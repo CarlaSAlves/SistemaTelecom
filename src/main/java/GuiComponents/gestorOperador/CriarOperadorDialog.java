@@ -10,7 +10,6 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import Servico.SistemaTeleServico;
-import guiComponents.gestorOperadores.GUI_gestor_operador;
 import standard_value_object.Cliente;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
