@@ -1,4 +1,4 @@
-package GuiComponents.gestorClientes;
+package guiComponentes.gestorCliente;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

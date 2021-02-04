@@ -1,4 +1,4 @@
-package GuiComponents;
+package guiComponentes;
 
 
 import java.awt.EventQueue;
@@ -6,8 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import GuiComponents.gestorClientes.GUI_gestor_cliente;
-import GuiComponents.gestorOperador.GUI_gestor_operador;
+
+import guiComponentes.gestorCliente.GUI_gestor_cliente;
+import guiComponentes.gestorOperador.GUI_gestor_operador;
 
 public class GUI_total extends JFrame {
 

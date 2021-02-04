@@ -1,4 +1,4 @@
-package GuiComponents;
+package guiComponentes;
 
 
 import java.awt.EventQueue;

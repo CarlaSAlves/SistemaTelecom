@@ -1,5 +1,5 @@
 
-package GuiComponents.gestorPacotes;
+package guiComponentes.gestorPacoteComercial;
 
 import java.awt.EventQueue;
 import java.awt.Font;

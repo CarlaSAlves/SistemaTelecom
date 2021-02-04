@@ -1,4 +1,4 @@
-package GuiComponents.gestorPacotes;
+package guiComponentes.gestorPacoteComercial;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

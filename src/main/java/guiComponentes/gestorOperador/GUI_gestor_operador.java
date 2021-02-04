@@ -1,4 +1,4 @@
-package GuiComponents.gestorOperador;
+package guiComponentes.gestorOperador;
 
 import java.awt.EventQueue;
 import java.awt.Font;

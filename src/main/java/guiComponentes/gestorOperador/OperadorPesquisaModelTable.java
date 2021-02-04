@@ -1,4 +1,4 @@
-package GuiComponents.gestorOperador;
+package guiComponentes.gestorOperador;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
