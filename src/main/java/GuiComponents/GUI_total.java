@@ -43,11 +43,11 @@ public class GUI_total extends JFrame {
 		setLayout(null);
 
 
-		GUI_login login = new GUI_login();
+		GUI_login login3 = new GUI_login();
 		GUI_homepage homepage = new GUI_homepage();
 		GUI_gestor_cliente gestor_cliente = new GUI_gestor_cliente();
 
-		JPanel login1 = login.returnPanel();
+		JPanel login1 = login3.returnPanel();
 		login1.setBounds(0, 0, 1500, 900);
 		getContentPane().add(login1);
 
@@ -63,7 +63,7 @@ public class GUI_total extends JFrame {
 
 
 
-		login.getBtLogin().addActionListener(new ActionListener() {
+		login3.getBtLogin().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
