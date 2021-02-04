@@ -102,17 +102,13 @@ public class GUI_gestor_operador extends JFrame {
 						operadores = SistemaTeleServico.getSistemaTeleServicoInstance().getAllFuncionarioOperador();
 					}
 
-					ClientePesquisaModelTable model = new ClientePesquisaModelTable(operadores);
+					OperadorPesquisaModelTable model = new OperadorPesquisaModelTable(operadores);
 					table.setModel(model);
 					numberRows = table.getRowCount();
 					lblResultados.setText("Resultados: " + numberRows);
 
 				} catch (Exception e1) {
-
 				}
-
-
-
 			}
 		});
 		getContentPane().add(botaoPesquisa);
@@ -128,6 +124,7 @@ public class GUI_gestor_operador extends JFrame {
 				dialog.setVisible(true);
 			}
 		});
+		
 		getContentPane().add(botaoCriarCliente);
 
 		JPanel panel = new JPanel();
@@ -176,7 +173,7 @@ public class GUI_gestor_operador extends JFrame {
 					return;
 				}
 
-				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
+				Cliente clienteTemp = (Cliente) table.getValueAt(row, OperadorPesquisaModelTable.OBJECT_COL);
 
 				CriarOperadorDialog dialog = new CriarOperadorDialog(GUI_gestor_operador.this,clienteTemp, true);
 
@@ -213,7 +210,7 @@ public class GUI_gestor_operador extends JFrame {
 
 
 					for(int i = 0; i < indices.length; i++) {
-						Cliente clienteTemp = (Cliente) table.getValueAt(indices[i], ClientePesquisaModelTable.OBJECT_COL);
+						Cliente clienteTemp = (Cliente) table.getValueAt(indices[i], OperadorPesquisaModelTable.OBJECT_COL);
 						SistemaTeleServico.getSistemaTeleServicoInstance().desativarCliente(clienteTemp.getId());
 
 					}
@@ -281,7 +278,7 @@ public class GUI_gestor_operador extends JFrame {
 
 		try {
 			List<Cliente> clientes = SistemaTeleServico.getSistemaTeleServicoInstance().getAllClientes();
-			ClientePesquisaModelTable model = new ClientePesquisaModelTable(clientes);
+			OperadorPesquisaModelTable model = new OperadorPesquisaModelTable(clientes);
 			table.setModel(model);
 
 		} catch (Exception exc) {

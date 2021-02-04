@@ -424,7 +424,7 @@ public class GUI_gestor_pacotes extends JFrame {
 //						clientes = SistemaTeleServico.getSistemaTeleServicoInstance().getAllClientes();
 //					}
 //
-//					ClientePesquisaModelTable model = new ClientePesquisaModelTable(clientes);
+//					OperadorPesquisaModelTable model = new OperadorPesquisaModelTable(clientes);
 //					table.setModel(model);
 //					numberRows = table.getRowCount();
 //					lblResultados.setText("Resultados: " + numberRows);
@@ -503,7 +503,7 @@ public class GUI_gestor_pacotes extends JFrame {
 //					return;
 //				}
 //
-//				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
+//				Cliente clienteTemp = (Cliente) table.getValueAt(row, OperadorPesquisaModelTable.OBJECT_COL);
 //
 //				CriarPacotesDialog dialog = new CriarPacotesDialog(GUI_gestor_pacotes.this,clienteTemp, true);
 //
@@ -540,7 +540,7 @@ public class GUI_gestor_pacotes extends JFrame {
 //
 //
 //					for(int i = 0; i < indices.length; i++) {
-//						Cliente clienteTemp = (Cliente) table.getValueAt(indices[i], ClientePesquisaModelTable.OBJECT_COL);
+//						Cliente clienteTemp = (Cliente) table.getValueAt(indices[i], OperadorPesquisaModelTable.OBJECT_COL);
 //						SistemaTeleServico.getSistemaTeleServicoInstance().desativarCliente(clienteTemp.getId());
 //
 //
@@ -615,7 +615,7 @@ public class GUI_gestor_pacotes extends JFrame {
 //
 //		try {
 //			List<Cliente> clientes = SistemaTeleServico.getSistemaTeleServicoInstance().getAllClientes();
-//			ClientePesquisaModelTable model = new ClientePesquisaModelTable(clientes);
+//			OperadorPesquisaModelTable model = new OperadorPesquisaModelTable(clientes);
 //			table.setModel(model);
 //
 //		} catch (Exception exc) {
