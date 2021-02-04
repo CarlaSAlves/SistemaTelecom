@@ -295,7 +295,7 @@ public class GUI_gestor_cliente extends JFrame {
 			List<Cliente> clientes = SistemaTeleServico.getSistemaTeleServicoInstance().getAllClientes();
 			ClientePesquisaModelTable model = new ClientePesquisaModelTable(clientes);
 			table.setModel(model);
-
+			lblResultados.setText("Resultados: " + numberRows);
 		} catch (Exception exc) {
 			JOptionPane.showMessageDialog(this, "Error: " + exc, "Error",
 					JOptionPane.ERROR_MESSAGE);
