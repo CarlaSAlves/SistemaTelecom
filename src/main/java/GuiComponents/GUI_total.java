@@ -35,6 +35,7 @@ public class GUI_total extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI_total() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1500, 900);
 		contentPane = new JPanel();
@@ -42,33 +43,30 @@ public class GUI_total extends JFrame {
 		setContentPane(contentPane);
 		setLayout(null);
 
-		//sdfsdfsdfsdfsdfsdfsd
 		GUI_login login = new GUI_login();
 		GUI_homepage homepage = new GUI_homepage();
 		GUI_gestor_cliente gestor_cliente = new GUI_gestor_cliente();
 
-		JPanel login1 = login.returnPanel();
-		login1.setBounds(0, 0, 1500, 900);
-		getContentPane().add(login1);
+		JPanel loginPanel = login.returnPanel();
+		loginPanel.setBounds(0, 0, 1500, 900);
+		getContentPane().add(loginPanel);
 
-		JPanel homepage1 = homepage.returnPanel();
-		homepage1.setVisible(false);
-		homepage1.setBounds(0, 0, 1500, 900);
-		getContentPane().add(homepage1);
+		JPanel homepagePanel = homepage.returnPanel();
+		homepagePanel.setVisible(false);
+		homepagePanel.setBounds(0, 0, 1500, 900);
+		getContentPane().add(homepagePanel);
 
-		JPanel gestor_cliente1 = gestor_cliente.returnPanel();
-		gestor_cliente1.setVisible(false);
-		gestor_cliente1.setBounds(0, 0, 1500, 900);
-		getContentPane().add(gestor_cliente1);
-
-
+		JPanel gestor_clientePanel = gestor_cliente.returnPanel();
+		gestor_clientePanel.setVisible(false);
+		gestor_clientePanel.setBounds(0, 0, 1500, 900);
+		getContentPane().add(gestor_clientePanel);
 
 		login.getBtLogin().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				login1.setVisible(false);
-				homepage1.setVisible(true);
+				loginPanel.setVisible(false);
+				homepagePanel.setVisible(true);
 			}
 		});
 
@@ -76,8 +74,8 @@ public class GUI_total extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				login1.setVisible(true);
-				homepage1.setVisible(false);
+				loginPanel.setVisible(true);
+				homepagePanel.setVisible(false);
 			}
 		});
 		
@@ -85,8 +83,8 @@ public class GUI_total extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				homepage1.setVisible(false);
-				gestor_cliente1.setVisible(true);
+				homepagePanel.setVisible(false);
+				gestor_clientePanel.setVisible(true);
 			}
 		});
 
@@ -94,8 +92,8 @@ public class GUI_total extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				homepage1.setVisible(true);
-				gestor_cliente1.setVisible(false);
+				homepagePanel.setVisible(true);
+				gestor_clientePanel.setVisible(false);
 			}
 		});
 		

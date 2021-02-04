@@ -29,9 +29,7 @@ public class GUI_login extends JFrame {
 	
 	private Font font = new Font("Dubai Light", Font.PLAIN, 20);
 
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -45,9 +43,7 @@ public class GUI_login extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public GUI_login() {
 		
 		panel = new JPanel();

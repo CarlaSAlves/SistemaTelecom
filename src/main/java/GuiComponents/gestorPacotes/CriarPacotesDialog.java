@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package GuiComponents.gestorPacotes;
 
 import java.awt.BorderLayout;

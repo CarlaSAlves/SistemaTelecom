@@ -142,23 +142,37 @@ public class GUI_gestor_cliente extends JFrame {
 		panel.add(scrollPane);
 
 		table = new JTable();
-		// defin da table 
 		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
 		table.setFillsViewportHeight(true);
 		table.setModel(new DefaultTableModel(new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
 		table.setForeground(SystemColor.desktop);
-		//	table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setBackground(UIManager.getColor("CheckBox.light"));
 		table.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		table.setRowHeight(20);
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+
+			public void valueChanged(ListSelectionEvent e) {
+				if (table.getSelectedRowCount()>1) {
+					botaoEditarCliente.setEnabled(false);
+					botaoDesativarCliente.setEnabled(true);
+				}
+				else if (table.getSelectedRows().length==1) {
+					botaoEditarCliente.setEnabled(true);
+					botaoDesativarCliente.setEnabled(true);
+				}
+				else if (table.getSelectedRowCount()==0)
+				{
+					botaoEditarCliente.setEnabled(false);
+					botaoDesativarCliente.setEnabled(false);
+				}
 
 
 
+			}
+		});
 		scrollPane.setViewportView(table);
-
-
-
 
 		lblResultados = new JLabel("Resultados: ");
 		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 20));
@@ -168,6 +182,7 @@ public class GUI_gestor_cliente extends JFrame {
 		botaoEditarCliente = new JButton("Editar Cliente");
 		botaoEditarCliente.setBounds(852, 15, 161, 33);
 		botaoEditarCliente.setFont(font);
+		botaoEditarCliente.setEnabled(false);
 		botaoEditarCliente.setBackground(SystemColor.activeCaption);
 		botaoEditarCliente.setFocusPainted(false);
 		botaoEditarCliente.addActionListener(new ActionListener() {
@@ -194,6 +209,7 @@ public class GUI_gestor_cliente extends JFrame {
 		botaoDesativarCliente = new JButton("Desativar Cliente");
 		botaoDesativarCliente.setBounds(1053, 15, 161, 33);
 		botaoDesativarCliente.setFont(font);
+		botaoDesativarCliente.setEnabled(false);
 		botaoDesativarCliente.setBackground(SystemColor.activeCaption);
 		botaoDesativarCliente.setFocusPainted(false);
 		botaoDesativarCliente.addActionListener(new ActionListener() {
@@ -209,7 +225,7 @@ public class GUI_gestor_cliente extends JFrame {
 						return;
 					}
 					int resposta = JOptionPane.showConfirmDialog(GUI_gestor_cliente.this,
-							"Desativar este Cliente?", "Confirmar Desativar",
+							"Desativar Cliente(s)?", "Confirmar Desativar",
 							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
 					if (resposta != JOptionPane.YES_OPTION) {
@@ -225,7 +241,7 @@ public class GUI_gestor_cliente extends JFrame {
 					}
 
 					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
-							"Cliente Desativado com sucesso", "Cliente Desativado",
+							"Cliente(s) Desativado(s) com sucesso", "Cliente(s) Desativado",
 							JOptionPane.INFORMATION_MESSAGE);
 
 					refreshClienteTable();
@@ -249,42 +265,8 @@ public class GUI_gestor_cliente extends JFrame {
 		lbFooter.setIcon(new ImageIcon(GUI_gestor_cliente.class.getResource("/img/footer2.png")));
 		lbFooter.setBounds(599, 802, 367, 59);
 		contentPane.add(lbFooter);
-		btVoltarGestorCliente.addActionListener(new ActionListener() {
+			
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-
-
-			}
-		});
-
-
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-
-
-			public void valueChanged(ListSelectionEvent e) {
-				if (table.getSelectedRowCount()>1) {
-					botaoEditarCliente.setEnabled(false);
-					botaoDesativarCliente.setEnabled(true);
-				}
-				else if (table.getSelectedRows().length==1) {
-					botaoEditarCliente.setEnabled(true);
-					botaoDesativarCliente.setEnabled(true);
-				}
-				else if (table.getSelectedRowCount()==0)
-				{
-					botaoEditarCliente.setEnabled(false);
-					botaoDesativarCliente.setEnabled(false);
-				}
-
-
-
-			}
-		});
-
-		botaoEditarCliente.setEnabled(false);
-		botaoDesativarCliente.setEnabled(false);
 	}
 
 
@@ -295,6 +277,7 @@ public class GUI_gestor_cliente extends JFrame {
 			List<Cliente> clientes = SistemaTeleServico.getSistemaTeleServicoInstance().getAllClientes();
 			ClientePesquisaModelTable model = new ClientePesquisaModelTable(clientes);
 			table.setModel(model);
+			numberRows = table.getRowCount();
 			lblResultados.setText("Resultados: " + numberRows);
 		} catch (Exception exc) {
 			JOptionPane.showMessageDialog(this, "Error: " + exc, "Error",

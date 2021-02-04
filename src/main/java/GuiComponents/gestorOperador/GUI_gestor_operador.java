@@ -18,8 +18,9 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
+
+import GuiComponents.gestorClientes.ClientePesquisaModelTable;
 import Servico.SistemaTeleServico;
-import guiComponents.ClientePesquisaModelTable;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
