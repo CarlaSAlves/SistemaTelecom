@@ -114,7 +114,7 @@ public class GUI_gestor_operador extends JFrame {
 		});
 		getContentPane().add(botaoPesquisa);
 
-		JButton botaoCriarOperador = new JButton("Criar Cliente");
+		JButton botaoCriarOperador = new JButton("Criar Operador");
 		botaoCriarOperador.setBounds(1250, 15, 152, 32);
 		botaoCriarOperador.setFont(font);
 		botaoCriarOperador.setBackground(SystemColor.activeCaption);
@@ -146,7 +146,6 @@ public class GUI_gestor_operador extends JFrame {
 		table.setFillsViewportHeight(true);
 		table.setModel(new DefaultTableModel(new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
 		table.setForeground(SystemColor.desktop);
-		//	table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setBackground(UIManager.getColor("CheckBox.light"));
 		table.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		table.setRowHeight(20);
@@ -158,7 +157,7 @@ public class GUI_gestor_operador extends JFrame {
 		lblResultados.setBounds(10, 4, 136, 25);
 		panel.add(lblResultados);
 
-		botaoEditarOperador = new JButton("Editar Cliente");
+		botaoEditarOperador = new JButton("Editar Operador");
 		botaoEditarOperador.setBounds(852, 15, 161, 33);
 		botaoEditarOperador.setFont(font);
 		botaoEditarOperador.setBackground(SystemColor.activeCaption);
@@ -170,13 +169,13 @@ public class GUI_gestor_operador extends JFrame {
 
 				if (row < 0) {
 					JOptionPane.showMessageDialog(GUI_gestor_operador.this,
-							"Por favor selecione um Cliente", "Error", JOptionPane.ERROR_MESSAGE);
+							"Por favor selecione um Operador", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 
-				Cliente clienteTemp = (Cliente) table.getValueAt(row, OperadorPesquisaModelTable.OBJECT_COL);
+				Funcionario funcionarioTemp = (Funcionario) table.getValueAt(row, OperadorPesquisaModelTable.OBJECT_COL);
 
-				CriarOperadorDialog dialog = new CriarOperadorDialog(GUI_gestor_operador.this,clienteTemp, true);
+				CriarOperadorDialog dialog = new CriarOperadorDialog(GUI_gestor_operador.this,funcionarioTemp, true);
 
 				dialog.setVisible(true);
 
@@ -184,7 +183,7 @@ public class GUI_gestor_operador extends JFrame {
 		});
 		getContentPane().add(botaoEditarOperador);
 
-		botaoDesativarOperador = new JButton("Desativar Cliente");
+		botaoDesativarOperador = new JButton("Desativar Operador");
 		botaoDesativarOperador.setBounds(1053, 15, 161, 33);
 		botaoDesativarOperador.setFont(font);
 		botaoDesativarOperador.setBackground(SystemColor.activeCaption);
@@ -197,27 +196,25 @@ public class GUI_gestor_operador extends JFrame {
 
 					if (indices.length < 0) {
 						JOptionPane.showMessageDialog(GUI_gestor_operador.this,
-								"Por favor selecione um Cliente", "Error",
+								"Por favor selecione um Operador", "Error",
 								JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 					int resposta = JOptionPane.showConfirmDialog(GUI_gestor_operador.this,
-							"Desativar este Cliente?", "Confirmar Eliminar",
+							"Desativar este Operador?", "Confirmar Desactivar",
 							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
 					if (resposta != JOptionPane.YES_OPTION) {
 						return;
 					}
-
-
+					
 					for(int i = 0; i < indices.length; i++) {
-						Cliente clienteTemp = (Cliente) table.getValueAt(indices[i], OperadorPesquisaModelTable.OBJECT_COL);
-						SistemaTeleServico.getSistemaTeleServicoInstance().desativarCliente(clienteTemp.getId());
-
+						Funcionario funcionarioTemp = (Funcionario) table.getValueAt(indices[i], OperadorPesquisaModelTable.OBJECT_COL);
+						SistemaTeleServico.getSistemaTeleServicoInstance().desativarFuncionario(funcionarioTemp.getId());
 					}
 
 					JOptionPane.showMessageDialog(GUI_gestor_operador.this,
-							"Cliente desativado com sucesso", "Cliente Desativado",
+							"Operador desativado com sucesso", "Operador Desativado",
 							JOptionPane.INFORMATION_MESSAGE);
 
 					refreshClienteTable();

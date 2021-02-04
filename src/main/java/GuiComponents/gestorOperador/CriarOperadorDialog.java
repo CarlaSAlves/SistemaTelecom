@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import Servico.SistemaTeleServico;
 import standard_value_object.Cliente;
+import standard_value_object.Funcionario;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -57,26 +58,26 @@ public class CriarOperadorDialog extends JDialog {
 		this.clientePesquisaApp = clientePesquisaApp;
 	}
 
-	public CriarOperadorDialog(GUI_gestor_operador clientePesquisaApp, Cliente clienteAntigo, boolean modoEditar ) {
+	public CriarOperadorDialog(GUI_gestor_operador clientePesquisaApp, Funcionario funcionarioTemp, boolean modoEditar ) {
 		this();
 		this.clientePesquisaApp = clientePesquisaApp;
-		this.clienteAntigo = clienteAntigo;
+		this.clienteAntigo = funcionarioTemp;
 		this.modoEditar = modoEditar;
 
 		if(modoEditar) {
 			setTitle("Editar Cliente");
-			popularTextFields(clienteAntigo);
+			popularTextFields(funcionarioTemp);
 		}
 	}
 
-	private void popularTextFields(Cliente clienteAntigo2) {
-		textFieldNome.setText(clienteAntigo2.getNome()+ "");
-		textFieldNIF.setText(clienteAntigo2.getNif() + "");
-		textFieldMorada.setText(clienteAntigo2.getMorada());
-		textFieldLogin.setText(clienteAntigo2.getLogin());
-		textFieldPassword.setText(clienteAntigo2.getPassword());
-		textFieldPacote.setText(clienteAntigo2.getId_pacote_cliente()+ "");
-		checkBoxAtivo.setSelected(clienteAntigo2.isAtivo());
+	private void popularTextFields(Funcionario funcionarioTemp) {
+		textFieldNome.setText(funcionarioTemp.getNome()+ "");
+		textFieldNIF.setText(funcionarioTemp.getNif() + "");
+		textFieldMorada.setText(funcionarioTemp.getMorada());
+		textFieldLogin.setText(funcionarioTemp.getLogin());
+		textFieldPassword.setText(funcionarioTemp.getPassword());
+		textFieldPacote.setText(funcionarioTemp.getId_pacote_cliente()+ "");
+		checkBoxAtivo.setSelected(funcionarioTemp.isAtivo());
 		
 	}
 
