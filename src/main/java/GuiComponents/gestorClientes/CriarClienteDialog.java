@@ -31,7 +31,10 @@ public class CriarClienteDialog extends JDialog {
 	private JTextField textFieldPassword;
 	private JTextField textFieldPacote;
 	private JCheckBox checkBoxAtivo;
-	
+	private GUI_gestor_cliente clientePesquisaApp;
+	private Cliente clienteAntigo;
+	private boolean modoEditar = false;
+	private JTextField textFieldNome;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
 
 	/**
@@ -47,10 +50,7 @@ public class CriarClienteDialog extends JDialog {
 		}
 	}
 
-	private GUI_gestor_cliente clientePesquisaApp;
-	private Cliente clienteAntigo;
-	private boolean modoEditar = false;
-	private JTextField textFieldNome;
+
 
 	public CriarClienteDialog(GUI_gestor_cliente clientePesquisaApp ) {
 		this();
@@ -86,12 +86,19 @@ public class CriarClienteDialog extends JDialog {
 		contentPanel.setBackground(SystemColor.inactiveCaption);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		setTitle("Novo Cliente");
 		contentPanel.setLayout(null);
 		{
-			JLabel lblNome = new JLabel("NIF");
+			JLabel lblNome = new JLabel("Nome");
 			lblNome.setFont(font);
-			lblNome.setBounds(10, 42, 46, 14);
+			lblNome.setBounds(10, 14, 46, 14);
 			contentPanel.add(lblNome);
+		}
+		{
+			JLabel lblNif = new JLabel("NIF");
+			lblNif.setFont(font);
+			lblNif.setBounds(10, 42, 46, 14);
+			contentPanel.add(lblNif);
 		}
 		{
 			JLabel lblMorada = new JLabel("Morada");
@@ -116,6 +123,13 @@ public class CriarClienteDialog extends JDialog {
 			lblIdpacote.setFont(font);
 			lblIdpacote.setBounds(10, 158, 70, 14);
 			contentPanel.add(lblIdpacote);
+		}
+		{
+			textFieldNome = new JTextField();
+			textFieldNome.setFont(font);
+			textFieldNome.setColumns(10);
+			textFieldNome.setBounds(90, 11, 334, 20);
+			contentPanel.add(textFieldNome);
 		}
 		{
 			textFieldNIF = new JTextField();
@@ -152,19 +166,6 @@ public class CriarClienteDialog extends JDialog {
 			textFieldPacote.setColumns(10);
 			textFieldPacote.setBounds(90, 155, 334, 20);
 			contentPanel.add(textFieldPacote);
-		}
-		{
-			JLabel lblNome_1 = new JLabel("Nome");
-			lblNome_1.setFont(font);
-			lblNome_1.setBounds(10, 14, 46, 14);
-			contentPanel.add(lblNome_1);
-		}
-		{
-			textFieldNome = new JTextField();
-			textFieldNome.setFont(font);
-			textFieldNome.setColumns(10);
-			textFieldNome.setBounds(90, 11, 334, 20);
-			contentPanel.add(textFieldNome);
 		}
 		
 		checkBoxAtivo = new JCheckBox("Ativo");

@@ -37,7 +37,7 @@ public class GUI_gestor_operador extends JFrame {
 
 	int indices[];
 
-	private Font font = new Font("Dubai Light", Font.PLAIN, 20);
+	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
 
 	/**
 	 * Launch the application.
@@ -98,6 +98,7 @@ public class GUI_gestor_operador extends JFrame {
 						operadores = SistemaTeleServico.getSistemaTeleServicoInstance().pesquisaFuncionarioOperador(nif);
 					} else {
 						operadores = SistemaTeleServico.getSistemaTeleServicoInstance().getAllFuncionarioOperador();
+						
 					}
 
 					OperadorPesquisaModelTable model = new OperadorPesquisaModelTable(operadores);

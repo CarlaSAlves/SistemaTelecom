@@ -73,7 +73,7 @@ public class ClientePesquisaModelTable extends AbstractTableModel {
 		case OBJECT_COL:
 			return cliente;
 		default:
-			return cliente.getNif();
+			return cliente.getId();
 		}
 	}
 

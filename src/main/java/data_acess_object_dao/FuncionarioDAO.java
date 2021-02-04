@@ -138,7 +138,7 @@ public class FuncionarioDAO {
 
 		try {
 			myStmt = myConn.prepareStatement("INSERT INTO funcionario(nome, nif, login, password, ativo, id_role) "
-					+ "VALUES(?,?,?,?,?,?,?)");
+					+ "VALUES(?,?,?,?,?,?)");
 			
 			myStmt.setString(1, funcionario.getNome());
 			myStmt.setLong(2, funcionario.getNif());

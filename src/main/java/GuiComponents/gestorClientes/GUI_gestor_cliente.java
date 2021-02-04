@@ -39,7 +39,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 	int indices[];
 
-	private Font font = new Font("Dubai Light", Font.PLAIN, 20);
+	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
 
 	/**
 	 * Launch the application.

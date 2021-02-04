@@ -11,21 +11,17 @@ public class OperadorPesquisaModelTable extends AbstractTableModel {
 
 	public static final int OBJECT_COL = -1;
 	private static final int ID_COL = 0;
-	private static final int NIF_COL = 1;
-	private static final int NOME_COL = 2;
-	private static final int MORADA_COL = 3;
-	private static final int LOGIN_COL = 4;
-	private static final int PASSWORD_COL = 5;
-	private static final int ATIVO_COL = 6;
-	private static final int ID_PACOTE_COMERCIAL_COL = 7;
-
+	private static final int NOME_COL = 1;
+	private static final int NIF_COL = 2;
+	private static final int LOGIN_COL = 3;
+	private static final int PASSWORD_COL = 4;
+	private static final int ATIVO_COL = 5;
 	
-	private String[] nomesColunas = { "ID","NIF", "Nome", "Morada",
-			"Login", "Password", "Ativo", "Pacote Comercial ID" };
+	private String[] nomesColunas = { "ID", "Nome", "NIF", "Login", "Password", "Ativo" };
 	
-	private List<Funcionario> operadores;
-
-	public OperadorPesquisaModelTable(List<Funcionario> funcionarios) {
+	private List<Funcionario> funcionarios;
+	
+	public OperadorPesquisaModelTable(List<Funcionario> operadores) {
 		funcionarios = operadores;
 	}
 
@@ -37,7 +33,7 @@ public class OperadorPesquisaModelTable extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return operadores.size();
+		return funcionarios.size();
 	}
 
 	@Override
@@ -48,29 +44,25 @@ public class OperadorPesquisaModelTable extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int row, int col) {
 
-		Cliente cliente = clientes.get(row);
+		Funcionario funcionario = funcionarios.get(row);
 
 		switch (col) {
 		case ID_COL:
-			return cliente.getId();
-		case NIF_COL:
-			return cliente.getNif();
+			return funcionario.getId();
 		case NOME_COL:
-			return cliente.getNome();
-		case MORADA_COL:
-			return cliente.getMorada();
+			return funcionario.getNome();
+		case NIF_COL:
+			return funcionario.getNif();
 		case LOGIN_COL:
-			return cliente.getLogin();
+			return funcionario.getLogin();
 		case PASSWORD_COL:
-			return cliente.getPassword();
+			return funcionario.getPassword();
 		case ATIVO_COL:
-			return cliente.isAtivo();
-		case ID_PACOTE_COMERCIAL_COL:
-			return cliente.getId_pacote_cliente();
+			return funcionario.isAtivo();
 		case OBJECT_COL:
-			return cliente;
+			return funcionario;
 		default:
-			return cliente.getNif();
+			return funcionario.getId();
 		}
 	}
 
