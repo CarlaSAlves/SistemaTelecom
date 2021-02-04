@@ -27,7 +27,6 @@ public class PromocaoDAO {
 		String password = props.getProperty("password");
 		String dburl = props.getProperty("dburl");
 
-
 		myConn = DriverManager.getConnection(dburl, user, password);
 
 	}
@@ -52,7 +51,7 @@ public class PromocaoDAO {
 			close(myStmt, myRs);
 		}
 	}
-	
+
 	public List<Promocao> pesquisaPromocao(String nome) throws Exception {
 		List<Promocao> list = new ArrayList<>();
 
@@ -79,13 +78,13 @@ public class PromocaoDAO {
 			close(myStmt, myRs);
 		}
 	}
-	
+
 	public void criarPromocao(Promocao promocao) throws Exception {
 		PreparedStatement myStmt = null;
 
 		try {
 			myStmt = myConn.prepareStatement("INSERT INTO promocao(nome, descricao, ativa) VALUES(?,?,?)");
-			
+
 			myStmt.setString(1, promocao.getNome());
 			myStmt.setString(2, promocao.getDescricao());
 			myStmt.setBoolean(3, promocao.isAtiva());
@@ -99,18 +98,18 @@ public class PromocaoDAO {
 			myStmt.close();
 		}
 	}
-	
+
 	public void editarPromocao(Promocao promocao) throws Exception {
 		PreparedStatement myStmt = null;
 		try {
 
 			myStmt = myConn.prepareStatement("UPDATE `promocao` SET `nome`=?, `descricao`=?, `ativa`=?  WHERE  `id`=?");
-			
+
 			myStmt.setString(1, promocao.getNome());
 			myStmt.setString(2, promocao.getDescricao());
 			myStmt.setBoolean(3, promocao.isAtiva());
 			myStmt.setInt(4, promocao.getId());
-			
+
 			myStmt.executeUpdate();
 
 		}catch(Exception e) {
@@ -144,7 +143,7 @@ public class PromocaoDAO {
 		String descricao = myRs.getString("descricao");
 		boolean ativo = myRs.getBoolean("ativo");
 
-		
+
 		Promocao promocao = new Promocao(id, nome, descricao, ativo);
 
 		return promocao;

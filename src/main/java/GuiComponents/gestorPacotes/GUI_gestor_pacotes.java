@@ -28,7 +28,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.JTextArea;
 
-@SuppressWarnings("serial")
 public class GUI_gestor_pacotes extends JFrame {
 	private JTextField textPesquisaId;
 	private JTable table;
@@ -37,19 +36,14 @@ public class GUI_gestor_pacotes extends JFrame {
 	private int numberRows;
 	private JLabel lblResultados;
 	private SistemaTeleServico sistemaTeleServico;
-
 	private JButton botaoDesativarPacoteComercial;
 	private JButton botaoEditarPacoteComercial;
-
-	int indices[];
-
+	private int indices[];
 	private Font font = new Font("Dubai Light", Font.PLAIN, 20);
 	private JTextField textField;
 	private JTextField textField_1;
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -63,9 +57,6 @@ public class GUI_gestor_pacotes extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public GUI_gestor_pacotes() {
 
 		contentPane = new JPanel();
@@ -76,7 +67,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1500, 900);
 		contentPane.setBackground(SystemColor.inactiveCaption);
-		
+
 		JLabel lblDeProcura = new JLabel("Id do Pacote: ");
 		lblDeProcura.setBounds(66, 68, 134, 26);
 		lblDeProcura.setFont(font);
@@ -87,7 +78,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		textPesquisaId.setFont(font);
 		getContentPane().add(textPesquisaId);
 		textPesquisaId.setColumns(10);
-		
+
 
 		JButton botaoPesquisa = new JButton("Pesquisar");
 		botaoPesquisa.setBackground(SystemColor.activeCaption);
@@ -102,7 +93,7 @@ public class GUI_gestor_pacotes extends JFrame {
 					String nif = textPesquisaId.getText();
 
 					List<PacoteComercial> pacotesComerciais = null;
-					
+
 
 					if (!nif.isBlank()) {
 						pacotesComerciais = SistemaTeleServico.getSistemaTeleServicoInstance().pesquisaPacoteComercial(nif);
@@ -129,7 +120,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		botaoCriarCliente.setBackground(SystemColor.activeCaption);
 		botaoCriarCliente.setFocusPainted(false);
 		botaoCriarCliente.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent arg0) {
 				CriarPacotesDialog dialog = new CriarPacotesDialog(GUI_gestor_pacotes.this);
 				dialog.setVisible(true);
@@ -149,13 +140,11 @@ public class GUI_gestor_pacotes extends JFrame {
 		panel.add(scrollPane);
 
 		table = new JTable();
-		// defin da table 
 		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
 		table.setFillsViewportHeight(true);
 		table.setModel(new DefaultTableModel(new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
 		table.setForeground(SystemColor.desktop);
-		//	table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setBackground(UIManager.getColor("CheckBox.light"));
 		table.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		table.setRowHeight(20);
@@ -175,7 +164,6 @@ public class GUI_gestor_pacotes extends JFrame {
 		botaoEditarPacoteComercial.setBackground(SystemColor.activeCaption);
 		botaoEditarPacoteComercial.setFocusPainted(false);
 		botaoEditarPacoteComercial.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent arg0) {
 
 				int row = table.getSelectedRow();
@@ -191,7 +179,6 @@ public class GUI_gestor_pacotes extends JFrame {
 				CriarPacotesDialog dialog = new CriarPacotesDialog(GUI_gestor_pacotes.this, pacoteComercialTemp, true);
 
 				dialog.setVisible(true);
-
 			}
 		});
 		getContentPane().add(botaoEditarPacoteComercial);
@@ -203,7 +190,6 @@ public class GUI_gestor_pacotes extends JFrame {
 		botaoDesativarPacoteComercial.setFocusPainted(false);
 		botaoDesativarPacoteComercial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
 				try {
 					indices = table.getSelectedRows();
 
@@ -221,14 +207,11 @@ public class GUI_gestor_pacotes extends JFrame {
 						return;
 					}
 
-
 					for(int i = 0; i < indices.length; i++) {
 						PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indices[i], PacoteComercialPesquisaModelTable.OBJECT_COL);
 						SistemaTeleServico.getSistemaTeleServicoInstance().desativarCliente(pacoteTemp.getId());
 
-
 					}
-
 					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
 							"Cliente Desativado com sucesso", "Cliente Desativado",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -237,7 +220,6 @@ public class GUI_gestor_pacotes extends JFrame {
 				} catch (Exception e1) {
 
 				}
-
 			}
 
 		});
@@ -264,10 +246,7 @@ public class GUI_gestor_pacotes extends JFrame {
 			}
 		});
 
-
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-
-
 			public void valueChanged(ListSelectionEvent e) {
 				if (table.getSelectedRowCount()>1) {
 					botaoEditarPacoteComercial.setEnabled(false);
@@ -282,60 +261,46 @@ public class GUI_gestor_pacotes extends JFrame {
 					botaoEditarPacoteComercial.setEnabled(false);
 					botaoDesativarPacoteComercial.setEnabled(false);
 				}
-
-
-
 			}
 		});
 
 		botaoEditarPacoteComercial.setEnabled(false);
-		
+
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 20));
 		lblNome.setBounds(66, 105, 134, 26);
 		contentPane.add(lblNome);
-		
+
 		textField = new JTextField();
 		textField.setFont(new Font("Dubai Light", Font.PLAIN, 20));
 		textField.setColumns(10);
 		textField.setBounds(210, 68, 161, 26);
 		contentPane.add(textField);
-		
+
 		JLabel lblCamposPesquisas = new JLabel("Campos Pesquisas");
 		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
 		lblCamposPesquisas.setBounds(66, 26, 168, 26);
 		contentPane.add(lblCamposPesquisas);
-		
+
 		JLabel lblAtivo = new JLabel("Ativo");
 		lblAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 20));
 		lblAtivo.setBounds(66, 142, 134, 26);
 		contentPane.add(lblAtivo);
-		
+
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Dubai Light", Font.PLAIN, 20));
 		textField_1.setColumns(10);
 		textField_1.setBounds(210, 142, 161, 26);
 		contentPane.add(textField_1);
 		botaoDesativarPacoteComercial.setEnabled(false);
-		
+
 		JTextArea textAreaDescricao = new JTextArea();
 		textAreaDescricao.setBounds(699, 71, 499, 178);
 		contentPane.add(textAreaDescricao);
-			
-		
-//		PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indices[i], PacoteComercialPesquisaModelTable.OBJECT_COL);
-//		SistemaTeleServico.getSistemaTeleServicoInstance().desativarCliente(pacoteTemp.getId());
-		
-		
-		
-		
-		
 	}
 
-
-
 	public void refreshClienteTable() {
-
+		
 		try {
 			List<PacoteComercial> pacotesComerciais = SistemaTeleServico.getSistemaTeleServicoInstance().getAllPacotesComerciais();
 			PacoteComercialPesquisaModelTable model = new PacoteComercialPesquisaModelTable(pacotesComerciais);

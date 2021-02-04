@@ -22,10 +22,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 
 public class CriarPacotesDialog extends JDialog {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JCheckBox checkBoxAtivo;	
@@ -34,12 +31,9 @@ public class CriarPacotesDialog extends JDialog {
 	private boolean modoEditar = false;
 	private JTextField textFieldNome;
 	private JTextField textFieldDescricao;
-	
 	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		try {
 			CriarPacotesDialog dialog = new CriarPacotesDialog();
@@ -49,7 +43,6 @@ public class CriarPacotesDialog extends JDialog {
 			e.printStackTrace();
 		}
 	}
-
 
 	public CriarPacotesDialog(GUI_gestor_pacotes pacoteComercialPesquisaApp ) {
 		this();
@@ -67,12 +60,12 @@ public class CriarPacotesDialog extends JDialog {
 			popularTextFields(pacoteComercialAntigo);
 		}
 	}
-//TODO duvidas no pacote antigo
+
 	private void popularTextFields(PacoteComercial pacoteComercialAntigo2) {
 		textFieldNome.setText(pacoteComercialAntigo2.getNome()+ "");
 		textFieldDescricao.setText(pacoteComercialAntigo2.getDescricao());
 		checkBoxAtivo.setSelected(pacoteComercialAntigo2.isAtivo());
-		
+
 	}
 
 	public CriarPacotesDialog() {
@@ -95,7 +88,7 @@ public class CriarPacotesDialog extends JDialog {
 			textFieldDescricao.setBounds(90, 51, 334, 20);
 			contentPanel.add(textFieldDescricao);
 		}
-		
+
 		{
 			JLabel lblNome_1 = new JLabel("Nome");
 			lblNome_1.setFont(font);
@@ -109,7 +102,7 @@ public class CriarPacotesDialog extends JDialog {
 			textFieldNome.setBounds(90, 11, 334, 20);
 			contentPanel.add(textFieldNome);
 		}
-		
+
 		checkBoxAtivo = new JCheckBox("Ativo");
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
 		checkBoxAtivo.setFont(font);
@@ -120,8 +113,6 @@ public class CriarPacotesDialog extends JDialog {
 			buttonPane.setBackground(SystemColor.inactiveCaption);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-
-
 			{
 				JButton okButton = new JButton("Confirmar");
 				okButton.setForeground(SystemColor.activeCaptionText);
@@ -129,7 +120,7 @@ public class CriarPacotesDialog extends JDialog {
 				okButton.setFont(font);
 				okButton.setFocusPainted(false);
 				okButton.addActionListener(new ActionListener() {
-					
+
 					public void actionPerformed(ActionEvent arg0) {
 						gravarPacoteComercial();
 					}
@@ -146,11 +137,11 @@ public class CriarPacotesDialog extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 				cancelButton.addActionListener(new ActionListener() {
-					
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						dispose();
-						
+
 					}
 				});
 			}
@@ -161,25 +152,21 @@ public class CriarPacotesDialog extends JDialog {
 		String nome = textFieldNome.getText();
 		String descricao = textFieldDescricao.getText();
 		boolean ativo = checkBoxAtivo.isSelected();
-		
-
 
 		PacoteComercial pacoteComercial = null;
-		
+
 		if (modoEditar) {
 			pacoteComercial = pacoteComercialAntigo;
-		
+
 			pacoteComercial.setNome(nome);
 			pacoteComercial.setDescricao(descricao);			
 			pacoteComercial.setAtivo(ativo);
 
-		
 		} else {
 			pacoteComercial = new PacoteComercial( nome, descricao, ativo);
 		}
 
 		try {
-			// save to the database
 			if (modoEditar) {
 				SistemaTeleServico.getSistemaTeleServicoInstance().editarPacoteComercial(pacoteComercial);
 
@@ -195,11 +182,10 @@ public class CriarPacotesDialog extends JDialog {
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 
-			
 			setVisible(false);
 			dispose();
 
-			
+
 		} catch (Exception exc) {
 			JOptionPane.showMessageDialog(pacoteComercialPesquisaApp,
 					"Error a criar o Pacote Comercial " + exc.getMessage(), "Error",

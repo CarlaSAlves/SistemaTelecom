@@ -5,8 +5,6 @@ import javax.swing.table.AbstractTableModel;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 
-
-@SuppressWarnings("serial")
 public class OperadorPesquisaModelTable extends AbstractTableModel {
 
 	public static final int OBJECT_COL = -1;

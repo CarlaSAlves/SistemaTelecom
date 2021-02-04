@@ -36,12 +36,12 @@ public class ClienteDAO {
 
 		Statement myStmt = null;
 		ResultSet myRs = null;
-		
-		
+
+
 		try {
 			myStmt = myConn.createStatement();
 			myRs = myStmt.executeQuery("select * from cliente");
-			
+
 
 			while (myRs.next()) {
 				Cliente cliente = converteRowParaCliente(myRs);
@@ -54,7 +54,7 @@ public class ClienteDAO {
 			close(myStmt, myRs);
 		}
 	}
-	
+
 	public List<Cliente> pesquisaCliente(String nif) throws Exception {
 		List<Cliente> list = new ArrayList<>();
 
@@ -81,14 +81,14 @@ public class ClienteDAO {
 			close(myStmt, myRs);
 		}
 	}
-	
+
 	public void criarCliente(Cliente cliente) throws Exception {
 		PreparedStatement myStmt = null;
 
 		try {
 			myStmt = myConn.prepareStatement("INSERT INTO cliente(nome, nif, morada, login, password, ativo, id_pacote_cliente) "
 					+ "VALUES(?,?,?,?,?,?,?)");
-			
+
 			myStmt.setString(1, cliente.getNome());
 			myStmt.setLong(2, cliente.getNif());
 			myStmt.setString(3, cliente.getMorada());
@@ -105,14 +105,14 @@ public class ClienteDAO {
 			myStmt.close();
 		}
 	}
-	
+
 	public void editarCliente(Cliente cliente) throws Exception {
 		PreparedStatement myStmt = null;
 		try {
 
 			myStmt = myConn.prepareStatement("UPDATE `cliente` SET `nome`=?, `nif`=?, `morada`=?, "
 					+ "`login`=?, `password`=?, `ativo`=?, `id_pacote_cliente`=? WHERE  `id`=?");
-			
+
 			myStmt.setString(1, cliente.getNome());
 			myStmt.setLong(2, cliente.getNif());
 			myStmt.setString(3, cliente.getMorada());
@@ -121,7 +121,7 @@ public class ClienteDAO {
 			myStmt.setBoolean(6, cliente.isAtivo());
 			myStmt.setInt(7, cliente.getId_pacote_cliente());
 			myStmt.setInt(8, cliente.getId());
-			
+
 			myStmt.executeUpdate();
 
 		}catch(Exception e) {
@@ -158,7 +158,7 @@ public class ClienteDAO {
 		String password = myRs.getString("password");
 		boolean ativo = myRs.getBoolean("ativo");
 		int id_pacote_cliente = myRs.getInt("id_pacote_cliente");
-		
+
 		Cliente cliente = new Cliente(id, nome, nif, morada, login, password, ativo, id_pacote_cliente);
 
 		return cliente;

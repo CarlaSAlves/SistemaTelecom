@@ -43,9 +43,6 @@ public class CriarOperadorDialog extends JDialog {
 	private boolean modoEditar = false;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		try {
 			CriarOperadorDialog dialog = new CriarOperadorDialog();
@@ -55,8 +52,6 @@ public class CriarOperadorDialog extends JDialog {
 			e.printStackTrace();
 		}
 	}
-
-	
 
 	public CriarOperadorDialog(GUI_gestor_operador operadorPesquisaApp ) {
 		this();
@@ -81,7 +76,7 @@ public class CriarOperadorDialog extends JDialog {
 		textFieldLogin.setText(funcionarioTemp.getLogin());
 		textFieldPassword.setText(funcionarioTemp.getPassword());
 		checkBoxAtivo.setSelected(funcionarioTemp.isAtivo());
-		
+
 	}
 
 	public CriarOperadorDialog() {
@@ -98,28 +93,28 @@ public class CriarOperadorDialog extends JDialog {
 			lblNome.setBounds(10, 27, 46, 14);
 			contentPanel.add(lblNome);
 		}
-		
+
 		{
 			JLabel lblNif = new JLabel("NIF");
 			lblNif.setFont(font);
 			lblNif.setBounds(10, 55, 46, 14);
 			contentPanel.add(lblNif);
 		}
-		
+
 		{
 			JLabel lblLogin = new JLabel("Login");
 			lblLogin.setFont(font);
 			lblLogin.setBounds(10, 83, 46, 20);
 			contentPanel.add(lblLogin);
 		}
-		
+
 		{
 			JLabel lblPassword = new JLabel("Password");
 			lblPassword.setFont(font);
 			lblPassword.setBounds(10, 114, 70, 14);
 			contentPanel.add(lblPassword);
 		}
-		
+
 		{
 			textFieldNome = new JTextField();
 			textFieldNome.setFont(font);
@@ -127,7 +122,7 @@ public class CriarOperadorDialog extends JDialog {
 			textFieldNome.setBounds(90, 24, 334, 20);
 			contentPanel.add(textFieldNome);
 		}
-		
+
 		{
 			textFieldNIF = new JTextField();
 			textFieldNIF.setFont(font);
@@ -143,7 +138,7 @@ public class CriarOperadorDialog extends JDialog {
 			textFieldLogin.setBounds(90, 83, 334, 20);
 			contentPanel.add(textFieldLogin);
 		}
-		
+
 		{
 			textFieldPassword = new JTextField();
 			textFieldPassword.setFont(font);
@@ -158,7 +153,7 @@ public class CriarOperadorDialog extends JDialog {
 		checkBoxAtivo.setFont(font);
 		checkBoxAtivo.setBounds(170, 156, 97, 23);
 		contentPanel.add(checkBoxAtivo);
-		
+
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(SystemColor.inactiveCaption);
@@ -189,11 +184,11 @@ public class CriarOperadorDialog extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 				cancelButton.addActionListener(new ActionListener() {
-					
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						dispose();
-						
+
 					}
 				});
 			}
@@ -206,24 +201,23 @@ public class CriarOperadorDialog extends JDialog {
 		String login = textFieldLogin.getText();
 		String pass = textFieldPassword.getText();
 		boolean ativo = checkBoxAtivo.isSelected();
-		
+
 		Funcionario funcionario = null;
-		
+
 		if (modoEditar) {
 			funcionario = funcionarioAntigo;
-		
+
 			funcionario.setNif(nif);
 			funcionario.setNome(nome);
 			funcionario.setLogin(login);
 			funcionario.setPassword(pass);
 			funcionario.setAtivo(ativo);
-		
+
 		} else {
 			funcionario = new Funcionario(nome, nif, login, pass, ativo, 2);
 		}
 
 		try {
-			// save to the database
 			if (modoEditar) {
 				SistemaTeleServico.getSistemaTeleServicoInstance().editarFuncionario(funcionario);
 				operadorPesquisaApp.refreshOperadorTable();
@@ -237,11 +231,11 @@ public class CriarOperadorDialog extends JDialog {
 						"Operador Criado com sucesso!", "Operador Criado",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
-			
+
 			setVisible(false);
 			dispose();
 
-			
+
 		} catch (Exception exc) {
 			JOptionPane.showMessageDialog(operadorPesquisaApp,
 					"Error a criar operador " + exc.getMessage(), "Error",

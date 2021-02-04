@@ -31,17 +31,12 @@ public class GUI_gestor_operador extends JFrame {
 	private int numberRows;
 	private JLabel lblResultados;
 	private SistemaTeleServico sistemaTeleServico;
-
 	private JButton botaoDesativarOperador;
 	private JButton botaoEditarOperador;
-
-	int indices[];
+	private int indices[];
 
 	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -55,9 +50,6 @@ public class GUI_gestor_operador extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public GUI_gestor_operador() {
 
 		contentPane = new JPanel();
@@ -89,7 +81,6 @@ public class GUI_gestor_operador extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 
 				try {
-
 					String nif = textPesquisaNIF.getText();
 
 					List<Funcionario> operadores = null;
@@ -98,7 +89,7 @@ public class GUI_gestor_operador extends JFrame {
 						operadores = SistemaTeleServico.getSistemaTeleServicoInstance().pesquisaFuncionarioOperador(nif);
 					} else {
 						operadores = SistemaTeleServico.getSistemaTeleServicoInstance().getAllFuncionarioOperador();
-						
+
 					}
 
 					OperadorPesquisaModelTable model = new OperadorPesquisaModelTable(operadores);
@@ -123,7 +114,7 @@ public class GUI_gestor_operador extends JFrame {
 				dialog.setVisible(true);
 			}
 		});
-		
+
 		getContentPane().add(botaoCriarOperador);
 
 		JPanel panel = new JPanel();
@@ -205,7 +196,7 @@ public class GUI_gestor_operador extends JFrame {
 					if (resposta != JOptionPane.YES_OPTION) {
 						return;
 					}
-					
+
 					for(int i = 0; i < indices.length; i++) {
 						Funcionario funcionarioTemp = (Funcionario) table.getValueAt(indices[i], OperadorPesquisaModelTable.OBJECT_COL);
 						SistemaTeleServico.getSistemaTeleServicoInstance().desativarFuncionario(funcionarioTemp.getId());
@@ -223,7 +214,7 @@ public class GUI_gestor_operador extends JFrame {
 			}
 
 		});
-		
+
 		getContentPane().add(botaoDesativarOperador);
 
 		btVoltarGestorOperador = new JButton("Voltar");
@@ -246,8 +237,6 @@ public class GUI_gestor_operador extends JFrame {
 		});
 
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-
-
 			public void valueChanged(ListSelectionEvent e) {
 				if (table.getSelectedRowCount()>1) {
 					botaoEditarOperador.setEnabled(false);

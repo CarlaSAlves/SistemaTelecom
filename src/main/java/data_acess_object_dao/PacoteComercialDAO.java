@@ -55,7 +55,7 @@ public class PacoteComercialDAO {
 			close(myStmt, myRs);
 		}
 	}
-	
+
 	public List<PacoteComercial> pesquisaPacoteComercial(String nome) throws Exception {
 		List<PacoteComercial> list = new ArrayList<>();
 
@@ -82,13 +82,13 @@ public class PacoteComercialDAO {
 			close(myStmt, myRs);
 		}
 	}
-	
+
 	public void criarPacoteComercial(PacoteComercial pacoteComercial) throws Exception {
 		PreparedStatement myStmt = null;
 
 		try {
 			myStmt = myConn.prepareStatement("INSERT INTO pacote_comercial(nome, descricao, ativo) VALUES(?,?,?)");
-			
+
 			myStmt.setString(1, pacoteComercial.getNome());
 			myStmt.setString(2, pacoteComercial.getDescricao());
 			myStmt.setBoolean(3, pacoteComercial.isAtivo());
@@ -102,18 +102,18 @@ public class PacoteComercialDAO {
 			myStmt.close();
 		}
 	}
-	
+
 	public void editarPacoteComercial(PacoteComercial pacoteComercial) throws Exception {
 		PreparedStatement myStmt = null;
 		try {
 
 			myStmt = myConn.prepareStatement("UPDATE `pacote_comercial` SET `nome`=?, `descricao`=?, `ativo`=?  WHERE  `id`=?");
-			
+
 			myStmt.setString(1, pacoteComercial.getNome());
 			myStmt.setString(2, pacoteComercial.getDescricao());
 			myStmt.setBoolean(3, pacoteComercial.isAtivo());
 			myStmt.setInt(4, pacoteComercial.getId());
-			
+
 			myStmt.executeUpdate();
 
 		}catch(Exception e) {
@@ -122,21 +122,21 @@ public class PacoteComercialDAO {
 			myStmt.close();
 		}
 	}
-	
+
 	public void getDescricaoPacoteComercial(PacoteComercial pacoteComercial) {
-		
+
 		PreparedStatement myStmt = null;
-		
+
 		try {
 			myStmt = myConn.prepareStatement("select `descricao` FROM `pacote_comercial` WHERE 'id' = ? ");
-			
+
 			myStmt.setString(1, pacoteComercial.getDescricao());
 		} catch (SQLException e) {
-	
+
 			e.printStackTrace();
 		}
-		
-		
+
+
 	}
 
 	public void eliminarPacoteComercial(String nome) throws SQLException{
@@ -163,7 +163,7 @@ public class PacoteComercialDAO {
 		String descricao = myRs.getString("descricao");
 		boolean ativo = myRs.getBoolean("ativo");
 
-		
+
 		PacoteComercial pacoteComercial = new PacoteComercial(id, nome, descricao, ativo);
 
 		return pacoteComercial;
@@ -190,6 +190,6 @@ public class PacoteComercialDAO {
 		}
 	}
 
-	
+
 
 }

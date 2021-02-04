@@ -6,14 +6,11 @@ import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 import standard_value_object.PacoteComercial;
 
-
-@SuppressWarnings("serial")
 public class PacoteComercialPesquisaModelTable extends AbstractTableModel {
 
 	public static final int OBJECT_COL = -1;
 	private static final int ID_COL = 0;
 	private static final int NOME_COL = 1;
-	
 	private static final int DESCRICAO_COL = 2;	
 	private static final int ATIVO_COL = 3;
 

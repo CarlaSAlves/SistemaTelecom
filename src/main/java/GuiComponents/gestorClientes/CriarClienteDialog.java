@@ -20,9 +20,6 @@ import java.awt.SystemColor;
 
 public class CriarClienteDialog extends JDialog {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldNIF;
@@ -37,9 +34,7 @@ public class CriarClienteDialog extends JDialog {
 	private JTextField textFieldNome;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
 
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		try {
 			CriarClienteDialog dialog = new CriarClienteDialog();
@@ -49,8 +44,6 @@ public class CriarClienteDialog extends JDialog {
 			e.printStackTrace();
 		}
 	}
-
-
 
 	public CriarClienteDialog(GUI_gestor_cliente clientePesquisaApp ) {
 		this();
@@ -242,7 +235,6 @@ public class CriarClienteDialog extends JDialog {
 		}
 
 		try {
-			// save to the database
 			if (modoEditar) {
 				SistemaTeleServico.getSistemaTeleServicoInstance().editarCliente(cliente);
 				clientePesquisaApp.refreshClienteTable();
@@ -256,8 +248,6 @@ public class CriarClienteDialog extends JDialog {
 						"Cliente Criado com sucesso!", "Cliente Criado",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
-
-			
 			setVisible(false);
 			dispose();
 

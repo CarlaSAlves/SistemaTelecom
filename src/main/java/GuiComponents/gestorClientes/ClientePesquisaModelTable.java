@@ -8,8 +8,6 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 import standard_value_object.Cliente;
 
-
-@SuppressWarnings("serial")
 public class ClientePesquisaModelTable extends AbstractTableModel {
 
 	public static final int OBJECT_COL = -1;
@@ -22,10 +20,10 @@ public class ClientePesquisaModelTable extends AbstractTableModel {
 	private static final int ATIVO_COL = 6;
 	private static final int ID_PACOTE_COMERCIAL_COL = 7;
 
-	
+
 	private String[] nomesColunas = { "ID","NIF", "Nome", "Morada",
 			"Login", "Password", "Ativo", "Pacote Comercial ID" };
-	
+
 	private List<Cliente> clientes;
 
 	public ClientePesquisaModelTable(List<Cliente> osClientes) {
@@ -35,7 +33,6 @@ public class ClientePesquisaModelTable extends AbstractTableModel {
 	@Override
 	public int getColumnCount() {
 		return nomesColunas.length;
-		
 	}
 
 	@Override
@@ -80,8 +77,8 @@ public class ClientePesquisaModelTable extends AbstractTableModel {
 	@Override
 	public Class getColumnClass(int c) {
 		return getValueAt(0, c).getClass();
-		
 
-}
+
+	}
 
 }

@@ -33,17 +33,13 @@ public class GUI_gestor_cliente extends JFrame {
 	private int numberRows;
 	private JLabel lblResultados;
 	private SistemaTeleServico sistemaTeleServico;
-
 	private JButton botaoDesativarCliente;
 	private JButton botaoEditarCliente;
-
-	int indices[];
+	private int indices[];
+	
 
 	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -57,9 +53,6 @@ public class GUI_gestor_cliente extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public GUI_gestor_cliente() {
 
 		contentPane = new JPanel();
@@ -89,7 +82,6 @@ public class GUI_gestor_cliente extends JFrame {
 		botaoPesquisa.setFocusPainted(false);
 		botaoPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
 				try {
 
 					String nif = textPesquisaNIF.getText();
@@ -151,8 +143,6 @@ public class GUI_gestor_cliente extends JFrame {
 		table.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		table.setRowHeight(20);
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-
-
 			public void valueChanged(ListSelectionEvent e) {
 				if (table.getSelectedRowCount()>1) {
 					botaoEditarCliente.setEnabled(false);
@@ -167,8 +157,6 @@ public class GUI_gestor_cliente extends JFrame {
 					botaoEditarCliente.setEnabled(false);
 					botaoDesativarCliente.setEnabled(false);
 				}
-
-
 
 			}
 		});
@@ -236,10 +224,7 @@ public class GUI_gestor_cliente extends JFrame {
 					for(int i = 0; i < indices.length; i++) {
 						Cliente clienteTemp = (Cliente) table.getValueAt(indices[i], ClientePesquisaModelTable.OBJECT_COL);
 						SistemaTeleServico.getSistemaTeleServicoInstance().desativarCliente(clienteTemp.getId());
-
-
 					}
-
 					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
 							"Cliente(s) Desativado(s) com sucesso", "Cliente(s) Desativado",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -265,7 +250,6 @@ public class GUI_gestor_cliente extends JFrame {
 		lbFooter.setIcon(new ImageIcon(GUI_gestor_cliente.class.getResource("/img/footer2.png")));
 		lbFooter.setBounds(599, 802, 367, 59);
 		contentPane.add(lbFooter);
-			
 
 	}
 

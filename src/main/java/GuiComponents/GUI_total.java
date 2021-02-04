@@ -10,15 +10,10 @@ import javax.swing.border.EmptyBorder;
 import GuiComponents.gestorClientes.GUI_gestor_cliente;
 import GuiComponents.gestorOperador.GUI_gestor_operador;
 
-@SuppressWarnings("serial")
 public class GUI_total extends JFrame {
 
 	private JPanel contentPane;
 
-
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -32,9 +27,6 @@ public class GUI_total extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public GUI_total() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

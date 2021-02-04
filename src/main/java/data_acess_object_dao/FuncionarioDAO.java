@@ -15,7 +15,7 @@ import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 
 public class FuncionarioDAO {
-	
+
 	private Connection myConn;
 
 	public FuncionarioDAO() throws Exception {
@@ -40,7 +40,7 @@ public class FuncionarioDAO {
 
 		try {
 			myStmt = myConn.createStatement();
-	
+
 			myRs = myStmt.executeQuery("select * from funcionario where id_role=1");
 
 			while (myRs.next()) {
@@ -54,7 +54,7 @@ public class FuncionarioDAO {
 			close(myStmt, myRs);
 		}
 	}
-	
+
 	public List<Funcionario> getAllFuncionarioOperador() throws Exception {
 		List<Funcionario> listaFuncionarioOperador = new ArrayList<>();
 
@@ -63,7 +63,7 @@ public class FuncionarioDAO {
 
 		try {
 			myStmt = myConn.createStatement();
-	
+
 			myRs = myStmt.executeQuery("select * from funcionario where id_role=2");
 
 			while (myRs.next()) {
@@ -77,7 +77,7 @@ public class FuncionarioDAO {
 			close(myStmt, myRs);
 		}
 	}
-	
+
 	public List<Funcionario> pesquisaFuncionarioAdmin(String nif) throws Exception {
 		List<Funcionario> list = new ArrayList<>();
 
@@ -104,7 +104,7 @@ public class FuncionarioDAO {
 			close(myStmt, myRs);
 		}
 	}
-	
+
 	public List<Funcionario> pesquisaFuncionarioOperador(String nif) throws Exception {
 		List<Funcionario> list = new ArrayList<>();
 
@@ -131,22 +131,22 @@ public class FuncionarioDAO {
 			close(myStmt, myRs);
 		}
 	}
-	
-	
+
+
 	public void criarFuncionario(Funcionario funcionario) throws Exception {
 		PreparedStatement myStmt = null;
 
 		try {
 			myStmt = myConn.prepareStatement("INSERT INTO funcionario(nome, nif, login, password, ativo, id_role) "
 					+ "VALUES(?,?,?,?,?,?)");
-			
+
 			myStmt.setString(1, funcionario.getNome());
 			myStmt.setLong(2, funcionario.getNif());
 			myStmt.setString(3, funcionario.getLogin());
 			myStmt.setString(4, funcionario.getPassword());
 			myStmt.setBoolean(5, funcionario.isAtivo());
 			myStmt.setInt(6, funcionario.getId_role());
-		
+
 			myStmt.executeUpdate();
 
 		}catch(Exception e) {
@@ -155,14 +155,14 @@ public class FuncionarioDAO {
 			myStmt.close();
 		}
 	}
-	
+
 	public void editarFuncionario(Funcionario funcionario) throws Exception {
 		PreparedStatement myStmt = null;
 		try {
 
 			myStmt = myConn.prepareStatement("UPDATE `funcionario` SET `nome`=?, `nif`=?, "
 					+ "`login`=?, `password`=?, `ativo`=?, `id_role`=? WHERE  `id`=?");
-			
+
 			myStmt.setString(1, funcionario.getNome());
 			myStmt.setLong(2, funcionario.getNif());
 			myStmt.setString(3, funcionario.getLogin());
@@ -170,7 +170,7 @@ public class FuncionarioDAO {
 			myStmt.setBoolean(5, funcionario.isAtivo());
 			myStmt.setInt(6, funcionario.getId_role());
 			myStmt.setInt(7, funcionario.getId());
-			
+
 			myStmt.executeUpdate();
 
 		}catch(Exception e) {
@@ -180,13 +180,13 @@ public class FuncionarioDAO {
 		}
 	}
 
-	public void desativarFuncionario(int nif) throws SQLException{
+	public void desativarFuncionario(int id) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
 
-			myStmt = myConn.prepareStatement("update funcionario SET `ativo`= 0 where nif=?");
+			myStmt = myConn.prepareStatement("update funcionario SET `ativo`= 0 where id=?");
 
-			myStmt.setInt(1, nif);
+			myStmt.setInt(1, id);
 
 			myStmt.executeUpdate();
 
@@ -206,7 +206,7 @@ public class FuncionarioDAO {
 		String password = myRs.getString("password");
 		boolean ativo = myRs.getBoolean("ativo");
 		int id_role = myRs.getInt("id_role");
-		
+
 		Funcionario funcionario = new Funcionario(id, nome, nif, login, password, ativo, id_role);
 
 		return funcionario;
