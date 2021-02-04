@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import Servico.SistemaTeleServico;
+import Servico.GestorDeDAO;
 import standard_value_object.Funcionario;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -211,13 +211,13 @@ public class CriarOperadorDialog extends JDialog {
 
 		try {
 			if (modoEditar) {
-				SistemaTeleServico.getSistemaTeleServicoInstance().editarFuncionario(funcionario);
+				GestorDeDAO.getGestorDeDAO().editarFuncionario(funcionario);
 				operadorPesquisaApp.refreshOperadorTable();
 				JOptionPane.showMessageDialog(operadorPesquisaApp,
 						"Operador Editado com sucesso!", "Operador Editado",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				SistemaTeleServico.getSistemaTeleServicoInstance().criarFuncionario(funcionario);
+				GestorDeDAO.getGestorDeDAO().criarFuncionario(funcionario);
 				operadorPesquisaApp.refreshOperadorTable();
 				JOptionPane.showMessageDialog(operadorPesquisaApp,
 						"Operador Criado com sucesso!", "Operador Criado",

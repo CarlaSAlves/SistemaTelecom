@@ -13,28 +13,28 @@ import standard_value_object.Funcionario;
 import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
 
-public class SistemaTeleServico {
+public class GestorDeDAO {
 
 
 	private ClienteDAO clienteDAO;
 	private FuncionarioDAO funcionarioDAO;
 	private PacoteComercialDAO pacoteComercialDAO;
 	private PromocaoDAO promocaoDAO;
-	private static SistemaTeleServico SistemaTeleServicoInstance = null;
+	private static GestorDeDAO GestorDeDAOInstance = null;
 
 
-	private SistemaTeleServico() throws Exception {
+	private GestorDeDAO() throws Exception {
 		clienteDAO = new ClienteDAO();
 		funcionarioDAO = new FuncionarioDAO();
 		pacoteComercialDAO = new PacoteComercialDAO();
 		promocaoDAO = new PromocaoDAO();
 	}
 
-	public static synchronized  SistemaTeleServico getSistemaTeleServicoInstance() throws Exception {
-		if( SistemaTeleServicoInstance == null ) {
-			SistemaTeleServicoInstance = new SistemaTeleServico();
+	public static synchronized  GestorDeDAO getGestorDeDAO() throws Exception {
+		if( GestorDeDAOInstance == null ) {
+			GestorDeDAOInstance = new GestorDeDAO();
 		}
-		return SistemaTeleServicoInstance;    
+		return GestorDeDAOInstance;    
 	}
 
 	public void criarCliente(Cliente cliente) throws Exception {

@@ -18,7 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-import Servico.SistemaTeleServico;
+import Servico.GestorDeDAO;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -89,9 +89,9 @@ public class GUI_gestor_cliente extends JFrame {
 					List<Cliente> clientes = null;
 
 					if (nif != null && nif.trim().length() > 0) {
-						clientes = SistemaTeleServico.getSistemaTeleServicoInstance().pesquisaCliente(nif);
+						clientes = GestorDeDAO.getGestorDeDAO().pesquisaCliente(nif);
 					} else {
-						clientes = SistemaTeleServico.getSistemaTeleServicoInstance().getAllClientes();
+						clientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
 					}
 
 					ClientePesquisaModelTable model = new ClientePesquisaModelTable(clientes);
@@ -223,7 +223,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 					for(int i = 0; i < indices.length; i++) {
 						Cliente clienteTemp = (Cliente) table.getValueAt(indices[i], ClientePesquisaModelTable.OBJECT_COL);
-						SistemaTeleServico.getSistemaTeleServicoInstance().desativarCliente(clienteTemp.getId());
+						GestorDeDAO.getGestorDeDAO().desativarCliente(clienteTemp.getId());
 					}
 					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
 							"Cliente(s) Desativado(s) com sucesso", "Cliente(s) Desativado",
@@ -258,7 +258,7 @@ public class GUI_gestor_cliente extends JFrame {
 	public void refreshClienteTable() {
 
 		try {
-			List<Cliente> clientes = SistemaTeleServico.getSistemaTeleServicoInstance().getAllClientes();
+			List<Cliente> clientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
 			ClientePesquisaModelTable model = new ClientePesquisaModelTable(clientes);
 			table.setModel(model);
 			numberRows = table.getRowCount();

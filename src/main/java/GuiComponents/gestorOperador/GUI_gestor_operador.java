@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-import Servico.SistemaTeleServico;
+import Servico.GestorDeDAO;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -85,9 +85,9 @@ public class GUI_gestor_operador extends JFrame {
 					List<Funcionario> operadores = null;
 
 					if (!nif.isBlank()) {
-						operadores = SistemaTeleServico.getSistemaTeleServicoInstance().pesquisaFuncionarioOperador(nif);
+						operadores = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioOperador(nif);
 					} else {
-						operadores = SistemaTeleServico.getSistemaTeleServicoInstance().getAllFuncionarioOperador();
+						operadores = GestorDeDAO.getGestorDeDAO().getAllFuncionarioOperador();
 
 					}
 
@@ -198,7 +198,7 @@ public class GUI_gestor_operador extends JFrame {
 
 					for(int i = 0; i < indices.length; i++) {
 						Funcionario funcionarioTemp = (Funcionario) table.getValueAt(indices[i], OperadorPesquisaModelTable.OBJECT_COL);
-						SistemaTeleServico.getSistemaTeleServicoInstance().desativarFuncionario(funcionarioTemp.getId());
+						GestorDeDAO.getGestorDeDAO().desativarFuncionario(funcionarioTemp.getId());
 					}
 
 					JOptionPane.showMessageDialog(GUI_gestor_operador.this,
@@ -261,7 +261,7 @@ public class GUI_gestor_operador extends JFrame {
 	public void refreshOperadorTable() {
 
 		try {
-			List<Funcionario> funcionarios = SistemaTeleServico.getSistemaTeleServicoInstance().getAllFuncionarioOperador();
+			List<Funcionario> funcionarios = GestorDeDAO.getGestorDeDAO().getAllFuncionarioOperador();
 			OperadorPesquisaModelTable model = new OperadorPesquisaModelTable(funcionarios);
 			table.setModel(model);
 

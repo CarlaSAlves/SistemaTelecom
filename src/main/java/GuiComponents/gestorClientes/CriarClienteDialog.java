@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import Servico.SistemaTeleServico;
+import Servico.GestorDeDAO;
 import standard_value_object.Cliente;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -236,13 +236,13 @@ public class CriarClienteDialog extends JDialog {
 
 		try {
 			if (modoEditar) {
-				SistemaTeleServico.getSistemaTeleServicoInstance().editarCliente(cliente);
+				GestorDeDAO.getGestorDeDAO().editarCliente(cliente);
 				clientePesquisaApp.refreshClienteTable();
 				JOptionPane.showMessageDialog(clientePesquisaApp,
 						"Cliente Editado com sucesso!", "Cliente Editado",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				SistemaTeleServico.getSistemaTeleServicoInstance().criarCliente(cliente);
+				GestorDeDAO.getGestorDeDAO().criarCliente(cliente);
 				clientePesquisaApp.refreshClienteTable();
 				JOptionPane.showMessageDialog(clientePesquisaApp,
 						"Cliente Criado com sucesso!", "Cliente Criado",

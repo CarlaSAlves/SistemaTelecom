@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 
-import Servico.SistemaTeleServico;
+import Servico.GestorDeDAO;
 
 import standard_value_object.PacoteComercial;
 import javax.swing.JLabel;
@@ -167,14 +167,14 @@ public class CriarPacotesDialog extends JDialog {
 
 		try {
 			if (modoEditar) {
-				SistemaTeleServico.getSistemaTeleServicoInstance().editarPacoteComercial(pacoteComercial);
+				GestorDeDAO.getGestorDeDAO().editarPacoteComercial(pacoteComercial);
 
 				pacoteComercialPesquisaApp.refreshClienteTable();
 				JOptionPane.showMessageDialog(pacoteComercialPesquisaApp,
 						"Pacote Comercial Editado com sucesso!", "Pacote Comercial Editado",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				SistemaTeleServico.getSistemaTeleServicoInstance().criarPacoteComercial(pacoteComercial);
+				GestorDeDAO.getGestorDeDAO().criarPacoteComercial(pacoteComercial);
 				pacoteComercialPesquisaApp.refreshClienteTable();
 				JOptionPane.showMessageDialog(pacoteComercialPesquisaApp,
 						"Pacote comercial criado com sucesso!", "Pacote Comercial Criado",

@@ -18,7 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-import Servico.SistemaTeleServico;
+import Servico.GestorDeDAO;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -94,9 +94,9 @@ public class GUI_gestor_pacotes extends JFrame {
 
 
 					if (!nif.isBlank()) {
-						pacotesComerciais = SistemaTeleServico.getSistemaTeleServicoInstance().pesquisaPacoteComercial(nif);
+						pacotesComerciais = GestorDeDAO.getGestorDeDAO().pesquisaPacoteComercial(nif);
 					} else  {
-						pacotesComerciais = SistemaTeleServico.getSistemaTeleServicoInstance().getAllPacotesComerciais();
+						pacotesComerciais = GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
 					}
 
 					PacoteComercialPesquisaModelTable model = new PacoteComercialPesquisaModelTable(pacotesComerciais);
@@ -207,7 +207,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 					for(int i = 0; i < indices.length; i++) {
 						PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indices[i], PacoteComercialPesquisaModelTable.OBJECT_COL);
-						SistemaTeleServico.getSistemaTeleServicoInstance().desativarCliente(pacoteTemp.getId());
+						GestorDeDAO.getGestorDeDAO().desativarCliente(pacoteTemp.getId());
 
 					}
 					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
@@ -300,7 +300,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	public void refreshClienteTable() {
 		
 		try {
-			List<PacoteComercial> pacotesComerciais = SistemaTeleServico.getSistemaTeleServicoInstance().getAllPacotesComerciais();
+			List<PacoteComercial> pacotesComerciais = GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
 			PacoteComercialPesquisaModelTable model = new PacoteComercialPesquisaModelTable(pacotesComerciais);
 			table.setModel(model);
 
