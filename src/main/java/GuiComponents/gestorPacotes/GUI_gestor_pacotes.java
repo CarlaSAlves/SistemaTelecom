@@ -21,7 +21,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import Servico.SistemaTeleServico;
 import GuiComponents.gestorClientes.ClientePesquisaModelTable;
-import GuiComponents.gestorClientes.CriarPacotesDialog;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;

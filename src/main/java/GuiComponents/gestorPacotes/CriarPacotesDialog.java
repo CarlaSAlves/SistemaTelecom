@@ -49,17 +49,17 @@ public class CriarPacotesDialog extends JDialog {
 		}
 	}
 
-	private GUI_gestor_cliente clientePesquisaApp;
+	private GUI_gestor_pacotes clientePesquisaApp;
 	private Cliente clienteAntigo;
 	private boolean modoEditar = false;
 	private JTextField textFieldNome;
 
-	public CriarClienteDialog(GUI_gestor_cliente clientePesquisaApp ) {
+	public CriarPacotesDialog(GUI_gestor_pacotes clientePesquisaApp ) {
 		this();
 		this.clientePesquisaApp = clientePesquisaApp;
 	}
 
-	public CriarClienteDialog(GUI_gestor_cliente clientePesquisaApp, Cliente clienteAntigo, boolean modoEditar ) {
+	public CriarPacotesDialog(GUI_gestor_pacotes clientePesquisaApp, Cliente clienteAntigo, boolean modoEditar ) {
 		this();
 		this.clientePesquisaApp = clientePesquisaApp;
 		this.clienteAntigo = clienteAntigo;
@@ -82,7 +82,7 @@ public class CriarPacotesDialog extends JDialog {
 		
 	}
 
-	public CriarClienteDialog() {
+	public CriarPacotesDialog() {
 		setBounds(500, 300, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.inactiveCaption);
