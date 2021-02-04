@@ -13,6 +13,7 @@ import GuiComponents.gestorClientes.GUI_gestor_cliente;
 public class GUI_total extends JFrame {
 
 	private JPanel contentPane;
+	private int teste;
 	
 
 	/**
