@@ -94,7 +94,7 @@ public class GUI_gestor_operador extends JFrame {
 
 					List<Funcionario> operadores = null;
 
-					if (nif != null && nif.trim().length() > 0) {
+					if (!nif.isBlank()) {
 						operadores = SistemaTeleServico.getSistemaTeleServicoInstance().pesquisaFuncionarioOperador(nif);
 					} else {
 						operadores = SistemaTeleServico.getSistemaTeleServicoInstance().getAllFuncionarioOperador();

@@ -111,6 +111,13 @@ public class SistemaTeleServico {
         pacoteComercialDAO.criarPacoteComercial(pacoteComercial);
     }
     
+    public void getDescricaoPacoteComercial(PacoteComercial pacoteComercial) {
+    	pacoteComercialDAO.getDescricaoPacoteComercial( pacoteComercial);
+    }
+    
+
+
+    
     public void editarPacoteComercial(PacoteComercial pacoteComercial) throws Exception {
         pacoteComercialDAO.editarPacoteComercial(pacoteComercial);
     }
@@ -124,7 +131,7 @@ public class SistemaTeleServico {
     }
     
     public List<PacoteComercial> pesquisaPacoteComercial(String nome){
-        return pesquisaPacoteComercial(null);
+        return pesquisaPacoteComercial(nome);
     }
     
     //Promoções Dao

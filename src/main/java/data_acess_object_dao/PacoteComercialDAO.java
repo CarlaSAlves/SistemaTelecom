@@ -122,6 +122,22 @@ public class PacoteComercialDAO {
 			myStmt.close();
 		}
 	}
+	
+	public void getDescricaoPacoteComercial(PacoteComercial pacoteComercial) {
+		
+		PreparedStatement myStmt = null;
+		
+		try {
+			myStmt = myConn.prepareStatement("select `descricao` FROM `pacote_comercial` WHERE 'id' = ? ");
+			
+			myStmt.setString(1, pacoteComercial.getDescricao());
+		} catch (SQLException e) {
+	
+			e.printStackTrace();
+		}
+		
+		
+	}
 
 	public void eliminarPacoteComercial(String nome) throws SQLException{
 		PreparedStatement myStmt = null;
@@ -173,5 +189,7 @@ public class PacoteComercialDAO {
 			myConn.close();
 		}
 	}
+
+	
 
 }
