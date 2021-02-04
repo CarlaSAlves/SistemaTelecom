@@ -1,7 +1,5 @@
 package standard_value_object;
 
-import java.time.LocalDateTime;
-
 public class Promocao {
 
 	private int id;

@@ -12,8 +12,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
-import standard_value_object.Cliente;
 import standard_value_object.Role;
 
 public class RoleDAO {

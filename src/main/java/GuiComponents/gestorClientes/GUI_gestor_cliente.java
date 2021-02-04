@@ -1,6 +1,6 @@
 package GuiComponents.gestorClientes;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.JFrame;
@@ -17,22 +17,22 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import Servico.SistemaTeleServico;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-@SuppressWarnings("serial")
+
 public class GUI_gestor_cliente extends JFrame {
+	
+	private static final long serialVersionUID = 1L;
 	private JTextField textPesquisaNIF;
 	private JTable table;
 	private JButton btVoltarGestorCliente;
 	private JPanel contentPane;
 	private int numberRows;
 	private JLabel lblResultados;
-	private SistemaTeleServico sistemaTeleServico;
 	private JButton botaoDesativarCliente;
 	private JButton botaoEditarCliente;
 	private int indices[];

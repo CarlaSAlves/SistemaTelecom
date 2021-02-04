@@ -1,15 +1,13 @@
 package GuiComponents.gestorClientes;
 
-import java.awt.Component;
+
 import java.util.List;
-import javax.swing.JLabel;
-import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableCellRenderer;
 import standard_value_object.Cliente;
 
 public class ClientePesquisaModelTable extends AbstractTableModel {
 
+	private static final long serialVersionUID = 1L;
 	public static final int OBJECT_COL = -1;
 	private static final int ID_COL = 0;
 	private static final int NIF_COL = 1;
@@ -74,6 +72,7 @@ public class ClientePesquisaModelTable extends AbstractTableModel {
 		}
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Class getColumnClass(int c) {
 		return getValueAt(0, c).getClass();

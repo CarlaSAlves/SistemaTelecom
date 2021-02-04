@@ -10,10 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.SpringLayout;
-
 public class GUI_homepage extends JFrame {
 
 	private JButton btVoltar;

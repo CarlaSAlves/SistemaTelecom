@@ -30,7 +30,6 @@ public class GUI_gestor_operador extends JFrame {
 	private JPanel contentPane;
 	private int numberRows;
 	private JLabel lblResultados;
-	private SistemaTeleServico sistemaTeleServico;
 	private JButton botaoDesativarOperador;
 	private JButton botaoEditarOperador;
 	private int indices[];

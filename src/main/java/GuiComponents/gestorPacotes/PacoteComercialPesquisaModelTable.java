@@ -2,12 +2,11 @@ package GuiComponents.gestorPacotes;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import standard_value_object.Cliente;
-import standard_value_object.Funcionario;
 import standard_value_object.PacoteComercial;
 
 public class PacoteComercialPesquisaModelTable extends AbstractTableModel {
 
+	private static final long serialVersionUID = 1L;
 	public static final int OBJECT_COL = -1;
 	private static final int ID_COL = 0;
 	private static final int NOME_COL = 1;
@@ -61,6 +60,7 @@ public class PacoteComercialPesquisaModelTable extends AbstractTableModel {
 		}
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Class getColumnClass(int c) {
 		return getValueAt(0, c).getClass();

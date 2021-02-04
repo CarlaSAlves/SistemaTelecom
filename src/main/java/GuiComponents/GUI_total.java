@@ -6,12 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import GuiComponents.gestorClientes.GUI_gestor_cliente;
 import GuiComponents.gestorOperador.GUI_gestor_operador;
 
 public class GUI_total extends JFrame {
 
+
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	public static void main(String[] args) {

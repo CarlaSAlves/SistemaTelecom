@@ -7,13 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
-import standard_value_object.Cliente;
 import standard_value_object.PacoteComercial;
 
 public class PacoteComercialDAO {

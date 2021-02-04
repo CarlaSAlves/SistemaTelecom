@@ -12,10 +12,11 @@ import java.awt.Font;
 import javax.swing.JPasswordField;
 import java.awt.Color;
 import javax.swing.ImageIcon;
-import javax.swing.SpringLayout;
+
 
 public class GUI_login extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JTextField textFieldUser;
 	private JButton btLogin;
 	private JLabel labelPass;

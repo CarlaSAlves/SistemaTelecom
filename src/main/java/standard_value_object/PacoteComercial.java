@@ -1,8 +1,5 @@
 package standard_value_object;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
-
 public class PacoteComercial {
 
 	private int id;

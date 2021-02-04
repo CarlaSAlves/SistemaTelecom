@@ -1,14 +1,12 @@
 
 package GuiComponents.gestorPacotes;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import standard_value_object.Cliente;
 import standard_value_object.PacoteComercial;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -19,23 +17,23 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import Servico.SistemaTeleServico;
-import GuiComponents.gestorClientes.ClientePesquisaModelTable;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.JTextArea;
 
 public class GUI_gestor_pacotes extends JFrame {
+	
+	
+	private static final long serialVersionUID = 1L;
 	private JTextField textPesquisaId;
 	private JTable table;
 	private JButton btVoltarGestorCliente;
 	private JPanel contentPane;
 	private int numberRows;
 	private JLabel lblResultados;
-	private SistemaTeleServico sistemaTeleServico;
 	private JButton botaoDesativarPacoteComercial;
 	private JButton botaoEditarPacoteComercial;
 	private int indices[];
