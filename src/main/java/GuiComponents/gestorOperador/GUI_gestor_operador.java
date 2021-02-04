@@ -113,19 +113,19 @@ public class GUI_gestor_operador extends JFrame {
 		});
 		getContentPane().add(botaoPesquisa);
 
-		JButton botaoCriarCliente = new JButton("Criar Cliente");
-		botaoCriarCliente.setBounds(1250, 15, 152, 32);
-		botaoCriarCliente.setFont(font);
-		botaoCriarCliente.setBackground(SystemColor.activeCaption);
-		botaoCriarCliente.setFocusPainted(false);
-		botaoCriarCliente.addActionListener(new ActionListener() {
+		JButton botaoCriarOperador = new JButton("Criar Cliente");
+		botaoCriarOperador.setBounds(1250, 15, 152, 32);
+		botaoCriarOperador.setFont(font);
+		botaoCriarOperador.setBackground(SystemColor.activeCaption);
+		botaoCriarOperador.setFocusPainted(false);
+		botaoCriarOperador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CriarOperadorDialog dialog = new CriarOperadorDialog(GUI_gestor_operador.this);
 				dialog.setVisible(true);
 			}
 		});
 		
-		getContentPane().add(botaoCriarCliente);
+		getContentPane().add(botaoCriarOperador);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(SystemColor.inactiveCaption);
