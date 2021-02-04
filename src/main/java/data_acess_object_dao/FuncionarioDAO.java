@@ -180,7 +180,7 @@ public class FuncionarioDAO {
 		}
 	}
 
-	public void desativarFuncionario(int nif) throws SQLException{
+	public void desativarFuncionario2(int nif) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
 

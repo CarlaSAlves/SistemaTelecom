@@ -84,7 +84,7 @@ public class SistemaTeleServico {
     }
     
     public void desativarFuncionario(int nif) throws Exception {
-        funcionarioDAO.desativarFuncionario(nif);
+        funcionarioDAO.desativarFuncionario2(nif);
     }
     
     public List<Funcionario> getAllFuncionarioAdmin() throws Exception{
