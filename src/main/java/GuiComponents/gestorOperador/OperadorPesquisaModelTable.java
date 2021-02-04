@@ -23,10 +23,10 @@ public class OperadorPesquisaModelTable extends AbstractTableModel {
 	private String[] nomesColunas = { "ID","NIF", "Nome", "Morada",
 			"Login", "Password", "Ativo", "Pacote Comercial ID" };
 	
-	private List<Cliente> clientes;
+	private List<Funcionario> operadores;
 
-	public OperadorPesquisaModelTable(List<Funcionario> operadores) {
-		clientes = operadores;
+	public OperadorPesquisaModelTable(List<Funcionario> funcionarios) {
+		funcionarios = operadores;
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class OperadorPesquisaModelTable extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return clientes.size();
+		return operadores.size();
 	}
 
 	@Override

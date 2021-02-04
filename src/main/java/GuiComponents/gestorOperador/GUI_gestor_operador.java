@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -18,8 +17,6 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-
-import GuiComponents.gestorClientes.ClientePesquisaModelTable;
 import Servico.SistemaTeleServico;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
@@ -115,7 +112,7 @@ public class GUI_gestor_operador extends JFrame {
 		getContentPane().add(botaoPesquisa);
 
 		JButton botaoCriarOperador = new JButton("Criar Operador");
-		botaoCriarOperador.setBounds(1250, 15, 152, 32);
+		botaoCriarOperador.setBounds(1250, 15, 161, 32);
 		botaoCriarOperador.setFont(font);
 		botaoCriarOperador.setBackground(SystemColor.activeCaption);
 		botaoCriarOperador.setFocusPainted(false);
@@ -158,7 +155,7 @@ public class GUI_gestor_operador extends JFrame {
 		panel.add(lblResultados);
 
 		botaoEditarOperador = new JButton("Editar Operador");
-		botaoEditarOperador.setBounds(852, 15, 161, 33);
+		botaoEditarOperador.setBounds(849, 15, 161, 33);
 		botaoEditarOperador.setFont(font);
 		botaoEditarOperador.setBackground(SystemColor.activeCaption);
 		botaoEditarOperador.setFocusPainted(false);
@@ -184,7 +181,7 @@ public class GUI_gestor_operador extends JFrame {
 		getContentPane().add(botaoEditarOperador);
 
 		botaoDesativarOperador = new JButton("Desativar Operador");
-		botaoDesativarOperador.setBounds(1053, 15, 161, 33);
+		botaoDesativarOperador.setBounds(1038, 15, 188, 33);
 		botaoDesativarOperador.setFont(font);
 		botaoDesativarOperador.setBackground(SystemColor.activeCaption);
 		botaoDesativarOperador.setFocusPainted(false);
@@ -217,7 +214,7 @@ public class GUI_gestor_operador extends JFrame {
 							"Operador desativado com sucesso", "Operador Desativado",
 							JOptionPane.INFORMATION_MESSAGE);
 
-					refreshClienteTable();
+					refreshOperadorTable();
 				} catch (Exception e1) {
 
 				}
@@ -272,11 +269,11 @@ public class GUI_gestor_operador extends JFrame {
 		botaoDesativarOperador.setEnabled(false);
 	}
 
-	public void refreshClienteTable() {
+	public void refreshOperadorTable() {
 
 		try {
-			List<Cliente> clientes = SistemaTeleServico.getSistemaTeleServicoInstance().getAllClientes();
-			OperadorPesquisaModelTable model = new OperadorPesquisaModelTable(clientes);
+			List<Funcionario> funcionarios = SistemaTeleServico.getSistemaTeleServicoInstance().getAllFuncionarioOperador();
+			OperadorPesquisaModelTable model = new OperadorPesquisaModelTable(funcionarios);
 			table.setModel(model);
 
 		} catch (Exception exc) {
@@ -286,12 +283,12 @@ public class GUI_gestor_operador extends JFrame {
 
 	}
 
-	public JButton btVoltarGestorCliente() {
+	public JButton btVoltarGestorOperador() {
 		return btVoltarGestorOperador;
 	}
 
-	public void setBtVoltarGestorCliente(JButton btnNewButtonVoltar2) {
-		this.btVoltarGestorOperador = btnNewButtonVoltar2;
+	public void setBtVoltarGestorOperador(JButton botaoVoltar2) {
+		this.btVoltarGestorOperador = botaoVoltar2;
 	}
 
 	public JPanel returnPanel() {

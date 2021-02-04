@@ -19,6 +19,8 @@ public class GUI_homepage extends JFrame {
 	private JButton btVoltar;
 	private JButton btGerirClientes;
 	
+	private JButton btGerirOperadores;
+	
 	private JPanel panel;
 
 	/**
@@ -89,7 +91,7 @@ public class GUI_homepage extends JFrame {
 		btVoltar.setFocusPainted(false);
 		getContentPane().add(btVoltar);
 		
-		JButton btGerirOperadores = new JButton("Gerir Operadores");
+		btGerirOperadores = new JButton("Gerir Operadores");
 		btGerirOperadores.setBounds(633, 406, 223, 59);
 		btGerirOperadores.setToolTipText("Gestão de Operadores");
 		btGerirOperadores.setForeground(Color.DARK_GRAY);
@@ -131,6 +133,10 @@ public class GUI_homepage extends JFrame {
 	
 	public JButton getBtGerirClientes() {
 		return btGerirClientes;
+	}
+	
+	public JButton getBtGerirOperadores() {
+		return btGerirOperadores;
 	}
 }
 

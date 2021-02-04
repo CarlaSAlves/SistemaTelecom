@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import GuiComponents.gestorClientes.GUI_gestor_cliente;
+import GuiComponents.gestorOperador.GUI_gestor_operador;
 
 @SuppressWarnings("serial")
 public class GUI_total extends JFrame {
@@ -46,6 +47,7 @@ public class GUI_total extends JFrame {
 		GUI_login login = new GUI_login();
 		GUI_homepage homepage = new GUI_homepage();
 		GUI_gestor_cliente gestor_cliente = new GUI_gestor_cliente();
+		GUI_gestor_operador gestor_operador = new GUI_gestor_operador();
 
 		JPanel loginPanel = login.returnPanel();
 		loginPanel.setBounds(0, 0, 1500, 900);
@@ -60,6 +62,11 @@ public class GUI_total extends JFrame {
 		gestor_clientePanel.setVisible(false);
 		gestor_clientePanel.setBounds(0, 0, 1500, 900);
 		getContentPane().add(gestor_clientePanel);
+		
+		JPanel gestor_operadorPanel = gestor_operador.returnPanel();
+		gestor_operadorPanel.setVisible(false);
+		gestor_operadorPanel.setBounds(0, 0, 1500, 900);
+		getContentPane().add(gestor_operadorPanel);
 
 		login.getBtLogin().addActionListener(new ActionListener() {
 
@@ -87,6 +94,16 @@ public class GUI_total extends JFrame {
 				gestor_clientePanel.setVisible(true);
 			}
 		});
+		
+		homepage.getBtGerirOperadores().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				homepagePanel.setVisible(false);
+				gestor_operadorPanel.setVisible(true);
+				
+			}
+		});
 
 		gestor_cliente.btVoltarGestorCliente().addActionListener(new ActionListener() {
 
@@ -94,6 +111,16 @@ public class GUI_total extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				homepagePanel.setVisible(true);
 				gestor_clientePanel.setVisible(false);
+			}
+		});
+		
+		gestor_operador.btVoltarGestorOperador().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				homepagePanel.setVisible(true);
+				gestor_operadorPanel.setVisible(false);
+				
 			}
 		});
 		

@@ -245,13 +245,13 @@ public class CriarOperadorDialog extends JDialog {
 			// save to the database
 			if (modoEditar) {
 				SistemaTeleServico.getSistemaTeleServicoInstance().editarCliente(cliente);
-				clientePesquisaApp.refreshClienteTable();
+				clientePesquisaApp.refreshOperadorTable();
 				JOptionPane.showMessageDialog(clientePesquisaApp,
 						"Cliente Editado com sucesso!", "Cliente Editado",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				SistemaTeleServico.getSistemaTeleServicoInstance().criarCliente(cliente);
-				clientePesquisaApp.refreshClienteTable();
+				clientePesquisaApp.refreshOperadorTable();
 				JOptionPane.showMessageDialog(clientePesquisaApp,
 						"Cliente Criado com sucesso!", "Cliente Criado",
 						JOptionPane.INFORMATION_MESSAGE);
