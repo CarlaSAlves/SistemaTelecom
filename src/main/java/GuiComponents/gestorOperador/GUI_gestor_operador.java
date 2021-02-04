@@ -17,7 +17,9 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-import Servico.GestorDeDAO;
+
+import servico.GestorDeDAO;
+
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
