@@ -45,5 +45,6 @@ public class HistoricoClienteDialog extends JDialog {
 		table = new JTable();
 		table.setBounds(0, 0, 1, 1);
 		contentPanel.add(table);
+		int noob;
 	}
 }
