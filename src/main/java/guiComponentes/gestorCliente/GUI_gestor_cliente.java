@@ -43,6 +43,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
 	private JLabel lblUsernameLogged;
 	private String username;
+	private JButton botaoVisualizarHistorico;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -152,17 +153,20 @@ public class GUI_gestor_cliente extends JFrame {
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				if (table.getSelectedRowCount()>1) {
+					botaoVisualizarHistorico.setEnabled(false);
 					botaoEditarCliente.setEnabled(false);
 					botaoDesativarCliente.setEnabled(true);
 				}
 				else if (table.getSelectedRows().length==1) {
 					botaoEditarCliente.setEnabled(true);
 					botaoDesativarCliente.setEnabled(true);
+					botaoVisualizarHistorico.setEnabled(true);
 				}
 				else if (table.getSelectedRowCount()==0)
 				{
 					botaoEditarCliente.setEnabled(false);
 					botaoDesativarCliente.setEnabled(false);
+					botaoVisualizarHistorico.setEnabled(false);
 				}
 
 			}
@@ -260,7 +264,7 @@ public class GUI_gestor_cliente extends JFrame {
 		lblUsernameLogged.setBounds(1315, 818, 159, 32);
 		contentPane.add(lblUsernameLogged);
 
-		JButton botaoVisualizarHistorico = new JButton("Ver Historico");
+		botaoVisualizarHistorico = new JButton("Ver Historico");
 		botaoVisualizarHistorico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
@@ -271,8 +275,7 @@ public class GUI_gestor_cliente extends JFrame {
 							"Por favor selecione um Cliente", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				
-				System.out.println("aqui");
+	
 				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
 				List<HistoricoCliente> list;
 				
@@ -292,6 +295,7 @@ public class GUI_gestor_cliente extends JFrame {
 		botaoVisualizarHistorico.setFont(new Font("Dialog", Font.PLAIN, 17));
 		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
 		botaoVisualizarHistorico.setBounds(658, 15, 161, 33);
+		botaoVisualizarHistorico.setEnabled(false);
 		contentPane.add(botaoVisualizarHistorico);
 
 	}
