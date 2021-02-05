@@ -59,7 +59,7 @@ public class CriarClienteDialog extends JDialog {
 		this.clienteAntigo = clienteAntigo;
 		this.modoEditar = modoEditar;
 		this.username = username;
-	
+
 		if(modoEditar) {
 			setTitle("Editar Cliente");
 			popularTextFields(clienteAntigo);
@@ -241,25 +241,24 @@ public class CriarClienteDialog extends JDialog {
 		}
 
 		try {
+			Funcionario funcionario = null;
 			if (modoEditar) {
-				GestorDeDAO.getGestorDeDAO().editarCliente(cliente);
+				funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(username);
+				GestorDeDAO.getGestorDeDAO().editarCliente(cliente, funcionario);
 				clientePesquisaApp.refreshClienteTable();
 				JOptionPane.showMessageDialog(clientePesquisaApp,
 						"Cliente Editado com sucesso!", "Cliente Editado",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
-
-				Funcionario funcionario = null;
-
 				try {
-					
+
 					funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(username);
 					GestorDeDAO.getGestorDeDAO().criarCliente(cliente, funcionario);
 					clientePesquisaApp.refreshClienteTable();
 					JOptionPane.showMessageDialog(clientePesquisaApp,
 							"Cliente Criado com sucesso!", "Cliente Criado",
 							JOptionPane.INFORMATION_MESSAGE);
-					
+
 				} catch (Exception e) {
 
 				}

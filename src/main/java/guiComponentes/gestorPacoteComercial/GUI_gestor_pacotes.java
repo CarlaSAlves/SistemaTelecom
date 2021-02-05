@@ -209,7 +209,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 					for(int i = 0; i < indices.length; i++) {
 						PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indices[i], PacoteComercialPesquisaModelTable.OBJECT_COL);
-						GestorDeDAO.getGestorDeDAO().desativarCliente(pacoteTemp.getId());
+						GestorDeDAO.getGestorDeDAO().desativarPacoteComercial(pacoteTemp.getId());
 
 					}
 					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
