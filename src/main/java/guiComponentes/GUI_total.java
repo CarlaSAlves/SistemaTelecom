@@ -35,6 +35,7 @@ public class GUI_total extends JFrame {
 	}
 
 	public GUI_total() {
+		int test;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1500, 900);
 		contentPane = new JPanel();
