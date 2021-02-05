@@ -8,9 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import servico.GestorDeDAO;
-import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;

@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
 import javax.swing.JTextField;
 import javax.swing.JButton;

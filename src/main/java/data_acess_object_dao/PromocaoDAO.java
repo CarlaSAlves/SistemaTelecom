@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -146,9 +145,9 @@ public class PromocaoDAO {
 		String descricao = myRs.getString("descricao");
 		boolean ativo = myRs.getBoolean("ativo");
 		Date data_inicio = myRs.getDate("data_inicio");
-		Date data_fim = myRs.getDate("data_inicio");
+		Date data_fim = myRs.getDate("data_fim");
 
-		Promocao promocao = new Promocao(id, nome, descricao, ativo, data_inicio, data_inicio);
+		Promocao promocao = new Promocao(id, nome, descricao, ativo, data_inicio, data_fim);
 
 		return promocao;
 	}
