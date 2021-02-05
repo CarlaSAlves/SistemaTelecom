@@ -90,13 +90,13 @@ public class GUI_gestor_pacotes extends JFrame {
 
 				try {
 
-					String nif = textPesquisaId.getText();
+					String id = textPesquisaId.getText();
 
 					List<PacoteComercial> pacotesComerciais = null;
 
 
-					if (!nif.isBlank()) {
-						pacotesComerciais = GestorDeDAO.getGestorDeDAO().pesquisaPacoteComercial(nif);
+					if (!id.isBlank()) {
+						pacotesComerciais = GestorDeDAO.getGestorDeDAO().pesquisaPacoteComercial(id);
 					} else  {
 						pacotesComerciais = GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
 					}

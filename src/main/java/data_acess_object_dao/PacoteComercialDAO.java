@@ -12,132 +12,134 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
 import standard_value_object.PacoteComercial;
+
 
 public class PacoteComercialDAO {
 
 	private Connection myConn;
 
-	public PacoteComercialDAO() throws Exception {
+	public PacoteComercialDAO() throws Exception  {
 
-		Properties props = new Properties();
+		Properties props = new Properties(); 
 		props.load(new FileInputStream("sistema_tele.properties"));
 
 		String user = props.getProperty("user");
 		String password = props.getProperty("password");
 		String dburl = props.getProperty("dburl");
 
-
 		myConn = DriverManager.getConnection(dburl, user, password);
 
 	}
 
 	public List<PacoteComercial> getAllPacotesComerciais() throws Exception {
-		List<PacoteComercial> listaPacotesComerciais = new ArrayList<>();
+		List<PacoteComercial> listaPacotes = new ArrayList<>();
 
 		Statement myStmt = null;
 		ResultSet myRs = null;
 
 		try {
+
 			myStmt = myConn.createStatement();
 			myRs = myStmt.executeQuery("select * from pacote_comercial");
 
 			while (myRs.next()) {
-				PacoteComercial pacoteComercial = converteRowParaPacoteComercial(myRs);
-				listaPacotesComerciais.add(pacoteComercial);
+				PacoteComercial pacote = converteRowParaPacote(myRs);
+				listaPacotes.add(pacote);
 			}
 
-			return listaPacotesComerciais;		
+			return listaPacotes;
 		}
 		finally {
 			close(myStmt, myRs);
 		}
+
 	}
 
-	public List<PacoteComercial> pesquisaPacoteComercial(String nome) throws Exception {
+	public List<PacoteComercial> pesquisaPacoteComercial(String id) throws Exception {
 		List<PacoteComercial> list = new ArrayList<>();
 
-		PreparedStatement myStmt = null;
-		ResultSet myRs = null;
+		PreparedStatement myState = null; 
+		ResultSet myRes = null; 
 
 		try {
-			nome += "%";
+			id += "%";
 
-			myStmt = myConn.prepareStatement("select * from pacote_comercial where nome like ?");
+			myState = myConn.prepareStatement("select * from pacote_comercial where id like ?");
 
-			myStmt.setString(1, nome);
+			myState.setString(1, id);
 
-			myRs = myStmt.executeQuery();
+			myRes = myState.executeQuery();
 
-			while (myRs.next()) {
-				PacoteComercial pacoteComercial = converteRowParaPacoteComercial(myRs);
-				list.add(pacoteComercial);
+			while (myRes.next()) {
+				PacoteComercial pacote = converteRowParaPacote(myRes);
+				list.add(pacote);
 			}
 
 			return list;
 		}
+
 		finally {
-			close(myStmt, myRs);
+			close (myState, myRes);
 		}
 	}
 
-	public void criarPacoteComercial(PacoteComercial pacoteComercial) throws Exception {
-		PreparedStatement myStmt = null;
+	public void criarPacoteComercial (PacoteComercial pacote) throws Exception {
+
+		PreparedStatement myState = null; 
 
 		try {
-			myStmt = myConn.prepareStatement("INSERT INTO pacote_comercial(nome, descricao, ativo) VALUES(?,?,?)");
+			myState = myConn.prepareStatement("INSERT INTO pacote_comercial (nome, descricao, ativo)"
+					+ "VALUES(?,?,?,?,?)");
 
-			myStmt.setString(1, pacoteComercial.getNome());
-			myStmt.setString(2, pacoteComercial.getDescricao());
-			myStmt.setBoolean(3, pacoteComercial.isAtivo());
+			myState.setString(1, pacote.getNome());
+			myState.setString(2, pacote.getDescricao());
+			myState.setBoolean(3, pacote.isAtivo());
 
+			myState.executeUpdate();
+		} catch(Exception e) {
 
-			myStmt.executeUpdate();
-
-		}catch(Exception e) {
-
-		}finally {
-			myStmt.close();
+		} finally {
+			myState.close();
 		}
 	}
 
-	public void editarPacoteComercial(PacoteComercial pacoteComercial) throws Exception {
-		PreparedStatement myStmt = null;
+	public void editarPacoteComercial(PacoteComercial pacote) throws Exception {
+		PreparedStatement myState = null; 
+
 		try {
+			myState = myConn.prepareStatement("UPDATE pacote_comercial SET nome=?, descricao=?, ativo=? WHERE id=?");
 
-			myStmt = myConn.prepareStatement("UPDATE `pacote_comercial` SET `nome`=?, `descricao`=?, `ativo`=?  WHERE  `id`=?");
+			myState.setString(1, pacote.getNome());
+			myState.setString(2, pacote.getDescricao());
+			myState.setBoolean(3, pacote.isAtivo());
 
-			myStmt.setString(1, pacoteComercial.getNome());
-			myStmt.setString(2, pacoteComercial.getDescricao());
-			myStmt.setBoolean(3, pacoteComercial.isAtivo());
-			myStmt.setInt(4, pacoteComercial.getId());
+			myState.executeUpdate();
 
-			myStmt.executeUpdate();
+		} catch(Exception e) {
 
-		}catch(Exception e) {
+		} finally {
 
-		}finally {
-			myStmt.close();
+			myState.close();
 		}
 	}
 
 	
+	public void desativarPacoteComercial (String nome) throws Exception {
+		PreparedStatement myState = null; 
 
-	public void eliminarPacoteComercial(String nome) throws SQLException{
-		PreparedStatement myStmt = null;
 		try {
 
-			myStmt = myConn.prepareStatement("update pacote_comercial SET `ativo`= 0 where nome=?");
+			myState = myConn.prepareStatement("UPDATE pacote_comercial SET ativo=0 WHERE id=?");
 
-			myStmt.setString(1, nome);
+			myState.setString(1, nome);
+			myState.executeUpdate();
 
-			myStmt.executeUpdate();
+		} catch(Exception e) {
 
-		}catch(Exception e) {
+		} finally {
 
-		}finally {
-			myStmt.close();
+			myState.close();
 		}
 
 	}
@@ -156,27 +158,23 @@ public class PacoteComercialDAO {
 		return pacoteComercial;
 	}
 
+	private void close(Statement myState, ResultSet myRes) throws SQLException {
+		close(null, myState, myRes);
 
-	private void close(Statement myStmt, ResultSet myRs) throws SQLException {
-		close(null, myStmt, myRs);		
 	}
 
-	private void close(Connection myConn, Statement myStmt, ResultSet myRs)
-			throws SQLException {
-
-		if (myRs != null) {
-			myRs.close();
+	private void close(Connection myConn, Statement myState, ResultSet myRes) throws SQLException {
+		
+		if (myRes != null) {
+			myRes.close();
 		}
 
-		if (myStmt != null) {
-			myStmt.close();
+		if (myState != null) {
+			myState.close();
 		}
 
 		if (myConn != null) {
 			myConn.close();
 		}
 	}
-
-
-
 }
