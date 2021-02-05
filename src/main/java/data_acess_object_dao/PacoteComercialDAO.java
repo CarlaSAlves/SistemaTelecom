@@ -44,7 +44,7 @@ public class PacoteComercialDAO {
 			myRs = myStmt.executeQuery("select * from pacote_comercial");
 
 			while (myRs.next()) {
-				PacoteComercial pacote = converteRowParaPacote(myRs);
+				PacoteComercial pacote = converteRowParaPacoteComercial(myRs);
 				listaPacotes.add(pacote);
 			}
 
@@ -72,7 +72,7 @@ public class PacoteComercialDAO {
 			myRes = myState.executeQuery();
 
 			while (myRes.next()) {
-				PacoteComercial pacote = converteRowParaPacote(myRes);
+				PacoteComercial pacote = converteRowParaPacoteComercial(myRes);
 				list.add(pacote);
 			}
 
