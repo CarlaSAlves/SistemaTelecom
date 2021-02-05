@@ -8,9 +8,7 @@ public class Promocao {
 	private String nome;
 	private String descricao;
 	private boolean ativa;
-	
 	private Date data_inicio; 
-	
 	private Date data_fim;
 	
 	public Promocao(int id, String nome, String descricao, boolean ativa, Date data_inicio2, Date data_fim2) {

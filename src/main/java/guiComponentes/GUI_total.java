@@ -4,12 +4,14 @@ package guiComponentes;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import guiComponentes.gestorCliente.GUI_gestor_cliente;
 import guiComponentes.gestorOperador.GUI_gestor_operador;
 import guiComponentes.gestorPacoteComercial.GUI_gestor_pacotes;
-import guiComponentes.gestorPromocao.GUI_gestor_promocoes;
+import guiComponentes.gestorPromocao.GUI_gestor_promocao;
 
 
 public class GUI_total extends JFrame {
@@ -45,7 +47,7 @@ public class GUI_total extends JFrame {
 		GUI_gestor_cliente gestor_cliente = new GUI_gestor_cliente();
 		GUI_gestor_operador gestor_operador = new GUI_gestor_operador();
 		GUI_gestor_pacotes gestor_pacotes = new GUI_gestor_pacotes();
-		GUI_gestor_promocoes gestor_promocoes = new GUI_gestor_promocoes();
+		GUI_gestor_promocao gestor_promocao = new GUI_gestor_promocao();
 
 
 		JPanel loginPanel = login.returnPanel();
@@ -72,12 +74,10 @@ public class GUI_total extends JFrame {
 		gestor_pacotesPanel.setBounds(0, 0, 1500, 900);
 		getContentPane().add(gestor_pacotesPanel);
 
-
-		JPanel gestor_promocoesPanel = gestor_promocoes.returnPanel();
-		gestor_promocoes.setVisible(false);
-		gestor_promocoes.setBounds(0, 0, 1500, 900);
-		getContentPane().add(gestor_promocoesPanel);
-
+		JPanel gestor_promocaoPanel = gestor_promocao.returnPanel();
+		gestor_promocaoPanel.setVisible(false);
+		gestor_promocaoPanel.setBounds(0, 0, 1500, 900);
+		getContentPane().add(gestor_promocaoPanel);
 
 		// LOGIN
 		login.getBtLogin().addActionListener(new ActionListener() {
@@ -112,16 +112,6 @@ public class GUI_total extends JFrame {
 		});
 
 		
-		homepage.getBtGerirPromocoes().addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				homepagePanel.setVisible(false);
-				gestor_promocoesPanel.setVisible(true);
-			
-			}
-		});
-		
 		homepage.getBtGerirPacotes().addActionListener(new ActionListener() {
 
 			@Override
@@ -131,6 +121,14 @@ public class GUI_total extends JFrame {
 			}
 		});
 
+		homepage.getBtGerirPromocoes().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				homepagePanel.setVisible(false);
+				gestor_promocaoPanel.setVisible(true);
+			}
+		});
 
 		// BOTÃO VOLTAR
 		homepage.getBtVoltar().addActionListener(new ActionListener() {
@@ -169,16 +167,14 @@ public class GUI_total extends JFrame {
 			}
 		});
 		
-//		gestor_promocoes.btVoltarGestorPromocoes().addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				homepagePanel.setVisible(true);
-//				gestor_promocoesPanel.setVisible(false);
-//				
-//			}
-//		});
-
+		gestor_promocao.getBtVoltarGestorPromocao().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				homepagePanel.setVisible(true);
+				gestor_promocaoPanel.setVisible(false);
+			}
+		});
 
 	}
 

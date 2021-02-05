@@ -10,7 +10,6 @@ public class PacoteComercial {
 	private String nome;
 	private String descricao;
 	private boolean ativo;
-	
 	private Date data_inicio;
 	private Date data_fim;
 

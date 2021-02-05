@@ -9,13 +9,13 @@ public class OperadorPesquisaModelTable extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	public static final int OBJECT_COL = -1;
 	private static final int ID_COL = 0;
-	private static final int NOME_COL = 1;
-	private static final int NIF_COL = 2;
+	private static final int NIF_COL = 1;
+	private static final int NOME_COL = 2;
 	private static final int LOGIN_COL = 3;
 	private static final int PASSWORD_COL = 4;
 	private static final int ATIVO_COL = 5;
 	
-	private String[] nomesColunas = { "ID", "Nome", "NIF", "Login", "Password", "Ativo" };
+	private String[] nomesColunas = { "ID", "NIF", "Nome", "Login", "Password", "Ativo" };
 	
 	private List<Funcionario> funcionarios;
 	

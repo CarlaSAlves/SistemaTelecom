@@ -59,7 +59,7 @@ public class GUI_homepage extends JFrame {
 		getContentPane().add(lblPoesia);
 
 		btGerirClientes = new JButton("Gerir Clientes");
-		btGerirClientes.setBounds(633, 321, 222, 59);
+		btGerirClientes.setBounds(593, 326, 318, 59);
 		btGerirClientes.setForeground(Color.DARK_GRAY);
 		btGerirClientes.setToolTipText("Gestão de Clientes");	
 		btGerirClientes.setFocusPainted(false);
@@ -73,7 +73,7 @@ public class GUI_homepage extends JFrame {
 		getContentPane().add(btVoltar);
 
 		btGerirOperadores = new JButton("Gerir Operadores");
-		btGerirOperadores.setBounds(633, 406, 223, 59);
+		btGerirOperadores.setBounds(593, 399, 318, 59);
 		btGerirOperadores.setToolTipText("Gestão de Operadores");
 		btGerirOperadores.setForeground(Color.DARK_GRAY);
 		btGerirOperadores.setFocusPainted(false);
@@ -81,15 +81,15 @@ public class GUI_homepage extends JFrame {
 		getContentPane().add(btGerirOperadores);
 
 		btGerirPromocoes = new JButton("Gerir Promoções");
-		btGerirPromocoes.setBounds(633, 489, 222, 59);
+		btGerirPromocoes.setBounds(593, 469, 318, 59);
 		btGerirPromocoes.setToolTipText("Gerir Promoções");
 		btGerirPromocoes.setForeground(Color.DARK_GRAY);
 		btGerirPromocoes.setFont(new Font("Dubai Light", Font.PLAIN, 20));
 		btGerirPromocoes.setFocusPainted(false);
 		getContentPane().add(btGerirPromocoes);
 
-		btGerirPacotes = new JButton("Gerir Pacotes");
-		btGerirPacotes.setBounds(633, 575, 222, 59);
+		btGerirPacotes = new JButton("Gerir Pacotes Comerciais");
+		btGerirPacotes.setBounds(593, 539, 318, 59);
 		btGerirPacotes.setToolTipText("Gestão de Pacotes de Clientes");
 		btGerirPacotes.setForeground(Color.DARK_GRAY);
 		btGerirPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 20));

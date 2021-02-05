@@ -109,8 +109,8 @@ public class GestorDeDAO {
 		return pacoteComercialDAO.getAllPacotesComerciais();    
 	}
 
-	public List<PacoteComercial> pesquisaPacoteComercial(String id){
-		return pesquisaPacoteComercial(id);
+	public List<PacoteComercial> pesquisaPacoteComercial(int id)  throws Exception{
+		return pacoteComercialDAO.pesquisaPacoteComercial(id);
 	}
 
 	public void criarPromocao(Promocao promocao) throws Exception {

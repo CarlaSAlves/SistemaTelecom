@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -55,18 +56,17 @@ public class PacoteComercialDAO {
 
 	}
 
-	public List<PacoteComercial> pesquisaPacoteComercial(String id) throws Exception {
+	public List<PacoteComercial> pesquisaPacoteComercial(int id) throws Exception {
 		List<PacoteComercial> list = new ArrayList<>();
 
 		PreparedStatement myState = null; 
 		ResultSet myRes = null; 
 
 		try {
-			id += "%";
 
-			myState = myConn.prepareStatement("select * from pacote_comercial where id like ?");
+			myState = myConn.prepareStatement("select * from pacote_comercial where id=?");
 
-			myState.setString(1, id);
+			myState.setInt(1, id);
 
 			myRes = myState.executeQuery();
 
@@ -148,8 +148,10 @@ public class PacoteComercialDAO {
 		String nome = myRs.getString("nome");
 		String descricao = myRs.getString("descricao");
 		boolean ativo = myRs.getBoolean("ativo");
-		Date data_inicio = myRs.getDate("data_inicio");
-		Date data_fim = myRs.getDate("data_fim");
+		Timestamp timestamp = myRs.getTimestamp("data_inicio");
+		java.sql.Date data_inicio = new java.sql.Date(timestamp.getTime());
+		Timestamp timestamp2 = myRs.getTimestamp("data_fim");
+		java.sql.Date data_fim = new java.sql.Date(timestamp2.getTime());
 
 
 		PacoteComercial pacoteComercial = new PacoteComercial(id, nome, descricao, ativo, data_inicio, data_fim);

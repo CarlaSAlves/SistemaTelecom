@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
 import standard_value_object.Funcionario;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -23,10 +24,15 @@ import servico.GestorDeDAO;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+
+import com.jgoodies.forms.layout.FormSpecs;
+import javax.swing.JCheckBox;
 
 @SuppressWarnings("serial")
 public class GUI_gestor_operador extends JFrame {
-	private JTextField textPesquisaNIF;
 	private JTable table;
 	private JButton btVoltarGestorOperador;
 	private JPanel contentPane;
@@ -36,7 +42,17 @@ public class GUI_gestor_operador extends JFrame {
 	private JButton botaoEditarOperador;
 	private int indices[];
 
-	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
+	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
+	private JLabel lblCamposPesquisas;
+	private JPanel panelPesquisa;
+	private JLabel lblNewLabelID;
+	private JTextField textPesquisaID;
+	private JTextField textPesquisaNIF;
+	private JTextField textFieldNome;
+	private JLabel lblNewLabelNIF;
+	private JLabel lblNome;
+	private JCheckBox checkBoxAtivo;
+	private JButton botaoPesquisa;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -62,50 +78,8 @@ public class GUI_gestor_operador extends JFrame {
 		setBounds(100, 30, 1500, 900);
 		contentPane.setBackground(SystemColor.inactiveCaption);
 
-		JLabel lblDeProcura = new JLabel("Introduza o NIF: ");
-		lblDeProcura.setBounds(66, 18, 134, 26);
-		lblDeProcura.setFont(font);
-		getContentPane().add(lblDeProcura);
-
-		textPesquisaNIF = new JTextField();
-		textPesquisaNIF.setBounds(210, 18, 161, 26);
-		textPesquisaNIF.setFont(font);
-		getContentPane().add(textPesquisaNIF);
-		textPesquisaNIF.setColumns(10);
-
-		JButton botaoPesquisa = new JButton("Pesquisar");
-		botaoPesquisa.setBackground(SystemColor.activeCaption);
-		botaoPesquisa.setBounds(411, 15, 119, 32);
-		botaoPesquisa.setFont(font);
-		botaoPesquisa.setFocusPainted(false);
-		botaoPesquisa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				try {
-					String nif = textPesquisaNIF.getText();
-
-					List<Funcionario> operadores = null;
-
-					if (!nif.isBlank()) {
-						operadores = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioOperador(nif);
-					} else {
-						operadores = GestorDeDAO.getGestorDeDAO().getAllFuncionarioOperador();
-
-					}
-
-					OperadorPesquisaModelTable model = new OperadorPesquisaModelTable(operadores);
-					table.setModel(model);
-					numberRows = table.getRowCount();
-					lblResultados.setText("Resultados: " + numberRows);
-
-				} catch (Exception e1) {
-				}
-			}
-		});
-		getContentPane().add(botaoPesquisa);
-
 		JButton botaoCriarOperador = new JButton("Criar Operador");
-		botaoCriarOperador.setBounds(1250, 15, 161, 32);
+		botaoCriarOperador.setBounds(1243, 270, 161, 32);
 		botaoCriarOperador.setFont(font);
 		botaoCriarOperador.setBackground(SystemColor.activeCaption);
 		botaoCriarOperador.setFocusPainted(false);
@@ -118,16 +92,16 @@ public class GUI_gestor_operador extends JFrame {
 
 		getContentPane().add(botaoCriarOperador);
 
-		JPanel panel = new JPanel();
-		panel.setBackground(SystemColor.inactiveCaption);
-		panel.setBounds(66, 74, 1366, 721);
-		panel.setFont(font);
-		getContentPane().add(panel);
-		panel.setLayout(null);
+		JPanel panelDaTable = new JPanel();
+		panelDaTable.setBackground(SystemColor.inactiveCaption);
+		panelDaTable.setBounds(66, 310, 1366, 488);
+		panelDaTable.setFont(font);
+		getContentPane().add(panelDaTable);
+		panelDaTable.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 33, 1332, 660);
-		panel.add(scrollPane);
+		scrollPane.setBounds(10, 33, 1332, 488);
+		panelDaTable.add(scrollPane);
 
 		table = new JTable();
 		// defin da table 
@@ -137,18 +111,18 @@ public class GUI_gestor_operador extends JFrame {
 		table.setModel(new DefaultTableModel(new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
 		table.setForeground(SystemColor.desktop);
 		table.setBackground(UIManager.getColor("CheckBox.light"));
-		table.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		table.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		table.setRowHeight(20);
 
 		scrollPane.setViewportView(table);
 
 		lblResultados = new JLabel("Resultados: ");
-		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 20));
+		lblResultados.setFont(new Font("Dialog", Font.PLAIN, 15));
 		lblResultados.setBounds(10, 4, 136, 25);
-		panel.add(lblResultados);
+		panelDaTable.add(lblResultados);
 
 		botaoEditarOperador = new JButton("Editar Operador");
-		botaoEditarOperador.setBounds(849, 15, 161, 33);
+		botaoEditarOperador.setBounds(874, 270, 161, 33);
 		botaoEditarOperador.setFont(font);
 		botaoEditarOperador.setBackground(SystemColor.activeCaption);
 		botaoEditarOperador.setFocusPainted(false);
@@ -174,7 +148,7 @@ public class GUI_gestor_operador extends JFrame {
 		getContentPane().add(botaoEditarOperador);
 
 		botaoDesativarOperador = new JButton("Desativar Operador");
-		botaoDesativarOperador.setBounds(1038, 15, 188, 33);
+		botaoDesativarOperador.setBounds(1045, 270, 188, 33);
 		botaoDesativarOperador.setFont(font);
 		botaoDesativarOperador.setBackground(SystemColor.activeCaption);
 		botaoDesativarOperador.setFocusPainted(false);
@@ -219,7 +193,7 @@ public class GUI_gestor_operador extends JFrame {
 		getContentPane().add(botaoDesativarOperador);
 
 		btVoltarGestorOperador = new JButton("Voltar");
-		btVoltarGestorOperador.setBounds(26, 818, 119, 32);
+		btVoltarGestorOperador.setBounds(76, 809, 119, 32);
 		btVoltarGestorOperador.setFont(font);
 		btVoltarGestorOperador.setBackground(SystemColor.activeCaption);
 		btVoltarGestorOperador.setFocusPainted(false);
@@ -258,6 +232,94 @@ public class GUI_gestor_operador extends JFrame {
 
 		botaoEditarOperador.setEnabled(false);
 		botaoDesativarOperador.setEnabled(false);
+		
+		lblCamposPesquisas = new JLabel("Campos Pesquisa");
+		lblCamposPesquisas.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblCamposPesquisas.setBounds(66, 26, 294, 26);
+		contentPane.add(lblCamposPesquisas);
+		
+		panelPesquisa = new JPanel();
+		panelPesquisa.setBackground(SystemColor.inactiveCaption);
+		panelPesquisa.setBounds(66, 63, 437, 189);
+		contentPane.add(panelPesquisa);
+		panelPesquisa.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		lblNewLabelID = new JLabel("ID");
+		lblNewLabelID.setFont(new Font("Dialog", Font.PLAIN, 13));
+		panelPesquisa.add(lblNewLabelID, "2, 2, left, default");
+		
+		textPesquisaID = new JTextField();
+		panelPesquisa.add(textPesquisaID, "4, 2, fill, default");
+		textPesquisaID.setColumns(10);
+		
+		lblNewLabelNIF = new JLabel("NIF");
+		lblNewLabelNIF.setFont(new Font("Dialog", Font.PLAIN, 13));
+		panelPesquisa.add(lblNewLabelNIF, "2, 4, left, default");
+		
+		textPesquisaNIF = new JTextField();
+		textPesquisaNIF.setColumns(10);
+		panelPesquisa.add(textPesquisaNIF, "4, 4, fill, default");
+		
+		lblNome = new JLabel("Nome");
+		lblNome.setFont(new Font("Dialog", Font.PLAIN, 13));
+		panelPesquisa.add(lblNome, "2, 6, left, default");
+		
+		textFieldNome = new JTextField();
+		textFieldNome.setColumns(10);
+		panelPesquisa.add(textFieldNome, "4, 6, fill, default");
+		
+		checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
+		panelPesquisa.add(checkBoxAtivo, "4, 10, center, default");
+		
+		botaoPesquisa = new JButton("Pesquisar");
+		botaoPesquisa.setFont(new Font("Dialog", Font.PLAIN, 15));
+		botaoPesquisa.setBackground(SystemColor.activeCaption);
+		panelPesquisa.add(botaoPesquisa, "4, 12");
+		botaoPesquisa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+
+					String nif = textPesquisaNIF.getText();
+
+					List<Funcionario> operadores = null;
+
+					if (nif != null && nif.trim().length() > 0) {
+						operadores = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioOperador(nif);
+					} else {
+						operadores = GestorDeDAO.getGestorDeDAO().getAllFuncionarioOperador();
+					}
+
+					OperadorPesquisaModelTable model = new OperadorPesquisaModelTable(operadores);
+					table.setModel(model);
+					numberRows = table.getRowCount();
+					lblResultados.setText("Resultados: " + numberRows);
+
+				} catch (Exception e1) {
+
+				}
+
+
+
+			}
+		});
 	}
 
 	public void refreshOperadorTable() {

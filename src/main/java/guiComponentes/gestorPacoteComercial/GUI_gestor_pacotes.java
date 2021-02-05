@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import standard_value_object.PacoteComercial;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -25,12 +26,17 @@ import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.JTextArea;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+
+import com.jgoodies.forms.layout.FormSpecs;
+import javax.swing.JCheckBox;
 
 public class GUI_gestor_pacotes extends JFrame {
 	
 	
 	private static final long serialVersionUID = 1L;
-	private JTextField textPesquisaId;
 	private JTable table;
 	private JButton btVoltarGestorPacotes;
 	private JPanel contentPane;
@@ -39,9 +45,9 @@ public class GUI_gestor_pacotes extends JFrame {
 	private JButton botaoDesativarPacoteComercial;
 	private JButton botaoEditarPacoteComercial;
 	private int indices[];
-	private Font font = new Font("Dubai Light", Font.PLAIN, 20);
-	private JTextField textField;
-	private JTextField textField_1;
+	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
+	private JTextField textFieldID;
+	private JTextField textFieldNome;
 
 
 
@@ -69,53 +75,9 @@ public class GUI_gestor_pacotes extends JFrame {
 		setBounds(100, 30, 1500, 900);
 		contentPane.setBackground(SystemColor.inactiveCaption);
 
-		/* Lbl e botão de Procura */
-		JLabel lblDeProcura = new JLabel("Id do Pacote: ");
-		lblDeProcura.setBounds(66, 68, 134, 26);
-		lblDeProcura.setFont(font);
-		getContentPane().add(lblDeProcura);
-
-		textPesquisaId = new JTextField();
-		textPesquisaId.setBounds(210, 105, 206, 26);
-		textPesquisaId.setFont(font);
-		getContentPane().add(textPesquisaId);
-		textPesquisaId.setColumns(10);
-
-
-		JButton botaoPesquisa = new JButton("Pesquisar");
-		botaoPesquisa.setBackground(SystemColor.activeCaption);
-		botaoPesquisa.setBounds(210, 197, 134, 43);
-		botaoPesquisa.setFont(font);
-		botaoPesquisa.setFocusPainted(false);
-		botaoPesquisa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				try {
-					String id = textPesquisaId.getText();
-					List<PacoteComercial> pacotesComerciais = null;
-
-					if (!id.isBlank()) {
-						pacotesComerciais = GestorDeDAO.getGestorDeDAO().pesquisaPacoteComercial(id);
-					} else  {
-						pacotesComerciais = GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
-					}
-
-					PacoteComercialPesquisaModelTable model = new PacoteComercialPesquisaModelTable(pacotesComerciais);
-					table.setModel(model);
-					numberRows = table.getRowCount();
-					lblResultados.setText("Resultados: " + numberRows);
-
-				} catch (Exception e1) {
-
-				}
-
-			}
-		});
-		getContentPane().add(botaoPesquisa);
-
-		JButton botaoCriarPacotes = new JButton("Criar Pacote");
-		botaoCriarPacotes.setBounds(518, 165, 170, 43);
-		botaoCriarPacotes.setFont(font);
+		JButton botaoCriarPacotes = new JButton("Criar Pacote Comercial");
+		botaoCriarPacotes.setBounds(697, 179, 231, 43);
+		botaoCriarPacotes.setFont(new Font("Dialog", Font.PLAIN, 15));
 		botaoCriarPacotes.setBackground(SystemColor.activeCaption);
 		botaoCriarPacotes.setFocusPainted(false);
 		botaoCriarPacotes.addActionListener(new ActionListener() {
@@ -145,7 +107,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		table.setModel(new DefaultTableModel(new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
 		table.setForeground(SystemColor.desktop);
 		table.setBackground(UIManager.getColor("CheckBox.light"));
-		table.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		table.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		table.setRowHeight(20);
 
 
@@ -153,13 +115,13 @@ public class GUI_gestor_pacotes extends JFrame {
 
 
 		lblResultados = new JLabel("Resultados: ");
-		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 20));
+		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		lblResultados.setBounds(10, 4, 136, 25);
 		panel.add(lblResultados);
 
-		botaoEditarPacoteComercial = new JButton("Editar Pacote");
-		botaoEditarPacoteComercial.setBounds(518, 105, 170, 28);
-		botaoEditarPacoteComercial.setFont(font);
+		botaoEditarPacoteComercial = new JButton("Editar Pacote Comercial");
+		botaoEditarPacoteComercial.setBounds(697, 125, 231, 43);
+		botaoEditarPacoteComercial.setFont(new Font("Dialog", Font.PLAIN, 15));
 		botaoEditarPacoteComercial.setBackground(SystemColor.activeCaption);
 		botaoEditarPacoteComercial.setFocusPainted(false);
 		botaoEditarPacoteComercial.addActionListener(new ActionListener() {
@@ -182,9 +144,9 @@ public class GUI_gestor_pacotes extends JFrame {
 		});
 		getContentPane().add(botaoEditarPacoteComercial);
 
-		botaoDesativarPacoteComercial = new JButton("Desativar Pacotes");
-		botaoDesativarPacoteComercial.setBounds(518, 32, 170, 33);
-		botaoDesativarPacoteComercial.setFont(font);
+		botaoDesativarPacoteComercial = new JButton("Desativar Pacote Comercial");
+		botaoDesativarPacoteComercial.setBounds(697, 71, 231, 43);
+		botaoDesativarPacoteComercial.setFont(new Font("Dialog", Font.PLAIN, 15));
 		botaoDesativarPacoteComercial.setBackground(SystemColor.activeCaption);
 		botaoDesativarPacoteComercial.setFocusPainted(false);
 		botaoDesativarPacoteComercial.addActionListener(new ActionListener() {
@@ -225,7 +187,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		getContentPane().add(botaoDesativarPacoteComercial);
 
 		btVoltarGestorPacotes = new JButton("Voltar");
-		btVoltarGestorPacotes.setBounds(26, 818, 119, 32);
+		btVoltarGestorPacotes.setBounds(76, 806, 119, 32);
 		btVoltarGestorPacotes.setFont(font);
 		btVoltarGestorPacotes.setBackground(SystemColor.activeCaption);
 		btVoltarGestorPacotes.setFocusPainted(false);
@@ -264,42 +226,88 @@ public class GUI_gestor_pacotes extends JFrame {
 		});
 
 		botaoEditarPacoteComercial.setEnabled(false);
-
-		JLabel lblNome = new JLabel("Nome");
-		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 20));
-		lblNome.setBounds(66, 105, 134, 26);
-		contentPane.add(lblNome);
-
-		textField = new JTextField();
-		textField.setFont(new Font("Dubai Light", Font.PLAIN, 20));
-		textField.setColumns(10);
-		textField.setBounds(210, 68, 206, 26);
-		contentPane.add(textField);
-
-		JLabel lblCamposPesquisas = new JLabel("Campos Pesquisas");
-		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-		lblCamposPesquisas.setBounds(66, 26, 168, 26);
-		contentPane.add(lblCamposPesquisas);
-
-		JLabel lblAtivo = new JLabel("Ativo");
-		lblAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 20));
-		lblAtivo.setBounds(66, 142, 134, 26);
-		contentPane.add(lblAtivo);
-
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Dubai Light", Font.PLAIN, 20));
-		textField_1.setColumns(10);
-		textField_1.setBounds(210, 142, 206, 26);
-		contentPane.add(textField_1);
 		botaoDesativarPacoteComercial.setEnabled(false);
+		
+		JLabel lblCamposPesquisas = new JLabel("Campos Pesquisa");
+		lblCamposPesquisas.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblCamposPesquisas.setBounds(66, 32, 294, 26);
+		contentPane.add(lblCamposPesquisas);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(SystemColor.inactiveCaption);
+		panel_1.setBounds(66, 69, 420, 172);
+		contentPane.add(panel_1);
+		panel_1.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblNewLabelID = new JLabel("ID");
+		lblNewLabelID.setFont(new Font("Dialog", Font.PLAIN, 13));
+		panel_1.add(lblNewLabelID, "2, 2, left, default");
+		
+		textFieldID = new JTextField();
+		panel_1.add(textFieldID, "4, 2, fill, default");
+		textFieldID.setColumns(10);
+		
+		JLabel lblNewLabelNome = new JLabel("Nome");
+		lblNewLabelNome.setFont(new Font("Dialog", Font.PLAIN, 13));
+		panel_1.add(lblNewLabelNome, "2, 4, right, default");
+		
+		textFieldNome = new JTextField();
+		panel_1.add(textFieldNome, "4, 4, fill, default");
+		textFieldNome.setColumns(10);
+		
+		JCheckBox NewCheckBoxAtivo = new JCheckBox("Ativo");
+		NewCheckBoxAtivo.setBackground(SystemColor.inactiveCaption);
+		NewCheckBoxAtivo.setForeground(SystemColor.desktop);
+		NewCheckBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
+		panel_1.add(NewCheckBoxAtivo, "4, 6, center, default");
+		
+		JButton btnNewButtonPesquisar = new JButton("Pesquisar");
+		btnNewButtonPesquisar.setBackground(SystemColor.activeCaption);
+		btnNewButtonPesquisar.setFont(new Font("Dialog", Font.PLAIN, 15));
+		panel_1.add(btnNewButtonPesquisar, "4, 8");
+		btnNewButtonPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 
+				try {
+					String id = textFieldID.getText();
+					List<PacoteComercial> pacotesComerciais = null;
+
+					if (!id.isBlank()) {
+						int id2 = Integer.parseInt(textFieldID.getText());
+						pacotesComerciais = GestorDeDAO.getGestorDeDAO().pesquisaPacoteComercial(id2);
+					} else  {
+						pacotesComerciais = GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
+					}
+
+					PacoteComercialPesquisaModelTable model = new PacoteComercialPesquisaModelTable(pacotesComerciais);
+					table.setModel(model);
+					numberRows = table.getRowCount();
+					lblResultados.setText("Resultados: " + numberRows);
+
+				} catch (Exception e1) {
+
+				}
+
+			}
+		});
+
+		
 		JTextArea textAreaDescricao = new JTextArea();
-		textAreaDescricao.setBounds(938, 38, 494, 211);
+		textAreaDescricao.setBounds(938, 71, 470, 151);
 		contentPane.add(textAreaDescricao);
-		
-		
-		//TODO - A descrição não está a aparecer
-	
 	}
 
 	public void refreshPacotesTable() {

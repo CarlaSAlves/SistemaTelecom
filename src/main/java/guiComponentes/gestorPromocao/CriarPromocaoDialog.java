@@ -16,13 +16,17 @@ import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import java.awt.Font;
 import java.awt.SystemColor;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class CriarPromocaoDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JCheckBox checkBoxAtivo;	
-	private GUI_gestor_promocoes promocaoPesquisaApp;
+	private GUI_gestor_promocao promocaoPesquisaApp;
 	private Promocao promocaoAntiga;
 	private boolean modoEditar = false;
 	private JTextField textFieldNome;
@@ -39,12 +43,12 @@ public class CriarPromocaoDialog extends JDialog {
 		}
 	}
 
-	public CriarPromocaoDialog(GUI_gestor_promocoes promocaoPesquisaApp ) {
+	public CriarPromocaoDialog(GUI_gestor_promocao promocaoPesquisaApp ) {
 		this();
 		this.promocaoPesquisaApp = promocaoPesquisaApp;
 	}
 
-	public CriarPromocaoDialog(GUI_gestor_promocoes promocaoPesquisaApp, Promocao promocaoTemp, boolean modoEditar ) {
+	public CriarPromocaoDialog(GUI_gestor_promocao promocaoPesquisaApp, Promocao promocaoTemp, boolean modoEditar ) {
 		this();
 		this.promocaoPesquisaApp = promocaoPesquisaApp;
 		this.promocaoAntiga = promocaoTemp;
@@ -57,7 +61,7 @@ public class CriarPromocaoDialog extends JDialog {
 	}
 
 	private void popularTextFields(Promocao promocaoAntigo2) {
-		textFieldNome.setText(promocaoAntigo2.getNome()+ "");
+		textFieldNome.setText(promocaoAntigo2.getNome());
 		textFieldDescricao.setText(promocaoAntigo2.getDescricao());
 		checkBoxAtivo.setSelected(promocaoAntigo2.isAtiva());
 
@@ -69,40 +73,46 @@ public class CriarPromocaoDialog extends JDialog {
 		contentPanel.setBackground(SystemColor.inactiveCaption);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("70px"),
+				FormSpecs.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("334px"),},
+			new RowSpec[] {
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				RowSpec.decode("20px"),
+				RowSpec.decode("20px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("23px"),}));
 		{
 			JLabel lblNome = new JLabel("Nome");
-			lblNome.setFont(font);
-			lblNome.setBounds(10, 14, 55, 14);
-			contentPanel.add(lblNome);
+			lblNome.setFont(new Font("Dialog", Font.PLAIN, 13));
+			contentPanel.add(lblNome, "2, 2, left, fill");
 		}
 		{
 			textFieldNome = new JTextField();
 			textFieldNome.setFont(font);
 			textFieldNome.setColumns(10);
-			textFieldNome.setBounds(90, 11, 334, 20);
-			contentPanel.add(textFieldNome);
+			contentPanel.add(textFieldNome, "4, 2, fill, fill");
 		}
 		
 		{
 			JLabel lblDescricao = new JLabel("Descrição");
-			lblDescricao.setFont(font);
-			lblDescricao.setBounds(10, 54, 70, 14);
-			contentPanel.add(lblDescricao);
+			lblDescricao.setFont(new Font("Dialog", Font.PLAIN, 13));
+			contentPanel.add(lblDescricao, "2, 4, fill, fill");
 		}
 		{
 			textFieldDescricao = new JTextField();
 			textFieldDescricao.setFont(font);
 			textFieldDescricao.setColumns(10);
-			textFieldDescricao.setBounds(90, 51, 334, 20);
-			contentPanel.add(textFieldDescricao);
+			contentPanel.add(textFieldDescricao, "4, 4, fill, fill");
 		}
 
 		checkBoxAtivo = new JCheckBox("Ativa");
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
-		checkBoxAtivo.setFont(font);
-		checkBoxAtivo.setBounds(10, 116, 97, 23);
-		contentPanel.add(checkBoxAtivo);
+		checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
+		contentPanel.add(checkBoxAtivo, "4, 6, center, fill");
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(SystemColor.inactiveCaption);
