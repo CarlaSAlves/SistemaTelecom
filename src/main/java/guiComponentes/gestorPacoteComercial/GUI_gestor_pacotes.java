@@ -32,7 +32,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JTextField textPesquisaId;
 	private JTable table;
-	private JButton btVoltarGestorCliente;
+	private JButton btVoltarGestorPacotes;
 	private JPanel contentPane;
 	private int numberRows;
 	private JLabel lblResultados;
@@ -42,6 +42,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	private Font font = new Font("Dubai Light", Font.PLAIN, 20);
 	private JTextField textField;
 	private JTextField textField_1;
+
 
 
 	public static void main(String[] args) {
@@ -68,13 +69,14 @@ public class GUI_gestor_pacotes extends JFrame {
 		setBounds(100, 30, 1500, 900);
 		contentPane.setBackground(SystemColor.inactiveCaption);
 
+		/* Lbl e botão de Procura */
 		JLabel lblDeProcura = new JLabel("Id do Pacote: ");
 		lblDeProcura.setBounds(66, 68, 134, 26);
 		lblDeProcura.setFont(font);
 		getContentPane().add(lblDeProcura);
 
 		textPesquisaId = new JTextField();
-		textPesquisaId.setBounds(210, 105, 161, 26);
+		textPesquisaId.setBounds(210, 105, 206, 26);
 		textPesquisaId.setFont(font);
 		getContentPane().add(textPesquisaId);
 		textPesquisaId.setColumns(10);
@@ -82,7 +84,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		JButton botaoPesquisa = new JButton("Pesquisar");
 		botaoPesquisa.setBackground(SystemColor.activeCaption);
-		botaoPesquisa.setBounds(210, 196, 119, 32);
+		botaoPesquisa.setBounds(210, 197, 134, 43);
 		botaoPesquisa.setFont(font);
 		botaoPesquisa.setFocusPainted(false);
 		botaoPesquisa.addActionListener(new ActionListener() {
@@ -114,19 +116,19 @@ public class GUI_gestor_pacotes extends JFrame {
 		});
 		getContentPane().add(botaoPesquisa);
 
-		JButton botaoCriarCliente = new JButton("Criar Cliente");
-		botaoCriarCliente.setBounds(435, 152, 152, 32);
-		botaoCriarCliente.setFont(font);
-		botaoCriarCliente.setBackground(SystemColor.activeCaption);
-		botaoCriarCliente.setFocusPainted(false);
-		botaoCriarCliente.addActionListener(new ActionListener() {
+		JButton botaoCriarPacotes = new JButton("Criar Pacote");
+		botaoCriarPacotes.setBounds(518, 165, 170, 43);
+		botaoCriarPacotes.setFont(font);
+		botaoCriarPacotes.setBackground(SystemColor.activeCaption);
+		botaoCriarPacotes.setFocusPainted(false);
+		botaoCriarPacotes.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
 				CriarPacotesDialog dialog = new CriarPacotesDialog(GUI_gestor_pacotes.this);
 				dialog.setVisible(true);
 			}
 		});
-		getContentPane().add(botaoCriarCliente);
+		getContentPane().add(botaoCriarPacotes);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(SystemColor.inactiveCaption);
@@ -158,8 +160,8 @@ public class GUI_gestor_pacotes extends JFrame {
 		lblResultados.setBounds(10, 4, 136, 25);
 		panel.add(lblResultados);
 
-		botaoEditarPacoteComercial = new JButton("Editar Cliente");
-		botaoEditarPacoteComercial.setBounds(435, 82, 161, 33);
+		botaoEditarPacoteComercial = new JButton("Editar Pacote");
+		botaoEditarPacoteComercial.setBounds(518, 105, 170, 28);
 		botaoEditarPacoteComercial.setFont(font);
 		botaoEditarPacoteComercial.setBackground(SystemColor.activeCaption);
 		botaoEditarPacoteComercial.setFocusPainted(false);
@@ -183,8 +185,8 @@ public class GUI_gestor_pacotes extends JFrame {
 		});
 		getContentPane().add(botaoEditarPacoteComercial);
 
-		botaoDesativarPacoteComercial = new JButton("Desativar Cliente");
-		botaoDesativarPacoteComercial.setBounds(426, 38, 170, 33);
+		botaoDesativarPacoteComercial = new JButton("Desativar Pacotes");
+		botaoDesativarPacoteComercial.setBounds(518, 32, 170, 33);
 		botaoDesativarPacoteComercial.setFont(font);
 		botaoDesativarPacoteComercial.setBackground(SystemColor.activeCaption);
 		botaoDesativarPacoteComercial.setFocusPainted(false);
@@ -195,12 +197,12 @@ public class GUI_gestor_pacotes extends JFrame {
 
 					if (indices.length < 0) {
 						JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
-								"Por favor selecione um Cliente", "Error",
+								"Por favor selecione um Pacote", "Error",
 								JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 					int resposta = JOptionPane.showConfirmDialog(GUI_gestor_pacotes.this,
-							"Desativar este Cliente?", "Confirmar Desativar",
+							"Desativar este Pacote?", "Confirmar Desativar",
 							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
 					if (resposta != JOptionPane.YES_OPTION) {
@@ -209,14 +211,14 @@ public class GUI_gestor_pacotes extends JFrame {
 
 					for(int i = 0; i < indices.length; i++) {
 						PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indices[i], PacoteComercialPesquisaModelTable.OBJECT_COL);
-						GestorDeDAO.getGestorDeDAO().desativarCliente(pacoteTemp.getId());
+						GestorDeDAO.getGestorDeDAO().desativarPacoteComercial(pacoteTemp.getId());
 
 					}
 					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
-							"Cliente Desativado com sucesso", "Cliente Desativado",
+							"Pacotes Desativado com sucesso", "Pacote Desativado",
 							JOptionPane.INFORMATION_MESSAGE);
 
-					refreshClienteTable();
+					refreshPacotesTable();
 				} catch (Exception e1) {
 
 				}
@@ -225,18 +227,18 @@ public class GUI_gestor_pacotes extends JFrame {
 		});
 		getContentPane().add(botaoDesativarPacoteComercial);
 
-		btVoltarGestorCliente = new JButton("Voltar");
-		btVoltarGestorCliente.setBounds(26, 818, 119, 32);
-		btVoltarGestorCliente.setFont(font);
-		btVoltarGestorCliente.setBackground(SystemColor.activeCaption);
-		btVoltarGestorCliente.setFocusPainted(false);
-		getContentPane().add(btVoltarGestorCliente);
+		btVoltarGestorPacotes = new JButton("Voltar");
+		btVoltarGestorPacotes.setBounds(26, 818, 119, 32);
+		btVoltarGestorPacotes.setFont(font);
+		btVoltarGestorPacotes.setBackground(SystemColor.activeCaption);
+		btVoltarGestorPacotes.setFocusPainted(false);
+		getContentPane().add(btVoltarGestorPacotes);
 
 		JLabel lbFooter = new JLabel("");
 		lbFooter.setIcon(new ImageIcon(GUI_gestor_pacotes.class.getResource("/img/footer2.png")));
 		lbFooter.setBounds(599, 802, 367, 59);
 		contentPane.add(lbFooter);
-		btVoltarGestorCliente.addActionListener(new ActionListener() {
+		btVoltarGestorPacotes.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -274,7 +276,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		textField = new JTextField();
 		textField.setFont(new Font("Dubai Light", Font.PLAIN, 20));
 		textField.setColumns(10);
-		textField.setBounds(210, 68, 161, 26);
+		textField.setBounds(210, 68, 206, 26);
 		contentPane.add(textField);
 
 		JLabel lblCamposPesquisas = new JLabel("Campos Pesquisas");
@@ -290,12 +292,12 @@ public class GUI_gestor_pacotes extends JFrame {
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Dubai Light", Font.PLAIN, 20));
 		textField_1.setColumns(10);
-		textField_1.setBounds(210, 142, 161, 26);
+		textField_1.setBounds(210, 142, 206, 26);
 		contentPane.add(textField_1);
 		botaoDesativarPacoteComercial.setEnabled(false);
 
 		JTextArea textAreaDescricao = new JTextArea();
-		textAreaDescricao.setBounds(699, 71, 499, 178);
+		textAreaDescricao.setBounds(938, 38, 494, 211);
 		contentPane.add(textAreaDescricao);
 		
 		
@@ -303,7 +305,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	
 	}
 
-	public void refreshClienteTable() {
+	public void refreshPacotesTable() {
 		
 		try {
 			List<PacoteComercial> pacotesComerciais = GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
@@ -317,12 +319,13 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	}
 
-	public JButton btVoltarGestorCliente() {
-		return btVoltarGestorCliente;
+	public JButton btVoltarGestorPacotes() {
+		return btVoltarGestorPacotes;
 	}
 
-	public void setBtVoltarGestorCliente(JButton btnNewButtonVoltar2) {
-		this.btVoltarGestorCliente = btnNewButtonVoltar2;
+
+	public void setBtVoltarGestorPacotes(JButton btnNewButtonVoltar2) {
+		this.btVoltarGestorPacotes = btnNewButtonVoltar2;
 	}
 
 	public JPanel returnPanel() {

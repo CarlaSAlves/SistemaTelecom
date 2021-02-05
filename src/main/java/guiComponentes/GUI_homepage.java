@@ -15,6 +15,8 @@ public class GUI_homepage extends JFrame {
 	private JButton btVoltar;
 	private JButton btGerirClientes;
 	private JButton btGerirOperadores;
+	private JButton btGerirPacotes;
+	private JButton btGerirPromocoes;
 	private JPanel panel;
 	private JLabel lblUsernameLogged;
 	private static final long serialVersionUID = 1L;
@@ -85,7 +87,7 @@ public class GUI_homepage extends JFrame {
 		btGerirOperadores.setFont(new Font("Dubai Light", Font.PLAIN, 20));
 		getContentPane().add(btGerirOperadores);
 
-		JButton btGerirPromocoes = new JButton("Gerir Promoções");
+		btGerirPromocoes = new JButton("Gerir Promoções");
 		btGerirPromocoes.setBounds(633, 489, 222, 59);
 		btGerirPromocoes.setToolTipText("Gerir Promoções");
 		btGerirPromocoes.setForeground(Color.DARK_GRAY);
@@ -93,7 +95,7 @@ public class GUI_homepage extends JFrame {
 		btGerirPromocoes.setFocusPainted(false);
 		getContentPane().add(btGerirPromocoes);
 
-		JButton btGerirPacotes = new JButton("Gerir Pacotes");
+		btGerirPacotes = new JButton("Gerir Pacotes");
 		btGerirPacotes.setBounds(633, 575, 222, 59);
 		btGerirPacotes.setToolTipText("Gestão de Pacotes de Clientes");
 		btGerirPacotes.setForeground(Color.DARK_GRAY);
@@ -128,7 +130,14 @@ public class GUI_homepage extends JFrame {
 	public JButton getBtGerirOperadores() {
 		return btGerirOperadores;
 	}
+		
+	public JButton getBtGerirPacotes() {
+		return btGerirPacotes;
+	}
 	
+	public JButton getBtGerirPromocoes() {
+		return btGerirPromocoes;
+	}
 	public void setUsernameLoggedIn(String username) {
 		lblUsernameLogged.setText("Logged in : " + username);
 	}

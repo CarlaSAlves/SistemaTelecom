@@ -124,14 +124,14 @@ public class PacoteComercialDAO {
 	}
 
 	
-	public void desativarPacoteComercial (String nome) throws Exception {
+	public void desativarPacoteComercial (int id) throws Exception {
 		PreparedStatement myState = null; 
 
 		try {
 
 			myState = myConn.prepareStatement("UPDATE pacote_comercial SET ativo=0 WHERE id=?");
 
-			myState.setString(1, nome);
+			myState.setInt(1, id);
 			myState.executeUpdate();
 
 		} catch(Exception e) {

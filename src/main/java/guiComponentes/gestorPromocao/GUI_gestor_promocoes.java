@@ -235,15 +235,7 @@ public class GUI_gestor_promocoes extends JFrame {
 		lbFooter.setIcon(new ImageIcon(GUI_gestor_promocoes.class.getResource("/img/footer2.png")));
 		lbFooter.setBounds(599, 802, 367, 59);
 		contentPane.add(lbFooter);
-		btVoltarGestorPromocao.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-
-
-			}
-		});
+		
 
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -283,7 +275,7 @@ public class GUI_gestor_promocoes extends JFrame {
 		botaoDesativarPromocao.setEnabled(false);
 
 		JTextArea textAreaDescricao = new JTextArea();
-		textAreaDescricao.setBounds(699, 71, 499, 178);
+		textAreaDescricao.setBounds(699, 38, 499, 211);
 		contentPane.add(textAreaDescricao);
 		
 		checkBoxAtivo = new JCheckBox("Ativa");

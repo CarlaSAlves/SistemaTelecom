@@ -95,8 +95,8 @@ public class GestorDeDAO {
 		pacoteComercialDAO.editarPacoteComercial(pacoteComercial);
 	}
 
-	public void desativarPacoteComercial(String nome) throws Exception {
-		pacoteComercialDAO.desativarPacoteComercial(nome);
+	public void desativarPacoteComercial(int id) throws Exception {
+		pacoteComercialDAO.desativarPacoteComercial(id);
 	}
 
 	public List<PacoteComercial> getAllPacotesComerciais() throws Exception{
