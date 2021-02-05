@@ -2,11 +2,13 @@ package data_acess_object_dao;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -120,21 +122,7 @@ public class PacoteComercialDAO {
 		}
 	}
 
-	public void getDescricaoPacoteComercial(PacoteComercial pacoteComercial) {
-
-		PreparedStatement myStmt = null;
-
-		try {
-			myStmt = myConn.prepareStatement("select `descricao` FROM `pacote_comercial` WHERE 'id' = ? ");
-
-			myStmt.setString(1, pacoteComercial.getDescricao());
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
-
-	}
+	
 
 	public void eliminarPacoteComercial(String nome) throws SQLException{
 		PreparedStatement myStmt = null;
@@ -159,9 +147,11 @@ public class PacoteComercialDAO {
 		String nome = myRs.getString("nome");
 		String descricao = myRs.getString("descricao");
 		boolean ativo = myRs.getBoolean("ativo");
+		Date data_inicio = myRs.getDate("data_inicio");
+		Date data_fim = myRs.getDate("data_fim");
 
 
-		PacoteComercial pacoteComercial = new PacoteComercial(id, nome, descricao, ativo);
+		PacoteComercial pacoteComercial = new PacoteComercial(id, nome, descricao, ativo, data_inicio, data_fim);
 
 		return pacoteComercial;
 	}

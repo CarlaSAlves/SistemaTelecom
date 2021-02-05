@@ -91,9 +91,6 @@ public class GestorDeDAO {
 		pacoteComercialDAO.criarPacoteComercial(pacoteComercial);
 	}
 
-	public void getDescricaoPacoteComercial(PacoteComercial pacoteComercial) {
-		pacoteComercialDAO.getDescricaoPacoteComercial( pacoteComercial);
-	}
 
 	public void editarPacoteComercial(PacoteComercial pacoteComercial) throws Exception {
 		pacoteComercialDAO.editarPacoteComercial(pacoteComercial);
