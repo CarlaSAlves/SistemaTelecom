@@ -264,25 +264,27 @@ public class GUI_gestor_cliente extends JFrame {
 		botaoVisualizarHistorico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
-//
-//				if (row < 0) {
-//					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
-//							"Por favor selecione um Cliente", "Error", JOptionPane.ERROR_MESSAGE);
-//					return;
-//				}
+
+
+				if (row < 0) {
+					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
+							"Por favor selecione um Cliente", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				
+				System.out.println("aqui");
 				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
 				List<HistoricoCliente> list;
-
+				
 				try {
 
 					list = GestorDeDAO.getGestorDeDAO().getHistoricoCliente(clienteTemp.getId());
 					HistoricoClienteDialog dialogHistorico = new HistoricoClienteDialog();
 					dialogHistorico.preencherTable(clienteTemp, list);
 					dialogHistorico.setVisible(true);
-					
-				} catch (Exception e1) {
 
+				} catch (Exception e1) {
+					e1.printStackTrace();
 				}
 
 			}

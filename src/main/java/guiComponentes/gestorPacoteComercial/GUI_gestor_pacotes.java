@@ -91,11 +91,8 @@ public class GUI_gestor_pacotes extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 
 				try {
-
 					String id = textPesquisaId.getText();
-
 					List<PacoteComercial> pacotesComerciais = null;
-
 
 					if (!id.isBlank()) {
 						pacotesComerciais = GestorDeDAO.getGestorDeDAO().pesquisaPacoteComercial(id);
