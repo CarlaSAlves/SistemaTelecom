@@ -47,7 +47,7 @@ public class GUI_homepage extends JFrame {
 		JLabel icon = new JLabel("");
 		icon.setBounds(429, 0, 626, 220);
 		icon.setBackground(new Color(240, 240, 240));
-		icon.setIcon(new ImageIcon(GUI_homepage.class.getResource("/img/mundo.png")));
+		icon.setIcon(new ImageIcon(GUI_homepage.class.getResource("/guiComponentes/img/mundo.png")));
 		getContentPane().setLayout(null);
 
 		JLabel labelTitulo = new JLabel("Gestão Telecom");
@@ -105,7 +105,7 @@ public class GUI_homepage extends JFrame {
 
 		JLabel lblFooter = new JLabel("");
 		lblFooter.setBounds(316, 740, 600, 100);
-		lblFooter.setIcon(new ImageIcon(GUI_login.class.getResource("/img/footer.png")));
+		lblFooter.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/footer.png")));
 		getContentPane().add(lblFooter);
 		
 		lblUsernameLogged = new JLabel();

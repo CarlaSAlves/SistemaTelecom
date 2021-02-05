@@ -232,7 +232,7 @@ public class GUI_gestor_promocoes extends JFrame {
 		getContentPane().add(btVoltarGestorPromocao);
 
 		JLabel lbFooter = new JLabel("");
-		lbFooter.setIcon(new ImageIcon(GUI_gestor_promocoes.class.getResource("/img/footer2.png")));
+		lbFooter.setIcon(new ImageIcon(GUI_gestor_promocoes.class.getResource("/guiComponentes/img/footer2.png")));
 		lbFooter.setBounds(599, 802, 367, 59);
 		contentPane.add(lbFooter);
 		

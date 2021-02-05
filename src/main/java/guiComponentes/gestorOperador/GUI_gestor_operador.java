@@ -226,7 +226,7 @@ public class GUI_gestor_operador extends JFrame {
 		getContentPane().add(btVoltarGestorOperador);
 
 		JLabel lbFooter = new JLabel("");
-		lbFooter.setIcon(new ImageIcon(GUI_gestor_operador.class.getResource("/img/footer2.png")));
+		lbFooter.setIcon(new ImageIcon(GUI_gestor_operador.class.getResource("/guiComponentes/img/footer2.png")));
 		lbFooter.setBounds(599, 802, 367, 59);
 		contentPane.add(lbFooter);
 		btVoltarGestorOperador.addActionListener(new ActionListener() {
