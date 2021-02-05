@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import standard_value_object.Cliente;
+import standard_value_object.Funcionario;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -18,6 +20,8 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
+
+import historico.cliente.HistoricoCliente;
 import servico.GestorDeDAO;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
@@ -44,7 +48,7 @@ public class GUI_gestor_cliente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
+
 					GUI_gestor_cliente frame = new GUI_gestor_cliente();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -117,7 +121,7 @@ public class GUI_gestor_cliente extends JFrame {
 		botaoCriarCliente.setFocusPainted(false);
 		botaoCriarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this, username);
 				dialog.setVisible(true);
 
@@ -220,10 +224,10 @@ public class GUI_gestor_cliente extends JFrame {
 						return;
 					}
 
-
+					Funcionario funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(username);
 					for(int i = 0; i < indices.length; i++) {
 						Cliente clienteTemp = (Cliente) table.getValueAt(indices[i], ClientePesquisaModelTable.OBJECT_COL);
-						GestorDeDAO.getGestorDeDAO().desativarCliente(clienteTemp.getId());
+						GestorDeDAO.getGestorDeDAO().desativarCliente(clienteTemp.getId(), funcionario);
 					}
 					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
 							"Cliente(s) Desativado(s) com sucesso", "Cliente(s) Desativado",
@@ -255,11 +259,29 @@ public class GUI_gestor_cliente extends JFrame {
 		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblUsernameLogged.setBounds(1315, 818, 159, 32);
 		contentPane.add(lblUsernameLogged);
-		
+
 		JButton botaoVisualizarHistorico = new JButton("Ver Historico");
+		botaoVisualizarHistorico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row = table.getSelectedRow();
+
+				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
+				List<HistoricoCliente> list;
+
+				try {
+
+					list = GestorDeDAO.getGestorDeDAO().getHistoricoCliente(clienteTemp.getId());
+					HistoricoClienteDialog dialogHistorico = new HistoricoClienteDialog();
+					dialogHistorico.preencherTable(clienteTemp, list);
+					dialogHistorico.setVisible(true);
+					
+				} catch (Exception e1) {
+
+				}
+
+			}
+		});
 		botaoVisualizarHistorico.setFont(new Font("Dialog", Font.PLAIN, 17));
-		botaoVisualizarHistorico.setFocusPainted(false);
-		botaoVisualizarHistorico.setEnabled(false);
 		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
 		botaoVisualizarHistorico.setBounds(658, 15, 161, 33);
 		contentPane.add(botaoVisualizarHistorico);

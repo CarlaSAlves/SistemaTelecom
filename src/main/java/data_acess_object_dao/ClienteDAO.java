@@ -21,8 +21,6 @@ public class ClienteDAO {
 
 	public ClienteDAO() throws Exception {
 
-		int test2;
-		
 		Properties props = new Properties();
 		props.load(new FileInputStream("sistema_tele.properties"));
 
@@ -86,7 +84,7 @@ public class ClienteDAO {
 		}
 	}
 
-	private Cliente pesquisaClienteAuxiliar(String nif) throws Exception {
+	private Cliente pesquisaClienteAuxiliarNIF(String nif) throws Exception {
 		Cliente cliente = null;
 
 		PreparedStatement myStmt = null;
@@ -110,6 +108,30 @@ public class ClienteDAO {
 			close(myStmt, myRs);
 		}
 	}
+
+	private Cliente pesquisaClienteAuxiliarID(int id) throws Exception {
+		Cliente cliente = null;
+
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+		
+			myStmt = myConn.prepareStatement("select * from cliente where id=?");
+
+			myStmt.setInt(1, id);
+
+			myRs = myStmt.executeQuery();
+
+			while (myRs.next()) {
+				cliente = converteRowParaCliente(myRs);
+			}
+			return cliente;
+		}
+		finally {
+			close(myStmt, myRs);
+		}
+	}
 	
 	@SuppressWarnings("resource")
 	public void criarCliente(Cliente cliente, Funcionario funcionario) throws Exception {
@@ -118,7 +140,7 @@ public class ClienteDAO {
 		try {
 			myStmt = myConn.prepareStatement("INSERT INTO cliente(nome, nif, morada, login, password, ativo, id_pacote_cliente) "
 					+ "VALUES(?,?,?,?,?,?,?)");
-			
+
 			myStmt.setString(1, cliente.getNome());
 			myStmt.setLong(2, cliente.getNif());
 			myStmt.setString(3, cliente.getMorada());
@@ -129,14 +151,14 @@ public class ClienteDAO {
 
 			myStmt.executeUpdate();
 
-			Cliente clientCriado = pesquisaClienteAuxiliar(""+cliente.getNif());
+			Cliente clientCriado = pesquisaClienteAuxiliarNIF(""+cliente.getNif());
 			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
-			
+
 			myStmt.setInt(1, funcionario.getId());
 			myStmt.setInt(2, clientCriado.getId());
 			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-			myStmt.setString(4, "Criou Cliente");	
-			
+			myStmt.setString(4, "Criar Cliente");	
+
 			myStmt.executeUpdate();	
 
 		}catch(Exception e) {
@@ -146,7 +168,8 @@ public class ClienteDAO {
 		}
 	}
 
-	public void editarCliente(Cliente cliente) throws Exception {
+	@SuppressWarnings("resource")
+	public void editarCliente(Cliente cliente, Funcionario funcionario) throws Exception {
 		PreparedStatement myStmt = null;
 		try {
 
@@ -164,6 +187,15 @@ public class ClienteDAO {
 
 			myStmt.executeUpdate();
 
+			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
+
+			myStmt.setInt(1, funcionario.getId());
+			myStmt.setInt(2, cliente.getId());
+			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+			myStmt.setString(4, "Editar Cliente");	
+
+			myStmt.executeUpdate();
+
 		}catch(Exception e) {
 
 		}finally {
@@ -171,7 +203,7 @@ public class ClienteDAO {
 		}
 	}
 
-	public void desativarCliente(int id ) throws SQLException{
+	public void desativarCliente(int id, Funcionario funcionario ) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
 
@@ -181,6 +213,16 @@ public class ClienteDAO {
 
 			myStmt.executeUpdate();
 
+			Cliente cliente = pesquisaClienteAuxiliarID(id);
+			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
+
+			myStmt.setInt(1, funcionario.getId());
+			myStmt.setInt(2, cliente.getId());
+			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+			myStmt.setString(4, "Desativar Cliente");	
+
+			myStmt.executeUpdate();
+			
 		}catch(Exception e) {
 
 		}finally {
@@ -201,7 +243,7 @@ public class ClienteDAO {
 
 			String sql = "SELECT HistoricoCliente.id_funcionario, HistoricoCliente.id_cliente, HistoricoCliente.descricao, "
 					+ "HistoricoCliente.data_registo, admin.nome "
-					+ "FROM funcionario_log_cliente HistoricoCliente, funcionario admin WHERE HistoricoCliente.id_funcionario=admin.id AND HistoricoCliente.id_cliente=2" + id_cliente;
+					+ "FROM funcionario_log_cliente HistoricoCliente, funcionario admin WHERE HistoricoCliente.id_funcionario=admin.id AND HistoricoCliente.id_cliente=" + id_cliente;
 
 			myRs = myStmt.executeQuery(sql);
 
@@ -214,7 +256,7 @@ public class ClienteDAO {
 				String nome = myRs.getString("admin.nome");
 
 
-				HistoricoCliente historico = new HistoricoCliente(id_funcionario, id_cliente, descricao, data_registo, nome);
+				HistoricoCliente historico = new HistoricoCliente(id_cliente, id_funcionario, descricao, data_registo, nome);
 
 				list.add(historico);
 			}
