@@ -46,58 +46,39 @@ public class GUI_login extends JFrame {
 		getContentPane().setBackground(SystemColor.inactiveCaption);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1500, 900);
-
-		icon = new JLabel("");
-		icon.setBounds(429, 0, 626, 220);
-		icon.setIcon(new ImageIcon(GUI_login.class.getResource("/img/mundo.png")));
-
-		JLabel labelTitulo = new JLabel("Gestão Telecom");
-		labelTitulo.setBounds(439, 103, 183, 47);
-		labelTitulo.setForeground(SystemColor.window);
-		labelTitulo.setFont(new Font("Dubai Light", Font.BOLD | Font.ITALIC, 27));
-		labelTitulo.setBackground(SystemColor.inactiveCaptionBorder);
 		getContentPane().setLayout(null);
 
-		JLabel lblPoesia = new JLabel("O mundo, mais perto de si");
-		lblPoesia.setBounds(442, 180, 513, 33);
-		lblPoesia.setForeground(Color.WHITE);
-		lblPoesia.setFont(new Font("Dubai Light", Font.ITALIC, 19));
-		lblPoesia.setBackground(SystemColor.inactiveCaptionBorder);
-		getContentPane().add(lblPoesia);
-		getContentPane().add(labelTitulo);
-		getContentPane().add(icon);
-
 		JLabel labelLogin = new JLabel("Username");
-		labelLogin.setBounds(519, 362, 131, 64);
-		labelLogin.setForeground(new Color(0,37,80));
+		labelLogin.setBounds(553, 382, 131, 27);
+		labelLogin.setForeground(Color.WHITE);
 		labelLogin.setFont(font);
 		getContentPane().add(labelLogin);
 
 		labelPass = new JLabel("Password");
-		labelPass.setBounds(519, 429, 138, 27);
-		labelPass.setForeground(new Color(0,37,80));
+		labelPass.setBounds(553, 429, 138, 27);
+		labelPass.setForeground(Color.WHITE);
 		labelPass.setFont(font);
 		getContentPane().add(labelPass);
 
 		JPasswordField passwordField = new JPasswordField();
-		passwordField.setBounds(666, 428, 193, 27);
+		passwordField.setBounds(700, 428, 193, 27);
 		passwordField.setFont(font);
 		getContentPane().add(passwordField);
 
 		textFieldUser = new JTextField();
-		textFieldUser.setBounds(666, 380, 193, 27);
+		textFieldUser.setBounds(700, 380, 193, 27);
 		textFieldUser.setFont(font);
 		getContentPane().add(textFieldUser);
 		textFieldUser.setColumns(10);
 
 		JLabel labelConfm = new JLabel("User ou Password incorreta");
-		labelConfm.setBounds(635, 550, 643, 18);
+		labelConfm.setBounds(682, 575, 230, 18);
 		labelConfm.setForeground(new Color(255, 0, 0));
 		labelConfm.setFont(font);
 		getContentPane().add(labelConfm);
 
 		btLogin = new JButton("Login");
-		btLogin.setBounds(708, 466, 104, 33);
+		btLogin.setBounds(736, 502, 104, 33);
 		btLogin.setForeground(SystemColor.desktop);
 		btLogin.setBackground(new Color(240, 240, 240));
 		btLogin.setToolTipText("Carregue para fazer login");
@@ -105,10 +86,20 @@ public class GUI_login extends JFrame {
 		btLogin.setFont(font);
 		getContentPane().add(btLogin);
 
-		JLabel lblFooter = new JLabel("");
-		lblFooter.setBounds(329, 676, 600, 100);
-		lblFooter.setIcon(new ImageIcon(GUI_login.class.getResource("/img/footer.png")));
+		JLabel lblFooter = new JLabel();
+		lblFooter.setBounds(630, 727, 327, 123);
+		lblFooter.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/Altran4.png")));
 		getContentPane().add(lblFooter);
+				
+				JLabel lblNewLabel = new JLabel();
+				lblNewLabel.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/user5.png")));
+				lblNewLabel.setBounds(663, 24, 230, 304);
+				panel.add(lblNewLabel);
+				
+						icon = new JLabel();
+						icon.setBounds(-17, -61, 1501, 922);
+						icon.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/black.png")));
+						getContentPane().add(icon);
 	}
 
 	public JButton getBtLogin() {
