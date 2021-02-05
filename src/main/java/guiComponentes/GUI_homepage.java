@@ -20,6 +20,7 @@ public class GUI_homepage extends JFrame {
 	private JPanel panel;
 	private JLabel lblUsernameLogged;
 	private static final long serialVersionUID = 1L;
+	private JLabel lblNewLabel;
 
 
 	public static void main(String[] args) {
@@ -43,27 +44,19 @@ public class GUI_homepage extends JFrame {
 		getContentPane().setBackground(SystemColor.inactiveCaption);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1500, 900);
-
-		JLabel icon = new JLabel("");
-		icon.setBounds(429, 0, 626, 220);
-		icon.setBackground(new Color(240, 240, 240));
-		icon.setIcon(new ImageIcon(GUI_homepage.class.getResource("/guiComponentes/img/mundo.png")));
 		getContentPane().setLayout(null);
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(GUI_homepage.class.getResource("/guiComponentes/img/user3.png")));
+		lblNewLabel.setBounds(1123, 50, 318, 328);
+		panel.add(lblNewLabel);
 
-		JLabel labelTitulo = new JLabel("Gestão Telecom");
-		labelTitulo.setBounds(439, 103, 183, 47);
-		labelTitulo.setForeground(SystemColor.window);
-		labelTitulo.setFont(new Font("Dubai Light", Font.BOLD | Font.ITALIC, 27));
-		labelTitulo.setBackground(SystemColor.inactiveCaptionBorder);
-		getContentPane().add(labelTitulo);
-
-		JLabel lblPoesia = new JLabel("Bem Vindo Portal Do Administrador");
-		lblPoesia.setBounds(442, 180, 513, 33);
+		JLabel lblPoesia = new JLabel("Portal Do Administrador");
+		lblPoesia.setBounds(40, 62, 513, 33);
 		lblPoesia.setForeground(Color.WHITE);
-		lblPoesia.setFont(new Font("Dubai Light", Font.ITALIC, 19));
+		lblPoesia.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		lblPoesia.setBackground(SystemColor.inactiveCaptionBorder);
 		getContentPane().add(lblPoesia);
-		getContentPane().add(icon);
 
 		btGerirClientes = new JButton("Gerir Clientes");
 		btGerirClientes.setBounds(633, 321, 222, 59);
@@ -104,14 +97,20 @@ public class GUI_homepage extends JFrame {
 		getContentPane().add(btGerirPacotes);
 
 		JLabel lblFooter = new JLabel("");
-		lblFooter.setBounds(316, 740, 600, 100);
-		lblFooter.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/footer.png")));
+		lblFooter.setBounds(593, 740, 313, 100);
+		lblFooter.setIcon(new ImageIcon(GUI_homepage.class.getResource("/guiComponentes/img/Altran4.png")));
 		getContentPane().add(lblFooter);
 		
 		lblUsernameLogged = new JLabel();
 		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblUsernameLogged.setBounds(1211, 817, 263, 33);
 		panel.add(lblUsernameLogged);
+		
+				JLabel icon = new JLabel("");
+				icon.setBounds(0, 0, 1484, 872);
+				icon.setBackground(new Color(240, 240, 240));
+				icon.setIcon(new ImageIcon(GUI_homepage.class.getResource("/guiComponentes/img/black.png")));
+				getContentPane().add(icon);
 	}
 
 	public JPanel returnPanel() {
