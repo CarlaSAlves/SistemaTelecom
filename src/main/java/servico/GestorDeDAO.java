@@ -115,8 +115,8 @@ public class GestorDeDAO {
 		promocaoDAO.editarPromocao(promocao);
 	}
 
-	public void eliminarPromocao(String nome) throws Exception {
-		promocaoDAO.eliminarPromocao(nome);
+	public void desativarPromocao(int id) throws Exception {
+		promocaoDAO.desativarPromocao(id);
 	}
 
 	public List<Promocao> getAllPromocoes() throws Exception {

@@ -122,13 +122,13 @@ public class PromocaoDAO {
 		}
 	}
 
-	public void eliminarPromocao(String nome) throws SQLException{
+	public void desativarPromocao(int id) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
 
-			myStmt = myConn.prepareStatement("update promocao SET `ativa`= 0 where nome=?");
+			myStmt = myConn.prepareStatement("update promocao SET `ativa`= 0 where id=?");
 
-			myStmt.setString(1, nome);
+			myStmt.setInt(1, id);
 
 			myStmt.executeUpdate();
 
