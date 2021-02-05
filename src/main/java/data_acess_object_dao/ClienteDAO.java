@@ -203,6 +203,7 @@ public class ClienteDAO {
 		}
 	}
 
+	@SuppressWarnings("resource")
 	public void desativarCliente(int id, Funcionario funcionario ) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {

@@ -264,7 +264,13 @@ public class GUI_gestor_cliente extends JFrame {
 		botaoVisualizarHistorico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
-
+//
+//				if (row < 0) {
+//					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
+//							"Por favor selecione um Cliente", "Error", JOptionPane.ERROR_MESSAGE);
+//					return;
+//				}
+				
 				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
 				List<HistoricoCliente> list;
 
