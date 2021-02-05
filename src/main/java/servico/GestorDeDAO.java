@@ -91,24 +91,20 @@ public class GestorDeDAO {
 		pacoteComercialDAO.criarPacoteComercial(pacoteComercial);
 	}
 
-	public void getDescricaoPacoteComercial(PacoteComercial pacoteComercial) {
-		pacoteComercialDAO.getDescricaoPacoteComercial( pacoteComercial);
-	}
-
 	public void editarPacoteComercial(PacoteComercial pacoteComercial) throws Exception {
 		pacoteComercialDAO.editarPacoteComercial(pacoteComercial);
 	}
 
-	public void eliminarPacoteComercial(String nome) throws Exception {
-		pacoteComercialDAO.eliminarPacoteComercial(nome);
+	public void desativarPacoteComercial(String nome) throws Exception {
+		pacoteComercialDAO.desativarPacoteComercial(nome);
 	}
 
 	public List<PacoteComercial> getAllPacotesComerciais() throws Exception{
 		return pacoteComercialDAO.getAllPacotesComerciais();    
 	}
 
-	public List<PacoteComercial> pesquisaPacoteComercial(String nome){
-		return pesquisaPacoteComercial(nome);
+	public List<PacoteComercial> pesquisaPacoteComercial(String id){
+		return pesquisaPacoteComercial(id);
 	}
 
 	public void criarPromocao(Promocao promocao) throws Exception {

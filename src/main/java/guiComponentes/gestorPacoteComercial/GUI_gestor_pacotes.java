@@ -90,13 +90,13 @@ public class GUI_gestor_pacotes extends JFrame {
 
 				try {
 
-					String nif = textPesquisaId.getText();
+					String id = textPesquisaId.getText();
 
 					List<PacoteComercial> pacotesComerciais = null;
 
 
-					if (!nif.isBlank()) {
-						pacotesComerciais = GestorDeDAO.getGestorDeDAO().pesquisaPacoteComercial(nif);
+					if (!id.isBlank()) {
+						pacotesComerciais = GestorDeDAO.getGestorDeDAO().pesquisaPacoteComercial(id);
 					} else  {
 						pacotesComerciais = GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
 					}
@@ -297,6 +297,10 @@ public class GUI_gestor_pacotes extends JFrame {
 		JTextArea textAreaDescricao = new JTextArea();
 		textAreaDescricao.setBounds(699, 71, 499, 178);
 		contentPane.add(textAreaDescricao);
+		
+		
+		//TODO - A descrição não está a aparecer
+	
 	}
 
 	public void refreshClienteTable() {
