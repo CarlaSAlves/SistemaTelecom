@@ -14,9 +14,7 @@ public class HistoricoClienteDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		try {
 			HistoricoClienteDialog dialog = new HistoricoClienteDialog();
@@ -27,9 +25,7 @@ public class HistoricoClienteDialog extends JDialog {
 		}
 	}
 
-	/**
-	 * Create the dialog.
-	 */
+	
 	public HistoricoClienteDialog() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());

@@ -21,6 +21,8 @@ public class ClienteDAO {
 
 	public ClienteDAO() throws Exception {
 
+		int test2;
+		
 		Properties props = new Properties();
 		props.load(new FileInputStream("sistema_tele.properties"));
 
