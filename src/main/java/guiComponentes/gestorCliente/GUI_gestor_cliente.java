@@ -18,16 +18,14 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-
 import servico.GestorDeDAO;
-
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 
 public class GUI_gestor_cliente extends JFrame {
-	
+
 	private static final long serialVersionUID = 1L;
 	private JTextField textPesquisaNIF;
 	private JTable table;
@@ -38,14 +36,15 @@ public class GUI_gestor_cliente extends JFrame {
 	private JButton botaoDesativarCliente;
 	private JButton botaoEditarCliente;
 	private int indices[];
-	
-
 	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
+	private JLabel lblUsernameLogged;
+	private String username;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					GUI_gestor_cliente frame = new GUI_gestor_cliente();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -118,8 +117,10 @@ public class GUI_gestor_cliente extends JFrame {
 		botaoCriarCliente.setFocusPainted(false);
 		botaoCriarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this);
+				
+				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this, username);
 				dialog.setVisible(true);
+
 			}
 		});
 		getContentPane().add(botaoCriarCliente);
@@ -187,11 +188,8 @@ public class GUI_gestor_cliente extends JFrame {
 				}
 
 				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
-
-				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this,clienteTemp, true);
-
+				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this,clienteTemp, true, username );
 				dialog.setVisible(true);
-
 			}
 		});
 		getContentPane().add(botaoEditarCliente);
@@ -253,6 +251,19 @@ public class GUI_gestor_cliente extends JFrame {
 		lbFooter.setBounds(599, 802, 367, 59);
 		contentPane.add(lbFooter);
 
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblUsernameLogged.setBounds(1315, 818, 159, 32);
+		contentPane.add(lblUsernameLogged);
+		
+		JButton botaoVisualizarHistorico = new JButton("Ver Historico");
+		botaoVisualizarHistorico.setFont(new Font("Dialog", Font.PLAIN, 17));
+		botaoVisualizarHistorico.setFocusPainted(false);
+		botaoVisualizarHistorico.setEnabled(false);
+		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
+		botaoVisualizarHistorico.setBounds(658, 15, 161, 33);
+		contentPane.add(botaoVisualizarHistorico);
+
 	}
 
 
@@ -282,5 +293,14 @@ public class GUI_gestor_cliente extends JFrame {
 
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
+	}
+
+	public void setUsernameLoggedIn(String username) {
+		lblUsernameLogged.setText("Logged in : " + username);
+
+	}
+
+	public void recebeUsernameDaPaginaLogin(String username) {
+		this.username = username;
 	}
 }

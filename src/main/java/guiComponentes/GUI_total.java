@@ -6,16 +6,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import guiComponentes.gestorCliente.GUI_gestor_cliente;
 import guiComponentes.gestorOperador.GUI_gestor_operador;
+
 
 public class GUI_total extends JFrame {
 
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
+	private String username;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -30,7 +31,6 @@ public class GUI_total extends JFrame {
 	}
 
 	public GUI_total() {
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1500, 900);
 		contentPane = new JPanel();
@@ -66,6 +66,10 @@ public class GUI_total extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				username = login.getUserText().getText();
+				gestor_cliente.setUsernameLoggedIn(username);
+				gestor_cliente.recebeUsernameDaPaginaLogin(username);
+				homepage.setUsernameLoggedIn(username);
 				loginPanel.setVisible(false);
 				homepagePanel.setVisible(true);
 			}

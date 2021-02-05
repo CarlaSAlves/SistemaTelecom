@@ -37,8 +37,8 @@ public class GestorDeDAO {
 		return GestorDeDAOInstance;    
 	}
 
-	public void criarCliente(Cliente cliente) throws Exception {
-		clienteDAO.criarCliente(cliente);
+	public void criarCliente(Cliente cliente, Funcionario funcionario) throws Exception {
+		clienteDAO.criarCliente(cliente, funcionario);
 	}
 
 	public void editarCliente(Cliente cliente) throws Exception {
@@ -79,8 +79,8 @@ public class GestorDeDAO {
 		return funcionarioDAO. getAllFuncionarioOperador();
 	}
 
-	public List<Funcionario> pesquisaFuncionarioAdmin(String nif) throws Exception{        
-		return funcionarioDAO.pesquisaFuncionarioAdmin(nif);
+	public Funcionario pesquisaFuncionarioAdmin(String username) throws Exception{        
+		return funcionarioDAO.pesquisaFuncionarioAdmin(username);
 	}
 
 	public List<Funcionario> pesquisaFuncionarioOperador(String nif) throws Exception{

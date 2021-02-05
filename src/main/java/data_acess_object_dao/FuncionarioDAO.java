@@ -76,32 +76,31 @@ public class FuncionarioDAO {
 		}
 	}
 
-	public List<Funcionario> pesquisaFuncionarioAdmin(String nif) throws Exception {
-		List<Funcionario> list = new ArrayList<>();
+	public Funcionario pesquisaFuncionarioAdmin(String login) throws Exception {
+		Funcionario funcionario = null;
 
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
 
 		try {
-			nif += "%";
 
-			myStmt = myConn.prepareStatement("select * from funcionario where nif LIKE ? AND id_role= 1");
+			myStmt = myConn.prepareStatement("select * from funcionario where login=? AND id_role=1");
 
-			myStmt.setString(1, nif);
+			myStmt.setString(1, login);
 
 			myRs = myStmt.executeQuery();
 
 			while (myRs.next()) {
-				Funcionario funcionario = convertRowParaFuncionario(myRs);
-				list.add(funcionario);
+				funcionario = convertRowParaFuncionario(myRs);
 			}
-
-			return list;
+			return funcionario;
 		}
 		finally {
 			close(myStmt, myRs);
 		}
 	}
+
+
 
 	public List<Funcionario> pesquisaFuncionarioOperador(String nif) throws Exception {
 		List<Funcionario> list = new ArrayList<>();

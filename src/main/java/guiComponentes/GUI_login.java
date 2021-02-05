@@ -68,13 +68,13 @@ public class GUI_login extends JFrame {
 		getContentPane().add(icon);
 
 		JLabel labelLogin = new JLabel("Username");
-		labelLogin.setBounds(563, 358, 80, 64);
+		labelLogin.setBounds(519, 362, 131, 64);
 		labelLogin.setForeground(new Color(0,37,80));
 		labelLogin.setFont(font);
 		getContentPane().add(labelLogin);
 
 		labelPass = new JLabel("Password");
-		labelPass.setBounds(563, 428, 87, 27);
+		labelPass.setBounds(519, 429, 138, 27);
 		labelPass.setForeground(new Color(0,37,80));
 		labelPass.setFont(font);
 		getContentPane().add(labelPass);
@@ -97,7 +97,7 @@ public class GUI_login extends JFrame {
 		getContentPane().add(labelConfm);
 
 		btLogin = new JButton("Login");
-		btLogin.setBounds(697, 483, 104, 33);
+		btLogin.setBounds(708, 466, 104, 33);
 		btLogin.setForeground(SystemColor.desktop);
 		btLogin.setBackground(new Color(240, 240, 240));
 		btLogin.setToolTipText("Carregue para fazer login");
@@ -117,5 +117,9 @@ public class GUI_login extends JFrame {
 
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
+	}
+	
+	public JTextField getUserText() {
+		return textFieldUser;
 	}
 }

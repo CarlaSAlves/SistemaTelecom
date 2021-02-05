@@ -10,8 +10,11 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import guiComponentes.GUI_login;
 import servico.GestorDeDAO;
 import standard_value_object.Cliente;
+import standard_value_object.Funcionario;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -33,9 +36,11 @@ public class CriarClienteDialog extends JDialog {
 	private Cliente clienteAntigo;
 	private boolean modoEditar = false;
 	private JTextField textFieldNome;
+	private String username;
+
 	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
 
-	
+
 	public static void main(String[] args) {
 		try {
 			CriarClienteDialog dialog = new CriarClienteDialog();
@@ -46,17 +51,19 @@ public class CriarClienteDialog extends JDialog {
 		}
 	}
 
-	public CriarClienteDialog(GUI_gestor_cliente clientePesquisaApp ) {
+	public CriarClienteDialog(GUI_gestor_cliente clientePesquisaApp, String username) {
 		this();
 		this.clientePesquisaApp = clientePesquisaApp;
+		this.username = username;
 	}
 
-	public CriarClienteDialog(GUI_gestor_cliente clientePesquisaApp, Cliente clienteAntigo, boolean modoEditar ) {
+	public CriarClienteDialog(GUI_gestor_cliente clientePesquisaApp, Cliente clienteAntigo, boolean modoEditar, String username) {
 		this();
 		this.clientePesquisaApp = clientePesquisaApp;
 		this.clienteAntigo = clienteAntigo;
 		this.modoEditar = modoEditar;
-
+		this.username = username;
+	
 		if(modoEditar) {
 			setTitle("Editar Cliente");
 			popularTextFields(clienteAntigo);
@@ -71,10 +78,11 @@ public class CriarClienteDialog extends JDialog {
 		textFieldPassword.setText(clienteAntigo2.getPassword());
 		textFieldPacote.setText(clienteAntigo2.getId_pacote_cliente()+ "");
 		checkBoxAtivo.setSelected(clienteAntigo2.isAtivo());
-		
+
 	}
 
 	public CriarClienteDialog() {
+
 		setBounds(500, 300, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.inactiveCaption);
@@ -161,7 +169,7 @@ public class CriarClienteDialog extends JDialog {
 			textFieldPacote.setBounds(90, 155, 334, 20);
 			contentPanel.add(textFieldPacote);
 		}
-		
+
 		checkBoxAtivo = new JCheckBox("Ativo");
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
 		checkBoxAtivo.setFont(font);
@@ -183,6 +191,7 @@ public class CriarClienteDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						gravarCliente();
+
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -197,11 +206,11 @@ public class CriarClienteDialog extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 				cancelButton.addActionListener(new ActionListener() {
-					
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						dispose();
-						
+
 					}
 				});
 			}
@@ -219,10 +228,10 @@ public class CriarClienteDialog extends JDialog {
 
 
 		Cliente cliente = null;
-		
+
 		if (modoEditar) {
 			cliente = clienteAntigo;
-		
+
 			cliente.setNif(nif);
 			cliente.setNome(nome);
 			cliente.setMorada(morada);
@@ -230,7 +239,7 @@ public class CriarClienteDialog extends JDialog {
 			cliente.setPassword(pass);
 			cliente.setAtivo(ativo);
 			cliente.setId_pacote_cliente(idPacote);
-		
+
 		} else {
 			cliente = new Cliente( nome, nif, morada, login, pass, ativo, idPacote);
 		}
@@ -243,16 +252,26 @@ public class CriarClienteDialog extends JDialog {
 						"Cliente Editado com sucesso!", "Cliente Editado",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				GestorDeDAO.getGestorDeDAO().criarCliente(cliente);
-				clientePesquisaApp.refreshClienteTable();
-				JOptionPane.showMessageDialog(clientePesquisaApp,
-						"Cliente Criado com sucesso!", "Cliente Criado",
-						JOptionPane.INFORMATION_MESSAGE);
+
+				Funcionario funcionario = null;
+
+				try {
+					
+					funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(username);
+					GestorDeDAO.getGestorDeDAO().criarCliente(cliente, funcionario);
+					clientePesquisaApp.refreshClienteTable();
+					JOptionPane.showMessageDialog(clientePesquisaApp,
+							"Cliente Criado com sucesso!", "Cliente Criado",
+							JOptionPane.INFORMATION_MESSAGE);
+					
+				} catch (Exception e) {
+
+				}
 			}
 			setVisible(false);
 			dispose();
 
-			
+
 		} catch (Exception exc) {
 			JOptionPane.showMessageDialog(clientePesquisaApp,
 					"Error a criar cliente " + exc.getMessage(), "Error",

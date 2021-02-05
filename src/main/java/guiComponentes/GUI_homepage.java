@@ -16,6 +16,7 @@ public class GUI_homepage extends JFrame {
 	private JButton btGerirClientes;
 	private JButton btGerirOperadores;
 	private JPanel panel;
+	private JLabel lblUsernameLogged;
 	private static final long serialVersionUID = 1L;
 
 
@@ -104,6 +105,11 @@ public class GUI_homepage extends JFrame {
 		lblFooter.setBounds(316, 740, 600, 100);
 		lblFooter.setIcon(new ImageIcon(GUI_login.class.getResource("/img/footer.png")));
 		getContentPane().add(lblFooter);
+		
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblUsernameLogged.setBounds(1211, 817, 263, 33);
+		panel.add(lblUsernameLogged);
 	}
 
 	public JPanel returnPanel() {
@@ -122,5 +128,10 @@ public class GUI_homepage extends JFrame {
 	public JButton getBtGerirOperadores() {
 		return btGerirOperadores;
 	}
+	
+	public void setUsernameLoggedIn(String username) {
+		lblUsernameLogged.setText("Logged in : " + username);
+	}
+	
 }
 

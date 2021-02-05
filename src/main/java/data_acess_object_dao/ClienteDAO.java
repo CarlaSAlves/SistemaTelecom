@@ -7,11 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
+import historico.cliente.HistoricoCliente;
 import standard_value_object.Cliente;
+import standard_value_object.Funcionario;
 
 public class ClienteDAO {
 
@@ -71,8 +73,8 @@ public class ClienteDAO {
 			myRs = myStmt.executeQuery();
 
 			while (myRs.next()) {
-				Cliente Cliente = converteRowParaCliente(myRs);
-				list.add(Cliente);
+				Cliente cliente = converteRowParaCliente(myRs);
+				list.add(cliente);
 			}
 
 			return list;
@@ -82,13 +84,39 @@ public class ClienteDAO {
 		}
 	}
 
-	public void criarCliente(Cliente cliente) throws Exception {
+	private Cliente pesquisaClienteAuxiliar(String nif) throws Exception {
+		Cliente cliente = null;
+
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			nif += "%";
+
+			myStmt = myConn.prepareStatement("select * from cliente where nif like ?");
+
+			myStmt.setString(1, nif);
+
+			myRs = myStmt.executeQuery();
+
+			while (myRs.next()) {
+				cliente = converteRowParaCliente(myRs);
+			}
+			return cliente;
+		}
+		finally {
+			close(myStmt, myRs);
+		}
+	}
+	
+	@SuppressWarnings("resource")
+	public void criarCliente(Cliente cliente, Funcionario funcionario) throws Exception {
 		PreparedStatement myStmt = null;
 
 		try {
 			myStmt = myConn.prepareStatement("INSERT INTO cliente(nome, nif, morada, login, password, ativo, id_pacote_cliente) "
 					+ "VALUES(?,?,?,?,?,?,?)");
-
+			
 			myStmt.setString(1, cliente.getNome());
 			myStmt.setLong(2, cliente.getNif());
 			myStmt.setString(3, cliente.getMorada());
@@ -98,6 +126,16 @@ public class ClienteDAO {
 			myStmt.setInt(7, cliente.getId_pacote_cliente());
 
 			myStmt.executeUpdate();
+
+			Cliente clientCriado = pesquisaClienteAuxiliar(""+cliente.getNif());
+			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
+			
+			myStmt.setInt(1, funcionario.getId());
+			myStmt.setInt(2, clientCriado.getId());
+			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+			myStmt.setString(4, "Criou Cliente");	
+			
+			myStmt.executeUpdate();	
 
 		}catch(Exception e) {
 
@@ -148,6 +186,45 @@ public class ClienteDAO {
 		}
 
 	}
+
+
+	public List<HistoricoCliente> getHistoricoCliente(int id_cliente) throws Exception {
+		List<HistoricoCliente> list = new ArrayList<HistoricoCliente>();
+
+		Statement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			myStmt = myConn.createStatement();
+
+			String sql = "SELECT HistoricoCliente.id_funcionario, HistoricoCliente.id_cliente, HistoricoCliente.descricao, "
+					+ "HistoricoCliente.data_registo, admin.nome "
+					+ "FROM funcionario_log_cliente HistoricoCliente, funcionario admin WHERE HistoricoCliente.id_funcionario=admin.id AND HistoricoCliente.id_cliente=2" + id_cliente;
+
+			myRs = myStmt.executeQuery(sql);
+
+			while (myRs.next()) {
+
+				int id_funcionario = myRs.getInt("HistoricoCliente.id_funcionario");
+				String descricao = myRs.getString("HistoricoCliente.descricao");
+				Timestamp timestamp = myRs.getTimestamp("HistoricoCliente.data_registo");
+				java.sql.Date data_registo = new java.sql.Date(timestamp.getTime());
+				String nome = myRs.getString("admin.nome");
+
+
+				HistoricoCliente historico = new HistoricoCliente(id_funcionario, id_cliente, descricao, data_registo, nome);
+
+				list.add(historico);
+			}
+
+			return list;		
+		}
+		finally {
+			close(myStmt, myRs);
+		}
+	}
+
+
 	private Cliente converteRowParaCliente(ResultSet myRs) throws SQLException {
 
 		int id = myRs.getInt("id");
