@@ -129,8 +129,8 @@ public class GestorDeDAO {
 		return promocaoDAO.getAllPromocoes();
 	}
 
-	public List<Promocao> pesquisaPromocao(String nome) throws Exception{
-		return promocaoDAO.pesquisaPromocao(nome);
+	public List<Promocao> pesquisaPromocao(int id) throws Exception{
+		return promocaoDAO.pesquisaPromocao(id);
 	}
 
 

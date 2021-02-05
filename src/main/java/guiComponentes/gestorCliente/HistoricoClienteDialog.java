@@ -47,7 +47,7 @@ public class HistoricoClienteDialog extends JDialog {
 		table.setModel(model);
 		
 		TableCellRenderer tableCellRenderer = new DateTimeCellRenderer();
-		table.getColumnModel().getColumn(HistoricoClienteTableModel.DATA_COL).setCellRenderer(tableCellRenderer);
+		table.getColumnModel().getColumn(HistoricoClienteTableModel.OBJECT_COL).setCellRenderer(tableCellRenderer);
 		
 	}
 	
@@ -103,7 +103,7 @@ public class HistoricoClienteDialog extends JDialog {
 	private final class DateTimeCellRenderer extends DefaultTableCellRenderer {
 		
 		private static final long serialVersionUID = 1L;
-		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yy HH:mm:ss ");
+		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
 
 		public Component getTableCellRendererComponent(JTable table,
 		        Object value, boolean isSelected, boolean hasFocus,

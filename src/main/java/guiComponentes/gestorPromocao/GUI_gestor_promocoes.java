@@ -1,6 +1,6 @@
-
 package guiComponentes.gestorPromocao;
 
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.JFrame;
@@ -13,11 +13,15 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import servico.GestorDeDAO;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
@@ -26,8 +30,8 @@ import javax.swing.JTextArea;
 import javax.swing.JCheckBox;
 
 public class GUI_gestor_promocoes extends JFrame {
-	
-	
+
+
 	private static final long serialVersionUID = 1L;
 	private JTextField textPesquisaId;
 	private JTable table;
@@ -89,19 +93,23 @@ public class GUI_gestor_promocoes extends JFrame {
 
 				try {
 
-					String id = textPesquisaId.getText();
-
 					List<Promocao> promocoes = null;
 
-
-					if (!id.isBlank()) {
+					if (!textPesquisaId.getText().isBlank()) {
+						int id = Integer.parseInt(textPesquisaId.getText());
 						promocoes = GestorDeDAO.getGestorDeDAO().pesquisaPromocao(id);
 					} else  {
 						promocoes = GestorDeDAO.getGestorDeDAO().getAllPromocoes();
+
 					}
 
 					PromocaoPesquisaModelTable model = new PromocaoPesquisaModelTable(promocoes);
 					table.setModel(model);
+
+					TableCellRenderer tableCellRenderer = new DateTimeCellRenderer();
+					table.getColumnModel().getColumn(PromocaoPesquisaModelTable.DATA_INICIO_COL).setCellRenderer(tableCellRenderer);
+					table.getColumnModel().getColumn(PromocaoPesquisaModelTable.DATA_FIM_COL).setCellRenderer(tableCellRenderer);
+
 					numberRows = table.getRowCount();
 					lblResultados.setText("Resultados: " + numberRows);
 
@@ -215,7 +223,7 @@ public class GUI_gestor_promocoes extends JFrame {
 							"Cliente Desativado com sucesso", "Cliente Desativado",
 							JOptionPane.INFORMATION_MESSAGE);
 
-					refreshClienteTable();
+					refreshPromocaoTable();
 				} catch (Exception e1) {
 
 				}
@@ -235,7 +243,7 @@ public class GUI_gestor_promocoes extends JFrame {
 		lbFooter.setIcon(new ImageIcon(GUI_gestor_promocoes.class.getResource("/guiComponentes/img/footer2.png")));
 		lbFooter.setBounds(599, 802, 367, 59);
 		contentPane.add(lbFooter);
-		
+
 
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -277,7 +285,7 @@ public class GUI_gestor_promocoes extends JFrame {
 		JTextArea textAreaDescricao = new JTextArea();
 		textAreaDescricao.setBounds(699, 38, 499, 211);
 		contentPane.add(textAreaDescricao);
-		
+
 		checkBoxAtivo = new JCheckBox("Ativa");
 		checkBoxAtivo.setSelected(true);
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
@@ -286,8 +294,8 @@ public class GUI_gestor_promocoes extends JFrame {
 		contentPane.add(checkBoxAtivo);
 	}
 
-	public void refreshClienteTable() {
-		
+	public void refreshPromocaoTable() {
+
 		try {
 			List<Promocao> promocoes = GestorDeDAO.getGestorDeDAO().getAllPromocoes();
 			PromocaoPesquisaModelTable model = new PromocaoPesquisaModelTable(promocoes);
@@ -311,4 +319,21 @@ public class GUI_gestor_promocoes extends JFrame {
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
+
+	private final class DateTimeCellRenderer extends DefaultTableCellRenderer {
+
+		private static final long serialVersionUID = 1L;
+		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+
+		public Component getTableCellRendererComponent(JTable table,
+				Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
+			if( value instanceof Date) {
+				value = f.format(value);
+			}
+			return super.getTableCellRendererComponent(table, value, isSelected,
+					hasFocus, row, column);
+		}
+	}
+
 }

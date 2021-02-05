@@ -165,13 +165,13 @@ public class CriarPromocaoDialog extends JDialog {
 			if (modoEditar) {
 				GestorDeDAO.getGestorDeDAO().editarPromocao(promocao);
 
-				promocaoPesquisaApp.refreshClienteTable();
+				promocaoPesquisaApp.refreshPromocaoTable();
 				JOptionPane.showMessageDialog(promocaoPesquisaApp,
 						"Promoção editada com sucesso!", "Promoção Editada",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				GestorDeDAO.getGestorDeDAO().criarPromocao(promocao);
-				promocaoPesquisaApp.refreshClienteTable();
+				promocaoPesquisaApp.refreshPromocaoTable();
 				JOptionPane.showMessageDialog(promocaoPesquisaApp,
 						"Promoção criada com sucesso!", "Promoção Criada",
 						JOptionPane.INFORMATION_MESSAGE);

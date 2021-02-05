@@ -118,6 +118,7 @@ public class GUI_total extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				homepagePanel.setVisible(false);
 				gestor_promocoesPanel.setVisible(true);
+			
 			}
 		});
 		
@@ -168,15 +169,15 @@ public class GUI_total extends JFrame {
 			}
 		});
 		
-		gestor_promocoes.btVoltarGestorPromocoes().addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				homepagePanel.setVisible(true);
-				gestor_promocoesPanel.setVisible(false);
-				
-			}
-		});
+//		gestor_promocoes.btVoltarGestorPromocoes().addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				homepagePanel.setVisible(true);
+//				gestor_promocoesPanel.setVisible(false);
+//				
+//			}
+//		});
 
 
 	}

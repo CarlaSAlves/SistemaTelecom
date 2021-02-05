@@ -72,13 +72,13 @@ public class GUI_login extends JFrame {
 		textFieldUser.setColumns(10);
 
 		JLabel labelConfm = new JLabel("User ou Password incorreta");
-		labelConfm.setBounds(682, 575, 230, 18);
+		labelConfm.setBounds(674, 575, 410, 18);
 		labelConfm.setForeground(new Color(255, 0, 0));
 		labelConfm.setFont(font);
 		getContentPane().add(labelConfm);
 
 		btLogin = new JButton("Login");
-		btLogin.setBounds(736, 502, 104, 33);
+		btLogin.setBounds(747, 501, 104, 33);
 		btLogin.setForeground(SystemColor.desktop);
 		btLogin.setBackground(new Color(240, 240, 240));
 		btLogin.setToolTipText("Carregue para fazer login");

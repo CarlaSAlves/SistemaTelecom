@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -34,14 +36,16 @@ public class PromocaoDAO {
 
 		Statement myStmt = null;
 		ResultSet myRs = null;
-
+		
 		try {
 			myStmt = myConn.createStatement();
 			myRs = myStmt.executeQuery("select * from promocao");
-
+			
 			while (myRs.next()) {
 				Promocao promocao = converteRowParaPromocoes(myRs);
+			
 				listaPromocoes.add(promocao);
+			
 			}
 
 			return listaPromocoes;		
@@ -51,18 +55,17 @@ public class PromocaoDAO {
 		}
 	}
 
-	public List<Promocao> pesquisaPromocao(String nome) throws Exception {
+	public List<Promocao> pesquisaPromocao(int id) throws Exception {
 		List<Promocao> list = new ArrayList<>();
 
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
 
 		try {
-			nome += "%";
+		
+			myStmt = myConn.prepareStatement("select * from promocao where id=?");
 
-			myStmt = myConn.prepareStatement("select * from promocao where nome like ?");
-
-			myStmt.setString(1, nome);
+			myStmt.setInt(1, id);
 
 			myRs = myStmt.executeQuery();
 
@@ -82,13 +85,11 @@ public class PromocaoDAO {
 		PreparedStatement myStmt = null;
 
 		try {
-			myStmt = myConn.prepareStatement("INSERT INTO promocao(nome, descricao, ativa, data_inicio, data_fim) VALUES(?,?,?,?,?)");
+			myStmt = myConn.prepareStatement("INSERT INTO promocao(nome, descricao, ativa) VALUES(?,?,?)");
 
 			myStmt.setString(1, promocao.getNome());
 			myStmt.setString(2, promocao.getDescricao());
 			myStmt.setBoolean(3, promocao.isAtiva());
-			myStmt.setDate(5, promocao.getData_inicio());
-			myStmt.setDate(5, promocao.getData_fim());
 
 			myStmt.executeUpdate();
 
@@ -103,14 +104,12 @@ public class PromocaoDAO {
 		PreparedStatement myStmt = null;
 		try {
 
-			myStmt = myConn.prepareStatement("UPDATE `promocao` SET `nome`=?, `descricao`=?, `ativa`=?, `data_inicio`, `data_fim` WHERE  `id`=?");
+			myStmt = myConn.prepareStatement("UPDATE `promocao` SET `nome`=?, `descricao`=?, `ativa`=? WHERE `id`=?");
 
 			myStmt.setString(1, promocao.getNome());
 			myStmt.setString(2, promocao.getDescricao());
 			myStmt.setBoolean(3, promocao.isAtiva());
 			myStmt.setInt(4, promocao.getId());
-			myStmt.setDate(5, promocao.getData_inicio());
-			myStmt.setDate(5, promocao.getData_fim());
 			
 			myStmt.executeUpdate();
 
@@ -139,14 +138,17 @@ public class PromocaoDAO {
 
 	}
 	private Promocao converteRowParaPromocoes(ResultSet myRs) throws SQLException {
-
+		
 		int id = myRs.getInt("id");
 		String nome = myRs.getString("nome");
 		String descricao = myRs.getString("descricao");
-		boolean ativo = myRs.getBoolean("ativo");
-		Date data_inicio = myRs.getDate("data_inicio");
-		Date data_fim = myRs.getDate("data_fim");
-
+		boolean ativo = myRs.getBoolean("ativa");
+		Timestamp timestamp = myRs.getTimestamp("data_inicio");
+		java.sql.Date data_inicio = new java.sql.Date(timestamp.getTime());
+		Timestamp timestamp2 = myRs.getTimestamp("data_fim");
+		java.sql.Date data_fim = new java.sql.Date(timestamp2.getTime());
+		
+		
 		Promocao promocao = new Promocao(id, nome, descricao, ativo, data_inicio, data_fim);
 
 		return promocao;
