@@ -118,9 +118,10 @@ public class ClienteDAO {
 		
 		try {
 			myStmt = myConn.prepareStatement("SELECT * FROM cliente WHERE login=? AND password=?;");
-
 			myStmt.setString(1, login);
-			myStmt.setString(2, pass);
+			
+			//vamos encriptar a palavra pass antes de a enviar
+			myStmt.setString(2, PasswordEncryption.get_SHA_512_SecurePassword(pass));
 			
 			myRs = myStmt.executeQuery();
 			

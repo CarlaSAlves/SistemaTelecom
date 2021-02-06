@@ -43,12 +43,16 @@ public class FuncionarioDAO {
 				Funcionario funcionario = convertRowToFuncionario(myRs);
 				listaFuncionario.add(funcionario);
 			}
-
-			return listaFuncionario;		
+		
+		} 
+		catch(Exception e) {
+			e.printStackTrace();
 		}
 		finally {
 			close(myStmt, myRs);
 		}
+		
+		return listaFuncionario;
 	}
 	
 	//nif é um int, ao enviar um nif para este metodo é necessario converte-lo em string, fazendo por exemplo "" + 12345
@@ -69,12 +73,14 @@ public class FuncionarioDAO {
 				Funcionario funcionario = convertRowToFuncionario(myRs);
 				list.add(funcionario);
 			}
-
-			return list;
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 		finally {
 			close(myStmt, myRs);
 		}
+		
+		return list;
 	}
 	
 	public List<Funcionario> searchFuncionarioByNome(String nome) throws Exception {
@@ -95,11 +101,14 @@ public class FuncionarioDAO {
 				list.add(funcionario);
 			}
 
-			return list;
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 		finally {
 			close(myStmt, myRs);
 		}
+		
+		return list;
 	}
 	
 	public Funcionario searchFuncionarioById(int id) throws Exception {
@@ -123,6 +132,8 @@ public class FuncionarioDAO {
 				funcionario.setAtivo(myRs.getInt(6) == 1 ? true : false);
 				funcionario.setId_role(myRs.getInt(7));	
 			}
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 		finally {
 			close(myStmt, myRs);
@@ -139,12 +150,14 @@ public class FuncionarioDAO {
 		try {
 			myStmt = myConn.prepareStatement("SELECT * FROM funcionario WHERE login=? AND password=?;");
 			myStmt.setString(1, login);
-			myStmt.setString(2, pass);
+			
+			//vamos encriptar a palavra pass antes de a enviar
+			myStmt.setString(2, PasswordEncryption.get_SHA_512_SecurePassword(pass));
+			
 			myRs = myStmt.executeQuery();
 			
 			if (myRs.next()) {
 				funcionario = new Funcionario();
-				
 				funcionario.setId(myRs.getInt(1));
 				funcionario.setNome(myRs.getString(2));
 				funcionario.setNif(myRs.getInt(3));
@@ -152,8 +165,9 @@ public class FuncionarioDAO {
 				funcionario.setPassword(myRs.getString(5));
 				funcionario.setAtivo(myRs.getInt(6) == 1 ? true : false);
 				funcionario.setId_role(myRs.getInt(7));	
-			}
-			
+			}	
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 		finally {
 			close(myStmt, myRs);
@@ -179,7 +193,7 @@ public class FuncionarioDAO {
 			myStmt.executeUpdate();
 
 		}catch(Exception e) {
-
+			e.printStackTrace();
 		}finally {
 			myStmt.close();
 		}
@@ -193,15 +207,14 @@ public class FuncionarioDAO {
 			myStmt.setInt(1, role.getId());
 			myStmt.setInt(2, funcionario.getId());
 			myStmt.executeUpdate();
-		}catch(Exception e) {
-
-		}finally {
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
 			myStmt.close();
 		}
 	}
 	
 	private Funcionario convertRowToFuncionario(ResultSet myRs) throws SQLException {
-
 		int id = myRs.getInt("id");
 		boolean ativo = (myRs.getInt("ativo") == 1);
 		int nif = myRs.getInt("nif");
