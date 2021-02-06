@@ -66,9 +66,9 @@ public class GUI_homepage extends JFrame {
 		btGerirClientes.setFont(new Font("Dubai Light", Font.PLAIN, 20));
 		getContentPane().add(btGerirClientes);
 
-		btVoltar = new JButton("Voltar");
-		btVoltar.setBounds(40, 807, 125, 33);
-		btVoltar.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btVoltar = new JButton("Terminar Sessão");
+		btVoltar.setBounds(40, 807, 222, 33);
+		btVoltar.setFont(new Font("Dialog", Font.PLAIN, 15));
 		btVoltar.setFocusPainted(false);
 		getContentPane().add(btVoltar);
 

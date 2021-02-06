@@ -2,7 +2,6 @@ package data_acess_object_dao;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +11,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.StringJoiner;
+
 import standard_value_object.PacoteComercial;
 
 
@@ -56,22 +57,45 @@ public class PacoteComercialDAO {
 
 	}
 
-	public List<PacoteComercial> pesquisaPacoteComercial(int id) throws Exception {
+	public List<PacoteComercial> pesquisaPacoteComercial(int id, String nome, int ativo) throws Exception {
 		List<PacoteComercial> list = new ArrayList<>();
 
-		PreparedStatement myState = null; 
-		ResultSet myRes = null; 
-
+		PreparedStatement myStmt = null; 
+		ResultSet myRs = null; 
+		StringJoiner sj = new StringJoiner (" AND ");
+		String query = "SELECT * FROM PACOTE_COMERCIAL WHERE ";
+		
 		try {
+			@SuppressWarnings("rawtypes")
+			List<Comparable> values = new ArrayList<Comparable>();
 
-			myState = myConn.prepareStatement("select * from pacote_comercial where id=?");
+			if(id!= 0){
+				sj.add("ID=?");
+				values.add(id);
+			}
+			if(nome != null) {
+				nome += "%";
+				sj.add("NOME LIKE ?");
+				values.add(nome);
+			}
+			if(ativo!=0){
+				sj.add("ativo=?");
+				values.add(ativo);
+			}
 
-			myState.setInt(1, id);
+			query += sj.toString();
+		
+		
+			myStmt = myConn.prepareStatement(query);
 
-			myRes = myState.executeQuery();
+			for (int index = 0; index < values.size(); index++){
+				myStmt.setObject(index+1 , values.get(index));
+			}
 
-			while (myRes.next()) {
-				PacoteComercial pacote = converteRowParaPacoteComercial(myRes);
+			myRs = myStmt.executeQuery();
+
+			while (myRs.next()) {
+				PacoteComercial pacote = converteRowParaPacoteComercial(myRs);
 				list.add(pacote);
 			}
 
@@ -79,27 +103,26 @@ public class PacoteComercialDAO {
 		}
 
 		finally {
-			close (myState, myRes);
+			close (myStmt, myRs);
 		}
 	}
 
 	public void criarPacoteComercial (PacoteComercial pacote) throws Exception {
-
-		PreparedStatement myState = null; 
+		PreparedStatement myStmt = null;
 
 		try {
-			myState = myConn.prepareStatement("INSERT INTO pacote_comercial (nome, descricao, ativo)"
-					+ "VALUES(?,?,?,?,?)");
+			myStmt = myConn.prepareStatement("INSERT INTO pacote_comercial(nome, descricao, ativo) VALUES(?,?,?)");
 
-			myState.setString(1, pacote.getNome());
-			myState.setString(2, pacote.getDescricao());
-			myState.setBoolean(3, pacote.isAtivo());
+			myStmt.setString(1, pacote.getNome());
+			myStmt.setString(2, pacote.getDescricao());
+			myStmt.setBoolean(3, pacote.isAtivo());
 
-			myState.executeUpdate();
-		} catch(Exception e) {
+			myStmt.executeUpdate();
 
-		} finally {
-			myState.close();
+		}catch(Exception e) {
+
+		}finally {
+			myStmt.close();
 		}
 	}
 
@@ -112,6 +135,7 @@ public class PacoteComercialDAO {
 			myState.setString(1, pacote.getNome());
 			myState.setString(2, pacote.getDescricao());
 			myState.setBoolean(3, pacote.isAtivo());
+			myState.setInt(4, pacote.getId());
 
 			myState.executeUpdate();
 

@@ -80,6 +80,14 @@ public class GUI_total extends JFrame {
 		getContentPane().add(gestor_promocaoPanel);
 
 		// LOGIN
+		login.getBtnSair().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+
+			}
+		});
 		login.getBtLogin().addActionListener(new ActionListener() {
 
 			@Override
@@ -110,7 +118,7 @@ public class GUI_total extends JFrame {
 			}
 		});
 
-		
+
 		homepage.getBtGerirPacotes().addActionListener(new ActionListener() {
 
 			@Override
@@ -121,7 +129,7 @@ public class GUI_total extends JFrame {
 		});
 
 		homepage.getBtGerirPromocoes().addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				homepagePanel.setVisible(false);
@@ -165,9 +173,9 @@ public class GUI_total extends JFrame {
 				gestor_pacotesPanel.setVisible(false);
 			}
 		});
-		
+
 		gestor_promocao.getBtVoltarGestorPromocao().addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				homepagePanel.setVisible(true);
@@ -176,7 +184,7 @@ public class GUI_total extends JFrame {
 		});
 
 	}
-	
+
 	private void labelUsernameNavegaPaginas(GUI_login login, GUI_homepage homepage,
 			GUI_gestor_cliente gestor_cliente, GUI_gestor_operador gestor_operador,
 			GUI_gestor_pacotes gestor_pacotes, GUI_gestor_promocao gestor_promocao) {

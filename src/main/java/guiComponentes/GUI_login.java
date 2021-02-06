@@ -12,18 +12,19 @@ import java.awt.Font;
 import javax.swing.JPasswordField;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class GUI_login extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField textFieldUser;
-	private JButton btLogin;
+	private JButton btLogin, btnSair;
 	private JLabel labelPass;
 	private JLabel icon;
 	private JPanel panel;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 20);
-
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -47,6 +48,15 @@ public class GUI_login extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1500, 900);
 		getContentPane().setLayout(null);
+		
+		btnSair = new JButton("Sair");
+		btnSair.setToolTipText("Carregue para fazer signout");
+		btnSair.setForeground(Color.BLACK);
+		btnSair.setFont(new Font("Dialog", Font.PLAIN, 20));
+		btnSair.setFocusPainted(false);
+		btnSair.setBackground(SystemColor.menu);
+		btnSair.setBounds(749, 522, 104, 33);
+		panel.add(btnSair);
 
 		JLabel labelLogin = new JLabel("Username");
 		labelLogin.setBounds(553, 382, 131, 27);
@@ -78,7 +88,7 @@ public class GUI_login extends JFrame {
 		getContentPane().add(labelConfm);
 
 		btLogin = new JButton("Login");
-		btLogin.setBounds(747, 501, 104, 33);
+		btLogin.setBounds(749, 478, 104, 33);
 		btLogin.setForeground(SystemColor.desktop);
 		btLogin.setBackground(new Color(240, 240, 240));
 		btLogin.setToolTipText("Carregue para fazer login");
@@ -113,4 +123,9 @@ public class GUI_login extends JFrame {
 	public JTextField getUserText() {
 		return textFieldUser;
 	}
+	
+	public JButton getBtnSair() {
+		return btnSair;
+	}
+	
 }

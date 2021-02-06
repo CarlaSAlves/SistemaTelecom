@@ -61,13 +61,15 @@ public class ClienteDAO {
 
 	public List<Cliente> pesquisaCliente(int id, String nif, String nome, String morada, int ativo) throws Exception {
 		List<Cliente> list = new ArrayList<>();
+		
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
 		StringJoiner sj = new StringJoiner (" AND ");
 		String query = "SELECT * FROM CLIENTE WHERE ";
 
 		try {
-			List values = new ArrayList();
+			@SuppressWarnings("rawtypes")
+			List<Comparable> values = new ArrayList<Comparable>();
 
 			if(id!= 0){
 				sj.add("ID=?");

@@ -29,6 +29,9 @@ import javax.swing.event.ListSelectionListener;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import guiComponentes.GUI_login;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JCheckBox;
 
@@ -60,6 +63,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private JTextField textFieldMorada;
 	private JCheckBox checkBoxAtivo;
 	private JButton botaoPesquisa;
+	private JLabel lblNewLabel;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -344,7 +348,7 @@ public class GUI_gestor_cliente extends JFrame {
 					String nome = null;
 					String morada = null;
 					int ativo = checkBoxAtivo.isSelected()? 1:0;
-					
+
 					if(!textPesquisaID.getText().isBlank()) {
 						id = Integer.parseInt(textPesquisaID.getText());
 					}
@@ -352,22 +356,20 @@ public class GUI_gestor_cliente extends JFrame {
 					if(!textPesquisaNIF.getText().isBlank()) {
 						nif = textPesquisaNIF.getText();
 					}
-					
+
 					if(!textFieldNome.getText().isBlank()) {
 						nome = textFieldNome.getText();
 					}
-					
+
 					if(!textFieldMorada.getText().isBlank()) {
 						morada = textFieldMorada.getText();
 					}
-					
-					
+
+
 					List<Cliente> clientes = null;
 
-					if ((id != 0) || (nif != null) || (nome != null) || (nome != null) || (ativo!=0) ) {
-					
+					if ((id != 0) || (nif != null) || (nome != null) || (morada != null) || (ativo!=0) ) {
 						clientes = GestorDeDAO.getGestorDeDAO().pesquisaCliente(id, nif, nome, morada, ativo);
-						
 					} else {
 						clientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
 					}
@@ -386,6 +388,12 @@ public class GUI_gestor_cliente extends JFrame {
 			}
 		});
 		panel.add(botaoPesquisa, "4, 12");
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setForeground(SystemColor.inactiveCaption);
+		lblNewLabel.setIcon(new ImageIcon(GUI_gestor_cliente.class.getResource("/guiComponentes/img/user-5122.png")));
+		lblNewLabel.setBounds(946, 11, 376, 244);
+		contentPane.add(lblNewLabel);
 
 	}
 

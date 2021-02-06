@@ -46,7 +46,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	private JButton botaoEditarPacoteComercial;
 	private int indices[];
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
-	private JTextField textFieldID;
+	private JTextField textPesquisaID;
 	private JTextField textFieldNome;
 
 
@@ -256,9 +256,9 @@ public class GUI_gestor_pacotes extends JFrame {
 		lblNewLabelID.setFont(new Font("Dialog", Font.PLAIN, 13));
 		panel_1.add(lblNewLabelID, "2, 2, left, default");
 		
-		textFieldID = new JTextField();
-		panel_1.add(textFieldID, "4, 2, fill, default");
-		textFieldID.setColumns(10);
+		textPesquisaID = new JTextField();
+		panel_1.add(textPesquisaID, "4, 2, fill, default");
+		textPesquisaID.setColumns(10);
 		
 		JLabel lblNewLabelNome = new JLabel("Nome");
 		lblNewLabelNome.setFont(new Font("Dialog", Font.PLAIN, 13));
@@ -268,11 +268,11 @@ public class GUI_gestor_pacotes extends JFrame {
 		panel_1.add(textFieldNome, "4, 4, fill, default");
 		textFieldNome.setColumns(10);
 		
-		JCheckBox NewCheckBoxAtivo = new JCheckBox("Ativo");
-		NewCheckBoxAtivo.setBackground(SystemColor.inactiveCaption);
-		NewCheckBoxAtivo.setForeground(SystemColor.desktop);
-		NewCheckBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
-		panel_1.add(NewCheckBoxAtivo, "4, 6, center, default");
+		JCheckBox checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
+		checkBoxAtivo.setForeground(SystemColor.desktop);
+		checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
+		panel_1.add(checkBoxAtivo, "4, 6, center, default");
 		
 		JButton btnNewButtonPesquisar = new JButton("Pesquisar");
 		btnNewButtonPesquisar.setBackground(SystemColor.activeCaption);
@@ -282,12 +282,22 @@ public class GUI_gestor_pacotes extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 
 				try {
-					String id = textFieldID.getText();
+					int id = 0;
+					String nome = null;
+					int ativo = checkBoxAtivo.isSelected()? 1:0;
+					
+					if(!textPesquisaID.getText().isBlank()) {
+						id = Integer.parseInt(textPesquisaID.getText());
+					}
+
+					if(!textFieldNome.getText().isBlank()) {
+						nome = textFieldNome.getText();
+					}
+					
 					List<PacoteComercial> pacotesComerciais = null;
 
-					if (!id.isBlank()) {
-						int id2 = Integer.parseInt(textFieldID.getText());
-						pacotesComerciais = GestorDeDAO.getGestorDeDAO().pesquisaPacoteComercial(id2);
+					if ((id != 0) || (nome != null) || (ativo!=0) ) {
+						pacotesComerciais = GestorDeDAO.getGestorDeDAO().pesquisaPacoteComercial(id, nome, ativo);
 					} else  {
 						pacotesComerciais = GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
 					}

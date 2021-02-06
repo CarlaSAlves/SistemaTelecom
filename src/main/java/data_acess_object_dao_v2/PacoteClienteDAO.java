@@ -9,16 +9,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
-import standard_value_object_v2.Cliente;
+
 import standard_value_object_v2.PacoteCliente;
-import standard_value_object_v2.PacoteComercial;
+
 import standard_value_object_v2.Promocao;
 
 public class PacoteClienteDAO {
@@ -103,7 +100,7 @@ public class PacoteClienteDAO {
 	public void adicionarPromocao(PacoteCliente pacoteCliente, Promocao promocao) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
-			myStmt = myConn.prepareStatement("INSERT INTO pacote_cliente_promoçao(id_pacote_cliente, id_promocao) VALUES(?, ?);");
+			myStmt = myConn.prepareStatement("INSERT INTO pacote_cliente_promoï¿½ao(id_pacote_cliente, id_promocao) VALUES(?, ?);");
 			myStmt.setInt(1, pacoteCliente.getId());
 			myStmt.setInt(2, promocao.getId());
 			myStmt.executeUpdate();
@@ -117,7 +114,7 @@ public class PacoteClienteDAO {
 	public void removerPromocao(PacoteCliente pacoteCliente, Promocao promocao) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
-			myStmt = myConn.prepareStatement("DELETE FROM `sistema_tele`.`pacote_cliente_promoçao` WHERE (`id_pacote_cliente` = ?) and (`id_promocao` = ?);");
+			myStmt = myConn.prepareStatement("DELETE FROM `sistema_tele`.`pacote_cliente_promoï¿½ao` WHERE (`id_pacote_cliente` = ?) and (`id_promocao` = ?);");
 			myStmt.setInt(1, pacoteCliente.getId());
 			myStmt.setInt(2, promocao.getId());
 			myStmt.executeUpdate();
@@ -128,7 +125,7 @@ public class PacoteClienteDAO {
 		}
 	}
 	
-	//por enquanto apenas muda o id_pacote_comercial do pacote_cliente. Será que deve poder mudar mais algo ?????
+	//por enquanto apenas muda o id_pacote_comercial do pacote_cliente. Serï¿½ que deve poder mudar mais algo ?????
 	public void editarPacoteCliente(PacoteCliente pacoteCliente) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
@@ -147,8 +144,8 @@ public class PacoteClienteDAO {
 		}
 	}
 	
-	//para apagar um pacote_cliente, vai ser necessario remover todas as promoçoes associadas a esse pacote.
-	// Vai ser tambem necessario remover o pacote do cliente que o detém. Só depois é possivel apagar o pacote cliente.
+	//para apagar um pacote_cliente, vai ser necessario remover todas as promoï¿½oes associadas a esse pacote.
+	// Vai ser tambem necessario remover o pacote do cliente que o detï¿½m. Sï¿½ depois ï¿½ possivel apagar o pacote cliente.
 	public void eliminarPacoteById(int id) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {

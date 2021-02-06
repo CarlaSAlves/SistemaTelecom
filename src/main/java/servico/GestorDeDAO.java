@@ -88,8 +88,8 @@ public class GestorDeDAO {
 		return funcionarioDAO.pesquisaFuncionarioAdmin(username);
 	}
 
-	public List<Funcionario> pesquisaFuncionarioOperador(String nif) throws Exception{
-		return funcionarioDAO.pesquisaFuncionarioOperador(nif);
+	public List<Funcionario> pesquisaFuncionarioOperador(int id ,String nif, String nome, int ativo) throws Exception{
+		return funcionarioDAO.pesquisaFuncionarioOperador(id, nif, nome, ativo);
 	}
 
 	public void criarPacoteComercial(PacoteComercial pacoteComercial) throws Exception {
@@ -109,8 +109,8 @@ public class GestorDeDAO {
 		return pacoteComercialDAO.getAllPacotesComerciais();    
 	}
 
-	public List<PacoteComercial> pesquisaPacoteComercial(int id)  throws Exception{
-		return pacoteComercialDAO.pesquisaPacoteComercial(id);
+	public List<PacoteComercial> pesquisaPacoteComercial(int id, String nome, int ativo)  throws Exception{
+		return pacoteComercialDAO.pesquisaPacoteComercial(id, nome, ativo);
 	}
 
 	public void criarPromocao(Promocao promocao) throws Exception {
@@ -129,8 +129,8 @@ public class GestorDeDAO {
 		return promocaoDAO.getAllPromocoes();
 	}
 
-	public List<Promocao> pesquisaPromocao(int id) throws Exception{
-		return promocaoDAO.pesquisaPromocao(id);
+	public List<Promocao> pesquisaPromocao(int id, String nome, int ativo) throws Exception{
+		return promocaoDAO.pesquisaPromocao(id, nome, ativo);
 	}
 
 

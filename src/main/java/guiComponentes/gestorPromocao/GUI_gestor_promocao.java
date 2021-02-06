@@ -21,6 +21,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import servico.GestorDeDAO;
+import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -41,7 +42,7 @@ public class GUI_gestor_promocao extends JFrame {
 	private JButton botaoEditarPromocao;
 	private int indices[];
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
-	private JTextField textFieldID;
+	private JTextField textPesquisaID;
 	private JTextField textFieldNome;
 
 
@@ -259,9 +260,9 @@ public class GUI_gestor_promocao extends JFrame {
 		panel_1.add(lblDeProcura, "2, 2, left, center");
 		lblDeProcura.setFont(new Font("Dialog", Font.PLAIN, 13));
 
-		textFieldID = new JTextField();
-		panel_1.add(textFieldID, "4, 2, fill, default");
-		textFieldID.setColumns(10);
+		textPesquisaID = new JTextField();
+		panel_1.add(textPesquisaID, "4, 2, fill, default");
+		textPesquisaID.setColumns(10);
 
 		JLabel lblNome = new JLabel("Nome");
 		panel_1.add(lblNome, "2, 4, left, center");
@@ -271,11 +272,10 @@ public class GUI_gestor_promocao extends JFrame {
 		panel_1.add(textFieldNome, "4, 4, fill, default");
 		textFieldNome.setColumns(10);
 
-		JCheckBox CheckBoxAtiva = new JCheckBox("Ativa");
-		CheckBoxAtiva.setSelected(true);
-		panel_1.add(CheckBoxAtiva, "4, 6, center, default");
-		CheckBoxAtiva.setFont(new Font("Dialog", Font.PLAIN, 13));
-		CheckBoxAtiva.setBackground(SystemColor.inactiveCaption);
+		JCheckBox checkBoxAtivo = new JCheckBox("Ativa");
+		panel_1.add(checkBoxAtivo, "4, 6, center, default");
+		checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
+		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
 
 
 		JButton botaoPesquisa = new JButton("Pesquisar");
@@ -290,14 +290,25 @@ public class GUI_gestor_promocao extends JFrame {
 		contentPane.add(lblUsernameLogged);
 		botaoPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				
 				try {
-					String id = textFieldID.getText();
+					int id = 0;
+					String nome = null;
+					int ativo = checkBoxAtivo.isSelected()? 1:0;
+					
+					if(!textPesquisaID.getText().isBlank()) {
+						id = Integer.parseInt(textPesquisaID.getText());
+					}
+
+					if(!textFieldNome.getText().isBlank()) {
+						nome = textFieldNome.getText();
+					}
+					
 					List<Promocao> Promocoes = null;
 
-					if (!id.isBlank()) {
-						int id2 = Integer.parseInt(textFieldID.getText());
-						Promocoes = GestorDeDAO.getGestorDeDAO().pesquisaPromocao(id2);
+					if ((id != 0) || (nome != null) || (ativo!=0) ) {
+					
+						Promocoes = GestorDeDAO.getGestorDeDAO().pesquisaPromocao(id, nome, ativo);
 					} else  {
 						Promocoes = GestorDeDAO.getGestorDeDAO().getAllPromocoes();
 					}
