@@ -55,8 +55,8 @@ public class GestorDeDAO {
 
 	}
 
-	public List<Cliente> pesquisaCliente(String nif) throws Exception{
-		return clienteDAO.pesquisaCliente(nif);
+	public List<Cliente> pesquisaCliente(int id, String nif, String nome, String morada, int ativo) throws Exception{
+		return clienteDAO.pesquisaCliente(id, nif, nome, morada, ativo);
 	}
 
 

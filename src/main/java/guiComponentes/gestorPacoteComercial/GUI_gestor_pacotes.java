@@ -41,7 +41,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	private JButton btVoltarGestorPacotes;
 	private JPanel contentPane;
 	private int numberRows;
-	private JLabel lblResultados;
+	private JLabel lblResultados, lblUsernameLogged;
 	private JButton botaoDesativarPacoteComercial;
 	private JButton botaoEditarPacoteComercial;
 	private int indices[];
@@ -308,6 +308,11 @@ public class GUI_gestor_pacotes extends JFrame {
 		JTextArea textAreaDescricao = new JTextArea();
 		textAreaDescricao.setBounds(938, 71, 470, 151);
 		contentPane.add(textAreaDescricao);
+		
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblUsernameLogged.setBounds(1252, 809, 159, 32);
+		contentPane.add(lblUsernameLogged);
 	}
 
 	public void refreshPacotesTable() {
@@ -333,6 +338,11 @@ public class GUI_gestor_pacotes extends JFrame {
 		this.btVoltarGestorPacotes = btnNewButtonVoltar2;
 	}
 
+	public void setUsernameLoggedIn(String username) {
+		lblUsernameLogged.setText("Logged in : " + username);
+
+	}
+	
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}

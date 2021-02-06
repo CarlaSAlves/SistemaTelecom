@@ -53,6 +53,7 @@ public class GUI_gestor_operador extends JFrame {
 	private JLabel lblNome;
 	private JCheckBox checkBoxAtivo;
 	private JButton botaoPesquisa;
+	private JLabel lblUsernameLogged;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -293,6 +294,11 @@ public class GUI_gestor_operador extends JFrame {
 		botaoPesquisa.setFont(new Font("Dialog", Font.PLAIN, 15));
 		botaoPesquisa.setBackground(SystemColor.activeCaption);
 		panelPesquisa.add(botaoPesquisa, "4, 12");
+		
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblUsernameLogged.setBounds(1252, 809, 159, 32);
+		contentPane.add(lblUsernameLogged);
 		botaoPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -344,6 +350,11 @@ public class GUI_gestor_operador extends JFrame {
 		this.btVoltarGestorOperador = botaoVoltar2;
 	}
 
+	public void setUsernameLoggedIn(String username) {
+		lblUsernameLogged.setText("Logged in : " + username);
+
+	}
+	
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}

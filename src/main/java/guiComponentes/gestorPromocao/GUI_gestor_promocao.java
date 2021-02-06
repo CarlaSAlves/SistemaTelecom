@@ -36,7 +36,7 @@ public class GUI_gestor_promocao extends JFrame {
 	private JTable table;
 	private JButton btVoltarGestorPromocao;
 	private int numberRows;
-	private JLabel lblResultados;
+	private JLabel lblResultados, lblUsernameLogged;
 	private JButton botaoDesativarPromocao;
 	private JButton botaoEditarPromocao;
 	private int indices[];
@@ -283,6 +283,11 @@ public class GUI_gestor_promocao extends JFrame {
 		botaoPesquisa.setBackground(SystemColor.activeCaption);
 		botaoPesquisa.setFont(new Font("Dialog", Font.PLAIN, 15));
 		botaoPesquisa.setFocusPainted(false);
+		
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblUsernameLogged.setBounds(1252, 809, 159, 32);
+		contentPane.add(lblUsernameLogged);
 		botaoPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -326,7 +331,12 @@ public class GUI_gestor_promocao extends JFrame {
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
+	
+	public void setUsernameLoggedIn(String username) {
+		lblUsernameLogged.setText("Logged in : " + username);
 
+	}
+	
 	public JButton getBtVoltarGestorPromocao() {
 		return btVoltarGestorPromocao;
 	}

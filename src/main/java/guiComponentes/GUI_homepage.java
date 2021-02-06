@@ -103,7 +103,7 @@ public class GUI_homepage extends JFrame {
 		
 		lblUsernameLogged = new JLabel();
 		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblUsernameLogged.setBounds(1211, 817, 263, 33);
+		lblUsernameLogged.setBounds(1252, 809, 159, 32);
 		panel.add(lblUsernameLogged);
 		
 				JLabel icon = new JLabel("");

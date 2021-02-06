@@ -35,7 +35,6 @@ public class GUI_total extends JFrame {
 	}
 
 	public GUI_total() {
-		int test;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1500, 900);
 		contentPane = new JPanel();
@@ -85,13 +84,12 @@ public class GUI_total extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				username = login.getUserText().getText();
-				gestor_cliente.setUsernameLoggedIn(username);
-				gestor_cliente.recebeUsernameDaPaginaLogin(username);
-				homepage.setUsernameLoggedIn(username);
+				labelUsernameNavegaPaginas(login, homepage, gestor_cliente, gestor_operador, gestor_pacotes,
+						gestor_promocao);
 				loginPanel.setVisible(false);
 				homepagePanel.setVisible(true);
 			}
+
 		});
 
 		homepage.getBtGerirClientes().addActionListener(new ActionListener() {
@@ -177,6 +175,18 @@ public class GUI_total extends JFrame {
 			}
 		});
 
+	}
+	
+	private void labelUsernameNavegaPaginas(GUI_login login, GUI_homepage homepage,
+			GUI_gestor_cliente gestor_cliente, GUI_gestor_operador gestor_operador,
+			GUI_gestor_pacotes gestor_pacotes, GUI_gestor_promocao gestor_promocao) {
+		username = login.getUserText().getText();
+		gestor_cliente.setUsernameLoggedIn(username);
+		gestor_operador.setUsernameLoggedIn(username);
+		gestor_pacotes.setUsernameLoggedIn(username);
+		gestor_promocao.setUsernameLoggedIn(username);
+		gestor_cliente.recebeUsernameDaPaginaLogin(username);
+		homepage.setUsernameLoggedIn(username);
 	}
 
 }

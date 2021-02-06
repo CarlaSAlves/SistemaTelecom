@@ -11,6 +11,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.StringJoiner;
+
 import historico.cliente.HistoricoCliente;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
@@ -57,18 +59,47 @@ public class ClienteDAO {
 		}
 	}
 
-	public List<Cliente> pesquisaCliente(String nif) throws Exception {
+	public List<Cliente> pesquisaCliente(int id, String nif, String nome, String morada, int ativo) throws Exception {
 		List<Cliente> list = new ArrayList<>();
-
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
+		StringJoiner sj = new StringJoiner (" AND ");
+		String query = "SELECT * FROM CLIENTE WHERE ";
 
 		try {
-			nif += "%";
+			List values = new ArrayList();
 
-			myStmt = myConn.prepareStatement("select * from cliente where nif like ?");
+			if(id!= 0){
+				sj.add("ID=?");
+				values.add(id);
+			}
+			if(nif != null) {
+				nif += "%";
+				sj.add("NIF LIKE ?");
+				values.add(nif);
+			}
+			if(nome != null) {
+				nome += "%";
+				sj.add("NOME LIKE ?");
+				values.add(nome);
+			}
+			if(morada != null) {
+				morada += "%";
+				sj.add("morada LIKE ?");
+				values.add(morada);
+			}
+			if(ativo!=0){
+				sj.add("ativo=?");
+				values.add(ativo);
+			}
 
-			myStmt.setString(1, nif);
+			query += sj.toString();
+
+			myStmt = myConn.prepareStatement(query);
+
+			for (int index = 0; index < values.size(); index++){
+				myStmt.setObject(index+1 , values.get(index));
+			}
 
 			myRs = myStmt.executeQuery();
 
@@ -78,11 +109,21 @@ public class ClienteDAO {
 			}
 
 			return list;
+		} catch(SQLException exp){
+			exp.printStackTrace();
+
+		}
+		catch(Exception e){
+			e.printStackTrace();
+
 		}
 		finally {
 			close(myStmt, myRs);
+
 		}
+		return list;
 	}
+
 
 	private Cliente pesquisaClienteAuxiliarNIF(String nif) throws Exception {
 		Cliente cliente = null;
@@ -116,7 +157,7 @@ public class ClienteDAO {
 		ResultSet myRs = null;
 
 		try {
-		
+
 			myStmt = myConn.prepareStatement("select * from cliente where id=?");
 
 			myStmt.setInt(1, id);
@@ -132,7 +173,7 @@ public class ClienteDAO {
 			close(myStmt, myRs);
 		}
 	}
-	
+
 	@SuppressWarnings("resource")
 	public void criarCliente(Cliente cliente, Funcionario funcionario) throws Exception {
 		PreparedStatement myStmt = null;
@@ -223,7 +264,7 @@ public class ClienteDAO {
 			myStmt.setString(4, "Desativar Cliente");	
 
 			myStmt.executeUpdate();
-			
+
 		}catch(Exception e) {
 
 		}finally {
