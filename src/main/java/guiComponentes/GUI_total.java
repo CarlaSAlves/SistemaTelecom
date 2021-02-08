@@ -15,7 +15,9 @@ import java.util.Calendar;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.UIManager.*;
 import guiComponentes.gestorCliente.GUI_gestor_cliente;
 import guiComponentes.gestorOperador.GUI_gestor_operador;
 import guiComponentes.gestorPacoteComercial.GUI_gestor_pacotes;
@@ -27,7 +29,7 @@ public class GUI_total extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private String username;
+	private static String username;
 	private Instant inicio;
 	private GUI_gestor_cliente gestor_cliente;
 	private GUI_homepage homepage;
@@ -37,12 +39,19 @@ public class GUI_total extends JFrame {
 	private Duration temporizador;
 	private String dataEHoraDeLog;
 	private SimpleDateFormat dateFormat ;
-int test;
+
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					GUI_total frame = new GUI_total();
+					for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				        if ("Nimbus".equals(info.getName())) {
+				            UIManager.setLookAndFeel(info.getClassName());
+				            break;
+				        }
+					}
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,11 +60,33 @@ int test;
 		});
 	}
 
+	
+
+	
+	
 	public GUI_total() {
+		
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+	        if ("Nimbus".equals(info.getName())) {
+	            try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+	            break;
+	        }
+		}
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 30, 1400, 800);
+		setBounds(100, 30, 1500, 900);
 		contentPane = new JPanel();
-		//setResizable(false);
+		setResizable(false);
 		setContentPane(contentPane);
 		setLayout(null);
 
@@ -66,19 +97,18 @@ int test;
 		gestor_pacotes = new GUI_gestor_pacotes();
 		gestor_promocao = new GUI_gestor_promocao();
 
-
 		JPanel loginPanel = login.returnPanel();
-		loginPanel.setBounds(0, 0, 1400, 800);
+		loginPanel.setBounds(0, 0, 1500, 900);
 		getContentPane().add(loginPanel);
 
 		JPanel homepagePanel = homepage.returnPanel();
 		homepagePanel.setVisible(false);
-		homepagePanel.setBounds(0, 0, 1400, 800);
+		homepagePanel.setBounds(0, 0, 1500, 900);
 		getContentPane().add(homepagePanel);
 
 		JPanel gestor_clientePanel = gestor_cliente.returnPanel();
 		gestor_clientePanel.setVisible(false);
-		gestor_clientePanel.setBounds(0, 0, 1400, 800);
+		gestor_clientePanel.setBounds(0, 0, 1500, 900);
 		getContentPane().add(gestor_clientePanel);
 
 		JPanel gestor_operadorPanel = gestor_operador.returnPanel();
@@ -106,6 +136,7 @@ int test;
 
 			}
 		});
+
 		login.getBtLogin().addActionListener(new ActionListener() {
 
 			@Override
@@ -138,17 +169,17 @@ int test;
 			}
 		});
 
-		
+
 		homepage.getBtGerirPromocoes().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {				
 				homepagePanel.setVisible(false);				
 				gestor_promocaoPanel.setVisible(true);
-				
+
 			}
 		});
-		
+
 		homepage.getBtGerirPacotes().addActionListener(new ActionListener() {
 
 			@Override
@@ -167,6 +198,7 @@ int test;
 				homepagePanel.setVisible(false);
 			}
 		});
+
 		gestor_cliente.btVoltarGestorCliente().addActionListener(new ActionListener() {
 
 			@Override
@@ -192,11 +224,11 @@ int test;
 			public void actionPerformed(ActionEvent e) {
 				homepagePanel.setVisible(true);
 				gestor_pacotesPanel.setVisible(false);
-				
+
 				System.out.println("Teste botão voltar !!!!");
 			}
 		});
-		
+
 
 		gestor_promocao.getBtVoltarGestorPromocao().addActionListener(new ActionListener() {
 
@@ -217,19 +249,18 @@ int test;
 		gestor_operador.setUsernameLoggedIn(username);
 		gestor_pacotes.setUsernameLoggedIn(username);
 		gestor_promocao.setUsernameLoggedIn(username);
-		gestor_cliente.recebeUsernameDaPaginaLogin(username);
 		homepage.setUsernameLoggedIn(username);
 	}
 
 
 	private void comecarTemporizador(){
-		
+
 		long data1 = System.currentTimeMillis();
 		Calendar cal2 = Calendar.getInstance();
 		cal2.setTimeInMillis(data1);
 		dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		dataEHoraDeLog = dateFormat.format(cal2.getTime());
-		
+
 		Thread t = new Thread(){
 			public void run(){
 				while (true) {
@@ -242,7 +273,7 @@ int test;
 					dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 					String dataEHora = dateFormat.format(cal1.getTime());
 
-					
+
 
 					homepage.setLblTempoSessao(temporizador);
 					homepage.setLblHoraSistema(dataEHora);
@@ -282,6 +313,10 @@ int test;
 		}	 catch (IOException e) {
 			e.printStackTrace();
 		}	
+	}
+
+	public static String getUsername() {
+		return username;
 	}
 }
 

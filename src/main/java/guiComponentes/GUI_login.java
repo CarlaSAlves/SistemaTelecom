@@ -16,6 +16,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import data_acess_object_dao_v2.PasswordEncryption;
 import servico.GestorDeDAO;
@@ -29,9 +32,9 @@ public class GUI_login extends JFrame {
 	private JTextField textFieldUser;
 	private JButton btLogin, btnSair;
 	private JLabel labelPass;
+	private JLabel icon;
 	private JPanel panel;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 20);
-	private JLabel lblNewLabel_1;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -47,136 +50,152 @@ public class GUI_login extends JFrame {
 	}
 
 	public GUI_login() {
+		
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+	        if ("Nimbus".equals(info.getName())) {
+	            try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+	            break;
+	        }
+		}
 
 		panel = new JPanel();
 		setContentPane(panel);
 		panel.setLayout(null);
-		getContentPane().setBackground(SystemColor.text);
+		getContentPane().setBackground(SystemColor.inactiveCaption);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 30, 1400, 800);
+		setBounds(100, 30, 1500, 900);
 		getContentPane().setLayout(null);
 		
 		btnSair = new JButton("Sair");
 		btnSair.setToolTipText("Carregue para fazer signout");
 		btnSair.setForeground(Color.BLACK);
-		btnSair.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		btnSair.setFont(new Font("Dubai Light", Font.PLAIN, 20));
 		btnSair.setFocusPainted(false);
 		btnSair.setBackground(SystemColor.menu);
-		btnSair.setBounds(375, 520, 104, 33);
+		btnSair.setBounds(749, 522, 104, 33);
 		panel.add(btnSair);
 
 		JLabel labelLogin = new JLabel("Username");
-		labelLogin.setBounds(209, 383, 131, 27);
+		labelLogin.setBounds(553, 382, 131, 27);
 		labelLogin.setForeground(Color.WHITE);
-		labelLogin.setFont(new Font("SansSerif", Font.BOLD, 20));
+		labelLogin.setFont(font);
 		getContentPane().add(labelLogin);
 
 		labelPass = new JLabel("Password");
-		labelPass.setBounds(209, 430, 138, 27);
+		labelPass.setBounds(553, 429, 138, 27);
 		labelPass.setForeground(Color.WHITE);
-		labelPass.setFont(new Font("SansSerif", Font.BOLD, 20));
+		labelPass.setFont(font);
 		getContentPane().add(labelPass);
 
 		JPasswordField passwordField = new JPasswordField();
-		passwordField.setBounds(329, 430, 193, 27);
+		passwordField.setBounds(700, 428, 193, 27);
 		passwordField.setFont(font);
 		getContentPane().add(passwordField);
 
 		textFieldUser = new JTextField();
-		textFieldUser.setBounds(329, 383, 193, 27);
+		textFieldUser.setBounds(700, 380, 193, 27);
 		textFieldUser.setFont(font);
 		getContentPane().add(textFieldUser);
 		textFieldUser.setColumns(10);
 
 		JLabel labelConfm = new JLabel("User ou Password incorreta");
-		labelConfm.setBounds(359, 578, 251, 18);
-		labelConfm.setForeground(new Color(70,74,101));
-		labelConfm.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		
+		labelConfm.setBounds(674, 575, 410, 18);
+		labelConfm.setForeground(new Color(255, 0, 0));
+		labelConfm.setFont(font);
 		
 		//labelConfirm devia estar escondida de origem, n�o ?
 		labelConfm.setVisible(false);
 		getContentPane().add(labelConfm);
 
 		btLogin = new JButton("Login");
-		btLogin.setBounds(375, 476, 104, 33);
+		btLogin.setBounds(749, 478, 104, 33);
 		btLogin.setForeground(SystemColor.desktop);
 		btLogin.setBackground(new Color(240, 240, 240));
 		btLogin.setToolTipText("Carregue para fazer login");
 		btLogin.setFocusPainted(false);
-		btLogin.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		btLogin.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//login vai usar metodos e entidades que estao nos dao do package V2
-				//primeiro vamos ver se o utilizador � um cliente
-				String login = textFieldUser.getText();
-				String pass = passwordField.getSelectedText();
-				
-				if(login.isBlank() || pass.isBlank()) {
-					JOptionPane.showMessageDialog(null, "Campos não podem estar vazios.");
-					return;
-				}
-				
-				//verifica se é um cliente (entidade cliente vem da package standard_value_objects_v2)
-				//searchClienteByLoginPass vem dos dao V2
-				Cliente cliente = GestorDeDAO.getGestorDeDAO().searchClienteByLoginPass( login, PasswordEncryption.get_SHA_512_SecurePassword(pass) );
-				if( cliente != null) {
-					//linha para abrir a janela do cliente (de preferencia essa janela recebe um cliente no construtor, assim podemos passar a info sobre o cliente atualmente logado)
-					//TODO: abrir Janela da area cliente e passar o cliente que loga no seu construtor
-					
-					//fecha o menu login
-					GUI_login.this.setVisible(false);
-					GUI_login.this.dispose();
-					return;
-				}
-				
-				//se nao � cliente, � funcion�rio (entidade funcionario vem da package standard_value_objects_v2)
-				//searchFuncionarioByLoginPass vem dos dao V2
-				Funcionario funcionario = GestorDeDAO.getGestorDeDAO().searchFuncionarioByLoginPass( login, PasswordEncryption.get_SHA_512_SecurePassword(pass) );
-				if( funcionario != null) {
-					//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
-					//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
-					
-					//TODO: arranjar algo melhor que um switch case para tratar da abertura da janela correspondente. Tenho que perceber mais sobre patterns
-					switch(funcionario.getId_role()) {
-						//role 1 = admin
-						case(1):
-							//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
-							//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
-							
-							GUI_login.this.setVisible(false);
-							GUI_login.this.dispose();
-							return;
-						//role 2 = operador	
-						case(2):
-							//linha para abrir a janela do operador (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o operador atualmente logado)
-							//TODO: abrir Janela da area operador e passar o operador que loga no seu construtor
-							
-							GUI_login.this.setVisible(false);
-							GUI_login.this.dispose();
-							return;
-					}
-				}
-				labelConfm.setVisible(true);
-			}
-		});
+		btLogin.setFont(font);
+//		//btLogin.addActionListener(new ActionListener() {
+//			//@Override
+//			//public void actionPerformed(ActionEvent e) {
+//				//login vai usar metodos e entidades que estao nos dao do package V2
+//				//primeiro vamos ver se o utilizador � um cliente
+//				//String login = textFieldUser.getText();
+//				//String pass = passwordField.getSelectedText();
+//				
+//				//if(login.isBlank() || pass.isBlank()) {
+//				//	JOptionPane.showMessageDialog(null, "Campos n�o podem estar vazios.");
+//				//	return;
+//				//}
+//				//
+//				//verifica se � um cliente (entidade cliente vem da package standard_value_objects_v2)
+//				//searchClienteByLoginPass vem dos dao V2
+//				//Cliente cliente = GestorDeDAO.getGestorDeDAO().searchClienteByLoginPass( login, PasswordEncryption.get_SHA_512_SecurePassword(pass) );
+//				//if( cliente != null) {
+//					//linha para abrir a janela do cliente (de preferencia essa janela recebe um cliente no construtor, assim podemos passar a info sobre o cliente atualmente logado)
+//					//TODO: abrir Janela da area cliente e passar o cliente que loga no seu construtor
+//					//
+//					//fecha o menu login
+//					//GUI_login.this.setVisible(false);
+//					//GUI_login.this.dispose();
+//					//return;
+//			//	}
+//				//
+//				//se nao � cliente, � funcion�rio (entidade funcionario vem da package standard_value_objects_v2)
+//				//searchFuncionarioByLoginPass vem dos dao V2
+//				//Funcionario funcionario = GestorDeDAO.getGestorDeDAO().searchFuncionarioByLoginPass( login, PasswordEncryption.get_SHA_512_SecurePassword(pass) );
+//				//if( funcionario != null) {
+//					//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
+//					//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
+//					
+//					//TODO: arranjar algo melhor que um switch case para tratar da abertura da janela correspondente. Tenho que perceber mais sobre patterns
+//				//	switch(funcionario.getId_role()) {
+//						//role 1 = admin
+//					//	case(1):
+//							//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
+//							//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
+//							//
+//							//GUI_login.this.setVisible(false);
+//							//GUI_login.this.dispose();
+//							//return;
+//						//role 2 = operador	
+//					//	case(2):
+//							//linha para abrir a janela do operador (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o operador atualmente logado)
+//							//TODO: abrir Janela da area operador e passar o operador que loga no seu construtor
+//							//
+//							//GUI_login.this.setVisible(false);
+//							//GUI_login.this.dispose();
+//							//return;
+//					//}
+//				//}
+//				//labelConfm.setVisible(true);
+//			//}
+//		//});
 		getContentPane().add(btLogin);
 
 		JLabel lblFooter = new JLabel();
-		lblFooter.setBounds(621, 674, 320, 87);
-		lblFooter.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/Altran1.1.png")));
+		lblFooter.setBounds(630, 727, 327, 123);
+		lblFooter.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/Altran4.png")));
 		getContentPane().add(lblFooter);
 				
 				JLabel lblNewLabel = new JLabel();
-				lblNewLabel.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/user.png")));
-				lblNewLabel.setBounds(302, 73, 238, 298);
+				lblNewLabel.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/user5.png")));
+				lblNewLabel.setBounds(663, 24, 230, 304);
 				panel.add(lblNewLabel);
 				
-				lblNewLabel_1 = new JLabel("New label");
-				lblNewLabel_1.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/1-3_what-we-do_1600.png")));
-				lblNewLabel_1.setBounds(0, 0, 1484, 717);
-				panel.add(lblNewLabel_1);
+						icon = new JLabel();
+						icon.setBounds(-17, -61, 1501, 922);
+						icon.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/black.png")));
+						getContentPane().add(icon);
 	}
 
 	public JButton getBtLogin() {

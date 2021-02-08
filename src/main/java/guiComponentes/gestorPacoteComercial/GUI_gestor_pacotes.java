@@ -24,6 +24,8 @@ import javax.swing.table.DefaultTableModel;
 import servico.GestorDeDAO;
 
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.JTextArea;
@@ -49,7 +51,6 @@ public class GUI_gestor_pacotes extends JFrame {
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JTextField textPesquisaID;
 	private JTextField textFieldNome;
-	private JPanel panelUserESessao;
 	private JLabel lblTempoSessao;
 	private JLabel lblHoraSistema;
 
@@ -69,219 +70,136 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 
 	public GUI_gestor_pacotes() {
+		
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+	        if ("Nimbus".equals(info.getName())) {
+	            try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+	            break;
+	        }
+		}
 
-		contentPane = new JPanel();
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		setTitle("Pesquisa de Pacotes Comerciais");
-		setFont(font);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 30, 1400, 800);
-		contentPane.setBackground(SystemColor.inactiveCaption);
+		contentPaneSetup();
 
-		JButton botaoCriarPacotes = new JButton("Criar Pacote Comercial");
-		botaoCriarPacotes.setBounds(697, 179, 231, 43);
-		botaoCriarPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoCriarPacotes.setBackground(SystemColor.activeCaption);
-		botaoCriarPacotes.setFocusPainted(false);
-		botaoCriarPacotes.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent arg0) {
-				CriarPacotesDialog dialog = new CriarPacotesDialog(GUI_gestor_pacotes.this);
-				dialog.setVisible(true);
-			}
-		});
+		JButton botaoCriarPacotes = botaoCriarPacotesSetup();
 		getContentPane().add(botaoCriarPacotes);
 
-		JPanel panel = new JPanel();
-		panel.setBackground(SystemColor.inactiveCaption);
-		panel.setBounds(66, 296, 1366, 499);
-		panel.setFont(font);
+		JPanel panel = panelSetup();
 		getContentPane().add(panel);
-		panel.setLayout(null);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 33, 1332, 660);
+		JScrollPane scrollPane = scrollPaneSetup();
 		panel.add(scrollPane);
 
-		table = new JTable();
-		table.setRowSelectionAllowed(true);
-		table.setColumnSelectionAllowed(false);
-		table.setFillsViewportHeight(true);
-		table.setModel(new DefaultTableModel(new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
-		table.setForeground(SystemColor.desktop);
-		table.setBackground(UIManager.getColor("CheckBox.light"));
-		table.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		table.setRowHeight(20);
-
-
+		tableSetup();
 		scrollPane.setViewportView(table);
 
 
-		lblResultados = new JLabel("Resultados: ");
-		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-		lblResultados.setBounds(10, 4, 136, 25);
+		lblResultadosSetup();
 		panel.add(lblResultados);
 
-		botaoEditarPacoteComercial = new JButton("Editar Pacote Comercial");
-		botaoEditarPacoteComercial.setBounds(697, 125, 231, 43);
-		botaoEditarPacoteComercial.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoEditarPacoteComercial.setBackground(SystemColor.activeCaption);
-		botaoEditarPacoteComercial.setFocusPainted(false);
-		botaoEditarPacoteComercial.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				int row = table.getSelectedRow();
-
-				if (row < 0) {
-					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
-							"Por favor selecione um Pacote Comercial", "Error", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-
-				PacoteComercial pacoteComercialTemp = (PacoteComercial) table.getValueAt(row, PacoteComercialPesquisaModelTable.OBJECT_COL);
-
-				CriarPacotesDialog dialog = new CriarPacotesDialog(GUI_gestor_pacotes.this, pacoteComercialTemp, true);
-
-				dialog.setVisible(true);
-			}
-		});
+		botaoEditarPacoteComercialSetup();
 		getContentPane().add(botaoEditarPacoteComercial);
 
-		botaoDesativarPacoteComercial = new JButton("Desativar Pacote Comercial");
-		botaoDesativarPacoteComercial.setBounds(697, 71, 231, 43);
-		botaoDesativarPacoteComercial.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoDesativarPacoteComercial.setBackground(SystemColor.activeCaption);
-		botaoDesativarPacoteComercial.setFocusPainted(false);
-		botaoDesativarPacoteComercial.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					indices = table.getSelectedRows();
-
-					if (indices.length < 0) {
-						JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
-								"Por favor selecione um Pacote", "Error",
-								JOptionPane.ERROR_MESSAGE);
-						return;
-					}
-					int resposta = JOptionPane.showConfirmDialog(GUI_gestor_pacotes.this,
-							"Desativar este Pacote?", "Confirmar Desativar",
-							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-
-					if (resposta != JOptionPane.YES_OPTION) {
-						return;
-					}
-
-					for(int i = 0; i < indices.length; i++) {
-						PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indices[i], PacoteComercialPesquisaModelTable.OBJECT_COL);
-						GestorDeDAO.getGestorDeDAO().desativarPacoteComercial(pacoteTemp.getId());
-
-					}
-					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
-							"Pacotes Desativado com sucesso", "Pacote Desativado",
-							JOptionPane.INFORMATION_MESSAGE);
-
-					refreshPacotesTable();
-				} catch (Exception e1) {
-
-				}
-			}
-
-		});
+		botaoDesativarPacoteComercialSetup();
 		getContentPane().add(botaoDesativarPacoteComercial);
 
-		btVoltarGestorPacotes = new JButton("Voltar");
-		btVoltarGestorPacotes.setBounds(76, 806, 119, 32);
-		btVoltarGestorPacotes.setFont(font);
-		btVoltarGestorPacotes.setBackground(SystemColor.activeCaption);
-		btVoltarGestorPacotes.setFocusPainted(false);
+		btVoltarGestorPacotesSetup();
 		getContentPane().add(btVoltarGestorPacotes);
 
-		JLabel lbFooter = new JLabel("");
-		lbFooter.setIcon(new ImageIcon(GUI_gestor_pacotes.class.getResource("/guiComponentes/img/footer2.png")));
-		lbFooter.setBounds(599, 802, 367, 59);
+		JLabel lbFooter = lbFooterSetup();
 		contentPane.add(lbFooter);
-		btVoltarGestorPacotes.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-
-
-			}
-		});
-
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				if (table.getSelectedRowCount()>1) {
-					botaoEditarPacoteComercial.setEnabled(false);
-					botaoDesativarPacoteComercial.setEnabled(true);
-				}
-				else if (table.getSelectedRows().length==1) {
-					botaoEditarPacoteComercial.setEnabled(true);
-					botaoDesativarPacoteComercial.setEnabled(true);
-				}
-				else if (table.getSelectedRowCount()==0)
-				{
-					botaoEditarPacoteComercial.setEnabled(false);
-					botaoDesativarPacoteComercial.setEnabled(false);
-				}
-			}
-		});
-
-		botaoEditarPacoteComercial.setEnabled(false);
-		botaoDesativarPacoteComercial.setEnabled(false);
 		
-		JLabel lblCamposPesquisas = new JLabel("Campos Pesquisa");
-		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-		lblCamposPesquisas.setBounds(66, 32, 294, 26);
+		JLabel lblCamposPesquisas = lblCamposPesquisasSetup();
 		contentPane.add(lblCamposPesquisas);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(SystemColor.inactiveCaption);
-		panel_1.setBounds(66, 69, 420, 172);
+		JPanel panel_1 = panel_1Setup();
+		panel_1ContentSetup(panel_1);
 		contentPane.add(panel_1);
-		panel_1.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblNewLabelID = new JLabel("ID");
-		lblNewLabelID.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		JTextArea textAreaDescricao = textAreaDescricao();
+		contentPane.add(textAreaDescricao);
+		
+		panelUserESessaoSetup();
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setBounds(1297, 805, 159, 16);
+		contentPane.add(lblUsernameLogged);
+		lblUsernameLogged.setText("Username:");
+		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblTempoSessao = new JLabel();
+		lblTempoSessao.setBounds(1297, 820, 159, 15);
+		contentPane.add(lblTempoSessao);
+		lblTempoSessao.setText("Sessão:");
+		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblHoraSistema = new JLabel();
+		lblHoraSistema.setBounds(1297, 835, 159, 16);
+		contentPane.add(lblHoraSistema);
+		lblHoraSistema.setText("Data:");
+		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 13));
+
+		panelUserESessaoContentSetup();
+		
+	}
+
+	private void panel_1ContentSetup(JPanel panel_1) {
+		JLabel lblNewLabelID = lblNewLabelIDSetup();
 		panel_1.add(lblNewLabelID, "2, 2, left, default");
 		
-		textPesquisaID = new JTextField();
+		textPesquisaIDSetup();
 		panel_1.add(textPesquisaID, "4, 2, fill, default");
-		textPesquisaID.setColumns(10);
 		
-		JLabel lblNewLabelNome = new JLabel("Nome");
-		lblNewLabelNome.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		JLabel lblNewLabelNome = lblNewLabelNomeSetup();
 		panel_1.add(lblNewLabelNome, "2, 4, right, default");
 		
-		textFieldNome = new JTextField();
+		textFieldNomeSetup();
 		panel_1.add(textFieldNome, "4, 4, fill, default");
-		textFieldNome.setColumns(10);
 		
-		JCheckBox checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
-		checkBoxAtivo.setForeground(SystemColor.desktop);
-		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		JCheckBox checkBoxAtivo = checkBoxAtivoSetup();
 		panel_1.add(checkBoxAtivo, "4, 6, center, default");
 		
+		JButton btnNewButtonPesquisar = btnNewButtonPesquisarSetup(checkBoxAtivo);
+		panel_1.add(btnNewButtonPesquisar, "4, 8");
+	}
+
+	private void panelUserESessaoContentSetup() {
+		lblUsernameLoggedSetup();
+
+		lblTempoSessaoSetup();
+
+		lblHoraSistemaSetup();
+	}
+
+	private void lblHoraSistemaSetup() {
+	}
+
+	private void lblTempoSessaoSetup() {
+	}
+
+	private void lblUsernameLoggedSetup() {
+	}
+
+	private void panelUserESessaoSetup() {
+	}
+
+	private JTextArea textAreaDescricao() {
+		JTextArea textAreaDescricao = new JTextArea();
+		textAreaDescricao.setBounds(938, 71, 470, 151);
+		return textAreaDescricao;
+	}
+
+	private JButton btnNewButtonPesquisarSetup(JCheckBox checkBoxAtivo) {
 		JButton btnNewButtonPesquisar = new JButton("Pesquisar");
 		btnNewButtonPesquisar.setBackground(SystemColor.activeCaption);
 		btnNewButtonPesquisar.setFont(new Font("Dubai Light", Font.PLAIN, 14));
-		panel_1.add(btnNewButtonPesquisar, "4, 8");
+		
 		btnNewButtonPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -317,36 +235,229 @@ public class GUI_gestor_pacotes extends JFrame {
 
 			}
 		});
+		return btnNewButtonPesquisar;
+	}
 
+	private JCheckBox checkBoxAtivoSetup() {
+		JCheckBox checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
+		checkBoxAtivo.setForeground(SystemColor.desktop);
+		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		return checkBoxAtivo;
+	}
+
+	private void textFieldNomeSetup() {
+		textFieldNome = new JTextField();
+		textFieldNome.setColumns(10);
+	}
+
+	private JLabel lblNewLabelNomeSetup() {
+		JLabel lblNewLabelNome = new JLabel("Nome");
+		lblNewLabelNome.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		return lblNewLabelNome;
+	}
+
+	private void textPesquisaIDSetup() {
+		textPesquisaID = new JTextField();
+		textPesquisaID.setColumns(10);
+	}
+
+	private JLabel lblNewLabelIDSetup() {
+		JLabel lblNewLabelID = new JLabel("ID");
+		lblNewLabelID.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		return lblNewLabelID;
+	}
+
+	private JLabel lblCamposPesquisasSetup() {
+		JLabel lblCamposPesquisas = new JLabel("Campos Pesquisa");
+		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
+		lblCamposPesquisas.setBounds(66, 32, 294, 26);
+		return lblCamposPesquisas;
+	}
+
+	private JPanel panel_1Setup() {
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(SystemColor.inactiveCaption);
+		panel_1.setBounds(66, 69, 420, 172);
 		
-		JTextArea textAreaDescricao = new JTextArea();
-		textAreaDescricao.setBounds(938, 71, 470, 151);
-		contentPane.add(textAreaDescricao);
-		
-		panelUserESessao = new JPanel();
-		panelUserESessao.setBackground(SystemColor.inactiveCaption);
-		panelUserESessao.setBounds(1242, 11, 232, 59);
-		contentPane.add(panelUserESessao);
-		panelUserESessao.setLayout(null);
+		panel_1.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		return panel_1;
+	}
 
-		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setBounds(0, 0, 159, 16);
-		panelUserESessao.add(lblUsernameLogged);
-		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+	private JLabel lbFooterSetup() {
+		JLabel lbFooter = new JLabel("");
+		lbFooter.setIcon(new ImageIcon(GUI_gestor_pacotes.class.getResource("/guiComponentes/img/footer2.png")));
+		lbFooter.setBounds(599, 802, 367, 59);
+		return lbFooter;
+	}
 
-		lblTempoSessao = new JLabel();
-		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setBounds(0, 15, 159, 15);
-		panelUserESessao.add(lblTempoSessao);
-		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+	private void btVoltarGestorPacotesSetup() {
+		btVoltarGestorPacotes = new JButton("Voltar");
+		btVoltarGestorPacotes.setBounds(76, 806, 119, 32);
+		btVoltarGestorPacotes.setFont(font);
+		btVoltarGestorPacotes.setBackground(SystemColor.activeCaption);
+		btVoltarGestorPacotes.setFocusPainted(false);
+	}
 
-		lblHoraSistema = new JLabel();
-		lblHoraSistema.setBounds(0, 32, 159, 16);
-		panelUserESessao.add(lblHoraSistema);
-		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		
+	private void botaoDesativarPacoteComercialSetup() {
+		botaoDesativarPacoteComercial = new JButton("Desativar Pacote Comercial");
+		botaoDesativarPacoteComercial.setBounds(697, 71, 231, 43);
+		botaoDesativarPacoteComercial.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		botaoDesativarPacoteComercial.setBackground(SystemColor.activeCaption);
+		botaoDesativarPacoteComercial.setFocusPainted(false);
+		botaoDesativarPacoteComercial.setEnabled(false);
+		botaoDesativarPacoteComercial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					indices = table.getSelectedRows();
+
+					if (indices.length < 0) {
+						JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
+								"Por favor selecione um Pacote", "Error",
+								JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					int resposta = JOptionPane.showConfirmDialog(GUI_gestor_pacotes.this,
+							"Desativar este Pacote?", "Confirmar Desativar",
+							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+					if (resposta != JOptionPane.YES_OPTION) {
+						return;
+					}
+
+					for(int i = 0; i < indices.length; i++) {
+						PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indices[i], PacoteComercialPesquisaModelTable.OBJECT_COL);
+						GestorDeDAO.getGestorDeDAO().desativarPacoteComercial(pacoteTemp.getId());
+
+					}
+					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
+							"Pacotes Desativado com sucesso", "Pacote Desativado",
+							JOptionPane.INFORMATION_MESSAGE);
+
+					refreshPacotesTable();
+				} catch (Exception e1) {
+
+				}
+			}
+
+		});
+	}
+
+	private void botaoEditarPacoteComercialSetup() {
+		botaoEditarPacoteComercial = new JButton("Editar Pacote Comercial");
+		botaoEditarPacoteComercial.setBounds(697, 125, 231, 43);
+		botaoEditarPacoteComercial.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		botaoEditarPacoteComercial.setBackground(SystemColor.activeCaption);
+		botaoEditarPacoteComercial.setFocusPainted(false);
+		botaoEditarPacoteComercial.setEnabled(false);
+		botaoEditarPacoteComercial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				int row = table.getSelectedRow();
+
+				if (row < 0) {
+					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
+							"Por favor selecione um Pacote Comercial", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				PacoteComercial pacoteComercialTemp = (PacoteComercial) table.getValueAt(row, PacoteComercialPesquisaModelTable.OBJECT_COL);
+
+				CriarPacotesDialog dialog = new CriarPacotesDialog(GUI_gestor_pacotes.this, pacoteComercialTemp, true);
+
+				dialog.setVisible(true);
+			}
+		});
+	}
+
+	private void lblResultadosSetup() {
+		lblResultados = new JLabel("Resultados: ");
+		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		lblResultados.setBounds(10, 4, 136, 25);
+	}
+
+	private void tableSetup() {
+		table = new JTable();
+		table.setRowSelectionAllowed(true);
+		table.setColumnSelectionAllowed(false);
+		table.setFillsViewportHeight(true);
+		table.setModel(new DefaultTableModel(new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
+		table.setForeground(SystemColor.desktop);
+		table.setBackground(UIManager.getColor("CheckBox.light"));
+		table.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		table.setRowHeight(20);
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if (table.getSelectedRowCount()>1) {
+					botaoEditarPacoteComercial.setEnabled(false);
+					botaoDesativarPacoteComercial.setEnabled(true);
+				}
+				else if (table.getSelectedRows().length==1) {
+					botaoEditarPacoteComercial.setEnabled(true);
+					botaoDesativarPacoteComercial.setEnabled(true);
+				}
+				else if (table.getSelectedRowCount()==0)
+				{
+					botaoEditarPacoteComercial.setEnabled(false);
+					botaoDesativarPacoteComercial.setEnabled(false);
+				}
+			}
+		});
+	}
+
+	private JScrollPane scrollPaneSetup() {
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 33, 1332, 660);
+		return scrollPane;
+	}
+
+	private JPanel panelSetup() {
+		JPanel panel = new JPanel();
+		panel.setBackground(SystemColor.inactiveCaption);
+		panel.setBounds(66, 296, 1366, 499);
+		panel.setFont(font);
+		panel.setLayout(null);
+		return panel;
+	}
+
+	private JButton botaoCriarPacotesSetup() {
+		JButton botaoCriarPacotes = new JButton("Criar Pacote Comercial");
+		botaoCriarPacotes.setBounds(697, 179, 231, 43);
+		botaoCriarPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		botaoCriarPacotes.setBackground(SystemColor.activeCaption);
+		botaoCriarPacotes.setFocusPainted(false);
+		botaoCriarPacotes.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+				CriarPacotesDialog dialog = new CriarPacotesDialog(GUI_gestor_pacotes.this);
+				dialog.setVisible(true);
+			}
+		});
+		return botaoCriarPacotes;
+	}
+
+	private void contentPaneSetup() {
+		contentPane = new JPanel();
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setTitle("Pesquisa de Pacotes Comerciais");
+		setFont(font);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 30, 1500, 900);
+		contentPane.setBackground(SystemColor.inactiveCaption);
 	}
 
 	public void refreshPacotesTable() {
@@ -378,7 +489,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 	
 	public void setLblTempoSessao(Duration temporizador) {
-		lblTempoSessao.setText("Sessão: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
+		lblTempoSessao.setText("Sessao: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
 	}
 
 	public void setLblHoraSistema(String agora) {
