@@ -66,7 +66,6 @@ public class GUI_gestor_cliente extends JFrame {
 	private JLabel lblTempoSessao;
 	private JLabel lblHoraSistema;
 	private JPanel panelUserESessao;
-	int test2;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
