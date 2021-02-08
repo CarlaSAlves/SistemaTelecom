@@ -76,7 +76,7 @@ public class CriarOperadorDialog extends JDialog {
 		textFieldNome.setText(funcionarioTemp.getNome()+ "");
 		textFieldNIF.setText(funcionarioTemp.getNif() + "");
 		textFieldLogin.setText(funcionarioTemp.getLogin());
-		textFieldPassword.setText(funcionarioTemp.getPassword().substring(0,8));
+		textFieldPassword.setText(funcionarioTemp.getPassword()); //.substring(0,8)
 		checkBoxAtivo.setSelected(funcionarioTemp.isAtivo());
 
 	}

@@ -79,7 +79,7 @@ public class CriarClienteDialog extends JDialog {
 		textFieldNIF.setText(clienteAntigo2.getNif() + "");
 		textFieldMorada.setText(clienteAntigo2.getMorada());
 		textFieldLogin.setText(clienteAntigo2.getLogin());
-		textFieldPassword.setText(clienteAntigo2.getPassword().substring(0,8));
+		textFieldPassword.setText(clienteAntigo2.getPassword()); // .substring(0,8)
 		textFieldPacote.setText(clienteAntigo2.getId_pacote_cliente()+ "");
 		checkBoxAtivo.setSelected(clienteAntigo2.isAtivo());
 
@@ -227,6 +227,7 @@ public class CriarClienteDialog extends JDialog {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void gravarCliente() {
 		String nome = textFieldNome.getText();
 		int nif = Integer.parseInt(textFieldNIF.getText());

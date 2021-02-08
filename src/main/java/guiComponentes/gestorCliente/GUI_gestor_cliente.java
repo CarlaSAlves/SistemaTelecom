@@ -65,7 +65,6 @@ public class GUI_gestor_cliente extends JFrame {
 	private JButton botaoPesquisa;
 	private JLabel lblTempoSessao;
 	private JLabel lblHoraSistema;
-	private JPanel panelUserESessao;
 
 
 
@@ -126,7 +125,21 @@ public class GUI_gestor_cliente extends JFrame {
 
 		panelUserESessaoSetup();
 		panelUserESessaoContentSetup();
-		contentPane.add(panelUserESessao);
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setBounds(1297, 805, 159, 16);
+		contentPane.add(lblUsernameLogged);
+		lblUsernameLogged.setText("Username:");
+		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblTempoSessao = new JLabel();
+		lblTempoSessao.setBounds(1297, 820, 159, 15);
+		contentPane.add(lblTempoSessao);
+		lblTempoSessao.setText("Sessão:");
+		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblHoraSistema = new JLabel();
+		lblHoraSistema.setBounds(1297, 835, 159, 16);
+		contentPane.add(lblHoraSistema);
+		lblHoraSistema.setText("Data:");
+		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 13));
 
 
 
@@ -134,41 +147,22 @@ public class GUI_gestor_cliente extends JFrame {
 
 	private void panelUserESessaoContentSetup() {
 		lblUsernameLoggedSetup();
-		panelUserESessao.add(lblUsernameLogged);
 
 		lblTempoSessaoSetup();
-		panelUserESessao.add(lblTempoSessao);
 
 		lblHoraSistemaSetup();
-		panelUserESessao.add(lblHoraSistema);
 	}
 
 	private void lblHoraSistemaSetup() {
-		lblHoraSistema = new JLabel();
-		lblHoraSistema.setBounds(0, 27, 159, 16);
-		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 	}
 
 	private void lblTempoSessaoSetup() {
-		lblTempoSessao = new JLabel();
-		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setBounds(0, 15, 159, 15);
-		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 	}
 
 	private void lblUsernameLoggedSetup() {
-		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setBounds(0, 0, 159, 16);
-		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 	}
 
 	private void panelUserESessaoSetup() {
-		panelUserESessao = new JPanel();
-		panelUserESessao.setBackground(SystemColor.inactiveCaption);
-		panelUserESessao.setBounds(1227, 11, 247, 49);
-		panelUserESessao.setLayout(null);
 	}
 
 	private void panelContentSetup() {
@@ -571,7 +565,7 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	public void setLblTempoSessao(Duration temporizador) {
-		lblTempoSessao.setText("SessÃ£o: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
+		lblTempoSessao.setText("Sessao: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
 	}
 
 	public void setLblHoraSistema(String agora) {

@@ -55,23 +55,23 @@ public class GUI_homepage extends JFrame {
 		lblUsernameLogged = new JLabel();
 		lblUsernameLogged.setForeground(Color.WHITE);
 		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setBounds(1297, 794, 166, 16);
+		lblUsernameLogged.setBounds(1297, 805, 166, 16);
 		panel.add(lblUsernameLogged);
-		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 13));
 
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setForeground(Color.WHITE);
 		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setBounds(1297, 809, 166, 15);
+		lblTempoSessao.setBounds(1297, 820, 166, 16);
 		panel.add(lblTempoSessao);
-		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 13));
 
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setForeground(Color.WHITE);
-		lblHoraSistema.setBounds(1297, 824, 166, 16);
+		lblHoraSistema.setBounds(1297, 835, 166, 16);
 		panel.add(lblHoraSistema);
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 13));
 
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(GUI_homepage.class.getResource("/guiComponentes/img/user3.png")));
@@ -164,7 +164,7 @@ public class GUI_homepage extends JFrame {
 	}
 
 	public void setLblTempoSessao(Duration temporizador) {
-		lblTempoSessao.setText("Sessão: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
+		lblTempoSessao.setText("Sessao: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
 	}
 
 	public void setLblHoraSistema(String agora) {
