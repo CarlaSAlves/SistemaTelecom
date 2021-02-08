@@ -18,15 +18,8 @@ public class RoleDAO {
 
 	private Connection myConn;
 	
-	public RoleDAO() throws FileNotFoundException, IOException, SQLException {
-		Properties props = new Properties();
-		props.load(new FileInputStream("sistema_tele.properties"));
-
-		String user = props.getProperty("user");
-		String password = props.getProperty("password");
-		String dburl = props.getProperty("dburl");
-		
-		myConn = DriverManager.getConnection(dburl, user, password);
+	public RoleDAO(Connection connection) throws FileNotFoundException, IOException, SQLException {
+		this.myConn = connection;
 	}
 	
 	public Role getRoleById(int id) throws Exception {
@@ -36,44 +29,43 @@ public class RoleDAO {
 		
 		try {
 			myStmt = myConn.prepareStatement("select * from role where id=?");
-
 			myStmt.setInt(1, id);
-
 			myRs = myStmt.executeQuery();
-
 			if (myRs.next()) {
 				role = new Role();
 				role.setId(myRs.getInt(1));
 				role.setNome(myRs.getString(2));
 			}
-
-			return role;
-		}
-		finally {
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
 			close(myStmt, myRs);
 		}
+		
+		return role;
 	}
 
 	public List<Role> getAllRole() throws Exception {
 		List<Role> listaRoles = new ArrayList<>();
-
 		Statement myStmt = null;
 		ResultSet myRs = null;
 
 		try {
 			myStmt = myConn.createStatement();
 			myRs = myStmt.executeQuery("select * from role");
-
 			while (myRs.next()) {
 				Role role = converteRowParaRoles(myRs);
 				listaRoles.add(role);
 			}
-
-			return listaRoles;		
-		}
-		finally {
+	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
 			close(myStmt, myRs);
 		}
+		
+		return listaRoles;	
 	}
 	
 	private Role converteRowParaRoles(ResultSet myRs) throws SQLException {

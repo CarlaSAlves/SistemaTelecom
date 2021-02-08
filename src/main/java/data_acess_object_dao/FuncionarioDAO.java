@@ -1,6 +1,8 @@
 package data_acess_object_dao;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,25 +15,20 @@ import java.util.List;
 import java.util.Properties;
 import java.util.StringJoiner;
 
+<<<<<<< HEAD
+import data_acess_object_dao_v2.PasswordEncryption;
+=======
 import historicos.HistoricoOperador;
+>>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 import standard_value_object.Funcionario;
+import standard_value_object_v2.Role;
 
 public class FuncionarioDAO {
 
 	private Connection myConn;
 
-	public FuncionarioDAO() throws Exception {
-
-		Properties props = new Properties();
-		props.load(new FileInputStream("sistema_tele.properties"));
-
-		String user = props.getProperty("user");
-		String password = props.getProperty("password");
-		String dburl = props.getProperty("dburl");
-
-
-		myConn = DriverManager.getConnection(dburl, user, password);
-
+	public FuncionarioDAO(Connection connection) throws FileNotFoundException, IOException, SQLException {
+		this.myConn = connection;
 	}
 
 	public List<Funcionario> getAllFuncionarioAdmin() throws Exception {
@@ -128,31 +125,30 @@ public class FuncionarioDAO {
 		}
 	}
 
-	public Funcionario pesquisaFuncionarioAdmin(String login) throws Exception {
-		Funcionario funcionario = null;
-
-		PreparedStatement myStmt = null;
-		ResultSet myRs = null;
-
-		try {
-
-			myStmt = myConn.prepareStatement("select * from funcionario where login=? AND id_role=1");
-
-			myStmt.setString(1, login);
-
-			myRs = myStmt.executeQuery();
-
-			while (myRs.next()) {
-				funcionario = convertRowParaFuncionario(myRs);
-			}
-			return funcionario;
-		}
-		finally {
-			close(myStmt, myRs);
-		}
-	}
-
-
+	//substituir pelo metodo pesquisarFuncionarioLoginPass
+//	public Funcionario pesquisaFuncionarioAdmin(String login) throws Exception {
+//		Funcionario funcionario = null;
+//
+//		PreparedStatement myStmt = null;
+//		ResultSet myRs = null;
+//
+//		try {
+//
+//			myStmt = myConn.prepareStatement("select * from funcionario where login=? AND id_role=1");
+//
+//			myStmt.setString(1, login);
+//
+//			myRs = myStmt.executeQuery();
+//
+//			while (myRs.next()) {
+//				funcionario = convertRowParaFuncionario(myRs);
+//			}
+//			return funcionario;
+//		}
+//		finally {
+//			close(myStmt, myRs);
+//		}
+//	}
 
 	public List<Funcionario> pesquisaFuncionarioOperador(int id ,String nif, String nome, int ativo) throws Exception {
 		List<Funcionario> list = new ArrayList<>();
@@ -207,7 +203,150 @@ public class FuncionarioDAO {
 			close(myStmt, myRs);
 		}
 	}
+	
+	public List<Funcionario> pesquisaTodosFuncionarios() throws Exception {
+		List<Funcionario> listaFuncionario = new ArrayList<>();
 
+		Statement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			myStmt = myConn.createStatement();
+			myRs = myStmt.executeQuery("select * from funcionario");
+
+			while (myRs.next()) {
+				Funcionario funcionario = convertRowParaFuncionario(myRs);
+				listaFuncionario.add(funcionario);
+			}
+		
+		} 
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(myStmt, myRs);
+		}
+		
+		return listaFuncionario;
+	}
+	
+	public List<Funcionario> pesquisaFuncionarioByNif(String nif) throws Exception {
+		List<Funcionario> list = new ArrayList<>();
+
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			nif += "%";
+
+			myStmt = myConn.prepareStatement("select * from funcionario where nif like ?");
+			myStmt.setString(1, nif);
+			myRs = myStmt.executeQuery();
+
+			while (myRs.next()) {
+				Funcionario funcionario = convertRowParaFuncionario(myRs);
+				list.add(funcionario);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(myStmt, myRs);
+		}
+		
+		return list;
+	}
+	
+	public List<Funcionario> pesquisaFuncionarioByNome(String nome) throws Exception {
+		List<Funcionario> list = new ArrayList<>();
+
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			nome += "%";
+			myStmt = myConn.prepareStatement("select * from funcionario where nome like ?");
+			myStmt.setString(1, nome);
+			myRs = myStmt.executeQuery();
+
+			while (myRs.next()) {
+				Funcionario funcionario = convertRowParaFuncionario(myRs);
+				list.add(funcionario);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(myStmt, myRs);
+		}
+		
+		return list;
+	}
+	
+	public Funcionario pesquisaFuncionarioById(int id) throws Exception {
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+		
+		Funcionario funcionario = null;
+
+		try {
+			myStmt = myConn.prepareStatement("select * from funcionario where id=?");
+			myStmt.setInt(1, id);
+			myRs = myStmt.executeQuery();
+			
+			if (myRs.next()) {
+				funcionario = new Funcionario();
+				funcionario.setId(myRs.getInt(1));
+				funcionario.setNome(myRs.getString(2));
+				funcionario.setNif(myRs.getInt(3));
+				funcionario.setLogin(myRs.getString(4));
+				funcionario.setPassword(myRs.getString(5));
+				funcionario.setAtivo(myRs.getInt(6) == 1 ? true : false);
+				funcionario.setId_role(myRs.getInt(7));	
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(myStmt, myRs);
+		}
+		
+		return funcionario;
+	}
+	
+	public Funcionario pesquisarFuncionarioLoginPass(String login, String pass) throws Exception {
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+		Funcionario funcionario = null;
+		
+		try {
+			myStmt = myConn.prepareStatement("SELECT * FROM funcionario WHERE login=? AND password=?;");
+			myStmt.setString(1, login);
+			
+			//vamos encriptar a palavra pass antes de a enviar
+			myStmt.setString(2, PasswordEncryption.get_SHA_512_SecurePassword(pass));
+			
+			myRs = myStmt.executeQuery();
+			
+			if (myRs.next()) {
+				funcionario = new Funcionario();
+				funcionario.setId(myRs.getInt(1));
+				funcionario.setNome(myRs.getString(2));
+				funcionario.setNif(myRs.getInt(3));
+				funcionario.setLogin(myRs.getString(4));
+				funcionario.setPassword(myRs.getString(5));
+				funcionario.setAtivo(myRs.getInt(6) == 1 ? true : false);
+				funcionario.setId_role(myRs.getInt(7));	
+			}	
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(myStmt, myRs);
+		}
+		
+		return funcionario;
+	}
 
 	@SuppressWarnings("resource")
 	public void criarFuncionario(Funcionario operador, Funcionario admin) throws Exception {
@@ -216,6 +355,15 @@ public class FuncionarioDAO {
 		try {
 			myStmt = myConn.prepareStatement("INSERT INTO funcionario(nome, nif, login, password, ativo, id_role) "
 					+ "VALUES(?,?,?,?,?,?)");
+<<<<<<< HEAD
+			
+			myStmt.setString(1, funcionario.getNome());
+			myStmt.setLong(2, funcionario.getNif());
+			myStmt.setString(3, funcionario.getLogin());
+			myStmt.setString(4, PasswordEncryption.get_SHA_512_SecurePassword(funcionario.getPassword()));
+			myStmt.setBoolean(5, funcionario.isAtivo());
+			myStmt.setInt(6, funcionario.getId_role());
+=======
 
 			myStmt.setString(1, operador.getNome());
 			myStmt.setLong(2, operador.getNif());
@@ -223,6 +371,7 @@ public class FuncionarioDAO {
 			myStmt.setString(4, operador.getPassword());
 			myStmt.setBoolean(5, operador.isAtivo());
 			myStmt.setInt(6, operador.getId_role());
+>>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 
 			myStmt.executeUpdate();
 
@@ -232,7 +381,7 @@ public class FuncionarioDAO {
 			myStmt.executeUpdate();	
 
 		}catch(Exception e) {
-
+			e.printStackTrace();
 		}finally {
 			myStmt.close();
 		}
@@ -246,6 +395,15 @@ public class FuncionarioDAO {
 			myStmt = myConn.prepareStatement("UPDATE `funcionario` SET `nome`=?, `nif`=?, "
 					+ "`login`=?, `password`=?, `ativo`=?, `id_role`=? WHERE  `id`=?");
 
+<<<<<<< HEAD
+			myStmt.setString(1, funcionario.getNome());
+			myStmt.setLong(2, funcionario.getNif());
+			myStmt.setString(3, funcionario.getLogin());
+			myStmt.setString(4, PasswordEncryption.get_SHA_512_SecurePassword(funcionario.getPassword()));
+			myStmt.setBoolean(5, funcionario.isAtivo());
+			myStmt.setInt(6, funcionario.getId_role());
+			myStmt.setInt(7, funcionario.getId());
+=======
 			myStmt.setString(1, operador.getNome());
 			myStmt.setLong(2, operador.getNif());
 			myStmt.setString(3, operador.getLogin());
@@ -257,12 +415,28 @@ public class FuncionarioDAO {
 			myStmt.executeUpdate();
 
 			myStmt = logUpdate(operador, admin, "Editar Operador");	
+>>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 
 			myStmt.executeUpdate();
 
 		}catch(Exception e) {
-
+			e.printStackTrace();
 		}finally {
+			myStmt.close();
+		}
+	}
+	
+	public void atribuirRoleAFuncionario(Role role, Funcionario funcionario) throws Exception {
+		PreparedStatement myStmt = null;
+		
+		try {
+			myStmt = myConn.prepareStatement("UPDATE `funcionario` SET `id_role`=? WHERE `id`=?");
+			myStmt.setInt(1, role.getId());
+			myStmt.setInt(2, funcionario.getId());
+			myStmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
 			myStmt.close();
 		}
 	}
@@ -272,25 +446,27 @@ public class FuncionarioDAO {
 	public void desativarFuncionario(int id, Funcionario admin) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
-
 			myStmt = myConn.prepareStatement("update funcionario SET `ativo`= 0 where id=?");
-
 			myStmt.setInt(1, id);
-
 			myStmt.executeUpdate();
+<<<<<<< HEAD
+=======
 
 			Funcionario operador = pesquisaOperadorAuxiliarID(id);
 			myStmt = logUpdate(operador, admin, "Desativar Operador");	
 
 			myStmt.executeUpdate();
 
+>>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 		}catch(Exception e) {
-
+			e.printStackTrace();
 		}finally {
 			myStmt.close();
 		}
-
 	}
+<<<<<<< HEAD
+	
+=======
 
 	public List<HistoricoOperador> getHistoricoOperador(int id_operador) throws Exception {
 		List<HistoricoOperador> list = new ArrayList<HistoricoOperador>();
@@ -328,6 +504,7 @@ public class FuncionarioDAO {
 		}
 	}
 
+>>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 	private Funcionario convertRowParaFuncionario(ResultSet myRs) throws SQLException {
 
 		int id = myRs.getInt("id");
