@@ -2,8 +2,6 @@ package standard_value_object;
 
 import java.sql.Date;
 
-
-
 public class PacoteComercial {
 
 	private int id;
@@ -13,7 +11,20 @@ public class PacoteComercial {
 	private Date data_inicio;
 	private Date data_fim;
 
+	public PacoteComercial() {
+		
+	}
 	
+	public PacoteComercial(String nome, String descricao, boolean ativo, Date data_inicio,
+			Date data_fim) {
+		super();
+		this.nome = nome;
+		this.descricao = descricao;
+		this.ativo = ativo;
+		this.data_inicio = data_inicio;
+		this.data_fim = data_fim;
+	}
+
 	public PacoteComercial(int id, String nome, String descricao, boolean ativo, Date data_inicio, Date data_fim) {
 		super();
 		this.id = id;
@@ -23,8 +34,6 @@ public class PacoteComercial {
 		this.data_inicio = data_inicio;
 		this.data_fim = data_fim;
 	}
-
-	
 
 	public PacoteComercial(String nome, String descricao, boolean ativo) {
 		super();
