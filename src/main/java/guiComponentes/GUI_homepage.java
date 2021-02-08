@@ -10,6 +10,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import java.awt.Font;
 import java.awt.Color;
 
@@ -32,7 +36,15 @@ public class GUI_homepage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+//					for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+//				        if ("Nimbus".equals(info.getName())) {
+//				            UIManager.setLookAndFeel(info.getClassName());
+//				            break;
+//				        }
+//					}
+					
 					GUI_homepage frame = new GUI_homepage();
+					
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,6 +54,22 @@ public class GUI_homepage extends JFrame {
 	}
 
 	public GUI_homepage() {
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+	        if ("Nimbus".equals(info.getName())) {
+	            try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+	            break;
+	        }
+		}
 		panel = new JPanel();
 		setContentPane(panel);
 		panel.setLayout(null);

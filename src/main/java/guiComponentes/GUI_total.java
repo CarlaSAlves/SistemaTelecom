@@ -15,7 +15,9 @@ import java.util.Calendar;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.UIManager.*;
 import guiComponentes.gestorCliente.GUI_gestor_cliente;
 import guiComponentes.gestorOperador.GUI_gestor_operador;
 import guiComponentes.gestorPacoteComercial.GUI_gestor_pacotes;
@@ -38,11 +40,18 @@ public class GUI_total extends JFrame {
 	private String dataEHoraDeLog;
 	private SimpleDateFormat dateFormat ;
 
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					GUI_total frame = new GUI_total();
+					for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				        if ("Nimbus".equals(info.getName())) {
+				            UIManager.setLookAndFeel(info.getClassName());
+				            break;
+				        }
+					}
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +60,29 @@ public class GUI_total extends JFrame {
 		});
 	}
 
+	
+
+	
+	
 	public GUI_total() {
+		
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+	        if ("Nimbus".equals(info.getName())) {
+	            try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+	            break;
+	        }
+		}
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1500, 900);
 		contentPane = new JPanel();
@@ -65,7 +96,6 @@ public class GUI_total extends JFrame {
 		gestor_operador = new GUI_gestor_operador();
 		gestor_pacotes = new GUI_gestor_pacotes();
 		gestor_promocao = new GUI_gestor_promocao();
-
 
 		JPanel loginPanel = login.returnPanel();
 		loginPanel.setBounds(0, 0, 1500, 900);

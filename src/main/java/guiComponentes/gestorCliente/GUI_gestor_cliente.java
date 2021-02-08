@@ -24,6 +24,8 @@ import javax.swing.table.DefaultTableModel;
 
 import servico.GestorDeDAO;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import com.jgoodies.forms.layout.FormLayout;
@@ -83,6 +85,24 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	public GUI_gestor_cliente() {
+		
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+	        if ("Nimbus".equals(info.getName())) {
+	            try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+	            break;
+	        }
+		}
+		
 
 		contentPaneSetup();
 
@@ -299,7 +319,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private void panelSetup() {
 		panel = new JPanel();
 		panel.setBackground(SystemColor.inactiveCaption);
-		panel.setBounds(66, 63, 447, 199);
+		panel.setBounds(66, 63, 453, 213);
 
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
