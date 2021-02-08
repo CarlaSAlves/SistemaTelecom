@@ -87,126 +87,117 @@ public class CriarClienteDialog extends JDialog {
 
 	public CriarClienteDialog() {
 
-		setBounds(500, 300, 573, 429);
+		setBounds(500, 300, 417, 351);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(SystemColor.inactiveCaption);
+		contentPanel.setBackground(SystemColor.window);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		setTitle("Novo Cliente");
-		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("70px"),
-				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("334px"),},
-			new RowSpec[] {
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("21px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("23px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
+		contentPanel.setLayout(null);
 		{
 			JLabel lblNome = new JLabel("Nome");
-			lblNome.setFont(new Font("Dialog", Font.PLAIN, 13));
-			contentPanel.add(lblNome, "2, 2, left, fill");
+			lblNome.setBounds(9, 33, 31, 23);
+			lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			contentPanel.add(lblNome);
 		}
 		{
 			JLabel lblNif = new JLabel("NIF");
-			lblNif.setFont(new Font("Dialog", Font.PLAIN, 13));
-			contentPanel.add(lblNif, "2, 4, left, fill");
+			lblNif.setBounds(9, 61, 19, 23);
+			lblNif.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			contentPanel.add(lblNif);
 		}
 		{
 			JLabel lblMorada = new JLabel("Morada");
-			lblMorada.setFont(new Font("Dialog", Font.PLAIN, 13));
-			contentPanel.add(lblMorada, "2, 6, fill, fill");
+			lblMorada.setBounds(9, 91, 82, 23);
+			lblMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			contentPanel.add(lblMorada);
 		}
 		{
 			JLabel lblLogin = new JLabel("Login");
-			lblLogin.setFont(new Font("Dialog", Font.PLAIN, 13));
-			contentPanel.add(lblLogin, "2, 8, left, fill");
+			lblLogin.setBounds(9, 121, 29, 23);
+			lblLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			contentPanel.add(lblLogin);
 		}
 		{
 			textFieldNome = new JTextField();
-			textFieldNome.setFont(font);
+			textFieldNome.setBounds(101, 31, 290, 27);
+			textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldNome.setColumns(10);
-			contentPanel.add(textFieldNome, "4, 2, fill, fill");
+			contentPanel.add(textFieldNome);
 		}
 		{
 			textFieldNIF = new JTextField();
-			textFieldNIF.setFont(font);
+			textFieldNIF.setBounds(101, 61, 290, 27);
+			textFieldNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldNIF.setColumns(10);
-			contentPanel.add(textFieldNIF, "4, 4, fill, fill");
+			contentPanel.add(textFieldNIF);
 		}
 		{
 			textFieldMorada = new JTextField();
-			textFieldMorada.setFont(font);
+			textFieldMorada.setBounds(101, 91, 290, 27);
+			textFieldMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldMorada.setColumns(10);
-			contentPanel.add(textFieldMorada, "4, 6, fill, fill");
+			contentPanel.add(textFieldMorada);
 		}
 		{
 			textFieldLogin = new JTextField();
-			textFieldLogin.setFont(font);
+			textFieldLogin.setBounds(101, 121, 290, 27);
+			textFieldLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldLogin.setColumns(10);
-			contentPanel.add(textFieldLogin, "4, 8, fill, fill");
+			contentPanel.add(textFieldLogin);
 		}
 		{
 			JLabel lblPassword = new JLabel("Password");
-			lblPassword.setFont(new Font("Dialog", Font.PLAIN, 13));
-			contentPanel.add(lblPassword, "2, 18, fill, fill");
+			lblPassword.setBounds(9, 153, 82, 23);
+			lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			contentPanel.add(lblPassword);
 		}
 		{
 			textFieldPassword = new JPasswordField();
-			textFieldPassword.setFont(font);
+			textFieldPassword.setBounds(101, 153, 290, 27);
+			textFieldPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldPassword.setColumns(10);
-			contentPanel.add(textFieldPassword, "4, 18, fill, fill");
+			contentPanel.add(textFieldPassword);
 		}
 		{
 			JLabel lblIdpacote = new JLabel("ID Pacote");
-			lblIdpacote.setFont(new Font("Dialog", Font.PLAIN, 13));
-			contentPanel.add(lblIdpacote, "2, 22, fill, fill");
+			lblIdpacote.setBounds(9, 183, 82, 23);
+			lblIdpacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			contentPanel.add(lblIdpacote);
 		}
 		{
 			textFieldPacote = new JTextField();
+			textFieldPacote.setBounds(101, 183, 290, 29);
 			textFieldPacote.setBackground(SystemColor.textHighlightText);
-			textFieldPacote.setFont(font);
+			textFieldPacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldPacote.setColumns(10);
-			contentPanel.add(textFieldPacote, "4, 22, fill, fill");
+			contentPanel.add(textFieldPacote);
 		}
 				
 						checkBoxAtivo = new JCheckBox("Ativo");
+						checkBoxAtivo.setBounds(244, 350, 53, 27);
 						checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
 						checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
-						contentPanel.add(checkBoxAtivo, "4, 24, center, fill");
+						contentPanel.add(checkBoxAtivo);
+						
+						JCheckBox chckbxNewCheckBox = new JCheckBox("Ativo");
+						chckbxNewCheckBox.setBounds(165, 218, 53, 23);
+						chckbxNewCheckBox.setBackground(SystemColor.text);
+						chckbxNewCheckBox.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+						contentPanel.add(chckbxNewCheckBox);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(SystemColor.inactiveCaption);
+			buttonPane.setBounds(0, 268, 401, 44);
+			contentPanel.add(buttonPane);
+			buttonPane.setBackground(SystemColor.window);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
 
 			{
 				JButton okButton = new JButton("Confirmar");
 				okButton.setForeground(SystemColor.activeCaptionText);
-				okButton.setBackground(SystemColor.inactiveCaption);
-				okButton.setFont(font);
+				okButton.setBackground(SystemColor.activeCaption);
+				okButton.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 				okButton.setFocusPainted(false);
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -220,8 +211,8 @@ public class CriarClienteDialog extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
-				cancelButton.setBackground(SystemColor.inactiveCaption);
-				cancelButton.setFont(font);
+				cancelButton.setBackground(SystemColor.activeCaption);
+				cancelButton.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 				cancelButton.setFocusPainted(false);
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);

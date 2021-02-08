@@ -82,89 +82,83 @@ public class CriarOperadorDialog extends JDialog {
 	}
 
 	public CriarOperadorDialog() {
-		setBounds(500, 300, 450, 300);
+		setBounds(500, 300, 385, 297);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(SystemColor.inactiveCaption);
+		contentPanel.setBackground(SystemColor.text);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		setTitle("Novo Operador");
-		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("70px"),
-				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("334px"),},
-			new RowSpec[] {
-				RowSpec.decode("24px"),
-				RowSpec.decode("20px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				RowSpec.decode("25px"),
-				RowSpec.decode("23px"),}));
+		contentPanel.setLayout(null);
 		{
 			JLabel lblNome = new JLabel("Nome");
-			lblNome.setFont(new Font("Dialog", Font.PLAIN, 13));
-			contentPanel.add(lblNome, "2, 2, left, top");
+			lblNome.setBounds(15, 29, 34, 18);
+			lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			contentPanel.add(lblNome);
 		}
 
 		{
 			JLabel lblNif = new JLabel("NIF");
-			lblNif.setFont(new Font("Dialog", Font.PLAIN, 13));
-			contentPanel.add(lblNif, "2, 4, left, top");
+			lblNif.setBounds(15, 55, 20, 18);
+			lblNif.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			contentPanel.add(lblNif);
 		}
 
 		{
 			JLabel lblLogin = new JLabel("Login");
-			lblLogin.setFont(new Font("Dialog", Font.PLAIN, 13));
-			contentPanel.add(lblLogin, "2, 6, left, top");
+			lblLogin.setBounds(15, 86, 31, 18);
+			lblLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			contentPanel.add(lblLogin);
 		}
 
 		{
 			JLabel lblPassword = new JLabel("Password");
-			lblPassword.setFont(new Font("Dialog", Font.PLAIN, 13));
-			contentPanel.add(lblPassword, "2, 8, fill, top");
+			lblPassword.setBounds(15, 112, 70, 18);
+			lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			contentPanel.add(lblPassword);
 		}
 
 		{
 			textFieldNome = new JTextField();
+			textFieldNome.setBounds(95, 29, 268, 23);
 			textFieldNome.setFont(font);
 			textFieldNome.setColumns(10);
-			contentPanel.add(textFieldNome, "4, 2, fill, fill");
+			contentPanel.add(textFieldNome);
 		}
 
 		{
 			textFieldNIF = new JTextField();
+			textFieldNIF.setBounds(95, 55, 268, 23);
 			textFieldNIF.setFont(font);
 			textFieldNIF.setColumns(10);
-			contentPanel.add(textFieldNIF, "4, 4, fill, fill");
+			contentPanel.add(textFieldNIF);
 		}
 
 		{
 			textFieldLogin = new JTextField();
+			textFieldLogin.setBounds(95, 83, 268, 23);
 			textFieldLogin.setFont(font);
 			textFieldLogin.setColumns(10);
-			contentPanel.add(textFieldLogin, "4, 6, fill, fill");
+			contentPanel.add(textFieldLogin);
 		}
 
 		{
 			textFieldPassword = new JPasswordField();
+			textFieldPassword.setBounds(95, 112, 268, 23);
 			textFieldPassword.setFont(font);
 			textFieldPassword.setColumns(10);
-			contentPanel.add(textFieldPassword, "4, 8, fill, fill");
+			contentPanel.add(textFieldPassword);
 		}
 
 		checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setBounds(235, 157, 53, 23);
 		checkBoxAtivo.setSelected(true);
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
-		checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
-		contentPanel.add(checkBoxAtivo, "4, 10, center, fill");
+		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		contentPanel.add(checkBoxAtivo);
 
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(SystemColor.inactiveCaption);
+			buttonPane.setBackground(SystemColor.text);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
@@ -172,8 +166,8 @@ public class CriarOperadorDialog extends JDialog {
 			{
 				JButton okButton = new JButton("Confirmar");
 				okButton.setForeground(SystemColor.activeCaptionText);
-				okButton.setBackground(SystemColor.inactiveCaption);
-				okButton.setFont(font);
+				okButton.setBackground(SystemColor.activeCaption);
+				okButton.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 				okButton.setFocusPainted(false);
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -186,8 +180,8 @@ public class CriarOperadorDialog extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
-				cancelButton.setBackground(SystemColor.inactiveCaption);
-				cancelButton.setFont(font);
+				cancelButton.setBackground(SystemColor.activeCaption);
+				cancelButton.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 				cancelButton.setFocusPainted(false);
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);

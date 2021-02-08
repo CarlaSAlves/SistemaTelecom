@@ -86,6 +86,7 @@ public class GUI_gestor_operador extends JFrame {
 	protected void inicialize() {
 
 		// visual look and feel - Nimbus 
+		
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 			if ("Nimbus".equals(info.getName())) {
 				try {
@@ -153,7 +154,6 @@ public class GUI_gestor_operador extends JFrame {
 
 		// -- Botões --  
 
-		//Criar Operador
 		JButton botaoCriarOperador = botaoCriarOperadorSetup();
 		getContentPane().add(botaoCriarOperador);
 
