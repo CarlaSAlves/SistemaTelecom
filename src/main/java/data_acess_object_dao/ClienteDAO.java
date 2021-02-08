@@ -15,8 +15,12 @@ import java.util.List;
 import java.util.Properties;
 import java.util.StringJoiner;
 
+<<<<<<< HEAD
 import data_acess_object_dao_v2.PasswordEncryption;
 import historico.cliente.HistoricoCliente;
+=======
+import historicos.HistoricoCliente;
+>>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 import standard_value_object_v2.PacoteCliente;
@@ -54,7 +58,7 @@ public class ClienteDAO {
 
 	public List<Cliente> pesquisaCliente(int id, String nif, String nome, String morada, int ativo) throws Exception {
 		List<Cliente> list = new ArrayList<>();
-		
+
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
 		StringJoiner sj = new StringJoiner (" AND ");
@@ -223,6 +227,7 @@ public class ClienteDAO {
 			myStmt.setBoolean(6, cliente.isAtivo());
 			myStmt.setNull(7, java.sql.Types.INTEGER);
 			myStmt.executeUpdate();
+<<<<<<< HEAD
 			
 			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
 	            if (generatedKeys.next()) { 
@@ -249,6 +254,13 @@ public class ClienteDAO {
 //			myStmt.setString(4, "Criar Cliente");	
 //
 //			myStmt.executeUpdate();	
+=======
+
+			Cliente clientCriado = pesquisaClienteAuxiliarNIF(""+cliente.getNif());
+			myStmt = logUpdate(funcionario, clientCriado, "Criar Cliente");	
+
+			myStmt.executeUpdate();	
+>>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -276,12 +288,7 @@ public class ClienteDAO {
 
 			myStmt.executeUpdate();
 
-			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
-
-			myStmt.setInt(1, funcionario.getId());
-			myStmt.setInt(2, cliente.getId());
-			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-			myStmt.setString(4, "Editar Cliente");	
+			myStmt = logUpdate(funcionario, cliente, "Editar Cliente");	
 
 			myStmt.executeUpdate();
 
@@ -302,12 +309,7 @@ public class ClienteDAO {
 			myStmt.executeUpdate();
 
 			Cliente cliente = pesquisaClienteAuxiliarID(id);
-			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
-
-			myStmt.setInt(1, funcionario.getId());
-			myStmt.setInt(2, cliente.getId());
-			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-			myStmt.setString(4, "Desativar Cliente");	
+			myStmt = logUpdate(funcionario, cliente, "Desativar Cliente");	
 
 			myStmt.executeUpdate();
 
@@ -318,6 +320,7 @@ public class ClienteDAO {
 		}
 
 	}
+<<<<<<< HEAD
 	
 	public void atribuirPacoteCliente(PacoteCliente pacoteCliente, Cliente cliente) throws Exception {
 		PreparedStatement myStmt = null;
@@ -333,6 +336,8 @@ public class ClienteDAO {
 			myStmt.close();
 		}
 	}
+=======
+>>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 
 	public List<HistoricoCliente> getHistoricoCliente(int id_cliente) throws Exception {
 		List<HistoricoCliente> list = new ArrayList<HistoricoCliente>();
@@ -386,6 +391,17 @@ public class ClienteDAO {
 		return cliente;
 	}
 
+	private PreparedStatement logUpdate(Funcionario funcionario, Cliente cliente, String descricao) throws SQLException {
+		PreparedStatement myStmt;
+		myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
+
+		myStmt.setInt(1, funcionario.getId());
+		myStmt.setInt(2, cliente.getId());
+		myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+		myStmt.setString(4, descricao);
+		return myStmt;
+	}
+	
 
 	private void close(Statement myStmt, ResultSet myRs) throws SQLException {
 		close(null, myStmt, myRs);		

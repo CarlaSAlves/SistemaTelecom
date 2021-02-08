@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import servico.GestorDeDAO;
@@ -22,6 +23,8 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import guiComponentes.GUI_total;
+
 
 public class CriarOperadorDialog extends JDialog {
 
@@ -33,7 +36,7 @@ public class CriarOperadorDialog extends JDialog {
 	private JTextField textFieldNome;
 	private JTextField textFieldNIF;
 	private JTextField textFieldLogin;
-	private JTextField textFieldPassword;
+	private JPasswordField textFieldPassword;
 	private JCheckBox checkBoxAtivo;
 	private GUI_gestor_operador operadorPesquisaApp;
 	private Funcionario funcionarioAntigo;
@@ -64,6 +67,8 @@ public class CriarOperadorDialog extends JDialog {
 		if(modoEditar) {
 			setTitle("Editar Operador");
 			popularTextFields(funcionarioTemp);
+			if (funcionarioTemp.isAtivo())
+				checkBoxAtivo.setVisible(false);
 		}
 	}
 
@@ -71,7 +76,7 @@ public class CriarOperadorDialog extends JDialog {
 		textFieldNome.setText(funcionarioTemp.getNome()+ "");
 		textFieldNIF.setText(funcionarioTemp.getNif() + "");
 		textFieldLogin.setText(funcionarioTemp.getLogin());
-		textFieldPassword.setText(funcionarioTemp.getPassword());
+		textFieldPassword.setText(funcionarioTemp.getPassword()); //.substring(0,8)
 		checkBoxAtivo.setSelected(funcionarioTemp.isAtivo());
 
 	}
@@ -145,7 +150,7 @@ public class CriarOperadorDialog extends JDialog {
 		}
 
 		{
-			textFieldPassword = new JTextField();
+			textFieldPassword = new JPasswordField();
 			textFieldPassword.setFont(font);
 			textFieldPassword.setColumns(10);
 			contentPanel.add(textFieldPassword, "4, 8, fill, fill");
@@ -198,6 +203,7 @@ public class CriarOperadorDialog extends JDialog {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void gravarOperador() {
 		String nome = textFieldNome.getText();
 		int nif = Integer.parseInt(textFieldNIF.getText());
@@ -222,13 +228,15 @@ public class CriarOperadorDialog extends JDialog {
 
 		try {
 			if (modoEditar) {
-				GestorDeDAO.getGestorDeDAO().editarFuncionario(funcionario);
+				Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+				GestorDeDAO.getGestorDeDAO().editarFuncionario(funcionario, admin);
 				operadorPesquisaApp.refreshOperadorTable();
 				JOptionPane.showMessageDialog(operadorPesquisaApp,
 						"Operador Editado com sucesso!", "Operador Editado",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				GestorDeDAO.getGestorDeDAO().criarFuncionario(funcionario);
+				Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+				GestorDeDAO.getGestorDeDAO().criarFuncionario(funcionario, admin);
 				operadorPesquisaApp.refreshOperadorTable();
 				JOptionPane.showMessageDialog(operadorPesquisaApp,
 						"Operador Criado com sucesso!", "Operador Criado",

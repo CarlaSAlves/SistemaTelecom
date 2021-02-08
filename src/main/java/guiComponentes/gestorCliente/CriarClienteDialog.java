@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import servico.GestorDeDAO;
 import standard_value_object.Cliente;
@@ -29,7 +30,7 @@ public class CriarClienteDialog extends JDialog {
 	private JTextField textFieldNIF;
 	private JTextField textFieldMorada;
 	private JTextField textFieldLogin;
-	private JTextField textFieldPassword;
+	private JPasswordField textFieldPassword;
 	private JTextField textFieldPacote;
 	private JCheckBox checkBoxAtivo;
 	private GUI_gestor_cliente clientePesquisaApp;
@@ -67,6 +68,9 @@ public class CriarClienteDialog extends JDialog {
 		if(modoEditar) {
 			setTitle("Editar Cliente");
 			popularTextFields(clienteAntigo);
+			if (clienteAntigo.isAtivo())
+			checkBoxAtivo.setVisible(false);
+			
 		}
 	}
 
@@ -75,7 +79,7 @@ public class CriarClienteDialog extends JDialog {
 		textFieldNIF.setText(clienteAntigo2.getNif() + "");
 		textFieldMorada.setText(clienteAntigo2.getMorada());
 		textFieldLogin.setText(clienteAntigo2.getLogin());
-		textFieldPassword.setText(clienteAntigo2.getPassword());
+		textFieldPassword.setText(clienteAntigo2.getPassword()); // .substring(0,8)
 		textFieldPacote.setText(clienteAntigo2.getId_pacote_cliente()+ "");
 		checkBoxAtivo.setSelected(clienteAntigo2.isAtivo());
 
@@ -83,7 +87,7 @@ public class CriarClienteDialog extends JDialog {
 
 	public CriarClienteDialog() {
 
-		setBounds(500, 300, 450, 300);
+		setBounds(500, 300, 573, 429);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.inactiveCaption);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -108,7 +112,17 @@ public class CriarClienteDialog extends JDialog {
 				FormSpecs.UNRELATED_GAP_ROWSPEC,
 				RowSpec.decode("20px"),
 				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("23px"),}));
+				RowSpec.decode("23px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
 		{
 			JLabel lblNome = new JLabel("Nome");
 			lblNome.setFont(new Font("Dialog", Font.PLAIN, 13));
@@ -128,16 +142,6 @@ public class CriarClienteDialog extends JDialog {
 			JLabel lblLogin = new JLabel("Login");
 			lblLogin.setFont(new Font("Dialog", Font.PLAIN, 13));
 			contentPanel.add(lblLogin, "2, 8, left, fill");
-		}
-		{
-			JLabel lblPassword = new JLabel("Password");
-			lblPassword.setFont(new Font("Dialog", Font.PLAIN, 13));
-			contentPanel.add(lblPassword, "2, 10, fill, fill");
-		}
-		{
-			JLabel lblIdpacote = new JLabel("ID Pacote");
-			lblIdpacote.setFont(new Font("Dialog", Font.PLAIN, 13));
-			contentPanel.add(lblIdpacote, "2, 12, fill, fill");
 		}
 		{
 			textFieldNome = new JTextField();
@@ -164,23 +168,33 @@ public class CriarClienteDialog extends JDialog {
 			contentPanel.add(textFieldLogin, "4, 8, fill, fill");
 		}
 		{
-			textFieldPassword = new JTextField();
+			JLabel lblPassword = new JLabel("Password");
+			lblPassword.setFont(new Font("Dialog", Font.PLAIN, 13));
+			contentPanel.add(lblPassword, "2, 18, fill, fill");
+		}
+		{
+			textFieldPassword = new JPasswordField();
 			textFieldPassword.setFont(font);
 			textFieldPassword.setColumns(10);
-			contentPanel.add(textFieldPassword, "4, 10, fill, fill");
+			contentPanel.add(textFieldPassword, "4, 18, fill, fill");
+		}
+		{
+			JLabel lblIdpacote = new JLabel("ID Pacote");
+			lblIdpacote.setFont(new Font("Dialog", Font.PLAIN, 13));
+			contentPanel.add(lblIdpacote, "2, 22, fill, fill");
 		}
 		{
 			textFieldPacote = new JTextField();
 			textFieldPacote.setBackground(SystemColor.textHighlightText);
 			textFieldPacote.setFont(font);
 			textFieldPacote.setColumns(10);
-			contentPanel.add(textFieldPacote, "4, 12, fill, fill");
+			contentPanel.add(textFieldPacote, "4, 22, fill, fill");
 		}
-
-		checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
-		checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
-		contentPanel.add(checkBoxAtivo, "4, 14, center, fill");
+				
+						checkBoxAtivo = new JCheckBox("Ativo");
+						checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
+						checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
+						contentPanel.add(checkBoxAtivo, "4, 24, center, fill");
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(SystemColor.inactiveCaption);
@@ -223,6 +237,7 @@ public class CriarClienteDialog extends JDialog {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void gravarCliente() {
 		String nome = textFieldNome.getText();
 		int nif = Integer.parseInt(textFieldNIF.getText());
