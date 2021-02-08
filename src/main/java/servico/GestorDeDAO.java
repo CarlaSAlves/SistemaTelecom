@@ -1,7 +1,14 @@
 package servico;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
+
 import data_acess_object_dao.ClienteDAO;
 import data_acess_object_dao.FuncionarioDAO;
 import data_acess_object_dao.PacoteComercialDAO;
@@ -20,12 +27,14 @@ public class GestorDeDAO {
 	private PacoteComercialDAO pacoteComercialDAO;
 	private PromocaoDAO promocaoDAO;
 	private static GestorDeDAO GestorDeDAOInstance = null;
+	private Connection connection;
 
 	private GestorDeDAO() throws Exception {
-		clienteDAO = new ClienteDAO();
-		funcionarioDAO = new FuncionarioDAO();
-		pacoteComercialDAO = new PacoteComercialDAO();
-		promocaoDAO = new PromocaoDAO();
+		this.startConnection();
+		clienteDAO = new ClienteDAO(this.connection);
+		funcionarioDAO = new FuncionarioDAO(this.connection);
+		pacoteComercialDAO = new PacoteComercialDAO(this.connection);
+		promocaoDAO = new PromocaoDAO(this.connection);
 	}
 
 	public static synchronized GestorDeDAO getGestorDeDAO() throws Exception {
@@ -33,6 +42,17 @@ public class GestorDeDAO {
 			GestorDeDAOInstance = new GestorDeDAO();
 		}
 		return GestorDeDAOInstance;    
+	}
+	
+	private void startConnection() throws FileNotFoundException, IOException, SQLException {
+		Properties props = new Properties();
+		props.load(new FileInputStream("sistema_tele.properties"));
+
+		String user = props.getProperty("user");
+		String password = props.getProperty("password");
+		String dburl = props.getProperty("dburl");
+
+		this.connection = DriverManager.getConnection(dburl, user, password);
 	}
 
 	public void criarCliente(Cliente cliente, Funcionario funcionario) throws Exception {

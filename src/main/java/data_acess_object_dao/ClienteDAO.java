@@ -15,12 +15,9 @@ import java.util.List;
 import java.util.Properties;
 import java.util.StringJoiner;
 
-<<<<<<< HEAD
 import data_acess_object_dao_v2.PasswordEncryption;
-import historico.cliente.HistoricoCliente;
-=======
 import historicos.HistoricoCliente;
->>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
+
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 import standard_value_object_v2.PacoteCliente;
@@ -227,7 +224,6 @@ public class ClienteDAO {
 			myStmt.setBoolean(6, cliente.isAtivo());
 			myStmt.setNull(7, java.sql.Types.INTEGER);
 			myStmt.executeUpdate();
-<<<<<<< HEAD
 			
 			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
 	            if (generatedKeys.next()) { 
@@ -254,13 +250,11 @@ public class ClienteDAO {
 //			myStmt.setString(4, "Criar Cliente");	
 //
 //			myStmt.executeUpdate();	
-=======
 
 			Cliente clientCriado = pesquisaClienteAuxiliarNIF(""+cliente.getNif());
 			myStmt = logUpdate(funcionario, clientCriado, "Criar Cliente");	
 
 			myStmt.executeUpdate();	
->>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -320,7 +314,6 @@ public class ClienteDAO {
 		}
 
 	}
-<<<<<<< HEAD
 	
 	public void atribuirPacoteCliente(PacoteCliente pacoteCliente, Cliente cliente) throws Exception {
 		PreparedStatement myStmt = null;
@@ -336,8 +329,6 @@ public class ClienteDAO {
 			myStmt.close();
 		}
 	}
-=======
->>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 
 	public List<HistoricoCliente> getHistoricoCliente(int id_cliente) throws Exception {
 		List<HistoricoCliente> list = new ArrayList<HistoricoCliente>();

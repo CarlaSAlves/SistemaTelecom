@@ -15,11 +15,9 @@ import java.util.List;
 import java.util.Properties;
 import java.util.StringJoiner;
 
-<<<<<<< HEAD
 import data_acess_object_dao_v2.PasswordEncryption;
-=======
+
 import historicos.HistoricoOperador;
->>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 import standard_value_object.Funcionario;
 import standard_value_object_v2.Role;
 
@@ -33,15 +31,13 @@ public class FuncionarioDAO {
 
 	public List<Funcionario> getAllFuncionarioAdmin() throws Exception {
 		List<Funcionario> listaFuncionarioAdmin = new ArrayList<>();
-
 		Statement myStmt = null;
 		ResultSet myRs = null;
 
 		try {
 			myStmt = myConn.createStatement();
-
 			myRs = myStmt.executeQuery("select * from funcionario where id_role=1");
-
+			
 			while (myRs.next()) {
 				Funcionario funcionario = convertRowParaFuncionario(myRs);
 				listaFuncionarioAdmin.add(funcionario);
@@ -60,19 +56,16 @@ public class FuncionarioDAO {
 		ResultSet myRs = null;
 
 		try {
-
 			myStmt = myConn.prepareStatement("select * from funcionario where id=?");
-
 			myStmt.setInt(1, id);
-
 			myRs = myStmt.executeQuery();
-
 			while (myRs.next()) {
 				funcionario = convertRowParaFuncionario(myRs);
 			}
 			return funcionario;
-		}
-		finally {
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
 			close(myStmt, myRs);
 		}
 	}
@@ -85,19 +78,17 @@ public class FuncionarioDAO {
 
 		try {
 			nif += "%";
-
 			myStmt = myConn.prepareStatement("select * from funcionario where nif like ?");
-
 			myStmt.setString(1, nif);
-
 			myRs = myStmt.executeQuery();
 
 			while (myRs.next()) {
 				funcionario = convertRowParaFuncionario(myRs);
 			}
 			return funcionario;
-		}
-		finally {
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
 			close(myStmt, myRs);
 		}
 	}
@@ -119,8 +110,9 @@ public class FuncionarioDAO {
 			}
 
 			return listaFuncionarioOperador;		
-		}
-		finally {
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
 			close(myStmt, myRs);
 		}
 	}
@@ -198,8 +190,9 @@ public class FuncionarioDAO {
 			}
 
 			return list;
-		}
-		finally {
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
 			close(myStmt, myRs);
 		}
 	}
@@ -355,7 +348,6 @@ public class FuncionarioDAO {
 		try {
 			myStmt = myConn.prepareStatement("INSERT INTO funcionario(nome, nif, login, password, ativo, id_role) "
 					+ "VALUES(?,?,?,?,?,?)");
-<<<<<<< HEAD
 			
 			myStmt.setString(1, funcionario.getNome());
 			myStmt.setLong(2, funcionario.getNif());
@@ -363,7 +355,6 @@ public class FuncionarioDAO {
 			myStmt.setString(4, PasswordEncryption.get_SHA_512_SecurePassword(funcionario.getPassword()));
 			myStmt.setBoolean(5, funcionario.isAtivo());
 			myStmt.setInt(6, funcionario.getId_role());
-=======
 
 			myStmt.setString(1, operador.getNome());
 			myStmt.setLong(2, operador.getNif());
@@ -371,7 +362,6 @@ public class FuncionarioDAO {
 			myStmt.setString(4, operador.getPassword());
 			myStmt.setBoolean(5, operador.isAtivo());
 			myStmt.setInt(6, operador.getId_role());
->>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 
 			myStmt.executeUpdate();
 
