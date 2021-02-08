@@ -37,7 +37,7 @@ public class GUI_total extends JFrame {
 	private Duration temporizador;
 	private String dataEHoraDeLog;
 	private SimpleDateFormat dateFormat ;
-int test;
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
