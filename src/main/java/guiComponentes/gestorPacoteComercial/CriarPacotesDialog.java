@@ -17,6 +17,10 @@ import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import java.awt.Font;
 import java.awt.SystemColor;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class CriarPacotesDialog extends JDialog {
 
@@ -71,40 +75,46 @@ public class CriarPacotesDialog extends JDialog {
 		contentPanel.setBackground(SystemColor.inactiveCaption);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
-		{
-			JLabel lblMorada = new JLabel("Descrição");
-			lblMorada.setFont(font);
-			lblMorada.setBounds(10, 54, 70, 14);
-			contentPanel.add(lblMorada);
-		}
-		{
-			textFieldDescricao = new JTextField();
-			textFieldDescricao.setFont(font);
-			textFieldDescricao.setColumns(10);
-			textFieldDescricao.setBounds(90, 51, 334, 20);
-			contentPanel.add(textFieldDescricao);
-		}
+		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("70px"),
+				FormSpecs.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("334px"),},
+			new RowSpec[] {
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				RowSpec.decode("20px"),
+				RowSpec.decode("20px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("23px"),}));
 
 		{
 			JLabel lblNome_1 = new JLabel("Nome");
-			lblNome_1.setFont(font);
-			lblNome_1.setBounds(10, 14, 55, 14);
-			contentPanel.add(lblNome_1);
+			lblNome_1.setFont(new Font("Dialog", Font.PLAIN, 13));
+			contentPanel.add(lblNome_1, "2, 2, fill, center");
 		}
 		{
 			textFieldNome = new JTextField();
 			textFieldNome.setFont(font);
 			textFieldNome.setColumns(10);
-			textFieldNome.setBounds(90, 11, 334, 20);
-			contentPanel.add(textFieldNome);
+			contentPanel.add(textFieldNome, "4, 2, fill, fill");
+		}
+		{
+			JLabel lblMorada = new JLabel("Descrição");
+			lblMorada.setFont(new Font("Dialog", Font.PLAIN, 13));
+			contentPanel.add(lblMorada, "2, 4, fill, top");
+		}
+		{
+			textFieldDescricao = new JTextField();
+			textFieldDescricao.setFont(font);
+			textFieldDescricao.setColumns(10);
+			contentPanel.add(textFieldDescricao, "4, 4, fill, fill");
 		}
 
 		checkBoxAtivo = new JCheckBox("Ativo");
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
-		checkBoxAtivo.setFont(font);
-		checkBoxAtivo.setBounds(10, 116, 97, 23);
-		contentPanel.add(checkBoxAtivo);
+		checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
+		contentPanel.add(checkBoxAtivo, "4, 6, center, fill");
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(SystemColor.inactiveCaption);

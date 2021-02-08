@@ -12,9 +12,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
-import standard_value_object_v2.Cliente;
-import standard_value_object_v2.Promocao;
 import standard_value_object_v2.Role;
 
 public class RoleDAO {
@@ -93,6 +90,7 @@ public class RoleDAO {
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	public void eliminarRoleById(int id) throws Exception {
 		PreparedStatement myStmt = null;
 

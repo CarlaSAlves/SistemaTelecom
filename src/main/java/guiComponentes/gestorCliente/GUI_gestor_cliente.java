@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.time.Duration;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
@@ -26,12 +27,18 @@ import servico.GestorDeDAO;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+
+
+import com.jgoodies.forms.layout.FormSpecs;
+import javax.swing.JCheckBox;
 
 
 public class GUI_gestor_cliente extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField textPesquisaNIF;
 	private JTable table;
 	private JButton btVoltarGestorCliente;
 	private JPanel contentPane;
@@ -40,9 +47,25 @@ public class GUI_gestor_cliente extends JFrame {
 	private JButton botaoDesativarCliente;
 	private JButton botaoEditarCliente;
 	private int indices[];
-	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
+	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JLabel lblUsernameLogged;
 	private String username;
+	private JButton botaoVisualizarHistorico;
+	private JLabel lblCamposPesquisas;
+	private JPanel panel;
+	private JLabel lblNewLabelID;
+	private JLabel lblNewLabelNIF;
+	private JLabel lblNome;
+	private JLabel lblMorada;
+	private JTextField textPesquisaID;
+	private JTextField textPesquisaNIF;
+	private JTextField textFieldNome;
+	private JTextField textFieldMorada;
+	private JCheckBox checkBoxAtivo;
+	private JButton botaoPesquisa;
+	private JLabel lblTempoSessao;
+	private JLabel lblHoraSistema;
+	private JPanel panelUserESessao;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -69,53 +92,8 @@ public class GUI_gestor_cliente extends JFrame {
 		setBounds(100, 30, 1500, 900);
 		contentPane.setBackground(SystemColor.inactiveCaption);
 
-		JLabel lblDeProcura = new JLabel("Introduza o NIF: ");
-		lblDeProcura.setBounds(66, 18, 134, 26);
-		lblDeProcura.setFont(font);
-		getContentPane().add(lblDeProcura);
-
-		textPesquisaNIF = new JTextField();
-		textPesquisaNIF.setBounds(210, 18, 161, 26);
-		textPesquisaNIF.setFont(font);
-		getContentPane().add(textPesquisaNIF);
-		textPesquisaNIF.setColumns(10);
-
-		JButton botaoPesquisa = new JButton("Pesquisar");
-		botaoPesquisa.setBackground(SystemColor.activeCaption);
-		botaoPesquisa.setBounds(411, 15, 119, 32);
-		botaoPesquisa.setFont(font);
-		botaoPesquisa.setFocusPainted(false);
-		botaoPesquisa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-
-					String nif = textPesquisaNIF.getText();
-
-					List<Cliente> clientes = null;
-
-					if (nif != null && nif.trim().length() > 0) {
-						clientes = GestorDeDAO.getGestorDeDAO().pesquisaCliente(nif);
-					} else {
-						clientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
-					}
-
-					ClientePesquisaModelTable model = new ClientePesquisaModelTable(clientes);
-					table.setModel(model);
-					numberRows = table.getRowCount();
-					lblResultados.setText("Resultados: " + numberRows);
-
-				} catch (Exception e1) {
-
-				}
-
-
-
-			}
-		});
-		getContentPane().add(botaoPesquisa);
-
 		JButton botaoCriarCliente = new JButton("Criar Cliente");
-		botaoCriarCliente.setBounds(1250, 15, 152, 32);
+		botaoCriarCliente.setBounds(1252, 267, 152, 32);
 		botaoCriarCliente.setFont(font);
 		botaoCriarCliente.setBackground(SystemColor.activeCaption);
 		botaoCriarCliente.setFocusPainted(false);
@@ -129,16 +107,16 @@ public class GUI_gestor_cliente extends JFrame {
 		});
 		getContentPane().add(botaoCriarCliente);
 
-		JPanel panel = new JPanel();
-		panel.setBackground(SystemColor.inactiveCaption);
-		panel.setBounds(66, 74, 1366, 721);
-		panel.setFont(font);
-		getContentPane().add(panel);
-		panel.setLayout(null);
+		JPanel panelDaTable = new JPanel();
+		panelDaTable.setBackground(SystemColor.inactiveCaption);
+		panelDaTable.setBounds(66, 310, 1366, 488);
+		panelDaTable.setFont(font);
+		getContentPane().add(panelDaTable);
+		panelDaTable.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 33, 1332, 660);
-		panel.add(scrollPane);
+		scrollPane.setBounds(10, 33, 1332, 488);
+		panelDaTable.add(scrollPane);
 
 		table = new JTable();
 		table.setRowSelectionAllowed(true);
@@ -147,22 +125,25 @@ public class GUI_gestor_cliente extends JFrame {
 		table.setModel(new DefaultTableModel(new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
 		table.setForeground(SystemColor.desktop);
 		table.setBackground(UIManager.getColor("CheckBox.light"));
-		table.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		table.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		table.setRowHeight(20);
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				if (table.getSelectedRowCount()>1) {
+					botaoVisualizarHistorico.setEnabled(false);
 					botaoEditarCliente.setEnabled(false);
 					botaoDesativarCliente.setEnabled(true);
 				}
 				else if (table.getSelectedRows().length==1) {
 					botaoEditarCliente.setEnabled(true);
 					botaoDesativarCliente.setEnabled(true);
+					botaoVisualizarHistorico.setEnabled(true);
 				}
 				else if (table.getSelectedRowCount()==0)
 				{
 					botaoEditarCliente.setEnabled(false);
 					botaoDesativarCliente.setEnabled(false);
+					botaoVisualizarHistorico.setEnabled(false);
 				}
 
 			}
@@ -170,12 +151,12 @@ public class GUI_gestor_cliente extends JFrame {
 		scrollPane.setViewportView(table);
 
 		lblResultados = new JLabel("Resultados: ");
-		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 20));
+		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		lblResultados.setBounds(10, 4, 136, 25);
-		panel.add(lblResultados);
+		panelDaTable.add(lblResultados);
 
 		botaoEditarCliente = new JButton("Editar Cliente");
-		botaoEditarCliente.setBounds(852, 15, 161, 33);
+		botaoEditarCliente.setBounds(910, 267, 161, 33);
 		botaoEditarCliente.setFont(font);
 		botaoEditarCliente.setEnabled(false);
 		botaoEditarCliente.setBackground(SystemColor.activeCaption);
@@ -199,7 +180,7 @@ public class GUI_gestor_cliente extends JFrame {
 		getContentPane().add(botaoEditarCliente);
 
 		botaoDesativarCliente = new JButton("Desativar Cliente");
-		botaoDesativarCliente.setBounds(1053, 15, 161, 33);
+		botaoDesativarCliente.setBounds(1081, 267, 161, 33);
 		botaoDesativarCliente.setFont(font);
 		botaoDesativarCliente.setEnabled(false);
 		botaoDesativarCliente.setBackground(SystemColor.activeCaption);
@@ -244,7 +225,7 @@ public class GUI_gestor_cliente extends JFrame {
 		getContentPane().add(botaoDesativarCliente);
 
 		btVoltarGestorCliente = new JButton("Voltar");
-		btVoltarGestorCliente.setBounds(26, 818, 119, 32);
+		btVoltarGestorCliente.setBounds(76, 809, 119, 32);
 		btVoltarGestorCliente.setFont(font);
 		btVoltarGestorCliente.setBackground(SystemColor.activeCaption);
 		btVoltarGestorCliente.setFocusPainted(false);
@@ -255,12 +236,7 @@ public class GUI_gestor_cliente extends JFrame {
 		lbFooter.setBounds(599, 802, 367, 59);
 		contentPane.add(lbFooter);
 
-		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblUsernameLogged.setBounds(1315, 818, 159, 32);
-		contentPane.add(lblUsernameLogged);
-
-		JButton botaoVisualizarHistorico = new JButton("Ver Historico");
+		botaoVisualizarHistorico = new JButton("Ver Historico");
 		botaoVisualizarHistorico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
@@ -271,11 +247,10 @@ public class GUI_gestor_cliente extends JFrame {
 							"Por favor selecione um Cliente", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				
-				System.out.println("aqui");
+
 				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
 				List<HistoricoCliente> list;
-				
+
 				try {
 
 					list = GestorDeDAO.getGestorDeDAO().getHistoricoCliente(clienteTemp.getId());
@@ -289,10 +264,151 @@ public class GUI_gestor_cliente extends JFrame {
 
 			}
 		});
-		botaoVisualizarHistorico.setFont(new Font("Dialog", Font.PLAIN, 17));
+		botaoVisualizarHistorico.setFont(new Font("Dialog", Font.PLAIN, 15));
 		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
-		botaoVisualizarHistorico.setBounds(658, 15, 161, 33);
+		botaoVisualizarHistorico.setBounds(739, 266, 161, 33);
+		botaoVisualizarHistorico.setEnabled(false);
 		contentPane.add(botaoVisualizarHistorico);
+
+		lblCamposPesquisas = new JLabel("Campos Pesquisa");
+		lblCamposPesquisas.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblCamposPesquisas.setBounds(66, 26, 294, 26);
+		contentPane.add(lblCamposPesquisas);
+
+		panel = new JPanel();
+		panel.setBackground(SystemColor.inactiveCaption);
+		panel.setBounds(66, 63, 437, 189);
+		contentPane.add(panel);
+		panel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+				new RowSpec[] {
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC,}));
+
+		lblNewLabelID = new JLabel("ID");
+		lblNewLabelID.setFont(new Font("Dialog", Font.PLAIN, 13));
+		panel.add(lblNewLabelID, "2, 2, left, default");
+
+		textPesquisaID = new JTextField();
+		textPesquisaID.setColumns(10);
+		panel.add(textPesquisaID, "4, 2, fill, default");
+
+		lblNewLabelNIF = new JLabel("NIF");
+		lblNewLabelNIF.setFont(new Font("Dialog", Font.PLAIN, 13));
+		panel.add(lblNewLabelNIF, "2, 4, left, default");
+
+		textPesquisaNIF = new JTextField();
+		textPesquisaNIF.setColumns(10);
+		panel.add(textPesquisaNIF, "4, 4, fill, default");
+
+		lblNome = new JLabel("Nome");
+		lblNome.setFont(new Font("Dialog", Font.PLAIN, 13));
+		panel.add(lblNome, "2, 6, left, default");
+
+		textFieldNome = new JTextField();
+		textFieldNome.setColumns(10);
+		panel.add(textFieldNome, "4, 6, fill, default");
+
+		lblMorada = new JLabel("Morada");
+		lblMorada.setFont(new Font("Dialog", Font.PLAIN, 13));
+		panel.add(lblMorada, "2, 8, left, default");
+
+		textFieldMorada = new JTextField();
+		textFieldMorada.setColumns(10);
+		panel.add(textFieldMorada, "4, 8, fill, default");
+
+		checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
+		panel.add(checkBoxAtivo, "4, 10, center, default");
+
+		botaoPesquisa = new JButton("Pesquisar");
+		botaoPesquisa.setFont(new Font("Dialog", Font.PLAIN, 15));
+		botaoPesquisa.setBackground(SystemColor.activeCaption);
+		botaoPesquisa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					int id = 0;
+					String nif = null;
+					String nome = null;
+					String morada = null;
+					int ativo = checkBoxAtivo.isSelected()? 1:0;
+
+					if(!textPesquisaID.getText().isBlank()) {
+						id = Integer.parseInt(textPesquisaID.getText());
+					}
+
+					if(!textPesquisaNIF.getText().isBlank()) {
+						nif = textPesquisaNIF.getText();
+					}
+
+					if(!textFieldNome.getText().isBlank()) {
+						nome = textFieldNome.getText();
+					}
+
+					if(!textFieldMorada.getText().isBlank()) {
+						morada = textFieldMorada.getText();
+					}
+
+
+					List<Cliente> clientes = null;
+
+					if ((id != 0) || (nif != null) || (nome != null) || (morada != null) || (ativo!=0) ) {
+						clientes = GestorDeDAO.getGestorDeDAO().pesquisaCliente(id, nif, nome, morada, ativo);
+					} else {
+						clientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
+					}
+
+					ClientePesquisaModelTable model = new ClientePesquisaModelTable(clientes);
+					table.setModel(model);
+					numberRows = table.getRowCount();
+					lblResultados.setText("Resultados: " + numberRows);
+
+				} catch (Exception e1) {
+
+				}
+
+
+
+			}
+		});
+		panel.add(botaoPesquisa, "4, 12");
+
+		panelUserESessao = new JPanel();
+		panelUserESessao.setBackground(SystemColor.inactiveCaption);
+		panelUserESessao.setBounds(1303, 11, 171, 69);
+		contentPane.add(panelUserESessao);
+		panelUserESessao.setLayout(null);
+
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setText("Username:");
+		lblUsernameLogged.setBounds(0, 0, 159, 16);
+		panelUserESessao.add(lblUsernameLogged);
+		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
+
+		lblTempoSessao = new JLabel();
+		lblTempoSessao.setText("Sessão:");
+		lblTempoSessao.setBounds(0, 15, 159, 15);
+		panelUserESessao.add(lblTempoSessao);
+		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 12));
+
+		lblHoraSistema = new JLabel();
+		lblHoraSistema.setBounds(0, 29, 159, 16);
+		panelUserESessao.add(lblHoraSistema);
+		lblHoraSistema.setText("Data:");
+		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 12));
 
 	}
 
@@ -326,11 +442,23 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	public void setUsernameLoggedIn(String username) {
-		lblUsernameLogged.setText("Logged in : " + username);
+		lblUsernameLogged.setText("Username: " + username);
 
 	}
 
 	public void recebeUsernameDaPaginaLogin(String username) {
 		this.username = username;
 	}
+
+	public void setLblTempoSessao(Duration temporizador) {
+		lblTempoSessao.setText("Sessão: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
+	}
+
+	public void setLblHoraSistema(String agora) {
+		lblHoraSistema.setText("Data: " + agora);
+
+	}
+	
+	
+	
 }

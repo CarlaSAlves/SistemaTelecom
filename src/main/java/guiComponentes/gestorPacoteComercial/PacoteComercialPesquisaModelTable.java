@@ -12,10 +12,11 @@ public class PacoteComercialPesquisaModelTable extends AbstractTableModel {
 	private static final int NOME_COL = 1;
 	private static final int DESCRICAO_COL = 2;	
 	private static final int ATIVO_COL = 3;
-
+	public static final int DATA_INICIO_COL = 4;
+	public static final int DATA_FIM_COL = 5;
 
 	
-	private String[] nomesColunas = { "ID", "Nome", "Descricao", "Ativo" };
+	private String[] nomesColunas = { "ID", "Nome", "Descricao", "Ativo","Data de Inicio", "Data de Fim" };
 	
 	private List<PacoteComercial> pacotesComerciais;
 
@@ -53,6 +54,10 @@ public class PacoteComercialPesquisaModelTable extends AbstractTableModel {
 			return pacoteComercial.getDescricao();
 		case ATIVO_COL:
 			return pacoteComercial.isAtivo();
+		case DATA_INICIO_COL:
+			return pacoteComercial.getData_inicio();
+			case DATA_FIM_COL:
+			return pacoteComercial.getData_fim();
 		case OBJECT_COL:
 			return pacoteComercial;
 		default:

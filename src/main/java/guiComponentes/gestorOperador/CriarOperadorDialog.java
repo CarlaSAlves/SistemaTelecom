@@ -17,6 +17,10 @@ import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import java.awt.Font;
 import java.awt.SystemColor;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
 
 
 public class CriarOperadorDialog extends JDialog {
@@ -79,73 +83,79 @@ public class CriarOperadorDialog extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		setTitle("Novo Operador");
-		contentPanel.setLayout(null);
+		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("70px"),
+				FormSpecs.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("334px"),},
+			new RowSpec[] {
+				RowSpec.decode("24px"),
+				RowSpec.decode("20px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				RowSpec.decode("25px"),
+				RowSpec.decode("23px"),}));
 		{
 			JLabel lblNome = new JLabel("Nome");
-			lblNome.setFont(font);
-			lblNome.setBounds(10, 27, 46, 14);
-			contentPanel.add(lblNome);
+			lblNome.setFont(new Font("Dialog", Font.PLAIN, 13));
+			contentPanel.add(lblNome, "2, 2, left, top");
 		}
 
 		{
 			JLabel lblNif = new JLabel("NIF");
-			lblNif.setFont(font);
-			lblNif.setBounds(10, 55, 46, 14);
-			contentPanel.add(lblNif);
+			lblNif.setFont(new Font("Dialog", Font.PLAIN, 13));
+			contentPanel.add(lblNif, "2, 4, left, top");
 		}
 
 		{
 			JLabel lblLogin = new JLabel("Login");
-			lblLogin.setFont(font);
-			lblLogin.setBounds(10, 83, 46, 20);
-			contentPanel.add(lblLogin);
+			lblLogin.setFont(new Font("Dialog", Font.PLAIN, 13));
+			contentPanel.add(lblLogin, "2, 6, left, top");
 		}
 
 		{
 			JLabel lblPassword = new JLabel("Password");
-			lblPassword.setFont(font);
-			lblPassword.setBounds(10, 114, 70, 14);
-			contentPanel.add(lblPassword);
+			lblPassword.setFont(new Font("Dialog", Font.PLAIN, 13));
+			contentPanel.add(lblPassword, "2, 8, fill, top");
 		}
 
 		{
 			textFieldNome = new JTextField();
 			textFieldNome.setFont(font);
 			textFieldNome.setColumns(10);
-			textFieldNome.setBounds(90, 24, 334, 20);
-			contentPanel.add(textFieldNome);
+			contentPanel.add(textFieldNome, "4, 2, fill, fill");
 		}
 
 		{
 			textFieldNIF = new JTextField();
 			textFieldNIF.setFont(font);
 			textFieldNIF.setColumns(10);
-			textFieldNIF.setBounds(90, 52, 334, 20);
-			contentPanel.add(textFieldNIF);
+			contentPanel.add(textFieldNIF, "4, 4, fill, fill");
 		}
 
 		{
 			textFieldLogin = new JTextField();
 			textFieldLogin.setFont(font);
 			textFieldLogin.setColumns(10);
-			textFieldLogin.setBounds(90, 83, 334, 20);
-			contentPanel.add(textFieldLogin);
+			contentPanel.add(textFieldLogin, "4, 6, fill, fill");
 		}
 
 		{
 			textFieldPassword = new JTextField();
 			textFieldPassword.setFont(font);
 			textFieldPassword.setColumns(10);
-			textFieldPassword.setBounds(90, 111, 334, 20);
-			contentPanel.add(textFieldPassword);
+			contentPanel.add(textFieldPassword, "4, 8, fill, fill");
 		}
 
 		checkBoxAtivo = new JCheckBox("Ativo");
 		checkBoxAtivo.setSelected(true);
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
-		checkBoxAtivo.setFont(font);
-		checkBoxAtivo.setBounds(170, 156, 97, 23);
-		contentPanel.add(checkBoxAtivo);
+		checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
+		contentPanel.add(checkBoxAtivo, "4, 10, center, fill");
 
 		{
 			JPanel buttonPane = new JPanel();

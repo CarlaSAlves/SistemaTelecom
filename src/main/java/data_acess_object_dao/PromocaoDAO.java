@@ -11,6 +11,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.StringJoiner;
+
 import standard_value_object.Promocao;
 
 public class PromocaoDAO {
@@ -53,17 +55,40 @@ public class PromocaoDAO {
 		}
 	}
 
-	public List<Promocao> pesquisaPromocao(int id) throws Exception {
+	public List<Promocao> pesquisaPromocao(int id, String nome, int ativo) throws Exception {
 		List<Promocao> list = new ArrayList<>();
 
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
-
-		try {
+		StringJoiner sj = new StringJoiner (" AND ");
+		String query = "SELECT * FROM PROMOCAO WHERE ";
 		
-			myStmt = myConn.prepareStatement("select * from promocao where id=?");
+		try {
+			@SuppressWarnings("rawtypes")
+			List<Comparable> values = new ArrayList<Comparable>();
 
-			myStmt.setInt(1, id);
+			if(id!= 0){
+				sj.add("ID=?");
+				values.add(id);
+			}
+			if(nome != null) {
+				nome += "%";
+				sj.add("NOME LIKE ?");
+				values.add(nome);
+			}
+			if(ativo!=0){
+				sj.add("ativo=?");
+				values.add(ativo);
+			}
+
+			query += sj.toString();
+		
+		
+			myStmt = myConn.prepareStatement(query);
+
+			for (int index = 0; index < values.size(); index++){
+				myStmt.setObject(index+1 , values.get(index));
+			}
 
 			myRs = myStmt.executeQuery();
 

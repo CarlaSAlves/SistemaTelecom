@@ -10,6 +10,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.StringJoiner;
+
 import standard_value_object.Funcionario;
 
 public class FuncionarioDAO {
@@ -102,18 +104,45 @@ public class FuncionarioDAO {
 
 
 
-	public List<Funcionario> pesquisaFuncionarioOperador(String nif) throws Exception {
+	public List<Funcionario> pesquisaFuncionarioOperador(int id ,String nif, String nome, int ativo) throws Exception {
 		List<Funcionario> list = new ArrayList<>();
 
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
-
+		StringJoiner sj = new StringJoiner (" AND ");
+		String query = "SELECT * FROM FUNCIONARIO WHERE ";
+		
 		try {
-			nif += "%";
+			@SuppressWarnings("rawtypes")
+			List<Comparable> values = new ArrayList<Comparable>();
 
-			myStmt = myConn.prepareStatement("select * from funcionario where nif LIKE ? AND id_role= 2");
+			if(id!= 0){
+				sj.add("ID=?");
+				values.add(id);
+			}
+			if(nif != null) {
+				nif += "%";
+				sj.add("NIF LIKE ?");
+				values.add(nif);
+			}
+			if(nome != null) {
+				nome += "%";
+				sj.add("NOME LIKE ?");
+				values.add(nome);
+			}
+			if(ativo!=0){
+				sj.add("ativo=?");
+				values.add(ativo);
+			}
 
-			myStmt.setString(1, nif);
+			query += sj.toString();
+			query+= " AND id_role=2";
+		
+			myStmt = myConn.prepareStatement(query);
+
+			for (int index = 0; index < values.size(); index++){
+				myStmt.setObject(index+1 , values.get(index));
+			}
 
 			myRs = myStmt.executeQuery();
 
