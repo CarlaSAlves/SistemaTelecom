@@ -111,16 +111,18 @@ public class GUI_total extends JFrame {
 			}
 		});
 
-		
-		homepage.getBtGerirPromocoes().addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				homepagePanel.setVisible(false);
-				gestor_promocoesPanel.setVisible(true);
-			
-			}
-		});
+//		
+//		homepage.getBtGerirPromocoes().addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent arg0) {				
+//				homepagePanel.setVisible(false);				
+//				gestor_promocoesPanel.setVisible(true);
+//				
+//				System.out.println("Teste !!!!");
+//			
+//			}
+//		});
 		
 		homepage.getBtGerirPacotes().addActionListener(new ActionListener() {
 
@@ -166,18 +168,11 @@ public class GUI_total extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				homepagePanel.setVisible(true);
 				gestor_pacotesPanel.setVisible(false);
+				
+				System.out.println("Teste botão voltar !!!!");
 			}
 		});
 		
-//		gestor_promocoes.btVoltarGestorPromocoes().addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				homepagePanel.setVisible(true);
-//				gestor_promocoesPanel.setVisible(false);
-//				
-//			}
-//		});
 
 
 	}
