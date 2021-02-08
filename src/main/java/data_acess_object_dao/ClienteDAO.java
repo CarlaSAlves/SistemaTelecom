@@ -11,18 +11,15 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
-<<<<<<< HEAD
 
-import data_acess_object_dao_v2.PasswordEncryption;
 import historicos.HistoricoCliente;
 
-=======
-import data_acess_object_dao_v2.PasswordEncryption;
+import data_acess_object_dao.PasswordEncryption;
 import historicos.HistoricoCliente;
->>>>>>> f764afec5d3dc6d0d7c41fd49b93880076dc14c8
+
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
-import standard_value_object_v2.PacoteCliente;
+import standard_value_object.PacoteCliente;
 
 public class ClienteDAO {
 
@@ -257,10 +254,7 @@ public class ClienteDAO {
 			myStmt = logUpdate(funcionario, clientCriado, "Criar Cliente");	
 
 			myStmt.executeUpdate();	
-<<<<<<< HEAD
-=======
 
->>>>>>> f764afec5d3dc6d0d7c41fd49b93880076dc14c8
 
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -82,7 +82,7 @@ public class PacoteClienteDAO {
 	
 	//cria um pacote_cliente e devolve o mesmo. Usar em combinaçao com metodo atribuirPacoteCliente do ClienteDao
 	//para criar e atribuir um pacote_cliente a clientes
-	public void criarPacoteCliente(PacoteCliente pacoteCliente) throws SQLException{
+	public PacoteCliente criarPacoteCliente(PacoteCliente pacoteCliente) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
 			//vamos criar um pacote_cliente novo e pedir ao driver do mysql que devolva o id da nova entidade criada
@@ -93,7 +93,7 @@ public class PacoteClienteDAO {
 			myStmt.setInt(3, pacoteCliente.getId_criado_por());
 			myStmt.executeUpdate();
 			
-			//vamos reaproveitar o objecto pacoteCliente e vamos colocar o id enviado pela base de dados nele
+			//vamos reaproveitar o objecto pacoteCliente no parametro da funçao e vamos colocar o id enviado pela base de dados nele
 			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
 	            if (generatedKeys.next()) {
 	                pacoteCliente.setId((int)generatedKeys.getLong(1));
@@ -107,6 +107,8 @@ public class PacoteClienteDAO {
 		}finally {
 			myStmt.close();
 		}
+		
+		return pacoteCliente;
 	}
 	
 	public void adicionarPromocao(PacoteCliente pacoteCliente, Promocao promocao) throws SQLException{

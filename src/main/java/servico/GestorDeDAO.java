@@ -11,12 +11,14 @@ import java.util.Properties;
 
 import data_acess_object_dao.ClienteDAO;
 import data_acess_object_dao.FuncionarioDAO;
+import data_acess_object_dao.PacoteClienteDAO;
 import data_acess_object_dao.PacoteComercialDAO;
 import data_acess_object_dao.PromocaoDAO;
 import historicos.HistoricoCliente;
 import historicos.HistoricoOperador;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
+import standard_value_object.PacoteCliente;
 import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
 
@@ -26,6 +28,7 @@ public class GestorDeDAO {
 	private FuncionarioDAO funcionarioDAO;
 	private PacoteComercialDAO pacoteComercialDAO;
 	private PromocaoDAO promocaoDAO;
+	private PacoteClienteDAO pacoteClienteDAO;
 	private static GestorDeDAO GestorDeDAOInstance = null;
 	private Connection connection;
 
@@ -35,6 +38,7 @@ public class GestorDeDAO {
 		funcionarioDAO = new FuncionarioDAO(this.connection);
 		pacoteComercialDAO = new PacoteComercialDAO(this.connection);
 		promocaoDAO = new PromocaoDAO(this.connection);
+		pacoteClienteDAO = new PacoteClienteDAO(connection);
 	}
 
 	public static synchronized GestorDeDAO getGestorDeDAO() throws Exception {
@@ -105,14 +109,26 @@ public class GestorDeDAO {
 		return funcionarioDAO. getAllFuncionarioOperador();
 	}
 
-	public Funcionario pesquisaFuncionarioAdmin(String username) throws Exception{        
-		return funcionarioDAO.pesquisaFuncionarioAdmin(username);
+	//se o login falhar, olhem aqui
+	public Funcionario pesquisarFuncionarioLoginPass(String username, String password) throws Exception{        
+		return funcionarioDAO.pesquisarFuncionarioLoginPass(username, password);
 	}
 
 	public List<Funcionario> pesquisaFuncionarioOperador(int id ,String nif, String nome, int ativo) throws Exception{
 		return funcionarioDAO.pesquisaFuncionarioOperador(id, nif, nome, ativo);
 	}
 
+	//metodo que vai ver se o cliente nao possui um pacote cliente e , caso nao tenha, vai criar um pacote_cliente novo e
+	//atribui-lo ao mesmo cliente. Deste modo assegura-se que nao ha pacotes sem clientes e que cada cliente tem apenas um pacote (e que cada pacote tem um cliente so)
+	//VEJAM QUAL É A MELHOR MANEIRA DE CRIAR E ATRIBUIR UM PACOTE, SABENDO QUE UM PACOTE SO PODE TER UM CLIENTE, E VICE-VERSA, E NAO PODEM HAVER PACOTES SEM CLIENTES
+	public void criarEAtribuirPacoteCliente(Cliente cliente, PacoteCliente pacoteCliente) throws SQLException, Exception {
+		if (cliente.getId_pacote_cliente() > 0) {
+			throw new RuntimeException("Cliente com id " + cliente.getId() + " já tem um pacote cliente.");
+		}
+		
+		clienteDAO.atribuirPacoteCliente(pacoteClienteDAO.criarPacoteCliente(pacoteCliente), cliente);
+	}
+	
 	public void criarPacoteComercial(PacoteComercial pacoteComercial) throws Exception {
 		pacoteComercialDAO.criarPacoteComercial(pacoteComercial);
 	}

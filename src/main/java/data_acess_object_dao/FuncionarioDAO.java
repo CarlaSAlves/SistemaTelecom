@@ -15,16 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.StringJoiner;
-<<<<<<< HEAD
 
-import data_acess_object_dao_v2.PasswordEncryption;
+import data_acess_object_dao.PasswordEncryption;
 
-=======
-import data_acess_object_dao_v2.PasswordEncryption;
->>>>>>> f764afec5d3dc6d0d7c41fd49b93880076dc14c8
 import historicos.HistoricoOperador;
 import standard_value_object.Funcionario;
-import standard_value_object_v2.Role;
+import standard_value_object.Role;
 
 public class FuncionarioDAO {
 
@@ -67,12 +63,14 @@ public class FuncionarioDAO {
 			while (myRs.next()) {
 				funcionario = convertRowParaFuncionario(myRs);
 			}
-			return funcionario;
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			close(myStmt, myRs);
 		}
+		
+		return funcionario;
 	}
 
 	private Funcionario pesquisaOperadorAuxiliarNIF(String nif) throws Exception {
@@ -90,12 +88,14 @@ public class FuncionarioDAO {
 			while (myRs.next()) {
 				funcionario = convertRowParaFuncionario(myRs);
 			}
-			return funcionario;
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			close(myStmt, myRs);
 		}
+		
+		return funcionario;
 	}
 
 	public List<Funcionario> getAllFuncionarioOperador() throws Exception {
@@ -113,13 +113,14 @@ public class FuncionarioDAO {
 				Funcionario funcionario = convertRowParaFuncionario(myRs);
 				listaFuncionarioOperador.add(funcionario);
 			}
-
-			return listaFuncionarioOperador;		
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			close(myStmt, myRs);
 		}
+		
+		return listaFuncionarioOperador;
 	}
 
 	//substituir pelo metodo pesquisarFuncionarioLoginPass
@@ -194,17 +195,17 @@ public class FuncionarioDAO {
 				list.add(funcionario);
 			}
 
-			return list;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			close(myStmt, myRs);
 		}
+		
+		return list;
 	}
 	
 	public List<Funcionario> pesquisaTodosFuncionarios() throws Exception {
 		List<Funcionario> listaFuncionario = new ArrayList<>();
-
 		Statement myStmt = null;
 		ResultSet myRs = null;
 
@@ -360,10 +361,6 @@ public class FuncionarioDAO {
 			myStmt.setString(4, PasswordEncryption.get_SHA_512_SecurePassword(funcionario.getPassword()));
 			myStmt.setBoolean(5, funcionario.isAtivo());
 			myStmt.setInt(6, funcionario.getId_role());
-<<<<<<< HEAD
-=======
-
->>>>>>> f764afec5d3dc6d0d7c41fd49b93880076dc14c8
 
 			myStmt.setString(1, operador.getNome());
 			myStmt.setLong(2, operador.getNif());
