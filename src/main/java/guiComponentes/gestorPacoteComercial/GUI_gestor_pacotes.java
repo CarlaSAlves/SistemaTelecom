@@ -81,7 +81,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		JButton botaoCriarPacotes = new JButton("Criar Pacote Comercial");
 		botaoCriarPacotes.setBounds(697, 179, 231, 43);
-		botaoCriarPacotes.setFont(new Font("Dialog", Font.PLAIN, 15));
+		botaoCriarPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoCriarPacotes.setBackground(SystemColor.activeCaption);
 		botaoCriarPacotes.setFocusPainted(false);
 		botaoCriarPacotes.addActionListener(new ActionListener() {
@@ -119,13 +119,13 @@ public class GUI_gestor_pacotes extends JFrame {
 
 
 		lblResultados = new JLabel("Resultados: ");
-		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		lblResultados.setBounds(10, 4, 136, 25);
 		panel.add(lblResultados);
 
 		botaoEditarPacoteComercial = new JButton("Editar Pacote Comercial");
 		botaoEditarPacoteComercial.setBounds(697, 125, 231, 43);
-		botaoEditarPacoteComercial.setFont(new Font("Dialog", Font.PLAIN, 15));
+		botaoEditarPacoteComercial.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoEditarPacoteComercial.setBackground(SystemColor.activeCaption);
 		botaoEditarPacoteComercial.setFocusPainted(false);
 		botaoEditarPacoteComercial.addActionListener(new ActionListener() {
@@ -150,7 +150,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		botaoDesativarPacoteComercial = new JButton("Desativar Pacote Comercial");
 		botaoDesativarPacoteComercial.setBounds(697, 71, 231, 43);
-		botaoDesativarPacoteComercial.setFont(new Font("Dialog", Font.PLAIN, 15));
+		botaoDesativarPacoteComercial.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoDesativarPacoteComercial.setBackground(SystemColor.activeCaption);
 		botaoDesativarPacoteComercial.setFocusPainted(false);
 		botaoDesativarPacoteComercial.addActionListener(new ActionListener() {
@@ -233,7 +233,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		botaoDesativarPacoteComercial.setEnabled(false);
 		
 		JLabel lblCamposPesquisas = new JLabel("Campos Pesquisa");
-		lblCamposPesquisas.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
 		lblCamposPesquisas.setBounds(66, 32, 294, 26);
 		contentPane.add(lblCamposPesquisas);
 		
@@ -257,7 +257,7 @@ public class GUI_gestor_pacotes extends JFrame {
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
 		JLabel lblNewLabelID = new JLabel("ID");
-		lblNewLabelID.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblNewLabelID.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		panel_1.add(lblNewLabelID, "2, 2, left, default");
 		
 		textPesquisaID = new JTextField();
@@ -265,7 +265,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		textPesquisaID.setColumns(10);
 		
 		JLabel lblNewLabelNome = new JLabel("Nome");
-		lblNewLabelNome.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblNewLabelNome.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		panel_1.add(lblNewLabelNome, "2, 4, right, default");
 		
 		textFieldNome = new JTextField();
@@ -275,12 +275,12 @@ public class GUI_gestor_pacotes extends JFrame {
 		JCheckBox checkBoxAtivo = new JCheckBox("Ativo");
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
 		checkBoxAtivo.setForeground(SystemColor.desktop);
-		checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
+		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		panel_1.add(checkBoxAtivo, "4, 6, center, default");
 		
 		JButton btnNewButtonPesquisar = new JButton("Pesquisar");
 		btnNewButtonPesquisar.setBackground(SystemColor.activeCaption);
-		btnNewButtonPesquisar.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btnNewButtonPesquisar.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		panel_1.add(btnNewButtonPesquisar, "4, 8");
 		btnNewButtonPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -325,7 +325,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		
 		panelUserESessao = new JPanel();
 		panelUserESessao.setBackground(SystemColor.inactiveCaption);
-		panelUserESessao.setBounds(1303, 11, 171, 69);
+		panelUserESessao.setBounds(1242, 11, 232, 59);
 		contentPane.add(panelUserESessao);
 		panelUserESessao.setLayout(null);
 
@@ -333,19 +333,19 @@ public class GUI_gestor_pacotes extends JFrame {
 		lblUsernameLogged.setText("Username:");
 		lblUsernameLogged.setBounds(0, 0, 159, 16);
 		panelUserESessao.add(lblUsernameLogged);
-		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setText("Sessão:");
 		lblTempoSessao.setBounds(0, 15, 159, 15);
 		panelUserESessao.add(lblTempoSessao);
-		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 
 		lblHoraSistema = new JLabel();
-		lblHoraSistema.setBounds(0, 29, 159, 16);
+		lblHoraSistema.setBounds(0, 32, 159, 16);
 		panelUserESessao.add(lblHoraSistema);
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		
 	}
 

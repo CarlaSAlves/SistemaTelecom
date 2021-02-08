@@ -123,7 +123,7 @@ public class GUI_gestor_operador extends JFrame {
 		scrollPane.setViewportView(table);
 
 		lblResultados = new JLabel("Resultados: ");
-		lblResultados.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		lblResultados.setBounds(10, 4, 136, 25);
 		panelDaTable.add(lblResultados);
 
@@ -240,7 +240,7 @@ public class GUI_gestor_operador extends JFrame {
 		botaoDesativarOperador.setEnabled(false);
 
 		lblCamposPesquisas = new JLabel("Campos Pesquisa");
-		lblCamposPesquisas.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
 		lblCamposPesquisas.setBounds(66, 26, 294, 26);
 		contentPane.add(lblCamposPesquisas);
 
@@ -268,7 +268,7 @@ public class GUI_gestor_operador extends JFrame {
 						FormSpecs.DEFAULT_ROWSPEC,}));
 
 		lblNewLabelID = new JLabel("ID");
-		lblNewLabelID.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblNewLabelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		panelPesquisa.add(lblNewLabelID, "2, 2, left, default");
 
 		textPesquisaID = new JTextField();
@@ -276,7 +276,7 @@ public class GUI_gestor_operador extends JFrame {
 		textPesquisaID.setColumns(10);
 
 		lblNewLabelNIF = new JLabel("NIF");
-		lblNewLabelNIF.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblNewLabelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		panelPesquisa.add(lblNewLabelNIF, "2, 4, left, default");
 
 		textPesquisaNIF = new JTextField();
@@ -284,7 +284,7 @@ public class GUI_gestor_operador extends JFrame {
 		panelPesquisa.add(textPesquisaNIF, "4, 4, fill, default");
 
 		lblNome = new JLabel("Nome");
-		lblNome.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		panelPesquisa.add(lblNome, "2, 6, left, default");
 
 		textFieldNome = new JTextField();
@@ -292,11 +292,12 @@ public class GUI_gestor_operador extends JFrame {
 		panelPesquisa.add(textFieldNome, "4, 6, fill, default");
 
 		checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
 		panelPesquisa.add(checkBoxAtivo, "4, 10, center, default");
 
 		botaoPesquisa = new JButton("Pesquisar");
-		botaoPesquisa.setFont(new Font("Dialog", Font.PLAIN, 15));
+		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoPesquisa.setBackground(SystemColor.activeCaption);
 		panelPesquisa.add(botaoPesquisa, "4, 12");
 		botaoPesquisa.addActionListener(new ActionListener() {
@@ -343,7 +344,7 @@ public class GUI_gestor_operador extends JFrame {
 
 		panelUserESessao = new JPanel();
 		panelUserESessao.setBackground(SystemColor.inactiveCaption);
-		panelUserESessao.setBounds(1303, 11, 171, 69);
+		panelUserESessao.setBounds(1222, 11, 252, 51);
 		contentPane.add(panelUserESessao);
 		panelUserESessao.setLayout(null);
 
@@ -351,19 +352,19 @@ public class GUI_gestor_operador extends JFrame {
 		lblUsernameLogged.setText("Username:");
 		lblUsernameLogged.setBounds(0, 0, 159, 16);
 		panelUserESessao.add(lblUsernameLogged);
-		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setText("Sessão:");
 		lblTempoSessao.setBounds(0, 15, 159, 15);
 		panelUserESessao.add(lblTempoSessao);
-		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setBounds(0, 29, 159, 16);
 		panelUserESessao.add(lblHoraSistema);
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 
 	}
 

@@ -59,7 +59,7 @@ public class GUI_login extends JFrame {
 		btnSair = new JButton("Sair");
 		btnSair.setToolTipText("Carregue para fazer signout");
 		btnSair.setForeground(Color.BLACK);
-		btnSair.setFont(new Font("Dialog", Font.PLAIN, 20));
+		btnSair.setFont(new Font("Dubai Light", Font.PLAIN, 20));
 		btnSair.setFocusPainted(false);
 		btnSair.setBackground(SystemColor.menu);
 		btnSair.setBounds(749, 522, 104, 33);
@@ -93,7 +93,7 @@ public class GUI_login extends JFrame {
 		labelConfm.setForeground(new Color(255, 0, 0));
 		labelConfm.setFont(font);
 		
-		//labelConfirm devia estar escondida de origem, não ?
+		//labelConfirm devia estar escondida de origem, nï¿½o ?
 		labelConfm.setVisible(false);
 		getContentPane().add(labelConfm);
 
@@ -108,16 +108,16 @@ public class GUI_login extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//login vai usar metodos e entidades que estao nos dao do package V2
-				//primeiro vamos ver se o utilizador é um cliente
+				//primeiro vamos ver se o utilizador ï¿½ um cliente
 				String login = textFieldUser.getText();
 				String pass = passwordField.getSelectedText();
 				
 				if(login.isBlank() || pass.isBlank()) {
-					JOptionPane.showMessageDialog(null, "Campos não podem estar vazios.");
+					JOptionPane.showMessageDialog(null, "Campos nï¿½o podem estar vazios.");
 					return;
 				}
 				
-				//verifica se é um cliente (entidade cliente vem da package standard_value_objects_v2)
+				//verifica se ï¿½ um cliente (entidade cliente vem da package standard_value_objects_v2)
 				//searchClienteByLoginPass vem dos dao V2
 				Cliente cliente = GestorDeDAO.getGestorDeDAO().searchClienteByLoginPass( login, PasswordEncryption.get_SHA_512_SecurePassword(pass) );
 				if( cliente != null) {
@@ -130,7 +130,7 @@ public class GUI_login extends JFrame {
 					return;
 				}
 				
-				//se nao é cliente, é funcionário (entidade funcionario vem da package standard_value_objects_v2)
+				//se nao ï¿½ cliente, ï¿½ funcionï¿½rio (entidade funcionario vem da package standard_value_objects_v2)
 				//searchFuncionarioByLoginPass vem dos dao V2
 				Funcionario funcionario = GestorDeDAO.getGestorDeDAO().searchFuncionarioByLoginPass( login, PasswordEncryption.get_SHA_512_SecurePassword(pass) );
 				if( funcionario != null) {

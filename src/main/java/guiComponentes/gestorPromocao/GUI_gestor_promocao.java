@@ -77,7 +77,7 @@ public class GUI_gestor_promocao extends JFrame {
 
 		JButton botaoCriarPromocao = new JButton("Criar Promoção");
 		botaoCriarPromocao.setBounds(697, 179, 231, 43);
-		botaoCriarPromocao.setFont(new Font("Dialog", Font.PLAIN, 15));
+		botaoCriarPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoCriarPromocao.setBackground(SystemColor.activeCaption);
 		botaoCriarPromocao.setFocusPainted(false);
 		botaoCriarPromocao.addActionListener(new ActionListener() {
@@ -121,7 +121,7 @@ public class GUI_gestor_promocao extends JFrame {
 
 		botaoEditarPromocao = new JButton("Editar Promoção");
 		botaoEditarPromocao.setBounds(697, 125, 231, 43);
-		botaoEditarPromocao.setFont(new Font("Dialog", Font.PLAIN, 15));
+		botaoEditarPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoEditarPromocao.setBackground(SystemColor.activeCaption);
 		botaoEditarPromocao.setFocusPainted(false);
 		botaoEditarPromocao.addActionListener(new ActionListener() {
@@ -146,7 +146,7 @@ public class GUI_gestor_promocao extends JFrame {
 
 		botaoDesativarPromocao = new JButton("Desativar Promoção");
 		botaoDesativarPromocao.setBounds(697, 71, 231, 43);
-		botaoDesativarPromocao.setFont(new Font("Dialog", Font.PLAIN, 15));
+		botaoDesativarPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoDesativarPromocao.setBackground(SystemColor.activeCaption);
 		botaoDesativarPromocao.setFocusPainted(false);
 		botaoDesativarPromocao.addActionListener(new ActionListener() {
@@ -262,7 +262,7 @@ public class GUI_gestor_promocao extends JFrame {
 						RowSpec.decode("26px"),}));
 		JLabel lblDeProcura = new JLabel("ID");
 		panel_1.add(lblDeProcura, "2, 2, left, center");
-		lblDeProcura.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblDeProcura.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 
 		textPesquisaID = new JTextField();
 		panel_1.add(textPesquisaID, "4, 2, fill, default");
@@ -270,7 +270,7 @@ public class GUI_gestor_promocao extends JFrame {
 
 		JLabel lblNome = new JLabel("Nome");
 		panel_1.add(lblNome, "2, 4, left, center");
-		lblNome.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 
 		textFieldNome = new JTextField();
 		panel_1.add(textFieldNome, "4, 4, fill, default");
@@ -278,14 +278,14 @@ public class GUI_gestor_promocao extends JFrame {
 
 		JCheckBox checkBoxAtivo = new JCheckBox("Ativa");
 		panel_1.add(checkBoxAtivo, "4, 6, center, default");
-		checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
+		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
 
 
 		JButton botaoPesquisa = new JButton("Pesquisar");
 		panel_1.add(botaoPesquisa, "4, 9");
 		botaoPesquisa.setBackground(SystemColor.activeCaption);
-		botaoPesquisa.setFont(new Font("Dialog", Font.PLAIN, 15));
+		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		botaoPesquisa.setFocusPainted(false);
 		
 	
@@ -329,7 +329,7 @@ public class GUI_gestor_promocao extends JFrame {
 
 		panelUserESessao = new JPanel();
 		panelUserESessao.setBackground(SystemColor.inactiveCaption);
-		panelUserESessao.setBounds(1303, 11, 171, 69);
+		panelUserESessao.setBounds(1206, 7, 268, 53);
 		contentPane.add(panelUserESessao);
 		panelUserESessao.setLayout(null);
 
@@ -337,19 +337,19 @@ public class GUI_gestor_promocao extends JFrame {
 		lblUsernameLogged.setText("Username:");
 		lblUsernameLogged.setBounds(0, 0, 159, 16);
 		panelUserESessao.add(lblUsernameLogged);
-		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setText("Sessão:");
 		lblTempoSessao.setBounds(0, 15, 159, 15);
 		panelUserESessao.add(lblTempoSessao);
-		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setBounds(0, 29, 159, 16);
 		panelUserESessao.add(lblHoraSistema);
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		
 	}
 
