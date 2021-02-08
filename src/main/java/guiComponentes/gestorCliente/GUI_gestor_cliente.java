@@ -22,18 +22,15 @@ import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
+import historico.cliente.HistoricoCliente;
 import servico.GestorDeDAO;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
-import guiComponentes.GUI_total;
-import historicos.HistoricoCliente;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JCheckBox;
@@ -52,6 +49,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private int indices[];
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JLabel lblUsernameLogged;
+	private String username;
 	private JButton botaoVisualizarHistorico;
 	private JLabel lblCamposPesquisas;
 	private JPanel panel;
@@ -67,8 +65,8 @@ public class GUI_gestor_cliente extends JFrame {
 	private JButton botaoPesquisa;
 	private JLabel lblTempoSessao;
 	private JLabel lblHoraSistema;
-
-
+	private JPanel panelUserESessao;
+	int test;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -85,24 +83,7 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	public GUI_gestor_cliente() {
-		
-		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-	        if ("Nimbus".equals(info.getName())) {
-	            try {
-					UIManager.setLookAndFeel(info.getClassName());
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e) {
-					e.printStackTrace();
-				}
-	            break;
-	        }
-		}
-		
+		setResizable(false);
 
 		contentPaneSetup();
 
@@ -142,47 +123,52 @@ public class GUI_gestor_cliente extends JFrame {
 		panelSetup();
 		panelContentSetup();
 		contentPane.add(panel);
-
+		
 		panelUserESessaoSetup();
 		panelUserESessaoContentSetup();
-		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setBounds(1297, 805, 159, 16);
-		contentPane.add(lblUsernameLogged);
-		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 13));
-		lblTempoSessao = new JLabel();
-		lblTempoSessao.setBounds(1297, 820, 159, 15);
-		contentPane.add(lblTempoSessao);
-		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 13));
-		lblHoraSistema = new JLabel();
-		lblHoraSistema.setBounds(1297, 835, 159, 16);
-		contentPane.add(lblHoraSistema);
-		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 13));
+		contentPane.add(panelUserESessao);
 
-
+		
 
 	}
 
 	private void panelUserESessaoContentSetup() {
 		lblUsernameLoggedSetup();
+		panelUserESessao.add(lblUsernameLogged);
 
 		lblTempoSessaoSetup();
-
+		panelUserESessao.add(lblTempoSessao);
+		
 		lblHoraSistemaSetup();
+		panelUserESessao.add(lblHoraSistema);
 	}
 
 	private void lblHoraSistemaSetup() {
+		lblHoraSistema = new JLabel();
+		lblHoraSistema.setBounds(0, 27, 159, 16);
+		lblHoraSistema.setText("Data:");
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 	}
 
 	private void lblTempoSessaoSetup() {
+		lblTempoSessao = new JLabel();
+		lblTempoSessao.setText("Sessão:");
+		lblTempoSessao.setBounds(0, 15, 159, 15);
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 	}
 
 	private void lblUsernameLoggedSetup() {
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setText("Username:");
+		lblUsernameLogged.setBounds(0, 0, 159, 16);
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 	}
 
 	private void panelUserESessaoSetup() {
+		panelUserESessao = new JPanel();
+		panelUserESessao.setBackground(SystemColor.inactiveCaption);
+		panelUserESessao.setBounds(1227, 11, 247, 49);
+		panelUserESessao.setLayout(null);
 	}
 
 	private void panelContentSetup() {
@@ -319,8 +305,8 @@ public class GUI_gestor_cliente extends JFrame {
 	private void panelSetup() {
 		panel = new JPanel();
 		panel.setBackground(SystemColor.inactiveCaption);
-		panel.setBounds(66, 63, 453, 213);
-
+		panel.setBounds(66, 63, 447, 199);
+		
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
@@ -424,7 +410,7 @@ public class GUI_gestor_cliente extends JFrame {
 						return;
 					}
 
-					Funcionario funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+					Funcionario funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(username);
 					for(int i = 0; i < indices.length; i++) {
 						Cliente clienteTemp = (Cliente) table.getValueAt(indices[i], ClientePesquisaModelTable.OBJECT_COL);
 						GestorDeDAO.getGestorDeDAO().desativarCliente(clienteTemp.getId(), funcionario);
@@ -462,7 +448,7 @@ public class GUI_gestor_cliente extends JFrame {
 				}
 
 				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
-				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this,clienteTemp, true, GUI_total.getUsername() );
+				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this,clienteTemp, true, username );
 				dialog.setVisible(true);
 			}
 		});
@@ -531,7 +517,7 @@ public class GUI_gestor_cliente extends JFrame {
 		botaoCriarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this, GUI_total.getUsername());
+				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this, username);
 				dialog.setVisible(true);
 
 			}
@@ -546,7 +532,7 @@ public class GUI_gestor_cliente extends JFrame {
 		setTitle("Pesquisa de Clientes");
 		setFont(font);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 30, 1500, 900);
+		setBounds(100, 30, 1400, 800);
 		contentPane.setBackground(SystemColor.inactiveCaption);
 	}
 
@@ -584,15 +570,19 @@ public class GUI_gestor_cliente extends JFrame {
 
 	}
 
+	public void recebeUsernameDaPaginaLogin(String username) {
+		this.username = username;
+	}
+
 	public void setLblTempoSessao(Duration temporizador) {
-		lblTempoSessao.setText("Sessao: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
+		lblTempoSessao.setText("SessÃ£o: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
 	}
 
 	public void setLblHoraSistema(String agora) {
 		lblHoraSistema.setText("Data: " + agora);
 
 	}
-
-
-
+	
+	
+	
 }
