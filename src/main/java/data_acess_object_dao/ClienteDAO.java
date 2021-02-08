@@ -1,6 +1,8 @@
 package data_acess_object_dao;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,50 +15,41 @@ import java.util.List;
 import java.util.Properties;
 import java.util.StringJoiner;
 
+import data_acess_object_dao_v2.PasswordEncryption;
 import historico.cliente.HistoricoCliente;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
+import standard_value_object_v2.PacoteCliente;
 
 public class ClienteDAO {
 
 	private Connection myConn;
 
-	public ClienteDAO() throws Exception {
-
-		Properties props = new Properties();
-		props.load(new FileInputStream("sistema_tele.properties"));
-
-		String user = props.getProperty("user");
-		String password = props.getProperty("password");
-		String dburl = props.getProperty("dburl");
-
-
-		myConn = DriverManager.getConnection(dburl, user, password);
-
+	public ClienteDAO(Connection connection) throws FileNotFoundException, IOException, SQLException {
+		this.myConn = connection;
 	}
 
 	public List<Cliente> getAllClientes() throws Exception {
 		List<Cliente> listaClientes = new ArrayList<>();
-
 		Statement myStmt = null;
 		ResultSet myRs = null;
-
 
 		try {
 			myStmt = myConn.createStatement();
 			myRs = myStmt.executeQuery("select * from cliente");
 
-
 			while (myRs.next()) {
 				Cliente cliente = converteRowParaCliente(myRs);
 				listaClientes.add(cliente);
 			}
-
-			return listaClientes;		
-		}
-		finally {
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			close(myStmt, myRs);
 		}
+		
+		return listaClientes;
 	}
 
 	public List<Cliente> pesquisaCliente(int id, String nif, String nome, String morada, int ativo) throws Exception {
@@ -67,11 +60,12 @@ public class ClienteDAO {
 		StringJoiner sj = new StringJoiner (" AND ");
 		String query = "SELECT * FROM CLIENTE WHERE ";
 
+		//TODO: maneira mais simples de escrever o código abaixo
 		try {
 			@SuppressWarnings("rawtypes")
 			List<Comparable> values = new ArrayList<Comparable>();
 
-			if(id!= 0){
+			if(id != 0){
 				sj.add("ID=?");
 				values.add(id);
 			}
@@ -90,7 +84,7 @@ public class ClienteDAO {
 				sj.add("morada LIKE ?");
 				values.add(morada);
 			}
-			if(ativo!=0){
+			if(ativo != 0){
 				sj.add("ativo=?");
 				values.add(ativo);
 			}
@@ -126,54 +120,87 @@ public class ClienteDAO {
 		return list;
 	}
 
-
+	//não vai ser necessário visto eu ter alterado o método criarCliente
 	private Cliente pesquisaClienteAuxiliarNIF(String nif) throws Exception {
 		Cliente cliente = null;
-
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
 
 		try {
 			nif += "%";
-
 			myStmt = myConn.prepareStatement("select * from cliente where nif like ?");
-
 			myStmt.setString(1, nif);
-
 			myRs = myStmt.executeQuery();
-
+			
 			while (myRs.next()) {
 				cliente = converteRowParaCliente(myRs);
 			}
-			return cliente;
-		}
-		finally {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			close(myStmt, myRs);
 		}
+		
+		return cliente;
 	}
 
 	private Cliente pesquisaClienteAuxiliarID(int id) throws Exception {
 		Cliente cliente = null;
-
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
 
 		try {
-
 			myStmt = myConn.prepareStatement("select * from cliente where id=?");
-
 			myStmt.setInt(1, id);
-
 			myRs = myStmt.executeQuery();
 
 			while (myRs.next()) {
 				cliente = converteRowParaCliente(myRs);
 			}
 			return cliente;
-		}
-		finally {
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			close(myStmt, myRs);
 		}
+		
+		return cliente;
+	}
+	
+	public Cliente pesquisaClienteLoginPass(String login, String pass) throws Exception {
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+		Cliente cliente = null;
+		
+		try {
+			myStmt = myConn.prepareStatement("SELECT * FROM cliente WHERE login=? AND password=?;");
+			myStmt.setString(1, login);
+			
+			//vamos encriptar a palavra pass antes de a enviar
+			myStmt.setString(2, PasswordEncryption.get_SHA_512_SecurePassword(pass));
+			
+			myRs = myStmt.executeQuery();
+			
+			if (myRs.next()) {
+				cliente = new Cliente();
+				cliente.setId(myRs.getInt(1));
+				cliente.setNome(myRs.getString(2));
+				cliente.setNif(myRs.getInt(3));
+				cliente.setMorada(myRs.getString(4));
+				cliente.setLogin(myRs.getString(5));
+				cliente.setPassword(myRs.getString(6));
+				cliente.setAtivo(myRs.getInt(7) == 1 ? true : false);
+				cliente.setId_pacote_cliente(myRs.getInt(8));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(myStmt, myRs);
+		}
+		
+		return cliente;
 	}
 
 	@SuppressWarnings("resource")
@@ -181,31 +208,50 @@ public class ClienteDAO {
 		PreparedStatement myStmt = null;
 
 		try {
+			//Statement.RETURN_GENERATED_KEYS permite ao driver jdbc devolver o id da entidade criada, caso a criação seja bem sucedida
 			myStmt = myConn.prepareStatement("INSERT INTO cliente(nome, nif, morada, login, password, ativo, id_pacote_cliente) "
-					+ "VALUES(?,?,?,?,?,?,?)");
-
+					+ "VALUES(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+			
+			//encriptar palavra pass do cliente antes da criação
+			cliente.setPassword(PasswordEncryption.get_SHA_512_SecurePassword(cliente.getPassword()));
+			
 			myStmt.setString(1, cliente.getNome());
 			myStmt.setLong(2, cliente.getNif());
 			myStmt.setString(3, cliente.getMorada());
 			myStmt.setString(4, cliente.getLogin());
 			myStmt.setString(5, cliente.getPassword());
 			myStmt.setBoolean(6, cliente.isAtivo());
-			myStmt.setInt(7, cliente.getId_pacote_cliente());
-
+			myStmt.setNull(7, java.sql.Types.INTEGER);
 			myStmt.executeUpdate();
+			
+			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
+	            if (generatedKeys.next()) { 
+	    			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
 
-			Cliente clientCriado = pesquisaClienteAuxiliarNIF(""+cliente.getNif());
-			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
+	    			myStmt.setInt(1, funcionario.getId());
+	    			//recuperamos o id do cliente criado e usamo-lo aqui
+	    			myStmt.setInt(2, (int)generatedKeys.getLong(1));
+	    			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+	    			myStmt.setString(4, "Criar Cliente");	
+	    			myStmt.executeUpdate();	
+	            }
+	            else {
+	                throw new SQLException("Criação de cliente falhou, nenhum ID foi devolvido.");
+	            }
+	        }
 
-			myStmt.setInt(1, funcionario.getId());
-			myStmt.setInt(2, clientCriado.getId());
-			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-			myStmt.setString(4, "Criar Cliente");	
-
-			myStmt.executeUpdate();	
+//			Cliente clientCriado = pesquisaClienteAuxiliarNIF(""+cliente.getNif());
+//			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
+//
+//			myStmt.setInt(1, funcionario.getId());
+//			myStmt.setInt(2, clientCriado.getId());
+//			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+//			myStmt.setString(4, "Criar Cliente");	
+//
+//			myStmt.executeUpdate();	
 
 		}catch(Exception e) {
-
+			e.printStackTrace();
 		}finally {
 			myStmt.close();
 		}
@@ -223,7 +269,7 @@ public class ClienteDAO {
 			myStmt.setLong(2, cliente.getNif());
 			myStmt.setString(3, cliente.getMorada());
 			myStmt.setString(4, cliente.getLogin());
-			myStmt.setString(5, cliente.getPassword());
+			myStmt.setString(5, PasswordEncryption.get_SHA_512_SecurePassword(cliente.getPassword()));
 			myStmt.setBoolean(6, cliente.isAtivo());
 			myStmt.setInt(7, cliente.getId_pacote_cliente());
 			myStmt.setInt(8, cliente.getId());
@@ -240,7 +286,7 @@ public class ClienteDAO {
 			myStmt.executeUpdate();
 
 		}catch(Exception e) {
-
+			e.printStackTrace();
 		}finally {
 			myStmt.close();
 		}
@@ -252,9 +298,7 @@ public class ClienteDAO {
 		try {
 
 			myStmt = myConn.prepareStatement("update cliente SET `ativo`= 0 where id=?");
-
 			myStmt.setLong(1, id);
-
 			myStmt.executeUpdate();
 
 			Cliente cliente = pesquisaClienteAuxiliarID(id);
@@ -268,13 +312,27 @@ public class ClienteDAO {
 			myStmt.executeUpdate();
 
 		}catch(Exception e) {
-
+			e.printStackTrace();
 		}finally {
 			myStmt.close();
 		}
 
 	}
-
+	
+	public void atribuirPacoteCliente(PacoteCliente pacoteCliente, Cliente cliente) throws Exception {
+		PreparedStatement myStmt = null;
+		
+		try {
+			myStmt = myConn.prepareStatement("UPDATE `cliente` SET `id_pacote_cliente`=? WHERE `id`=?");
+			myStmt.setInt(1, pacoteCliente.getId());
+			myStmt.setInt(2, cliente.getId());
+			myStmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			myStmt.close();
+		}
+	}
 
 	public List<HistoricoCliente> getHistoricoCliente(int id_cliente) throws Exception {
 		List<HistoricoCliente> list = new ArrayList<HistoricoCliente>();
@@ -311,7 +369,6 @@ public class ClienteDAO {
 			close(myStmt, myRs);
 		}
 	}
-
 
 	private Cliente converteRowParaCliente(ResultSet myRs) throws SQLException {
 

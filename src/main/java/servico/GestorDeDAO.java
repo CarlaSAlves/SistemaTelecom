@@ -1,7 +1,5 @@
 package servico;
 
-
-
 import java.sql.SQLException;
 import java.util.List;
 import data_acess_object_dao.ClienteDAO;
@@ -16,13 +14,11 @@ import standard_value_object.Promocao;
 
 public class GestorDeDAO {
 
-
 	private ClienteDAO clienteDAO;
 	private FuncionarioDAO funcionarioDAO;
 	private PacoteComercialDAO pacoteComercialDAO;
 	private PromocaoDAO promocaoDAO;
 	private static GestorDeDAO GestorDeDAOInstance = null;
-
 
 	private GestorDeDAO() throws Exception {
 		clienteDAO = new ClienteDAO();
@@ -31,7 +27,7 @@ public class GestorDeDAO {
 		promocaoDAO = new PromocaoDAO();
 	}
 
-	public static synchronized  GestorDeDAO getGestorDeDAO() throws Exception {
+	public static synchronized GestorDeDAO getGestorDeDAO() throws Exception {
 		if( GestorDeDAOInstance == null ) {
 			GestorDeDAOInstance = new GestorDeDAO();
 		}

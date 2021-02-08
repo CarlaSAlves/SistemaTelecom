@@ -34,7 +34,6 @@ public class ClienteDAO {
 
 	public List<Cliente> searchAllClientes() throws Exception {
 		List<Cliente> listaClientes = new ArrayList<>();
-
 		Statement myStmt = null;
 		ResultSet myRs = null;
 

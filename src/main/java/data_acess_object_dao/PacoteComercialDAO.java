@@ -1,8 +1,8 @@
 package data_acess_object_dao;
 
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,32 +10,20 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.StringJoiner;
 
 import standard_value_object.PacoteComercial;
-
 
 public class PacoteComercialDAO {
 
 	private Connection myConn;
 
-	public PacoteComercialDAO() throws Exception  {
-
-		Properties props = new Properties(); 
-		props.load(new FileInputStream("sistema_tele.properties"));
-
-		String user = props.getProperty("user");
-		String password = props.getProperty("password");
-		String dburl = props.getProperty("dburl");
-
-		myConn = DriverManager.getConnection(dburl, user, password);
-
+	public PacoteComercialDAO(Connection connection) throws FileNotFoundException, IOException, SQLException {
+		this.myConn = connection;
 	}
 
 	public List<PacoteComercial> getAllPacotesComerciais() throws Exception {
 		List<PacoteComercial> listaPacotes = new ArrayList<>();
-
 		Statement myStmt = null;
 		ResultSet myRs = null;
 
@@ -48,13 +36,12 @@ public class PacoteComercialDAO {
 				PacoteComercial pacote = converteRowParaPacoteComercial(myRs);
 				listaPacotes.add(pacote);
 			}
-
-			return listaPacotes;
-		}
-		finally {
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			close(myStmt, myRs);
 		}
-
+		return listaPacotes;
 	}
 
 	public List<PacoteComercial> pesquisaPacoteComercial(int id, String nome, int ativo) throws Exception {
@@ -99,84 +86,159 @@ public class PacoteComercialDAO {
 				list.add(pacote);
 			}
 
-			return list;
-		}
-
-		finally {
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			close (myStmt, myRs);
 		}
+		return list;
+	}
+	
+	public PacoteComercial pesquisaPacoteComercialById(int id) throws Exception {
+		PacoteComercial pacoteComercial = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			myStmt = myConn.prepareStatement("select * from pacote_comercial where id=?");
+			myStmt.setInt(1, id);
+			myRs = myStmt.executeQuery();
+
+			if (myRs.next()) {
+				pacoteComercial = new PacoteComercial();
+				pacoteComercial.setId(myRs.getInt(1));
+				pacoteComercial.setNome(myRs.getString(2));
+				pacoteComercial.setDescricao(myRs.getString(3));
+				pacoteComercial.setAtivo(myRs.getBoolean(4));
+				
+				if (myRs.getTimestamp(5) != null) {
+					pacoteComercial.setData_inicio( new java.sql.Date(myRs.getTimestamp(5).getTime()));
+				}
+				
+				if (myRs.getTimestamp(6) != null) {
+					pacoteComercial.setData_fim( new java.sql.Date(myRs.getTimestamp(6).getTime()));
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(myStmt, myRs);
+		}
+		
+		return pacoteComercial;
 	}
 
 	public void criarPacoteComercial (PacoteComercial pacote) throws Exception {
 		PreparedStatement myStmt = null;
 
+		//se se pode criar um pacoteComercial com ativo = false, entao nao faz sentido ter data_inicio definida de forma automatica
+		//pelo mysql. É preciso que seja definida manualmente
 		try {
-			myStmt = myConn.prepareStatement("INSERT INTO pacote_comercial(nome, descricao, ativo) VALUES(?,?,?)");
-
+			myStmt = myConn.prepareStatement("INSERT INTO pacote_comercial(nome, descricao, ativo, data_inicio) VALUES(?,?,?,?)");
 			myStmt.setString(1, pacote.getNome());
 			myStmt.setString(2, pacote.getDescricao());
 			myStmt.setBoolean(3, pacote.isAtivo());
-
+			//se ativo = true, mudar a data_inicio para agora. De outro modo, colocar nulo na data_inicio
+			myStmt.setTimestamp(4, pacote.isAtivo() ? new Timestamp(System.currentTimeMillis()) : null);
 			myStmt.executeUpdate();
-
-		}catch(Exception e) {
-
+		}catch (Exception e) {
+			e.printStackTrace();
 		}finally {
 			myStmt.close();
 		}
 	}
 
+	// Este metodo serve apenas para editar nome e descriçao. Para Ativar/Desativar, usar os metodos correspondentes
 	public void editarPacoteComercial(PacoteComercial pacote) throws Exception {
 		PreparedStatement myState = null; 
 
 		try {
-			myState = myConn.prepareStatement("UPDATE pacote_comercial SET nome=?, descricao=?, ativo=? WHERE id=?");
+			myState = myConn.prepareStatement("UPDATE pacote_comercial SET nome=?, descricao=?WHERE id=?");
 
 			myState.setString(1, pacote.getNome());
 			myState.setString(2, pacote.getDescricao());
-			myState.setBoolean(3, pacote.isAtivo());
-			myState.setInt(4, pacote.getId());
-
+			myState.setInt(3, pacote.getId());
 			myState.executeUpdate();
-
-		} catch(Exception e) {
-
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
-
 			myState.close();
 		}
 	}
 
-	
+	//primeiro ve se o pacote com o id inserido esta ativo, e só depois desativa e insere a data atual
+	//no campo data_fim
 	public void desativarPacoteComercial (int id) throws Exception {
 		PreparedStatement myState = null; 
 
 		try {
-
-			myState = myConn.prepareStatement("UPDATE pacote_comercial SET ativo=0 WHERE id=?");
-
-			myState.setInt(1, id);
-			myState.executeUpdate();
-
+			myState = myConn.prepareStatement("Select ativo From pacote_comercial Where id =" + id + ";");
+			ResultSet rs = myState.executeQuery();
+			
+			boolean estaAtivo = true;;
+			if(rs.next()) {
+				estaAtivo = rs.getBoolean(1);
+			}
+			
+			if(estaAtivo) {
+				myState = myConn.prepareStatement("UPDATE pacote_comercial SET ativo = 0,"
+						+ "data_fim = current_timestamp() WHERE id=?");
+				myState.setInt(1, id);
+				myState.executeUpdate();
+			}
 		} catch(Exception e) {
-
+			e.printStackTrace();
 		} finally {
-
 			myState.close();
 		}
-
 	}
+	
+	//primeiro ve se o pacote com o id inserido esta inativo, e só depois ativa e insere a data atual
+	//no campo data_inicio e faz set a data_fim para null
+	public void ativarPacoteComercial (int id) throws Exception {
+		PreparedStatement myState = null; 
+
+		try {
+			myState = myConn.prepareStatement("Select ativo From pacote_comercial Where id =" + id + ";");
+			ResultSet rs = myState.executeQuery();
+			
+			boolean estaAtivo = false;;
+			if(rs.next()) {
+				estaAtivo = rs.getBoolean(1);
+			}
+			
+			if(!estaAtivo) {
+				myState = myConn.prepareStatement("UPDATE pacote_comercial SET ativo = 1,"
+						+ "data_inicio = current_timestamp(), data_fim = NULL WHERE id=?");
+				myState.setInt(1, id);
+				myState.executeUpdate();
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			myState.close();
+		}
+	}
+	
 	private PacoteComercial converteRowParaPacoteComercial(ResultSet myRs) throws SQLException {
 
 		int id = myRs.getInt("id");
 		String nome = myRs.getString("nome");
 		String descricao = myRs.getString("descricao");
 		boolean ativo = myRs.getBoolean("ativo");
-		Timestamp timestamp = myRs.getTimestamp("data_inicio");
-		java.sql.Date data_inicio = new java.sql.Date(timestamp.getTime());
-		Timestamp timestamp2 = myRs.getTimestamp("data_fim");
-		java.sql.Date data_fim = new java.sql.Date(timestamp2.getTime());
 
+		java.sql.Date data_inicio = null;
+		java.sql.Date data_fim = null;
+		
+		//datas podem ser nulas, é necessário testar nulidade
+		if (myRs.getTimestamp("data_inicio") != null) {
+			data_inicio = new java.sql.Date(myRs.getTimestamp("data_inicio").getTime());
+		}
+		
+		if (myRs.getTimestamp("data_fim") != null) {
+			data_fim = new java.sql.Date(myRs.getTimestamp("data_fim").getTime());
+		}
 
 		PacoteComercial pacoteComercial = new PacoteComercial(id, nome, descricao, ativo, data_inicio, data_fim);
 

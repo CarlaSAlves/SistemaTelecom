@@ -115,7 +115,7 @@ public class GUI_total extends JFrame {
 						gestor_promocao);
 				loginPanel.setVisible(false);
 				homepagePanel.setVisible(true);
-				comeÃ§arTemporizador();
+				começarTemporizador();
 			}
 
 		});
@@ -224,7 +224,7 @@ public class GUI_total extends JFrame {
 	}
 
 
-	private void comeÃ§arTemporizador(){
+	private void começarTemporizador(){
 		
 		long data1 = System.currentTimeMillis();
 		Calendar cal2 = Calendar.getInstance();
@@ -243,8 +243,6 @@ public class GUI_total extends JFrame {
 					cal1.setTimeInMillis(data);
 					dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 					String dataEHora = dateFormat.format(cal1.getTime());
-
-					
 
 					homepage.setLblTempoSessao(temporizador);
 					homepage.setLblHoraSistema(dataEHora);

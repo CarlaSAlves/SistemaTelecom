@@ -90,8 +90,6 @@ public class PacoteComercial {
 		this.data_fim = data_fim;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "PacoteComercial [id=" + id + ", nome=" + nome + ", descricao=" + descricao
