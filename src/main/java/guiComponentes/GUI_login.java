@@ -5,14 +5,10 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -20,10 +16,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-import data_acess_object_dao_v2.PasswordEncryption;
-import servico.GestorDeDAO;
-import standard_value_object_v2.Funcionario;
-import standard_value_object_v2.Cliente;
+
 
 
 public class GUI_login extends JFrame {
@@ -50,6 +43,7 @@ public class GUI_login extends JFrame {
 	}
 
 	public GUI_login() {
+		setBackground(Color.WHITE);
 		
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 	        if ("Nimbus".equals(info.getName())) {
@@ -71,59 +65,65 @@ public class GUI_login extends JFrame {
 		panel = new JPanel();
 		setContentPane(panel);
 		panel.setLayout(null);
-		getContentPane().setBackground(SystemColor.inactiveCaption);
+		getContentPane().setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 30, 1500, 900);
+		setBounds(100, 30, 1400, 800);
 		getContentPane().setLayout(null);
+		
+				JLabel lblFooter = new JLabel();
+				lblFooter.setBounds(621, 674, 320, 87);
+				lblFooter.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/Altran1.1.png")));
+				getContentPane().add(lblFooter);
 		
 		btnSair = new JButton("Sair");
 		btnSair.setToolTipText("Carregue para fazer signout");
 		btnSair.setForeground(Color.BLACK);
-		btnSair.setFont(new Font("Dubai Light", Font.PLAIN, 20));
+		btnSair.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		btnSair.setFocusPainted(false);
 		btnSair.setBackground(SystemColor.menu);
-		btnSair.setBounds(749, 522, 104, 33);
+		btnSair.setBounds(375, 520, 104, 33);
 		panel.add(btnSair);
 
 		JLabel labelLogin = new JLabel("Username");
-		labelLogin.setBounds(553, 382, 131, 27);
+		labelLogin.setBounds(209, 383, 131, 27);
 		labelLogin.setForeground(Color.WHITE);
-		labelLogin.setFont(font);
+		labelLogin.setFont(new Font("SansSerif", Font.BOLD, 20));
 		getContentPane().add(labelLogin);
 
 		labelPass = new JLabel("Password");
-		labelPass.setBounds(553, 429, 138, 27);
+		labelPass.setBounds(209, 430, 138, 27);
 		labelPass.setForeground(Color.WHITE);
-		labelPass.setFont(font);
+		labelPass.setFont(new Font("SansSerif", Font.BOLD, 20));
 		getContentPane().add(labelPass);
 
 		JPasswordField passwordField = new JPasswordField();
-		passwordField.setBounds(700, 428, 193, 27);
-		passwordField.setFont(font);
+		passwordField.setBounds(329, 430, 193, 27);
+		passwordField.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		getContentPane().add(passwordField);
 
 		textFieldUser = new JTextField();
-		textFieldUser.setBounds(700, 380, 193, 27);
-		textFieldUser.setFont(font);
+		textFieldUser.setBounds(329, 383, 193, 27);
+		textFieldUser.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		getContentPane().add(textFieldUser);
 		textFieldUser.setColumns(10);
 
 		JLabel labelConfm = new JLabel("User ou Password incorreta");
-		labelConfm.setBounds(674, 575, 410, 18);
-		labelConfm.setForeground(new Color(255, 0, 0));
-		labelConfm.setFont(font);
+		labelConfm.setBounds(359, 578, 251, 18);
+		labelConfm.setForeground(new Color(70,74,101));
+		labelConfm.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		
 		
 		//labelConfirm devia estar escondida de origem, n�o ?
 		labelConfm.setVisible(false);
 		getContentPane().add(labelConfm);
 
 		btLogin = new JButton("Login");
-		btLogin.setBounds(749, 478, 104, 33);
+		btLogin.setBounds(375, 476, 104, 33);
 		btLogin.setForeground(SystemColor.desktop);
 		btLogin.setBackground(new Color(240, 240, 240));
 		btLogin.setToolTipText("Carregue para fazer login");
 		btLogin.setFocusPainted(false);
-		btLogin.setFont(font);
+		btLogin.setFont(new Font("SansSerif", Font.PLAIN, 14));
 //		//btLogin.addActionListener(new ActionListener() {
 //			//@Override
 //			//public void actionPerformed(ActionEvent e) {
@@ -181,21 +181,15 @@ public class GUI_login extends JFrame {
 //			//}
 //		//});
 		getContentPane().add(btLogin);
-
-		JLabel lblFooter = new JLabel();
-		lblFooter.setBounds(630, 727, 327, 123);
-		lblFooter.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/Altran4.png")));
-		getContentPane().add(lblFooter);
 				
 				JLabel lblNewLabel = new JLabel();
-				lblNewLabel.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/user5.png")));
-				lblNewLabel.setBounds(663, 24, 230, 304);
+				lblNewLabel.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/user.png")));
+				lblNewLabel.setBounds(302, 73, 238, 298);
 				panel.add(lblNewLabel);
 				
-						icon = new JLabel();
-						icon.setBounds(-17, -61, 1501, 922);
-						icon.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/black.png")));
-						getContentPane().add(icon);
+				JLabel lblNewLabel_1 = new JLabel("New label");
+				lblNewLabel_1.setBounds(59, 250, 46, 14);
+				panel.add(lblNewLabel_1);
 	}
 
 	public JButton getBtLogin() {
@@ -213,5 +207,4 @@ public class GUI_login extends JFrame {
 	public JButton getBtnSair() {
 		return btnSair;
 	}
-	
 }

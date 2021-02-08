@@ -84,7 +84,7 @@ public class GUI_total extends JFrame {
 		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 30, 1500, 900);
+		setBounds(100, 30, 1400, 800);
 		contentPane = new JPanel();
 		setResizable(false);
 		setContentPane(contentPane);
@@ -98,32 +98,32 @@ public class GUI_total extends JFrame {
 		gestor_promocao = new GUI_gestor_promocao();
 
 		JPanel loginPanel = login.returnPanel();
-		loginPanel.setBounds(0, 0, 1500, 900);
+		loginPanel.setBounds(0, 0, 1400, 800);
 		getContentPane().add(loginPanel);
 
 		JPanel homepagePanel = homepage.returnPanel();
 		homepagePanel.setVisible(false);
-		homepagePanel.setBounds(0, 0, 1500, 900);
+		homepagePanel.setBounds(0, 0, 1400, 800);
 		getContentPane().add(homepagePanel);
 
 		JPanel gestor_clientePanel = gestor_cliente.returnPanel();
 		gestor_clientePanel.setVisible(false);
-		gestor_clientePanel.setBounds(0, 0, 1500, 900);
+		gestor_clientePanel.setBounds(0, 0, 1400, 800);
 		getContentPane().add(gestor_clientePanel);
 
 		JPanel gestor_operadorPanel = gestor_operador.returnPanel();
 		gestor_operadorPanel.setVisible(false);
-		gestor_operadorPanel.setBounds(0, 0, 1500, 900);
+		gestor_operadorPanel.setBounds(0, 0, 1400, 800);
 		getContentPane().add(gestor_operadorPanel);
 
 		JPanel gestor_pacotesPanel = gestor_pacotes.returnPanel();
 		gestor_pacotesPanel.setVisible(false);
-		gestor_pacotesPanel.setBounds(0, 0, 1500, 900);
+		gestor_pacotesPanel.setBounds(0, 0, 1400, 800);
 		getContentPane().add(gestor_pacotesPanel);
 
 		JPanel gestor_promocaoPanel = gestor_promocao.returnPanel();
 		gestor_promocaoPanel.setVisible(false);
-		gestor_promocaoPanel.setBounds(0, 0, 1500, 900);
+		gestor_promocaoPanel.setBounds(0, 0, 1400, 800);
 		getContentPane().add(gestor_promocaoPanel);
 
 		// LOGIN
