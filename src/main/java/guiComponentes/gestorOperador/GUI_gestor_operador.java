@@ -13,9 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.time.Duration;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
@@ -54,7 +56,9 @@ public class GUI_gestor_operador extends JFrame {
 	private JCheckBox checkBoxAtivo;
 	private JButton botaoPesquisa;
 	private JLabel lblUsernameLogged;
-	private JLabel lblNewLabel;
+	private JPanel panelUserESessao;
+	private JLabel lblTempoSessao;
+	private JLabel lblHoraSistema;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -295,16 +299,6 @@ public class GUI_gestor_operador extends JFrame {
 		botaoPesquisa.setFont(new Font("Dialog", Font.PLAIN, 15));
 		botaoPesquisa.setBackground(SystemColor.activeCaption);
 		panelPesquisa.add(botaoPesquisa, "4, 12");
-
-		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblUsernameLogged.setBounds(1252, 809, 159, 32);
-		contentPane.add(lblUsernameLogged);
-		
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(GUI_gestor_operador.class.getResource("/guiComponentes/img/operador.png")));
-		lblNewLabel.setBounds(934, 11, 245, 245);
-		contentPane.add(lblNewLabel);
 		botaoPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -346,6 +340,31 @@ public class GUI_gestor_operador extends JFrame {
 
 			}
 		});
+
+		panelUserESessao = new JPanel();
+		panelUserESessao.setBackground(SystemColor.inactiveCaption);
+		panelUserESessao.setBounds(1303, 11, 171, 69);
+		contentPane.add(panelUserESessao);
+		panelUserESessao.setLayout(null);
+
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setText("Username:");
+		lblUsernameLogged.setBounds(0, 0, 159, 16);
+		panelUserESessao.add(lblUsernameLogged);
+		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
+
+		lblTempoSessao = new JLabel();
+		lblTempoSessao.setText("Sessão:");
+		lblTempoSessao.setBounds(0, 15, 159, 15);
+		panelUserESessao.add(lblTempoSessao);
+		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 12));
+
+		lblHoraSistema = new JLabel();
+		lblHoraSistema.setBounds(0, 29, 159, 16);
+		panelUserESessao.add(lblHoraSistema);
+		lblHoraSistema.setText("Data:");
+		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 12));
+
 	}
 
 	public void refreshOperadorTable() {
@@ -371,10 +390,19 @@ public class GUI_gestor_operador extends JFrame {
 	}
 
 	public void setUsernameLoggedIn(String username) {
-		lblUsernameLogged.setText("Logged in : " + username);
+		lblUsernameLogged.setText("Username : " + username);
 
 	}
+	
+	public void setLblTempoSessao(Duration temporizador) {
+		lblTempoSessao.setText("Sessão: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
+	}
 
+	public void setLblHoraSistema(String agora) {
+		lblHoraSistema.setText("Data: " + agora);
+
+	}
+	
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}

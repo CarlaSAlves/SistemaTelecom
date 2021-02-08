@@ -1,0 +1,18 @@
+<sessao>
+<username:	admin>
+<data de login:	08-02-2021 00:19:39>
+<duração:	0:2>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	08-02-2021 00:20:35>
+<duração da sessão:	0:10>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	08-02-2021 00:21:54>
+<duração da sessão:	0:22>
+</sessao>
+

@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.time.Duration;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
@@ -48,6 +49,9 @@ public class GUI_gestor_pacotes extends JFrame {
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JTextField textPesquisaID;
 	private JTextField textFieldNome;
+	private JPanel panelUserESessao;
+	private JLabel lblTempoSessao;
+	private JLabel lblHoraSistema;
 
 
 
@@ -319,10 +323,30 @@ public class GUI_gestor_pacotes extends JFrame {
 		textAreaDescricao.setBounds(938, 71, 470, 151);
 		contentPane.add(textAreaDescricao);
 		
+		panelUserESessao = new JPanel();
+		panelUserESessao.setBackground(SystemColor.inactiveCaption);
+		panelUserESessao.setBounds(1303, 11, 171, 69);
+		contentPane.add(panelUserESessao);
+		panelUserESessao.setLayout(null);
+
 		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setText("Username:");
+		lblUsernameLogged.setBounds(0, 0, 159, 16);
+		panelUserESessao.add(lblUsernameLogged);
 		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblUsernameLogged.setBounds(1252, 809, 159, 32);
-		contentPane.add(lblUsernameLogged);
+
+		lblTempoSessao = new JLabel();
+		lblTempoSessao.setText("Sessão:");
+		lblTempoSessao.setBounds(0, 15, 159, 15);
+		panelUserESessao.add(lblTempoSessao);
+		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 12));
+
+		lblHoraSistema = new JLabel();
+		lblHoraSistema.setBounds(0, 29, 159, 16);
+		panelUserESessao.add(lblHoraSistema);
+		lblHoraSistema.setText("Data:");
+		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 12));
+		
 	}
 
 	public void refreshPacotesTable() {
@@ -349,7 +373,16 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 
 	public void setUsernameLoggedIn(String username) {
-		lblUsernameLogged.setText("Logged in : " + username);
+		lblUsernameLogged.setText("Username : " + username);
+
+	}
+	
+	public void setLblTempoSessao(Duration temporizador) {
+		lblTempoSessao.setText("Sessão: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
+	}
+
+	public void setLblHoraSistema(String agora) {
+		lblHoraSistema.setText("Data: " + agora);
 
 	}
 	

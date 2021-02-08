@@ -4,6 +4,14 @@ package guiComponentes;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Calendar;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,6 +28,15 @@ public class GUI_total extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private String username;
+	private Instant inicio;
+	private GUI_gestor_cliente gestor_cliente;
+	private GUI_homepage homepage;
+	private	GUI_gestor_operador gestor_operador;
+	private GUI_gestor_pacotes gestor_pacotes;
+	private	GUI_gestor_promocao gestor_promocao;
+	private Duration temporizador;
+	private String dataEHoraDeLog;
+	private SimpleDateFormat dateFormat ;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -43,11 +60,11 @@ public class GUI_total extends JFrame {
 		setLayout(null);
 
 		GUI_login login = new GUI_login();
-		GUI_homepage homepage = new GUI_homepage();
-		GUI_gestor_cliente gestor_cliente = new GUI_gestor_cliente();
-		GUI_gestor_operador gestor_operador = new GUI_gestor_operador();
-		GUI_gestor_pacotes gestor_pacotes = new GUI_gestor_pacotes();
-		GUI_gestor_promocao gestor_promocao = new GUI_gestor_promocao();
+		homepage = new GUI_homepage();
+		gestor_cliente = new GUI_gestor_cliente();
+		gestor_operador = new GUI_gestor_operador();
+		gestor_pacotes = new GUI_gestor_pacotes();
+		gestor_promocao = new GUI_gestor_promocao();
 
 
 		JPanel loginPanel = login.returnPanel();
@@ -84,6 +101,7 @@ public class GUI_total extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				gravarFicheiro(username, temporizador, dataEHoraDeLog, "sessaolog.txt");
 				dispose();
 
 			}
@@ -92,10 +110,12 @@ public class GUI_total extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				inicio = Instant.now();
 				labelUsernameNavegaPaginas(login, homepage, gestor_cliente, gestor_operador, gestor_pacotes,
 						gestor_promocao);
 				loginPanel.setVisible(false);
 				homepagePanel.setVisible(true);
+				começarTemporizador();
 			}
 
 		});
@@ -197,4 +217,68 @@ public class GUI_total extends JFrame {
 		homepage.setUsernameLoggedIn(username);
 	}
 
+
+	private void começarTemporizador(){
+		
+		long data1 = System.currentTimeMillis();
+		Calendar cal2 = Calendar.getInstance();
+		cal2.setTimeInMillis(data1);
+		dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		dataEHoraDeLog = dateFormat.format(cal2.getTime());
+		
+		Thread t = new Thread(){
+			public void run(){
+				while (true) {
+
+					long data = System.currentTimeMillis();
+					Instant agora = Instant.now();
+					Calendar cal1 = Calendar.getInstance();
+					temporizador = Duration.between(inicio, agora);
+					cal1.setTimeInMillis(data);
+					dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+					String dataEHora = dateFormat.format(cal1.getTime());
+
+					
+
+					homepage.setLblTempoSessao(temporizador);
+					homepage.setLblHoraSistema(dataEHora);
+
+					gestor_cliente.setLblTempoSessao(temporizador);
+					gestor_cliente.setLblHoraSistema(dataEHora);
+
+					gestor_operador.setLblTempoSessao(temporizador);
+					gestor_operador.setLblHoraSistema(dataEHora);
+
+					gestor_pacotes.setLblTempoSessao(temporizador);
+					gestor_pacotes.setLblHoraSistema(dataEHora);
+
+					gestor_promocao.setLblTempoSessao(temporizador); 
+					gestor_promocao.setLblHoraSistema(dataEHora);
+					try {
+						sleep(1000);
+					} catch (InterruptedException e) {
+					}
+				}
+			}
+		};
+		t.start();
+	}
+
+	private void gravarFicheiro(String username, Duration temporizador, String dataEHora, String ficheiro) {
+
+		try {
+			PrintWriter guarda = new PrintWriter(new BufferedWriter (new FileWriter(ficheiro, true)));
+			guarda.println("<sessao>");
+			guarda.println("<username:	" + username + ">");
+			guarda.println("<data e hora do login:	" + dataEHora +  ">" );
+			guarda.println("<duração da sessão:	" + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart() +  ">" );
+			guarda.println("</sessao>\n");
+
+			guarda.close();
+		}	 catch (IOException e) {
+			e.printStackTrace();
+		}	
+	}
 }
+
+

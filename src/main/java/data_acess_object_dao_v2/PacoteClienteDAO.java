@@ -146,6 +146,7 @@ public class PacoteClienteDAO {
 	
 	//para apagar um pacote_cliente, vai ser necessario remover todas as promo�oes associadas a esse pacote.
 	// Vai ser tambem necessario remover o pacote do cliente que o det�m. S� depois � possivel apagar o pacote cliente.
+	@SuppressWarnings("resource")
 	public void eliminarPacoteById(int id) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {

@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.time.Duration;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
@@ -62,7 +63,9 @@ public class GUI_gestor_cliente extends JFrame {
 	private JTextField textFieldMorada;
 	private JCheckBox checkBoxAtivo;
 	private JButton botaoPesquisa;
-	private JLabel lblNewLabel;
+	private JLabel lblTempoSessao;
+	private JLabel lblHoraSistema;
+	private JPanel panelUserESessao;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -233,11 +236,6 @@ public class GUI_gestor_cliente extends JFrame {
 		lbFooter.setBounds(599, 802, 367, 59);
 		contentPane.add(lbFooter);
 
-		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblUsernameLogged.setBounds(1252, 809, 159, 32);
-		contentPane.add(lblUsernameLogged);
-
 		botaoVisualizarHistorico = new JButton("Ver Historico");
 		botaoVisualizarHistorico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -266,7 +264,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 			}
 		});
-		botaoVisualizarHistorico.setFont(new Font("Dialog", Font.PLAIN, 17));
+		botaoVisualizarHistorico.setFont(new Font("Dialog", Font.PLAIN, 15));
 		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
 		botaoVisualizarHistorico.setBounds(739, 266, 161, 33);
 		botaoVisualizarHistorico.setEnabled(false);
@@ -387,12 +385,30 @@ public class GUI_gestor_cliente extends JFrame {
 			}
 		});
 		panel.add(botaoPesquisa, "4, 12");
-		
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setForeground(SystemColor.inactiveCaption);
-		lblNewLabel.setIcon(new ImageIcon(GUI_gestor_cliente.class.getResource("/guiComponentes/img/user-5122.png")));
-		lblNewLabel.setBounds(946, 11, 376, 244);
-		contentPane.add(lblNewLabel);
+
+		panelUserESessao = new JPanel();
+		panelUserESessao.setBackground(SystemColor.inactiveCaption);
+		panelUserESessao.setBounds(1303, 11, 171, 69);
+		contentPane.add(panelUserESessao);
+		panelUserESessao.setLayout(null);
+
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setText("Username:");
+		lblUsernameLogged.setBounds(0, 0, 159, 16);
+		panelUserESessao.add(lblUsernameLogged);
+		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
+
+		lblTempoSessao = new JLabel();
+		lblTempoSessao.setText("Sessão:");
+		lblTempoSessao.setBounds(0, 15, 159, 15);
+		panelUserESessao.add(lblTempoSessao);
+		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 12));
+
+		lblHoraSistema = new JLabel();
+		lblHoraSistema.setBounds(0, 29, 159, 16);
+		panelUserESessao.add(lblHoraSistema);
+		lblHoraSistema.setText("Data:");
+		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 12));
 
 	}
 
@@ -426,11 +442,23 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	public void setUsernameLoggedIn(String username) {
-		lblUsernameLogged.setText("Logged in : " + username);
+		lblUsernameLogged.setText("Username: " + username);
 
 	}
 
 	public void recebeUsernameDaPaginaLogin(String username) {
 		this.username = username;
 	}
+
+	public void setLblTempoSessao(Duration temporizador) {
+		lblTempoSessao.setText("Sessão: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
+	}
+
+	public void setLblHoraSistema(String agora) {
+		lblHoraSistema.setText("Data: " + agora);
+
+	}
+	
+	
+	
 }
