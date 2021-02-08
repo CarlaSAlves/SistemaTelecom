@@ -66,6 +66,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private JLabel lblTempoSessao;
 	private JLabel lblHoraSistema;
 	private JPanel panelUserESessao;
+	int test;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -83,258 +84,125 @@ public class GUI_gestor_cliente extends JFrame {
 
 	public GUI_gestor_cliente() {
 
-		contentPane = new JPanel();
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		setTitle("Pesquisa de Clientes");
-		setFont(font);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 30, 1500, 900);
-		contentPane.setBackground(SystemColor.inactiveCaption);
+		contentPaneSetup();
 
-		JButton botaoCriarCliente = new JButton("Criar Cliente");
-		botaoCriarCliente.setBounds(1252, 267, 152, 32);
-		botaoCriarCliente.setFont(font);
-		botaoCriarCliente.setBackground(SystemColor.activeCaption);
-		botaoCriarCliente.setFocusPainted(false);
-		botaoCriarCliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this, username);
-				dialog.setVisible(true);
-
-			}
-		});
+		JButton botaoCriarCliente = botaoCriarClienteSetup();
 		getContentPane().add(botaoCriarCliente);
 
-		JPanel panelDaTable = new JPanel();
-		panelDaTable.setBackground(SystemColor.inactiveCaption);
-		panelDaTable.setBounds(66, 310, 1366, 488);
-		panelDaTable.setFont(font);
+		JPanel panelDaTable = panelDaTableSetup();
 		getContentPane().add(panelDaTable);
-		panelDaTable.setLayout(null);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 33, 1332, 488);
+		JScrollPane scrollPane = scrollPaneSetup();
 		panelDaTable.add(scrollPane);
 
-		table = new JTable();
-		table.setRowSelectionAllowed(true);
-		table.setColumnSelectionAllowed(false);
-		table.setFillsViewportHeight(true);
-		table.setModel(new DefaultTableModel(new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
-		table.setForeground(SystemColor.desktop);
-		table.setBackground(UIManager.getColor("CheckBox.light"));
-		table.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		table.setRowHeight(20);
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				if (table.getSelectedRowCount()>1) {
-					botaoVisualizarHistorico.setEnabled(false);
-					botaoEditarCliente.setEnabled(false);
-					botaoDesativarCliente.setEnabled(true);
-				}
-				else if (table.getSelectedRows().length==1) {
-					botaoEditarCliente.setEnabled(true);
-					botaoDesativarCliente.setEnabled(true);
-					botaoVisualizarHistorico.setEnabled(true);
-				}
-				else if (table.getSelectedRowCount()==0)
-				{
-					botaoEditarCliente.setEnabled(false);
-					botaoDesativarCliente.setEnabled(false);
-					botaoVisualizarHistorico.setEnabled(false);
-				}
-
-			}
-		});
+		tableSetup();
 		scrollPane.setViewportView(table);
 
-		lblResultados = new JLabel("Resultados: ");
-		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		lblResultados.setBounds(10, 4, 136, 25);
+		lblResultadosSetup();
 		panelDaTable.add(lblResultados);
 
-		botaoEditarCliente = new JButton("Editar Cliente");
-		botaoEditarCliente.setBounds(910, 267, 161, 33);
-		botaoEditarCliente.setFont(font);
-		botaoEditarCliente.setEnabled(false);
-		botaoEditarCliente.setBackground(SystemColor.activeCaption);
-		botaoEditarCliente.setFocusPainted(false);
-		botaoEditarCliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				int row = table.getSelectedRow();
-
-				if (row < 0) {
-					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
-							"Por favor selecione um Cliente", "Error", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-
-				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
-				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this,clienteTemp, true, username );
-				dialog.setVisible(true);
-			}
-		});
+		botaoEditarClienteSetup();
 		getContentPane().add(botaoEditarCliente);
 
-		botaoDesativarCliente = new JButton("Desativar Cliente");
-		botaoDesativarCliente.setBounds(1081, 267, 161, 33);
-		botaoDesativarCliente.setFont(font);
-		botaoDesativarCliente.setEnabled(false);
-		botaoDesativarCliente.setBackground(SystemColor.activeCaption);
-		botaoDesativarCliente.setFocusPainted(false);
-		botaoDesativarCliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				try {
-					indices = table.getSelectedRows();
-
-					if (indices.length < 0) {
-						JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
-								"Por favor selecione um Cliente", "Error",
-								JOptionPane.ERROR_MESSAGE);
-						return;
-					}
-					int resposta = JOptionPane.showConfirmDialog(GUI_gestor_cliente.this,
-							"Desativar Cliente(s)?", "Confirmar Desativar",
-							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-
-					if (resposta != JOptionPane.YES_OPTION) {
-						return;
-					}
-
-					Funcionario funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(username);
-					for(int i = 0; i < indices.length; i++) {
-						Cliente clienteTemp = (Cliente) table.getValueAt(indices[i], ClientePesquisaModelTable.OBJECT_COL);
-						GestorDeDAO.getGestorDeDAO().desativarCliente(clienteTemp.getId(), funcionario);
-					}
-					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
-							"Cliente(s) Desativado(s) com sucesso", "Cliente(s) Desativado",
-							JOptionPane.INFORMATION_MESSAGE);
-
-					refreshClienteTable();
-				} catch (Exception e1) {
-
-				}
-
-			}
-
-		});
+		botaoDesativarClienteSetup();
 		getContentPane().add(botaoDesativarCliente);
 
-		btVoltarGestorCliente = new JButton("Voltar");
-		btVoltarGestorCliente.setBounds(76, 809, 119, 32);
-		btVoltarGestorCliente.setFont(font);
-		btVoltarGestorCliente.setBackground(SystemColor.activeCaption);
-		btVoltarGestorCliente.setFocusPainted(false);
+		btVoltarGestorClienteSetup();
 		getContentPane().add(btVoltarGestorCliente);
 
-		JLabel lbFooter = new JLabel("");
-		lbFooter.setIcon(new ImageIcon(GUI_gestor_cliente.class.getResource("/guiComponentes/img/footer2.png")));
-		lbFooter.setBounds(599, 802, 367, 59);
+		JLabel lbFooter = lbFooterSetup();
 		contentPane.add(lbFooter);
 
-		botaoVisualizarHistorico = new JButton("Ver Historico");
-		botaoVisualizarHistorico.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int row = table.getSelectedRow();
-
-
-				if (row < 0) {
-					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
-							"Por favor selecione um Cliente", "Error", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-
-				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
-				List<HistoricoCliente> list;
-
-				try {
-
-					list = GestorDeDAO.getGestorDeDAO().getHistoricoCliente(clienteTemp.getId());
-					HistoricoClienteDialog dialogHistorico = new HistoricoClienteDialog();
-					dialogHistorico.preencherTable(clienteTemp, list);
-					dialogHistorico.setVisible(true);
-
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-
-			}
-		});
-		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
-		botaoVisualizarHistorico.setBounds(739, 266, 161, 33);
-		botaoVisualizarHistorico.setEnabled(false);
+		botaoVisualizarHistoricoSetup();
 		contentPane.add(botaoVisualizarHistorico);
 
-		lblCamposPesquisas = new JLabel("Campos Pesquisa");
-		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-		lblCamposPesquisas.setBounds(66, 26, 294, 26);
+		lblCamposPesquisasSetup();
 		contentPane.add(lblCamposPesquisas);
 
-		panel = new JPanel();
-		panel.setBackground(SystemColor.inactiveCaption);
-		panel.setBounds(66, 63, 447, 199);
+		panelSetup();
+		panelContentSetup();
 		contentPane.add(panel);
-		panel.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
-				new RowSpec[] {
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		panelUserESessaoSetup();
+		panelUserESessaoContentSetup();
+		contentPane.add(panelUserESessao);
 
-		lblNewLabelID = new JLabel("ID");
-		lblNewLabelID.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		
+
+	}
+
+	private void panelUserESessaoContentSetup() {
+		lblUsernameLoggedSetup();
+		panelUserESessao.add(lblUsernameLogged);
+
+		lblTempoSessaoSetup();
+		panelUserESessao.add(lblTempoSessao);
+		
+		lblHoraSistemaSetup();
+		panelUserESessao.add(lblHoraSistema);
+	}
+
+	private void lblHoraSistemaSetup() {
+		lblHoraSistema = new JLabel();
+		lblHoraSistema.setBounds(0, 27, 159, 16);
+		lblHoraSistema.setText("Data:");
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+	}
+
+	private void lblTempoSessaoSetup() {
+		lblTempoSessao = new JLabel();
+		lblTempoSessao.setText("Sessão:");
+		lblTempoSessao.setBounds(0, 15, 159, 15);
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+	}
+
+	private void lblUsernameLoggedSetup() {
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setText("Username:");
+		lblUsernameLogged.setBounds(0, 0, 159, 16);
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+	}
+
+	private void panelUserESessaoSetup() {
+		panelUserESessao = new JPanel();
+		panelUserESessao.setBackground(SystemColor.inactiveCaption);
+		panelUserESessao.setBounds(1227, 11, 247, 49);
+		panelUserESessao.setLayout(null);
+	}
+
+	private void panelContentSetup() {
+		lblNewLabelIDSetup();
 		panel.add(lblNewLabelID, "2, 2, left, default");
 
-		textPesquisaID = new JTextField();
-		textPesquisaID.setColumns(10);
+		textPesquisaIDSetup();
 		panel.add(textPesquisaID, "4, 2, fill, default");
 
-		lblNewLabelNIF = new JLabel("NIF");
-		lblNewLabelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		lblNewLabelNIFSetup();
 		panel.add(lblNewLabelNIF, "2, 4, left, default");
 
-		textPesquisaNIF = new JTextField();
-		textPesquisaNIF.setColumns(10);
+		textPesquisaNIFSetup();
 		panel.add(textPesquisaNIF, "4, 4, fill, default");
 
-		lblNome = new JLabel("Nome");
-		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		lblNomeSetup();
 		panel.add(lblNome, "2, 6, left, default");
 
-		textFieldNome = new JTextField();
-		textFieldNome.setColumns(10);
+		textFieldNomeSetup();
 		panel.add(textFieldNome, "4, 6, fill, default");
 
-		lblMorada = new JLabel("Morada");
-		lblMorada.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		lblMoradaSetup();
 		panel.add(lblMorada, "2, 8, left, default");
 
-		textFieldMorada = new JTextField();
-		textFieldMorada.setColumns(10);
+		textFieldMoradaSetup();
 		panel.add(textFieldMorada, "4, 8, fill, default");
 
-		checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
-		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
+		checkBoxAtivoSetup();
 		panel.add(checkBoxAtivo, "4, 10, center, default");
 
+		botaoPesquisaSetup();
+		panel.add(botaoPesquisa, "4, 12");
+	}
+
+	private void botaoPesquisaSetup() {
 		botaoPesquisa = new JButton("Pesquisar");
 		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoPesquisa.setBackground(SystemColor.activeCaption);
@@ -385,32 +253,286 @@ public class GUI_gestor_cliente extends JFrame {
 
 			}
 		});
-		panel.add(botaoPesquisa, "4, 12");
+	}
 
-		panelUserESessao = new JPanel();
-		panelUserESessao.setBackground(SystemColor.inactiveCaption);
-		panelUserESessao.setBounds(1227, 11, 247, 49);
-		contentPane.add(panelUserESessao);
-		panelUserESessao.setLayout(null);
+	private void checkBoxAtivoSetup() {
+		checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
+	}
 
-		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setBounds(0, 0, 159, 16);
-		panelUserESessao.add(lblUsernameLogged);
-		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+	private void textFieldMoradaSetup() {
+		textFieldMorada = new JTextField();
+		textFieldMorada.setColumns(10);
+	}
 
-		lblTempoSessao = new JLabel();
-		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setBounds(0, 15, 159, 15);
-		panelUserESessao.add(lblTempoSessao);
-		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+	private void lblMoradaSetup() {
+		lblMorada = new JLabel("Morada");
+		lblMorada.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+	}
 
-		lblHoraSistema = new JLabel();
-		lblHoraSistema.setBounds(0, 27, 159, 16);
-		panelUserESessao.add(lblHoraSistema);
-		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+	private void textFieldNomeSetup() {
+		textFieldNome = new JTextField();
+		textFieldNome.setColumns(10);
+	}
 
+	private void lblNomeSetup() {
+		lblNome = new JLabel("Nome");
+		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+	}
+
+	private void textPesquisaNIFSetup() {
+		textPesquisaNIF = new JTextField();
+		textPesquisaNIF.setColumns(10);
+	}
+
+	private void lblNewLabelNIFSetup() {
+		lblNewLabelNIF = new JLabel("NIF");
+		lblNewLabelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+	}
+
+	private void textPesquisaIDSetup() {
+		textPesquisaID = new JTextField();
+		textPesquisaID.setColumns(10);
+	}
+
+	private void lblNewLabelIDSetup() {
+		lblNewLabelID = new JLabel("ID");
+		lblNewLabelID.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+	}
+
+	private void panelSetup() {
+		panel = new JPanel();
+		panel.setBackground(SystemColor.inactiveCaption);
+		panel.setBounds(66, 63, 447, 199);
+		
+		panel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+				new RowSpec[] {
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC,}));
+	}
+
+	private void lblCamposPesquisasSetup() {
+		lblCamposPesquisas = new JLabel("Campos Pesquisa");
+		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
+		lblCamposPesquisas.setBounds(66, 26, 294, 26);
+	}
+
+	private void botaoVisualizarHistoricoSetup() {
+		botaoVisualizarHistorico = new JButton("Ver Historico");
+		botaoVisualizarHistorico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row = table.getSelectedRow();
+
+
+				if (row < 0) {
+					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
+							"Por favor selecione um Cliente", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
+				List<HistoricoCliente> list;
+
+				try {
+
+					list = GestorDeDAO.getGestorDeDAO().getHistoricoCliente(clienteTemp.getId());
+					HistoricoClienteDialog dialogHistorico = new HistoricoClienteDialog();
+					dialogHistorico.preencherTable(clienteTemp, list);
+					dialogHistorico.setVisible(true);
+
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
+		botaoVisualizarHistorico.setBounds(739, 266, 161, 33);
+		botaoVisualizarHistorico.setEnabled(false);
+	}
+
+	private JLabel lbFooterSetup() {
+		JLabel lbFooter = new JLabel("");
+		lbFooter.setIcon(new ImageIcon(GUI_gestor_cliente.class.getResource("/guiComponentes/img/footer2.png")));
+		lbFooter.setBounds(599, 802, 367, 59);
+		return lbFooter;
+	}
+
+	private void btVoltarGestorClienteSetup() {
+		btVoltarGestorCliente = new JButton("Voltar");
+		btVoltarGestorCliente.setBounds(76, 809, 119, 32);
+		btVoltarGestorCliente.setFont(font);
+		btVoltarGestorCliente.setBackground(SystemColor.activeCaption);
+		btVoltarGestorCliente.setFocusPainted(false);
+	}
+
+	private void botaoDesativarClienteSetup() {
+		botaoDesativarCliente = new JButton("Desativar Cliente");
+		botaoDesativarCliente.setBounds(1081, 267, 161, 33);
+		botaoDesativarCliente.setFont(font);
+		botaoDesativarCliente.setEnabled(false);
+		botaoDesativarCliente.setBackground(SystemColor.activeCaption);
+		botaoDesativarCliente.setFocusPainted(false);
+		botaoDesativarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				try {
+					indices = table.getSelectedRows();
+
+					if (indices.length < 0) {
+						JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
+								"Por favor selecione um Cliente", "Error",
+								JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					int resposta = JOptionPane.showConfirmDialog(GUI_gestor_cliente.this,
+							"Desativar Cliente(s)?", "Confirmar Desativar",
+							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+					if (resposta != JOptionPane.YES_OPTION) {
+						return;
+					}
+
+					Funcionario funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(username);
+					for(int i = 0; i < indices.length; i++) {
+						Cliente clienteTemp = (Cliente) table.getValueAt(indices[i], ClientePesquisaModelTable.OBJECT_COL);
+						GestorDeDAO.getGestorDeDAO().desativarCliente(clienteTemp.getId(), funcionario);
+					}
+					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
+							"Cliente(s) Desativado(s) com sucesso", "Cliente(s) Desativado",
+							JOptionPane.INFORMATION_MESSAGE);
+
+					refreshClienteTable();
+				} catch (Exception e1) {
+
+				}
+
+			}
+
+		});
+	}
+
+	private void botaoEditarClienteSetup() {
+		botaoEditarCliente = new JButton("Editar Cliente");
+		botaoEditarCliente.setBounds(910, 267, 161, 33);
+		botaoEditarCliente.setFont(font);
+		botaoEditarCliente.setEnabled(false);
+		botaoEditarCliente.setBackground(SystemColor.activeCaption);
+		botaoEditarCliente.setFocusPainted(false);
+		botaoEditarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				int row = table.getSelectedRow();
+
+				if (row < 0) {
+					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
+							"Por favor selecione um Cliente", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
+				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this,clienteTemp, true, username );
+				dialog.setVisible(true);
+			}
+		});
+	}
+
+	private void lblResultadosSetup() {
+		lblResultados = new JLabel("Resultados: ");
+		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		lblResultados.setBounds(10, 4, 136, 25);
+	}
+
+	private void tableSetup() {
+		table = new JTable();
+		table.setRowSelectionAllowed(true);
+		table.setColumnSelectionAllowed(false);
+		table.setFillsViewportHeight(true);
+		table.setModel(new DefaultTableModel(new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
+		table.setForeground(SystemColor.desktop);
+		table.setBackground(UIManager.getColor("CheckBox.light"));
+		table.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		table.setRowHeight(20);
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if (table.getSelectedRowCount()>1) {
+					botaoVisualizarHistorico.setEnabled(false);
+					botaoEditarCliente.setEnabled(false);
+					botaoDesativarCliente.setEnabled(true);
+				}
+				else if (table.getSelectedRows().length==1) {
+					botaoEditarCliente.setEnabled(true);
+					botaoDesativarCliente.setEnabled(true);
+					botaoVisualizarHistorico.setEnabled(true);
+				}
+				else if (table.getSelectedRowCount()==0)
+				{
+					botaoEditarCliente.setEnabled(false);
+					botaoDesativarCliente.setEnabled(false);
+					botaoVisualizarHistorico.setEnabled(false);
+				}
+
+			}
+		});
+	}
+
+	private JScrollPane scrollPaneSetup() {
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 33, 1332, 488);
+		return scrollPane;
+	}
+
+	private JPanel panelDaTableSetup() {
+		JPanel panelDaTable = new JPanel();
+		panelDaTable.setBackground(SystemColor.inactiveCaption);
+		panelDaTable.setBounds(66, 310, 1366, 488);
+		panelDaTable.setFont(font);
+		panelDaTable.setLayout(null);
+		return panelDaTable;
+	}
+
+	private JButton botaoCriarClienteSetup() {
+		JButton botaoCriarCliente = new JButton("Criar Cliente");
+		botaoCriarCliente.setBounds(1252, 267, 152, 32);
+		botaoCriarCliente.setFont(font);
+		botaoCriarCliente.setBackground(SystemColor.activeCaption);
+		botaoCriarCliente.setFocusPainted(false);
+		botaoCriarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this, username);
+				dialog.setVisible(true);
+
+			}
+		});
+		return botaoCriarCliente;
+	}
+
+	private void contentPaneSetup() {
+		contentPane = new JPanel();
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setTitle("Pesquisa de Clientes");
+		setFont(font);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 30, 1500, 900);
+		contentPane.setBackground(SystemColor.inactiveCaption);
 	}
 
 

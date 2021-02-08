@@ -115,7 +115,7 @@ public class GUI_total extends JFrame {
 						gestor_promocao);
 				loginPanel.setVisible(false);
 				homepagePanel.setVisible(true);
-				começarTemporizador();
+				comecarTemporizador();
 			}
 
 		});
@@ -224,7 +224,7 @@ public class GUI_total extends JFrame {
 	}
 
 
-	private void começarTemporizador(){
+	private void comecarTemporizador(){
 		
 		long data1 = System.currentTimeMillis();
 		Calendar cal2 = Calendar.getInstance();

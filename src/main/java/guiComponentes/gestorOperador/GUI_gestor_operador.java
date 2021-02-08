@@ -46,6 +46,7 @@ public class GUI_gestor_operador extends JFrame {
 
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JLabel lblCamposPesquisas;
+	int test;
 	private JPanel panelPesquisa;
 	private JLabel lblNewLabelID;
 	private JTextField textPesquisaID;
