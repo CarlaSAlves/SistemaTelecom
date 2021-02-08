@@ -1,10 +1,8 @@
 package data_acess_object_dao;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,15 +10,9 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.StringJoiner;
-
-<<<<<<< HEAD
 import data_acess_object_dao_v2.PasswordEncryption;
-import historico.cliente.HistoricoCliente;
-=======
 import historicos.HistoricoCliente;
->>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 import standard_value_object_v2.PacoteCliente;
@@ -64,7 +56,7 @@ public class ClienteDAO {
 		StringJoiner sj = new StringJoiner (" AND ");
 		String query = "SELECT * FROM CLIENTE WHERE ";
 
-		//TODO: maneira mais simples de escrever o código abaixo
+		//TODO: maneira mais simples de escrever o cÃ³digo abaixo
 		try {
 			@SuppressWarnings("rawtypes")
 			List<Comparable> values = new ArrayList<Comparable>();
@@ -124,7 +116,7 @@ public class ClienteDAO {
 		return list;
 	}
 
-	//não vai ser necessário visto eu ter alterado o método criarCliente
+	//nï¿½o vai ser necessï¿½rio visto eu ter alterado o mï¿½todo criarCliente
 	private Cliente pesquisaClienteAuxiliarNIF(String nif) throws Exception {
 		Cliente cliente = null;
 		PreparedStatement myStmt = null;
@@ -212,11 +204,11 @@ public class ClienteDAO {
 		PreparedStatement myStmt = null;
 
 		try {
-			//Statement.RETURN_GENERATED_KEYS permite ao driver jdbc devolver o id da entidade criada, caso a criação seja bem sucedida
+			//Statement.RETURN_GENERATED_KEYS permite ao driver jdbc devolver o id da entidade criada, caso a criaï¿½ï¿½o seja bem sucedida
 			myStmt = myConn.prepareStatement("INSERT INTO cliente(nome, nif, morada, login, password, ativo, id_pacote_cliente) "
 					+ "VALUES(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			
-			//encriptar palavra pass do cliente antes da criação
+			//encriptar palavra pass do cliente antes da criaï¿½ï¿½o
 			cliente.setPassword(PasswordEncryption.get_SHA_512_SecurePassword(cliente.getPassword()));
 			
 			myStmt.setString(1, cliente.getNome());
@@ -227,7 +219,6 @@ public class ClienteDAO {
 			myStmt.setBoolean(6, cliente.isAtivo());
 			myStmt.setNull(7, java.sql.Types.INTEGER);
 			myStmt.executeUpdate();
-<<<<<<< HEAD
 			
 			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
 	            if (generatedKeys.next()) { 
@@ -241,7 +232,7 @@ public class ClienteDAO {
 	    			myStmt.executeUpdate();	
 	            }
 	            else {
-	                throw new SQLException("Criação de cliente falhou, nenhum ID foi devolvido.");
+	                throw new SQLException("Criaï¿½ï¿½o de cliente falhou, nenhum ID foi devolvido.");
 	            }
 	        }
 
@@ -254,13 +245,12 @@ public class ClienteDAO {
 //			myStmt.setString(4, "Criar Cliente");	
 //
 //			myStmt.executeUpdate();	
-=======
 
 			Cliente clientCriado = pesquisaClienteAuxiliarNIF(""+cliente.getNif());
 			myStmt = logUpdate(funcionario, clientCriado, "Criar Cliente");	
 
 			myStmt.executeUpdate();	
->>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
+
 
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -320,7 +310,6 @@ public class ClienteDAO {
 		}
 
 	}
-<<<<<<< HEAD
 	
 	public void atribuirPacoteCliente(PacoteCliente pacoteCliente, Cliente cliente) throws Exception {
 		PreparedStatement myStmt = null;
@@ -336,8 +325,6 @@ public class ClienteDAO {
 			myStmt.close();
 		}
 	}
-=======
->>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 
 	public List<HistoricoCliente> getHistoricoCliente(int id_cliente) throws Exception {
 		List<HistoricoCliente> list = new ArrayList<HistoricoCliente>();
