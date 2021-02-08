@@ -78,10 +78,17 @@ public class GUI_gestor_operador extends JFrame {
 	}
 
 	public GUI_gestor_operador() {
-		
+		contentPaneSetup();
+		inicialize();
+
+	}
+
+	protected void inicialize() {
+
+		// visual look and feel - Nimbus 
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-	        if ("Nimbus".equals(info.getName())) {
-	            try {
+			if ("Nimbus".equals(info.getName())) {
+				try {
 					UIManager.setLookAndFeel(info.getClassName());
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
@@ -92,26 +99,63 @@ public class GUI_gestor_operador extends JFrame {
 				} catch (UnsupportedLookAndFeelException e) {
 					e.printStackTrace();
 				}
-	            break;
-	        }
+				break;
+			}
 		}
 
-		contentPaneSetup();
+		// -- Campo Pesquisa -- 
 
+		lblCamposPesquisasSetup();
+		contentPane.add(lblCamposPesquisas);
+
+		panelPesquisaSetup();
+		contentPane.add(panelPesquisa);
+
+		labelIDSetup();
+		panelPesquisa.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("31px"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("299px"),},
+				new RowSpec[] {
+						FormSpecs.PARAGRAPH_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormSpecs.UNRELATED_GAP_ROWSPEC,
+						RowSpec.decode("24px"),
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("38px"),}));
+		panelPesquisa.add(lblNewLabelID, "2, 2, left, center");
+
+		textPesquisaIDSetup();
+		panelPesquisa.add(textPesquisaID, "4, 2, fill, top");
+
+		labelNIFSetup();
+		panelPesquisa.add(lblNewLabelNIF, "2, 4, left, center");
+
+		textPesquisaNIFSetup();
+		panelPesquisa.add(textPesquisaNIF, "4, 4, fill, top");
+
+		lblNomeSetup();
+		panelPesquisa.add(lblNome, "2, 6, left, center");
+
+		textFieldNomeSetup();
+		panelPesquisa.add(textFieldNome, "4, 6, fill, top");
+
+		checkBoxAtivoSetup();
+		panelPesquisa.add(checkBoxAtivo, "4, 8, center, top");
+
+		botaoPesquisaSetup();
+		panelPesquisa.add(botaoPesquisa, "4, 10, fill, top");
+
+		// -- Botões --  
+
+		//Criar Operador
 		JButton botaoCriarOperador = botaoCriarOperadorSetup();
 		getContentPane().add(botaoCriarOperador);
-
-		JPanel panelDaTable = panelDaTableSetup();
-		getContentPane().add(panelDaTable);
-
-		JScrollPane scrollPane = scrollPaneSetup();
-		panelDaTable.add(scrollPane);
-
-		tableSetup();
-		scrollPane.setViewportView(table);
-
-		lblResultadosSetup();
-		panelDaTable.add(lblResultados);
 
 		botaoEditarOperadorSetup();
 		getContentPane().add(botaoEditarOperador);
@@ -121,118 +165,116 @@ public class GUI_gestor_operador extends JFrame {
 
 		btVoltarGestorOperadorSetup();
 		getContentPane().add(btVoltarGestorOperador);
-		
-		JLabel lbFooter = lbFooterSetup();
-		contentPane.add(lbFooter);
 
-
-
-
-		lblCamposPesquisasSetup();
-		contentPane.add(lblCamposPesquisas);
-
-		panelPesquisaSetup();
-		contentPane.add(panelPesquisa);
-
-		lblNewLabelIDSetup();
-		panelPesquisa.add(lblNewLabelID, "2, 2, left, default");
-
-		textPesquisaIDSetup();
-		panelPesquisa.add(textPesquisaID, "4, 2, fill, default");
-
-		lblNewLabelNIFSetup();
-		panelPesquisa.add(lblNewLabelNIF, "2, 4, left, default");
-
-		textPesquisaNIFSetup();
-		panelPesquisa.add(textPesquisaNIF, "4, 4, fill, default");
-
-		lblNomeSetup();
-		panelPesquisa.add(lblNome, "2, 6, left, default");
-
-		textFieldNomeSetup();
-		panelPesquisa.add(textFieldNome, "4, 6, fill, default");
-
-		checkBoxAtivoSetup();
-		panelPesquisa.add(checkBoxAtivo, "4, 10, center, default");
-
-		botaoPesquisaSetup();
-		panelPesquisa.add(botaoPesquisa, "4, 12");
-
-		panelUserESessaoSetup();
-
-		lblUsernameLoggedSetup();
-
-		lblTempoSessaoSetup();
-
-		lblHoraSistemaSetup();
+		//  Visualizar log de histórico
 
 		botaoVisualizarHistoricoSetup();
 		contentPane.add(botaoVisualizarHistorico);
 		lblTempoSessao = new JLabel();
-		lblTempoSessao.setBounds(1297, 820, 159, 15);
+		lblTempoSessao.setBounds(1219, 709, 159, 18);
 		contentPane.add(lblTempoSessao);
+
 		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 12));
+
 		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setBounds(1297, 805, 159, 16);
+		lblUsernameLogged.setBounds(1219, 690, 159, 16);
 		contentPane.add(lblUsernameLogged);
+
 		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
+
 		lblHoraSistema = new JLabel();
-		lblHoraSistema.setBounds(1297, 835, 159, 16);
+		lblHoraSistema.setBounds(1219, 729, 159, 18);
 		contentPane.add(lblHoraSistema);
+
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 12));
+
+		// tabela
+
+		JPanel panelDaTable = panelDaTableSetup();
+		getContentPane().add(panelDaTable);
+
+		JScrollPane scrollPane = scrollPaneSetup();
+		panelDaTable.add(scrollPane);
+
+		tableSetup();
+		lblResultadosSetup();
+		panelDaTable.add(lblResultados);
+
+		// footer 
+
+		JLabel lbFooter = lbFooterSetup();
+		contentPane.add(lbFooter);
+
+		panelUserESessaoSetup();
+		lblUsernameLoggedSetup();
+		lblTempoSessaoSetup();
+		lblHoraSistemaSetup();
+
 
 	}
 
-	private void botaoVisualizarHistoricoSetup() {
-		botaoVisualizarHistorico = new JButton("Ver Historico");
-		botaoVisualizarHistorico.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int row = table.getSelectedRow();
-
-
-				if (row < 0) {
-					JOptionPane.showMessageDialog(GUI_gestor_operador.this,
-							"Por favor selecione um Operador", "Error", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-
-				Funcionario operadorTemp = (Funcionario) table.getValueAt(row, OperadorPesquisaModelTable.OBJECT_COL);
-				List<HistoricoOperador> list;
-
-				try {
-
-					list = GestorDeDAO.getGestorDeDAO().getHistoricoOperador(operadorTemp.getId());
-					HistoricoOperadorDialog dialogHistorico = new HistoricoOperadorDialog();
-					dialogHistorico.preencherTable(operadorTemp, list);
-					dialogHistorico.setVisible(true);
-
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-
-			}
-		});
-		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
-		botaoVisualizarHistorico.setBounds(703, 270, 161, 33);
-		botaoVisualizarHistorico.setEnabled(false);
+	private void contentPaneSetup() {
+		contentPane = new JPanel();
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setTitle("Pesquisa de Operador");
+		setFont(font);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 30, 1400, 800);
+		contentPane.setBackground(SystemColor.text);
 	}
-
-	private void lblHoraSistemaSetup() {
+	
+	private void lblCamposPesquisasSetup() {
+		lblCamposPesquisas = new JLabel("Campos de Pesquisa");
+		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
+		lblCamposPesquisas.setBounds(98, 26, 294, 26);
 	}
-
-	private void lblTempoSessaoSetup() {
+	
+	private void panelPesquisaSetup() {
+		panelPesquisa = new JPanel();
+		panelPesquisa.setBackground(SystemColor.text);
+		panelPesquisa.setBounds(98, 63, 344, 221);
 	}
-
-	private void lblUsernameLoggedSetup() {
+	
+	private void labelIDSetup() {
+		lblNewLabelID = new JLabel("ID");
+		lblNewLabelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
-
-	private void panelUserESessaoSetup() {
+	
+	private void textPesquisaIDSetup() {
+		textPesquisaID = new JTextField();
+		textPesquisaID.setColumns(10);
 	}
-
+	
+	private void labelNIFSetup() {
+		lblNewLabelNIF = new JLabel("NIF");
+		lblNewLabelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+	}
+	
+	private void textPesquisaNIFSetup() {
+		textPesquisaNIF = new JTextField();
+		textPesquisaNIF.setColumns(10);
+	}
+	
+	private void lblNomeSetup() {
+		lblNome = new JLabel("Nome");
+		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+	}
+	
+	private void textFieldNomeSetup() {
+		textFieldNome = new JTextField();
+		textFieldNome.setColumns(10);
+	}
+	
+	private void checkBoxAtivoSetup() {
+		checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
+	}
+	
 	private void botaoPesquisaSetup() {
 		botaoPesquisa = new JButton("Pesquisar");
 		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 15));
@@ -279,91 +321,38 @@ public class GUI_gestor_operador extends JFrame {
 			}
 		});
 	}
+	
+	private void botaoEditarOperadorSetup() {
+		botaoEditarOperador = new JButton("Editar Operador");
+		botaoEditarOperador.setBounds(826, 264, 161, 33);
+		botaoEditarOperador.setFont(font);
+		botaoEditarOperador.setBackground(SystemColor.activeCaption);
+		botaoEditarOperador.setFocusPainted(false);
+		botaoEditarOperador.setEnabled(false);
+		botaoEditarOperador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 
-	private void checkBoxAtivoSetup() {
-		checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
-		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
+				int row = table.getSelectedRow();
+
+				if (row < 0) {
+					JOptionPane.showMessageDialog(GUI_gestor_operador.this,
+							"Por favor selecione um Operador", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				Funcionario funcionarioTemp = (Funcionario) table.getValueAt(row, OperadorPesquisaModelTable.OBJECT_COL);
+
+				CriarOperadorDialog dialog = new CriarOperadorDialog(GUI_gestor_operador.this,funcionarioTemp, true);
+
+				dialog.setVisible(true);
+
+			}
+		});
 	}
-
-	private void textFieldNomeSetup() {
-		textFieldNome = new JTextField();
-		textFieldNome.setColumns(10);
-	}
-
-	private void lblNomeSetup() {
-		lblNome = new JLabel("Nome");
-		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-	}
-
-	private void textPesquisaNIFSetup() {
-		textPesquisaNIF = new JTextField();
-		textPesquisaNIF.setColumns(10);
-	}
-
-	private void lblNewLabelNIFSetup() {
-		lblNewLabelNIF = new JLabel("NIF");
-		lblNewLabelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-	}
-
-	private void textPesquisaIDSetup() {
-		textPesquisaID = new JTextField();
-		textPesquisaID.setColumns(10);
-	}
-
-	private void lblNewLabelIDSetup() {
-		lblNewLabelID = new JLabel("ID");
-		lblNewLabelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-	}
-
-	private void panelPesquisaSetup() {
-		panelPesquisa = new JPanel();
-		panelPesquisa.setBackground(SystemColor.inactiveCaption);
-		panelPesquisa.setBounds(66, 63, 437, 189);
-		panelPesquisa.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
-				new RowSpec[] {
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC,}));
-	}
-
-	private void lblCamposPesquisasSetup() {
-		lblCamposPesquisas = new JLabel("Campos Pesquisa");
-		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-		lblCamposPesquisas.setBounds(66, 26, 294, 26);
-	}
-
-	private JLabel lbFooterSetup() {
-		JLabel lbFooter = new JLabel("");
-		lbFooter.setIcon(new ImageIcon(GUI_gestor_operador.class.getResource("/guiComponentes/img/footer2.png")));
-		lbFooter.setBounds(599, 802, 367, 59);
-		return lbFooter;
-	}
-
-	private void btVoltarGestorOperadorSetup() {
-		btVoltarGestorOperador = new JButton("Voltar");
-		btVoltarGestorOperador.setBounds(76, 809, 119, 32);
-		btVoltarGestorOperador.setFont(font);
-		btVoltarGestorOperador.setBackground(SystemColor.activeCaption);
-		btVoltarGestorOperador.setFocusPainted(false);
-	}
-
+	
 	private void botaoDesativarOperadorSetup() {
 		botaoDesativarOperador = new JButton("Desativar Operador");
-		botaoDesativarOperador.setBounds(1045, 270, 188, 33);
+		botaoDesativarOperador.setBounds(997, 264, 161, 33);
 		botaoDesativarOperador.setFont(font);
 		botaoDesativarOperador.setBackground(SystemColor.activeCaption);
 		botaoDesativarOperador.setFocusPainted(false);
@@ -407,17 +396,34 @@ public class GUI_gestor_operador extends JFrame {
 
 		});
 	}
-
-	private void botaoEditarOperadorSetup() {
-		botaoEditarOperador = new JButton("Editar Operador");
-		botaoEditarOperador.setBounds(874, 270, 161, 33);
-		botaoEditarOperador.setFont(font);
-		botaoEditarOperador.setBackground(SystemColor.activeCaption);
-		botaoEditarOperador.setFocusPainted(false);
-		botaoEditarOperador.setEnabled(false);
-		botaoEditarOperador.addActionListener(new ActionListener() {
+	
+	private JButton botaoCriarOperadorSetup() {
+		JButton botaoCriarOperador = new JButton("Criar Operador");
+		botaoCriarOperador.setBounds(1168, 264, 152, 32);
+		botaoCriarOperador.setFont(font);
+		botaoCriarOperador.setBackground(SystemColor.activeCaption);
+		botaoCriarOperador.setFocusPainted(false);
+		botaoCriarOperador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				CriarOperadorDialog dialog = new CriarOperadorDialog(GUI_gestor_operador.this);
+				dialog.setVisible(true);
+			}
+		});
+		return botaoCriarOperador;
+	}
+	
+	private void btVoltarGestorOperadorSetup() {
+		btVoltarGestorOperador = new JButton("Voltar");
+		btVoltarGestorOperador.setBounds(6, 709, 119, 38);
+		btVoltarGestorOperador.setFont(font);
+		btVoltarGestorOperador.setBackground(SystemColor.activeCaption);
+		btVoltarGestorOperador.setFocusPainted(false);
+	}
 
+	private void botaoVisualizarHistoricoSetup() {
+		botaoVisualizarHistorico = new JButton("Ver Historico");
+		botaoVisualizarHistorico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
 
 				if (row < 0) {
@@ -426,24 +432,56 @@ public class GUI_gestor_operador extends JFrame {
 					return;
 				}
 
-				Funcionario funcionarioTemp = (Funcionario) table.getValueAt(row, OperadorPesquisaModelTable.OBJECT_COL);
+				Funcionario operadorTemp = (Funcionario) table.getValueAt(row, OperadorPesquisaModelTable.OBJECT_COL);
+				List<HistoricoOperador> list;
 
-				CriarOperadorDialog dialog = new CriarOperadorDialog(GUI_gestor_operador.this,funcionarioTemp, true);
+				try {
 
-				dialog.setVisible(true);
+					list = GestorDeDAO.getGestorDeDAO().getHistoricoOperador(operadorTemp.getId());
+					HistoricoOperadorDialog dialogHistorico = new HistoricoOperadorDialog();
+					dialogHistorico.preencherTable(operadorTemp, list);
+					dialogHistorico.setVisible(true);
+
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 
 			}
 		});
+		
+		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
+		botaoVisualizarHistorico.setBounds(651, 264, 161, 33);
+		botaoVisualizarHistorico.setEnabled(false);
 	}
-
+	
 	private void lblResultadosSetup() {
 		lblResultados = new JLabel("Resultados: ");
 		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 16));
-		lblResultados.setBounds(10, 4, 136, 25);
+		lblResultados.setBounds(33, 6, 136, 25);
+	}
+	
+
+	private void lblHoraSistemaSetup() {
+	}
+
+	private void lblTempoSessaoSetup() {
+	}
+
+	private void lblUsernameLoggedSetup() {
+	}
+
+	private void panelUserESessaoSetup() {
 	}
 
 	private void tableSetup() {
+	}
+
+	private JScrollPane scrollPaneSetup() {
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(33, 33, 1224, 330);
 		table = new JTable();
+		scrollPane.setViewportView(table);
 		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
 		table.setFillsViewportHeight(true);
@@ -473,47 +511,23 @@ public class GUI_gestor_operador extends JFrame {
 
 			}
 		});
-	}
-
-	private JScrollPane scrollPaneSetup() {
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 33, 1332, 488);
 		return scrollPane;
 	}
 
 	private JPanel panelDaTableSetup() {
 		JPanel panelDaTable = new JPanel();
-		panelDaTable.setBackground(SystemColor.inactiveCaption);
-		panelDaTable.setBounds(66, 310, 1366, 488);
+		panelDaTable.setBackground(SystemColor.window);
+		panelDaTable.setBounds(66, 309, 1279, 369);
 		panelDaTable.setFont(font);
 		panelDaTable.setLayout(null);
 		return panelDaTable;
 	}
-
-	private JButton botaoCriarOperadorSetup() {
-		JButton botaoCriarOperador = new JButton("Criar Operador");
-		botaoCriarOperador.setBounds(1243, 270, 161, 32);
-		botaoCriarOperador.setFont(font);
-		botaoCriarOperador.setBackground(SystemColor.activeCaption);
-		botaoCriarOperador.setFocusPainted(false);
-		botaoCriarOperador.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				CriarOperadorDialog dialog = new CriarOperadorDialog(GUI_gestor_operador.this);
-				dialog.setVisible(true);
-			}
-		});
-		return botaoCriarOperador;
-	}
-
-	private void contentPaneSetup() {
-		contentPane = new JPanel();
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		setTitle("Pesquisa de Operador");
-		setFont(font);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 30, 1400, 800);
-		contentPane.setBackground(SystemColor.inactiveCaption);
+	
+	private JLabel lbFooterSetup() {
+		JLabel lbFooter = new JLabel();
+		lbFooter.setIcon(new ImageIcon(GUI_gestor_operador.class.getResource("/guiComponentes/img/Altran1.1.png")));
+		lbFooter.setBounds(599, 690, 367, 65);
+		return lbFooter;
 	}
 
 	public void refreshOperadorTable() {
