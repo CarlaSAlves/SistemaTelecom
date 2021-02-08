@@ -1,6 +1,7 @@
 package data_acess_object_dao;
 
 import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -14,9 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.StringJoiner;
+<<<<<<< HEAD
 
 import data_acess_object_dao_v2.PasswordEncryption;
 
+=======
+import data_acess_object_dao_v2.PasswordEncryption;
+>>>>>>> f764afec5d3dc6d0d7c41fd49b93880076dc14c8
 import historicos.HistoricoOperador;
 import standard_value_object.Funcionario;
 import standard_value_object_v2.Role;
@@ -355,6 +360,10 @@ public class FuncionarioDAO {
 			myStmt.setString(4, PasswordEncryption.get_SHA_512_SecurePassword(funcionario.getPassword()));
 			myStmt.setBoolean(5, funcionario.isAtivo());
 			myStmt.setInt(6, funcionario.getId_role());
+<<<<<<< HEAD
+=======
+
+>>>>>>> f764afec5d3dc6d0d7c41fd49b93880076dc14c8
 
 			myStmt.setString(1, operador.getNome());
 			myStmt.setLong(2, operador.getNif());
@@ -385,7 +394,6 @@ public class FuncionarioDAO {
 			myStmt = myConn.prepareStatement("UPDATE `funcionario` SET `nome`=?, `nif`=?, "
 					+ "`login`=?, `password`=?, `ativo`=?, `id_role`=? WHERE  `id`=?");
 
-<<<<<<< HEAD
 			myStmt.setString(1, funcionario.getNome());
 			myStmt.setLong(2, funcionario.getNif());
 			myStmt.setString(3, funcionario.getLogin());
@@ -393,7 +401,7 @@ public class FuncionarioDAO {
 			myStmt.setBoolean(5, funcionario.isAtivo());
 			myStmt.setInt(6, funcionario.getId_role());
 			myStmt.setInt(7, funcionario.getId());
-=======
+
 			myStmt.setString(1, operador.getNome());
 			myStmt.setLong(2, operador.getNif());
 			myStmt.setString(3, operador.getLogin());
@@ -405,7 +413,6 @@ public class FuncionarioDAO {
 			myStmt.executeUpdate();
 
 			myStmt = logUpdate(operador, admin, "Editar Operador");	
->>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 
 			myStmt.executeUpdate();
 
@@ -439,24 +446,19 @@ public class FuncionarioDAO {
 			myStmt = myConn.prepareStatement("update funcionario SET `ativo`= 0 where id=?");
 			myStmt.setInt(1, id);
 			myStmt.executeUpdate();
-<<<<<<< HEAD
-=======
+
 
 			Funcionario operador = pesquisaOperadorAuxiliarID(id);
 			myStmt = logUpdate(operador, admin, "Desativar Operador");	
 
 			myStmt.executeUpdate();
 
->>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			myStmt.close();
 		}
 	}
-<<<<<<< HEAD
-	
-=======
 
 	public List<HistoricoOperador> getHistoricoOperador(int id_operador) throws Exception {
 		List<HistoricoOperador> list = new ArrayList<HistoricoOperador>();
@@ -494,7 +496,6 @@ public class FuncionarioDAO {
 		}
 	}
 
->>>>>>> ad18196035ed6ff0f21c059b61636f7af5c8e2ae
 	private Funcionario convertRowParaFuncionario(ResultSet myRs) throws SQLException {
 
 		int id = myRs.getInt("id");
