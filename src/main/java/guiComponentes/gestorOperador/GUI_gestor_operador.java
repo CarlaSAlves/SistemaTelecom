@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -32,10 +31,6 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import guiComponentes.GUI_total;
-import guiComponentes.gestorCliente.ClientePesquisaModelTable;
-import guiComponentes.gestorCliente.GUI_gestor_cliente;
-import guiComponentes.gestorCliente.HistoricoClienteDialog;
-import historicos.HistoricoCliente;
 import historicos.HistoricoOperador;
 
 import com.jgoodies.forms.layout.FormSpecs;
@@ -51,10 +46,8 @@ public class GUI_gestor_operador extends JFrame {
 	private JButton botaoDesativarOperador;
 	private JButton botaoEditarOperador;
 	private int indices[];
-
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JLabel lblCamposPesquisas;
-	int test;
 	private JPanel panelPesquisa;
 	private JLabel lblNewLabelID;
 	private JTextField textPesquisaID;
@@ -114,15 +107,15 @@ public class GUI_gestor_operador extends JFrame {
 		JLabel lbFooter = lbFooterSetup();
 		contentPane.add(lbFooter);
 
-		
-		
+
+
 
 		lblCamposPesquisasSetup();
 		contentPane.add(lblCamposPesquisas);
 
 		panelPesquisaSetup();
 		contentPane.add(panelPesquisa);
-		
+
 		lblNewLabelIDSetup();
 		panelPesquisa.add(lblNewLabelID, "2, 2, left, default");
 
@@ -146,24 +139,24 @@ public class GUI_gestor_operador extends JFrame {
 
 		botaoPesquisaSetup();
 		panelPesquisa.add(botaoPesquisa, "4, 12");
-		
+
 		panelUserESessaoSetup();
 		contentPane.add(panelUserESessao);
 
 		lblUsernameLoggedSetup();
 		panelUserESessao.add(lblUsernameLogged);
-		
+
 		lblTempoSessaoSetup();
 		panelUserESessao.add(lblTempoSessao);
 
 		lblHoraSistemaSetup();
 		panelUserESessao.add(lblHoraSistema);
-		
+
 		botaoVisualizarHistoricoSetup();
 		contentPane.add(botaoVisualizarHistorico);
 
 	}
-	
+
 	private void botaoVisualizarHistoricoSetup() {
 		botaoVisualizarHistorico = new JButton("Ver Historico");
 		botaoVisualizarHistorico.addActionListener(new ActionListener() {
@@ -536,7 +529,7 @@ public class GUI_gestor_operador extends JFrame {
 		lblUsernameLogged.setText("Username : " + username);
 
 	}
-	
+
 	public void setLblTempoSessao(Duration temporizador) {
 		lblTempoSessao.setText("Sessão: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
 	}
@@ -545,7 +538,7 @@ public class GUI_gestor_operador extends JFrame {
 		lblHoraSistema.setText("Data: " + agora);
 
 	}
-	
+
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}

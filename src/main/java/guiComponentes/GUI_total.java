@@ -106,6 +106,7 @@ public class GUI_total extends JFrame {
 
 			}
 		});
+
 		login.getBtLogin().addActionListener(new ActionListener() {
 
 			@Override
@@ -138,17 +139,17 @@ public class GUI_total extends JFrame {
 			}
 		});
 
-		
+
 		homepage.getBtGerirPromocoes().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {				
 				homepagePanel.setVisible(false);				
 				gestor_promocaoPanel.setVisible(true);
-				
+
 			}
 		});
-		
+
 		homepage.getBtGerirPacotes().addActionListener(new ActionListener() {
 
 			@Override
@@ -167,6 +168,7 @@ public class GUI_total extends JFrame {
 				homepagePanel.setVisible(false);
 			}
 		});
+
 		gestor_cliente.btVoltarGestorCliente().addActionListener(new ActionListener() {
 
 			@Override
@@ -192,11 +194,11 @@ public class GUI_total extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				homepagePanel.setVisible(true);
 				gestor_pacotesPanel.setVisible(false);
-				
+
 				System.out.println("Teste botão voltar !!!!");
 			}
 		});
-		
+
 
 		gestor_promocao.getBtVoltarGestorPromocao().addActionListener(new ActionListener() {
 
@@ -217,19 +219,18 @@ public class GUI_total extends JFrame {
 		gestor_operador.setUsernameLoggedIn(username);
 		gestor_pacotes.setUsernameLoggedIn(username);
 		gestor_promocao.setUsernameLoggedIn(username);
-	
 		homepage.setUsernameLoggedIn(username);
 	}
 
 
 	private void comecarTemporizador(){
-		
+
 		long data1 = System.currentTimeMillis();
 		Calendar cal2 = Calendar.getInstance();
 		cal2.setTimeInMillis(data1);
 		dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		dataEHoraDeLog = dateFormat.format(cal2.getTime());
-		
+
 		Thread t = new Thread(){
 			public void run(){
 				while (true) {
@@ -242,7 +243,7 @@ public class GUI_total extends JFrame {
 					dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 					String dataEHora = dateFormat.format(cal1.getTime());
 
-					
+
 
 					homepage.setLblTempoSessao(temporizador);
 					homepage.setLblHoraSistema(dataEHora);
@@ -286,10 +287,6 @@ public class GUI_total extends JFrame {
 
 	public static String getUsername() {
 		return username;
-	}
-
-	public static void setUsername(String username) {
-		GUI_total.username = username;
 	}
 }
 

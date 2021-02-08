@@ -203,6 +203,7 @@ public class CriarOperadorDialog extends JDialog {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void gravarOperador() {
 		String nome = textFieldNome.getText();
 		int nif = Integer.parseInt(textFieldNIF.getText());

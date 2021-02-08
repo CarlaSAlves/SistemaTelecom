@@ -3,7 +3,6 @@ package guiComponentes.gestorOperador;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-import historicos.HistoricoCliente;
 import historicos.HistoricoOperador;
 
 

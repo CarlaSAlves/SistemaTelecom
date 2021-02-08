@@ -16,13 +16,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
-import historicos.HistoricoCliente;
 import historicos.HistoricoOperador;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 
 public class HistoricoOperadorDialog extends JDialog {
@@ -70,8 +68,8 @@ public class HistoricoOperadorDialog extends JDialog {
 			contentPanel.add(panel, BorderLayout.NORTH);
 			panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 			{
-				JLabel lblAuditHistoryFor = new JLabel("Historico do Operador :");
-				panel.add(lblAuditHistoryFor);
+				JLabel lblHistoricoPara = new JLabel("Historico do Operador :");
+				panel.add(lblHistoricoPara);
 			}
 			{
 				operadorRegistoLabel = new JLabel("");

@@ -30,7 +30,6 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
-import guiComponentes.GUI_login;
 import guiComponentes.GUI_total;
 import historicos.HistoricoCliente;
 
@@ -87,7 +86,7 @@ public class GUI_gestor_cliente extends JFrame {
 	public GUI_gestor_cliente() {
 
 		contentPaneSetup();
-		
+
 		JButton botaoCriarCliente = botaoCriarClienteSetup();
 		getContentPane().add(botaoCriarCliente);
 
@@ -571,7 +570,6 @@ public class GUI_gestor_cliente extends JFrame {
 
 	}
 
-	
 	public void setLblTempoSessao(Duration temporizador) {
 		lblTempoSessao.setText("SessÃ£o: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
 	}

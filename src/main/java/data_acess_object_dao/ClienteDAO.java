@@ -61,7 +61,7 @@ public class ClienteDAO {
 
 	public List<Cliente> pesquisaCliente(int id, String nif, String nome, String morada, int ativo) throws Exception {
 		List<Cliente> list = new ArrayList<>();
-		
+
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
 		StringJoiner sj = new StringJoiner (" AND ");
@@ -195,7 +195,7 @@ public class ClienteDAO {
 			myStmt.executeUpdate();
 
 			Cliente clientCriado = pesquisaClienteAuxiliarNIF(""+cliente.getNif());
-			myStmt = logUpdate(funcionario, cliente, "Criar Cliente");	
+			myStmt = logUpdate(funcionario, clientCriado, "Criar Cliente");	
 
 			myStmt.executeUpdate();	
 
@@ -260,18 +260,6 @@ public class ClienteDAO {
 
 	}
 
-	private PreparedStatement logUpdate(Funcionario funcionario, Cliente cliente, String descricao) throws SQLException {
-		PreparedStatement myStmt;
-		myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
-
-		myStmt.setInt(1, funcionario.getId());
-		myStmt.setInt(2, cliente.getId());
-		myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-		myStmt.setString(4, descricao);
-		return myStmt;
-	}
-
-
 	public List<HistoricoCliente> getHistoricoCliente(int id_cliente) throws Exception {
 		List<HistoricoCliente> list = new ArrayList<HistoricoCliente>();
 
@@ -325,6 +313,17 @@ public class ClienteDAO {
 		return cliente;
 	}
 
+	private PreparedStatement logUpdate(Funcionario funcionario, Cliente cliente, String descricao) throws SQLException {
+		PreparedStatement myStmt;
+		myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
+
+		myStmt.setInt(1, funcionario.getId());
+		myStmt.setInt(2, cliente.getId());
+		myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+		myStmt.setString(4, descricao);
+		return myStmt;
+	}
+	
 
 	private void close(Statement myStmt, ResultSet myRs) throws SQLException {
 		close(null, myStmt, myRs);		

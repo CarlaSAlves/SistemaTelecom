@@ -14,7 +14,6 @@ import java.util.Properties;
 import java.util.StringJoiner;
 
 import historicos.HistoricoOperador;
-import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 
 public class FuncionarioDAO {
@@ -80,7 +79,7 @@ public class FuncionarioDAO {
 			close(myStmt, myRs);
 		}
 	}
-	
+
 	private Funcionario pesquisaOperadorAuxiliarNIF(String nif) throws Exception {
 		Funcionario funcionario = null;
 
@@ -105,42 +104,6 @@ public class FuncionarioDAO {
 			close(myStmt, myRs);
 		}
 	}
-	public List<HistoricoOperador> getHistoricoOperador(int id_operador) throws Exception {
-		List<HistoricoOperador> list = new ArrayList<HistoricoOperador>();
-
-		Statement myStmt = null;
-		ResultSet myRs = null;
-
-		try {
-			myStmt = myConn.createStatement();
-
-			String sql = "SELECT HistoricoOperador.id_funcionario, HistoricoOperador.id_operador, HistoricoOperador.descricao, "
-					+ "HistoricoOperador.data_registo, admin.nome "
-					+ "FROM funcionario_log_operador HistoricoOperador, funcionario admin WHERE HistoricoOperador.id_funcionario=admin.id AND HistoricoOperador.id_operador=" + id_operador;
-
-			myRs = myStmt.executeQuery(sql);
-
-			while (myRs.next()) {
-
-				int id_funcionario = myRs.getInt("HistoricoOperador.id_funcionario");
-				String descricao = myRs.getString("HistoricoOperador.descricao");
-				Timestamp timestamp = myRs.getTimestamp("HistoricoOperador.data_registo");
-				java.sql.Date data_registo = new java.sql.Date(timestamp.getTime());
-				String nome = myRs.getString("admin.nome");
-
-
-				HistoricoOperador historico = new HistoricoOperador(id_operador, id_funcionario, descricao, data_registo, nome);
-
-				list.add(historico);
-			}
-
-			return list;		
-		}
-		finally {
-			close(myStmt, myRs);
-		}
-	}
-
 
 	public List<Funcionario> getAllFuncionarioOperador() throws Exception {
 		List<Funcionario> listaFuncionarioOperador = new ArrayList<>();
@@ -198,7 +161,7 @@ public class FuncionarioDAO {
 		ResultSet myRs = null;
 		StringJoiner sj = new StringJoiner (" AND ");
 		String query = "SELECT * FROM FUNCIONARIO WHERE ";
-		
+
 		try {
 			@SuppressWarnings("rawtypes")
 			List<Comparable> values = new ArrayList<Comparable>();
@@ -224,7 +187,7 @@ public class FuncionarioDAO {
 
 			query += sj.toString();
 			query+= " AND id_role=2";
-		
+
 			myStmt = myConn.prepareStatement(query);
 
 			for (int index = 0; index < values.size(); index++){
@@ -246,6 +209,7 @@ public class FuncionarioDAO {
 	}
 
 
+	@SuppressWarnings("resource")
 	public void criarFuncionario(Funcionario operador, Funcionario admin) throws Exception {
 		PreparedStatement myStmt = null;
 
@@ -261,7 +225,7 @@ public class FuncionarioDAO {
 			myStmt.setInt(6, operador.getId_role());
 
 			myStmt.executeUpdate();
-			
+
 			Funcionario operadorCriado = pesquisaOperadorAuxiliarNIF(""+operador.getNif());
 			myStmt = logUpdate(operadorCriado, admin, "Criar Operador");	
 
@@ -291,7 +255,7 @@ public class FuncionarioDAO {
 			myStmt.setInt(7, operador.getId());
 
 			myStmt.executeUpdate();
-			
+
 			myStmt = logUpdate(operador, admin, "Editar Operador");	
 
 			myStmt.executeUpdate();
@@ -302,18 +266,9 @@ public class FuncionarioDAO {
 			myStmt.close();
 		}
 	}
-	
-	private PreparedStatement logUpdate(Funcionario operador, Funcionario admin, String descricao) throws SQLException {
-		PreparedStatement myStmt;
-		myStmt = myConn.prepareStatement("insert into funcionario_log_operador(id_funcionario, id_operador, data_registo, descricao) VALUES (?, ?, ?, ?)");
 
-		myStmt.setInt(1, admin.getId());
-		myStmt.setInt(2, operador.getId());
-		myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-		myStmt.setString(4, descricao);
-		return myStmt;
-	}
 
+	@SuppressWarnings("resource")
 	public void desativarFuncionario(int id, Funcionario admin) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
@@ -323,7 +278,7 @@ public class FuncionarioDAO {
 			myStmt.setInt(1, id);
 
 			myStmt.executeUpdate();
-			
+
 			Funcionario operador = pesquisaOperadorAuxiliarID(id);
 			myStmt = logUpdate(operador, admin, "Desativar Operador");	
 
@@ -336,6 +291,43 @@ public class FuncionarioDAO {
 		}
 
 	}
+
+	public List<HistoricoOperador> getHistoricoOperador(int id_operador) throws Exception {
+		List<HistoricoOperador> list = new ArrayList<HistoricoOperador>();
+
+		Statement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			myStmt = myConn.createStatement();
+
+			String sql = "SELECT HistoricoOperador.id_funcionario, HistoricoOperador.id_operador, HistoricoOperador.descricao, "
+					+ "HistoricoOperador.data_registo, admin.nome "
+					+ "FROM funcionario_log_operador HistoricoOperador, funcionario admin WHERE HistoricoOperador.id_funcionario=admin.id AND HistoricoOperador.id_operador=" + id_operador;
+
+			myRs = myStmt.executeQuery(sql);
+
+			while (myRs.next()) {
+
+				int id_funcionario = myRs.getInt("HistoricoOperador.id_funcionario");
+				String descricao = myRs.getString("HistoricoOperador.descricao");
+				Timestamp timestamp = myRs.getTimestamp("HistoricoOperador.data_registo");
+				java.sql.Date data_registo = new java.sql.Date(timestamp.getTime());
+				String nome = myRs.getString("admin.nome");
+
+
+				HistoricoOperador historico = new HistoricoOperador(id_operador, id_funcionario, descricao, data_registo, nome);
+
+				list.add(historico);
+			}
+
+			return list;		
+		}
+		finally {
+			close(myStmt, myRs);
+		}
+	}
+
 	private Funcionario convertRowParaFuncionario(ResultSet myRs) throws SQLException {
 
 		int id = myRs.getInt("id");
@@ -349,6 +341,17 @@ public class FuncionarioDAO {
 		Funcionario funcionario = new Funcionario(id, nome, nif, login, password, ativo, id_role);
 
 		return funcionario;
+	}
+
+	private PreparedStatement logUpdate(Funcionario operador, Funcionario admin, String descricao) throws SQLException {
+		PreparedStatement myStmt;
+		myStmt = myConn.prepareStatement("insert into funcionario_log_operador(id_funcionario, id_operador, data_registo, descricao) VALUES (?, ?, ?, ?)");
+
+		myStmt.setInt(1, admin.getId());
+		myStmt.setInt(2, operador.getId());
+		myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+		myStmt.setString(4, descricao);
+		return myStmt;
 	}
 
 

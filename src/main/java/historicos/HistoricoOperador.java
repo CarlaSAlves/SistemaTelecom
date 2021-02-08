@@ -53,7 +53,7 @@ public class HistoricoOperador {
 
 	@Override
 	public String toString() {
-		return "Historicooperador [id_operador=" + id_operador + ", id_funcionario=" + id_funcionario + ", descricao="
+		return "HistoricoOperador [id_operador=" + id_operador + ", id_funcionario=" + id_funcionario + ", descricao="
 				+ descricao + ", data_registo=" + data_registo + ", nome_funcionario=" + nome_funcionario + "]";
 	}
 	
