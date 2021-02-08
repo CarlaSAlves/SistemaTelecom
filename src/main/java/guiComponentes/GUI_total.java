@@ -37,7 +37,7 @@ public class GUI_total extends JFrame {
 	private Duration temporizador;
 	private String dataEHoraDeLog;
 	private SimpleDateFormat dateFormat ;
-
+int test;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -138,18 +138,16 @@ public class GUI_total extends JFrame {
 			}
 		});
 
-//		
-//		homepage.getBtGerirPromocoes().addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {				
-//				homepagePanel.setVisible(false);				
-//				gestor_promocoesPanel.setVisible(true);
-//				
-//				System.out.println("Teste !!!!");
-//			
-//			}
-//		});
+		
+		homepage.getBtGerirPromocoes().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {				
+				homepagePanel.setVisible(false);				
+				gestor_promocaoPanel.setVisible(true);
+				
+			}
+		});
 		
 		homepage.getBtGerirPacotes().addActionListener(new ActionListener() {
 
