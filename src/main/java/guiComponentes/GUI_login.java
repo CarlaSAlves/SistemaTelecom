@@ -184,7 +184,7 @@ public class GUI_login extends JFrame {
 				
 				JLabel lblNewLabel = new JLabel();
 				lblNewLabel.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/user.png")));
-				lblNewLabel.setBounds(302, 73, 238, 298);
+				lblNewLabel.setBounds(301, 89, 238, 298);
 				panel.add(lblNewLabel);
 				
 				JLabel lblNewLabel_1 = new JLabel("");

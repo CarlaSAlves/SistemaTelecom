@@ -37,6 +37,7 @@ import historicos.HistoricoCliente;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JCheckBox;
+import java.awt.Color;
 
 
 public class GUI_gestor_cliente extends JFrame {
@@ -142,24 +143,24 @@ public class GUI_gestor_cliente extends JFrame {
 		panelSetup();
 		panelContentSetup();
 		contentPane.add(panel);
-
-		panelUserESessaoSetup();
-		panelUserESessaoContentSetup();
-		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setBounds(1297, 805, 159, 16);
-		contentPane.add(lblUsernameLogged);
-		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 13));
-		lblTempoSessao = new JLabel();
-		lblTempoSessao.setBounds(1297, 820, 159, 15);
-		contentPane.add(lblTempoSessao);
-		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 13));
 		lblHoraSistema = new JLabel();
-		lblHoraSistema.setBounds(1297, 835, 159, 16);
+		lblHoraSistema.setBounds(1219, 729, 159, 18);
 		contentPane.add(lblHoraSistema);
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblTempoSessao = new JLabel();
+		lblTempoSessao.setBounds(1219, 709, 159, 18);
+		contentPane.add(lblTempoSessao);
+		lblTempoSessao.setText("Sessão:");
+		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setBounds(1219, 690, 159, 18);
+		contentPane.add(lblUsernameLogged);
+		lblUsernameLogged.setText("Username:");
+		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 13));
+
+		panelUserESessaoSetup();
+		panelUserESessaoContentSetup();
 
 
 
@@ -318,8 +319,8 @@ public class GUI_gestor_cliente extends JFrame {
 
 	private void panelSetup() {
 		panel = new JPanel();
-		panel.setBackground(SystemColor.inactiveCaption);
-		panel.setBounds(66, 63, 453, 213);
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(98, 63, 453, 221);
 
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
@@ -344,7 +345,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private void lblCamposPesquisasSetup() {
 		lblCamposPesquisas = new JLabel("Campos Pesquisa");
 		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-		lblCamposPesquisas.setBounds(66, 26, 294, 26);
+		lblCamposPesquisas.setBounds(98, 26, 294, 26);
 	}
 
 	private void botaoVisualizarHistoricoSetup() {
@@ -378,20 +379,20 @@ public class GUI_gestor_cliente extends JFrame {
 		});
 		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
-		botaoVisualizarHistorico.setBounds(739, 266, 161, 33);
+		botaoVisualizarHistorico.setBounds(655, 263, 161, 33);
 		botaoVisualizarHistorico.setEnabled(false);
 	}
 
 	private JLabel lbFooterSetup() {
 		JLabel lbFooter = new JLabel("");
-		lbFooter.setIcon(new ImageIcon(GUI_gestor_cliente.class.getResource("/guiComponentes/img/footer2.png")));
-		lbFooter.setBounds(599, 802, 367, 59);
+		lbFooter.setIcon(new ImageIcon(GUI_gestor_cliente.class.getResource("/guiComponentes/img/Altran1.1.png")));
+		lbFooter.setBounds(599, 690, 367, 65);
 		return lbFooter;
 	}
 
 	private void btVoltarGestorClienteSetup() {
 		btVoltarGestorCliente = new JButton("Voltar");
-		btVoltarGestorCliente.setBounds(76, 809, 119, 32);
+		btVoltarGestorCliente.setBounds(6, 709, 119, 38);
 		btVoltarGestorCliente.setFont(font);
 		btVoltarGestorCliente.setBackground(SystemColor.activeCaption);
 		btVoltarGestorCliente.setFocusPainted(false);
@@ -399,7 +400,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 	private void botaoDesativarClienteSetup() {
 		botaoDesativarCliente = new JButton("Desativar Cliente");
-		botaoDesativarCliente.setBounds(1081, 267, 161, 33);
+		botaoDesativarCliente.setBounds(997, 264, 161, 33);
 		botaoDesativarCliente.setFont(font);
 		botaoDesativarCliente.setEnabled(false);
 		botaoDesativarCliente.setBackground(SystemColor.activeCaption);
@@ -445,7 +446,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 	private void botaoEditarClienteSetup() {
 		botaoEditarCliente = new JButton("Editar Cliente");
-		botaoEditarCliente.setBounds(910, 267, 161, 33);
+		botaoEditarCliente.setBounds(826, 264, 161, 33);
 		botaoEditarCliente.setFont(font);
 		botaoEditarCliente.setEnabled(false);
 		botaoEditarCliente.setBackground(SystemColor.activeCaption);
@@ -471,7 +472,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private void lblResultadosSetup() {
 		lblResultados = new JLabel("Resultados: ");
 		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		lblResultados.setBounds(10, 4, 136, 25);
+		lblResultados.setBounds(33, 6, 136, 25);
 	}
 
 	private void tableSetup() {
@@ -509,14 +510,14 @@ public class GUI_gestor_cliente extends JFrame {
 
 	private JScrollPane scrollPaneSetup() {
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 33, 1332, 488);
+		scrollPane.setBounds(33, 33, 1224, 330);
 		return scrollPane;
 	}
 
 	private JPanel panelDaTableSetup() {
 		JPanel panelDaTable = new JPanel();
-		panelDaTable.setBackground(SystemColor.inactiveCaption);
-		panelDaTable.setBounds(66, 310, 1366, 488);
+		panelDaTable.setBackground(Color.WHITE);
+		panelDaTable.setBounds(66, 309, 1279, 369);
 		panelDaTable.setFont(font);
 		panelDaTable.setLayout(null);
 		return panelDaTable;
@@ -524,7 +525,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 	private JButton botaoCriarClienteSetup() {
 		JButton botaoCriarCliente = new JButton("Criar Cliente");
-		botaoCriarCliente.setBounds(1252, 267, 152, 32);
+		botaoCriarCliente.setBounds(1168, 264, 152, 32);
 		botaoCriarCliente.setFont(font);
 		botaoCriarCliente.setBackground(SystemColor.activeCaption);
 		botaoCriarCliente.setFocusPainted(false);
@@ -547,7 +548,7 @@ public class GUI_gestor_cliente extends JFrame {
 		setFont(font);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
-		contentPane.setBackground(SystemColor.inactiveCaption);
+		contentPane.setBackground(Color.WHITE);
 	}
 
 
@@ -592,7 +593,4 @@ public class GUI_gestor_cliente extends JFrame {
 		lblHoraSistema.setText("Data: " + agora);
 
 	}
-
-
-
 }
