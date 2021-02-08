@@ -22,7 +22,6 @@ import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
-import historico.cliente.HistoricoCliente;
 import servico.GestorDeDAO;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
@@ -31,6 +30,9 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import guiComponentes.GUI_login;
+import guiComponentes.GUI_total;
+import historicos.HistoricoCliente;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JCheckBox;
@@ -49,7 +51,6 @@ public class GUI_gestor_cliente extends JFrame {
 	private int indices[];
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JLabel lblUsernameLogged;
-	private String username;
 	private JButton botaoVisualizarHistorico;
 	private JLabel lblCamposPesquisas;
 	private JPanel panel;
@@ -66,7 +67,8 @@ public class GUI_gestor_cliente extends JFrame {
 	private JLabel lblTempoSessao;
 	private JLabel lblHoraSistema;
 	private JPanel panelUserESessao;
-	int test;
+
+
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -85,7 +87,7 @@ public class GUI_gestor_cliente extends JFrame {
 	public GUI_gestor_cliente() {
 
 		contentPaneSetup();
-
+		
 		JButton botaoCriarCliente = botaoCriarClienteSetup();
 		getContentPane().add(botaoCriarCliente);
 
@@ -122,12 +124,12 @@ public class GUI_gestor_cliente extends JFrame {
 		panelSetup();
 		panelContentSetup();
 		contentPane.add(panel);
-		
+
 		panelUserESessaoSetup();
 		panelUserESessaoContentSetup();
 		contentPane.add(panelUserESessao);
 
-		
+
 
 	}
 
@@ -137,7 +139,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 		lblTempoSessaoSetup();
 		panelUserESessao.add(lblTempoSessao);
-		
+
 		lblHoraSistemaSetup();
 		panelUserESessao.add(lblHoraSistema);
 	}
@@ -305,7 +307,7 @@ public class GUI_gestor_cliente extends JFrame {
 		panel = new JPanel();
 		panel.setBackground(SystemColor.inactiveCaption);
 		panel.setBounds(66, 63, 447, 199);
-		
+
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
@@ -409,7 +411,7 @@ public class GUI_gestor_cliente extends JFrame {
 						return;
 					}
 
-					Funcionario funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(username);
+					Funcionario funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
 					for(int i = 0; i < indices.length; i++) {
 						Cliente clienteTemp = (Cliente) table.getValueAt(indices[i], ClientePesquisaModelTable.OBJECT_COL);
 						GestorDeDAO.getGestorDeDAO().desativarCliente(clienteTemp.getId(), funcionario);
@@ -447,7 +449,7 @@ public class GUI_gestor_cliente extends JFrame {
 				}
 
 				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
-				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this,clienteTemp, true, username );
+				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this,clienteTemp, true, GUI_total.getUsername() );
 				dialog.setVisible(true);
 			}
 		});
@@ -516,7 +518,7 @@ public class GUI_gestor_cliente extends JFrame {
 		botaoCriarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this, username);
+				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this, GUI_total.getUsername());
 				dialog.setVisible(true);
 
 			}
@@ -569,10 +571,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 	}
 
-	public void recebeUsernameDaPaginaLogin(String username) {
-		this.username = username;
-	}
-
+	
 	public void setLblTempoSessao(Duration temporizador) {
 		lblTempoSessao.setText("SessÃ£o: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
 	}
@@ -581,7 +580,7 @@ public class GUI_gestor_cliente extends JFrame {
 		lblHoraSistema.setText("Data: " + agora);
 
 	}
-	
-	
-	
+
+
+
 }

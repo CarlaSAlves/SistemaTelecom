@@ -27,7 +27,7 @@ public class GUI_total extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private String username;
+	private static String username;
 	private Instant inicio;
 	private GUI_gestor_cliente gestor_cliente;
 	private GUI_homepage homepage;
@@ -217,7 +217,7 @@ public class GUI_total extends JFrame {
 		gestor_operador.setUsernameLoggedIn(username);
 		gestor_pacotes.setUsernameLoggedIn(username);
 		gestor_promocao.setUsernameLoggedIn(username);
-		gestor_cliente.recebeUsernameDaPaginaLogin(username);
+	
 		homepage.setUsernameLoggedIn(username);
 	}
 
@@ -282,6 +282,14 @@ public class GUI_total extends JFrame {
 		}	 catch (IOException e) {
 			e.printStackTrace();
 		}	
+	}
+
+	public static String getUsername() {
+		return username;
+	}
+
+	public static void setUsername(String username) {
+		GUI_total.username = username;
 	}
 }
 

@@ -15,9 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
+
+import historicos.HistoricoCliente;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import historico.cliente.HistoricoCliente;
+
 import standard_value_object.Cliente;
 
 public class HistoricoClienteDialog extends JDialog {

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.StringJoiner;
 
-import historico.cliente.HistoricoCliente;
+import historicos.HistoricoCliente;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 
@@ -195,12 +195,7 @@ public class ClienteDAO {
 			myStmt.executeUpdate();
 
 			Cliente clientCriado = pesquisaClienteAuxiliarNIF(""+cliente.getNif());
-			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
-
-			myStmt.setInt(1, funcionario.getId());
-			myStmt.setInt(2, clientCriado.getId());
-			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-			myStmt.setString(4, "Criar Cliente");	
+			myStmt = logUpdate(funcionario, cliente, "Criar Cliente");	
 
 			myStmt.executeUpdate();	
 
@@ -230,12 +225,7 @@ public class ClienteDAO {
 
 			myStmt.executeUpdate();
 
-			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
-
-			myStmt.setInt(1, funcionario.getId());
-			myStmt.setInt(2, cliente.getId());
-			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-			myStmt.setString(4, "Editar Cliente");	
+			myStmt = logUpdate(funcionario, cliente, "Editar Cliente");	
 
 			myStmt.executeUpdate();
 
@@ -258,12 +248,7 @@ public class ClienteDAO {
 			myStmt.executeUpdate();
 
 			Cliente cliente = pesquisaClienteAuxiliarID(id);
-			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
-
-			myStmt.setInt(1, funcionario.getId());
-			myStmt.setInt(2, cliente.getId());
-			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-			myStmt.setString(4, "Desativar Cliente");	
+			myStmt = logUpdate(funcionario, cliente, "Desativar Cliente");	
 
 			myStmt.executeUpdate();
 
@@ -273,6 +258,17 @@ public class ClienteDAO {
 			myStmt.close();
 		}
 
+	}
+
+	private PreparedStatement logUpdate(Funcionario funcionario, Cliente cliente, String descricao) throws SQLException {
+		PreparedStatement myStmt;
+		myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
+
+		myStmt.setInt(1, funcionario.getId());
+		myStmt.setInt(2, cliente.getId());
+		myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+		myStmt.setString(4, descricao);
+		return myStmt;
 	}
 
 

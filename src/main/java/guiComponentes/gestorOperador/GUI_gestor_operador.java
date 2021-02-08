@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -29,6 +30,13 @@ import javax.swing.event.ListSelectionListener;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import guiComponentes.GUI_total;
+import guiComponentes.gestorCliente.ClientePesquisaModelTable;
+import guiComponentes.gestorCliente.GUI_gestor_cliente;
+import guiComponentes.gestorCliente.HistoricoClienteDialog;
+import historicos.HistoricoCliente;
+import historicos.HistoricoOperador;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JCheckBox;
@@ -60,6 +68,7 @@ public class GUI_gestor_operador extends JFrame {
 	private JPanel panelUserESessao;
 	private JLabel lblTempoSessao;
 	private JLabel lblHoraSistema;
+	private JButton botaoVisualizarHistorico;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -149,7 +158,45 @@ public class GUI_gestor_operador extends JFrame {
 
 		lblHoraSistemaSetup();
 		panelUserESessao.add(lblHoraSistema);
+		
+		botaoVisualizarHistoricoSetup();
+		contentPane.add(botaoVisualizarHistorico);
 
+	}
+	
+	private void botaoVisualizarHistoricoSetup() {
+		botaoVisualizarHistorico = new JButton("Ver Historico");
+		botaoVisualizarHistorico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row = table.getSelectedRow();
+
+
+				if (row < 0) {
+					JOptionPane.showMessageDialog(GUI_gestor_operador.this,
+							"Por favor selecione um Operador", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				Funcionario operadorTemp = (Funcionario) table.getValueAt(row, OperadorPesquisaModelTable.OBJECT_COL);
+				List<HistoricoOperador> list;
+
+				try {
+
+					list = GestorDeDAO.getGestorDeDAO().getHistoricoOperador(operadorTemp.getId());
+					HistoricoOperadorDialog dialogHistorico = new HistoricoOperadorDialog();
+					dialogHistorico.preencherTable(operadorTemp, list);
+					dialogHistorico.setVisible(true);
+
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
+		botaoVisualizarHistorico.setBounds(703, 270, 161, 33);
+		botaoVisualizarHistorico.setEnabled(false);
 	}
 
 	private void lblHoraSistemaSetup() {
@@ -337,7 +384,8 @@ public class GUI_gestor_operador extends JFrame {
 
 					for(int i = 0; i < indices.length; i++) {
 						Funcionario funcionarioTemp = (Funcionario) table.getValueAt(indices[i], OperadorPesquisaModelTable.OBJECT_COL);
-						GestorDeDAO.getGestorDeDAO().desativarFuncionario(funcionarioTemp.getId());
+						Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+						GestorDeDAO.getGestorDeDAO().desativarFuncionario(funcionarioTemp.getId(),admin );
 					}
 
 					JOptionPane.showMessageDialog(GUI_gestor_operador.this,
@@ -403,15 +451,18 @@ public class GUI_gestor_operador extends JFrame {
 				if (table.getSelectedRowCount()>1) {
 					botaoEditarOperador.setEnabled(false);
 					botaoDesativarOperador.setEnabled(true);
+					botaoVisualizarHistorico.setEnabled(false);
 				}
 				else if (table.getSelectedRows().length==1) {
 					botaoEditarOperador.setEnabled(true);
 					botaoDesativarOperador.setEnabled(true);
+					botaoVisualizarHistorico.setEnabled(true);
 				}
 				else if (table.getSelectedRowCount()==0)
 				{
 					botaoEditarOperador.setEnabled(false);
 					botaoDesativarOperador.setEnabled(false);
+					botaoVisualizarHistorico.setEnabled(false);
 				}
 
 			}

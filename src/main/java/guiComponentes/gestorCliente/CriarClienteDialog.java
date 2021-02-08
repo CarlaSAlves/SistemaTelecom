@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import servico.GestorDeDAO;
 import standard_value_object.Cliente;
@@ -29,7 +30,7 @@ public class CriarClienteDialog extends JDialog {
 	private JTextField textFieldNIF;
 	private JTextField textFieldMorada;
 	private JTextField textFieldLogin;
-	private JTextField textFieldPassword;
+	private JPasswordField textFieldPassword;
 	private JTextField textFieldPacote;
 	private JCheckBox checkBoxAtivo;
 	private GUI_gestor_cliente clientePesquisaApp;
@@ -67,6 +68,9 @@ public class CriarClienteDialog extends JDialog {
 		if(modoEditar) {
 			setTitle("Editar Cliente");
 			popularTextFields(clienteAntigo);
+			if (clienteAntigo.isAtivo())
+			checkBoxAtivo.setVisible(false);
+			
 		}
 	}
 
@@ -75,7 +79,7 @@ public class CriarClienteDialog extends JDialog {
 		textFieldNIF.setText(clienteAntigo2.getNif() + "");
 		textFieldMorada.setText(clienteAntigo2.getMorada());
 		textFieldLogin.setText(clienteAntigo2.getLogin());
-		textFieldPassword.setText(clienteAntigo2.getPassword());
+		textFieldPassword.setText(clienteAntigo2.getPassword().substring(0,8));
 		textFieldPacote.setText(clienteAntigo2.getId_pacote_cliente()+ "");
 		checkBoxAtivo.setSelected(clienteAntigo2.isAtivo());
 
@@ -164,7 +168,7 @@ public class CriarClienteDialog extends JDialog {
 			contentPanel.add(textFieldLogin, "4, 8, fill, fill");
 		}
 		{
-			textFieldPassword = new JTextField();
+			textFieldPassword = new JPasswordField();
 			textFieldPassword.setFont(font);
 			textFieldPassword.setColumns(10);
 			contentPanel.add(textFieldPassword, "4, 10, fill, fill");

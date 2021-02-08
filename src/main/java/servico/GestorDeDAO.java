@@ -8,7 +8,8 @@ import data_acess_object_dao.ClienteDAO;
 import data_acess_object_dao.FuncionarioDAO;
 import data_acess_object_dao.PacoteComercialDAO;
 import data_acess_object_dao.PromocaoDAO;
-import historico.cliente.HistoricoCliente;
+import historicos.HistoricoCliente;
+import historicos.HistoricoOperador;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 import standard_value_object.PacoteComercial;
@@ -64,18 +65,22 @@ public class GestorDeDAO {
 		return clienteDAO.getHistoricoCliente(id_cliente);
 	}
 	
-	public void criarFuncionario(Funcionario funcionario) throws Exception {
-		funcionarioDAO.criarFuncionario(funcionario);
+	public void criarFuncionario(Funcionario funcionario, Funcionario admin) throws Exception {
+		funcionarioDAO.criarFuncionario(funcionario, admin);
 	}
 
-	public void editarFuncionario(Funcionario funcionario) throws Exception {
-		funcionarioDAO.editarFuncionario(funcionario);
+	public void editarFuncionario(Funcionario funcionario, Funcionario admin) throws Exception {
+		funcionarioDAO.editarFuncionario(funcionario, admin);
 	}
 
-	public void desativarFuncionario(int id) throws Exception {
-		funcionarioDAO.desativarFuncionario(id);
+	public void desativarFuncionario(int id, Funcionario admin) throws Exception {
+		funcionarioDAO.desativarFuncionario(id, admin);
 	}
-
+	
+	public List<HistoricoOperador> getHistoricoOperador(int id_operador) throws Exception {
+		return funcionarioDAO.getHistoricoOperador(id_operador);
+		
+	}
 	public List<Funcionario> getAllFuncionarioAdmin() throws Exception{
 		return funcionarioDAO. getAllFuncionarioAdmin();    
 	}

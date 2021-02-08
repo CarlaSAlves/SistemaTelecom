@@ -2,7 +2,8 @@ package guiComponentes.gestorCliente;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import historico.cliente.HistoricoCliente;
+
+import historicos.HistoricoCliente;
 
 
 public class HistoricoClienteTableModel extends AbstractTableModel {
