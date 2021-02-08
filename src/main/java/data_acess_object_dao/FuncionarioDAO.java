@@ -124,29 +124,29 @@ public class FuncionarioDAO {
 	}
 
 	//substituir pelo metodo pesquisarFuncionarioLoginPass
-//	public Funcionario pesquisaFuncionarioAdmin(String login) throws Exception {
-//		Funcionario funcionario = null;
-//
-//		PreparedStatement myStmt = null;
-//		ResultSet myRs = null;
-//
-//		try {
-//
-//			myStmt = myConn.prepareStatement("select * from funcionario where login=? AND id_role=1");
-//
-//			myStmt.setString(1, login);
-//
-//			myRs = myStmt.executeQuery();
-//
-//			while (myRs.next()) {
-//				funcionario = convertRowParaFuncionario(myRs);
-//			}
-//			return funcionario;
-//		}
-//		finally {
-//			close(myStmt, myRs);
-//		}
-//	}
+	public Funcionario pesquisaFuncionarioAdmin(String login) throws Exception {
+		Funcionario funcionario = null;
+
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+
+			myStmt = myConn.prepareStatement("select * from funcionario where login=? AND id_role=1");
+
+			myStmt.setString(1, login);
+
+			myRs = myStmt.executeQuery();
+
+			while (myRs.next()) {
+				funcionario = convertRowParaFuncionario(myRs);
+			}
+			return funcionario;
+		}
+		finally {
+			close(myStmt, myRs);
+		}
+	}
 
 	public List<Funcionario> pesquisaFuncionarioOperador(int id ,String nif, String nome, int ativo) throws Exception {
 		List<Funcionario> list = new ArrayList<>();

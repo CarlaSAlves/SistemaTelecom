@@ -97,6 +97,11 @@ public class GestorDeDAO {
 		funcionarioDAO.desativarFuncionario(id, admin);
 	}
 	
+	public Funcionario pesquisaFuncionarioAdmin(String login) throws Exception {
+		return this.funcionarioDAO.pesquisaFuncionarioAdmin(login);
+		
+	}
+	
 	public List<HistoricoOperador> getHistoricoOperador(int id_operador) throws Exception {
 		return funcionarioDAO.getHistoricoOperador(id_operador);
 		
@@ -120,10 +125,10 @@ public class GestorDeDAO {
 
 	//metodo que vai ver se o cliente nao possui um pacote cliente e , caso nao tenha, vai criar um pacote_cliente novo e
 	//atribui-lo ao mesmo cliente. Deste modo assegura-se que nao ha pacotes sem clientes e que cada cliente tem apenas um pacote (e que cada pacote tem um cliente so)
-	//VEJAM QUAL É A MELHOR MANEIRA DE CRIAR E ATRIBUIR UM PACOTE, SABENDO QUE UM PACOTE SO PODE TER UM CLIENTE, E VICE-VERSA, E NAO PODEM HAVER PACOTES SEM CLIENTES
+	//VEJAM QUAL ï¿½ A MELHOR MANEIRA DE CRIAR E ATRIBUIR UM PACOTE, SABENDO QUE UM PACOTE SO PODE TER UM CLIENTE, E VICE-VERSA, E NAO PODEM HAVER PACOTES SEM CLIENTES
 	public void criarEAtribuirPacoteCliente(Cliente cliente, PacoteCliente pacoteCliente) throws SQLException, Exception {
 		if (cliente.getId_pacote_cliente() > 0) {
-			throw new RuntimeException("Cliente com id " + cliente.getId() + " já tem um pacote cliente.");
+			throw new RuntimeException("Cliente com id " + cliente.getId() + " jï¿½ tem um pacote cliente.");
 		}
 		
 		clienteDAO.atribuirPacoteCliente(pacoteClienteDAO.criarPacoteCliente(pacoteCliente), cliente);
