@@ -457,7 +457,7 @@ public class GUI_gestor_promocao extends JFrame {
 		setTitle("Pesquisa de Promocao");
 		setFont(font);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 30, 1500, 900);
+		setBounds(100, 30, 1400, 800);
 		contentPane.setBackground(SystemColor.inactiveCaption);
 	}
 

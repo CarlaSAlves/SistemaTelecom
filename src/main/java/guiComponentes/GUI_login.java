@@ -71,7 +71,7 @@ public class GUI_login extends JFrame {
 		getContentPane().setLayout(null);
 		
 				JLabel lblFooter = new JLabel();
-				lblFooter.setBounds(621, 674, 320, 87);
+				lblFooter.setBounds(600, 674, 200, 87);
 				lblFooter.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/Altran1.1.png")));
 				getContentPane().add(lblFooter);
 		
@@ -187,8 +187,9 @@ public class GUI_login extends JFrame {
 				lblNewLabel.setBounds(302, 73, 238, 298);
 				panel.add(lblNewLabel);
 				
-				JLabel lblNewLabel_1 = new JLabel("New label");
-				lblNewLabel_1.setBounds(59, 250, 46, 14);
+				JLabel lblNewLabel_1 = new JLabel("");
+				lblNewLabel_1.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/fundoAltran.png")));
+				lblNewLabel_1.setBounds(0, 89, 1394, 586);
 				panel.add(lblNewLabel_1);
 	}
 

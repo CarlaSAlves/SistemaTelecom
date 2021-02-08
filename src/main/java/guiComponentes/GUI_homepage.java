@@ -25,7 +25,6 @@ public class GUI_homepage extends JFrame {
 	private JButton btGerirPromocoes;
 	private JPanel panel;
 	private static final long serialVersionUID = 1L;
-	private JLabel lblNewLabel;
 	private JLabel lblUsernameLogged;
 	private JLabel lblTempoSessao;
 	private JLabel lblHoraSistema;
@@ -105,11 +104,6 @@ public class GUI_homepage extends JFrame {
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 13));
 
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(GUI_homepage.class.getResource("/guiComponentes/img/user3.png")));
-		lblNewLabel.setBounds(1116, 32, 318, 328);
-		panel.add(lblNewLabel);
-
 		JLabel lblPoesia = new JLabel("Portal Do Administrador");
 		lblPoesia.setBounds(161, 117, 508, 33);
 		lblPoesia.setForeground(new Color(70,74,101));
@@ -149,12 +143,12 @@ public class GUI_homepage extends JFrame {
 		getContentPane().add(btGerirPacotes);
 
 		JLabel lblFooter = new JLabel("");
-		lblFooter.setBounds(529, 674, 320, 87);
+		lblFooter.setBounds(600, 674, 320, 87);
 		lblFooter.setIcon(new ImageIcon(GUI_homepage.class.getResource("/guiComponentes/img/Altran1.1.png")));
 		getContentPane().add(lblFooter);
 
 		JLabel icon = new JLabel("");
-		icon.setBounds(0, 89, 1384, 586);
+		icon.setBounds(0, 89, 1394, 586);
 		icon.setBackground(new Color(240, 240, 240));
 		icon.setIcon(new ImageIcon(GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
 		getContentPane().add(icon);
