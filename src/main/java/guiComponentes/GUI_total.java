@@ -138,18 +138,16 @@ public class GUI_total extends JFrame {
 			}
 		});
 
-//		
-//		homepage.getBtGerirPromocoes().addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {				
-//				homepagePanel.setVisible(false);				
-//				gestor_promocoesPanel.setVisible(true);
-//				
-//				System.out.println("Teste !!!!");
-//			
-//			}
-//		});
+		
+		homepage.getBtGerirPromocoes().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {				
+				homepagePanel.setVisible(false);				
+				gestor_promocaoPanel.setVisible(true);
+				
+			}
+		});
 		
 		homepage.getBtGerirPacotes().addActionListener(new ActionListener() {
 

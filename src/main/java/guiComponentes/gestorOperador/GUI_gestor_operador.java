@@ -390,7 +390,6 @@ public class GUI_gestor_operador extends JFrame {
 
 	private void tableSetup() {
 		table = new JTable();
-		// defin da table 
 		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
 		table.setFillsViewportHeight(true);
