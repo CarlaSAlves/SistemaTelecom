@@ -25,6 +25,7 @@ import standard_value_object.Role;
 public class FuncionarioDAO {
 
 	private Connection myConn;
+	private Funcionario funcionario = new Funcionario();
 
 	public FuncionarioDAO(Connection connection) throws FileNotFoundException, IOException, SQLException {
 		this.myConn = connection;
@@ -391,7 +392,7 @@ public class FuncionarioDAO {
 			myStmt = myConn.prepareStatement("UPDATE `funcionario` SET `nome`=?, `nif`=?, "
 					+ "`login`=?, `password`=?, `ativo`=?, `id_role`=? WHERE  `id`=?");
 
-			myStmt.setString(1, funcionario.getNome());
+			myStmt.setString(1, funcionario .getNome());
 			myStmt.setLong(2, funcionario.getNif());
 			myStmt.setString(3, funcionario.getLogin());
 			myStmt.setString(4, PasswordEncryption.get_SHA_512_SecurePassword(funcionario.getPassword()));
