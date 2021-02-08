@@ -9,6 +9,20 @@ public class Funcionario {
 	private String password;
 	private boolean ativo;
 	private int id_role;
+	
+	public Funcionario() {
+		
+	}
+	
+	public Funcionario(String nome, int nif, String login, String password, boolean ativo, int id_role) {
+		this.nome = nome;
+		this.nif = nif;
+		this.login = login;
+		this.password = password;
+		this.ativo = ativo;
+		this.id_role = id_role;
+	}
+	
 	public Funcionario(int id, String nome, long nif, String login, String password, boolean ativo, int id_role) {
 		super();
 		this.id = id;
