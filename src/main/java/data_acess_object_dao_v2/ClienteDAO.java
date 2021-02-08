@@ -222,13 +222,9 @@ public class ClienteDAO {
 	public void desativarCliente(int nif) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
-
 			myStmt = myConn.prepareStatement("delete from cliente where nif=?");
-
 			myStmt.setInt(1, nif);
-
 			myStmt.executeUpdate();
-
 		}catch(Exception e) {
 
 		}finally {
@@ -251,7 +247,6 @@ public class ClienteDAO {
 
 		return cliente;
 	}
-
 
 	private void close(Statement myStmt, ResultSet myRs) throws SQLException {
 		close(null, myStmt, myRs);		

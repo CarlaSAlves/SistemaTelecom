@@ -11,6 +11,10 @@ public class Promocao {
 	private Date data_inicio; 
 	private Date data_fim;
 	
+	public Promocao() {
+		
+	}
+	
 	public Promocao(int id, String nome, String descricao, boolean ativa, Date data_inicio2, Date data_fim2) {
 		super();
 		this.id = id;
@@ -19,6 +23,15 @@ public class Promocao {
 		this.ativa = ativa;
 		this.data_inicio = data_inicio2;
 		this.data_fim = data_fim2; 
+	}
+	
+	public Promocao(String nome, String descricao, boolean ativa, Date data_inicio, Date data_fim) {
+		super();
+		this.nome = nome;
+		this.descricao = descricao;
+		this.ativa = ativa;
+		this.data_inicio = data_inicio;
+		this.data_fim = data_fim;
 	}
 
 	public Promocao(String nome, String descricao, boolean ativa) {

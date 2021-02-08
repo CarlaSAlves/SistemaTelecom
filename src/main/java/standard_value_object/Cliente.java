@@ -11,6 +11,21 @@ public class Cliente {
 	private boolean ativo;
 	private int id_pacote_cliente;
 	
+	public Cliente() {
+		
+	}
+	
+	//para quando quisermos criar um cliente sem pacote 
+	public Cliente( int nif, String nome, String morada, String login, String password, boolean ativo) {
+		super();
+
+		this.ativo = ativo;
+		this.nif = nif;
+		this.nome = nome;
+		this.morada = morada;
+		this.login = login;
+		this.password = password;
+	}
 	
 	public Cliente(int id, String nome, long nif, String morada, String login, String password, boolean ativo,
 			int id_pacote_cliente) {

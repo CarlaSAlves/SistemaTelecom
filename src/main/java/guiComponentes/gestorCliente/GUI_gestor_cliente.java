@@ -574,7 +574,7 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	public void setLblTempoSessao(Duration temporizador) {
-		lblTempoSessao.setText("Sessão: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
+		lblTempoSessao.setText("SessÃ£o: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
 	}
 
 	public void setLblHoraSistema(String agora) {
