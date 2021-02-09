@@ -112,6 +112,7 @@ public class CriarPromocaoDialog extends JDialog {
 		}
 
 		checkBoxAtivo = new JCheckBox("Ativa");
+		checkBoxAtivo.setSelected(true);
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		contentPanel.add(checkBoxAtivo, "3, 6, left, fill");
