@@ -96,13 +96,13 @@ public class CriarClienteDialog extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JLabel lblNome = new JLabel("Nome");
-			lblNome.setBounds(9, 33, 82, 23);
+			lblNome.setBounds(9, 33, 31, 23);
 			lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblNome);
 		}
 		{
 			JLabel lblNif = new JLabel("NIF");
-			lblNif.setBounds(9, 61, 82, 23);
+			lblNif.setBounds(9, 61, 19, 23);
 			lblNif.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblNif);
 		}
@@ -114,7 +114,7 @@ public class CriarClienteDialog extends JDialog {
 		}
 		{
 			JLabel lblLogin = new JLabel("Login");
-			lblLogin.setBounds(9, 121, 82, 23);
+			lblLogin.setBounds(9, 121, 29, 23);
 			lblLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblLogin);
 		}
@@ -181,7 +181,6 @@ public class CriarClienteDialog extends JDialog {
 						contentPanel.add(checkBoxAtivo);
 						
 						JCheckBox chckbxNewCheckBox = new JCheckBox("Ativo");
-						chckbxNewCheckBox.setSelected(true);
 						chckbxNewCheckBox.setBounds(165, 218, 53, 23);
 						chckbxNewCheckBox.setBackground(SystemColor.text);
 						chckbxNewCheckBox.setFont(new Font("Dubai Light", Font.PLAIN, 13));

@@ -17,7 +17,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.UIManager.*;
 import guiComponentes.gestorCliente.GUI_gestor_cliente;
 import guiComponentes.gestorOperador.GUI_gestor_operador;
@@ -131,7 +130,8 @@ public class GUI_total extends JFrame {
 		login.getBtnSair().addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {	
+			public void actionPerformed(ActionEvent e) {
+				gravarFicheiro(username, temporizador, dataEHoraDeLog, "sessaolog.txt");
 				dispose();
 
 			}
@@ -147,14 +147,6 @@ public class GUI_total extends JFrame {
 				loginPanel.setVisible(false);
 				homepagePanel.setVisible(true);
 				comecarTemporizador();
-				gestor_cliente.getTable().setModel(new DefaultTableModel());	
-				gestor_operador.getTable().setModel(new DefaultTableModel());
-				gestor_pacotes.getTable().setModel(new DefaultTableModel());
-				gestor_promocao.getTable().setModel(new DefaultTableModel());
-				gestor_cliente.getLblResultados().setText("Resultados: ");
-				gestor_operador.getLblResultados().setText("Resultados: ");
-				gestor_pacotes.getLblResultados().setText("Resultados: ");
-				gestor_promocao.getLblResultados().setText("Resultados: ");
 			}
 
 		});
@@ -202,10 +194,8 @@ public class GUI_total extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				gravarFicheiro(username, temporizador, dataEHoraDeLog, "sessaolog.txt");
 				loginPanel.setVisible(true);
 				homepagePanel.setVisible(false);
-			
 			}
 		});
 
@@ -216,10 +206,6 @@ public class GUI_total extends JFrame {
 				homepagePanel.setVisible(true);
 				gestor_clientePanel.setVisible(false);
 				
-<<<<<<< HEAD
-=======
-		
->>>>>>> a85dd256bd1d25618f0447ffb945fd439ad2a35e
 			}
 		});
 

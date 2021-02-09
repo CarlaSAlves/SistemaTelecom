@@ -37,7 +37,6 @@ import historicos.HistoricoOperador;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JCheckBox;
-import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class GUI_gestor_operador extends JFrame {
@@ -114,29 +113,44 @@ public class GUI_gestor_operador extends JFrame {
 		contentPane.add(panelPesquisa);
 
 		labelIDSetup();
-		panelPesquisa.setLayout(null);
-		panelPesquisa.add(lblNewLabelID);
+		panelPesquisa.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("31px"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("299px"),},
+				new RowSpec[] {
+						FormSpecs.PARAGRAPH_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormSpecs.UNRELATED_GAP_ROWSPEC,
+						RowSpec.decode("24px"),
+						FormSpecs.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("38px"),}));
+		panelPesquisa.add(lblNewLabelID, "2, 2, left, center");
 
 		textPesquisaIDSetup();
-		panelPesquisa.add(textPesquisaID);
+		panelPesquisa.add(textPesquisaID, "4, 2, fill, top");
 
 		labelNIFSetup();
-		panelPesquisa.add(lblNewLabelNIF);
+		panelPesquisa.add(lblNewLabelNIF, "2, 4, left, center");
 
 		textPesquisaNIFSetup();
-		panelPesquisa.add(textPesquisaNIF);
+		panelPesquisa.add(textPesquisaNIF, "4, 4, fill, top");
 
 		lblNomeSetup();
-		panelPesquisa.add(lblNome);
+		panelPesquisa.add(lblNome, "2, 6, left, center");
 
 		textFieldNomeSetup();
-		panelPesquisa.add(textFieldNome);
+		panelPesquisa.add(textFieldNome, "4, 6, fill, top");
 
 		checkBoxAtivoSetup();
-		panelPesquisa.add(checkBoxAtivo);
+		panelPesquisa.add(checkBoxAtivo, "4, 8, center, top");
 
 		botaoPesquisaSetup();
-		panelPesquisa.add(botaoPesquisa);
+		panelPesquisa.add(botaoPesquisa, "4, 10, fill, top");
 
 		// -- Botões --  
 
@@ -222,55 +236,47 @@ public class GUI_gestor_operador extends JFrame {
 	private void panelPesquisaSetup() {
 		panelPesquisa = new JPanel();
 		panelPesquisa.setBackground(SystemColor.text);
-		panelPesquisa.setBounds(98, 63, 444, 215);
+		panelPesquisa.setBounds(98, 63, 344, 221);
 	}
 	
 	private void labelIDSetup() {
 		lblNewLabelID = new JLabel("ID");
-		lblNewLabelID.setBounds(10, 13, 12, 18);
 		lblNewLabelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 	
 	private void textPesquisaIDSetup() {
 		textPesquisaID = new JTextField();
-		textPesquisaID.setBounds(84, 11, 350, 27);
 		textPesquisaID.setColumns(10);
 	}
 	
 	private void labelNIFSetup() {
 		lblNewLabelNIF = new JLabel("NIF");
-		lblNewLabelNIF.setBounds(10, 44, 20, 26);
 		lblNewLabelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 	
 	private void textPesquisaNIFSetup() {
 		textPesquisaNIF = new JTextField();
-		textPesquisaNIF.setBounds(84, 47, 350, 27);
 		textPesquisaNIF.setColumns(10);
 	}
 	
 	private void lblNomeSetup() {
 		lblNome = new JLabel("Nome");
-		lblNome.setBounds(10, 83, 64, 18);
 		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 	
 	private void textFieldNomeSetup() {
 		textFieldNome = new JTextField();
-		textFieldNome.setBounds(84, 81, 350, 27);
 		textFieldNome.setColumns(10);
 	}
 	
 	private void checkBoxAtivoSetup() {
 		checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setBounds(226, 112, 76, 24);
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
-		checkBoxAtivo.setBackground(Color.WHITE);
+		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
 	}
 	
 	private void botaoPesquisaSetup() {
 		botaoPesquisa = new JButton("Pesquisar");
-		botaoPesquisa.setBounds(84, 143, 350, 25);
 		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoPesquisa.setBackground(SystemColor.activeCaption);
 		botaoPesquisa.addActionListener(new ActionListener() {
@@ -537,11 +543,6 @@ public class GUI_gestor_operador extends JFrame {
 		}
 
 	}
-	
-	
-	public JTable getTable() {
-		return table;
-	}
 
 	public JButton btVoltarGestorOperador() {
 		return btVoltarGestorOperador;
@@ -568,9 +569,4 @@ public class GUI_gestor_operador extends JFrame {
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
-	
-	public JLabel getLblResultados() {
-		return lblResultados;
-	}
-	
 }
