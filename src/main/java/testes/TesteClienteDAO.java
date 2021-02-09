@@ -84,7 +84,7 @@ public class TesteClienteDAO {
 	@Test
 	public void testAtribuirPacoteCliente() throws Exception{
 		Cliente cliente = clienteDAO.pesquisaClienteAuxiliarID(1);
-		clienteDAO.desativarCliente(2, funcionario);
+
 		assertEquals(false, clienteDAO.pesquisaClienteAuxiliarID(2).isAtivo());
 	}
 	
