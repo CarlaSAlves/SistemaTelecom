@@ -246,9 +246,9 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	private JLabel lblNomeSetup() {
-		JLabel lblNome = new JLabel("Nome");
-		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		return lblNome;
+		JLabel labelNome = new JLabel("Nome");
+		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		return labelNome;
 	}
 
 	private void textPesquisaIDSetup() {
@@ -257,18 +257,18 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	private JLabel lblDeProcuraSetup() {
-		JLabel lblDeProcura = new JLabel("ID");
-		lblDeProcura.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		return lblDeProcura;
+		JLabel labelID = new JLabel("ID");
+		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		return labelID;
 	}
 
 	private JPanel panel_1Setup() {
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.WHITE);
-		panel_1.setForeground(SystemColor.desktop);
-		panel_1.setBounds(99, 71, 344, 177);
+		JPanel painelPesquisa = new JPanel();
+		painelPesquisa.setBackground(Color.WHITE);
+		painelPesquisa.setForeground(SystemColor.desktop);
+		painelPesquisa.setBounds(99, 71, 344, 177);
 		
-		panel_1.setLayout(new FormLayout(new ColumnSpec[] {
+		painelPesquisa.setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("34px"),
 				FormSpecs.RELATED_GAP_COLSPEC,
@@ -286,7 +286,7 @@ public class GUI_gestor_promocao extends JFrame {
 						FormSpecs.DEFAULT_ROWSPEC,
 						RowSpec.decode("31px"),
 						RowSpec.decode("26px"),}));
-		return panel_1;
+		return painelPesquisa;
 	}
 
 	private JLabel lbFooterSetup() {
@@ -419,13 +419,13 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	private JPanel panelSetup() {
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(66, 309, 1279, 369);
-		panel.setFont(font);
+		JPanel painelTabela = new JPanel();
+		painelTabela.setBackground(Color.WHITE);
+		painelTabela.setBounds(66, 309, 1279, 369);
+		painelTabela.setFont(font);
 		
-		panel.setLayout(null);
-		return panel;
+		painelTabela.setLayout(null);
+		return painelTabela;
 	}
 
 	private JButton botaoCriarPromocaoSetup() {
