@@ -69,56 +69,49 @@ public class CriarPromocaoDialog extends JDialog {
 	}
 
 	public CriarPromocaoDialog() {
-		setBounds(500, 300, 427, 249);
+		setBounds(500, 300, 417, 351);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("94px"),
-				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("294px"),},
-			new RowSpec[] {
-				FormSpecs.PARAGRAPH_GAP_ROWSPEC,
-				RowSpec.decode("29px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("29px"),
-				RowSpec.decode("30px"),
-				RowSpec.decode("23px"),
-				RowSpec.decode("24px"),
-				RowSpec.decode("44px"),}));
+		contentPanel.setLayout(null);
 		{
 			JLabel lblNome = new JLabel("Nome");
-			lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			contentPanel.add(lblNome, "1, 2, fill, fill");
+			lblNome.setBounds(9, 15, 82, 23);
+			lblNome.setFont(new Font("Dialog", Font.BOLD, 13));
+			contentPanel.add(lblNome);
 		}
 		{
 			textFieldNome = new JTextField();
+			textFieldNome.setBounds(101, 9, 290, 27);
 			textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldNome.setColumns(10);
-			contentPanel.add(textFieldNome, "3, 2, fill, fill");
+			contentPanel.add(textFieldNome);
 		}
 		
 		{
 			JLabel lblDescricao = new JLabel("Descrição");
-			lblDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			contentPanel.add(lblDescricao, "1, 4, fill, fill");
+			lblDescricao.setBounds(9, 49, 82, 23);
+			lblDescricao.setFont(new Font("Dialog", Font.BOLD, 13));
+			contentPanel.add(lblDescricao);
 		}
 		{
 			textFieldDescricao = new JTextField();
+			textFieldDescricao.setBounds(101, 47, 290, 27);
 			textFieldDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldDescricao.setColumns(10);
-			contentPanel.add(textFieldDescricao, "3, 4, fill, fill");
+			contentPanel.add(textFieldDescricao);
 		}
 
 		checkBoxAtivo = new JCheckBox("Ativa");
-		checkBoxAtivo.setSelected(true);
-		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
+		checkBoxAtivo.setBounds(214, 81, 53, 23);
+		checkBoxAtivo.setBackground(Color.WHITE);
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		contentPanel.add(checkBoxAtivo, "3, 6, left, fill");
+		contentPanel.add(checkBoxAtivo);
 		{
 			JPanel buttonPane = new JPanel();
-			contentPanel.add(buttonPane, "1, 8, 3, 1, fill, top");
+			buttonPane.setBounds(0, 274, 401, 38);
+			contentPanel.add(buttonPane);
 			buttonPane.setBackground(Color.WHITE);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			{
