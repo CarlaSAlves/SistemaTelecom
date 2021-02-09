@@ -233,7 +233,7 @@ public class GUI_gestor_operador extends JFrame {
 	
 	private void textPesquisaIDSetup() {
 		textPesquisaID = new JTextField();
-		textPesquisaID.setBounds(84, 11, 350, 25);
+		textPesquisaID.setBounds(84, 11, 350, 27);
 		textPesquisaID.setColumns(10);
 	}
 	
@@ -245,7 +245,7 @@ public class GUI_gestor_operador extends JFrame {
 	
 	private void textPesquisaNIFSetup() {
 		textPesquisaNIF = new JTextField();
-		textPesquisaNIF.setBounds(84, 47, 350, 25);
+		textPesquisaNIF.setBounds(84, 47, 350, 27);
 		textPesquisaNIF.setColumns(10);
 	}
 	
@@ -257,7 +257,7 @@ public class GUI_gestor_operador extends JFrame {
 	
 	private void textFieldNomeSetup() {
 		textFieldNome = new JTextField();
-		textFieldNome.setBounds(84, 81, 350, 25);
+		textFieldNome.setBounds(84, 81, 350, 27);
 		textFieldNome.setColumns(10);
 	}
 	
@@ -568,4 +568,9 @@ public class GUI_gestor_operador extends JFrame {
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
+	
+	public JLabel getLblResultados() {
+		return lblResultados;
+	}
+	
 }

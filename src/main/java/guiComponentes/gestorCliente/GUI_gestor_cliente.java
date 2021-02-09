@@ -282,7 +282,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 	private void textFieldMoradaSetup() {
 		textFieldMorada = new JTextField();
-		textFieldMorada.setBounds(84, 112, 350, 25);
+		textFieldMorada.setBounds(84, 112, 350, 27);
 		textFieldMorada.setColumns(10);
 	}
 
@@ -294,7 +294,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 	private void textFieldNomeSetup() {
 		textFieldNome = new JTextField();
-		textFieldNome.setBounds(84, 77, 350, 25);
+		textFieldNome.setBounds(84, 77, 350, 27);
 		textFieldNome.setColumns(10);
 	}
 
@@ -306,7 +306,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 	private void textPesquisaNIFSetup() {
 		textPesquisaNIF = new JTextField();
-		textPesquisaNIF.setBounds(84, 46, 350, 25);
+		textPesquisaNIF.setBounds(84, 46, 350, 27);
 		textPesquisaNIF.setColumns(10);
 	}
 
@@ -318,7 +318,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 	private void textPesquisaIDSetup() {
 		textPesquisaID = new JTextField();
-		textPesquisaID.setBounds(84, 11, 350, 25);
+		textPesquisaID.setBounds(84, 11, 350, 27);
 		textPesquisaID.setColumns(10);
 	}
 
@@ -591,4 +591,10 @@ public class GUI_gestor_cliente extends JFrame {
 		lblHoraSistema.setText("Data: " + agora);
 
 	}
+
+	public JLabel getLblResultados() {
+		return lblResultados;
+	}
+	
+	
 }

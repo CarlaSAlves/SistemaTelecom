@@ -28,3 +28,39 @@
 <duração da sessão:	2:22>
 </sessao>
 
+<sessao>
+<username:	admin>
+<data e hora do login:	09-02-2021 11:01:48>
+<duração da sessão:	1:7>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	09-02-2021 11:02:57>
+<duração da sessão:	3:14>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	09-02-2021 11:06:12>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	09-02-2021 11:06:20>
+<duração da sessão:	0:5>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	09-02-2021 11:10:20>
+<duração da sessão:	0:6>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	09-02-2021 11:10:27>
+<duração da sessão:	0:3>
+</sessao>
+

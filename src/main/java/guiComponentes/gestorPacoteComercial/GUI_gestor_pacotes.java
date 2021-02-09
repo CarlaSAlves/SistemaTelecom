@@ -269,7 +269,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	private void textFieldNomeSetup() {
 		textFieldNome = new JTextField();
-		textFieldNome.setBounds(84, 43, 350, 25);
+		textFieldNome.setBounds(84, 43, 350, 27);
 		textFieldNome.setColumns(10);
 	}
 
@@ -282,7 +282,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	private void textPesquisaIDSetup() {
 		textPesquisaID = new JTextField();
-		textPesquisaID.setBounds(84, 11, 350, 25);
+		textPesquisaID.setBounds(84, 11, 350, 27);
 		textPesquisaID.setColumns(10);
 	}
 
@@ -522,4 +522,9 @@ public class GUI_gestor_pacotes extends JFrame {
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
+	
+	public JLabel getLblResultados() {
+		return lblResultados;
+	}
+	
 }
