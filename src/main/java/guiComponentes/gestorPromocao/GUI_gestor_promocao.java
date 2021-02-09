@@ -472,6 +472,10 @@ public class GUI_gestor_promocao extends JFrame {
 		}
 
 	}
+	
+	public JTable getTable() {
+		return table;
+	}
 
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();

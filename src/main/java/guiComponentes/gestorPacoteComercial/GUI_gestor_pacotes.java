@@ -473,6 +473,11 @@ public class GUI_gestor_pacotes extends JFrame {
 		}
 
 	}
+	
+	
+	public JTable getTable() {
+		return table;
+	}
 
 	public JButton btVoltarGestorPacotes() {
 		return btVoltarGestorPacotes;
