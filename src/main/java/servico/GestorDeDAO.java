@@ -16,6 +16,7 @@ import data_acess_object_dao.PacoteComercialDAO;
 import data_acess_object_dao.PromocaoDAO;
 import historicos.HistoricoCliente;
 import historicos.HistoricoOperador;
+import historicos.HistoricoPacoteComercial;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 import standard_value_object.PacoteCliente;
@@ -85,6 +86,10 @@ public class GestorDeDAO {
 		return clienteDAO.getHistoricoCliente(id_cliente);
 	}
 	
+	public List<HistoricoPacoteComercial> getHistoricoPacoteComercial(int id_pacote) throws Exception {
+		return pacoteComercialDAO.getHistoricoPacoteComercial(id_pacote);
+	}
+	
 	public void criarFuncionario(Funcionario funcionario, Funcionario admin) throws Exception {
 		funcionarioDAO.criarFuncionario(funcionario, admin);
 	}
@@ -134,17 +139,17 @@ public class GestorDeDAO {
 		clienteDAO.atribuirPacoteCliente(pacoteClienteDAO.criarPacoteCliente(pacoteCliente), cliente);
 	}
 	
-	public void criarPacoteComercial(PacoteComercial pacoteComercial) throws Exception {
-		pacoteComercialDAO.criarPacoteComercial(pacoteComercial);
+	public void criarPacoteComercial(PacoteComercial pacoteComercial, Funcionario funcionario) throws Exception {
+		pacoteComercialDAO.criarPacoteComercial(pacoteComercial,funcionario);
 	}
 
-	public void editarPacoteComercial(PacoteComercial pacoteComercial) throws Exception {
-		pacoteComercialDAO.editarPacoteComercial(pacoteComercial);
+	public void editarPacoteComercial(PacoteComercial pacoteComercial, Funcionario funcionario) throws Exception {
+		pacoteComercialDAO.editarPacoteComercial(pacoteComercial,funcionario);
 	}
 
 
-	public void desativarPacoteComercial(int i) throws Exception {
-		pacoteComercialDAO.desativarPacoteComercial(i);
+	public void desativarPacoteComercial(int i, Funcionario funcionario) throws Exception {
+		pacoteComercialDAO.desativarPacoteComercial(i,funcionario);
 	}
 
 	public List<PacoteComercial> getAllPacotesComerciais() throws Exception{

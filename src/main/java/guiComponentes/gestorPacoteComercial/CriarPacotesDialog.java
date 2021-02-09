@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import servico.GestorDeDAO;
+import standard_value_object.Funcionario;
 import standard_value_object.PacoteComercial;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,6 +24,8 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 import java.awt.Color;
 
+import guiComponentes.GUI_total;
+
 public class CriarPacotesDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -34,6 +37,7 @@ public class CriarPacotesDialog extends JDialog {
 	private JTextField textFieldNome;
 	private JTextField textFieldDescricao;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
+	private String username;
 
 
 	public static void main(String[] args) {
@@ -46,9 +50,10 @@ public class CriarPacotesDialog extends JDialog {
 		}
 	}
 
-	public CriarPacotesDialog(GUI_gestor_pacotes pacoteComercialPesquisaApp ) {
+	public CriarPacotesDialog(GUI_gestor_pacotes pacoteComercialPesquisaApp, String username ) {
 		this();
 		this.pacoteComercialPesquisaApp = pacoteComercialPesquisaApp;
+		this.username = username;
 	}
 
 	public CriarPacotesDialog(GUI_gestor_pacotes pacoteComercialPesquisaApp, PacoteComercial pacoteComercialAntigo, boolean modoEditar ) {
@@ -171,14 +176,16 @@ public class CriarPacotesDialog extends JDialog {
 
 		try {
 			if (modoEditar) {
-				GestorDeDAO.getGestorDeDAO().editarPacoteComercial(pacoteComercial);
+				Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+				GestorDeDAO.getGestorDeDAO().editarPacoteComercial(pacoteComercial,admin);
 
 				pacoteComercialPesquisaApp.refreshPacotesTable();
 				JOptionPane.showMessageDialog(pacoteComercialPesquisaApp,
 						"Pacote Comercial Editado com sucesso!", "Pacote Comercial Editado",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				GestorDeDAO.getGestorDeDAO().criarPacoteComercial(pacoteComercial);
+				Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+				GestorDeDAO.getGestorDeDAO().criarPacoteComercial(pacoteComercial,admin);
 				pacoteComercialPesquisaApp.refreshPacotesTable();
 				JOptionPane.showMessageDialog(pacoteComercialPesquisaApp,
 						"Pacote comercial criado com sucesso!", "Pacote Comercial Criado",

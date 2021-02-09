@@ -25,6 +25,10 @@ import standard_value_object.Role;
 public class FuncionarioDAO {
 
 	private Connection myConn;
+<<<<<<< HEAD
+
+=======
+>>>>>>> a85dd256bd1d25618f0447ffb945fd439ad2a35e
 
 	public FuncionarioDAO(Connection connection) throws FileNotFoundException, IOException, SQLException {
 		this.myConn = connection;
@@ -353,14 +357,24 @@ public class FuncionarioDAO {
 
 		try {
 			myStmt = myConn.prepareStatement("INSERT INTO funcionario(nome, nif, login, password, ativo, id_role) "
+<<<<<<< HEAD
+					+ "VALUES(?,?,?,?,?,2)");
+			
+=======
 					+ "VALUES(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
+>>>>>>> a85dd256bd1d25618f0447ffb945fd439ad2a35e
 			myStmt.setString(1, operador.getNome());
 			myStmt.setLong(2, operador.getNif());
 			myStmt.setString(3, operador.getLogin());
 			myStmt.setString(4, operador.getPassword());
 			myStmt.setBoolean(5, operador.isAtivo());
+<<<<<<< HEAD
+			
+
+=======
 			myStmt.setInt(6, 2);
+>>>>>>> a85dd256bd1d25618f0447ffb945fd439ad2a35e
 			myStmt.executeUpdate();
 			
 			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
@@ -395,7 +409,7 @@ public class FuncionarioDAO {
 			myStmt.setString(1, operador.getNome());
 			myStmt.setLong(2, operador.getNif());
 			myStmt.setString(3, operador.getLogin());
-			myStmt.setString(4, operador.getPassword());
+			myStmt.setString(4, PasswordEncryption.get_SHA_512_SecurePassword(operador.getPassword()));
 			myStmt.setBoolean(5, operador.isAtivo());
 			myStmt.setInt(6, operador.getId_role());
 			myStmt.setInt(7, operador.getId());

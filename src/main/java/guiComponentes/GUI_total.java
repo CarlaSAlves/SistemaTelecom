@@ -216,7 +216,10 @@ public class GUI_total extends JFrame {
 				homepagePanel.setVisible(true);
 				gestor_clientePanel.setVisible(false);
 				
+<<<<<<< HEAD
+=======
 		
+>>>>>>> a85dd256bd1d25618f0447ffb945fd439ad2a35e
 			}
 		});
 

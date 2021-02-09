@@ -24,10 +24,18 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import servico.GestorDeDAO;
+import standard_value_object.Cliente;
 import standard_value_object.Promocao;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import guiComponentes.gestorCliente.ClientePesquisaModelTable;
+import guiComponentes.gestorCliente.GUI_gestor_cliente;
+import guiComponentes.gestorCliente.HistoricoClienteDialog;
+import guiComponentes.gestorPacoteComercial.GUI_gestor_pacotes;
+import historicos.HistoricoCliente;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JCheckBox;
 import java.awt.Color;
@@ -50,8 +58,12 @@ public class GUI_gestor_promocao extends JFrame {
 	private JLabel lblTempoSessao;
 	private JLabel lblHoraSistema;
 	JCheckBox checkBoxAtivo;
+<<<<<<< HEAD
+	
+=======
 	private JPanel panel_2;
 
+>>>>>>> a85dd256bd1d25618f0447ffb945fd439ad2a35e
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -143,13 +155,35 @@ public class GUI_gestor_promocao extends JFrame {
 
 		JLabel lbFooter = lbFooterSetup();
 		contentPane.add(lbFooter);	
+<<<<<<< HEAD
+
+
+		JLabel lblCamposPesquisas = new JLabel("Campos Pesquisa");
+		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
+		lblCamposPesquisas.setBounds(66, 26, 294, 26);
+		contentPane.add(lblCamposPesquisas);
+=======
 		
+>>>>>>> a85dd256bd1d25618f0447ffb945fd439ad2a35e
 		
 		setUpUserSessao();
 		
 	}
 
+<<<<<<< HEAD
+		JTextArea textAreaDescricao = new JTextArea();
+		textAreaDescricao.setBounds(938, 71, 470, 151);
+		contentPane.add(textAreaDescricao);
+
+		JPanel panel_1 = panel_1Setup();
+		panel_1ContentSetup(panel_1);
+		contentPane.add(panel_1);
+	
+		
+		
+=======
 	private void setUpUserSessao() {
+>>>>>>> a85dd256bd1d25618f0447ffb945fd439ad2a35e
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setBounds(1297, 820, 159, 15);	
 		lblTempoSessao.setText("Sessão:");
@@ -166,6 +200,14 @@ public class GUI_gestor_promocao extends JFrame {
 		lblHoraSistema.setBounds(1297, 835, 159, 16);
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 13));
+<<<<<<< HEAD
+
+		
+		
+	}
+
+
+=======
 		contentPane.add(lblHoraSistema);
 	}
 	
@@ -193,6 +235,7 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	
+>>>>>>> a85dd256bd1d25618f0447ffb945fd439ad2a35e
 
 	private void panel_1ContentSetup(JPanel panel_1) {
 		panel_2.setLayout(null);
@@ -216,6 +259,10 @@ public class GUI_gestor_promocao extends JFrame {
 		panel_1.add(botaoPesquisa);
 	}
 
+<<<<<<< HEAD
+	
+=======
+>>>>>>> a85dd256bd1d25618f0447ffb945fd439ad2a35e
 
 	private JButton botaoPesquisaSetup() {
 		JButton botaoPesquisa = new JButton("Pesquisar");
@@ -411,10 +458,12 @@ public class GUI_gestor_promocao extends JFrame {
 				if (table.getSelectedRowCount()>1) {
 					botaoEditarPromocao.setEnabled(false);
 					botaoDesativarPromocao.setEnabled(true);
+					
 				}
 				else if (table.getSelectedRows().length==1) {
 					botaoEditarPromocao.setEnabled(true);
 					botaoDesativarPromocao.setEnabled(true);
+					
 				}
 				else if (table.getSelectedRowCount()==0)
 				{

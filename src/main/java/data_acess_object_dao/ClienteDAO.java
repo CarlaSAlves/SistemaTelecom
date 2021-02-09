@@ -238,6 +238,28 @@ public class ClienteDAO {
 //	    			myStmt.executeUpdate();	
 	            }
 	            else {
+<<<<<<< HEAD
+	                throw new SQLException("Criacao de cliente falhou, nenhum ID foi devolvido.");
+	            }
+	        }
+
+//			Cliente clientCriado = pesquisaClienteAuxiliarNIF(""+cliente.getNif());
+//			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
+//
+//			myStmt.setInt(1, funcionario.getId());
+//			myStmt.setInt(2, clientCriado.getId());
+//			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+//			myStmt.setString(4, "Criar Cliente");	
+//
+//			myStmt.executeUpdate();	
+
+//			Cliente clientCriado = pesquisaClienteAuxiliarNIF(""+cliente.getNif());
+//			myStmt = logUpdate(funcionario, clientCriado, "Criar Cliente");	
+//
+//			myStmt.executeUpdate();	
+
+
+=======
 	                throw new SQLException("Criação de cliente falhou, nenhum ID foi devolvido.");
 	            }
 	        }
@@ -245,6 +267,7 @@ public class ClienteDAO {
 			//o nosso objeto cliente já contém o id, por isso podemos usa-lo diretamente na funçao seguinte
 			myStmt = logUpdate(funcionario, cliente, "Criar Cliente");	
 			myStmt.executeUpdate();	
+>>>>>>> a85dd256bd1d25618f0447ffb945fd439ad2a35e
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
