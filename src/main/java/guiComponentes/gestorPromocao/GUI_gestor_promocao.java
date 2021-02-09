@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Duration;
 import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -144,9 +143,12 @@ public class GUI_gestor_promocao extends JFrame {
 		JLabel lbFooter = lbFooterSetup();
 		contentPane.add(lbFooter);	
 		
-		panelUserESessaoSetup();
-		panelUserESessaoContentSetup();
 		
+		setUpUserSessao();
+		
+	}
+
+	private void setUpUserSessao() {
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setBounds(1297, 820, 159, 15);	
 		lblTempoSessao.setText("Sessão:");
@@ -164,7 +166,6 @@ public class GUI_gestor_promocao extends JFrame {
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 13));
 		contentPane.add(lblHoraSistema);
-		
 	}
 	
 	
@@ -213,8 +214,6 @@ public class GUI_gestor_promocao extends JFrame {
 		panel_1.add(botaoPesquisa, "4, 9");
 	}
 
-	private void panelUserESessaoSetup() {
-	}
 
 	private JButton botaoPesquisaSetup() {
 		JButton botaoPesquisa = new JButton("Pesquisar");
@@ -475,21 +474,8 @@ public class GUI_gestor_promocao extends JFrame {
 
 	}
 	
-	private void panelUserESessaoContentSetup() {
-		lblUsernameLoggedSetup();
-
-		lblTempoSessaoSetup();
-
-		lblHoraSistemaSetup();
-	}
-
-	private void lblHoraSistemaSetup() {
-	}
-
-	private void lblTempoSessaoSetup() {
-	}
-
-	private void lblUsernameLoggedSetup() {
+	public JTable getTable() {
+		return table;
 	}
 
 	public JPanel returnPanel() {
@@ -510,7 +496,7 @@ public class GUI_gestor_promocao extends JFrame {
 
 	}
 	
-	
+
 	public JButton getBtVoltarGestorPromocao() {
 		return btVoltarGestorPromocao;
 	}
