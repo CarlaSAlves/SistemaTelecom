@@ -50,6 +50,7 @@ public class GUI_gestor_promocao extends JFrame {
 	private JLabel lblTempoSessao;
 	private JLabel lblHoraSistema;
 	JCheckBox checkBoxAtivo;
+	private JPanel painelPesquisa;
 
 
 	public static void main(String[] args) {
@@ -168,29 +169,32 @@ public class GUI_gestor_promocao extends JFrame {
 	
 
 	private void panel_1ContentSetup(JPanel panel_1) {
+		
+		painelPesquisa.setLayout(null);
 		JLabel lblDeProcura = lblDeProcuraSetup();
-		panel_1.add(lblDeProcura, "2, 2, left, center");
+		panel_1.add(lblDeProcura);
 
 		textPesquisaIDSetup();
-		panel_1.add(textPesquisaID, "4, 2, fill, default");
+		panel_1.add(textPesquisaID);
 
 		JLabel lblNome = lblNomeSetup();
-		panel_1.add(lblNome, "2, 4, left, center");
+		panel_1.add(lblNome);
 
 		textFieldNomeSetup();
-		panel_1.add(textFieldNome, "4, 4, fill, default");
+		panel_1.add(textFieldNome);
 
 		JCheckBox checkBoxAtivo = checkBoxAtivoSetup();
-		panel_1.add(checkBoxAtivo, "4, 6, center, default");
+		panel_1.add(checkBoxAtivo);
 
 
 		JButton botaoPesquisa = botaoPesquisaSetup();
-		panel_1.add(botaoPesquisa, "4, 9");
+		panel_1.add(botaoPesquisa);
 	}
 
 
 	private JButton botaoPesquisaSetup() {
 		JButton botaoPesquisa = new JButton("Pesquisar");
+		botaoPesquisa.setBounds(46, 138, 273, 31);
 		botaoPesquisa.setBackground(SystemColor.activeCaption);
 		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoPesquisa.setFocusPainted(false);
@@ -235,6 +239,7 @@ public class GUI_gestor_promocao extends JFrame {
 
 	private JCheckBox checkBoxAtivoSetup() {
 		checkBoxAtivo = new JCheckBox("Ativa");
+		checkBoxAtivo.setBounds(156, 82, 53, 31);
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
 		return checkBoxAtivo;
@@ -242,50 +247,35 @@ public class GUI_gestor_promocao extends JFrame {
 
 	private void textFieldNomeSetup() {
 		textFieldNome = new JTextField();
+		textFieldNome.setBounds(46, 50, 273, 20);
 		textFieldNome.setColumns(10);
 	}
 
 	private JLabel lblNomeSetup() {
 		JLabel labelNome = new JLabel("Nome");
+		labelNome.setBounds(6, 48, 31, 23);
 		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		return labelNome;
 	}
 
 	private void textPesquisaIDSetup() {
 		textPesquisaID = new JTextField();
+		textPesquisaID.setBounds(46, 12, 273, 20);
 		textPesquisaID.setColumns(10);
 	}
 
 	private JLabel lblDeProcuraSetup() {
 		JLabel labelID = new JLabel("ID");
+		labelID.setBounds(6, 10, 11, 23);
 		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		return labelID;
 	}
 
 	private JPanel panel_1Setup() {
-		JPanel painelPesquisa = new JPanel();
+		painelPesquisa = new JPanel();
 		painelPesquisa.setBackground(Color.WHITE);
 		painelPesquisa.setForeground(SystemColor.desktop);
 		painelPesquisa.setBounds(99, 71, 344, 177);
-		
-		painelPesquisa.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("34px"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("166px:grow"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,},
-				new RowSpec[] {
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						RowSpec.decode("32px"),
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						RowSpec.decode("32px"),
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC,
-						RowSpec.decode("31px"),
-						RowSpec.decode("26px"),}));
 		return painelPesquisa;
 	}
 
