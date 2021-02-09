@@ -37,6 +37,7 @@ import historicos.HistoricoOperador;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JCheckBox;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class GUI_gestor_operador extends JFrame {
@@ -113,44 +114,29 @@ public class GUI_gestor_operador extends JFrame {
 		contentPane.add(panelPesquisa);
 
 		labelIDSetup();
-		panelPesquisa.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("31px"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("299px"),},
-				new RowSpec[] {
-						FormSpecs.PARAGRAPH_GAP_ROWSPEC,
-						RowSpec.decode("28px"),
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						RowSpec.decode("28px"),
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						RowSpec.decode("28px"),
-						FormSpecs.UNRELATED_GAP_ROWSPEC,
-						RowSpec.decode("24px"),
-						FormSpecs.RELATED_GAP_ROWSPEC,
-						RowSpec.decode("38px"),}));
-		panelPesquisa.add(lblNewLabelID, "2, 2, left, center");
+		panelPesquisa.setLayout(null);
+		panelPesquisa.add(lblNewLabelID);
 
 		textPesquisaIDSetup();
-		panelPesquisa.add(textPesquisaID, "4, 2, fill, top");
+		panelPesquisa.add(textPesquisaID);
 
 		labelNIFSetup();
-		panelPesquisa.add(lblNewLabelNIF, "2, 4, left, center");
+		panelPesquisa.add(lblNewLabelNIF);
 
 		textPesquisaNIFSetup();
-		panelPesquisa.add(textPesquisaNIF, "4, 4, fill, top");
+		panelPesquisa.add(textPesquisaNIF);
 
 		lblNomeSetup();
-		panelPesquisa.add(lblNome, "2, 6, left, center");
+		panelPesquisa.add(lblNome);
 
 		textFieldNomeSetup();
-		panelPesquisa.add(textFieldNome, "4, 6, fill, top");
+		panelPesquisa.add(textFieldNome);
 
 		checkBoxAtivoSetup();
-		panelPesquisa.add(checkBoxAtivo, "4, 8, center, top");
+		panelPesquisa.add(checkBoxAtivo);
 
 		botaoPesquisaSetup();
-		panelPesquisa.add(botaoPesquisa, "4, 10, fill, top");
+		panelPesquisa.add(botaoPesquisa);
 
 		// -- Botões --  
 
@@ -236,47 +222,55 @@ public class GUI_gestor_operador extends JFrame {
 	private void panelPesquisaSetup() {
 		panelPesquisa = new JPanel();
 		panelPesquisa.setBackground(SystemColor.text);
-		panelPesquisa.setBounds(98, 63, 344, 221);
+		panelPesquisa.setBounds(98, 63, 444, 215);
 	}
 	
 	private void labelIDSetup() {
 		lblNewLabelID = new JLabel("ID");
+		lblNewLabelID.setBounds(10, 13, 12, 18);
 		lblNewLabelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 	
 	private void textPesquisaIDSetup() {
 		textPesquisaID = new JTextField();
+		textPesquisaID.setBounds(84, 11, 350, 25);
 		textPesquisaID.setColumns(10);
 	}
 	
 	private void labelNIFSetup() {
 		lblNewLabelNIF = new JLabel("NIF");
+		lblNewLabelNIF.setBounds(10, 44, 20, 26);
 		lblNewLabelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 	
 	private void textPesquisaNIFSetup() {
 		textPesquisaNIF = new JTextField();
+		textPesquisaNIF.setBounds(84, 47, 350, 25);
 		textPesquisaNIF.setColumns(10);
 	}
 	
 	private void lblNomeSetup() {
 		lblNome = new JLabel("Nome");
+		lblNome.setBounds(10, 83, 64, 18);
 		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 	
 	private void textFieldNomeSetup() {
 		textFieldNome = new JTextField();
+		textFieldNome.setBounds(84, 81, 350, 25);
 		textFieldNome.setColumns(10);
 	}
 	
 	private void checkBoxAtivoSetup() {
 		checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setBounds(226, 112, 76, 24);
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
-		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
+		checkBoxAtivo.setBackground(Color.WHITE);
 	}
 	
 	private void botaoPesquisaSetup() {
 		botaoPesquisa = new JButton("Pesquisar");
+		botaoPesquisa.setBounds(84, 143, 350, 25);
 		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoPesquisa.setBackground(SystemColor.activeCaption);
 		botaoPesquisa.addActionListener(new ActionListener() {

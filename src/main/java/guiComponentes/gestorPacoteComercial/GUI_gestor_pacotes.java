@@ -214,7 +214,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	private JButton btnNewButtonPesquisarSetup(JCheckBox checkBoxAtivo) {
 		JButton btnNewButtonPesquisar = new JButton("Pesquisar");
-		btnNewButtonPesquisar.setBounds(45, 107, 326, 36);
+		btnNewButtonPesquisar.setBounds(84, 105, 350, 25);
 		btnNewButtonPesquisar.setBackground(SystemColor.activeCaption);
 		btnNewButtonPesquisar.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 
@@ -260,8 +260,8 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	private JCheckBox checkBoxAtivoSetup() {
 		JCheckBox checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setBounds(207, 77, 50, 23);
-		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
+		checkBoxAtivo.setBounds(225, 75, 142, 23);
+		checkBoxAtivo.setBackground(Color.WHITE);
 		checkBoxAtivo.setForeground(SystemColor.desktop);
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		return checkBoxAtivo;
@@ -269,26 +269,26 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	private void textFieldNomeSetup() {
 		textFieldNome = new JTextField();
-		textFieldNome.setBounds(45, 42, 326, 28);
+		textFieldNome.setBounds(84, 43, 350, 25);
 		textFieldNome.setColumns(10);
 	}
 
 	private JLabel lblNewLabelNomeSetup() {
 		JLabel lblNewLabelNome = new JLabel("Nome");
-		lblNewLabelNome.setBounds(7, 44, 31, 23);
+		lblNewLabelNome.setBounds(10, 42, 64, 26);
 		lblNewLabelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		return lblNewLabelNome;
 	}
 
 	private void textPesquisaIDSetup() {
 		textPesquisaID = new JTextField();
-		textPesquisaID.setBounds(45, 7, 326, 28);
+		textPesquisaID.setBounds(84, 11, 350, 25);
 		textPesquisaID.setColumns(10);
 	}
 
 	private JLabel lblNewLabelIDSetup() {
 		JLabel lblNewLabelID = new JLabel("ID");
-		lblNewLabelID.setBounds(7, 9, 11, 23);
+		lblNewLabelID.setBounds(10, 13, 64, 18);
 		lblNewLabelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		return lblNewLabelID;
 	}
@@ -303,7 +303,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	private JPanel panel_1Setup() {
 		panel_2 = new JPanel();
 		panel_2.setBackground(Color.WHITE);
-		panel_2.setBounds(115, 90, 420, 172);
+		panel_2.setBounds(98, 63, 444, 215);
 		return panel_2;
 	}
 

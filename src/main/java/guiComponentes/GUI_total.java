@@ -189,7 +189,7 @@ public class GUI_total extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				homepagePanel.setVisible(false);
-				gestor_promocaoPanel.setVisible(true);
+				gestor_pacotesPanel.setVisible(true);
 			}
 		});
 
