@@ -72,7 +72,7 @@ public class GUI_login extends JFrame {
 		
 				JLabel lblFooter = new JLabel();
 				lblFooter.setBounds(600, 674, 200, 87);
-				//lblFooter.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/Altran1.1.png")));
+				lblFooter.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/Altran1.1.png")));
 				getContentPane().add(lblFooter);
 		
 		btnSair = new JButton("Sair");

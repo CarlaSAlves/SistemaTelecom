@@ -25,7 +25,7 @@ import standard_value_object.Role;
 public class FuncionarioDAO {
 
 	private Connection myConn;
-
+	private Funcionario funcionario = new Funcionario();
 
 	public FuncionarioDAO(Connection connection) throws FileNotFoundException, IOException, SQLException {
 		this.myConn = connection;
@@ -354,14 +354,21 @@ public class FuncionarioDAO {
 
 		try {
 			myStmt = myConn.prepareStatement("INSERT INTO funcionario(nome, nif, login, password, ativo, id_role) "
-					+ "VALUES(?,?,?,?,?,2)");
+					+ "VALUES(?,?,?,?,?,?)");
 			
+			myStmt.setString(1, funcionario.getNome());
+			myStmt.setLong(2, funcionario.getNif());
+			myStmt.setString(3, funcionario.getLogin());
+			myStmt.setString(4, PasswordEncryption.get_SHA_512_SecurePassword(funcionario.getPassword()));
+			myStmt.setBoolean(5, funcionario.isAtivo());
+			myStmt.setInt(6, funcionario.getId_role());
+
 			myStmt.setString(1, operador.getNome());
 			myStmt.setLong(2, operador.getNif());
 			myStmt.setString(3, operador.getLogin());
 			myStmt.setString(4, operador.getPassword());
 			myStmt.setBoolean(5, operador.isAtivo());
-			
+			myStmt.setInt(6, operador.getId_role());
 
 			myStmt.executeUpdate();
 
@@ -385,10 +392,18 @@ public class FuncionarioDAO {
 			myStmt = myConn.prepareStatement("UPDATE `funcionario` SET `nome`=?, `nif`=?, "
 					+ "`login`=?, `password`=?, `ativo`=?, `id_role`=? WHERE  `id`=?");
 
+			myStmt.setString(1, funcionario .getNome());
+			myStmt.setLong(2, funcionario.getNif());
+			myStmt.setString(3, funcionario.getLogin());
+			myStmt.setString(4, PasswordEncryption.get_SHA_512_SecurePassword(funcionario.getPassword()));
+			myStmt.setBoolean(5, funcionario.isAtivo());
+			myStmt.setInt(6, funcionario.getId_role());
+			myStmt.setInt(7, funcionario.getId());
+
 			myStmt.setString(1, operador.getNome());
 			myStmt.setLong(2, operador.getNif());
 			myStmt.setString(3, operador.getLogin());
-			myStmt.setString(4, PasswordEncryption.get_SHA_512_SecurePassword(operador.getPassword()));
+			myStmt.setString(4, operador.getPassword());
 			myStmt.setBoolean(5, operador.isAtivo());
 			myStmt.setInt(6, operador.getId_role());
 			myStmt.setInt(7, operador.getId());

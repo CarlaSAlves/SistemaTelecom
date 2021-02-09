@@ -543,6 +543,11 @@ public class GUI_gestor_operador extends JFrame {
 		}
 
 	}
+	
+	
+	public JTable getTable() {
+		return table;
+	}
 
 	public JButton btVoltarGestorOperador() {
 		return btVoltarGestorOperador;
