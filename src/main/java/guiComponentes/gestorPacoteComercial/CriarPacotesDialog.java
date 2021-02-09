@@ -81,52 +81,45 @@ public class CriarPacotesDialog extends JDialog {
 		contentPanel.setBackground(new Color(255, 255, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("76px"),
-				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("346px"),},
-			new RowSpec[] {
-				RowSpec.decode("32px"),
-				RowSpec.decode("28px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				RowSpec.decode("23px"),
-				RowSpec.decode("23px"),
-				FormSpecs.PARAGRAPH_GAP_ROWSPEC,
-				RowSpec.decode("48px"),}));
+		contentPanel.setLayout(null);
 
 		{
 			JLabel lblNome_1 = new JLabel("Nome");
+			lblNome_1.setBounds(10, 37, 76, 28);
 			lblNome_1.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			contentPanel.add(lblNome_1, "2, 2, fill, fill");
+			contentPanel.add(lblNome_1);
 		}
 		{
 			textFieldNome = new JTextField();
+			textFieldNome.setBounds(98, 37, 346, 28);
 			textFieldNome.setFont(font);
 			textFieldNome.setColumns(10);
-			contentPanel.add(textFieldNome, "4, 2, fill, fill");
+			contentPanel.add(textFieldNome);
 		}
 		{
 			JLabel lblMorada = new JLabel("Descrição");
+			lblMorada.setBounds(10, 76, 76, 28);
 			lblMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			contentPanel.add(lblMorada, "2, 4, fill, fill");
+			contentPanel.add(lblMorada);
 		}
 		{
 			textFieldDescricao = new JTextField();
+			textFieldDescricao.setBounds(98, 76, 346, 28);
 			textFieldDescricao.setFont(font);
 			textFieldDescricao.setColumns(10);
-			contentPanel.add(textFieldDescricao, "4, 4, fill, fill");
+			contentPanel.add(textFieldDescricao);
 		}
 
 		checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setBounds(174, 130, 50, 23);
 		checkBoxAtivo.setSelected(true);
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		contentPanel.add(checkBoxAtivo, "4, 6, center, top");
+		contentPanel.add(checkBoxAtivo);
 		{
 			JPanel buttonPane = new JPanel();
-			contentPanel.add(buttonPane, "2, 8, 3, 1, fill, top");
+			buttonPane.setBounds(10, 165, 434, 48);
+			contentPanel.add(buttonPane);
 			buttonPane.setBackground(Color.WHITE);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			{
