@@ -91,66 +91,66 @@ public class CriarOperadorDialog extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JLabel lblNome = new JLabel("Nome");
-			lblNome.setBounds(17, 34, 31, 23);
+			lblNome.setBounds(15, 29, 34, 18);
 			lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblNome);
 		}
 
 		{
 			JLabel lblNif = new JLabel("NIF");
-			lblNif.setBounds(17, 60, 19, 23);
+			lblNif.setBounds(15, 55, 20, 18);
 			lblNif.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblNif);
 		}
 
 		{
 			JLabel lblLogin = new JLabel("Login");
-			lblLogin.setBounds(17, 88, 29, 23);
+			lblLogin.setBounds(15, 86, 31, 18);
 			lblLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblLogin);
 		}
 
 		{
 			JLabel lblPassword = new JLabel("Password");
-			lblPassword.setBounds(17, 118, 70, 23);
+			lblPassword.setBounds(15, 112, 70, 18);
 			lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblPassword);
 		}
 
 		{
 			textFieldNome = new JTextField();
-			textFieldNome.setBounds(99, 34, 264, 23);
-			textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			textFieldNome.setBounds(95, 29, 268, 23);
+			textFieldNome.setFont(font);
 			textFieldNome.setColumns(10);
 			contentPanel.add(textFieldNome);
 		}
 
 		{
 			textFieldNIF = new JTextField();
-			textFieldNIF.setBounds(99, 60, 264, 23);
-			textFieldNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			textFieldNIF.setBounds(95, 55, 268, 23);
+			textFieldNIF.setFont(font);
 			textFieldNIF.setColumns(10);
 			contentPanel.add(textFieldNIF);
 		}
 
 		{
 			textFieldLogin = new JTextField();
-			textFieldLogin.setBounds(99, 88, 264, 23);
-			textFieldLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			textFieldLogin.setBounds(95, 83, 268, 23);
+			textFieldLogin.setFont(font);
 			textFieldLogin.setColumns(10);
 			contentPanel.add(textFieldLogin);
 		}
 
 		{
 			textFieldPassword = new JPasswordField();
-			textFieldPassword.setBounds(99, 118, 264, 23);
-			textFieldPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			textFieldPassword.setBounds(95, 112, 268, 23);
+			textFieldPassword.setFont(font);
 			textFieldPassword.setColumns(10);
 			contentPanel.add(textFieldPassword);
 		}
 
 		checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setBounds(208, 163, 50, 23);
+		checkBoxAtivo.setBounds(235, 157, 53, 23);
 		checkBoxAtivo.setSelected(true);
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));

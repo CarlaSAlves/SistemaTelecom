@@ -80,7 +80,7 @@ public class PacoteClienteDAO {
 		return pacoteCliente;
 	}
 	
-	//cria um pacote_cliente e devolve o mesmo. Usar em combinaï¿½ao com metodo atribuirPacoteCliente do ClienteDao
+	//cria um pacote_cliente e devolve o mesmo. Usar em combinaçao com metodo atribuirPacoteCliente do ClienteDao
 	//para criar e atribuir um pacote_cliente a clientes
 	public PacoteCliente criarPacoteCliente(PacoteCliente pacoteCliente) throws SQLException{
 		PreparedStatement myStmt = null;
@@ -93,13 +93,13 @@ public class PacoteClienteDAO {
 			myStmt.setInt(3, pacoteCliente.getId_criado_por());
 			myStmt.executeUpdate();
 			
-			//vamos reaproveitar o objecto pacoteCliente no parametro da funï¿½ao e vamos colocar o id enviado pela base de dados nele
+			//vamos reaproveitar o objecto pacoteCliente no parametro da funçao e vamos colocar o id enviado pela base de dados nele
 			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
 	            if (generatedKeys.next()) {
 	                pacoteCliente.setId((int)generatedKeys.getLong(1));
 	            }
 	            else {
-	                throw new SQLException("CriaÃ§Ã£o de pacote falhou. Nenhum ID foi devolvido.");
+	                throw new SQLException("Criação de pacote falhou. Nenhum ID foi devolvido.");
 	            }
 	        }
 		}catch(Exception e) {
@@ -114,7 +114,7 @@ public class PacoteClienteDAO {
 	public void adicionarPromocao(PacoteCliente pacoteCliente, Promocao promocao) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
-			myStmt = myConn.prepareStatement("INSERT INTO pacote_cliente_promoÃ§ao(id_pacote_cliente, id_promocao) VALUES(?, ?);");
+			myStmt = myConn.prepareStatement("INSERT INTO pacote_cliente_promoçao(id_pacote_cliente, id_promocao) VALUES(?, ?);");
 			myStmt.setInt(1, pacoteCliente.getId());
 			myStmt.setInt(2, promocao.getId());
 			myStmt.executeUpdate();
@@ -128,7 +128,7 @@ public class PacoteClienteDAO {
 	public void removerPromocao(PacoteCliente pacoteCliente, Promocao promocao) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
-			myStmt = myConn.prepareStatement("DELETE FROM `sistema_tele`.`pacote_cliente_promoÃ§ao` WHERE (`id_pacote_cliente` = ?) and (`id_promocao` = ?);");
+			myStmt = myConn.prepareStatement("DELETE FROM `sistema_tele`.`pacote_cliente_promoï¿½ao` WHERE (`id_pacote_cliente` = ?) and (`id_promocao` = ?);");
 			myStmt.setInt(1, pacoteCliente.getId());
 			myStmt.setInt(2, promocao.getId());
 			myStmt.executeUpdate();
@@ -143,11 +143,14 @@ public class PacoteClienteDAO {
 	public void editarPacoteCliente(PacoteCliente pacoteCliente) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
+
 			myStmt = myConn.prepareStatement("UPDATE pacote_cliente "
 					+ "SET `id_pacote_comercial`=? WHERE `id`=?");
+			
 			myStmt.setInt(1, pacoteCliente.getId_pacote_comercial());
 			myStmt.setInt(2, pacoteCliente.getId());
 			myStmt.executeUpdate();
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

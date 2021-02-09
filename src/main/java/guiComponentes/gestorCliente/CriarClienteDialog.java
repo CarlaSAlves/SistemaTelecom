@@ -181,7 +181,6 @@ public class CriarClienteDialog extends JDialog {
 						contentPanel.add(checkBoxAtivo);
 						
 						JCheckBox chckbxNewCheckBox = new JCheckBox("Ativo");
-						chckbxNewCheckBox.setSelected(true);
 						chckbxNewCheckBox.setBounds(165, 218, 53, 23);
 						chckbxNewCheckBox.setBackground(SystemColor.text);
 						chckbxNewCheckBox.setFont(new Font("Dubai Light", Font.PLAIN, 13));

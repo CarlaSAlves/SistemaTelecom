@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Duration;
 import java.util.List;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,13 +25,20 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import servico.GestorDeDAO;
+import standard_value_object.Cliente;
 import standard_value_object.Promocao;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import guiComponentes.gestorCliente.ClientePesquisaModelTable;
+import guiComponentes.gestorCliente.GUI_gestor_cliente;
+import guiComponentes.gestorCliente.HistoricoClienteDialog;
+import guiComponentes.gestorPacoteComercial.GUI_gestor_pacotes;
+import historicos.HistoricoCliente;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JCheckBox;
-import java.awt.Color;
 
 
 public class GUI_gestor_promocao extends JFrame {
@@ -50,7 +58,7 @@ public class GUI_gestor_promocao extends JFrame {
 	private JLabel lblTempoSessao;
 	private JLabel lblHoraSistema;
 	JCheckBox checkBoxAtivo;
-
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -66,16 +74,6 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	public  GUI_gestor_promocao() {
-		contentPaneSetup();
-		inicialize();
-	}
-
-	/**
-	 * 
-	 */
-	protected void inicialize() {
-		
-		// look and feel Nimbus 
 		
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 	        if ("Nimbus".equals(info.getName())) {
@@ -94,25 +92,27 @@ public class GUI_gestor_promocao extends JFrame {
 	        }
 		}
 		
-		// Campo de pesquisa 
-		
-				JLabel lblCamposPesquisas = new JLabel("Campo de Pesquisa");
-				lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-				lblCamposPesquisas.setBounds(124, 26, 294, 26);
-				contentPane.add(lblCamposPesquisas);
-				
-				JTextArea textAreaDescricao = new JTextArea();
-				textAreaDescricao.setBounds(905, 71, 367, 151);
-				contentPane.add(textAreaDescricao);
-				
-				JPanel panel_1 = panel_1Setup();
-				panel_1ContentSetup(panel_1);
-				contentPane.add(panel_1);
+		contentPaneSetup();
 
-		// Botões 
+		/* Lbl e botão de Procura */
 
 		JButton botaoCriarPromocao = botaoCriarPromocaoSetup();
 		getContentPane().add(botaoCriarPromocao);
+
+		JPanel panel = panelSetup();
+		getContentPane().add(panel);
+
+		JScrollPane scrollPane = scrollPaneSetup();
+		panel.add(scrollPane);
+
+		tableSetup();
+
+
+		scrollPane.setViewportView(table);
+
+
+		lblResultadosSetup();
+		panel.add(lblResultados);
 
 		botaoEditarPromocaoSetup();
 		getContentPane().add(botaoEditarPromocao);
@@ -122,76 +122,48 @@ public class GUI_gestor_promocao extends JFrame {
 
 		btVoltarGestorPromocaoSetup();
 		getContentPane().add(btVoltarGestorPromocao);
-		
-		// table 
-		
-		tableSetup();
-
-		JPanel panel = panelSetup();
-		getContentPane().add(panel);
-
-		JScrollPane scrollPane = scrollPaneSetup();
-		panel.add(scrollPane);
-
-		scrollPane.setViewportView(table);
-
-		lblResultadosSetup();
-		panel.add(lblResultados);
-
-		// Footer
 
 		JLabel lbFooter = lbFooterSetup();
 		contentPane.add(lbFooter);	
-		
-		
-		setUpUserSessao();
-		
-	}
 
-	private void setUpUserSessao() {
+
+		JLabel lblCamposPesquisas = new JLabel("Campos Pesquisa");
+		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
+		lblCamposPesquisas.setBounds(66, 26, 294, 26);
+		contentPane.add(lblCamposPesquisas);
+		
+
+		JTextArea textAreaDescricao = new JTextArea();
+		textAreaDescricao.setBounds(938, 71, 470, 151);
+		contentPane.add(textAreaDescricao);
+
+		JPanel panel_1 = panel_1Setup();
+		panel_1ContentSetup(panel_1);
+		contentPane.add(panel_1);
+	
+		
+		
 		lblTempoSessao = new JLabel();
-		lblTempoSessao.setBounds(1297, 820, 159, 15);	
+		lblTempoSessao.setBounds(1297, 820, 159, 15);
+		contentPane.add(lblTempoSessao);
 		lblTempoSessao.setText("Sessão:");
 		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 13));
-		contentPane.add(lblTempoSessao);
-		
 		lblUsernameLogged = new JLabel();
 		lblUsernameLogged.setBounds(1297, 805, 159, 16);
+		contentPane.add(lblUsernameLogged);
 		lblUsernameLogged.setText("Username:");
 		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 13));
-		contentPane.add(lblUsernameLogged);
-		
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setBounds(1297, 835, 159, 16);
+		contentPane.add(lblHoraSistema);
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 13));
-		contentPane.add(lblHoraSistema);
-	}
-	
-	
-	
-	private void contentPaneSetup() {
-		contentPane = new JPanel();
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		setTitle("Pesquisa de Promocao");
-		setFont(font);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 30, 1400, 800);
-		contentPane.setBackground(Color.WHITE);
-	}
-	
-	private JPanel panelSetup() {
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(80, 309, 1217, 369);
-		panel.setFont(font);
+
 		
-		panel.setLayout(null);
-		return panel;
+		
 	}
 
-	
+
 
 	private void panel_1ContentSetup(JPanel panel_1) {
 		JLabel lblDeProcura = lblDeProcuraSetup();
@@ -214,6 +186,7 @@ public class GUI_gestor_promocao extends JFrame {
 		panel_1.add(botaoPesquisa, "4, 9");
 	}
 
+	
 
 	private JButton botaoPesquisaSetup() {
 		JButton botaoPesquisa = new JButton("Pesquisar");
@@ -262,7 +235,7 @@ public class GUI_gestor_promocao extends JFrame {
 	private JCheckBox checkBoxAtivoSetup() {
 		checkBoxAtivo = new JCheckBox("Ativa");
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
-		checkBoxAtivo.setBackground(Color.WHITE);
+		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
 		return checkBoxAtivo;
 	}
 
@@ -290,9 +263,9 @@ public class GUI_gestor_promocao extends JFrame {
 
 	private JPanel panel_1Setup() {
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.WHITE);
+		panel_1.setBackground(SystemColor.inactiveCaption);
 		panel_1.setForeground(SystemColor.desktop);
-		panel_1.setBounds(117, 76, 380, 177);
+		panel_1.setBounds(66, 63, 380, 177);
 		
 		panel_1.setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
@@ -324,7 +297,7 @@ public class GUI_gestor_promocao extends JFrame {
 
 	private void btVoltarGestorPromocaoSetup() {
 		btVoltarGestorPromocao = new JButton("Voltar");
-		btVoltarGestorPromocao.setBounds(6, 709, 119, 38);
+		btVoltarGestorPromocao.setBounds(76, 806, 119, 32);
 		btVoltarGestorPromocao.setFont(font);
 		btVoltarGestorPromocao.setBackground(SystemColor.activeCaption);
 		btVoltarGestorPromocao.setFocusPainted(false);
@@ -332,7 +305,7 @@ public class GUI_gestor_promocao extends JFrame {
 
 	private void botaoDesativarPromocaoSetup() {
 		botaoDesativarPromocao = new JButton("Desativar Promoção");
-		botaoDesativarPromocao.setBounds(656, 71, 211, 43);
+		botaoDesativarPromocao.setBounds(697, 71, 231, 43);
 		botaoDesativarPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoDesativarPromocao.setBackground(SystemColor.activeCaption);
 		botaoDesativarPromocao.setFocusPainted(false);
@@ -376,7 +349,7 @@ public class GUI_gestor_promocao extends JFrame {
 
 	private void botaoEditarPromocaoSetup() {
 		botaoEditarPromocao = new JButton("Editar Promoção");
-		botaoEditarPromocao.setBounds(656, 125, 211, 43);
+		botaoEditarPromocao.setBounds(697, 125, 231, 43);
 		botaoEditarPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoEditarPromocao.setBackground(SystemColor.activeCaption);
 		botaoEditarPromocao.setFocusPainted(false);
@@ -404,7 +377,7 @@ public class GUI_gestor_promocao extends JFrame {
 	private void lblResultadosSetup() {
 		lblResultados = new JLabel("Resultados: ");
 		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		lblResultados.setBounds(33, 0, 136, 25);
+		lblResultados.setBounds(10, 4, 136, 25);
 	}
 
 	private void tableSetup() {
@@ -422,10 +395,12 @@ public class GUI_gestor_promocao extends JFrame {
 				if (table.getSelectedRowCount()>1) {
 					botaoEditarPromocao.setEnabled(false);
 					botaoDesativarPromocao.setEnabled(true);
+					
 				}
 				else if (table.getSelectedRows().length==1) {
 					botaoEditarPromocao.setEnabled(true);
 					botaoDesativarPromocao.setEnabled(true);
+					
 				}
 				else if (table.getSelectedRowCount()==0)
 				{
@@ -438,15 +413,23 @@ public class GUI_gestor_promocao extends JFrame {
 
 	private JScrollPane scrollPaneSetup() {
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(33, 33, 1158, 313);
+		scrollPane.setBounds(10, 33, 1332, 660);
 		return scrollPane;
 	}
 
-	
+	private JPanel panelSetup() {
+		JPanel panel = new JPanel();
+		panel.setBackground(SystemColor.inactiveCaption);
+		panel.setBounds(66, 296, 1366, 499);
+		panel.setFont(font);
+		
+		panel.setLayout(null);
+		return panel;
+	}
 
 	private JButton botaoCriarPromocaoSetup() {
 		JButton botaoCriarPromocao = new JButton("Criar Promoção");
-		botaoCriarPromocao.setBounds(656, 179, 211, 43);
+		botaoCriarPromocao.setBounds(697, 179, 231, 43);
 		botaoCriarPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoCriarPromocao.setBackground(SystemColor.activeCaption);
 		botaoCriarPromocao.setFocusPainted(false);
@@ -460,7 +443,16 @@ public class GUI_gestor_promocao extends JFrame {
 		return botaoCriarPromocao;
 	}
 
-	
+	private void contentPaneSetup() {
+		contentPane = new JPanel();
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setTitle("Pesquisa de Promocao");
+		setFont(font);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 30, 1400, 800);
+		contentPane.setBackground(SystemColor.inactiveCaption);
+	}
 
 	public void refreshPromocaoTable() {
 		try {
@@ -472,10 +464,6 @@ public class GUI_gestor_promocao extends JFrame {
 					JOptionPane.ERROR_MESSAGE);
 		}
 
-	}
-	
-	public JTable getTable() {
-		return table;
 	}
 
 	public JPanel returnPanel() {
@@ -496,7 +484,7 @@ public class GUI_gestor_promocao extends JFrame {
 
 	}
 	
-
+	
 	public JButton getBtVoltarGestorPromocao() {
 		return btVoltarGestorPromocao;
 	}
