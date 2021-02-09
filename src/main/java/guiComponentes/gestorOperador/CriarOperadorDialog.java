@@ -119,11 +119,7 @@ public class CriarOperadorDialog extends JDialog {
 
 		{
 			textFieldNome = new JTextField();
-<<<<<<< HEAD
-			textFieldNome.setBounds(99, 34, 264, 23);
-=======
 			textFieldNome.setBounds(95, 29, 268, 23);
->>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 			textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldNome.setColumns(10);
 			contentPanel.add(textFieldNome);
@@ -131,11 +127,7 @@ public class CriarOperadorDialog extends JDialog {
 
 		{
 			textFieldNIF = new JTextField();
-<<<<<<< HEAD
-			textFieldNIF.setBounds(99, 60, 264, 23);
-=======
 			textFieldNIF.setBounds(95, 55, 268, 23);
->>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 			textFieldNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldNIF.setColumns(10);
 			contentPanel.add(textFieldNIF);
@@ -143,11 +135,7 @@ public class CriarOperadorDialog extends JDialog {
 
 		{
 			textFieldLogin = new JTextField();
-<<<<<<< HEAD
-			textFieldLogin.setBounds(99, 88, 264, 23);
-=======
 			textFieldLogin.setBounds(95, 83, 268, 23);
->>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 			textFieldLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldLogin.setColumns(10);
 			contentPanel.add(textFieldLogin);
@@ -155,11 +143,7 @@ public class CriarOperadorDialog extends JDialog {
 
 		{
 			textFieldPassword = new JPasswordField();
-<<<<<<< HEAD
-			textFieldPassword.setBounds(99, 118, 264, 23);
-=======
 			textFieldPassword.setBounds(95, 112, 268, 23);
->>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 			textFieldPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldPassword.setColumns(10);
 			contentPanel.add(textFieldPassword);

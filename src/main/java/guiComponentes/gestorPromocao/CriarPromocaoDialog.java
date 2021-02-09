@@ -69,30 +69,12 @@ public class CriarPromocaoDialog extends JDialog {
 	}
 
 	public CriarPromocaoDialog() {
-<<<<<<< HEAD
-		setBounds(500, 300, 427, 249);
-=======
 		setBounds(500, 300, 399, 268);
->>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
-<<<<<<< HEAD
-				ColumnSpec.decode("94px"),
-				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("294px"),},
-			new RowSpec[] {
-				FormSpecs.PARAGRAPH_GAP_ROWSPEC,
-				RowSpec.decode("29px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("29px"),
-				RowSpec.decode("30px"),
-				RowSpec.decode("23px"),
-				RowSpec.decode("24px"),
-				RowSpec.decode("44px"),}));
-=======
 				ColumnSpec.decode("86px"),
 				FormSpecs.UNRELATED_GAP_COLSPEC,
 				ColumnSpec.decode("273px"),},
@@ -105,7 +87,6 @@ public class CriarPromocaoDialog extends JDialog {
 				RowSpec.decode("23px"),
 				FormSpecs.UNRELATED_GAP_ROWSPEC,
 				RowSpec.decode("48px"),}));
->>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 		{
 			JLabel lblNome = new JLabel("Nome");
 			lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
@@ -134,21 +115,12 @@ public class CriarPromocaoDialog extends JDialog {
 		checkBoxAtivo.setSelected(true);
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-<<<<<<< HEAD
-		contentPanel.add(checkBoxAtivo, "3, 6, left, fill");
-		{
-			JPanel buttonPane = new JPanel();
-			contentPanel.add(buttonPane, "1, 8, 3, 1, fill, top");
-			buttonPane.setBackground(Color.WHITE);
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-=======
 		contentPanel.add(checkBoxAtivo, "3, 6, center, top");
 		{
 			JPanel painelConfirmacao = new JPanel();
 			contentPanel.add(painelConfirmacao, "1, 8, 3, 1, fill, top");
 			painelConfirmacao.setBackground(Color.WHITE);
 			painelConfirmacao.setLayout(new FlowLayout(FlowLayout.RIGHT));
->>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 			{
 				JButton okButton = new JButton("Confirmar");
 				okButton.setForeground(SystemColor.activeCaptionText);
