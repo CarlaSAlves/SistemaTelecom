@@ -171,25 +171,25 @@ public class GUI_gestor_operador extends JFrame {
 		botaoVisualizarHistoricoSetup();
 		contentPane.add(botaoVisualizarHistorico);
 		lblTempoSessao = new JLabel();
-		lblTempoSessao.setBounds(1219, 709, 159, 18);
+		lblTempoSessao.setBounds(1213, 717, 159, 18);
 		contentPane.add(lblTempoSessao);
 
 		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 
 		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setBounds(1219, 690, 159, 16);
+		lblUsernameLogged.setBounds(1213, 698, 159, 16);
 		contentPane.add(lblUsernameLogged);
 
 		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 
 		lblHoraSistema = new JLabel();
-		lblHoraSistema.setBounds(1219, 729, 159, 18);
+		lblHoraSistema.setBounds(1213, 737, 159, 18);
 		contentPane.add(lblHoraSistema);
 
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 
 		// tabela
 
@@ -228,7 +228,7 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	private void lblCamposPesquisasSetup() {
-		lblCamposPesquisas = new JLabel("Campos de Pesquisa");
+		lblCamposPesquisas = new JLabel("Campo de Pesquisa");
 		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
 		lblCamposPesquisas.setBounds(98, 26, 294, 26);
 	}

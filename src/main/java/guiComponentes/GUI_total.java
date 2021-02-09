@@ -26,7 +26,6 @@ import guiComponentes.gestorPromocao.GUI_gestor_promocao;
 
 public class GUI_total extends JFrame {
 
-
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private static String username;
