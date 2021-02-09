@@ -288,7 +288,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 	private void lblMoradaSetup() {
 		labelMorada = new JLabel("Morada");
-		labelMorada.setBounds(6, 122, 56, 21);
+		labelMorada.setBounds(6, 116, 56, 27);
 		labelMorada.setFont(new Font("Dialog", Font.BOLD, 13));
 	}
 

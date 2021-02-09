@@ -216,7 +216,7 @@ public class GUI_gestor_operador extends JFrame {
 			{
 				labelNome = new JLabel("Nome");
 				labelNome.setFont(new Font("Dialog", Font.BOLD, 13));
-				labelNome.setBounds(6, 87, 56, 18);
+				labelNome.setBounds(6, 78, 56, 27);
 				painelPesquisa.add(labelNome);
 			}
 			{

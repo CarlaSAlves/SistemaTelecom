@@ -190,7 +190,7 @@ public class GUI_gestor_pacotes extends JFrame {
 			{
 				labelNome_1 = new JLabel("Nome");
 				labelNome_1.setFont(new Font("Dialog", Font.BOLD, 13));
-				labelNome_1.setBounds(6, 53, 56, 18);
+				labelNome_1.setBounds(6, 44, 56, 27);
 				painelPesquisa_1.add(labelNome_1);
 			}
 			{
