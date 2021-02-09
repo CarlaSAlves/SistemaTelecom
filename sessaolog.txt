@@ -34,3 +34,15 @@
 <duração da sessão:	2:49>
 </sessao>
 
+<sessao>
+<username:	admin>
+<data e hora do login:	09-02-2021 20:31:05>
+<duração da sessão:	1:12>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	09-02-2021 20:32:19>
+<duração da sessão:	0:14>
+</sessao>
+

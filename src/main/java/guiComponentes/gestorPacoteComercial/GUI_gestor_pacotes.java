@@ -46,12 +46,17 @@ public class GUI_gestor_pacotes extends JFrame {
 	private JButton botaoEditarPacoteComercial;
 	private int indices[];
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
-	private JTextField textPesquisaID;
-	private JTextField textFieldNome;
 	private JLabel lblTempoSessao;
 	private JLabel lblHoraSistema;
 	private JButton botaoVisualizarHistorico;
 	private JPanel painelPesquisa;
+	private JPanel painelPesquisa_1;
+	private JLabel labelID_1;
+	private JTextField textPesquisaID;
+	private JLabel labelNome_1;
+	private JTextField textFieldNome;
+	private JCheckBox checkBoxAtivo;
+	private JButton btPesquisar;
 
 
 
@@ -132,7 +137,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		
 		JLabel lblCamposPesquisas = new JLabel("Campo de Pesquisa");
 		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-		lblCamposPesquisas.setBounds(124, 26, 294, 26);
+		lblCamposPesquisas.setBounds(98, 26, 294, 26);
 		contentPane.add(lblCamposPesquisas);
 		
 		JTextArea textAreaDescricao = new JTextArea();
@@ -153,17 +158,97 @@ public class GUI_gestor_pacotes extends JFrame {
 		lblUsernameLogged.setBounds(1219, 698, 159, 16);
 		contentPane.add(lblUsernameLogged);
 		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 10));
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setBounds(1219, 717, 159, 18);
 		contentPane.add(lblTempoSessao);
 		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 10));
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setBounds(1219, 737, 159, 18);
 		contentPane.add(lblHoraSistema);
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 10));
+		{
+			painelPesquisa_1 = new JPanel();
+			painelPesquisa_1.setLayout(null);
+			painelPesquisa_1.setBackground(Color.WHITE);
+			painelPesquisa_1.setBounds(98, 63, 453, 221);
+			contentPane.add(painelPesquisa_1);
+			{
+				labelID_1 = new JLabel("ID");
+				labelID_1.setFont(new Font("Dialog", Font.BOLD, 13));
+				labelID_1.setBounds(6, 15, 39, 18);
+				painelPesquisa_1.add(labelID_1);
+			}
+			{
+				textPesquisaID = new JTextField();
+				textPesquisaID.setColumns(10);
+				textPesquisaID.setBounds(72, 6, 371, 27);
+				painelPesquisa_1.add(textPesquisaID);
+			}
+			{
+				labelNome_1 = new JLabel("Nome");
+				labelNome_1.setFont(new Font("Dialog", Font.BOLD, 13));
+				labelNome_1.setBounds(6, 53, 56, 18);
+				painelPesquisa_1.add(labelNome_1);
+			}
+			{
+				textFieldNome = new JTextField();
+				textFieldNome.setColumns(10);
+				textFieldNome.setBounds(72, 44, 371, 27);
+				painelPesquisa_1.add(textFieldNome);
+			}
+			{
+				checkBoxAtivo = new JCheckBox("Ativo");
+				checkBoxAtivo.setFont(new Font("Dialog", Font.BOLD, 13));
+				checkBoxAtivo.setBackground(Color.WHITE);
+				checkBoxAtivo.setBounds(232, 78, 69, 24);
+				painelPesquisa_1.add(checkBoxAtivo);
+			}
+			{
+				btPesquisar = new JButton("Pesquisar");
+				btPesquisar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							int id = 0;
+							String nome = null;
+							int ativo = checkBoxAtivo.isSelected() ? 1 : 0;
+
+							if (!textPesquisaID.getText().isBlank()) {
+								id = Integer.parseInt(textPesquisaID.getText());
+							}
+
+							if (!textFieldNome.getText().isBlank()) {
+								nome = textFieldNome.getText();
+							}
+
+							List<PacoteComercial> pacotesComerciais = null;
+
+							if ((id != 0) || (nome != null) || (ativo != 0)) {
+								pacotesComerciais = GestorDeDAO.getGestorDeDAO().pesquisaPacoteComercial(id,
+										nome, ativo);
+							} else {
+								pacotesComerciais = GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
+							}
+
+							PacoteComercialPesquisaModelTable model =
+									new PacoteComercialPesquisaModelTable(pacotesComerciais);
+							table.setModel(model);
+							numberRows = table.getRowCount();
+							lblResultados.setText("Resultados: " + numberRows);
+
+						} catch (Exception e1) {
+
+						}
+					}
+				});
+				btPesquisar.setFont(new Font("Dialog", Font.PLAIN, 15));
+				btPesquisar.setBackground(SystemColor.activeCaption);
+				btPesquisar.setBounds(72, 109, 371, 27);
+				painelPesquisa_1.add(btPesquisar);
+			}
+		}
 
 		panelUserESessaoContentSetup();
 	}
@@ -175,14 +260,11 @@ private void panel_1ContentSetup(JPanel panel_1) {
 		JLabel lblDeProcura = lblNewLabelIDSetup();
 		panel_1.add(lblDeProcura);
 
-		textPesquisaIDSetup();
-		panel_1.add(textPesquisaID);
+		
 
 		JLabel lblNome = lblNewLabelNomeSetup();
 		panel_1.add(lblNome);
 
-		textFieldNomeSetup();
-		panel_1.add(textFieldNome);
 
 		JCheckBox checkBoxAtivo = checkBoxAtivoSetup();
 		panel_1.add(checkBoxAtivo);
@@ -213,43 +295,7 @@ private void panel_1ContentSetup(JPanel panel_1) {
 		btPesquisar.setBackground(SystemColor.activeCaption);
 		btPesquisar.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		
-		btPesquisar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				try {
-					int id = 0;
-					String nome = null;
-					int ativo = checkBoxAtivo.isSelected() ? 1 : 0;
-
-					if (!textPesquisaID.getText().isBlank()) {
-						id = Integer.parseInt(textPesquisaID.getText());
-					}
-
-					if (!textFieldNome.getText().isBlank()) {
-						nome = textFieldNome.getText();
-					}
-
-					List<PacoteComercial> pacotesComerciais = null;
-
-					if ((id != 0) || (nome != null) || (ativo != 0)) {
-						pacotesComerciais = GestorDeDAO.getGestorDeDAO().pesquisaPacoteComercial(id,
-								nome, ativo);
-					} else {
-						pacotesComerciais = GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
-					}
-
-					PacoteComercialPesquisaModelTable model =
-							new PacoteComercialPesquisaModelTable(pacotesComerciais);
-					table.setModel(model);
-					numberRows = table.getRowCount();
-					lblResultados.setText("Resultados: " + numberRows);
-
-				} catch (Exception e1) {
-
-				}
-
-			}
-		});
+		
 		return btPesquisar;
 	}
 
@@ -262,11 +308,7 @@ private void panel_1ContentSetup(JPanel panel_1) {
 		return checkBoxAtivo;
 	}
 
-	private void textFieldNomeSetup() {
-		textFieldNome = new JTextField();
-		textFieldNome.setBounds(45, 42, 326, 28);
-		textFieldNome.setColumns(10);
-	}
+	
 
 	private JLabel lblNewLabelNomeSetup() {
 		JLabel labelNome = new JLabel("Nome");
@@ -274,11 +316,7 @@ private void panel_1ContentSetup(JPanel panel_1) {
 		return labelNome;
 	}
 
-	private void textPesquisaIDSetup() {
-		textPesquisaID = new JTextField();
-		textPesquisaID.setBounds(45, 7, 326, 28);
-		textPesquisaID.setColumns(10);
-	}
+	
 
 	private JLabel lblNewLabelIDSetup() {
 		JLabel labelID = new JLabel("ID");

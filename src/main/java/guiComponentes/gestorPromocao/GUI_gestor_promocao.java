@@ -45,12 +45,15 @@ public class GUI_gestor_promocao extends JFrame {
 	private JButton botaoEditarPromocao;
 	private int indices[];
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
-	private JTextField textPesquisaID;
-	private JTextField textFieldNome;
 	private JLabel lblTempoSessao;
 	private JLabel lblHoraSistema;
-	JCheckBox checkBoxAtivo;
 	private JPanel painelPesquisa;
+	private JLabel labelID;
+	private JTextField textPesquisaID;
+	private JLabel labelNome;
+	private JTextField textFieldNome;
+	private JCheckBox checkBoxAtivo;
+	private JButton btPesquisar;
 
 
 	public static void main(String[] args) {
@@ -75,12 +78,12 @@ public class GUI_gestor_promocao extends JFrame {
 	 * 
 	 */
 	protected void inicialize() {
-		
+
 		// look and feel Nimbus 
-		
+
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-	        if ("Nimbus".equals(info.getName())) {
-	            try {
+			if ("Nimbus".equals(info.getName())) {
+				try {
 					UIManager.setLookAndFeel(info.getClassName());
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
@@ -91,24 +94,20 @@ public class GUI_gestor_promocao extends JFrame {
 				} catch (UnsupportedLookAndFeelException e) {
 					e.printStackTrace();
 				}
-	            break;
-	        }
+				break;
+			}
 		}
-		
+
 		// Campo de pesquisa 
-		
-				JLabel lblCamposPesquisas = new JLabel("Campo de Pesquisa");
-				lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-				lblCamposPesquisas.setBounds(124, 26, 294, 26);
-				contentPane.add(lblCamposPesquisas);
-				
-				JTextArea textAreaDescricao = new JTextArea();
-				textAreaDescricao.setBounds(905, 71, 367, 151);
-				contentPane.add(textAreaDescricao);
-				
-				JPanel panel_1 = panel_1Setup();
-				panel_1ContentSetup(panel_1);
-				contentPane.add(panel_1);
+
+		JLabel lblCamposPesquisas = new JLabel("Campo de Pesquisa");
+		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
+		lblCamposPesquisas.setBounds(98, 26, 294, 26);
+		contentPane.add(lblCamposPesquisas);
+
+		JTextArea textAreaDescricao = new JTextArea();
+		textAreaDescricao.setBounds(905, 71, 367, 151);
+		contentPane.add(textAreaDescricao);
 
 		// Botões 
 
@@ -123,9 +122,9 @@ public class GUI_gestor_promocao extends JFrame {
 
 		btVoltarGestorPromocaoSetup();
 		getContentPane().add(btVoltarGestorPromocao);
-		
+
 		// table 
-		
+
 		tableSetup();
 
 		JPanel panel = panelSetup();
@@ -143,9 +142,9 @@ public class GUI_gestor_promocao extends JFrame {
 
 		JLabel lbFooter = lbFooterSetup();
 		contentPane.add(lbFooter);	
-		
+
 		setUpUserSessao();
-		
+
 	}
 
 	private void setUpUserSessao() {
@@ -153,131 +152,116 @@ public class GUI_gestor_promocao extends JFrame {
 		lblTempoSessao.setBounds(1219, 717, 159, 18);
 		contentPane.add(lblTempoSessao);
 		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 10));
 		lblUsernameLogged = new JLabel();
 		lblUsernameLogged.setBounds(1219, 698, 159, 16);
 		contentPane.add(lblUsernameLogged);
 		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 10));
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setBounds(1219, 737, 159, 18);
 		contentPane.add(lblHoraSistema);
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 10));
+		{
+			painelPesquisa = new JPanel();
+			painelPesquisa.setLayout(null);
+			painelPesquisa.setBackground(Color.WHITE);
+			painelPesquisa.setBounds(98, 63, 453, 221);
+			contentPane.add(painelPesquisa);
+			{
+				labelID = new JLabel("ID");
+				labelID.setFont(new Font("Dialog", Font.BOLD, 13));
+				labelID.setBounds(6, 15, 39, 18);
+				painelPesquisa.add(labelID);
+			}
+			{
+				textPesquisaID = new JTextField();
+				textPesquisaID.setColumns(10);
+				textPesquisaID.setBounds(72, 6, 371, 27);
+				painelPesquisa.add(textPesquisaID);
+			}
+			{
+				labelNome = new JLabel("Nome");
+				labelNome.setFont(new Font("Dialog", Font.BOLD, 13));
+				labelNome.setBounds(6, 53, 56, 18);
+				painelPesquisa.add(labelNome);
+			}
+			{
+				textFieldNome = new JTextField();
+				textFieldNome.setColumns(10);
+				textFieldNome.setBounds(72, 44, 371, 27);
+				painelPesquisa.add(textFieldNome);
+			}
+			{
+				checkBoxAtivo = new JCheckBox("Ativa");
+				checkBoxAtivo.setFont(new Font("Dialog", Font.BOLD, 13));
+				checkBoxAtivo.setBackground(Color.WHITE);
+				checkBoxAtivo.setBounds(232, 78, 69, 24);
+				painelPesquisa.add(checkBoxAtivo);
+			}
+			{
+				btPesquisar = new JButton("Pesquisar");
+				btPesquisar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							int id = 0;
+							String nome = null;
+							int ativo = checkBoxAtivo.isSelected()? 1:0;
+							
+							if(!textPesquisaID.getText().isBlank()) {
+								id = Integer.parseInt(textPesquisaID.getText());
+							}
+
+							if(!textFieldNome.getText().isBlank()) {
+								nome = textFieldNome.getText();
+							}
+							
+							List<Promocao> Promocoes = null;
+
+							if ((id != 0) || (nome != null) || (ativo!=0) ) {
+							
+								Promocoes = GestorDeDAO.getGestorDeDAO().pesquisaPromocao(id, nome, ativo);
+							} else  {
+								Promocoes = GestorDeDAO.getGestorDeDAO().getAllPromocoes();
+							}
+
+							PromocaoPesquisaModelTable model = new PromocaoPesquisaModelTable(Promocoes);
+							table.setModel(model);
+							numberRows = table.getRowCount();
+							lblResultados.setText("Resultados: " + numberRows);
+
+						} catch (Exception e1) {
+
+						}
+					}
+				});
+				btPesquisar.setFont(new Font("Dialog", Font.PLAIN, 15));
+				btPesquisar.setBackground(SystemColor.activeCaption);
+				btPesquisar.setBounds(72, 109, 371, 27);
+				painelPesquisa.add(btPesquisar);
+			}
+		}
 	}
 
-	
+
 
 	private void panel_1ContentSetup(JPanel panel_1) {
-		
-		painelPesquisa.setLayout(null);
-		JLabel lblDeProcura = lblDeProcuraSetup();
-		panel_1.add(lblDeProcura);
 
 		textPesquisaIDSetup();
-		panel_1.add(textPesquisaID);
-
-		JLabel lblNome = lblNomeSetup();
-		panel_1.add(lblNome);
 
 		textFieldNomeSetup();
-		panel_1.add(textFieldNome);
-
-		JCheckBox checkBoxAtivo = checkBoxAtivoSetup();
-		panel_1.add(checkBoxAtivo);
-
-
-		JButton botaoPesquisa = botaoPesquisaSetup();
-		panel_1.add(botaoPesquisa);
 	}
 
 
-	private JButton botaoPesquisaSetup() {
-		JButton botaoPesquisa = new JButton("Pesquisar");
-		botaoPesquisa.setBounds(46, 138, 273, 31);
-		botaoPesquisa.setBackground(SystemColor.activeCaption);
-		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoPesquisa.setFocusPainted(false);
-		botaoPesquisa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				try {
-					int id = 0;
-					String nome = null;
-					int ativo = checkBoxAtivo.isSelected()? 1:0;
-					
-					if(!textPesquisaID.getText().isBlank()) {
-						id = Integer.parseInt(textPesquisaID.getText());
-					}
-
-					if(!textFieldNome.getText().isBlank()) {
-						nome = textFieldNome.getText();
-					}
-					
-					List<Promocao> Promocoes = null;
-
-					if ((id != 0) || (nome != null) || (ativo!=0) ) {
-					
-						Promocoes = GestorDeDAO.getGestorDeDAO().pesquisaPromocao(id, nome, ativo);
-					} else  {
-						Promocoes = GestorDeDAO.getGestorDeDAO().getAllPromocoes();
-					}
-
-					PromocaoPesquisaModelTable model = new PromocaoPesquisaModelTable(Promocoes);
-					table.setModel(model);
-					numberRows = table.getRowCount();
-					lblResultados.setText("Resultados: " + numberRows);
-
-				} catch (Exception e1) {
-
-				}
-
-			}
-		});
-		return botaoPesquisa;
-	}
-
-	private JCheckBox checkBoxAtivoSetup() {
-		checkBoxAtivo = new JCheckBox("Ativa");
-		checkBoxAtivo.setBounds(156, 82, 53, 31);
-		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
-		return checkBoxAtivo;
-	}
 
 	private void textFieldNomeSetup() {
-		textFieldNome = new JTextField();
-		textFieldNome.setBounds(46, 50, 273, 20);
-		textFieldNome.setColumns(10);
 	}
 
-	private JLabel lblNomeSetup() {
-		JLabel labelNome = new JLabel("Nome");
-		labelNome.setBounds(6, 48, 31, 23);
-		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		return labelNome;
-	}
 
 	private void textPesquisaIDSetup() {
-		textPesquisaID = new JTextField();
-		textPesquisaID.setBounds(46, 12, 273, 20);
-		textPesquisaID.setColumns(10);
 	}
 
-	private JLabel lblDeProcuraSetup() {
-		JLabel labelID = new JLabel("ID");
-		labelID.setBounds(6, 10, 11, 23);
-		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		return labelID;
-	}
-
-	private JPanel panel_1Setup() {
-		painelPesquisa = new JPanel();
-		painelPesquisa.setBackground(Color.WHITE);
-		painelPesquisa.setForeground(SystemColor.desktop);
-		painelPesquisa.setBounds(99, 71, 344, 177);
-		return painelPesquisa;
-	}
 
 	private JLabel lbFooterSetup() {
 		JLabel lbFooter = new JLabel("");
@@ -411,7 +395,7 @@ public class GUI_gestor_promocao extends JFrame {
 		painelTabela.setBackground(Color.WHITE);
 		painelTabela.setBounds(66, 309, 1279, 369);
 		painelTabela.setFont(font);
-		
+
 		painelTabela.setLayout(null);
 		return painelTabela;
 	}
@@ -454,7 +438,7 @@ public class GUI_gestor_promocao extends JFrame {
 		}
 
 	}
-	
+
 	public JTable getTable() {
 		return table;
 	}
@@ -462,12 +446,12 @@ public class GUI_gestor_promocao extends JFrame {
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
-	
+
 	public void setUsernameLoggedIn(String username) {
 		lblUsernameLogged.setText("Username : " + username);
 
 	}
-	
+
 	public void setLblTempoSessao(Duration temporizador) {
 		lblTempoSessao.setText("Sessao: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
 	}
@@ -476,7 +460,7 @@ public class GUI_gestor_promocao extends JFrame {
 		lblHoraSistema.setText("Data: " + agora);
 
 	}
-	
+
 
 	public JButton getBtVoltarGestorPromocao() {
 		return btVoltarGestorPromocao;

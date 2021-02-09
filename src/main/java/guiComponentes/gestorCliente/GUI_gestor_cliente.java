@@ -147,17 +147,17 @@ public class GUI_gestor_cliente extends JFrame {
 		lblHoraSistema.setBounds(1219, 729, 159, 18);
 		contentPane.add(lblHoraSistema);
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 10));
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setBounds(1219, 709, 159, 18);
 		contentPane.add(lblTempoSessao);
 		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 10));
 		lblUsernameLogged = new JLabel();
 		lblUsernameLogged.setBounds(1219, 690, 159, 18);
 		contentPane.add(lblUsernameLogged);
 		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 10));
 
 		panelUserESessaoSetup();
 		panelUserESessaoContentSetup();
@@ -188,56 +188,40 @@ public class GUI_gestor_cliente extends JFrame {
 
 	private void panelContentSetup() {
 		lblNewLabelIDSetup();
-		painelPesquisa.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("39px"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("400px"),},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("24px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("38px"),}));
-		painelPesquisa.add(labelID, "2, 2, left, center");
+		painelPesquisa.setLayout(null);
+		painelPesquisa.add(labelID);
 
 		textPesquisaIDSetup();
-		painelPesquisa.add(textPesquisaID, "4, 2, fill, top");
+		painelPesquisa.add(textPesquisaID);
 
 		lblNewLabelNIFSetup();
-		painelPesquisa.add(labelNIF, "2, 4, left, center");
+		painelPesquisa.add(labelNIF);
 
 		textPesquisaNIFSetup();
-		painelPesquisa.add(textPesquisaNIF, "4, 4, fill, top");
+		painelPesquisa.add(textPesquisaNIF);
 
 		lblNomeSetup();
-		painelPesquisa.add(labelNome, "2, 6, left, center");
+		painelPesquisa.add(labelNome);
 
 		textFieldNomeSetup();
-		painelPesquisa.add(textFieldNome, "4, 6, fill, top");
+		painelPesquisa.add(textFieldNome);
 
 		lblMoradaSetup();
-		painelPesquisa.add(labelMorada, "2, 8, left, center");
+		painelPesquisa.add(labelMorada);
 
 		textFieldMoradaSetup();
-		painelPesquisa.add(textFieldMorada, "4, 8, fill, top");
+		painelPesquisa.add(textFieldMorada);
 
 		checkBoxAtivoSetup();
-		painelPesquisa.add(checkBoxAtivo, "4, 10, center, top");
+		painelPesquisa.add(checkBoxAtivo);
 
 		botaoPesquisaSetup();
-		painelPesquisa.add(botaoPesquisa, "4, 12, fill, top");
+		painelPesquisa.add(botaoPesquisa);
 	}
 
 	private void botaoPesquisaSetup() {
 		botaoPesquisa = new JButton("Pesquisar");
+		botaoPesquisa.setBounds(72, 181, 371, 27);
 		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoPesquisa.setBackground(SystemColor.activeCaption);
 		botaoPesquisa.addActionListener(new ActionListener() {
@@ -291,48 +275,57 @@ public class GUI_gestor_cliente extends JFrame {
 
 	private void checkBoxAtivoSetup() {
 		checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
-		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
+		checkBoxAtivo.setBounds(234, 150, 69, 24);
+		checkBoxAtivo.setFont(new Font("Dialog", Font.BOLD, 13));
+		checkBoxAtivo.setBackground(Color.WHITE);
 	}
 
 	private void textFieldMoradaSetup() {
 		textFieldMorada = new JTextField();
+		textFieldMorada.setBounds(72, 116, 371, 27);
 		textFieldMorada.setColumns(10);
 	}
 
 	private void lblMoradaSetup() {
 		labelMorada = new JLabel("Morada");
-		labelMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		labelMorada.setBounds(6, 122, 56, 21);
+		labelMorada.setFont(new Font("Dialog", Font.BOLD, 13));
 	}
 
 	private void textFieldNomeSetup() {
 		textFieldNome = new JTextField();
+		textFieldNome.setBounds(72, 78, 371, 27);
 		textFieldNome.setColumns(10);
 	}
 
 	private void lblNomeSetup() {
 		labelNome = new JLabel("Nome");
-		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		labelNome.setBounds(6, 87, 56, 18);
+		labelNome.setFont(new Font("Dialog", Font.BOLD, 13));
 	}
 
 	private void textPesquisaNIFSetup() {
 		textPesquisaNIF = new JTextField();
+		textPesquisaNIF.setBounds(72, 40, 371, 27);
 		textPesquisaNIF.setColumns(10);
 	}
 
 	private void lblNewLabelNIFSetup() {
 		labelNIF = new JLabel("NIF");
-		labelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		labelNIF.setBounds(6, 49, 56, 18);
+		labelNIF.setFont(new Font("Dialog", Font.BOLD, 13));
 	}
 
 	private void textPesquisaIDSetup() {
 		textPesquisaID = new JTextField();
+		textPesquisaID.setBounds(72, 6, 371, 27);
 		textPesquisaID.setColumns(10);
 	}
 
 	private void lblNewLabelIDSetup() {
 		labelID = new JLabel("ID");
-		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		labelID.setBounds(6, 15, 39, 18);
+		labelID.setFont(new Font("Dialog", Font.BOLD, 13));
 	}
 
 	private void panelSetup() {
