@@ -20,6 +20,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+import java.awt.Color;
 
 public class CriarPromocaoDialog extends JDialog {
 
@@ -70,7 +71,7 @@ public class CriarPromocaoDialog extends JDialog {
 	public CriarPromocaoDialog() {
 		setBounds(500, 300, 427, 249);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(SystemColor.inactiveCaption);
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
@@ -117,7 +118,7 @@ public class CriarPromocaoDialog extends JDialog {
 		{
 			JPanel buttonPane = new JPanel();
 			contentPanel.add(buttonPane, "1, 8, 3, 1, fill, top");
-			buttonPane.setBackground(SystemColor.inactiveCaption);
+			buttonPane.setBackground(Color.WHITE);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			{
 				JButton okButton = new JButton("Confirmar");
