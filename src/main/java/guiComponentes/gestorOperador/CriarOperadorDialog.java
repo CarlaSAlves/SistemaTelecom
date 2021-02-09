@@ -24,6 +24,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import guiComponentes.GUI_total;
+import java.awt.Color;
 
 
 public class CriarOperadorDialog extends JDialog {
@@ -82,7 +83,7 @@ public class CriarOperadorDialog extends JDialog {
 	}
 
 	public CriarOperadorDialog() {
-		setBounds(500, 300, 385, 297);
+		setBounds(500, 300, 417, 351);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.text);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -91,68 +92,113 @@ public class CriarOperadorDialog extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JLabel lblNome = new JLabel("Nome");
+<<<<<<< HEAD
 			lblNome.setBounds(15, 29, 34, 18);
 			lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+=======
+			lblNome.setBounds(9, 15, 82, 23);
+			lblNome.setFont(new Font("Dialog", Font.BOLD, 13));
+>>>>>>> e08abd290be096b2ebbb54f61c23ee7c6f8066c0
 			contentPanel.add(lblNome);
 		}
 
 		{
 			JLabel lblNif = new JLabel("NIF");
+<<<<<<< HEAD
 			lblNif.setBounds(15, 55, 20, 18);
 			lblNif.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+=======
+			lblNif.setBounds(9, 49, 82, 23);
+			lblNif.setFont(new Font("Dialog", Font.BOLD, 13));
+>>>>>>> e08abd290be096b2ebbb54f61c23ee7c6f8066c0
 			contentPanel.add(lblNif);
 		}
 
 		{
 			JLabel lblLogin = new JLabel("Login");
+<<<<<<< HEAD
 			lblLogin.setBounds(15, 86, 31, 18);
 			lblLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+=======
+			lblLogin.setBounds(9, 85, 82, 23);
+			lblLogin.setFont(new Font("Dialog", Font.BOLD, 13));
+>>>>>>> e08abd290be096b2ebbb54f61c23ee7c6f8066c0
 			contentPanel.add(lblLogin);
 		}
 
 		{
 			JLabel lblPassword = new JLabel("Password");
+<<<<<<< HEAD
 			lblPassword.setBounds(15, 112, 70, 18);
 			lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+=======
+			lblPassword.setBounds(9, 121, 82, 23);
+			lblPassword.setFont(new Font("Dialog", Font.BOLD, 13));
+>>>>>>> e08abd290be096b2ebbb54f61c23ee7c6f8066c0
 			contentPanel.add(lblPassword);
 		}
 
 		{
 			textFieldNome = new JTextField();
+<<<<<<< HEAD
 			textFieldNome.setBounds(95, 29, 268, 23);
 			textFieldNome.setFont(font);
+=======
+			textFieldNome.setBounds(101, 9, 290, 27);
+			textFieldNome.setFont(new Font("Dialog", Font.PLAIN, 13));
+>>>>>>> e08abd290be096b2ebbb54f61c23ee7c6f8066c0
 			textFieldNome.setColumns(10);
 			contentPanel.add(textFieldNome);
 		}
 
 		{
 			textFieldNIF = new JTextField();
+<<<<<<< HEAD
 			textFieldNIF.setBounds(95, 55, 268, 23);
 			textFieldNIF.setFont(font);
+=======
+			textFieldNIF.setBounds(101, 47, 290, 27);
+			textFieldNIF.setFont(new Font("Dialog", Font.PLAIN, 13));
+>>>>>>> e08abd290be096b2ebbb54f61c23ee7c6f8066c0
 			textFieldNIF.setColumns(10);
 			contentPanel.add(textFieldNIF);
 		}
 
 		{
 			textFieldLogin = new JTextField();
+<<<<<<< HEAD
 			textFieldLogin.setBounds(95, 83, 268, 23);
 			textFieldLogin.setFont(font);
+=======
+			textFieldLogin.setBounds(101, 83, 290, 27);
+			textFieldLogin.setFont(new Font("Dialog", Font.PLAIN, 13));
+>>>>>>> e08abd290be096b2ebbb54f61c23ee7c6f8066c0
 			textFieldLogin.setColumns(10);
 			contentPanel.add(textFieldLogin);
 		}
 
 		{
 			textFieldPassword = new JPasswordField();
+<<<<<<< HEAD
 			textFieldPassword.setBounds(95, 112, 268, 23);
 			textFieldPassword.setFont(font);
+=======
+			textFieldPassword.setBounds(101, 119, 290, 27);
+			textFieldPassword.setFont(new Font("Dialog", Font.PLAIN, 13));
+>>>>>>> e08abd290be096b2ebbb54f61c23ee7c6f8066c0
 			textFieldPassword.setColumns(10);
 			contentPanel.add(textFieldPassword);
 		}
 
 		checkBoxAtivo = new JCheckBox("Ativo");
+<<<<<<< HEAD
 		checkBoxAtivo.setBounds(235, 157, 53, 23);
 		checkBoxAtivo.setSelected(true);
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
+=======
+		checkBoxAtivo.setBounds(209, 153, 102, 23);
+		checkBoxAtivo.setBackground(Color.WHITE);
+>>>>>>> e08abd290be096b2ebbb54f61c23ee7c6f8066c0
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		contentPanel.add(checkBoxAtivo);
 
