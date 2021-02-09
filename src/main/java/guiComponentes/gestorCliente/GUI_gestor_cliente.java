@@ -389,7 +389,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private JLabel lbFooterSetup() {
 		JLabel lbFooter = new JLabel("");
 		lbFooter.setIcon(new ImageIcon(GUI_gestor_cliente.class.getResource("/guiComponentes/img/Altran1.1.png")));
-		lbFooter.setBounds(599, 690, 367, 65);
+		lbFooter.setBounds(599, 690, 214, 65);
 		return lbFooter;
 	}
 

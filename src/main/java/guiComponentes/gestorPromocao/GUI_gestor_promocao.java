@@ -291,8 +291,8 @@ public class GUI_gestor_promocao extends JFrame {
 
 	private JLabel lbFooterSetup() {
 		JLabel lbFooter = new JLabel("");
-		lbFooter.setIcon(new ImageIcon(GUI_gestor_promocao.class.getResource("/guiComponentes/img/footer2.png")));
-		lbFooter.setBounds(599, 802, 367, 59);
+		lbFooter.setIcon(new ImageIcon(GUI_gestor_promocao.class.getResource("/guiComponentes/img/Altran1.1.png")));
+		lbFooter.setBounds(599, 690, 213, 65);
 		return lbFooter;
 	}
 

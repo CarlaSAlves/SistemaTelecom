@@ -45,6 +45,7 @@ import historicos.HistoricoPacoteComercial;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JCheckBox;
+import java.awt.Color;
 
 public class GUI_gestor_pacotes extends JFrame {
 	
@@ -144,20 +145,20 @@ public class GUI_gestor_pacotes extends JFrame {
 		
 		panelUserESessaoSetup();
 		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setBounds(1297, 805, 159, 16);
+		lblUsernameLogged.setBounds(1219, 698, 159, 16);
 		contentPane.add(lblUsernameLogged);
 		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		lblTempoSessao = new JLabel();
-		lblTempoSessao.setBounds(1297, 820, 159, 15);
+		lblTempoSessao.setBounds(1219, 717, 159, 18);
 		contentPane.add(lblTempoSessao);
 		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		lblHoraSistema = new JLabel();
-		lblHoraSistema.setBounds(1297, 835, 159, 16);
+		lblHoraSistema.setBounds(1219, 737, 159, 18);
 		contentPane.add(lblHoraSistema);
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 
 		panelUserESessaoContentSetup();
 		
@@ -205,16 +206,16 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	private JTextArea textAreaDescricao() {
 		JTextArea textAreaDescricao = new JTextArea();
-		textAreaDescricao.setBounds(938, 71, 470, 151);
+		textAreaDescricao.setBounds(878, 71, 443, 151);
 		return textAreaDescricao;
 	}
 
 	private JButton btnNewButtonPesquisarSetup(JCheckBox checkBoxAtivo) {
-		JButton btnNewButtonPesquisar = new JButton("Pesquisar");
-		btnNewButtonPesquisar.setBackground(SystemColor.activeCaption);
-		btnNewButtonPesquisar.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		JButton btPesquisar = new JButton("Pesquisar");
+		btPesquisar.setBackground(SystemColor.activeCaption);
+		btPesquisar.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		
-		btnNewButtonPesquisar.addActionListener(new ActionListener() {
+		btPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				try {
@@ -249,14 +250,14 @@ public class GUI_gestor_pacotes extends JFrame {
 
 			}
 		});
-		return btnNewButtonPesquisar;
+		return btPesquisar;
 	}
 
 	private JCheckBox checkBoxAtivoSetup() {
 		JCheckBox checkBoxAtivo = new JCheckBox("Ativo");
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
 		checkBoxAtivo.setForeground(SystemColor.desktop);
-		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		return checkBoxAtivo;
 	}
 
@@ -266,9 +267,9 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 
 	private JLabel lblNewLabelNomeSetup() {
-		JLabel lblNewLabelNome = new JLabel("Nome");
-		lblNewLabelNome.setFont(new Font("Dubai Light", Font.PLAIN, 14));
-		return lblNewLabelNome;
+		JLabel labelNome = new JLabel("Nome");
+		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		return labelNome;
 	}
 
 	private void textPesquisaIDSetup() {
@@ -277,9 +278,9 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 
 	private JLabel lblNewLabelIDSetup() {
-		JLabel lblNewLabelID = new JLabel("ID");
-		lblNewLabelID.setFont(new Font("Dubai Light", Font.PLAIN, 14));
-		return lblNewLabelID;
+		JLabel labelID = new JLabel("ID");
+		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		return labelID;
 	}
 
 	private JLabel lblCamposPesquisasSetup() {
@@ -290,11 +291,11 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 
 	private JPanel panel_1Setup() {
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(SystemColor.inactiveCaption);
-		panel_1.setBounds(66, 69, 420, 172);
+		JPanel painelPesquisa = new JPanel();
+		painelPesquisa.setBackground(Color.WHITE);
+		painelPesquisa.setBounds(99, 71, 344, 177);
 		
-		panel_1.setLayout(new FormLayout(new ColumnSpec[] {
+		painelPesquisa.setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
@@ -308,18 +309,18 @@ public class GUI_gestor_pacotes extends JFrame {
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
-		return panel_1;
+		return painelPesquisa;
 	}
 
 	private JLabel lbFooterSetup() {
 		JLabel lbFooter = new JLabel("");
-		lbFooter.setIcon(new ImageIcon(GUI_gestor_pacotes.class.getResource("/guiComponentes/img/footer2.png")));
-		lbFooter.setBounds(599, 802, 367, 59);
+		lbFooter.setIcon(new ImageIcon(GUI_gestor_pacotes.class.getResource("/guiComponentes/img/Altran1.1.png")));
+		lbFooter.setBounds(599, 690, 213, 65);
 		return lbFooter;
 	}
 	
 	private void botaoVisualizarHistoricoSetup() {
-		botaoVisualizarHistorico = new JButton("Ver history");
+		botaoVisualizarHistorico = new JButton("Visualizar Historico");
 		botaoVisualizarHistorico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
@@ -349,13 +350,13 @@ public class GUI_gestor_pacotes extends JFrame {
 		});
 		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
-		botaoVisualizarHistorico.setBounds(655, 263, 161, 33);
+		botaoVisualizarHistorico.setBounds(609, 236, 218, 43);
 		botaoVisualizarHistorico.setEnabled(true);
 	}
 
 	private void btVoltarGestorPacotesSetup() {
 		btVoltarGestorPacotes = new JButton("Voltar");
-		btVoltarGestorPacotes.setBounds(76, 806, 119, 32);
+		btVoltarGestorPacotes.setBounds(6, 709, 119, 38);
 		btVoltarGestorPacotes.setFont(font);
 		btVoltarGestorPacotes.setBackground(SystemColor.activeCaption);
 		btVoltarGestorPacotes.setFocusPainted(false);
@@ -363,7 +364,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	private void botaoDesativarPacoteComercialSetup() {
 		botaoDesativarPacoteComercial = new JButton("Desativar Pacote Comercial");
-		botaoDesativarPacoteComercial.setBounds(697, 71, 231, 43);
+		botaoDesativarPacoteComercial.setBounds(609, 71, 218, 43);
 		botaoDesativarPacoteComercial.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoDesativarPacoteComercial.setBackground(SystemColor.activeCaption);
 		botaoDesativarPacoteComercial.setFocusPainted(false);
@@ -408,7 +409,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	private void botaoEditarPacoteComercialSetup() {
 		botaoEditarPacoteComercial = new JButton("Editar Pacote Comercial");
-		botaoEditarPacoteComercial.setBounds(697, 125, 231, 43);
+		botaoEditarPacoteComercial.setBounds(609, 125, 218, 43);
 		botaoEditarPacoteComercial.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoEditarPacoteComercial.setBackground(SystemColor.activeCaption);
 		botaoEditarPacoteComercial.setFocusPainted(false);
@@ -435,8 +436,8 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	private void lblResultadosSetup() {
 		lblResultados = new JLabel("Resultados: ");
-		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-		lblResultados.setBounds(10, 4, 136, 25);
+		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 16));
+		lblResultados.setBounds(33, 6, 136, 25);
 	}
 
 	private void tableSetup() {
@@ -473,22 +474,22 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	private JScrollPane scrollPaneSetup() {
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 33, 1332, 660);
+		scrollPane.setBounds(33, 33, 1224, 330);
 		return scrollPane;
 	}
 
 	private JPanel panelSetup() {
-		JPanel panel = new JPanel();
-		panel.setBackground(SystemColor.inactiveCaption);
-		panel.setBounds(66, 296, 1366, 499);
-		panel.setFont(font);
-		panel.setLayout(null);
-		return panel;
+		JPanel painelTabela = new JPanel();
+		painelTabela.setBackground(Color.WHITE);
+		painelTabela.setBounds(66, 309, 1279, 369);
+		painelTabela.setFont(font);
+		painelTabela.setLayout(null);
+		return painelTabela;
 	}
 
 	private JButton botaoCriarPacotesSetup() {
 		JButton botaoCriarPacotes = new JButton("Criar Pacote Comercial");
-		botaoCriarPacotes.setBounds(697, 179, 231, 43);
+		botaoCriarPacotes.setBounds(609, 179, 218, 43);
 		botaoCriarPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoCriarPacotes.setBackground(SystemColor.activeCaption);
 		botaoCriarPacotes.setFocusPainted(false);
@@ -510,7 +511,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		setFont(font);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
-		contentPane.setBackground(SystemColor.inactiveCaption);
+		contentPane.setBackground(Color.WHITE);
 	}
 
 	public void refreshPacotesTable() {
