@@ -98,12 +98,12 @@ public class GUI_login extends JFrame {
 
 		JPasswordField passwordField = new JPasswordField();
 		passwordField.setBounds(329, 430, 193, 27);
-		passwordField.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		passwordField.setFont(new Font("Dialog", Font.PLAIN, 13));
 		getContentPane().add(passwordField);
 
 		textFieldUser = new JTextField();
 		textFieldUser.setBounds(329, 383, 193, 27);
-		textFieldUser.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		textFieldUser.setFont(new Font("Dialog", Font.PLAIN, 13));
 		getContentPane().add(textFieldUser);
 		textFieldUser.setColumns(10);
 

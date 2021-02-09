@@ -69,8 +69,8 @@ public class CriarClienteDialog extends JDialog {
 			setTitle("Editar Cliente");
 			popularTextFields(clienteAntigo);
 			if (clienteAntigo.isAtivo())
-			checkBoxAtivo.setVisible(false);
-			
+				checkBoxAtivo.setVisible(false);
+
 		}
 	}
 
@@ -96,99 +96,98 @@ public class CriarClienteDialog extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JLabel lblNome = new JLabel("Nome");
-			lblNome.setBounds(9, 33, 31, 23);
-			lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			lblNome.setBounds(9, 11, 82, 27);
+			lblNome.setFont(new Font("Dialog", Font.BOLD, 13));
 			contentPanel.add(lblNome);
 		}
 		{
 			JLabel lblNif = new JLabel("NIF");
-			lblNif.setBounds(9, 61, 19, 23);
-			lblNif.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			lblNif.setBounds(9, 51, 82, 27);
+			lblNif.setFont(new Font("Dialog", Font.BOLD, 13));
 			contentPanel.add(lblNif);
 		}
 		{
 			JLabel lblMorada = new JLabel("Morada");
-			lblMorada.setBounds(9, 91, 82, 23);
-			lblMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			lblMorada.setBounds(9, 89, 82, 27);
+			lblMorada.setFont(new Font("Dialog", Font.BOLD, 13));
 			contentPanel.add(lblMorada);
 		}
 		{
 			JLabel lblLogin = new JLabel("Login");
-			lblLogin.setBounds(9, 121, 29, 23);
-			lblLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			lblLogin.setBounds(9, 125, 82, 27);
+			lblLogin.setFont(new Font("Dialog", Font.BOLD, 13));
 			contentPanel.add(lblLogin);
 		}
 		{
 			textFieldNome = new JTextField();
-			textFieldNome.setBounds(101, 31, 290, 27);
+			textFieldNome.setBounds(101, 11, 290, 27);
 			textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldNome.setColumns(10);
 			contentPanel.add(textFieldNome);
 		}
 		{
 			textFieldNIF = new JTextField();
-			textFieldNIF.setBounds(101, 61, 290, 27);
+			textFieldNIF.setBounds(101, 49, 290, 27);
 			textFieldNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldNIF.setColumns(10);
 			contentPanel.add(textFieldNIF);
 		}
 		{
 			textFieldMorada = new JTextField();
-			textFieldMorada.setBounds(101, 91, 290, 27);
+			textFieldMorada.setBounds(101, 87, 290, 27);
 			textFieldMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldMorada.setColumns(10);
 			contentPanel.add(textFieldMorada);
 		}
 		{
 			textFieldLogin = new JTextField();
-			textFieldLogin.setBounds(101, 121, 290, 27);
+			textFieldLogin.setBounds(101, 125, 290, 27);
 			textFieldLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldLogin.setColumns(10);
 			contentPanel.add(textFieldLogin);
 		}
 		{
 			JLabel lblPassword = new JLabel("Password");
-			lblPassword.setBounds(9, 153, 82, 23);
-			lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			lblPassword.setBounds(9, 163, 82, 27);
+			lblPassword.setFont(new Font("Dialog", Font.BOLD, 13));
 			contentPanel.add(lblPassword);
 		}
 		{
 			textFieldPassword = new JPasswordField();
-			textFieldPassword.setBounds(101, 153, 290, 27);
+			textFieldPassword.setBounds(101, 163, 290, 27);
 			textFieldPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldPassword.setColumns(10);
 			contentPanel.add(textFieldPassword);
 		}
 		{
 			JLabel lblIdpacote = new JLabel("ID Pacote");
-			lblIdpacote.setBounds(9, 183, 82, 23);
-			lblIdpacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			lblIdpacote.setBounds(9, 202, 82, 27);
+			lblIdpacote.setFont(new Font("Dialog", Font.BOLD, 13));
 			contentPanel.add(lblIdpacote);
 		}
 		{
 			textFieldPacote = new JTextField();
-			textFieldPacote.setBounds(101, 183, 290, 29);
+			textFieldPacote.setBounds(101, 201, 290, 29);
 			textFieldPacote.setBackground(SystemColor.textHighlightText);
 			textFieldPacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldPacote.setColumns(10);
 			contentPanel.add(textFieldPacote);
 		}
-				
-						checkBoxAtivo = new JCheckBox("Ativo");
-						checkBoxAtivo.setBounds(244, 350, 53, 27);
-						checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
-						checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
-						contentPanel.add(checkBoxAtivo);
-						
-						JCheckBox chckbxNewCheckBox = new JCheckBox("Ativo");
-						chckbxNewCheckBox.setSelected(true);
-						chckbxNewCheckBox.setBounds(165, 218, 53, 23);
-						chckbxNewCheckBox.setBackground(SystemColor.text);
-						chckbxNewCheckBox.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-						contentPanel.add(chckbxNewCheckBox);
+
+		checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setBounds(244, 350, 53, 27);
+		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
+		checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
+		contentPanel.add(checkBoxAtivo);
+
+		JCheckBox chckbxNewCheckBox = new JCheckBox("Ativo");
+		chckbxNewCheckBox.setBounds(201, 237, 96, 23);
+		chckbxNewCheckBox.setBackground(SystemColor.text);
+		chckbxNewCheckBox.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		contentPanel.add(chckbxNewCheckBox);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBounds(0, 268, 401, 44);
+			buttonPane.setBounds(0, 274, 401, 38);
 			contentPanel.add(buttonPane);
 			buttonPane.setBackground(SystemColor.window);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
