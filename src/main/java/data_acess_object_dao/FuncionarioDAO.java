@@ -25,7 +25,6 @@ import standard_value_object.Role;
 public class FuncionarioDAO {
 
 	private Connection myConn;
-	private Funcionario funcionario = new Funcionario();
 
 	public FuncionarioDAO(Connection connection) throws FileNotFoundException, IOException, SQLException {
 		this.myConn = connection;
@@ -354,27 +353,28 @@ public class FuncionarioDAO {
 
 		try {
 			myStmt = myConn.prepareStatement("INSERT INTO funcionario(nome, nif, login, password, ativo, id_role) "
-					+ "VALUES(?,?,?,?,?,?)");
-			
-			myStmt.setString(1, funcionario.getNome());
-			myStmt.setLong(2, funcionario.getNif());
-			myStmt.setString(3, funcionario.getLogin());
-			myStmt.setString(4, PasswordEncryption.get_SHA_512_SecurePassword(funcionario.getPassword()));
-			myStmt.setBoolean(5, funcionario.isAtivo());
-			myStmt.setInt(6, funcionario.getId_role());
+					+ "VALUES(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
 			myStmt.setString(1, operador.getNome());
 			myStmt.setLong(2, operador.getNif());
 			myStmt.setString(3, operador.getLogin());
 			myStmt.setString(4, operador.getPassword());
 			myStmt.setBoolean(5, operador.isAtivo());
-			myStmt.setInt(6, operador.getId_role());
-
+			myStmt.setInt(6, 2);
 			myStmt.executeUpdate();
+			
+			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
+	            if (generatedKeys.next()) {
+	            	//recuperamos o id do cliente recém-criado e vamos atribui-lo ao objeto cliente enviado como parametro nesta funçao, só para o reaproveitar
+	            	operador.setId((int)generatedKeys.getLong(1));
+	            	operador.setId_role(2);
+	            }
+	            else {
+	                throw new SQLException("Criação de cliente falhou, nenhum ID foi devolvido.");
+	            }
+	        }
 
-			Funcionario operadorCriado = pesquisaOperadorAuxiliarNIF(""+operador.getNif());
-			myStmt = logUpdate(operadorCriado, admin, "Criar Operador");	
-
+			myStmt = logUpdate(operador, admin, "Criar Operador");	
 			myStmt.executeUpdate();	
 
 		}catch(Exception e) {
@@ -392,14 +392,6 @@ public class FuncionarioDAO {
 			myStmt = myConn.prepareStatement("UPDATE `funcionario` SET `nome`=?, `nif`=?, "
 					+ "`login`=?, `password`=?, `ativo`=?, `id_role`=? WHERE  `id`=?");
 
-			myStmt.setString(1, funcionario .getNome());
-			myStmt.setLong(2, funcionario.getNif());
-			myStmt.setString(3, funcionario.getLogin());
-			myStmt.setString(4, PasswordEncryption.get_SHA_512_SecurePassword(funcionario.getPassword()));
-			myStmt.setBoolean(5, funcionario.isAtivo());
-			myStmt.setInt(6, funcionario.getId_role());
-			myStmt.setInt(7, funcionario.getId());
-
 			myStmt.setString(1, operador.getNome());
 			myStmt.setLong(2, operador.getNif());
 			myStmt.setString(3, operador.getLogin());
@@ -407,13 +399,10 @@ public class FuncionarioDAO {
 			myStmt.setBoolean(5, operador.isAtivo());
 			myStmt.setInt(6, operador.getId_role());
 			myStmt.setInt(7, operador.getId());
-
 			myStmt.executeUpdate();
 
 			myStmt = logUpdate(operador, admin, "Editar Operador");	
-
 			myStmt.executeUpdate();
-
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -474,16 +463,12 @@ public class FuncionarioDAO {
 			myRs = myStmt.executeQuery(sql);
 
 			while (myRs.next()) {
-
 				int id_funcionario = myRs.getInt("HistoricoOperador.id_funcionario");
 				String descricao = myRs.getString("HistoricoOperador.descricao");
 				Timestamp timestamp = myRs.getTimestamp("HistoricoOperador.data_registo");
 				java.sql.Date data_registo = new java.sql.Date(timestamp.getTime());
 				String nome = myRs.getString("admin.nome");
-
-
 				HistoricoOperador historico = new HistoricoOperador(id_operador, id_funcionario, descricao, data_registo, nome);
-
 				list.add(historico);
 			}
 
@@ -495,7 +480,6 @@ public class FuncionarioDAO {
 	}
 
 	private Funcionario convertRowParaFuncionario(ResultSet myRs) throws SQLException {
-
 		int id = myRs.getInt("id");
 		String nome = myRs.getString("nome");
 		long nif = myRs.getInt("nif");
