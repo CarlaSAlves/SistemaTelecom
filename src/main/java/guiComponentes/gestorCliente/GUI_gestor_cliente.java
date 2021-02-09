@@ -165,6 +165,10 @@ public class GUI_gestor_cliente extends JFrame {
 
 
 	}
+	
+	public JTable getTable() {
+		return table;
+	}
 
 	private void panelUserESessaoContentSetup() {
 		lblUsernameLoggedSetup();
@@ -395,6 +399,14 @@ public class GUI_gestor_cliente extends JFrame {
 		btVoltarGestorCliente.setFont(font);
 		btVoltarGestorCliente.setBackground(SystemColor.activeCaption);
 		btVoltarGestorCliente.setFocusPainted(false);
+		btVoltarGestorCliente().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				table.setModel(null);
+				
+			}
+		});
 	}
 
 	private void botaoDesativarClienteSetup() {

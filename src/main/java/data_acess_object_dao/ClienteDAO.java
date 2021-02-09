@@ -237,7 +237,7 @@ public class ClienteDAO {
 	    			myStmt.executeUpdate();	
 	            }
 	            else {
-	                throw new SQLException("Cria��o de cliente falhou, nenhum ID foi devolvido.");
+	                throw new SQLException("Criacao de cliente falhou, nenhum ID foi devolvido.");
 	            }
 	        }
 
@@ -251,10 +251,10 @@ public class ClienteDAO {
 //
 //			myStmt.executeUpdate();	
 
-			Cliente clientCriado = pesquisaClienteAuxiliarNIF(""+cliente.getNif());
-			myStmt = logUpdate(funcionario, clientCriado, "Criar Cliente");	
-
-			myStmt.executeUpdate();	
+//			Cliente clientCriado = pesquisaClienteAuxiliarNIF(""+cliente.getNif());
+//			myStmt = logUpdate(funcionario, clientCriado, "Criar Cliente");	
+//
+//			myStmt.executeUpdate();	
 
 
 		}catch(Exception e) {

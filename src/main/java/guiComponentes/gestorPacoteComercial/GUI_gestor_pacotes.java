@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
+import standard_value_object.Cliente;
+import standard_value_object.Funcionario;
 import standard_value_object.PacoteComercial;
 
 import javax.swing.JTextField;
@@ -33,6 +36,13 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import guiComponentes.GUI_total;
+import guiComponentes.gestorCliente.ClientePesquisaModelTable;
+import guiComponentes.gestorCliente.GUI_gestor_cliente;
+import guiComponentes.gestorCliente.HistoricoClienteDialog;
+import historicos.HistoricoCliente;
+import historicos.HistoricoPacoteComercial;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JCheckBox;
 
@@ -47,6 +57,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	private JLabel lblResultados, lblUsernameLogged;
 	private JButton botaoDesativarPacoteComercial;
 	private JButton botaoEditarPacoteComercial;
+	private JButton botaoVisualizarHistorico;
 	private int indices[];
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JTextField textPesquisaID;
@@ -117,6 +128,9 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		JLabel lbFooter = lbFooterSetup();
 		contentPane.add(lbFooter);
+		
+		botaoVisualizarHistoricoSetup();
+		contentPane.add(botaoVisualizarHistorico);
 		
 		JLabel lblCamposPesquisas = lblCamposPesquisasSetup();
 		contentPane.add(lblCamposPesquisas);
@@ -303,6 +317,41 @@ public class GUI_gestor_pacotes extends JFrame {
 		lbFooter.setBounds(599, 802, 367, 59);
 		return lbFooter;
 	}
+	
+	private void botaoVisualizarHistoricoSetup() {
+		botaoVisualizarHistorico = new JButton("Ver history");
+		botaoVisualizarHistorico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row = table.getSelectedRow();
+
+
+				if (row < 0) {
+					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
+							"Por favor selecione um Cliente", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				PacoteComercial pacoteComercial = (PacoteComercial) table.getValueAt(row, PacoteComercialPesquisaModelTable.OBJECT_COL);
+				List<HistoricoPacoteComercial> list;
+
+				try {
+
+					list = GestorDeDAO.getGestorDeDAO().getHistoricoPacoteComercial(pacoteComercial.getId());
+					HistoricoPacoteComercialDialog dialogHistorico = new HistoricoPacoteComercialDialog();
+					dialogHistorico.preencherTable(pacoteComercial, list);
+					dialogHistorico.setVisible(true);
+
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
+		botaoVisualizarHistorico.setBounds(655, 263, 161, 33);
+		botaoVisualizarHistorico.setEnabled(true);
+	}
 
 	private void btVoltarGestorPacotesSetup() {
 		btVoltarGestorPacotes = new JButton("Voltar");
@@ -340,7 +389,8 @@ public class GUI_gestor_pacotes extends JFrame {
 
 					for(int i = 0; i < indices.length; i++) {
 						PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indices[i], PacoteComercialPesquisaModelTable.OBJECT_COL);
-						GestorDeDAO.getGestorDeDAO().desativarPacoteComercial(pacoteTemp.getId());
+						Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+						GestorDeDAO.getGestorDeDAO().desativarPacoteComercial(pacoteTemp.getId(),admin);
 
 					}
 					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
@@ -398,21 +448,24 @@ public class GUI_gestor_pacotes extends JFrame {
 		table.setForeground(SystemColor.desktop);
 		table.setBackground(UIManager.getColor("CheckBox.light"));
 		table.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		table.setRowHeight(20);
+		table.setRowHeight(1);
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				if (table.getSelectedRowCount()>1) {
 					botaoEditarPacoteComercial.setEnabled(false);
 					botaoDesativarPacoteComercial.setEnabled(true);
+					botaoVisualizarHistorico.setEnabled(false);
 				}
 				else if (table.getSelectedRows().length==1) {
 					botaoEditarPacoteComercial.setEnabled(true);
 					botaoDesativarPacoteComercial.setEnabled(true);
+					botaoVisualizarHistorico.setEnabled(true);
 				}
 				else if (table.getSelectedRowCount()==0)
 				{
 					botaoEditarPacoteComercial.setEnabled(false);
 					botaoDesativarPacoteComercial.setEnabled(false);
+					botaoVisualizarHistorico.setEnabled(false);
 				}
 			}
 		});
@@ -442,7 +495,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		botaoCriarPacotes.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
-				CriarPacotesDialog dialog = new CriarPacotesDialog(GUI_gestor_pacotes.this);
+				CriarPacotesDialog dialog = new CriarPacotesDialog(GUI_gestor_pacotes.this,GUI_total.getUsername());
 				dialog.setVisible(true);
 			}
 		});
