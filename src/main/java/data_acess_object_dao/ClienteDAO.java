@@ -238,7 +238,6 @@ public class ClienteDAO {
 	    			myStmt.executeUpdate();	
 	            }
 	            else {
-<<<<<<< HEAD
 	                throw new SQLException("Criação de cliente falhou, nenhum ID foi devolvido.");
 	            }
 	        }
@@ -246,28 +245,6 @@ public class ClienteDAO {
 			//o nosso objeto cliente já contém o id, por isso podemos usa-lo diretamente na funçao seguinte
 			myStmt = logUpdate(funcionario, cliente, "Criar Cliente");	
 			myStmt.executeUpdate();	
-=======
-	                throw new SQLException("Cria��o de cliente falhou, nenhum ID foi devolvido.");
-	            }
-	        }
-
-//			Cliente clientCriado = pesquisaClienteAuxiliarNIF(""+cliente.getNif());
-//			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
-//
-//			myStmt.setInt(1, funcionario.getId());
-//			myStmt.setInt(2, clientCriado.getId());
-//			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-//			myStmt.setString(4, "Criar Cliente");	
-//
-//			myStmt.executeUpdate();	
-
-			Cliente clientCriado = pesquisaClienteAuxiliarNIF(""+cliente.getNif());
-			myStmt = logUpdate(funcionario, clientCriado, "Criar Cliente");	
-
-			myStmt.executeUpdate();	
-
-
->>>>>>> parent of 94a1fe5 (implementei o historico do Pacote comercial)
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
