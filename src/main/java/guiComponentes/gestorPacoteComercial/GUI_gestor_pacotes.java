@@ -149,6 +149,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		panelUserESessaoSetup();
 		lblUsernameLogged = new JLabel();
+<<<<<<< HEAD
 		lblUsernameLogged.setBounds(1297, 805, 159, 16);
 		lblUsernameLogged.setText("Username:");
 		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 13));
@@ -165,6 +166,22 @@ public class GUI_gestor_pacotes extends JFrame {
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 13));
 		contentPane.add(lblHoraSistema);
+=======
+		lblUsernameLogged.setBounds(1219, 698, 159, 16);
+		contentPane.add(lblUsernameLogged);
+		lblUsernameLogged.setText("Username:");
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		lblTempoSessao = new JLabel();
+		lblTempoSessao.setBounds(1219, 717, 159, 18);
+		contentPane.add(lblTempoSessao);
+		lblTempoSessao.setText("Sessão:");
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		lblHoraSistema = new JLabel();
+		lblHoraSistema.setBounds(1219, 737, 159, 18);
+		contentPane.add(lblHoraSistema);
+		lblHoraSistema.setText("Data:");
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+>>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 
 		panelUserESessaoContentSetup();
 	}
@@ -208,17 +225,29 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	private JTextArea textAreaDescricao() {
 		JTextArea textAreaDescricao = new JTextArea();
+<<<<<<< HEAD
 		textAreaDescricao.setBounds(923, 71, 351, 151);
+=======
+		textAreaDescricao.setBounds(878, 71, 443, 151);
+>>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 		return textAreaDescricao;
 	}
 
 	private JButton btnNewButtonPesquisarSetup(JCheckBox checkBoxAtivo) {
+<<<<<<< HEAD
 		JButton btnNewButtonPesquisar = new JButton("Pesquisar");
 		btnNewButtonPesquisar.setBounds(45, 107, 326, 36);
 		btnNewButtonPesquisar.setBackground(SystemColor.activeCaption);
 		btnNewButtonPesquisar.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 
 		btnNewButtonPesquisar.addActionListener(new ActionListener() {
+=======
+		JButton btPesquisar = new JButton("Pesquisar");
+		btPesquisar.setBackground(SystemColor.activeCaption);
+		btPesquisar.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		
+		btPesquisar.addActionListener(new ActionListener() {
+>>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 			public void actionPerformed(ActionEvent arg0) {
 
 				try {
@@ -255,7 +284,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 			}
 		});
-		return btnNewButtonPesquisar;
+		return btPesquisar;
 	}
 
 	private JCheckBox checkBoxAtivoSetup() {
@@ -274,10 +303,16 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 
 	private JLabel lblNewLabelNomeSetup() {
+<<<<<<< HEAD
 		JLabel lblNewLabelNome = new JLabel("Nome");
 		lblNewLabelNome.setBounds(7, 44, 31, 23);
 		lblNewLabelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		return lblNewLabelNome;
+=======
+		JLabel labelNome = new JLabel("Nome");
+		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		return labelNome;
+>>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 	}
 
 	private void textPesquisaIDSetup() {
@@ -287,10 +322,16 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 
 	private JLabel lblNewLabelIDSetup() {
+<<<<<<< HEAD
 		JLabel lblNewLabelID = new JLabel("ID");
 		lblNewLabelID.setBounds(7, 9, 11, 23);
 		lblNewLabelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		return lblNewLabelID;
+=======
+		JLabel labelID = new JLabel("ID");
+		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		return labelID;
+>>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 	}
 
 	private JLabel lblCamposPesquisasSetup() {
@@ -301,14 +342,37 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 
 	private JPanel panel_1Setup() {
+<<<<<<< HEAD
 		panel_2 = new JPanel();
 		panel_2.setBackground(Color.WHITE);
 		panel_2.setBounds(115, 90, 420, 172);
 		return panel_2;
+=======
+		JPanel painelPesquisa = new JPanel();
+		painelPesquisa.setBackground(Color.WHITE);
+		painelPesquisa.setBounds(99, 71, 344, 177);
+		
+		painelPesquisa.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		return painelPesquisa;
+>>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 	}
 
 	private JLabel lbFooterSetup() {
 		JLabel lbFooter = new JLabel("");
+<<<<<<< HEAD
 		lbFooter.setIcon(new ImageIcon(
 				GUI_gestor_pacotes.class.getResource("/guiComponentes/img/footer2.png")));
 		lbFooter.setBounds(599, 802, 367, 59);
@@ -318,6 +382,51 @@ public class GUI_gestor_pacotes extends JFrame {
 	private void btVoltarGestorPacotesSetup() {
 		btVoltarGestorPacotes = new JButton("Voltar");
 		btVoltarGestorPacotes.setBounds(6, 709, 110, 38);
+=======
+		lbFooter.setIcon(new ImageIcon(GUI_gestor_pacotes.class.getResource("/guiComponentes/img/Altran1.1.png")));
+		lbFooter.setBounds(599, 690, 213, 65);
+		return lbFooter;
+	}
+	
+	private void botaoVisualizarHistoricoSetup() {
+		botaoVisualizarHistorico = new JButton("Visualizar Historico");
+		botaoVisualizarHistorico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row = table.getSelectedRow();
+
+
+				if (row < 0) {
+					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
+							"Por favor selecione um Cliente", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				PacoteComercial pacoteComercial = (PacoteComercial) table.getValueAt(row, PacoteComercialPesquisaModelTable.OBJECT_COL);
+				List<HistoricoPacoteComercial> list;
+
+				try {
+
+					list = GestorDeDAO.getGestorDeDAO().getHistoricoPacoteComercial(pacoteComercial.getId());
+					HistoricoPacoteComercialDialog dialogHistorico = new HistoricoPacoteComercialDialog();
+					dialogHistorico.preencherTable(pacoteComercial, list);
+					dialogHistorico.setVisible(true);
+
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
+		botaoVisualizarHistorico.setBounds(609, 236, 218, 43);
+		botaoVisualizarHistorico.setEnabled(true);
+	}
+
+	private void btVoltarGestorPacotesSetup() {
+		btVoltarGestorPacotes = new JButton("Voltar");
+		btVoltarGestorPacotes.setBounds(6, 709, 119, 38);
+>>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 		btVoltarGestorPacotes.setFont(font);
 		btVoltarGestorPacotes.setBackground(SystemColor.activeCaption);
 		btVoltarGestorPacotes.setFocusPainted(false);
@@ -325,7 +434,11 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	private void botaoDesativarPacoteComercialSetup() {
 		botaoDesativarPacoteComercial = new JButton("Desativar Pacote Comercial");
+<<<<<<< HEAD
 		botaoDesativarPacoteComercial.setBounds(664, 71, 229, 43);
+=======
+		botaoDesativarPacoteComercial.setBounds(609, 71, 218, 43);
+>>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 		botaoDesativarPacoteComercial.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoDesativarPacoteComercial.setBackground(SystemColor.activeCaption);
 		botaoDesativarPacoteComercial.setFocusPainted(false);
@@ -370,7 +483,11 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	private void botaoEditarPacoteComercialSetup() {
 		botaoEditarPacoteComercial = new JButton("Editar Pacote Comercial");
+<<<<<<< HEAD
 		botaoEditarPacoteComercial.setBounds(664, 125, 229, 43);
+=======
+		botaoEditarPacoteComercial.setBounds(609, 125, 218, 43);
+>>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 		botaoEditarPacoteComercial.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoEditarPacoteComercial.setBackground(SystemColor.activeCaption);
 		botaoEditarPacoteComercial.setFocusPainted(false);
@@ -400,7 +517,11 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	private void lblResultadosSetup() {
 		lblResultados = new JLabel("Resultados: ");
+<<<<<<< HEAD
 		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+=======
+		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 16));
+>>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 		lblResultados.setBounds(33, 6, 136, 25);
 	}
 
@@ -433,22 +554,39 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	private JScrollPane scrollPaneSetup() {
 		JScrollPane scrollPane = new JScrollPane();
+<<<<<<< HEAD
 		scrollPane.setBounds(33, 33, 1158, 313);
+=======
+		scrollPane.setBounds(33, 33, 1224, 330);
+>>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 		return scrollPane;
 	}
 
 	private JPanel panelSetup() {
+<<<<<<< HEAD
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(80, 309, 1217, 369);
 		panel.setFont(font);
 		panel.setLayout(null);
 		return panel;
+=======
+		JPanel painelTabela = new JPanel();
+		painelTabela.setBackground(Color.WHITE);
+		painelTabela.setBounds(66, 309, 1279, 369);
+		painelTabela.setFont(font);
+		painelTabela.setLayout(null);
+		return painelTabela;
+>>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 	}
 
 	private JButton botaoCriarPacotesSetup() {
 		JButton botaoCriarPacotes = new JButton("Criar Pacote Comercial");
+<<<<<<< HEAD
 		botaoCriarPacotes.setBounds(664, 179, 229, 43);
+=======
+		botaoCriarPacotes.setBounds(609, 179, 218, 43);
+>>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 		botaoCriarPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoCriarPacotes.setBackground(SystemColor.activeCaption);
 		botaoCriarPacotes.setFocusPainted(false);
@@ -471,7 +609,10 @@ public class GUI_gestor_pacotes extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
 		contentPane.setBackground(Color.WHITE);
+<<<<<<< HEAD
 		setResizable(false);
+=======
+>>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 	}
 
 	public void refreshPacotesTable() {

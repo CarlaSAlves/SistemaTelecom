@@ -55,11 +55,11 @@ public class GUI_gestor_cliente extends JFrame {
 	private JLabel lblUsernameLogged;
 	private JButton botaoVisualizarHistorico;
 	private JLabel lblCamposPesquisas;
-	private JPanel panel;
-	private JLabel lblNewLabelID;
-	private JLabel lblNewLabelNIF;
-	private JLabel lblNome;
-	private JLabel lblMorada;
+	private JPanel painelPesquisa;
+	private JLabel labelID;
+	private JLabel labelNIF;
+	private JLabel labelNome;
+	private JLabel labelMorada;
 	private JTextField textPesquisaID;
 	private JTextField textPesquisaNIF;
 	private JTextField textFieldNome;
@@ -142,7 +142,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 		panelSetup();
 		panelContentSetup();
-		contentPane.add(panel);
+		contentPane.add(painelPesquisa);
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setBounds(1219, 729, 159, 18);
 		contentPane.add(lblHoraSistema);
@@ -188,7 +188,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 	private void panelContentSetup() {
 		lblNewLabelIDSetup();
-		panel.setLayout(new FormLayout(new ColumnSpec[] {
+		painelPesquisa.setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("39px"),
 				FormSpecs.RELATED_GAP_COLSPEC,
@@ -206,34 +206,34 @@ public class GUI_gestor_cliente extends JFrame {
 				RowSpec.decode("24px"),
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("38px"),}));
-		panel.add(lblNewLabelID, "2, 2, left, center");
+		painelPesquisa.add(labelID, "2, 2, left, center");
 
 		textPesquisaIDSetup();
-		panel.add(textPesquisaID, "4, 2, fill, top");
+		painelPesquisa.add(textPesquisaID, "4, 2, fill, top");
 
 		lblNewLabelNIFSetup();
-		panel.add(lblNewLabelNIF, "2, 4, left, center");
+		painelPesquisa.add(labelNIF, "2, 4, left, center");
 
 		textPesquisaNIFSetup();
-		panel.add(textPesquisaNIF, "4, 4, fill, top");
+		painelPesquisa.add(textPesquisaNIF, "4, 4, fill, top");
 
 		lblNomeSetup();
-		panel.add(lblNome, "2, 6, left, center");
+		painelPesquisa.add(labelNome, "2, 6, left, center");
 
 		textFieldNomeSetup();
-		panel.add(textFieldNome, "4, 6, fill, top");
+		painelPesquisa.add(textFieldNome, "4, 6, fill, top");
 
 		lblMoradaSetup();
-		panel.add(lblMorada, "2, 8, left, center");
+		painelPesquisa.add(labelMorada, "2, 8, left, center");
 
 		textFieldMoradaSetup();
-		panel.add(textFieldMorada, "4, 8, fill, top");
+		painelPesquisa.add(textFieldMorada, "4, 8, fill, top");
 
 		checkBoxAtivoSetup();
-		panel.add(checkBoxAtivo, "4, 10, center, top");
+		painelPesquisa.add(checkBoxAtivo, "4, 10, center, top");
 
 		botaoPesquisaSetup();
-		panel.add(botaoPesquisa, "4, 12, fill, top");
+		painelPesquisa.add(botaoPesquisa, "4, 12, fill, top");
 	}
 
 	private void botaoPesquisaSetup() {
@@ -301,8 +301,8 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	private void lblMoradaSetup() {
-		lblMorada = new JLabel("Morada");
-		lblMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		labelMorada = new JLabel("Morada");
+		labelMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 
 	private void textFieldNomeSetup() {
@@ -311,8 +311,8 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	private void lblNomeSetup() {
-		lblNome = new JLabel("Nome");
-		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		labelNome = new JLabel("Nome");
+		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 
 	private void textPesquisaNIFSetup() {
@@ -321,8 +321,8 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	private void lblNewLabelNIFSetup() {
-		lblNewLabelNIF = new JLabel("NIF");
-		lblNewLabelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		labelNIF = new JLabel("NIF");
+		labelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 
 	private void textPesquisaIDSetup() {
@@ -331,18 +331,18 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	private void lblNewLabelIDSetup() {
-		lblNewLabelID = new JLabel("ID");
-		lblNewLabelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		labelID = new JLabel("ID");
+		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 
 	private void panelSetup() {
-		panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(98, 63, 453, 221);
+		painelPesquisa = new JPanel();
+		painelPesquisa.setBackground(Color.WHITE);
+		painelPesquisa.setBounds(98, 63, 453, 221);
 	}
 
 	private void lblCamposPesquisasSetup() {
-		lblCamposPesquisas = new JLabel("Campos de Pesquisa");
+		lblCamposPesquisas = new JLabel("Campo de Pesquisa");
 		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
 		lblCamposPesquisas.setBounds(98, 26, 294, 26);
 	}
@@ -386,7 +386,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private JLabel lbFooterSetup() {
 		JLabel lbFooter = new JLabel("");
 		lbFooter.setIcon(new ImageIcon(GUI_gestor_cliente.class.getResource("/guiComponentes/img/Altran1.1.png")));
-		lbFooter.setBounds(599, 690, 367, 65);
+		lbFooter.setBounds(599, 690, 214, 65);
 		return lbFooter;
 	}
 
@@ -515,12 +515,12 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	private JPanel panelDaTableSetup() {
-		JPanel panelDaTable = new JPanel();
-		panelDaTable.setBackground(Color.WHITE);
-		panelDaTable.setBounds(66, 309, 1279, 369);
-		panelDaTable.setFont(font);
-		panelDaTable.setLayout(null);
-		return panelDaTable;
+		JPanel painelTabela = new JPanel();
+		painelTabela.setBackground(Color.WHITE);
+		painelTabela.setBounds(66, 309, 1279, 369);
+		painelTabela.setFont(font);
+		painelTabela.setLayout(null);
+		return painelTabela;
 	}
 
 	private JButton botaoCriarClienteSetup() {

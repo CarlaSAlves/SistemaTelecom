@@ -51,12 +51,12 @@ public class GUI_gestor_operador extends JFrame {
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JLabel lblCamposPesquisas;
 	private JPanel panelPesquisa;
-	private JLabel lblNewLabelID;
+	private JLabel labelID;
 	private JTextField textPesquisaID;
 	private JTextField textPesquisaNIF;
 	private JTextField textFieldNome;
-	private JLabel lblNewLabelNIF;
-	private JLabel lblNome;
+	private JLabel labelNIF;
+	private JLabel labelNome;
 	private JCheckBox checkBoxAtivo;
 	private JButton botaoPesquisa;
 	private JLabel lblUsernameLogged;
@@ -129,19 +129,19 @@ public class GUI_gestor_operador extends JFrame {
 						RowSpec.decode("24px"),
 						FormSpecs.RELATED_GAP_ROWSPEC,
 						RowSpec.decode("38px"),}));
-		panelPesquisa.add(lblNewLabelID, "2, 2, left, center");
+		panelPesquisa.add(labelID, "2, 2, left, center");
 
 		textPesquisaIDSetup();
 		panelPesquisa.add(textPesquisaID, "4, 2, fill, top");
 
 		labelNIFSetup();
-		panelPesquisa.add(lblNewLabelNIF, "2, 4, left, center");
+		panelPesquisa.add(labelNIF, "2, 4, left, center");
 
 		textPesquisaNIFSetup();
 		panelPesquisa.add(textPesquisaNIF, "4, 4, fill, top");
 
 		lblNomeSetup();
-		panelPesquisa.add(lblNome, "2, 6, left, center");
+		panelPesquisa.add(labelNome, "2, 6, left, center");
 
 		textFieldNomeSetup();
 		panelPesquisa.add(textFieldNome, "4, 6, fill, top");
@@ -171,25 +171,25 @@ public class GUI_gestor_operador extends JFrame {
 		botaoVisualizarHistoricoSetup();
 		contentPane.add(botaoVisualizarHistorico);
 		lblTempoSessao = new JLabel();
-		lblTempoSessao.setBounds(1219, 709, 159, 18);
+		lblTempoSessao.setBounds(1213, 717, 159, 18);
 		contentPane.add(lblTempoSessao);
 
 		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 
 		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setBounds(1219, 690, 159, 16);
+		lblUsernameLogged.setBounds(1213, 698, 159, 16);
 		contentPane.add(lblUsernameLogged);
 
 		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 
 		lblHoraSistema = new JLabel();
-		lblHoraSistema.setBounds(1219, 729, 159, 18);
+		lblHoraSistema.setBounds(1213, 737, 159, 18);
 		contentPane.add(lblHoraSistema);
 
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 
 		// tabela
 
@@ -228,7 +228,7 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	private void lblCamposPesquisasSetup() {
-		lblCamposPesquisas = new JLabel("Campos de Pesquisa");
+		lblCamposPesquisas = new JLabel("Campo de Pesquisa");
 		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
 		lblCamposPesquisas.setBounds(98, 26, 294, 26);
 	}
@@ -240,8 +240,8 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	private void labelIDSetup() {
-		lblNewLabelID = new JLabel("ID");
-		lblNewLabelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		labelID = new JLabel("ID");
+		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 	
 	private void textPesquisaIDSetup() {
@@ -250,8 +250,8 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	private void labelNIFSetup() {
-		lblNewLabelNIF = new JLabel("NIF");
-		lblNewLabelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		labelNIF = new JLabel("NIF");
+		labelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 	
 	private void textPesquisaNIFSetup() {
@@ -260,8 +260,8 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	private void lblNomeSetup() {
-		lblNome = new JLabel("Nome");
-		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		labelNome = new JLabel("Nome");
+		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 	
 	private void textFieldNomeSetup() {
@@ -515,18 +515,18 @@ public class GUI_gestor_operador extends JFrame {
 	}
 
 	private JPanel panelDaTableSetup() {
-		JPanel panelDaTable = new JPanel();
-		panelDaTable.setBackground(SystemColor.window);
-		panelDaTable.setBounds(66, 309, 1279, 369);
-		panelDaTable.setFont(font);
-		panelDaTable.setLayout(null);
-		return panelDaTable;
+		JPanel painelTabela = new JPanel();
+		painelTabela.setBackground(SystemColor.window);
+		painelTabela.setBounds(66, 309, 1279, 369);
+		painelTabela.setFont(font);
+		painelTabela.setLayout(null);
+		return painelTabela;
 	}
 	
 	private JLabel lbFooterSetup() {
 		JLabel lbFooter = new JLabel();
 		lbFooter.setIcon(new ImageIcon(GUI_gestor_operador.class.getResource("/guiComponentes/img/Altran1.1.png")));
-		lbFooter.setBounds(599, 690, 367, 65);
+		lbFooter.setBounds(599, 690, 213, 65);
 		return lbFooter;
 	}
 
