@@ -19,8 +19,10 @@ import java.util.Properties;
 import org.junit.Test;
 
 import data_acess_object_dao.ClienteDAO;
+import historicos.HistoricoCliente;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
+import standard_value_object.PacoteCliente;
 
 //correr o script para criar a base de dados antes de correr estes testes
 public class TesteClienteDAO {
@@ -84,10 +86,18 @@ public class TesteClienteDAO {
 	@Test
 	public void testAtribuirPacoteCliente() throws Exception{
 		Cliente cliente = clienteDAO.pesquisaClienteAuxiliarID(1);
-
-		assertEquals(false, clienteDAO.pesquisaClienteAuxiliarID(2).isAtivo());
+		PacoteCliente pacoteCliente = new PacoteCliente();
+		pacoteCliente.setId(3);
+		clienteDAO.atribuirPacoteCliente(pacoteCliente, cliente);
+		
+		assertEquals(3, clienteDAO.pesquisaClienteAuxiliarID(1).getId_pacote_cliente());
 	}
 	
+	@Test
+	public void testGetHistoricoCliente() throws Exception{
+		List<HistoricoCliente> list = clienteDAO.getHistoricoCliente(1);
+		assertNotNull(list);
+	}
 	
 	//estabelece a ligaçao com a base de dados definida no documento sistema_tele.properties
 	private Connection startConnection() throws FileNotFoundException, IOException, SQLException {

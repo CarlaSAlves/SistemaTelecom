@@ -21,11 +21,9 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
-<<<<<<< HEAD
-=======
 
 import guiComponentes.GUI_total;
->>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
+
 import java.awt.Color;
 
 public class CriarPacotesDialog extends JDialog {
@@ -76,7 +74,6 @@ public class CriarPacotesDialog extends JDialog {
 	}
 
 	public CriarPacotesDialog() {
-<<<<<<< HEAD
 		setBounds(500, 300, 414, 276);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
@@ -104,7 +101,7 @@ public class CriarPacotesDialog extends JDialog {
 		}
 		{
 			textFieldNome = new JTextField();
-=======
+			
 		setBounds(500, 300, 474, 261);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(255, 255, 255));
@@ -121,20 +118,18 @@ public class CriarPacotesDialog extends JDialog {
 		{
 			textFieldNome = new JTextField();
 			textFieldNome.setBounds(98, 37, 346, 28);
->>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
+
 			textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldNome.setColumns(10);
 			contentPanel.add(textFieldNome);
 		}
 		{
 			JLabel lblMorada = new JLabel("Descrição");
-<<<<<<< HEAD
 			lblMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblMorada, "2, 4, fill, fill");
 		}
 		{
 			textFieldDescricao = new JTextField();
-=======
 			lblMorada.setBounds(10, 76, 76, 28);
 			lblMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblMorada);
@@ -142,14 +137,12 @@ public class CriarPacotesDialog extends JDialog {
 		{
 			textFieldDescricao = new JTextField();
 			textFieldDescricao.setBounds(98, 76, 346, 28);
->>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
 			textFieldDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldDescricao.setColumns(10);
 			contentPanel.add(textFieldDescricao);
 		}
 
 		checkBoxAtivo = new JCheckBox("Ativo");
-<<<<<<< HEAD
 		checkBoxAtivo.setSelected(true);
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
@@ -159,7 +152,7 @@ public class CriarPacotesDialog extends JDialog {
 			contentPanel.add(buttonPane, "2, 8, 3, 1, fill, fill");
 			buttonPane.setBackground(Color.WHITE);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-=======
+
 		checkBoxAtivo.setBounds(174, 130, 50, 23);
 		checkBoxAtivo.setSelected(true);
 		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
@@ -171,7 +164,7 @@ public class CriarPacotesDialog extends JDialog {
 			contentPanel.add(painelConfirmacao);
 			painelConfirmacao.setBackground(Color.WHITE);
 			painelConfirmacao.setLayout(new FlowLayout(FlowLayout.RIGHT));
->>>>>>> 2e1289ca5ed6113f1673d09b52a3e42019c0f522
+
 			{
 				JButton okButton = new JButton("Confirmar");
 				okButton.setForeground(SystemColor.activeCaptionText);

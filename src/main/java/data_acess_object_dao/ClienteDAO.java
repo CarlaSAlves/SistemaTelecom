@@ -275,7 +275,7 @@ public class ClienteDAO {
 	}
 
 	@SuppressWarnings("resource")
-	public int desativarCliente(int id, Funcionario funcionario ) throws SQLException{
+	public void desativarCliente(int id, Funcionario funcionario ) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
 
@@ -293,7 +293,6 @@ public class ClienteDAO {
 		}finally {
 			myStmt.close();
 		}
-		return 1;
 	}
 	
 	public void atribuirPacoteCliente(PacoteCliente pacoteCliente, Cliente cliente) throws Exception {
@@ -313,7 +312,6 @@ public class ClienteDAO {
 
 	public List<HistoricoCliente> getHistoricoCliente(int id_cliente) throws Exception {
 		List<HistoricoCliente> list = new ArrayList<HistoricoCliente>();
-
 		Statement myStmt = null;
 		ResultSet myRs = null;
 
