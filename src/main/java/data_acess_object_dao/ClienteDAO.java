@@ -230,12 +230,12 @@ public class ClienteDAO {
 	            	//recuperamos o id do cliente recém-criado e vamos atribui-lo ao objeto cliente enviado como parametro nesta funçao, só para o reaproveitar
 	            	cliente.setId((int)generatedKeys.getLong(1));
 	            	
-	    			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
-	    			myStmt.setInt(1, funcionario.getId());
-	    			myStmt.setInt(2, cliente.getId());
-	    			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-	    			myStmt.setString(4, "Criar Cliente");	
-	    			myStmt.executeUpdate();	
+//	    			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
+//	    			myStmt.setInt(1, funcionario.getId());
+//	    			myStmt.setInt(2, cliente.getId());
+//	    			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+//	    			myStmt.setString(4, "Criar Cliente");	
+//	    			myStmt.executeUpdate();	
 	            }
 	            else {
 	                throw new SQLException("Criação de cliente falhou, nenhum ID foi devolvido.");
