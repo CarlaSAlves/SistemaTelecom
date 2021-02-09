@@ -121,7 +121,7 @@ public class ClienteDAO {
 		return list;
 	}
 
-	//n�o vai ser necess�rio visto eu ter alterado o m�todo criarCliente
+	//nao vai ser necess�rio visto eu ter alterado o metodo criarCliente para usar o id da entidade recem-criada
 	private Cliente pesquisaClienteAuxiliarNIF(String nif) throws Exception {
 		Cliente cliente = null;
 		PreparedStatement myStmt = null;
@@ -209,7 +209,7 @@ public class ClienteDAO {
 		PreparedStatement myStmt = null;
 
 		try {
-			//Statement.RETURN_GENERATED_KEYS permite ao driver jdbc devolver o id da entidade criada, caso a cria��o seja bem sucedida
+			//Statement.RETURN_GENERATED_KEYS permite ao driver jdbc devolver o id da entidade criada, caso a criaçao seja bem sucedida
 			myStmt = myConn.prepareStatement("INSERT INTO cliente(nome, nif, morada, login, password, ativo, id_pacote_cliente) "
 					+ "VALUES(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			
@@ -226,37 +226,25 @@ public class ClienteDAO {
 			myStmt.executeUpdate();
 			
 			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
-	            if (generatedKeys.next()) { 
+	            if (generatedKeys.next()) {
+	            	//recuperamos o id do cliente recém-criado e vamos atribui-lo ao objeto cliente enviado como parametro nesta funçao, só para o reaproveitar
+	            	cliente.setId((int)generatedKeys.getLong(1));
+	            	
 	    			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
-
 	    			myStmt.setInt(1, funcionario.getId());
-	    			//recuperamos o id do cliente criado e usamo-lo aqui
-	    			myStmt.setInt(2, (int)generatedKeys.getLong(1));
+	    			myStmt.setInt(2, cliente.getId());
 	    			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
 	    			myStmt.setString(4, "Criar Cliente");	
 	    			myStmt.executeUpdate();	
 	            }
 	            else {
-	                throw new SQLException("Cria��o de cliente falhou, nenhum ID foi devolvido.");
+	                throw new SQLException("Criação de cliente falhou, nenhum ID foi devolvido.");
 	            }
 	        }
-
-//			Cliente clientCriado = pesquisaClienteAuxiliarNIF(""+cliente.getNif());
-//			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
-//
-//			myStmt.setInt(1, funcionario.getId());
-//			myStmt.setInt(2, clientCriado.getId());
-//			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-//			myStmt.setString(4, "Criar Cliente");	
-//
-//			myStmt.executeUpdate();	
-
-			Cliente clientCriado = pesquisaClienteAuxiliarNIF(""+cliente.getNif());
-			myStmt = logUpdate(funcionario, clientCriado, "Criar Cliente");	
-
+			
+			//o nosso objeto cliente já contém o id, por isso podemos usa-lo diretamente na funçao seguinte
+			myStmt = logUpdate(funcionario, cliente, "Criar Cliente");	
 			myStmt.executeUpdate();	
-
-
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -280,13 +268,10 @@ public class ClienteDAO {
 			myStmt.setBoolean(6, cliente.isAtivo());
 			myStmt.setInt(7, cliente.getId_pacote_cliente());
 			myStmt.setInt(8, cliente.getId());
-
 			myStmt.executeUpdate();
 
 			myStmt = logUpdate(funcionario, cliente, "Editar Cliente");	
-
 			myStmt.executeUpdate();
-
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -353,18 +338,16 @@ public class ClienteDAO {
 				Timestamp timestamp = myRs.getTimestamp("HistoricoCliente.data_registo");
 				java.sql.Date data_registo = new java.sql.Date(timestamp.getTime());
 				String nome = myRs.getString("admin.nome");
-
-
 				HistoricoCliente historico = new HistoricoCliente(id_cliente, id_funcionario, descricao, data_registo, nome);
-
 				list.add(historico);
 			}
-
-			return list;		
-		}
-		finally {
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
 			close(myStmt, myRs);
 		}
+		return list;
 	}
 
 	private Cliente converteRowParaCliente(ResultSet myRs) throws SQLException {
