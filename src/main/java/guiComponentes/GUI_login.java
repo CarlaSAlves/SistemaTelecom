@@ -25,7 +25,7 @@ public class GUI_login extends JFrame {
 	private JTextField textFieldUser;
 	private JButton btLogin, btnSair;
 	private JLabel labelPass;
-	private JLabel icon;
+
 	private JPanel panel;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 20);
 
