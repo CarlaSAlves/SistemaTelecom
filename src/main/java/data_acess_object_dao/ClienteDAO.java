@@ -146,7 +146,7 @@ public class ClienteDAO {
 		return cliente;
 	}
 
-	private Cliente pesquisaClienteAuxiliarID(int id) throws Exception {
+	public Cliente pesquisaClienteAuxiliarID(int id) throws Exception {
 		Cliente cliente = null;
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
@@ -159,7 +159,6 @@ public class ClienteDAO {
 			while (myRs.next()) {
 				cliente = converteRowParaCliente(myRs);
 			}
-			return cliente;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -205,7 +204,7 @@ public class ClienteDAO {
 	}
 
 	@SuppressWarnings("resource")
-	public void criarCliente(Cliente cliente, Funcionario funcionario) throws Exception {
+	public Cliente criarCliente(Cliente cliente, Funcionario funcionario) throws Exception {
 		PreparedStatement myStmt = null;
 
 		try {
@@ -229,13 +228,6 @@ public class ClienteDAO {
 	            if (generatedKeys.next()) {
 	            	//recuperamos o id do cliente recém-criado e vamos atribui-lo ao objeto cliente enviado como parametro nesta funçao, só para o reaproveitar
 	            	cliente.setId((int)generatedKeys.getLong(1));
-	            	
-//	    			myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
-//	    			myStmt.setInt(1, funcionario.getId());
-//	    			myStmt.setInt(2, cliente.getId());
-//	    			myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-//	    			myStmt.setString(4, "Criar Cliente");	
-//	    			myStmt.executeUpdate();	
 	            }
 	            else {
 	                throw new SQLException("Criação de cliente falhou, nenhum ID foi devolvido.");
@@ -250,10 +242,12 @@ public class ClienteDAO {
 		}finally {
 			myStmt.close();
 		}
+		
+		return cliente;
 	}
 
 	@SuppressWarnings("resource")
-	public void editarCliente(Cliente cliente, Funcionario funcionario) throws Exception {
+	public Cliente editarCliente(Cliente cliente, Funcionario funcionario) throws Exception {
 		PreparedStatement myStmt = null;
 		try {
 
@@ -277,10 +271,11 @@ public class ClienteDAO {
 		}finally {
 			myStmt.close();
 		}
+		return cliente;
 	}
 
 	@SuppressWarnings("resource")
-	public void desativarCliente(int id, Funcionario funcionario ) throws SQLException{
+	public int desativarCliente(int id, Funcionario funcionario ) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
 
@@ -298,7 +293,7 @@ public class ClienteDAO {
 		}finally {
 			myStmt.close();
 		}
-
+		return 1;
 	}
 	
 	public void atribuirPacoteCliente(PacoteCliente pacoteCliente, Cliente cliente) throws Exception {
