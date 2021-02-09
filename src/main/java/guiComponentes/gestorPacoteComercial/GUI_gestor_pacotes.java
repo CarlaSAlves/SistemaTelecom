@@ -132,6 +132,12 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		// Campos de Pesquisa
 
+<<<<<<< HEAD
+=======
+		JLabel lbFooter = lbFooterSetup();
+		contentPane.add(lbFooter);
+		
+>>>>>>> parent of 94a1fe5 (implementei o historico do Pacote comercial)
 		JLabel lblCamposPesquisas = lblCamposPesquisasSetup();
 		contentPane.add(lblCamposPesquisas);
 
@@ -349,9 +355,14 @@ public class GUI_gestor_pacotes extends JFrame {
 						return;
 					}
 
+<<<<<<< HEAD
 					for (int i = 0; i < indices.length; i++) {
 						PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indices[i],
 								PacoteComercialPesquisaModelTable.OBJECT_COL);
+=======
+					for(int i = 0; i < indices.length; i++) {
+						PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indices[i], PacoteComercialPesquisaModelTable.OBJECT_COL);
+>>>>>>> parent of 94a1fe5 (implementei o historico do Pacote comercial)
 						GestorDeDAO.getGestorDeDAO().desativarPacoteComercial(pacoteTemp.getId());
 
 					}
@@ -420,10 +431,20 @@ public class GUI_gestor_pacotes extends JFrame {
 				if (table.getSelectedRowCount() > 1) {
 					botaoEditarPacoteComercial.setEnabled(false);
 					botaoDesativarPacoteComercial.setEnabled(true);
+<<<<<<< HEAD
 				} else if (table.getSelectedRows().length == 1) {
 					botaoEditarPacoteComercial.setEnabled(true);
 					botaoDesativarPacoteComercial.setEnabled(true);
 				} else if (table.getSelectedRowCount() == 0) {
+=======
+				}
+				else if (table.getSelectedRows().length==1) {
+					botaoEditarPacoteComercial.setEnabled(true);
+					botaoDesativarPacoteComercial.setEnabled(true);
+				}
+				else if (table.getSelectedRowCount()==0)
+				{
+>>>>>>> parent of 94a1fe5 (implementei o historico do Pacote comercial)
 					botaoEditarPacoteComercial.setEnabled(false);
 					botaoDesativarPacoteComercial.setEnabled(false);
 				}

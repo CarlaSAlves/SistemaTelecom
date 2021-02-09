@@ -21,7 +21,10 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+<<<<<<< HEAD
 import java.awt.Color;
+=======
+>>>>>>> parent of 94a1fe5 (implementei o historico do Pacote comercial)
 
 public class CriarPacotesDialog extends JDialog {
 

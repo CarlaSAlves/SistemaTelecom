@@ -142,6 +142,7 @@ public class GUI_gestor_promocao extends JFrame {
 
 		JLabel lbFooter = lbFooterSetup();
 		contentPane.add(lbFooter);	
+<<<<<<< HEAD
 		
 		
 		setUpUserSessao();
@@ -149,6 +150,27 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	private void setUpUserSessao() {
+=======
+
+		
+
+		JLabel lblCamposPesquisas = new JLabel("Campos Pesquisa");
+		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
+		lblCamposPesquisas.setBounds(66, 26, 294, 26);
+		contentPane.add(lblCamposPesquisas);
+		
+
+		JTextArea textAreaDescricao = new JTextArea();
+		textAreaDescricao.setBounds(938, 71, 470, 151);
+		contentPane.add(textAreaDescricao);
+
+		JPanel panel_1 = panel_1Setup();
+		panel_1ContentSetup(panel_1);
+		contentPane.add(panel_1);
+	
+		panelUserESessaoSetup();
+		panelUserESessaoContentSetup();
+>>>>>>> parent of 94a1fe5 (implementei o historico do Pacote comercial)
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setBounds(1297, 820, 159, 15);	
 		lblTempoSessao.setText("Sessão:");
@@ -191,7 +213,26 @@ public class GUI_gestor_promocao extends JFrame {
 		return panel;
 	}
 
+<<<<<<< HEAD
 	
+=======
+	private void panelUserESessaoContentSetup() {
+		lblUsernameLoggedSetup();
+
+		lblTempoSessaoSetup();
+
+		lblHoraSistemaSetup();
+	}
+
+	private void lblHoraSistemaSetup() {
+	}
+
+	private void lblTempoSessaoSetup() {
+	}
+
+	private void lblUsernameLoggedSetup() {
+	}
+>>>>>>> parent of 94a1fe5 (implementei o historico do Pacote comercial)
 
 	private void panel_1ContentSetup(JPanel panel_1) {
 		JLabel lblDeProcura = lblDeProcuraSetup();
@@ -214,6 +255,11 @@ public class GUI_gestor_promocao extends JFrame {
 		panel_1.add(botaoPesquisa, "4, 9");
 	}
 
+<<<<<<< HEAD
+=======
+	private void panelUserESessaoSetup() {
+	}
+>>>>>>> parent of 94a1fe5 (implementei o historico do Pacote comercial)
 
 	private JButton botaoPesquisaSetup() {
 		JButton botaoPesquisa = new JButton("Pesquisar");

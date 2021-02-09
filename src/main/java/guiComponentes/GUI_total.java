@@ -211,8 +211,11 @@ public class GUI_total extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				homepagePanel.setVisible(true);
 				gestor_clientePanel.setVisible(false);
+<<<<<<< HEAD
 				
 		
+=======
+>>>>>>> parent of 94a1fe5 (implementei o historico do Pacote comercial)
 			}
 		});
 
