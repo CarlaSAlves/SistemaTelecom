@@ -127,7 +127,7 @@ public class GUI_homepage extends JFrame {
 		getContentPane().add(btGerirOperadores);
 
 		btGerirPromocoes = new JButton("Gerir Promoções");
-		btGerirPromocoes.setBounds(239, 395, 286, 60);
+		btGerirPromocoes.setBounds(239, 483, 286, 60);
 		btGerirPromocoes.setToolTipText("Gerir Promoções");
 		btGerirPromocoes.setForeground(Color.DARK_GRAY);
 		btGerirPromocoes.setFont(new Font("SansSerif", Font.PLAIN, 15));
@@ -135,7 +135,7 @@ public class GUI_homepage extends JFrame {
 		getContentPane().add(btGerirPromocoes);
 
 		btGerirPacotes = new JButton("Gerir Pacotes Comerciais");
-		btGerirPacotes.setBounds(239, 489, 286, 60);
+		btGerirPacotes.setBounds(239, 395, 286, 60);
 		btGerirPacotes.setToolTipText("Gestão de Pacotes de Clientes");
 		btGerirPacotes.setForeground(Color.DARK_GRAY);
 		btGerirPacotes.setFont(new Font("SansSerif", Font.PLAIN, 15));

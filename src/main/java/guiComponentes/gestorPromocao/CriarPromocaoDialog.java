@@ -117,10 +117,10 @@ public class CriarPromocaoDialog extends JDialog {
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		contentPanel.add(checkBoxAtivo, "3, 6, center, top");
 		{
-			JPanel buttonPane = new JPanel();
-			contentPanel.add(buttonPane, "1, 8, 3, 1, fill, top");
-			buttonPane.setBackground(Color.WHITE);
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			JPanel painelConfirmacao = new JPanel();
+			contentPanel.add(painelConfirmacao, "1, 8, 3, 1, fill, top");
+			painelConfirmacao.setBackground(Color.WHITE);
+			painelConfirmacao.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			{
 				JButton okButton = new JButton("Confirmar");
 				okButton.setForeground(SystemColor.activeCaptionText);
@@ -134,7 +134,7 @@ public class CriarPromocaoDialog extends JDialog {
 					}
 				});
 				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
+				painelConfirmacao.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
@@ -143,7 +143,7 @@ public class CriarPromocaoDialog extends JDialog {
 				cancelButton.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 				cancelButton.setFocusPainted(false);
 				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				painelConfirmacao.add(cancelButton);
 				cancelButton.addActionListener(new ActionListener() {
 
 					@Override

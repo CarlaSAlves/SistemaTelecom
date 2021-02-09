@@ -117,11 +117,11 @@ public class CriarPacotesDialog extends JDialog {
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		contentPanel.add(checkBoxAtivo);
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setBounds(10, 165, 434, 48);
-			contentPanel.add(buttonPane);
-			buttonPane.setBackground(Color.WHITE);
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			JPanel painelConfirmacao = new JPanel();
+			painelConfirmacao.setBounds(10, 165, 434, 48);
+			contentPanel.add(painelConfirmacao);
+			painelConfirmacao.setBackground(Color.WHITE);
+			painelConfirmacao.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			{
 				JButton okButton = new JButton("Confirmar");
 				okButton.setForeground(SystemColor.activeCaptionText);
@@ -135,7 +135,7 @@ public class CriarPacotesDialog extends JDialog {
 					}
 				});
 				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
+				painelConfirmacao.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
@@ -144,7 +144,7 @@ public class CriarPacotesDialog extends JDialog {
 				cancelButton.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 				cancelButton.setFocusPainted(false);
 				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				painelConfirmacao.add(cancelButton);
 				cancelButton.addActionListener(new ActionListener() {
 
 					@Override
