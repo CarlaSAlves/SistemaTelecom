@@ -354,26 +354,29 @@ public class FuncionarioDAO {
 
 		try {
 			myStmt = myConn.prepareStatement("INSERT INTO funcionario(nome, nif, login, password, ativo, id_role) "
-					+ "VALUES(?,?,?,?,?,?)");
+					+ "VALUES(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+	
+			operador.setPassword(PasswordEncryption.get_SHA_512_SecurePassword(operador.getPassword()));
 			
-			myStmt.setString(1, funcionario.getNome());
-			myStmt.setLong(2, funcionario.getNif());
-			myStmt.setString(3, funcionario.getLogin());
-			myStmt.setString(4, PasswordEncryption.get_SHA_512_SecurePassword(funcionario.getPassword()));
-			myStmt.setBoolean(5, funcionario.isAtivo());
-			myStmt.setInt(6, funcionario.getId_role());
-
 			myStmt.setString(1, operador.getNome());
 			myStmt.setLong(2, operador.getNif());
 			myStmt.setString(3, operador.getLogin());
-			myStmt.setString(4, operador.getPassword());
+			myStmt.setString(4,  operador.getPassword());
 			myStmt.setBoolean(5, operador.isAtivo());
-			myStmt.setInt(6, operador.getId_role());
+			myStmt.setInt(6, 2);
 
 			myStmt.executeUpdate();
 
-			Funcionario operadorCriado = pesquisaOperadorAuxiliarNIF(""+operador.getNif());
-			myStmt = logUpdate(operadorCriado, admin, "Criar Operador");	
+			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
+	            if (generatedKeys.next()) {
+	            	operador.setId((int)generatedKeys.getLong(1));
+	            }
+	            else {
+	                throw new SQLException("Criação de operador falhou, nenhum ID foi devolvido.");
+	            }
+	        }
+			
+			myStmt = logUpdate(operador, admin, "Criar Operador");	
 
 			myStmt.executeUpdate();	
 
@@ -392,18 +395,10 @@ public class FuncionarioDAO {
 			myStmt = myConn.prepareStatement("UPDATE `funcionario` SET `nome`=?, `nif`=?, "
 					+ "`login`=?, `password`=?, `ativo`=?, `id_role`=? WHERE  `id`=?");
 
-			myStmt.setString(1, funcionario .getNome());
-			myStmt.setLong(2, funcionario.getNif());
-			myStmt.setString(3, funcionario.getLogin());
-			myStmt.setString(4, PasswordEncryption.get_SHA_512_SecurePassword(funcionario.getPassword()));
-			myStmt.setBoolean(5, funcionario.isAtivo());
-			myStmt.setInt(6, funcionario.getId_role());
-			myStmt.setInt(7, funcionario.getId());
-
 			myStmt.setString(1, operador.getNome());
 			myStmt.setLong(2, operador.getNif());
 			myStmt.setString(3, operador.getLogin());
-			myStmt.setString(4, operador.getPassword());
+			myStmt.setString(4, PasswordEncryption.get_SHA_512_SecurePassword(operador.getPassword()));
 			myStmt.setBoolean(5, operador.isAtivo());
 			myStmt.setInt(6, operador.getId_role());
 			myStmt.setInt(7, operador.getId());

@@ -236,6 +236,7 @@ public class ClienteDAO {
 			
 			//o nosso objeto cliente já contém o id, por isso podemos usa-lo diretamente na funçao seguinte
 			myStmt = logUpdate(funcionario, cliente, "Criar Cliente");	
+			
 			myStmt.executeUpdate();	
 		}catch(Exception e) {
 			e.printStackTrace();

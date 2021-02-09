@@ -80,20 +80,21 @@ public class PacoteClienteDAO {
 		return pacoteCliente;
 	}
 	
-	//cria um pacote_cliente e devolve o mesmo. Usar em combina�ao com metodo atribuirPacoteCliente do ClienteDao
-	//para criar e atribuir um pacote_cliente a clientes
+	
 	public PacoteCliente criarPacoteCliente(PacoteCliente pacoteCliente) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
-			//vamos criar um pacote_cliente novo e pedir ao driver do mysql que devolva o id da nova entidade criada
+		
+
 			myStmt = myConn.prepareStatement("insert into pacote_cliente(id_pacote_comercial, data_inicio, id_criado_por) "
 					+ "VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+			
 			myStmt.setInt(1, pacoteCliente.getId_pacote_comercial());
 			myStmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
 			myStmt.setInt(3, pacoteCliente.getId_criado_por());
 			myStmt.executeUpdate();
 			
-			//vamos reaproveitar o objecto pacoteCliente no parametro da fun�ao e vamos colocar o id enviado pela base de dados nele
+		
 			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
 	            if (generatedKeys.next()) {
 	                pacoteCliente.setId((int)generatedKeys.getLong(1));

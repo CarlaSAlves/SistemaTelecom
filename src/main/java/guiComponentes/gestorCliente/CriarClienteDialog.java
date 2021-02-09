@@ -22,6 +22,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+import java.awt.Color;
 
 public class CriarClienteDialog extends JDialog {
 
@@ -32,9 +33,9 @@ public class CriarClienteDialog extends JDialog {
 	private JTextField textFieldLogin;
 	private JPasswordField textFieldPassword;
 	private JTextField textFieldPacote;
-	private JCheckBox checkBoxAtivo;
 	private GUI_gestor_cliente clientePesquisaApp;
 	private Cliente clienteAntigo;
+	private JCheckBox checkBoxAtivo;
 	private boolean modoEditar = false;
 	private JTextField textFieldNome;
 	private String username;
@@ -68,9 +69,6 @@ public class CriarClienteDialog extends JDialog {
 		if(modoEditar) {
 			setTitle("Editar Cliente");
 			popularTextFields(clienteAntigo);
-			if (clienteAntigo.isAtivo())
-				checkBoxAtivo.setVisible(false);
-
 		}
 	}
 
@@ -174,17 +172,9 @@ public class CriarClienteDialog extends JDialog {
 			contentPanel.add(textFieldPacote);
 		}
 
-		checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setBounds(244, 350, 53, 27);
-		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
-		checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
-		contentPanel.add(checkBoxAtivo);
+		
 
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Ativo");
-		chckbxNewCheckBox.setBounds(201, 237, 96, 23);
-		chckbxNewCheckBox.setBackground(SystemColor.text);
-		chckbxNewCheckBox.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		contentPanel.add(chckbxNewCheckBox);
+	
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBounds(0, 274, 401, 38);
@@ -216,6 +206,12 @@ public class CriarClienteDialog extends JDialog {
 				cancelButton.setFocusPainted(false);
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
+				
+				checkBoxAtivo = new JCheckBox("Ativo");
+				checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
+				checkBoxAtivo.setBackground(Color.WHITE);
+				checkBoxAtivo.setBounds(220, 237, 86, 23);
+				contentPanel.add(checkBoxAtivo);
 				cancelButton.addActionListener(new ActionListener() {
 
 					@Override

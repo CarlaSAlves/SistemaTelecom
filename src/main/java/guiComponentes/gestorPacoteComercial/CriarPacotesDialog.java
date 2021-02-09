@@ -105,7 +105,7 @@ public class CriarPacotesDialog extends JDialog {
 			contentPanel.add(textFieldDescricao);
 		}
 
-		checkBoxAtivo = new JCheckBox("Ativa");
+		checkBoxAtivo = new JCheckBox("Ativo");
 		checkBoxAtivo.setBounds(208, 83, 86, 23);
 		checkBoxAtivo.setBackground(Color.WHITE);
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));

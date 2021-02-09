@@ -155,17 +155,17 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		panelUserESessaoSetup();
 		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setBounds(1219, 698, 159, 16);
+		lblUsernameLogged.setBounds(1215, 698, 159, 18);
 		contentPane.add(lblUsernameLogged);
 		lblUsernameLogged.setText("Username:");
 		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 10));
 		lblTempoSessao = new JLabel();
-		lblTempoSessao.setBounds(1219, 717, 159, 18);
+		lblTempoSessao.setBounds(1215, 717, 159, 18);
 		contentPane.add(lblTempoSessao);
 		lblTempoSessao.setText("Sessão:");
 		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 10));
 		lblHoraSistema = new JLabel();
-		lblHoraSistema.setBounds(1219, 737, 159, 18);
+		lblHoraSistema.setBounds(1215, 737, 159, 18);
 		contentPane.add(lblHoraSistema);
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 10));

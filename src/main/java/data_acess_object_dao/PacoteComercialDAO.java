@@ -154,11 +154,12 @@ public class PacoteComercialDAO {
 		PreparedStatement myState = null; 
 
 		try {
-			myState = myConn.prepareStatement("UPDATE pacote_comercial SET nome=?, descricao=?WHERE id=?");
+			myState = myConn.prepareStatement("UPDATE pacote_comercial SET nome=?, descricao=? WHERE id=?");
 
 			myState.setString(1, pacote.getNome());
 			myState.setString(2, pacote.getDescricao());
-			myState.setInt(3, pacote.getId());
+			myState.setInt(5, pacote.getId());
+			
 			myState.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

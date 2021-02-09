@@ -147,21 +147,21 @@ public class GUI_gestor_operador extends JFrame {
 		botaoVisualizarHistoricoSetup();
 		contentPane.add(botaoVisualizarHistorico);
 		lblTempoSessao = new JLabel();
-		lblTempoSessao.setBounds(1213, 717, 159, 18);
+		lblTempoSessao.setBounds(1215, 717, 159, 18);
 		contentPane.add(lblTempoSessao);
 
 		lblTempoSessao.setText("Sessão:");
 		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 10));
 
 		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setBounds(1213, 698, 159, 16);
+		lblUsernameLogged.setBounds(1215, 698, 159, 18);
 		contentPane.add(lblUsernameLogged);
 
 		lblUsernameLogged.setText("Username:");
 		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 10));
 
 		lblHoraSistema = new JLabel();
-		lblHoraSistema.setBounds(1213, 737, 159, 18);
+		lblHoraSistema.setBounds(1215, 737, 159, 18);
 		contentPane.add(lblHoraSistema);
 
 		lblHoraSistema.setText("Data:");
@@ -467,18 +467,6 @@ public class GUI_gestor_operador extends JFrame {
 		lblResultados.setBounds(33, 6, 136, 25);
 	}
 
-
-	private void lblHoraSistemaSetup() {
-	}
-
-	private void lblTempoSessaoSetup() {
-	}
-
-	private void lblUsernameLoggedSetup() {
-	}
-
-	private void panelUserESessaoSetup() {
-	}
 
 	private void tableSetup() {
 	}

@@ -52,3 +52,15 @@
 <duração da sessão:	0:32>
 </sessao>
 
+<sessao>
+<username:	admiin>
+<data e hora do login:	09-02-2021 21:39:21>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	09-02-2021 22:02:54>
+<duração da sessão:	2:55>
+</sessao>
+

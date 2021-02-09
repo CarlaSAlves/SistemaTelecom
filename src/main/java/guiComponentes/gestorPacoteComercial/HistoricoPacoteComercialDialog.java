@@ -16,13 +16,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
-import historicos.HistoricoCliente;
 import historicos.HistoricoPacoteComercial;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import standard_value_object.Cliente;
 import standard_value_object.PacoteComercial;
 
 public class HistoricoPacoteComercialDialog extends JDialog {
