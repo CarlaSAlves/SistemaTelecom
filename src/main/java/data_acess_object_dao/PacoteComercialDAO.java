@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
-
+import historicos.HistoricoPacoteComercial;
 import standard_value_object.PacoteComercial;
 
 public class PacoteComercialDAO {
@@ -133,7 +133,7 @@ public class PacoteComercialDAO {
 		PreparedStatement myStmt = null;
 
 		//se se pode criar um pacoteComercial com ativo = false, entao nao faz sentido ter data_inicio definida de forma automatica
-		//pelo mysql. É preciso que seja definida manualmente
+		//pelo mysql. ï¿½ preciso que seja definida manualmente
 		try {
 			myStmt = myConn.prepareStatement("INSERT INTO pacote_comercial(nome, descricao, ativo, data_inicio) VALUES(?,?,?,?)");
 			myStmt.setString(1, pacote.getNome());
@@ -149,7 +149,7 @@ public class PacoteComercialDAO {
 		}
 	}
 
-	// Este metodo serve apenas para editar nome e descriçao. Para Ativar/Desativar, usar os metodos correspondentes
+	// Este metodo serve apenas para editar nome e descriï¿½ao. Para Ativar/Desativar, usar os metodos correspondentes
 	public void editarPacoteComercial(PacoteComercial pacote) throws Exception {
 		PreparedStatement myState = null; 
 
@@ -166,8 +166,44 @@ public class PacoteComercialDAO {
 			myState.close();
 		}
 	}
+	
+	public List<HistoricoPacoteComercial> getHistoricoPacoteComercial(int id_pacote) throws Exception {
+		List<HistoricoPacoteComercial> list = new ArrayList<HistoricoPacoteComercial>();
 
-	//primeiro ve se o pacote com o id inserido esta ativo, e só depois desativa e insere a data atual
+		Statement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			myStmt = myConn.createStatement();
+
+			String sql = "SELECT HistoricoPacoteComercial.id_funcionario, HistoricoPacoteComercial.id_pacote_comercial, HistoricoPacoteComercial.descricao, "
+					+ "HistoricoPacoteComercial.data_registo, admin.nome "
+					+ "FROM funcionario_log_pacote_comercial HistoricoPacoteComercial, funcionario admin WHERE HistoricoPacoteComercial.id_funcionario=admin.id AND HistoricoPacoteComercial.id_pacote_comercial=" + id_pacote;
+
+			myRs = myStmt.executeQuery(sql);
+
+			while (myRs.next()) {
+
+				int id_funcionario = myRs.getInt("HistoricoPacoteComercial.id_funcionario");
+				String descricao = myRs.getString("HistoricoPacoteComercial.descricao");
+				Timestamp timestamp = myRs.getTimestamp("HistoricoPacoteComercial.data_registo");
+				java.sql.Date data_registo = new java.sql.Date(timestamp.getTime());
+				String nome = myRs.getString("admin.nome");
+
+
+				HistoricoPacoteComercial historico = new HistoricoPacoteComercial(id_pacote, id_funcionario, descricao, data_registo, nome);
+
+				list.add(historico);
+			}
+
+			return list;		
+		}
+		finally {
+			close(myStmt, myRs);
+		}
+	}
+
+	//primeiro ve se o pacote com o id inserido esta ativo, e sï¿½ depois desativa e insere a data atual
 	//no campo data_fim
 	public void desativarPacoteComercial (int id) throws Exception {
 		PreparedStatement myState = null; 
@@ -194,7 +230,7 @@ public class PacoteComercialDAO {
 		}
 	}
 	
-	//primeiro ve se o pacote com o id inserido esta inativo, e só depois ativa e insere a data atual
+	//primeiro ve se o pacote com o id inserido esta inativo, e sï¿½ depois ativa e insere a data atual
 	//no campo data_inicio e faz set a data_fim para null
 	public void ativarPacoteComercial (int id) throws Exception {
 		PreparedStatement myState = null; 
@@ -231,7 +267,7 @@ public class PacoteComercialDAO {
 		java.sql.Date data_inicio = null;
 		java.sql.Date data_fim = null;
 		
-		//datas podem ser nulas, é necessário testar nulidade
+		//datas podem ser nulas, ï¿½ necessï¿½rio testar nulidade
 		if (myRs.getTimestamp("data_inicio") != null) {
 			data_inicio = new java.sql.Date(myRs.getTimestamp("data_inicio").getTime());
 		}

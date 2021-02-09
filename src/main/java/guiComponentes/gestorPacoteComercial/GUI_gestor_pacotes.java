@@ -32,7 +32,7 @@ import javax.swing.JTextArea;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
-
+import historicos.HistoricoPacoteComercial;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JCheckBox;
 import java.awt.Color;
@@ -55,6 +55,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	private JLabel lblTempoSessao;
 	private JLabel lblHoraSistema;
 	private JPanel panel_2;
+	private JButton botaoVisualizarHistorico;
 
 
 
@@ -168,7 +169,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 
 	private void panel_1ContentSetup(JPanel panel_1) {
-		panel_2.setLayout(null);
+		//panel_2.setLayout(null);
 		JLabel lblNewLabelID = lblNewLabelIDSetup();
 		panel_1.add(lblNewLabelID);
 

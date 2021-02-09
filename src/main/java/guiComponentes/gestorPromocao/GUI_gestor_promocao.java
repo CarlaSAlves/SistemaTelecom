@@ -142,22 +142,6 @@ public class GUI_gestor_promocao extends JFrame {
 
 		JLabel lbFooter = lbFooterSetup();
 		contentPane.add(lbFooter);	
-
-
-		JLabel lblCamposPesquisas = new JLabel("Campo de Pesquisa");
-		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-		lblCamposPesquisas.setBounds(99, 28, 294, 26);
-		contentPane.add(lblCamposPesquisas);
-		
-
-		JTextArea textAreaDescricao = new JTextArea();
-		textAreaDescricao.setBounds(878, 71, 443, 151);
-		contentPane.add(textAreaDescricao);
-
-		JPanel panel_1 = panel_1Setup();
-		panel_1ContentSetup(panel_1);
-		contentPane.add(panel_1);
-	
 		
 		setUpUserSessao();
 		
@@ -179,11 +163,6 @@ public class GUI_gestor_promocao extends JFrame {
 		contentPane.add(lblHoraSistema);
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-
-		
-		
-		panel.setLayout(null);
-		return panel;
 	}
 
 	
