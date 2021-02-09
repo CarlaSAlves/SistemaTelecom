@@ -120,7 +120,7 @@ public class CriarOperadorDialog extends JDialog {
 		{
 			textFieldNome = new JTextField();
 			textFieldNome.setBounds(95, 29, 268, 23);
-			textFieldNome.setFont(font);
+			textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldNome.setColumns(10);
 			contentPanel.add(textFieldNome);
 		}
@@ -128,7 +128,7 @@ public class CriarOperadorDialog extends JDialog {
 		{
 			textFieldNIF = new JTextField();
 			textFieldNIF.setBounds(95, 55, 268, 23);
-			textFieldNIF.setFont(font);
+			textFieldNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldNIF.setColumns(10);
 			contentPanel.add(textFieldNIF);
 		}
@@ -136,7 +136,7 @@ public class CriarOperadorDialog extends JDialog {
 		{
 			textFieldLogin = new JTextField();
 			textFieldLogin.setBounds(95, 83, 268, 23);
-			textFieldLogin.setFont(font);
+			textFieldLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldLogin.setColumns(10);
 			contentPanel.add(textFieldLogin);
 		}
@@ -144,7 +144,7 @@ public class CriarOperadorDialog extends JDialog {
 		{
 			textFieldPassword = new JPasswordField();
 			textFieldPassword.setBounds(95, 112, 268, 23);
-			textFieldPassword.setFont(font);
+			textFieldPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldPassword.setColumns(10);
 			contentPanel.add(textFieldPassword);
 		}

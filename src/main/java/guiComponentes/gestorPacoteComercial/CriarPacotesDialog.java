@@ -92,7 +92,7 @@ public class CriarPacotesDialog extends JDialog {
 		{
 			textFieldNome = new JTextField();
 			textFieldNome.setBounds(98, 37, 346, 28);
-			textFieldNome.setFont(font);
+			textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldNome.setColumns(10);
 			contentPanel.add(textFieldNome);
 		}
@@ -105,7 +105,7 @@ public class CriarPacotesDialog extends JDialog {
 		{
 			textFieldDescricao = new JTextField();
 			textFieldDescricao.setBounds(98, 76, 346, 28);
-			textFieldDescricao.setFont(font);
+			textFieldDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldDescricao.setColumns(10);
 			contentPanel.add(textFieldDescricao);
 		}

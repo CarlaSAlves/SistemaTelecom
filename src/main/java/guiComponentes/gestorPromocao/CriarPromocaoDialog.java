@@ -94,7 +94,7 @@ public class CriarPromocaoDialog extends JDialog {
 		}
 		{
 			textFieldNome = new JTextField();
-			textFieldNome.setFont(font);
+			textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldNome.setColumns(10);
 			contentPanel.add(textFieldNome, "3, 2, fill, fill");
 		}
@@ -106,7 +106,7 @@ public class CriarPromocaoDialog extends JDialog {
 		}
 		{
 			textFieldDescricao = new JTextField();
-			textFieldDescricao.setFont(font);
+			textFieldDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldDescricao.setColumns(10);
 			contentPanel.add(textFieldDescricao, "3, 4, fill, fill");
 		}

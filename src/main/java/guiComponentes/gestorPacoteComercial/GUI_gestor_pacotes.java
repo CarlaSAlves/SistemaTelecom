@@ -449,7 +449,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		table.setForeground(SystemColor.desktop);
 		table.setBackground(UIManager.getColor("CheckBox.light"));
 		table.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		table.setRowHeight(1);
+		table.setRowHeight(20);
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				if (table.getSelectedRowCount()>1) {
