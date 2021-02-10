@@ -95,7 +95,7 @@ public class TesteClienteDAO {
 	
 	@Test
 	public void testGetHistoricoCliente() throws Exception{
-		assertNotEquals(0, clienteDAO.getHistoricoCliente(1));
+		assertNotEquals(0, clienteDAO.getHistoricoCliente(1).size());
 	}
 	
 	//estabelece a ligaçao com a base de dados definida no documento sistema_tele.properties

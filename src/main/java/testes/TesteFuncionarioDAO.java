@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import data_acess_object_dao.FuncionarioDAO;
 import standard_value_object.Funcionario;
+import standard_value_object.Role;
 
 //correr o script para criar a base de dados antes de correr estes testes
 public class TesteFuncionarioDAO {
@@ -93,6 +94,32 @@ public class TesteFuncionarioDAO {
 		assertTrue(novoNome.equals(operador.getNome()));
 	}
 	
+	@Test
+	public void testAtribuirRoleAFuncionario() throws Exception {
+		//vamos atribuir a role Operador a um admin
+		//funcionario com id 2 é um admin
+		Funcionario admin = funcionarioDAO.pesquisaFuncionarioById(2);
+		funcionarioDAO.atribuirRoleAFuncionario(new Role(2, "Operador"), admin);
+	
+		assertEquals(2, funcionarioDAO.pesquisaFuncionarioById(5).getId_role());
+	}
+	
+	@Test
+	public void testAtivarFuncionario() throws Exception {
+		Funcionario admin = funcionarioDAO.pesquisaFuncionarioById(3);
+		Funcionario funcionarioAtivar = funcionarioDAO.pesquisaFuncionarioById(4);
+		boolean isAtivado = funcionarioAtivar.isAtivo();
+		
+		funcionarioDAO.desativarFuncionario(4, admin);
+	
+		assertEquals(!isAtivado, funcionarioDAO.pesquisaFuncionarioById(4).isAtivo());
+	}
+	
+	@Test
+	public void getHistoricoOperador() throws Exception {
+		assertNotEquals(0, funcionarioDAO.getHistoricoOperador(3).size());
+	}
+
 	//estabelece a ligaçao com a base de dados definida no documento sistema_tele.properties
 	private Connection startConnection() throws FileNotFoundException, IOException, SQLException {
 //		Properties props = new Properties();
