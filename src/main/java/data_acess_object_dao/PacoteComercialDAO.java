@@ -243,28 +243,23 @@ public class PacoteComercialDAO {
 
 	//primeiro ve se o pacote com o id inserido esta ativo, e s� depois desativa e insere a data atual
 	//no campo data_fim
-	public void desativarPacoteComercial (PacoteComercial pacoteComercial, Funcionario funcionario) throws Exception {
+	public void desativarPacoteComercial (int id, Funcionario funcionario) throws Exception {
 		PreparedStatement myState = null; 
-
+		PacoteComercial pacote = pesquisaPacoteComercialAuxiliarID(id);
 		try {
-			myState = myConn.prepareStatement("Select ativo From pacote_comercial Where id =" + pacoteComercial.getId() + ";");
+			myState = myConn.prepareStatement("Select ativo From pacote_comercial Where id =" + id + ";");
 			ResultSet rs = myState.executeQuery();
-			
-			boolean estaAtivo = true;;
-			if(rs.next()) {
-				estaAtivo = rs.getBoolean(1);
-			}
-			
-			if(estaAtivo) {
+
 				myState = myConn.prepareStatement("UPDATE pacote_comercial SET ativo = 0,"
 						+ "data_fim = current_timestamp() WHERE id=?");
-				myState.setInt(1, pacoteComercial.getId());
+				System.out.println("entrei aqui");
+				myState.setInt(1, id);
 				myState.executeUpdate();
 				
-				myState = logUpdate(funcionario, pacoteComercial, "Editar Cliente");	
+				myState = logUpdate(funcionario, pacote, "Desativar Pacote Comercial");	
 				
 				myState.executeUpdate();	
-			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

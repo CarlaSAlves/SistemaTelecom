@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
+import standard_value_object.Funcionario;
 import standard_value_object.PacoteComercial;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -32,6 +34,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import guiComponentes.GUI_total;
 import guiComponentes.gestorCliente.ClientePesquisaModelTable;
 import historicos.HistoricoPacoteComercial;
 import javax.swing.JCheckBox;
@@ -48,7 +51,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	private JLabel lblResultados, lblUsernameLogged;
 	private JButton botaoDesativarPacoteComercial;
 	private JButton botaoEditarPacoteComercial;
-	private int indices[];
+	private int indice;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JLabel lblTempoSessao;
 	private JLabel lblHoraSistema;
@@ -336,9 +339,9 @@ public class GUI_gestor_pacotes extends JFrame {
 		botaoDesativarPacoteComercial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					indices = table.getSelectedRows();
+					indice = table.getSelectedRow();
 
-					if (indices.length < 0) {
+					if (indice < 0) {
 						JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
 								"Por favor selecione um Pacote", "Error",
 								JOptionPane.ERROR_MESSAGE);
@@ -352,11 +355,13 @@ public class GUI_gestor_pacotes extends JFrame {
 						return;
 					}
 
-					for (int i = 0; i < indices.length; i++) {
-						PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indices[i],
+					
+						PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indice,
 								PacoteComercialPesquisaModelTable.OBJECT_COL);
-					}
-					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
+						Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+						GestorDeDAO.getGestorDeDAO().desativarPacoteComercial(pacoteTemp.getId(),admin );
+						
+						JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
 							"Pacotes Desativado com sucesso", "Pacote Desativado",
 							JOptionPane.INFORMATION_MESSAGE);
 
