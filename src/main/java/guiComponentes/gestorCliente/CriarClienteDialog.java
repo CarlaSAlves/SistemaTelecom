@@ -81,7 +81,7 @@ public class CriarClienteDialog extends JDialog {
 
 	public CriarClienteDialog() {
 
-		setBounds(500, 300, 435, 365);
+		setBounds(500, 300, 440, 329);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.window);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -154,26 +154,8 @@ public class CriarClienteDialog extends JDialog {
 			contentPanel.add(textFieldPassword);
 		}
 		{
-			JLabel lblIdpacote = new JLabel("ID Pacote");
-			lblIdpacote.setBounds(9, 202, 82, 27);
-			lblIdpacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			contentPanel.add(lblIdpacote);
-		}
-		{
-			textFieldPacote = new JTextField();
-			textFieldPacote.setBounds(101, 201, 290, 29);
-			textFieldPacote.setBackground(SystemColor.textHighlightText);
-			textFieldPacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			textFieldPacote.setColumns(10);
-			contentPanel.add(textFieldPacote);
-		}
-
-		
-
-	
-		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBounds(0, 274, 419, 41);
+			buttonPane.setBounds(0, 245, 424, 41);
 			contentPanel.add(buttonPane);
 			buttonPane.setBackground(SystemColor.window);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -224,7 +206,7 @@ public class CriarClienteDialog extends JDialog {
 				checkBoxAtivo = new JCheckBox("Ativo");
 				checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				checkBoxAtivo.setBackground(Color.WHITE);
-				checkBoxAtivo.setBounds(220, 237, 86, 23);
+				checkBoxAtivo.setBounds(159, 212, 86, 23);
 				contentPanel.add(checkBoxAtivo);
 				cancelButton.addActionListener(new ActionListener() {
 

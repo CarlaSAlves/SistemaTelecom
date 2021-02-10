@@ -16,11 +16,10 @@ public class ClientePesquisaModelTable extends AbstractTableModel {
 	private static final int LOGIN_COL = 4;
 	private static final int PASSWORD_COL = 5;
 	private static final int ATIVO_COL = 6;
-	private static final int ID_PACOTE_COMERCIAL_COL = 7;
 
 
 	private String[] nomesColunas = { "ID","NIF", "Nome", "Morada",
-			"Login", "Password", "Ativo", "Pacote Comercial ID" };
+			"Login", "Password", "Ativo"};
 
 	private List<Cliente> clientes;
 
@@ -63,8 +62,6 @@ public class ClientePesquisaModelTable extends AbstractTableModel {
 			return cliente.getPassword();
 		case ATIVO_COL:
 			return cliente.isAtivo();
-		case ID_PACOTE_COMERCIAL_COL:
-			return cliente.getId_pacote_cliente();
 		case OBJECT_COL:
 			return cliente;
 		default:

@@ -144,14 +144,17 @@ public class GUI_gestor_cliente extends JFrame {
 		panelSetup();
 		panelContentSetup();
 		contentPane.add(painelPesquisa);
+		
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setBounds(1215, 737, 159, 18);
 		contentPane.add(lblHoraSistema);
+		
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 10));
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setBounds(1215, 717, 159, 18);
 		contentPane.add(lblTempoSessao);
+		
 		lblTempoSessao.setText("Sessão:");
 		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 10));
 		lblUsernameLogged = new JLabel();
@@ -160,31 +163,8 @@ public class GUI_gestor_cliente extends JFrame {
 		lblUsernameLogged.setText("Username:");
 		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 10));
 
-		panelUserESessaoSetup();
-		panelUserESessaoContentSetup();
 
 
-
-	}
-
-	private void panelUserESessaoContentSetup() {
-		lblUsernameLoggedSetup();
-
-		lblTempoSessaoSetup();
-
-		lblHoraSistemaSetup();
-	}
-
-	private void lblHoraSistemaSetup() {
-	}
-
-	private void lblTempoSessaoSetup() {
-	}
-
-	private void lblUsernameLoggedSetup() {
-	}
-
-	private void panelUserESessaoSetup() {
 	}
 
 	private void panelContentSetup() {
