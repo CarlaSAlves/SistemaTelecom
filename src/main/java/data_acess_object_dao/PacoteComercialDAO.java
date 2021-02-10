@@ -11,6 +11,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+
+import historicos.HistoricoOperador;
 import historicos.HistoricoPacoteComercial;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
@@ -150,16 +152,18 @@ public class PacoteComercialDAO {
 	            if (generatedKeys.next()) {
 	            	//recuperamos o id do cliente recém-criado e vamos atribui-lo ao objeto cliente enviado como parametro nesta funçao, só para o reaproveitar
 	            	pacote.setId((int)generatedKeys.getLong(1));
+	            	
 	            }
 	            else {
-	                throw new SQLException("Criação de cliente falhou, nenhum ID foi devolvido.");
+	                throw new SQLException("Criacao do Pacote Comercial falhou, nenhum ID foi devolvido.");
 	            }
 	        }
-			
+			myStmt = logUpdate(funcionario, pacote, "Criar Pacote Comercial");	
+        	myStmt.executeUpdate();	
 			//o nosso objeto cliente já contém o id, por isso podemos usa-lo diretamente na funçao seguinte
-			myStmt = logUpdate(funcionario, pacote, "Criar Cliente");	
 			
-			myStmt.executeUpdate();	
+			
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -176,23 +180,12 @@ public class PacoteComercialDAO {
 
 			myState.setString(1, pacote.getNome());
 			myState.setString(2, pacote.getDescricao());
-			myState.setInt(5, pacote.getId());
+			myState.setInt(3, pacote.getId());
 			
 			myState.executeUpdate();
 			
-			try (ResultSet generatedKeys = myState.getGeneratedKeys()) {
-	            if (generatedKeys.next()) {
-	            	//recuperamos o id do cliente recém-criado e vamos atribui-lo ao objeto cliente enviado como parametro nesta funçao, só para o reaproveitar
-	            	pacote.setId((int)generatedKeys.getLong(1));
-	            }
-	            else {
-	                throw new SQLException("Criação de cliente falhou, nenhum ID foi devolvido.");
-	            }
-	        }
-			
 			//o nosso objeto cliente já contém o id, por isso podemos usa-lo diretamente na funçao seguinte
-			myState = logUpdate(funcionario, pacote, "Editar Cliente");	
-			
+			myState = logUpdate(funcionario, pacote, "Editar Pacote Comercial");	
 			myState.executeUpdate();	
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -239,7 +232,7 @@ public class PacoteComercialDAO {
 	
 	private PreparedStatement logUpdate(Funcionario funcionario, PacoteComercial pacote, String descricao) throws SQLException {
 		PreparedStatement myStmt;
-		myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
+		myStmt = myConn.prepareStatement("insert into funcionario_log_pacote_comercial(id_funcionario, id_pacote_comercial, data_registo, descricao) VALUES (?, ?, ?, ?)");
 
 		myStmt.setInt(1, funcionario.getId());
 		myStmt.setInt(2, pacote.getId());
@@ -250,11 +243,11 @@ public class PacoteComercialDAO {
 
 	//primeiro ve se o pacote com o id inserido esta ativo, e s� depois desativa e insere a data atual
 	//no campo data_fim
-	public void desativarPacoteComercial (int id, Funcionario funcionario) throws Exception {
+	public void desativarPacoteComercial (PacoteComercial pacoteComercial, Funcionario funcionario) throws Exception {
 		PreparedStatement myState = null; 
 
 		try {
-			myState = myConn.prepareStatement("Select ativo From pacote_comercial Where id =" + id + ";");
+			myState = myConn.prepareStatement("Select ativo From pacote_comercial Where id =" + pacoteComercial.getId() + ";");
 			ResultSet rs = myState.executeQuery();
 			
 			boolean estaAtivo = true;;
@@ -265,13 +258,10 @@ public class PacoteComercialDAO {
 			if(estaAtivo) {
 				myState = myConn.prepareStatement("UPDATE pacote_comercial SET ativo = 0,"
 						+ "data_fim = current_timestamp() WHERE id=?");
-				myState.setInt(1, id);
+				myState.setInt(1, pacoteComercial.getId());
 				myState.executeUpdate();
 				
-				
-				myState.setInt(1, id );
-				//o nosso objeto cliente já contém o id, por isso podemos usa-lo diretamente na funçao seguinte
-				myState = logUpdate(funcionario, pesquisaPacoteComercialById(id), "Editar Cliente");	
+				myState = logUpdate(funcionario, pacoteComercial, "Editar Cliente");	
 				
 				myState.executeUpdate();	
 			}
@@ -306,6 +296,42 @@ public class PacoteComercialDAO {
 			e.printStackTrace();
 		} finally {
 			myState.close();
+		}
+	}
+	
+	public List<HistoricoPacoteComercial> getHistoricoOperador(int id_pacoteComercial) throws Exception {
+		List<HistoricoPacoteComercial> list = new ArrayList<HistoricoPacoteComercial>();
+
+		Statement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			myStmt = myConn.createStatement();
+
+			String sql = "SELECT HistoricoPacoteComercial.id_funcionario, HistoricoPacoteComercial.id_operador, HistoricoPacoteComercial.descricao, "
+					+ "HistoricoPacoteComercial.data_registo, admin.nome "
+					+ "FROM funcionario_log_PacoteComercial HistoricoPacoteComercial, funcionario admin WHERE HistoricoPacoteComercial.id_funcionario=admin.id AND HistoricoPacoteComercial.id_operador=" + id_pacoteComercial;
+
+			myRs = myStmt.executeQuery(sql);
+
+			while (myRs.next()) {
+
+				int id_funcionario = myRs.getInt("HistoricoOperador.id_funcionario");
+				String descricao = myRs.getString("HistoricoOperador.descricao");
+				Timestamp timestamp = myRs.getTimestamp("HistoricoOperador.data_registo");
+				java.sql.Date data_registo = new java.sql.Date(timestamp.getTime());
+				String nome = myRs.getString("admin.nome");
+
+
+				HistoricoPacoteComercial historico = new HistoricoPacoteComercial(id_pacoteComercial, id_funcionario, descricao, data_registo, nome);
+
+				list.add(historico);
+			}
+
+			return list;		
+		}
+		finally {
+			close(myStmt, myRs);
 		}
 	}
 	public PacoteComercial pesquisaPacoteComercialAuxiliarID(int id) throws Exception {

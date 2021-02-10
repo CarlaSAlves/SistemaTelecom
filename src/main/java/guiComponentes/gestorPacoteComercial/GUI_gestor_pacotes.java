@@ -135,7 +135,9 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		lblResultadosSetup();
 		panel.add(lblResultados);
-
+		
+		botaoVisualizarHistoricoSetup();
+		contentPane.add(botaoVisualizarHistorico);
 
 
 		// Campo de pesquisa 
@@ -259,6 +261,8 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		panelUserESessaoContentSetup();
 	}
+	
+	
 	
 private void panel_1ContentSetup(JPanel panel_1) {
 		

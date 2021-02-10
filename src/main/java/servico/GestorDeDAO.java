@@ -148,8 +148,8 @@ public class GestorDeDAO {
 	}
 
 
-	public void desativarPacoteComercial(int i, Funcionario funcionario) throws Exception {
-		pacoteComercialDAO.desativarPacoteComercial(i,funcionario);
+	public void desativarPacoteComercial(PacoteComercial pacoteComercial, Funcionario funcionario) throws Exception {
+		pacoteComercialDAO.desativarPacoteComercial(pacoteComercial,funcionario);
 	}
 
 	public List<PacoteComercial> getAllPacotesComerciais() throws Exception{

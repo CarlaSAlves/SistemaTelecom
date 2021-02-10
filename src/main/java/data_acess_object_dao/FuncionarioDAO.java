@@ -404,7 +404,6 @@ public class FuncionarioDAO {
 			myStmt.setInt(7, operador.getId());
 
 			myStmt.executeUpdate();
-
 			myStmt = logUpdate(operador, admin, "Editar Operador");	
 
 			myStmt.executeUpdate();
