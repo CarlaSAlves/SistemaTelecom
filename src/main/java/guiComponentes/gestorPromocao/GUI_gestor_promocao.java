@@ -36,29 +36,18 @@ import java.awt.Color;
 
 
 public class GUI_gestor_promocao extends JFrame {
-
-	private JPanel contentPane;
-	private static final long serialVersionUID = 1L;
-	private JTable table;
-	private JButton btVoltarGestorPromocao;
-	private int numberRows;
-	private JLabel lblResultados, lblUsernameLogged;
-	private JButton botaoDesativarPromocao;
-	private JButton botaoEditarPromocao;
-	private int indices[];
-	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
-	private JLabel lblTempoSessao;
-	private JLabel lblHoraSistema;
-	private JPanel painelPesquisa;
-	private JLabel labelID;
-	private JTextField textPesquisaID;
-	private JLabel labelNome;
-	private JTextField textFieldNome;
-	private JCheckBox checkBoxAtivo;
-	private JButton btPesquisar;
 	
+	private static final long serialVersionUID = 1L;
+	private int numberRows;
+	private int indices[];
+	private JPanel contentPane, painelPesquisa;
+	private JTable table;
+	private JButton btVoltarGestorPromocao, btPesquisar, botaoDesativarPromocao, botaoEditarPromocao;
+	private JLabel lblResultados, lblUsernameLogged, lblTempoSessao, lblHoraSistema, labelID, labelNome;
+	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
+	private JTextField textPesquisaID, textFieldNome;
+	private JCheckBox checkBoxAtivo;
 	private JTextArea textAreaDescricao;
-
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -72,15 +61,11 @@ public class GUI_gestor_promocao extends JFrame {
 			}
 		});
 	}
-
 	public  GUI_gestor_promocao() {
 		contentPaneSetup();
 		inicialize();
 	}
 
-	/**
-	 * 
-	 */
 	protected void inicialize() {
 
 		// look and feel Nimbus 
@@ -108,6 +93,8 @@ public class GUI_gestor_promocao extends JFrame {
 		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
 		lblCamposPesquisas.setBounds(98, 26, 294, 26);
 		contentPane.add(lblCamposPesquisas);
+		
+		painelPesquisa();
 
 		textAreaDescricao = new JTextArea();
 		textAreaDescricao.setBounds(905, 71, 367, 151);
@@ -158,18 +145,27 @@ public class GUI_gestor_promocao extends JFrame {
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setBounds(1215, 717, 159, 18);
 		contentPane.add(lblTempoSessao);
+		
 		lblTempoSessao.setText("Sessão:");
 		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 10));
 		lblUsernameLogged = new JLabel();
 		lblUsernameLogged.setBounds(1215, 698, 159, 18);
 		contentPane.add(lblUsernameLogged);
+		
 		lblUsernameLogged.setText("Username:");
 		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 10));
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setBounds(1215, 737, 159, 18);
 		contentPane.add(lblHoraSistema);
+		
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 10));
+		
+	}
+	/**
+	 * 
+	 */
+	protected void painelPesquisa() {
 		{
 			painelPesquisa = new JPanel();
 			painelPesquisa.setLayout(null);

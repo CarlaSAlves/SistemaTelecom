@@ -24,16 +24,13 @@ import guiComponentes.gestorPacoteComercial.CriarPacotesDialog;
 import java.awt.Color;
 
 public class CriarPromocaoDialog extends JDialog {
-
-	private static final long serialVersionUID = 1L;
-	private final JPanel contentPanel = new JPanel();
-	private JCheckBox checkBoxAtivo;	
 	private GUI_gestor_promocao promocaoPesquisaApp;
+	private static final long serialVersionUID = 1L;
 	private Promocao promocaoAntiga;
 	private boolean modoEditar = false;
-	private JTextField textFieldNome;
-	private JTextField textFieldDescricao;
-	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
+	private final JPanel contentPanel = new JPanel();
+	private JCheckBox checkBoxAtivo;	
+	private JTextField textFieldNome, textFieldDescricao;
 
 	public static void main(String[] args) {
 		try {

@@ -35,11 +35,7 @@ public class CriarPacotesDialog extends JDialog {
 	private GUI_gestor_pacotes pacoteComercialPesquisaApp;
 	private PacoteComercial pacoteComercialAntigo;
 	private boolean modoEditar = false;
-	private JTextField textFieldNome;
-	
-	private JTextField textFieldDescricao;
-	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
-
+	private JTextField textFieldNome, textFieldDescricao;
 
 	public static void main(String[] args) {
 		try {
@@ -129,7 +125,7 @@ public class CriarPacotesDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 
 					public void actionPerformed(ActionEvent arg0) {
-						
+
 						if (textFieldNome.getText().isBlank() || textFieldDescricao.getText().isBlank()) {
 							JOptionPane.showMessageDialog( CriarPacotesDialog.this, "Todos os dados têm de ser preenchidos!");
 							return;
