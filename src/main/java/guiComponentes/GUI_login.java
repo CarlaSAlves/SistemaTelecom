@@ -5,16 +5,25 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import data_acess_object_dao.PasswordEncryption;
+import servico.GestorDeDAO;
+import standard_value_object.Cliente;
+import standard_value_object.Funcionario;
 
 
 
@@ -124,62 +133,78 @@ public class GUI_login extends JFrame {
 		btLogin.setToolTipText("Carregue para fazer login");
 		btLogin.setFocusPainted(false);
 		btLogin.setFont(new Font("SansSerif", Font.PLAIN, 14));
-//		//btLogin.addActionListener(new ActionListener() {
-//			//@Override
-//			//public void actionPerformed(ActionEvent e) {
-//				//login vai usar metodos e entidades que estao nos dao do package V2
-//				//primeiro vamos ver se o utilizador � um cliente
-//				//String login = textFieldUser.getText();
-//				//String pass = passwordField.getSelectedText();
-//				
-//				//if(login.isBlank() || pass.isBlank()) {
-//				//	JOptionPane.showMessageDialog(null, "Campos n�o podem estar vazios.");
-//				//	return;
-//				//}
-//				//
-//				//verifica se � um cliente (entidade cliente vem da package standard_value_objects_v2)
-//				//searchClienteByLoginPass vem dos dao V2
-//				//Cliente cliente = GestorDeDAO.getGestorDeDAO().searchClienteByLoginPass( login, PasswordEncryption.get_SHA_512_SecurePassword(pass) );
-//				//if( cliente != null) {
-//					//linha para abrir a janela do cliente (de preferencia essa janela recebe um cliente no construtor, assim podemos passar a info sobre o cliente atualmente logado)
-//					//TODO: abrir Janela da area cliente e passar o cliente que loga no seu construtor
-//					//
-//					//fecha o menu login
-//					//GUI_login.this.setVisible(false);
-//					//GUI_login.this.dispose();
-//					//return;
-//			//	}
-//				//
-//				//se nao � cliente, � funcion�rio (entidade funcionario vem da package standard_value_objects_v2)
-//				//searchFuncionarioByLoginPass vem dos dao V2
-//				//Funcionario funcionario = GestorDeDAO.getGestorDeDAO().searchFuncionarioByLoginPass( login, PasswordEncryption.get_SHA_512_SecurePassword(pass) );
-//				//if( funcionario != null) {
-//					//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
-//					//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
-//					
-//					//TODO: arranjar algo melhor que um switch case para tratar da abertura da janela correspondente. Tenho que perceber mais sobre patterns
-//				//	switch(funcionario.getId_role()) {
-//						//role 1 = admin
-//					//	case(1):
-//							//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
-//							//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
-//							//
-//							//GUI_login.this.setVisible(false);
-//							//GUI_login.this.dispose();
-//							//return;
-//						//role 2 = operador	
-//					//	case(2):
-//							//linha para abrir a janela do operador (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o operador atualmente logado)
-//							//TODO: abrir Janela da area operador e passar o operador que loga no seu construtor
-//							//
-//							//GUI_login.this.setVisible(false);
-//							//GUI_login.this.dispose();
-//							//return;
-//					//}
-//				//}
-//				//labelConfm.setVisible(true);
-//			//}
-//		//});
+		btLogin.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		btLogin.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//login vai usar metodos e entidades que estao nos dao do package V2
+				//primeiro vamos ver se o utilizador � um cliente
+				String login = textFieldUser.getText();
+				String pass = passwordField.getSelectedText();
+				
+				if(login.isBlank() || pass.isBlank()) {
+					JOptionPane.showMessageDialog(null, "Campos não podem estar vazios.");
+					return;
+				}
+				
+				//verifica se � um cliente (entidade cliente vem da package standard_value_objects_v2)
+				Cliente cliente = null;
+				try {
+					cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLoginPass( login, PasswordEncryption.get_SHA_512_SecurePassword(pass) );
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+				if( cliente != null) {
+					//linha para abrir a janela do cliente (de preferencia essa janela recebe um cliente no construtor, assim podemos passar a info sobre o cliente atualmente logado)
+					//TODO: abrir Janela da area cliente e passar o cliente que loga no seu construtor
+					
+					//fecha o menu login
+					GUI_login.this.setVisible(false);
+					GUI_login.this.dispose();
+					return;
+				}
+				
+				//se nao é  cliente, é  funcion�rio (entidade funcionario vem da package standard_value_objects_v2)
+				Funcionario funcionario = null;
+				try {
+					funcionario = GestorDeDAO.getGestorDeDAO().pesquisarFuncionarioLoginPass( login, PasswordEncryption.get_SHA_512_SecurePassword(pass) );
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				if(funcionario != null) {
+					//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
+					//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
+					
+					//TODO: arranjar algo melhor que um switch case para tratar da abertura da janela correspondente. Tenho que perceber mais sobre patterns
+					switch(funcionario.getId_role()) {
+						//role 1 = admin
+						case(1):
+							//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
+							//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
+							
+							GUI_login.this.setVisible(false);
+							GUI_login.this.dispose();
+							return;
+						//role 2 = operador	
+						case(2):
+							//linha para abrir a janela do operador (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o operador atualmente logado)
+							//TODO: abrir Janela da area operador e passar o operador que loga no seu construtor
+							
+							GUI_login.this.setVisible(false);
+							GUI_login.this.dispose();
+							return;
+					}
+				}
+				labelConfm.setVisible(true);
+			}
+		});
 		getContentPane().add(btLogin);
 				
 				JLabel lblNewLabel = new JLabel();

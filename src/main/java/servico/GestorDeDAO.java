@@ -82,6 +82,10 @@ public class GestorDeDAO {
 		return clienteDAO.pesquisaCliente(id, nif, nome, morada, ativo);
 	}
 
+	//metodo para fazer login como cliente
+		public Cliente pesquisaClienteLoginPass(String login, String password) throws Exception {
+			return clienteDAO.pesquisaClienteLoginPass(login, password);
+		}
 
 	public List<HistoricoCliente> getHistoricoCliente(int id_cliente) throws Exception {
 		return clienteDAO.getHistoricoCliente(id_cliente);
@@ -183,6 +187,5 @@ public class GestorDeDAO {
 	public List<Promocao> pesquisaPromocao(int id, String nome, int ativo) throws Exception{
 		return promocaoDAO.pesquisaPromocao(id, nome, ativo);
 	}
-
 
 }
