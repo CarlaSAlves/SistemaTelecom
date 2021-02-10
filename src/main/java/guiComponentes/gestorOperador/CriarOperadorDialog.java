@@ -24,6 +24,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import guiComponentes.GUI_total;
+import guiComponentes.gestorCliente.CriarClienteDialog;
 import java.awt.Color;
 
 
@@ -93,28 +94,28 @@ public class CriarOperadorDialog extends JDialog {
 		{
 			JLabel lblNome = new JLabel("Nome");
 			lblNome.setBounds(17, 11, 70, 27);
-			lblNome.setFont(new Font("Dialog", Font.BOLD, 13));
+			lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblNome);
 		}
 
 		{
 			JLabel lblNif = new JLabel("NIF");
 			lblNif.setBounds(17, 49, 70, 27);
-			lblNif.setFont(new Font("Dialog", Font.BOLD, 13));
+			lblNif.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblNif);
 		}
 
 		{
 			JLabel lblLogin = new JLabel("Login");
 			lblLogin.setBounds(17, 87, 70, 27);
-			lblLogin.setFont(new Font("Dialog", Font.BOLD, 13));
+			lblLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblLogin);
 		}
 
 		{
 			JLabel lblPassword = new JLabel("Password");
 			lblPassword.setBounds(17, 125, 70, 27);
-			lblPassword.setFont(new Font("Dialog", Font.BOLD, 13));
+			lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblPassword);
 		}
 
@@ -151,6 +152,7 @@ public class CriarOperadorDialog extends JDialog {
 		}
 
 		checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setSelected(true);
 		checkBoxAtivo.setBounds(204, 159, 97, 23);
 		checkBoxAtivo.setBackground(Color.WHITE);
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
@@ -171,6 +173,24 @@ public class CriarOperadorDialog extends JDialog {
 				okButton.setFocusPainted(false);
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						
+						if (textFieldNome.getText().isBlank() || textFieldLogin.getText().isBlank() || textFieldPassword.getPassword().length == 0) {
+							JOptionPane.showMessageDialog( CriarOperadorDialog.this, "Todos os dados têm de ser preenchidos!");
+							return;
+						}
+						if( textFieldNIF.getText().isBlank()) {
+							JOptionPane.showMessageDialog( CriarOperadorDialog.this, "O NIF tem que estar preenchido!");
+							return;
+						}
+						try {
+							Integer.parseInt( textFieldNIF.getText() );
+						}
+						catch( Exception ex ){
+							JOptionPane.showMessageDialog( CriarOperadorDialog.this, "A NIF tem de ser um inteiro!");
+							return;
+						}
+						
+
 						gravarOperador();
 					}
 				});
