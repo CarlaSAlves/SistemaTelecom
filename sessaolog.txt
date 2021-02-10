@@ -64,3 +64,45 @@
 <duração da sessão:	2:55>
 </sessao>
 
+<sessao>
+<username:	>
+<data e hora do login:	10-02-2021 14:01:14>
+<duração da sessão:	0:4>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	10-02-2021 14:01:22>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	10-02-2021 14:01:28>
+<duração da sessão:	0:52>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	10-02-2021 14:59:40>
+<duração da sessão:	0:7>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	10-02-2021 14:59:48>
+<duração da sessão:	0:0>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	10-02-2021 14:59:51>
+<duração da sessão:	0:0>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	10-02-2021 14:59:54>
+<duração da sessão:	0:3>
+</sessao>
+
