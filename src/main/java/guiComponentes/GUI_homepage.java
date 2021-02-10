@@ -4,6 +4,8 @@ package guiComponentes;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.Duration;
 
 import javax.swing.ImageIcon;
@@ -18,23 +20,20 @@ import java.awt.Color;
 
 public class GUI_homepage extends JFrame {
 
-	private JButton btVoltar;
-	private JButton btGerirClientes;
-	private JButton btGerirOperadores;
-	private JButton btGerirPacotes;
-	private JButton btGerirPromocoes;
+	private JButton btVoltar,btGerirClientes,btGerirOperadores,btGerirPacotes,btGerirPromocoes;
+
 	private JPanel panel;
 	private static final long serialVersionUID = 1L;
-	private JLabel lblUsernameLogged;
-	private JLabel lblTempoSessao;
-	private JLabel lblHoraSistema;
+	private JLabel lblUsernameLogged,lblTempoSessao,lblHoraSistema;
+
+	private GUI_total guit;
 
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUI_homepage frame = new GUI_homepage();
+					GUI_homepage frame = new GUI_homepage(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,8 +42,8 @@ public class GUI_homepage extends JFrame {
 		});
 	}
 
-	public GUI_homepage() {
-
+	public GUI_homepage(GUI_total guit) {
+		this.guit = guit;
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 			if ("Nimbus".equals(info.getName())) {
 				try {
@@ -152,32 +151,56 @@ public class GUI_homepage extends JFrame {
 		icon.setBackground(new Color(240, 240, 240));
 		icon.setIcon(new ImageIcon(GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
 		getContentPane().add(icon);
+		
+		btGerirClientes.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				guit.gerirClientes();
+			}
+		});
+
+		btGerirOperadores.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				guit.gerirOperadores();				
+			}
+		});
+
+
+		btGerirPromocoes.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {				
+				guit.gerirPromocoes();
+
+			}
+		});
+
+		btGerirPacotes.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				guit.gerirPacotes();
+			}
+		});
+		
+		btVoltar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				guit.voltarBtHomePage();
+				
+			}
+		});
 	}
 
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
 
-	public JButton getBtVoltar() {
-		return btVoltar;
-	}
-
-
-	public JButton getBtGerirClientes() {
-		return btGerirClientes;
-	}
-
-	public JButton getBtGerirOperadores() {
-		return btGerirOperadores;
-	}
-
-	public JButton getBtGerirPacotes() {
-		return btGerirPacotes;
-	}
-
-	public JButton getBtGerirPromocoes() {
-		return btGerirPromocoes;
-	}
+	
 	public void setUsernameLoggedIn(String username) {
 		lblUsernameLogged.setText("Username: " + username);
 	}
@@ -190,5 +213,5 @@ public class GUI_homepage extends JFrame {
 		lblHoraSistema.setText("Data: " + agora);
 
 	}
+	
 }
-

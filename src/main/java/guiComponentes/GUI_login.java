@@ -141,14 +141,7 @@ public class GUI_login extends JFrame {
 		btLogin.setToolTipText("Carregue para fazer login");
 		btLogin.setFocusPainted(false);
 		btLogin.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		btLogin.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		
 		
 		textFieldUser.addKeyListener(new KeyListener() {
 			

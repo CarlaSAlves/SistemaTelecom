@@ -1,10 +1,8 @@
 package data_acess_object_dao;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,9 +10,9 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.StringJoiner;
 
+import standard_value_object.PacoteCliente;
 import standard_value_object.Promocao;
 
 public class PromocaoDAO {
@@ -156,6 +154,33 @@ public class PromocaoDAO {
 		
 		return list;
 	}
+	
+	public List<Promocao> pesquisarPromocoesPacoteCliente(PacoteCliente pacote) throws Exception {
+		List<Promocao> list = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			myStmt = myConn.prepareStatement("Select p.id, p.nome, p.descricao, p.ativa, p.data_inicio, p.data_fim\r\n" + 
+					"			From pacote_cliente_promoÃ§ao pcp JOIN promocao p ON pcp.id_promocao = p.id\r\n" + 
+					"			Where pcp.id_pacote_cliente =" + pacote.getId() + ";");
+			myRs = myStmt.executeQuery();
+			
+			list = new ArrayList<Promocao>();
+			
+			while (myRs.next()) {
+				Promocao promocao = converteRowParaPromocoes(myRs);
+				list.add(promocao);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(myStmt, myRs);
+		}
+		
+		return list;
+	}
 
 	public void criarPromocao(Promocao promocao) throws Exception {
 		PreparedStatement myStmt = null;
@@ -179,7 +204,7 @@ public class PromocaoDAO {
 		}
 	}
 
-	// Este metodo serve apenas para editar nome e descriçao. Para Ativar/Desativar, usar os metodos correspondentes
+	// Este metodo serve apenas para editar nome e descriï¿½ao. Para Ativar/Desativar, usar os metodos correspondentes
 	public void editarPromocao(Promocao promocao) throws Exception {
 		PreparedStatement myStmt = null;
 		try {
@@ -194,24 +219,8 @@ public class PromocaoDAO {
 			myStmt.close();
 		}
 	}
-
-//	public void desativarPromocao(int id) throws SQLException{
-//		PreparedStatement myStmt = null;
-//		try {
-//			myStmt = myConn.prepareStatement("update promocao SET `ativa`= 0 where id=?");
-//
-//			myStmt.setInt(1, id);
-//
-//			myStmt.executeUpdate();
-//
-//		}catch(Exception e) {
-//
-//		}finally {
-//			myStmt.close();
-//		}
-//	}
 	
-	//primeiro ve se a promocao com o id inserido esta ativa, e só depois desativa e insere a data atual
+	//primeiro ve se a promocao com o id inserido esta ativa, e sï¿½ depois desativa e insere a data atual
 	//no campo data_fim
 	public void desativarPromocao (int id) throws Exception {
 		PreparedStatement myState = null; 
@@ -238,7 +247,7 @@ public class PromocaoDAO {
 		}
 	}
 	
-	//primeiro ve se a promocao com o id inserido esta desativa, e só depois ativa e insere a data atual
+	//primeiro ve se a promocao com o id inserido esta desativa, e sï¿½ depois ativa e insere a data atual
 	//no campo data_inicio e coloca data_fim a nulo
 	public void ativarPromocao (int id) throws Exception {
 		PreparedStatement myState = null; 
@@ -275,7 +284,7 @@ public class PromocaoDAO {
 		java.sql.Date data_inicio = null;
 		java.sql.Date data_fim = null;
 		
-		//datas podem ser nulas, é necessário testar nulidade
+		//datas podem ser nulas, ï¿½ necessï¿½rio testar nulidade
 		if (myRs.getTimestamp("data_inicio") != null) {
 			data_inicio = new java.sql.Date(myRs.getTimestamp("data_inicio").getTime());
 		}
