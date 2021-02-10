@@ -24,19 +24,14 @@ public class CriarClienteDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textFieldNIF;
-	private JTextField textFieldMorada;
-	private JTextField textFieldLogin;
+	private JTextField textFieldNIF, textFieldMorada, textFieldLogin, textFieldPacote, textFieldNome ;
+	private JCheckBox checkBoxAtivo;
 	private JPasswordField textFieldPassword;
-	private JTextField textFieldPacote;
 	private GUI_gestor_cliente clientePesquisaApp;
 	private Cliente clienteAntigo;
-	private JCheckBox checkBoxAtivo;
 	private boolean modoEditar = false;
-	private JTextField textFieldNome;
 	private String username;
 
-	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
 
 
 	public static void main(String[] args) {

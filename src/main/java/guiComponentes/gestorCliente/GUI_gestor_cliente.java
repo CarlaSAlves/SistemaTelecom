@@ -29,14 +29,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-
 import guiComponentes.GUI_total;
 import historicos.HistoricoCliente;
-
-import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JCheckBox;
 import java.awt.Color;
 
@@ -44,33 +38,17 @@ import java.awt.Color;
 public class GUI_gestor_cliente extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JTable table;
-	private JButton btVoltarGestorCliente;
-	private JPanel contentPane;
 	private int numberRows;
-	private JLabel lblResultados;
-	private JButton botaoDesativarCliente;
-	private JButton botaoEditarCliente;
 	private int indice;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
-	private JLabel lblUsernameLogged;
-	private JButton botaoVisualizarHistorico;
-	private JLabel lblCamposPesquisas;
-	private JPanel painelPesquisa;
-	private JLabel labelID;
-	private JLabel labelNIF;
-	private JLabel labelNome;
-	private JLabel labelMorada;
-	private JTextField textPesquisaID;
-	private JTextField textPesquisaNIF;
-	private JTextField textFieldNome;
-	private JTextField textFieldMorada;
+	private JTable table;
+	private JButton btVoltarGestorCliente;
+	private JPanel contentPane, painelPesquisa ;	
+	private JLabel lblResultados, lblUsernameLogged, lblCamposPesquisas, labelID, labelNIF, labelNome, labelMorada, lblTempoSessao, lblHoraSistema ;
+	private JButton botaoDesativarCliente, botaoEditarCliente, botaoVisualizarHistorico, botaoPesquisa;
+	private JTextField textPesquisaID, textPesquisaNIF,textFieldNome,textFieldMorada;
 	private JCheckBox checkBoxAtivo;
-	private JButton botaoPesquisa;
-	private JLabel lblTempoSessao;
-	private JLabel lblHoraSistema;
-
-
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -308,7 +286,7 @@ public class GUI_gestor_cliente extends JFrame {
 		labelID.setBounds(6, 15, 39, 18);
 		labelID.setFont(new Font("Dialog", Font.BOLD, 13));
 	}
-
+	
 	private void panelSetup() {
 		painelPesquisa = new JPanel();
 		painelPesquisa.setBackground(Color.WHITE);
