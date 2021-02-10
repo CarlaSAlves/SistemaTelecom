@@ -33,6 +33,13 @@ public class GUI_login extends JFrame {
 	private JTextField textFieldUser;
 	private JButton btLogin, btnSair;
 	private JLabel labelPass;
+	private JPasswordField passwordField;
+	private JLabel labelConfm;
+	
+	private GUI_total guit;
+	
+
+
 	private JLabel icon;
 	private JPanel panel;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 20);
@@ -41,7 +48,7 @@ public class GUI_login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUI_login frame = new GUI_login();
+					GUI_login frame = new GUI_login(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +57,12 @@ public class GUI_login extends JFrame {
 		});
 	}
 
-	public GUI_login() {
+
+
+	public GUI_login(GUI_total guit) {
+		
+		this.guit = guit;
+		
 		setBackground(Color.WHITE);
 		
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -104,7 +116,7 @@ public class GUI_login extends JFrame {
 		labelPass.setFont(new Font("SansSerif", Font.BOLD, 20));
 		getContentPane().add(labelPass);
 
-		JPasswordField passwordField = new JPasswordField();
+		passwordField = new JPasswordField();
 		passwordField.setBounds(329, 430, 193, 27);
 		passwordField.setFont(new Font("Dialog", Font.PLAIN, 13));
 		getContentPane().add(passwordField);
@@ -115,7 +127,7 @@ public class GUI_login extends JFrame {
 		getContentPane().add(textFieldUser);
 		textFieldUser.setColumns(10);
 
-		JLabel labelConfm = new JLabel("User ou Password incorreta");
+		labelConfm = new JLabel("User ou Password incorreta");
 		labelConfm.setBounds(359, 578, 251, 18);
 		labelConfm.setForeground(new Color(70,74,101));
 		labelConfm.setFont(new Font("SansSerif", Font.PLAIN, 12));
@@ -166,10 +178,6 @@ public class GUI_login extends JFrame {
 					//linha para abrir a janela do cliente (de preferencia essa janela recebe um cliente no construtor, assim podemos passar a info sobre o cliente atualmente logado)
 					//TODO: abrir Janela da area cliente e passar o cliente que loga no seu construtor
 					JOptionPane.showMessageDialog(null, "Menu cliente em construção.");
-					
-					//fecha o menu login
-					GUI_login.this.setVisible(false);
-					GUI_login.this.dispose();
 					return;
 				}
 				
@@ -190,26 +198,21 @@ public class GUI_login extends JFrame {
 						case(1):
 							//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
 							//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
-							GUI_homepage guiHomepage = new GUI_homepage();
-							guiHomepage.setVisible(true);
-							
-							GUI_login.this.setVisible(false);
-							GUI_login.this.dispose();
+							guit.loginEfetuado();
 							return;
 						//role 2 = operador	
 						case(2):
 							//linha para abrir a janela do operador (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o operador atualmente logado)
 							//TODO: abrir Janela da area operador e passar o operador que loga no seu construtor
 							JOptionPane.showMessageDialog(null, "Menu operador em construção.");
-						
-							GUI_login.this.setVisible(false);
-							GUI_login.this.dispose();
+					
 							return;
 					}
 				}
 				labelConfm.setVisible(true);
 			}
 		});
+		
 		getContentPane().add(btLogin);
 				
 				JLabel lblNewLabel = new JLabel();
@@ -223,9 +226,6 @@ public class GUI_login extends JFrame {
 				panel.add(lblNewLabel_1);
 	}
 
-	public JButton getBtLogin() {
-		return btLogin;
-	}
 
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();

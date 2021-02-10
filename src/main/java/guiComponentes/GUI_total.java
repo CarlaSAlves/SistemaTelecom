@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.util.Calendar;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -23,6 +24,9 @@ import guiComponentes.gestorCliente.GUI_gestor_cliente;
 import guiComponentes.gestorOperador.GUI_gestor_operador;
 import guiComponentes.gestorPacoteComercial.GUI_gestor_pacotes;
 import guiComponentes.gestorPromocao.GUI_gestor_promocao;
+import servico.GestorDeDAO;
+import standard_value_object.Cliente;
+import standard_value_object.Funcionario;
 
 
 public class GUI_total extends JFrame {
@@ -39,6 +43,10 @@ public class GUI_total extends JFrame {
 	private Duration temporizador;
 	private String dataEHoraDeLog;
 	private SimpleDateFormat dateFormat ;
+	
+	private GUI_login login;
+	
+	private JPanel loginPanel, homepagePanel, gestor_clientePanel, gestor_operadorPanel, gestor_pacotesPanel, gestor_promocaoPanel;
 
 	
 	public static void main(String[] args) {
@@ -90,42 +98,47 @@ public class GUI_total extends JFrame {
 		setContentPane(contentPane);
 		setLayout(null);
 
-		GUI_login login = new GUI_login();
+		login = new GUI_login(this);
 		homepage = new GUI_homepage();
 		gestor_cliente = new GUI_gestor_cliente();
 		gestor_operador = new GUI_gestor_operador();
 		gestor_pacotes = new GUI_gestor_pacotes();
 		gestor_promocao = new GUI_gestor_promocao();
-
-		JPanel loginPanel = login.returnPanel();
+		
+		loginPanel = login.returnPanel();
 		loginPanel.setBounds(0, 0, 1400, 800);
 		getContentPane().add(loginPanel);
 
-		JPanel homepagePanel = homepage.returnPanel();
+		homepagePanel = homepage.returnPanel();
 		homepagePanel.setVisible(false);
 		homepagePanel.setBounds(0, 0, 1400, 800);
 		getContentPane().add(homepagePanel);
 
-		JPanel gestor_clientePanel = gestor_cliente.returnPanel();
+		gestor_clientePanel = gestor_cliente.returnPanel();
 		gestor_clientePanel.setVisible(false);
 		gestor_clientePanel.setBounds(0, 0, 1400, 800);
 		getContentPane().add(gestor_clientePanel);
 
-		JPanel gestor_operadorPanel = gestor_operador.returnPanel();
+		gestor_operadorPanel = gestor_operador.returnPanel();
 		gestor_operadorPanel.setVisible(false);
 		gestor_operadorPanel.setBounds(0, 0, 1400, 800);
 		getContentPane().add(gestor_operadorPanel);
 
-		JPanel gestor_pacotesPanel = gestor_pacotes.returnPanel();
+		gestor_pacotesPanel = gestor_pacotes.returnPanel();
 		gestor_pacotesPanel.setVisible(false);
 		gestor_pacotesPanel.setBounds(0, 0, 1400, 800);
 		getContentPane().add(gestor_pacotesPanel);
 
-		JPanel gestor_promocaoPanel = gestor_promocao.returnPanel();
+		gestor_promocaoPanel = gestor_promocao.returnPanel();
 		gestor_promocaoPanel.setVisible(false);
 		gestor_promocaoPanel.setBounds(0, 0, 1400, 800);
 		getContentPane().add(gestor_promocaoPanel);
 
+		gestor_cliente.getTable().setModel(new DefaultTableModel());	
+		gestor_operador.getTable().setModel(new DefaultTableModel());
+		gestor_pacotes.getTable().setModel(new DefaultTableModel());
+		gestor_promocao.getTable().setModel(new DefaultTableModel());
+		
 		// LOGIN
 		login.getBtnSair().addActionListener(new ActionListener() {
 
@@ -134,24 +147,6 @@ public class GUI_total extends JFrame {
 				dispose();
 
 			}
-		});
-
-		login.getBtLogin().addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				inicio = Instant.now();
-				labelUsernameNavegaPaginas(login, homepage, gestor_cliente, gestor_operador, gestor_pacotes,
-						gestor_promocao);
-				loginPanel.setVisible(false);
-				homepagePanel.setVisible(true);
-				comecarTemporizador();
-				gestor_cliente.getTable().setModel(new DefaultTableModel());	
-				gestor_operador.getTable().setModel(new DefaultTableModel());
-				gestor_pacotes.getTable().setModel(new DefaultTableModel());
-				gestor_promocao.getTable().setModel(new DefaultTableModel());
-			}
-
 		});
 
 		homepage.getBtGerirClientes().addActionListener(new ActionListener() {
@@ -324,6 +319,16 @@ public class GUI_total extends JFrame {
 
 	public static String getUsername() {
 		return username;
+	}
+
+	public void loginEfetuado() {
+		inicio = Instant.now();
+		labelUsernameNavegaPaginas(login, homepage, gestor_cliente, gestor_operador, gestor_pacotes,
+				gestor_promocao);
+		loginPanel.setVisible(false);
+		homepagePanel.setVisible(true);
+		comecarTemporizador();
+		
 	}
 }
 
