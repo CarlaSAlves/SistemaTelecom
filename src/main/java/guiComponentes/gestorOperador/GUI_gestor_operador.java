@@ -283,7 +283,19 @@ public class GUI_gestor_operador extends JFrame {
 			}
 		}
 
-		
+	private void botaoAtivarDinamico() {
+	
+		try {
+		int row = table.getSelectedRow();
+		Funcionario funcionario = (Funcionario) table.getValueAt(row, OperadorPesquisaModelTable.OBJECT_COL);
+		if (funcionario.isAtivo())
+			botaoDesativarOperador.setText("Desativar operador");
+		else
+			botaoDesativarOperador.setText("Ativar operador");
+		} catch  (Exception e) {
+		}
+	}
+	
 	private void contentPaneSetup() {
 		contentPane = new JPanel();
 		setContentPane(contentPane);
@@ -502,7 +514,7 @@ public class GUI_gestor_operador extends JFrame {
 					botaoDesativarOperador.setEnabled(false);
 					botaoVisualizarHistorico.setEnabled(false);
 				}
-
+				botaoAtivarDinamico();
 			}
 		});
 		return scrollPane;

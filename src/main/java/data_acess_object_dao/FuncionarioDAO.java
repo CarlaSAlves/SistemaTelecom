@@ -435,12 +435,16 @@ public class FuncionarioDAO {
 	public void desativarFuncionario(int id, Funcionario admin) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
-			myStmt = myConn.prepareStatement("update funcionario SET `ativo`= 0 where id=?");
+			Funcionario operador = pesquisaOperadorAuxiliarID(id);
+			if(operador.isAtivo()) {
+				myStmt = myConn.prepareStatement("update funcionario SET `ativo`= 0 where id=?");
+			} else {
+				myStmt = myConn.prepareStatement("update funcionario SET `ativo`= 1 where id=?");
+			}
+			
 			myStmt.setInt(1, id);
 			myStmt.executeUpdate();
 
-
-			Funcionario operador = pesquisaOperadorAuxiliarID(id);
 			myStmt = logUpdate(operador, admin, "Desativar Operador");	
 
 			myStmt.executeUpdate();
@@ -450,6 +454,7 @@ public class FuncionarioDAO {
 		}finally {
 			myStmt.close();
 		}
+		
 	}
 
 	public List<HistoricoOperador> getHistoricoOperador(int id_operador) throws Exception {
