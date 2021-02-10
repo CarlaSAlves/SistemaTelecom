@@ -18,10 +18,6 @@ import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import java.awt.Font;
 import java.awt.SystemColor;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
 import java.awt.Color;
 
 public class CriarClienteDialog extends JDialog {
@@ -85,7 +81,7 @@ public class CriarClienteDialog extends JDialog {
 
 	public CriarClienteDialog() {
 
-		setBounds(500, 300, 417, 351);
+		setBounds(500, 300, 435, 365);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.window);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -95,25 +91,25 @@ public class CriarClienteDialog extends JDialog {
 		{
 			JLabel lblNome = new JLabel("Nome");
 			lblNome.setBounds(9, 11, 82, 27);
-			lblNome.setFont(new Font("Dialog", Font.BOLD, 13));
+			lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblNome);
 		}
 		{
 			JLabel lblNif = new JLabel("NIF");
 			lblNif.setBounds(9, 51, 82, 27);
-			lblNif.setFont(new Font("Dialog", Font.BOLD, 13));
+			lblNif.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblNif);
 		}
 		{
 			JLabel lblMorada = new JLabel("Morada");
 			lblMorada.setBounds(9, 89, 82, 27);
-			lblMorada.setFont(new Font("Dialog", Font.BOLD, 13));
+			lblMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblMorada);
 		}
 		{
 			JLabel lblLogin = new JLabel("Login");
 			lblLogin.setBounds(9, 125, 82, 27);
-			lblLogin.setFont(new Font("Dialog", Font.BOLD, 13));
+			lblLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblLogin);
 		}
 		{
@@ -147,7 +143,7 @@ public class CriarClienteDialog extends JDialog {
 		{
 			JLabel lblPassword = new JLabel("Password");
 			lblPassword.setBounds(9, 163, 82, 27);
-			lblPassword.setFont(new Font("Dialog", Font.BOLD, 13));
+			lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblPassword);
 		}
 		{
@@ -160,7 +156,7 @@ public class CriarClienteDialog extends JDialog {
 		{
 			JLabel lblIdpacote = new JLabel("ID Pacote");
 			lblIdpacote.setBounds(9, 202, 82, 27);
-			lblIdpacote.setFont(new Font("Dialog", Font.BOLD, 13));
+			lblIdpacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblIdpacote);
 		}
 		{
@@ -177,7 +173,7 @@ public class CriarClienteDialog extends JDialog {
 	
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBounds(0, 274, 401, 38);
+			buttonPane.setBounds(0, 274, 419, 41);
 			contentPanel.add(buttonPane);
 			buttonPane.setBackground(SystemColor.window);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -191,10 +187,21 @@ public class CriarClienteDialog extends JDialog {
 				okButton.setFocusPainted(false);
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						
+						if (textFieldNome.getText().isBlank() || textFieldMorada.getText().isBlank() || textFieldLogin.getText().isBlank() || textFieldPassword.getPassword().length == 0) {
+							JOptionPane.showMessageDialog( CriarClienteDialog.this, "Todos os dados têm de ser preenchidos!");
+							return;
+						}
+						if( textFieldNIF.getText().isBlank() ) {
+							JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem que estar preenchido!");
+							return;
+						}
+
 						gravarCliente();
 
 					}
 				});
+				
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -208,7 +215,7 @@ public class CriarClienteDialog extends JDialog {
 				buttonPane.add(cancelButton);
 				
 				checkBoxAtivo = new JCheckBox("Ativo");
-				checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
+				checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				checkBoxAtivo.setBackground(Color.WHITE);
 				checkBoxAtivo.setBounds(220, 237, 86, 23);
 				contentPanel.add(checkBoxAtivo);
