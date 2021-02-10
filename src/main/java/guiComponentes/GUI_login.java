@@ -34,17 +34,12 @@ public class GUI_login extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JTextField textFieldUser;
 	private JButton btLogin, btnSair;
-	private JLabel labelPass;
+	private JLabel labelPass, labelConfm;
 	private JPasswordField passwordField;
-	private JLabel labelConfm;
-	
 	private GUI_total guit;
-	
-
-
 	private JLabel icon;
 	private JPanel panel;
-	private Font font = new Font("Dubai Light", Font.PLAIN, 20);
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
