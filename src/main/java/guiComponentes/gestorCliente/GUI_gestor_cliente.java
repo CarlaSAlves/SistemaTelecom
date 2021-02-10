@@ -11,6 +11,7 @@ import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -50,7 +51,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private JLabel lblResultados;
 	private JButton botaoDesativarCliente;
 	private JButton botaoEditarCliente;
-	private int indices[];
+	private int indice;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JLabel lblUsernameLogged;
 	private JButton botaoVisualizarHistorico;
@@ -402,9 +403,9 @@ public class GUI_gestor_cliente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 
 				try {
-					indices = table.getSelectedRows();
+					indice = table.getSelectedRow();
 
-					if (indices.length < 0) {
+					if (indice < 0) {
 						JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
 								"Por favor selecione um Cliente", "Error",
 								JOptionPane.ERROR_MESSAGE);
@@ -419,10 +420,10 @@ public class GUI_gestor_cliente extends JFrame {
 					}
 
 					Funcionario funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
-					for(int i = 0; i < indices.length; i++) {
-						Cliente clienteTemp = (Cliente) table.getValueAt(indices[i], ClientePesquisaModelTable.OBJECT_COL);
+					
+						Cliente clienteTemp = (Cliente) table.getValueAt(indice, ClientePesquisaModelTable.OBJECT_COL);
 						GestorDeDAO.getGestorDeDAO().desativarCliente(clienteTemp.getId(), funcionario);
-					}
+					
 					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
 							"Cliente(s) Desativado(s) com sucesso", "Cliente(s) Desativado",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -475,6 +476,7 @@ public class GUI_gestor_cliente extends JFrame {
 		table.setFillsViewportHeight(true);
 		table.setModel(new DefaultTableModel(new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
 		table.setForeground(SystemColor.desktop);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setBackground(UIManager.getColor("CheckBox.light"));
 		table.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		table.setRowHeight(20);
@@ -496,9 +498,24 @@ public class GUI_gestor_cliente extends JFrame {
 					botaoDesativarCliente.setEnabled(false);
 					botaoVisualizarHistorico.setEnabled(false);
 				}
-
+				botaoAtivarDinamico();
 			}
+
+		
 		});
+	}
+	
+	private void botaoAtivarDinamico() {
+		// TODO Auto-generated method stub
+		try {
+		int row = table.getSelectedRow();
+		Cliente cliente = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
+		if (cliente.isAtivo())
+			botaoDesativarCliente.setText("Desativar cliente");
+		else
+			botaoDesativarCliente.setText("Ativar Cliente");
+		} catch  (Exception e) {
+		}
 	}
 
 	private JScrollPane scrollPaneSetup() {

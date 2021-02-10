@@ -279,12 +279,15 @@ public class ClienteDAO {
 	public void desativarCliente(int id, Funcionario funcionario ) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
-
-			myStmt = myConn.prepareStatement("update cliente SET `ativo`= 0 where id=?");
+			Cliente cliente = pesquisaClienteAuxiliarID(id);
+			if (cliente.isAtivo())
+				myStmt = myConn.prepareStatement("update cliente SET `ativo`= 0 where id=?");
+			else
+				myStmt = myConn.prepareStatement("update cliente SET `ativo`= 1 where id=?");
 			myStmt.setLong(1, id);
 			myStmt.executeUpdate();
 
-			Cliente cliente = pesquisaClienteAuxiliarID(id);
+			
 			myStmt = logUpdate(funcionario, cliente, "Desativar Cliente");	
 
 			myStmt.executeUpdate();
