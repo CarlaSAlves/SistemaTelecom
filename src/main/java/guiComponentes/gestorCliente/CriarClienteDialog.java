@@ -192,8 +192,15 @@ public class CriarClienteDialog extends JDialog {
 							JOptionPane.showMessageDialog( CriarClienteDialog.this, "Todos os dados têm de ser preenchidos!");
 							return;
 						}
-						if( textFieldNIF.getText().isBlank() ) {
+						if( textFieldNIF.getText().isBlank()) {
 							JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem que estar preenchido!");
+							return;
+						}
+						try {
+							Integer.parseInt( textFieldNIF.getText() );
+						}
+						catch( Exception ex ){
+							JOptionPane.showMessageDialog( CriarClienteDialog.this, "A NIF tem de ser um inteiro!");
 							return;
 						}
 

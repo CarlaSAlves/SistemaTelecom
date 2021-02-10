@@ -159,9 +159,7 @@ public class GUI_login extends JFrame {
 				//primeiro vamos ver se o utilizador � um cliente
 				String login = textFieldUser.getText();
 				String pass = passwordField.getText();
-				
-				System.out.println("login: " + login + "\nPass: " + pass);
-				
+			
 				if(login.isBlank() || pass.isBlank()) {
 					JOptionPane.showMessageDialog(null, "Campos não podem estar vazios.");
 					return;
