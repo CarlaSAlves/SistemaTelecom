@@ -24,10 +24,12 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import servico.GestorDeDAO;
+import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+import guiComponentes.gestorPacoteComercial.PacoteComercialPesquisaModelTable;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JCheckBox;
 import java.awt.Color;
@@ -54,6 +56,8 @@ public class GUI_gestor_promocao extends JFrame {
 	private JTextField textFieldNome;
 	private JCheckBox checkBoxAtivo;
 	private JButton btPesquisar;
+	
+	private JTextArea textAreaDescricao;
 
 
 	public static void main(String[] args) {
@@ -105,8 +109,11 @@ public class GUI_gestor_promocao extends JFrame {
 		lblCamposPesquisas.setBounds(98, 26, 294, 26);
 		contentPane.add(lblCamposPesquisas);
 
-		JTextArea textAreaDescricao = new JTextArea();
+		textAreaDescricao = new JTextArea();
 		textAreaDescricao.setBounds(905, 71, 367, 151);
+		textAreaDescricao.setLineWrap(true);
+		textAreaDescricao.setWrapStyleWord(true);
+		textAreaDescricao.setEditable(false);
 		contentPane.add(textAreaDescricao);
 
 		// Botões 
@@ -372,8 +379,11 @@ public class GUI_gestor_promocao extends JFrame {
 					botaoDesativarPromocao.setEnabled(true);
 				}
 				else if (table.getSelectedRows().length==1) {
+					int row = table.getSelectedRow();
 					botaoEditarPromocao.setEnabled(true);
 					botaoDesativarPromocao.setEnabled(true);
+					Promocao pacoteComercial = (Promocao) table.getValueAt(row, PromocaoPesquisaModelTable.OBJECT_COL);
+					textAreaDescricao.setText(pacoteComercial.getDescricao());
 				}
 				else if (table.getSelectedRowCount()==0)
 				{

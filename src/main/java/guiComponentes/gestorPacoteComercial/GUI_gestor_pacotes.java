@@ -151,11 +151,9 @@ public class GUI_gestor_pacotes extends JFrame {
 		textAreaDescricao = new JTextArea();
 		textAreaDescricao.setBounds(905, 71, 367, 151);
 		textAreaDescricao.setLineWrap(true);
+		textAreaDescricao.setWrapStyleWord(true);
+		textAreaDescricao.setEditable(false);
 		contentPane.add(textAreaDescricao);
-		
-	//	JPanel panel_1 = panel_1Setup();
-	//	panel_1ContentSetup(panel_1);
-		//contentPane.add(panel_1);
 		
 		// Footer
 
@@ -261,29 +259,6 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		panelUserESessaoContentSetup();
 	}
-	
-	
-	
-private void panel_1ContentSetup(JPanel panel_1) {
-		
-		painelPesquisa.setLayout(null);
-		
-		JLabel lblDeProcura = lblNewLabelIDSetup();
-		panel_1.add(lblDeProcura);
-
-		
-
-		JLabel lblNome = lblNewLabelNomeSetup();
-		panel_1.add(lblNome);
-
-
-		JCheckBox checkBoxAtivo = checkBoxAtivoSetup();
-		panel_1.add(checkBoxAtivo);
-
-
-		JButton botaoPesquisa = btnNewButtonPesquisarSetup(checkBoxAtivo);
-		panel_1.add(botaoPesquisa);
-	}
 
 	private void panelUserESessaoContentSetup() {
 		lblUsernameLoggedSetup();
@@ -300,62 +275,6 @@ private void panel_1ContentSetup(JPanel panel_1) {
 	private void lblUsernameLoggedSetup() {}
 
 	private void panelUserESessaoSetup() {}
-
-	private JButton btnNewButtonPesquisarSetup(JCheckBox checkBoxAtivo) {
-		JButton btPesquisar = new JButton("Pesquisar");
-		btPesquisar.setBackground(SystemColor.activeCaption);
-		btPesquisar.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		
-		
-		return btPesquisar;
-	}
-
-	private JCheckBox checkBoxAtivoSetup() {
-		JCheckBox checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setBounds(207, 77, 50, 23);
-		checkBoxAtivo.setBackground(SystemColor.inactiveCaption);
-		checkBoxAtivo.setForeground(SystemColor.desktop);
-		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		return checkBoxAtivo;
-	}
-
-	
-
-	private JLabel lblNewLabelNomeSetup() {
-		JLabel labelNome = new JLabel("Nome");
-		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		return labelNome;
-	}
-
-	
-
-	private JLabel lblNewLabelIDSetup() {
-		JLabel labelID = new JLabel("ID");
-		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 14));
-		return labelID;
-	}
-
-//	private JPanel panel_1Setup() {
-//		JPanel painelPesquisa = new JPanel();
-//		painelPesquisa.setBackground(Color.WHITE);
-//		painelPesquisa.setBounds(99, 71, 344, 177);
-//		
-//		painelPesquisa.setLayout(new FormLayout(new ColumnSpec[] {
-//				FormSpecs.RELATED_GAP_COLSPEC,
-//				FormSpecs.DEFAULT_COLSPEC,
-//				FormSpecs.RELATED_GAP_COLSPEC,
-//				ColumnSpec.decode("default:grow"),},
-//			new RowSpec[] {
-//				FormSpecs.RELATED_GAP_ROWSPEC,
-//				FormSpecs.DEFAULT_ROWSPEC,
-//				FormSpecs.RELATED_GAP_ROWSPEC,
-//				FormSpecs.DEFAULT_ROWSPEC,
-//				FormSpecs.RELATED_GAP_ROWSPEC,
-//				FormSpecs.DEFAULT_ROWSPEC,
-//				FormSpecs.RELATED_GAP_ROWSPEC,
-//				FormSpecs.DEFAULT_ROWSPEC,}));
-//		return painelPesquisa;
-//	}
 
 	private JLabel lbFooterSetup() {
 		JLabel lbFooter = new JLabel("");
@@ -436,8 +355,6 @@ private void panel_1ContentSetup(JPanel panel_1) {
 					for (int i = 0; i < indices.length; i++) {
 						PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indices[i],
 								PacoteComercialPesquisaModelTable.OBJECT_COL);
-					//	GestorDeDAO.getGestorDeDAO().desativarPacoteComercial(pacoteTemp.getId());
-
 					}
 					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
 							"Pacotes Desativado com sucesso", "Pacote Desativado",
