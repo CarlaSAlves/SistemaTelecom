@@ -9,7 +9,7 @@ public class Cliente {
 	private String login;
 	private String password;
 	private boolean ativo;
-
+	private int id_pacote_cliente;
 	
 	public Cliente() {
 		
@@ -39,6 +39,18 @@ public class Cliente {
 		
 	}
 	
+	public Cliente(int id, String nome, long nif, String morada, String login, String password, 
+			boolean ativo, int id_pacote_cliente) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.nif = nif;
+		this.morada = morada;
+		this.login = login;
+		this.password = password;
+		this.ativo = ativo;
+		this.id_pacote_cliente = id_pacote_cliente;
+	}
 	
 	public Cliente(String nome, long nif, String morada, String login, String password, boolean ativo) {
 		super();
@@ -51,48 +63,68 @@ public class Cliente {
 		
 	}
 
-
 	public int getId() {
 		return id;
 	}
+	
 	public String getNome() {
 		return nome;
 	}
+	
 	public long getNif() {
 		return nif;
 	}
+	
 	public String getMorada() {
 		return morada;
 	}
+	
 	public String getLogin() {
 		return login;
 	}
+	
 	public String getPassword() {
 		return password;
 	}
+	
 	public boolean isAtivo() {
 		return ativo;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 	public void setNif(long nif) {
 		this.nif = nif;
 	}
+	
 	public void setMorada(String morada) {
 		this.morada = morada;
 	}
+	
 	public void setLogin(String login) {
 		this.login = login;
 	}
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+	
+	public int getId_pacote_cliente() {
+		return id_pacote_cliente;
+	}
+
+	public void setId_pacote_cliente(int id_pacote_cliente) {
+		this.id_pacote_cliente = id_pacote_cliente;
 	}
 
 	@Override

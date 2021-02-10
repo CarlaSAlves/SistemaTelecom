@@ -127,7 +127,7 @@ public class PacoteClienteDAO {
 		return 1;
 	}
 	
-	public void removerPromocao(PacoteCliente pacoteCliente, Promocao promocao) throws SQLException{
+	public int removerPromocao(PacoteCliente pacoteCliente, Promocao promocao) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
 			myStmt = myConn.prepareStatement("DELETE FROM `sistema_tele`.`pacote_cliente_promoçao` WHERE (`id_pacote_cliente` = ?) and (`id_promocao` = ?);");
@@ -139,10 +139,12 @@ public class PacoteClienteDAO {
 		}finally {
 			myStmt.close();
 		}
+		
+		return 1;
 	}
 	
 	//por enquanto apenas muda o id_pacote_comercial do pacote_cliente. Ser� que deve poder mudar mais algo ?????
-	public void editarPacoteCliente(PacoteCliente pacoteCliente) throws SQLException{
+	public int editarPacoteCliente(PacoteCliente pacoteCliente) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
 			myStmt = myConn.prepareStatement("UPDATE pacote_cliente "
@@ -155,12 +157,13 @@ public class PacoteClienteDAO {
 		}finally {
 			myStmt.close();
 		}
+		return 1;
 	}
 	
 	//para apagar um pacote_cliente, vai ser necessario remover todas as promo�oes associadas a esse pacote.
 	// Vai ser tambem necessario remover o pacote do cliente que o det�m. S� depois � possivel apagar o pacote cliente.
 	@SuppressWarnings("resource")
-	public void eliminarPacoteById(int id) throws SQLException{
+	public int eliminarPacoteById(int id) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
 			String query1 = "Update `cliente` Set `id_pacote_cliente` = NULL Where (`id_pacote_cliente` =" + id + ");";
@@ -176,6 +179,8 @@ public class PacoteClienteDAO {
 		}finally {
 			myStmt.close();
 		}
+		
+		return 1;
 	}
 	
 	private PacoteCliente convertRowToPacoteCliente(ResultSet myRs) throws SQLException {

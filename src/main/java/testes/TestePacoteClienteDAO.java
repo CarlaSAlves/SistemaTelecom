@@ -42,9 +42,30 @@ public class TestePacoteClienteDAO {
 	@Test
 	public void testAdicionarPromocao() throws Exception {
 		Promocao promocao = new Promocao(4, "", "", true, null, null);
-		PacoteCliente pacoteCliente = pacoteClienteDAO.pesquisarPacoteClienteId(2);
+		PacoteCliente pacoteCliente = pacoteClienteDAO.pesquisarPacoteClienteId(1);
 		
 		assertEquals(1, pacoteClienteDAO.adicionarPromocao(pacoteCliente, promocao));
+	}
+	
+	@Test
+	public void testRemoverPromocao() throws Exception {
+		Promocao promocao = new Promocao(1, "", "", true, null, null);
+		PacoteCliente pacoteCliente = pacoteClienteDAO.pesquisarPacoteClienteId(2);
+		
+		assertEquals(1, pacoteClienteDAO.removerPromocao(pacoteCliente, promocao));
+	}
+	
+	@Test
+	public void testEditarPacoteCliente() throws Exception {
+		PacoteCliente pacoteCliente = pacoteClienteDAO.pesquisarPacoteClienteId(3);
+		pacoteCliente.setId_pacote_comercial(1);
+		
+		assertEquals(1, pacoteClienteDAO.editarPacoteCliente(pacoteCliente));
+	}
+	
+	@Test
+	public void testEliminarPacoteById() throws Exception {
+		assertEquals(1, pacoteClienteDAO.eliminarPacoteById(4));
 	}
 	
 	//estabelece a ligaçao com a base de dados definida no documento sistema_tele.properties
