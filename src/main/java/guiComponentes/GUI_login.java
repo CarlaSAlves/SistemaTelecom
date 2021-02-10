@@ -218,9 +218,9 @@ public class GUI_login extends JFrame {
 				panel.add(lblNewLabel);
 				
 				JLabel lblNewLabel_1 = new JLabel("");
-				lblNewLabel_1.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/fundoAltran.png")));
-				lblNewLabel_1.setBounds(0, 89, 1394, 586);
-				panel.add(lblNewLabel_1);
+                lblNewLabel_1.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/fundoAltran.png")));
+                lblNewLabel_1.setBounds(0, 89, 1394, 586);
+                panel.add(lblNewLabel_1);
 	}
 
 	public JButton getBtLogin() {
