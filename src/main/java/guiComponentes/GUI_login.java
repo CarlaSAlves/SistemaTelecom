@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -152,63 +154,59 @@ public class GUI_login extends JFrame {
 				
 			}
 		});
-		btLogin.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//login vai usar metodos e entidades que estao nos dao do package V2
-				//primeiro vamos ver se o utilizador � um cliente
-				String login = textFieldUser.getText();
-				String pass = passwordField.getText();
+		
+		textFieldUser.addKeyListener(new KeyListener() {
 			
-				if(login.isBlank() || pass.isBlank()) {
-					JOptionPane.showMessageDialog(null, "Campos não podem estar vazios.");
-					return;
-				}
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER){
+					login(guit);
+		        }
 				
-				//verifica se � um cliente
-				Cliente cliente = null;
-				try {
-					cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLoginPass( login, pass);
-				} catch (Exception e2) {
-					e2.printStackTrace();
-				}
-				if( cliente != null) {
-					//linha para abrir a janela do cliente (de preferencia essa janela recebe um cliente no construtor, assim podemos passar a info sobre o cliente atualmente logado)
-					//TODO: abrir Janela da area cliente e passar o cliente que loga no seu construtor
-					JOptionPane.showMessageDialog(null, "Menu cliente em construção.");
-					return;
-				}
-				
-				//se nao é  cliente, é  funcion�rio 
-				Funcionario funcionario = null;
-				try {
-					funcionario = GestorDeDAO.getGestorDeDAO().pesquisarFuncionarioLoginPass( login, pass);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				if(funcionario != null) {
-					//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
-					//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
-					
-					//TODO: arranjar algo melhor que um switch case para tratar da abertura da janela correspondente. Tenho que perceber mais sobre patterns
-					switch(funcionario.getId_role()) {
-						//role 1 = admin
-						case(1):
-							//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
-							//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
-							guit.loginEfetuado();
-							return;
-						//role 2 = operador	
-						case(2):
-							//linha para abrir a janela do operador (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o operador atualmente logado)
-							//TODO: abrir Janela da area operador e passar o operador que loga no seu construtor
-							JOptionPane.showMessageDialog(null, "Menu operador em construção.");
-					
-							return;
-					}
-				}
-				labelConfm.setVisible(true);
 			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		passwordField.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER){
+					login(guit);
+		        }
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		btLogin.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				login(guit);
+			}
+
+			
 		});
 		
 		getContentPane().add(btLogin);
@@ -223,7 +221,61 @@ public class GUI_login extends JFrame {
                 lblNewLabel_1.setBounds(0, 89, 1394, 586);
                 panel.add(lblNewLabel_1);
 	}
-
+	private void login(GUI_total guit) {
+		//login vai usar metodos e entidades que estao nos dao do package V2
+		//primeiro vamos ver se o utilizador � um cliente
+		String login = textFieldUser.getText();
+		String pass = passwordField.getText();
+	
+		if(login.isBlank() || pass.isBlank()) {
+			JOptionPane.showMessageDialog(null, "Campos não podem estar vazios.");
+			return;
+		}
+		
+		//verifica se � um cliente
+		Cliente cliente = null;
+		try {
+			cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLoginPass( login, pass);
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+		if( cliente != null) {
+			//linha para abrir a janela do cliente (de preferencia essa janela recebe um cliente no construtor, assim podemos passar a info sobre o cliente atualmente logado)
+			//TODO: abrir Janela da area cliente e passar o cliente que loga no seu construtor
+			JOptionPane.showMessageDialog(null, "Menu cliente em construção.");
+			return;
+		}
+		
+		//se nao é  cliente, é  funcion�rio 
+		Funcionario funcionario = null;
+		try {
+			funcionario = GestorDeDAO.getGestorDeDAO().pesquisarFuncionarioLoginPass( login, pass);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		if(funcionario != null) {
+			//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
+			//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
+			
+			//TODO: arranjar algo melhor que um switch case para tratar da abertura da janela correspondente. Tenho que perceber mais sobre patterns
+			switch(funcionario.getId_role()) {
+				//role 1 = admin
+				case(1):
+					//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
+					//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
+					guit.loginEfetuado();
+					return;
+				//role 2 = operador	
+				case(2):
+					//linha para abrir a janela do operador (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o operador atualmente logado)
+					//TODO: abrir Janela da area operador e passar o operador que loga no seu construtor
+					JOptionPane.showMessageDialog(null, "Menu operador em construção.");
+			
+					return;
+			}
+		}
+		labelConfm.setVisible(true);
+	}
 
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
