@@ -83,9 +83,9 @@ public class GestorDeDAO {
 	}
 
 	//metodo para fazer login como cliente
-		public Cliente pesquisaClienteLoginPass(String login, String password) throws Exception {
-			return clienteDAO.pesquisaClienteLoginPass(login, password);
-		}
+	public Cliente pesquisaClienteLoginPass(String login, String password) throws Exception {
+		return clienteDAO.pesquisaClienteLoginPass(login, password);
+	}
 
 	public List<HistoricoCliente> getHistoricoCliente(int id_cliente) throws Exception {
 		return clienteDAO.getHistoricoCliente(id_cliente);

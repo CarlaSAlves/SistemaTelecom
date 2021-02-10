@@ -20,7 +20,6 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import data_acess_object_dao.PasswordEncryption;
 import servico.GestorDeDAO;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
@@ -147,23 +146,26 @@ public class GUI_login extends JFrame {
 				//login vai usar metodos e entidades que estao nos dao do package V2
 				//primeiro vamos ver se o utilizador � um cliente
 				String login = textFieldUser.getText();
-				String pass = passwordField.getSelectedText();
+				String pass = passwordField.getText();
+				
+				System.out.println("login: " + login + "\nPass: " + pass);
 				
 				if(login.isBlank() || pass.isBlank()) {
 					JOptionPane.showMessageDialog(null, "Campos não podem estar vazios.");
 					return;
 				}
 				
-				//verifica se � um cliente (entidade cliente vem da package standard_value_objects_v2)
+				//verifica se � um cliente
 				Cliente cliente = null;
 				try {
-					cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLoginPass( login, PasswordEncryption.get_SHA_512_SecurePassword(pass) );
+					cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLoginPass( login, pass);
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
 				if( cliente != null) {
 					//linha para abrir a janela do cliente (de preferencia essa janela recebe um cliente no construtor, assim podemos passar a info sobre o cliente atualmente logado)
 					//TODO: abrir Janela da area cliente e passar o cliente que loga no seu construtor
+					JOptionPane.showMessageDialog(null, "Menu cliente em construção.");
 					
 					//fecha o menu login
 					GUI_login.this.setVisible(false);
@@ -171,10 +173,10 @@ public class GUI_login extends JFrame {
 					return;
 				}
 				
-				//se nao é  cliente, é  funcion�rio (entidade funcionario vem da package standard_value_objects_v2)
+				//se nao é  cliente, é  funcion�rio 
 				Funcionario funcionario = null;
 				try {
-					funcionario = GestorDeDAO.getGestorDeDAO().pesquisarFuncionarioLoginPass( login, PasswordEncryption.get_SHA_512_SecurePassword(pass) );
+					funcionario = GestorDeDAO.getGestorDeDAO().pesquisarFuncionarioLoginPass( login, pass);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -188,6 +190,8 @@ public class GUI_login extends JFrame {
 						case(1):
 							//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
 							//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
+							GUI_homepage guiHomepage = new GUI_homepage();
+							guiHomepage.setVisible(true);
 							
 							GUI_login.this.setVisible(false);
 							GUI_login.this.dispose();
@@ -196,7 +200,8 @@ public class GUI_login extends JFrame {
 						case(2):
 							//linha para abrir a janela do operador (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o operador atualmente logado)
 							//TODO: abrir Janela da area operador e passar o operador que loga no seu construtor
-							
+							JOptionPane.showMessageDialog(null, "Menu operador em construção.");
+						
 							GUI_login.this.setVisible(false);
 							GUI_login.this.dispose();
 							return;
