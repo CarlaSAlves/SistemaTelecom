@@ -106,6 +106,7 @@ public class CriarPacotesDialog extends JDialog {
 		}
 
 		checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setSelected(true);
 		checkBoxAtivo.setBounds(170, 96, 86, 23);
 		checkBoxAtivo.setBackground(Color.WHITE);
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));

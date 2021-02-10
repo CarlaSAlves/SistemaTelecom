@@ -147,19 +147,19 @@ public class GUI_gestor_promocao extends JFrame {
 		contentPane.add(lblTempoSessao);
 		
 		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 10));
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblUsernameLogged = new JLabel();
 		lblUsernameLogged.setBounds(1215, 698, 159, 18);
 		contentPane.add(lblUsernameLogged);
 		
 		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 10));
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setBounds(1215, 737, 159, 18);
 		contentPane.add(lblHoraSistema);
 		
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 10));
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		
 	}
 	/**
@@ -170,35 +170,37 @@ public class GUI_gestor_promocao extends JFrame {
 			painelPesquisa = new JPanel();
 			painelPesquisa.setLayout(null);
 			painelPesquisa.setBackground(Color.WHITE);
-			painelPesquisa.setBounds(98, 63, 453, 221);
+			painelPesquisa.setBounds(98, 87, 453, 171);
 			contentPane.add(painelPesquisa);
 			{
 				labelID = new JLabel("ID");
-				labelID.setFont(new Font("Dialog", Font.BOLD, 13));
+				labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				labelID.setBounds(6, 15, 39, 18);
 				painelPesquisa.add(labelID);
 			}
 			{
 				textPesquisaID = new JTextField();
+				textPesquisaID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				textPesquisaID.setColumns(10);
 				textPesquisaID.setBounds(72, 6, 371, 27);
 				painelPesquisa.add(textPesquisaID);
 			}
 			{
 				labelNome = new JLabel("Nome");
-				labelNome.setFont(new Font("Dialog", Font.BOLD, 13));
+				labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				labelNome.setBounds(6, 44, 56, 27);
 				painelPesquisa.add(labelNome);
 			}
 			{
 				textFieldNome = new JTextField();
+				textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				textFieldNome.setColumns(10);
 				textFieldNome.setBounds(72, 44, 371, 27);
 				painelPesquisa.add(textFieldNome);
 			}
 			{
 				checkBoxAtivo = new JCheckBox("Ativa");
-				checkBoxAtivo.setFont(new Font("Dialog", Font.BOLD, 13));
+				checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				checkBoxAtivo.setBackground(Color.WHITE);
 				checkBoxAtivo.setBounds(232, 78, 69, 24);
 				painelPesquisa.add(checkBoxAtivo);
@@ -239,9 +241,9 @@ public class GUI_gestor_promocao extends JFrame {
 						}
 					}
 				});
-				btPesquisar.setFont(new Font("Dialog", Font.PLAIN, 15));
+				btPesquisar.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				btPesquisar.setBackground(SystemColor.activeCaption);
-				btPesquisar.setBounds(72, 109, 371, 27);
+				btPesquisar.setBounds(72, 121, 371, 27);
 				painelPesquisa.add(btPesquisar);
 			}
 		}

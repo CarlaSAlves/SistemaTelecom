@@ -198,6 +198,7 @@ public class CriarClienteDialog extends JDialog {
 				buttonPane.add(cancelButton);
 				
 				checkBoxAtivo = new JCheckBox("Ativo");
+				checkBoxAtivo.setSelected(true);
 				checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				checkBoxAtivo.setBackground(Color.WHITE);
 				checkBoxAtivo.setBounds(159, 212, 86, 23);

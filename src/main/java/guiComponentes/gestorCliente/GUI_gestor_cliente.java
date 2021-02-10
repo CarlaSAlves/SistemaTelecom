@@ -128,18 +128,18 @@ public class GUI_gestor_cliente extends JFrame {
 		contentPane.add(lblHoraSistema);
 		
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dialog", Font.PLAIN, 10));
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setBounds(1215, 717, 159, 18);
 		contentPane.add(lblTempoSessao);
 		
 		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dialog", Font.PLAIN, 10));
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 		lblUsernameLogged = new JLabel();
 		lblUsernameLogged.setBounds(1215, 698, 159, 18);
 		contentPane.add(lblUsernameLogged);
 		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dialog", Font.PLAIN, 10));
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 
 
 
@@ -181,7 +181,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private void botaoPesquisaSetup() {
 		botaoPesquisa = new JButton("Pesquisar");
 		botaoPesquisa.setBounds(72, 181, 371, 27);
-		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		botaoPesquisa.setBackground(SystemColor.activeCaption);
 		botaoPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -235,7 +235,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private void checkBoxAtivoSetup() {
 		checkBoxAtivo = new JCheckBox("Ativo");
 		checkBoxAtivo.setBounds(234, 150, 69, 24);
-		checkBoxAtivo.setFont(new Font("Dialog", Font.BOLD, 13));
+		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		checkBoxAtivo.setBackground(Color.WHITE);
 	}
 
@@ -248,7 +248,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private void lblMoradaSetup() {
 		labelMorada = new JLabel("Morada");
 		labelMorada.setBounds(6, 116, 56, 27);
-		labelMorada.setFont(new Font("Dialog", Font.BOLD, 13));
+		labelMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 
 	private void textFieldNomeSetup() {
@@ -260,7 +260,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private void lblNomeSetup() {
 		labelNome = new JLabel("Nome");
 		labelNome.setBounds(6, 87, 56, 18);
-		labelNome.setFont(new Font("Dialog", Font.BOLD, 13));
+		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 
 	private void textPesquisaNIFSetup() {
@@ -272,7 +272,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private void lblNewLabelNIFSetup() {
 		labelNIF = new JLabel("NIF");
 		labelNIF.setBounds(6, 49, 56, 18);
-		labelNIF.setFont(new Font("Dialog", Font.BOLD, 13));
+		labelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 
 	private void textPesquisaIDSetup() {
@@ -284,7 +284,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private void lblNewLabelIDSetup() {
 		labelID = new JLabel("ID");
 		labelID.setBounds(6, 15, 39, 18);
-		labelID.setFont(new Font("Dialog", Font.BOLD, 13));
+		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
 	
 	private void panelSetup() {
