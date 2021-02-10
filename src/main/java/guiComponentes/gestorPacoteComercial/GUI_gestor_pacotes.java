@@ -135,26 +135,26 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		lblResultadosSetup();
 		panel.add(lblResultados);
-		
+
 		botaoVisualizarHistoricoSetup();
 		contentPane.add(botaoVisualizarHistorico);
 
 
 		// Campo de pesquisa 
-		
+
 		JLabel lblCamposPesquisas = new JLabel("Campo de Pesquisa");
 		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
 		lblCamposPesquisas.setBounds(98, 26, 294, 26);
 		contentPane.add(lblCamposPesquisas);
-		
-		
+
+
 		textAreaDescricao = new JTextArea();
 		textAreaDescricao.setBounds(905, 71, 367, 151);
 		textAreaDescricao.setLineWrap(true);
 		textAreaDescricao.setWrapStyleWord(true);
 		textAreaDescricao.setEditable(false);
 		contentPane.add(textAreaDescricao);
-		
+
 		// Footer
 
 		JLabel lbFooter = lbFooterSetup();
@@ -282,7 +282,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		lbFooter.setBounds(599, 690, 213, 65);
 		return lbFooter;
 	}
-	
+
 	private void botaoVisualizarHistoricoSetup() {
 		botaoVisualizarHistorico = new JButton("Visualizar Historico");
 		botaoVisualizarHistorico.addActionListener(new ActionListener() {
@@ -399,6 +399,20 @@ public class GUI_gestor_pacotes extends JFrame {
 		});
 	}
 
+	private void botaoAtivarDinamico() {
+
+		try {
+			int row = table.getSelectedRow();
+			PacoteComercial pacoteComercial = (PacoteComercial) table.getValueAt(row, PacoteComercialPesquisaModelTable.OBJECT_COL);
+			if (pacoteComercial.isAtivo())
+				botaoDesativarPacoteComercial.setText("Desativa pacote");
+			else
+				botaoDesativarPacoteComercial.setText("Ativa pacote");
+		} catch  (Exception e) {
+
+		}
+	}
+
 	private void lblResultadosSetup() {
 		lblResultados = new JLabel("Resultados: ");
 		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 16));
@@ -427,12 +441,13 @@ public class GUI_gestor_pacotes extends JFrame {
 					botaoDesativarPacoteComercial.setEnabled(true);
 					PacoteComercial pacoteComercial = (PacoteComercial) table.getValueAt(row, PacoteComercialPesquisaModelTable.OBJECT_COL);
 					textAreaDescricao.setText(pacoteComercial.getDescricao());
-					
-					
+
+
 				} else if (table.getSelectedRowCount() == 0) {
 					botaoEditarPacoteComercial.setEnabled(false);
 					botaoDesativarPacoteComercial.setEnabled(false);
 				}
+				botaoAtivarDinamico();
 			}
 		});
 	}

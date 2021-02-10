@@ -243,6 +243,7 @@ public class PacoteComercialDAO {
 
 	//primeiro ve se o pacote com o id inserido esta ativo, e s� depois desativa e insere a data atual
 	//no campo data_fim
+	@SuppressWarnings("resource")
 	public void desativarPacoteComercial (PacoteComercial pacoteComercial, Funcionario funcionario) throws Exception {
 		PreparedStatement myState = null; 
 
@@ -255,9 +256,15 @@ public class PacoteComercialDAO {
 				estaAtivo = rs.getBoolean(1);
 			}
 			
-			if(estaAtivo) {
-				myState = myConn.prepareStatement("UPDATE pacote_comercial SET ativo = 0,"
-						+ "data_fim = current_timestamp() WHERE id=?");
+			if(estaAtivo) {		
+				if(pacoteComercial.isAtivo()) {
+					myState = myConn.prepareStatement("UPDATE pacote_comercial SET ativo = 0,"
+							+ "data_fim = current_timestamp() WHERE id=?");
+				} else {
+					myState = myConn.prepareStatement("UPDATE pacote_comercial SET ativo = 1,"
+							+ "data_fim = current_timestamp() WHERE id=?");
+				}
+
 				myState.setInt(1, pacoteComercial.getId());
 				myState.executeUpdate();
 				
