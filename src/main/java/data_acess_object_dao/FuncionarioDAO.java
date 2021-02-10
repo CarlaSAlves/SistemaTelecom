@@ -349,7 +349,7 @@ public class FuncionarioDAO {
 	}
 
 	@SuppressWarnings("resource")
-	public void criarFuncionario(Funcionario operador, Funcionario admin) throws Exception {
+	public Funcionario criarFuncionario(Funcionario operador, Funcionario admin) throws Exception {
 		PreparedStatement myStmt = null;
 
 		try {
@@ -385,10 +385,12 @@ public class FuncionarioDAO {
 		}finally {
 			myStmt.close();
 		}
+		
+		return operador;
 	}
 
 	@SuppressWarnings("resource")
-	public void editarFuncionario(Funcionario operador, Funcionario admin) throws Exception {
+	public Funcionario editarFuncionario(Funcionario operador, Funcionario admin) throws Exception {
 		PreparedStatement myStmt = null;
 		try {
 
@@ -413,6 +415,7 @@ public class FuncionarioDAO {
 		}finally {
 			myStmt.close();
 		}
+		return operador;
 	}
 	
 	public void atribuirRoleAFuncionario(Role role, Funcionario funcionario) throws Exception {
