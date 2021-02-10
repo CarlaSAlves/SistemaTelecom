@@ -191,7 +191,6 @@ public class ClienteDAO {
 				cliente.setLogin(myRs.getString(5));
 				cliente.setPassword(myRs.getString(6));
 				cliente.setAtivo(myRs.getInt(7) == 1 ? true : false);
-				cliente.setId_pacote_cliente(myRs.getInt(8));
 			}
 			
 		} catch (Exception e) {
@@ -261,7 +260,6 @@ public class ClienteDAO {
 			myStmt.setString(4, cliente.getLogin());
 			myStmt.setString(5, PasswordEncryption.get_SHA_512_SecurePassword(cliente.getPassword()));
 			myStmt.setBoolean(6, cliente.isAtivo());
-			myStmt.setInt(7, cliente.getId_pacote_cliente());
 			myStmt.setInt(8, cliente.getId());
 			myStmt.executeUpdate();
 
@@ -356,9 +354,8 @@ public class ClienteDAO {
 		String login = myRs.getString("login");
 		String password = myRs.getString("password");
 		boolean ativo = myRs.getBoolean("ativo");
-		int id_pacote_cliente = myRs.getInt("id_pacote_cliente");
 
-		Cliente cliente = new Cliente(id, nome, nif, morada, login, password, ativo, id_pacote_cliente);
+		Cliente cliente = new Cliente(id, nome, nif, morada, login, password, ativo);
 
 		return cliente;
 	}
