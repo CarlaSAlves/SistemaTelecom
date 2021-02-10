@@ -10,9 +10,10 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
-import data_acess_object_dao.ClienteDAO;
 import data_acess_object_dao.FuncionarioDAO;
+import standard_value_object.Funcionario;
 
+//correr o script para criar a base de dados antes de correr estes testes
 public class TesteFuncionarioDAO {
 
 	private FuncionarioDAO funcionarioDAO;
@@ -22,9 +23,75 @@ public class TesteFuncionarioDAO {
 	}
 	
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testGetAllFuncionarioAdmin() throws Exception {
+		assertEquals(4, funcionarioDAO.getAllFuncionarioAdmin().size());
 	}
+	
+	@Test
+	public void testPesquisaOperadorAuxiliarID() throws Exception {
+		assertNotNull(funcionarioDAO.pesquisaFuncionarioById(1));
+	}
+	
+	@Test
+	public void testGetAllFuncionarioOperador() throws Exception {
+		assertEquals(1, funcionarioDAO.getAllFuncionarioOperador().size());
+	}
+	
+	@Test
+	public void testPesquisaFuncionarioAdmin() throws Exception {
+		assertNotNull(funcionarioDAO.pesquisaFuncionarioAdmin("admin"));
+	}
+	
+	@Test
+	public void testPesquisaFuncionarioOperador() throws Exception {
+		assertNotNull(funcionarioDAO.pesquisaFuncionarioOperador(0, "235", "", 1));
+	}
+	
+	@Test
+	public void testPesquisaTodosFuncionarios() throws Exception {
+		assertEquals(5, funcionarioDAO.pesquisaTodosFuncionarios().size());
+	}
+	
+	@Test
+	public void testPesquisaFuncionarioByNif() throws Exception {
+		assertEquals(2, funcionarioDAO.pesquisaFuncionarioByNif("235").size());
+	}
+	
+	@Test
+	public void testPesquisaFuncionarioByNome() throws Exception {
+		assertEquals(1, funcionarioDAO.pesquisaFuncionarioByNome("admin").size());
+	}
+	
+	@Test
+	public void testPesquisaFuncionarioById() throws Exception {
+		assertNotNull(funcionarioDAO.pesquisaFuncionarioById(1));
+	}
+	
+	@Test
+	public void testPesquisarFuncionarioLoginPass() throws Exception {
+		assertNotNull(funcionarioDAO.pesquisaFuncionarioById(1));
+	}
+	
+	@Test
+	public void testCriarFuncionario() throws Exception {
+		Funcionario operador = new Funcionario("TesteCriarFunc", 555666, "testeLoginFunc", 
+				"testPass", true, 2);
+		assertNotEquals(0, funcionarioDAO.criarFuncionario(operador, funcionarioDAO.pesquisaFuncionarioById(1)).getId());
+	}
+	
+//	@Test
+//	public void testEditarFuncionario() throws Exception {
+//		String novoNome = "testeEditar";
+//		
+//		//funcionario com id 5 é um operador
+//		Funcionario operador = funcionarioDAO.pesquisaFuncionarioById(5);
+//		operador.setNome(novoNome);
+//		//funcionario com id 1 é um admin
+//		Funcionario admin = funcionarioDAO.pesquisaFuncionarioById(1);
+//		funcionarioDAO.editarFuncionario(operador, admin);
+//		
+//		assertEquals(expected, actual);
+//	}
 	
 	//estabelece a ligaçao com a base de dados definida no documento sistema_tele.properties
 	private Connection startConnection() throws FileNotFoundException, IOException, SQLException {
