@@ -84,7 +84,7 @@ public class CriarOperadorDialog extends JDialog {
 	}
 
 	public CriarOperadorDialog() {
-		setBounds(500, 300, 417, 351);
+		setBounds(500, 300, 418, 275);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.text);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -160,9 +160,10 @@ public class CriarOperadorDialog extends JDialog {
 
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBounds(0, 189, 401, 44);
+			contentPanel.add(buttonPane);
 			buttonPane.setBackground(SystemColor.text);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
 
 			{

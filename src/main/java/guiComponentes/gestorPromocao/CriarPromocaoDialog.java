@@ -20,6 +20,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+import guiComponentes.gestorPacoteComercial.CriarPacotesDialog;
 import java.awt.Color;
 
 public class CriarPromocaoDialog extends JDialog {
@@ -69,7 +70,7 @@ public class CriarPromocaoDialog extends JDialog {
 	}
 
 	public CriarPromocaoDialog() {
-		setBounds(500, 300, 417, 351);
+		setBounds(500, 300, 415, 227);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -78,7 +79,7 @@ public class CriarPromocaoDialog extends JDialog {
 		{
 			JLabel lblNome = new JLabel("Nome");
 			lblNome.setBounds(5, 10, 86, 28);
-			lblNome.setFont(new Font("Dialog", Font.BOLD, 13));
+			lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblNome);
 		}
 		{
@@ -92,7 +93,7 @@ public class CriarPromocaoDialog extends JDialog {
 		{
 			JLabel lblDescricao = new JLabel("Descrição");
 			lblDescricao.setBounds(5, 49, 86, 28);
-			lblDescricao.setFont(new Font("Dialog", Font.BOLD, 13));
+			lblDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblDescricao);
 		}
 		{
@@ -104,13 +105,13 @@ public class CriarPromocaoDialog extends JDialog {
 		}
 
 		checkBoxAtivo = new JCheckBox("Ativa");
-		checkBoxAtivo.setBounds(209, 83, 86, 23);
+		checkBoxAtivo.setBounds(170, 96, 86, 23);
 		checkBoxAtivo.setBackground(Color.WHITE);
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		contentPanel.add(checkBoxAtivo);
 		{
 			JPanel painelConfirmacao = new JPanel();
-			painelConfirmacao.setBounds(5, 274, 396, 38);
+			painelConfirmacao.setBounds(5, 135, 396, 44);
 			contentPanel.add(painelConfirmacao);
 			painelConfirmacao.setBackground(Color.WHITE);
 			painelConfirmacao.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -123,6 +124,10 @@ public class CriarPromocaoDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 
 					public void actionPerformed(ActionEvent arg0) {
+						if (textFieldNome.getText().isBlank() || textFieldDescricao.getText().isBlank()) {
+							JOptionPane.showMessageDialog( CriarPromocaoDialog.this, "Todos os dados têm de ser preenchidos!");
+							return;
+						}
 						gravarPromocao();
 					}
 				});

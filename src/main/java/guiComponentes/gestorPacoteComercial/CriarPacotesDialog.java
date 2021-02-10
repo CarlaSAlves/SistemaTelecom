@@ -75,7 +75,7 @@ public class CriarPacotesDialog extends JDialog {
 
 	}
 	public CriarPacotesDialog() {
-		setBounds(500, 300, 417, 351);
+		setBounds(500, 300, 423, 224);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -84,7 +84,7 @@ public class CriarPacotesDialog extends JDialog {
 		{
 			JLabel lblNome = new JLabel("Nome");
 			lblNome.setBounds(5, 11, 86, 27);
-			lblNome.setFont(new Font("Dialog", Font.BOLD, 13));
+			lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblNome);
 		}
 		{
@@ -98,7 +98,7 @@ public class CriarPacotesDialog extends JDialog {
 		{
 			JLabel lblDescricao = new JLabel("Descrição");
 			lblDescricao.setBounds(5, 48, 86, 28);
-			lblDescricao.setFont(new Font("Dialog", Font.BOLD, 13));
+			lblDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblDescricao);
 		}
 		{
@@ -110,13 +110,13 @@ public class CriarPacotesDialog extends JDialog {
 		}
 
 		checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setBounds(208, 83, 86, 23);
+		checkBoxAtivo.setBounds(170, 96, 86, 23);
 		checkBoxAtivo.setBackground(Color.WHITE);
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		contentPanel.add(checkBoxAtivo);
 		{
 			JPanel painelConfirmacao = new JPanel();
-			painelConfirmacao.setBounds(5, 274, 396, 38);
+			painelConfirmacao.setBounds(5, 135, 396, 44);
 			contentPanel.add(painelConfirmacao);
 			painelConfirmacao.setBackground(Color.WHITE);
 			painelConfirmacao.setLayout(new FlowLayout(FlowLayout.RIGHT));
