@@ -17,6 +17,8 @@ import java.time.Duration;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import java.awt.TextArea;
+
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import servico.GestorDeDAO;
@@ -29,6 +31,8 @@ import javax.swing.JTextArea;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import guiComponentes.gestorCliente.ClientePesquisaModelTable;
 import historicos.HistoricoPacoteComercial;
 import javax.swing.JCheckBox;
 import java.awt.Color;
@@ -57,6 +61,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	private JTextField textFieldNome;
 	private JCheckBox checkBoxAtivo;
 	private JButton btPesquisar;
+	JTextArea textAreaDescricao;
 
 
 
@@ -140,8 +145,10 @@ public class GUI_gestor_pacotes extends JFrame {
 		lblCamposPesquisas.setBounds(98, 26, 294, 26);
 		contentPane.add(lblCamposPesquisas);
 		
-		JTextArea textAreaDescricao = new JTextArea();
+		
+		textAreaDescricao = new JTextArea();
 		textAreaDescricao.setBounds(905, 71, 367, 151);
+		textAreaDescricao.setLineWrap(true);
 		contentPane.add(textAreaDescricao);
 		
 	//	JPanel panel_1 = panel_1Setup();
@@ -425,7 +432,7 @@ private void panel_1ContentSetup(JPanel panel_1) {
 					for (int i = 0; i < indices.length; i++) {
 						PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indices[i],
 								PacoteComercialPesquisaModelTable.OBJECT_COL);
-						GestorDeDAO.getGestorDeDAO().desativarPacoteComercial(pacoteTemp.getId());
+					//	GestorDeDAO.getGestorDeDAO().desativarPacoteComercial(pacoteTemp.getId());
 
 					}
 					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
@@ -494,8 +501,13 @@ private void panel_1ContentSetup(JPanel panel_1) {
 					botaoEditarPacoteComercial.setEnabled(false);
 					botaoDesativarPacoteComercial.setEnabled(true);
 				} else if (table.getSelectedRows().length == 1) {
+					int row = table.getSelectedRow();
 					botaoEditarPacoteComercial.setEnabled(true);
 					botaoDesativarPacoteComercial.setEnabled(true);
+					PacoteComercial pacoteComercial = (PacoteComercial) table.getValueAt(row, PacoteComercialPesquisaModelTable.OBJECT_COL);
+					textAreaDescricao.setText(pacoteComercial.getDescricao());
+					
+					
 				} else if (table.getSelectedRowCount() == 0) {
 					botaoEditarPacoteComercial.setEnabled(false);
 					botaoDesativarPacoteComercial.setEnabled(false);

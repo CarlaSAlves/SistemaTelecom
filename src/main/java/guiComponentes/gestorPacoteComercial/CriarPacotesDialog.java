@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import servico.GestorDeDAO;
+import standard_value_object.Funcionario;
 import standard_value_object.PacoteComercial;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,6 +23,8 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import guiComponentes.GUI_total;
+
 import java.awt.Color;
 
 public class CriarPacotesDialog extends JDialog {
@@ -33,6 +36,7 @@ public class CriarPacotesDialog extends JDialog {
 	private PacoteComercial pacoteComercialAntigo;
 	private boolean modoEditar = false;
 	private JTextField textFieldNome;
+	
 	private JTextField textFieldDescricao;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 17);
 
@@ -169,14 +173,17 @@ public class CriarPacotesDialog extends JDialog {
 		}
 
 		try {
+			Funcionario funcionario = null;
 			if (modoEditar) {
-				GestorDeDAO.getGestorDeDAO().editarPacoteComercial(pacoteComercial);
+				funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+				GestorDeDAO.getGestorDeDAO().editarPacoteComercial(pacoteComercial,funcionario );
 				pacoteComercialPesquisaApp.refreshPacotesTable();
 				JOptionPane.showMessageDialog(pacoteComercialPesquisaApp,
 						"Pacote Comercial Editado com sucesso!", "Pacote Comercial Editado",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				GestorDeDAO.getGestorDeDAO().criarPacoteComercial(pacoteComercial);
+				funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+				GestorDeDAO.getGestorDeDAO().criarPacoteComercial(pacoteComercial, funcionario);
 				pacoteComercialPesquisaApp.refreshPacotesTable();
 				JOptionPane.showMessageDialog(pacoteComercialPesquisaApp,
 						"Pacote comercial criado com sucesso!", "Pacote Comercial Criado",

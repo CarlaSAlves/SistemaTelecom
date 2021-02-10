@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 import historicos.HistoricoPacoteComercial;
+import standard_value_object.Cliente;
+import standard_value_object.Funcionario;
 import standard_value_object.PacoteComercial;
 
 public class PacoteComercialDAO {
@@ -129,7 +131,7 @@ public class PacoteComercialDAO {
 		return pacoteComercial;
 	}
 
-	public void criarPacoteComercial (PacoteComercial pacote) throws Exception {
+	public void criarPacoteComercial (PacoteComercial pacote , Funcionario funcionario) throws Exception {
 		PreparedStatement myStmt = null;
 
 		//se se pode criar um pacoteComercial com ativo = false, entao nao faz sentido ter data_inicio definida de forma automatica
@@ -142,6 +144,22 @@ public class PacoteComercialDAO {
 			//se ativo = true, mudar a data_inicio para agora. De outro modo, colocar nulo na data_inicio
 			myStmt.setTimestamp(4, pacote.isAtivo() ? new Timestamp(System.currentTimeMillis()) : null);
 			myStmt.executeUpdate();
+			
+
+			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
+	            if (generatedKeys.next()) {
+	            	//recuperamos o id do cliente recém-criado e vamos atribui-lo ao objeto cliente enviado como parametro nesta funçao, só para o reaproveitar
+	            	pacote.setId((int)generatedKeys.getLong(1));
+	            }
+	            else {
+	                throw new SQLException("Criação de cliente falhou, nenhum ID foi devolvido.");
+	            }
+	        }
+			
+			//o nosso objeto cliente já contém o id, por isso podemos usa-lo diretamente na funçao seguinte
+			myStmt = logUpdate(funcionario, pacote, "Criar Cliente");	
+			
+			myStmt.executeUpdate();	
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -150,7 +168,7 @@ public class PacoteComercialDAO {
 	}
 
 	// Este metodo serve apenas para editar nome e descri�ao. Para Ativar/Desativar, usar os metodos correspondentes
-	public void editarPacoteComercial(PacoteComercial pacote) throws Exception {
+	public void editarPacoteComercial(PacoteComercial pacote, Funcionario funcionario) throws Exception {
 		PreparedStatement myState = null; 
 
 		try {
@@ -161,6 +179,21 @@ public class PacoteComercialDAO {
 			myState.setInt(5, pacote.getId());
 			
 			myState.executeUpdate();
+			
+			try (ResultSet generatedKeys = myState.getGeneratedKeys()) {
+	            if (generatedKeys.next()) {
+	            	//recuperamos o id do cliente recém-criado e vamos atribui-lo ao objeto cliente enviado como parametro nesta funçao, só para o reaproveitar
+	            	pacote.setId((int)generatedKeys.getLong(1));
+	            }
+	            else {
+	                throw new SQLException("Criação de cliente falhou, nenhum ID foi devolvido.");
+	            }
+	        }
+			
+			//o nosso objeto cliente já contém o id, por isso podemos usa-lo diretamente na funçao seguinte
+			myState = logUpdate(funcionario, pacote, "Editar Cliente");	
+			
+			myState.executeUpdate();	
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -203,10 +236,21 @@ public class PacoteComercialDAO {
 			close(myStmt, myRs);
 		}
 	}
+	
+	private PreparedStatement logUpdate(Funcionario funcionario, PacoteComercial pacote, String descricao) throws SQLException {
+		PreparedStatement myStmt;
+		myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
+
+		myStmt.setInt(1, funcionario.getId());
+		myStmt.setInt(2, pacote.getId());
+		myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+		myStmt.setString(4, descricao);
+		return myStmt;
+	}
 
 	//primeiro ve se o pacote com o id inserido esta ativo, e s� depois desativa e insere a data atual
 	//no campo data_fim
-	public void desativarPacoteComercial (int id) throws Exception {
+	public void desativarPacoteComercial (int id, Funcionario funcionario) throws Exception {
 		PreparedStatement myState = null; 
 
 		try {
@@ -223,6 +267,13 @@ public class PacoteComercialDAO {
 						+ "data_fim = current_timestamp() WHERE id=?");
 				myState.setInt(1, id);
 				myState.executeUpdate();
+				
+				
+				myState.setInt(1, id );
+				//o nosso objeto cliente já contém o id, por isso podemos usa-lo diretamente na funçao seguinte
+				myState = logUpdate(funcionario, pesquisaPacoteComercialById(id), "Editar Cliente");	
+				
+				myState.executeUpdate();	
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -257,8 +308,28 @@ public class PacoteComercialDAO {
 			myState.close();
 		}
 	}
-	
-	private PacoteComercial converteRowParaPacoteComercial(ResultSet myRs) throws SQLException {
+	public PacoteComercial pesquisaPacoteComercialAuxiliarID(int id) throws Exception {
+		PacoteComercial pacoteComercial = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			myStmt = myConn.prepareStatement("select * from pacote_comercial where id=?");
+			myStmt.setInt(1, id);
+			myRs = myStmt.executeQuery();
+
+			while (myRs.next()) {
+				pacoteComercial = converteRowParaPacoteComercial(myRs);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(myStmt, myRs);
+		}
+		
+		return pacoteComercial;
+	}
+	public PacoteComercial converteRowParaPacoteComercial(ResultSet myRs) throws SQLException {
 
 		int id = myRs.getInt("id");
 		String nome = myRs.getString("nome");

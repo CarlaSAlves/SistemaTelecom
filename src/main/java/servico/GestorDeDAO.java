@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
@@ -138,17 +139,17 @@ public class GestorDeDAO {
 		clienteDAO.atribuirPacoteCliente(pacoteClienteDAO.criarPacoteCliente(pacoteCliente), cliente);
 	}
 	
-	public void criarPacoteComercial(PacoteComercial pacoteComercial) throws Exception {
-		pacoteComercialDAO.criarPacoteComercial(pacoteComercial);
+	public void criarPacoteComercial(PacoteComercial pacoteComercial, Funcionario funcionario) throws Exception {
+		pacoteComercialDAO.criarPacoteComercial(pacoteComercial,funcionario);
 	}
 
-	public void editarPacoteComercial(PacoteComercial pacoteComercial) throws Exception {
-		pacoteComercialDAO.editarPacoteComercial(pacoteComercial);
+	public void editarPacoteComercial(PacoteComercial pacoteComercial, Funcionario funcionario) throws Exception {
+		pacoteComercialDAO.editarPacoteComercial(pacoteComercial,funcionario);
 	}
 
 
-	public void desativarPacoteComercial(int i) throws Exception {
-		pacoteComercialDAO.desativarPacoteComercial(i);
+	public void desativarPacoteComercial(int i, Funcionario funcionario) throws Exception {
+		pacoteComercialDAO.desativarPacoteComercial(i,funcionario);
 	}
 
 	public List<PacoteComercial> getAllPacotesComerciais() throws Exception{
@@ -159,6 +160,9 @@ public class GestorDeDAO {
 		return pacoteComercialDAO.pesquisaPacoteComercial(id, nome, ativo);
 	}
 
+	public PacoteComercial convertRowToPacoteComercial(ResultSet myRs) throws SQLException {
+		return pacoteComercialDAO.converteRowParaPacoteComercial(myRs);
+	}
 	public void criarPromocao(Promocao promocao) throws Exception {
 		promocaoDAO.criarPromocao(promocao);
 	}
@@ -170,6 +174,7 @@ public class GestorDeDAO {
 	public void desativarPromocao(int id) throws Exception {
 		promocaoDAO.desativarPromocao(id);
 	}
+	
 
 	public List<Promocao> getAllPromocoes() throws Exception {
 		return promocaoDAO.getAllPromocoes();
