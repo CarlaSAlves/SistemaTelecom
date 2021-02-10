@@ -69,7 +69,6 @@ public class CriarClienteDialog extends JDialog {
 		textFieldMorada.setText(clienteAntigo2.getMorada());
 		textFieldLogin.setText(clienteAntigo2.getLogin());
 		textFieldPassword.setText(clienteAntigo2.getPassword()); // .substring(0,8)
-		textFieldPacote.setText(clienteAntigo2.getId_pacote_cliente()+ "");
 		checkBoxAtivo.setSelected(clienteAntigo2.isAtivo());
 
 	}
@@ -223,7 +222,6 @@ public class CriarClienteDialog extends JDialog {
 		String login = textFieldLogin.getText();
 		String pass = textFieldPassword.getText();
 		boolean ativo = checkBoxAtivo.isSelected();
-		int idPacote = Integer.parseInt(textFieldPacote.getText());
 
 
 		Cliente cliente = null;
@@ -237,10 +235,9 @@ public class CriarClienteDialog extends JDialog {
 			cliente.setLogin(login);
 			cliente.setPassword(pass);
 			cliente.setAtivo(ativo);
-			cliente.setId_pacote_cliente(idPacote);
 
 		} else {
-			cliente = new Cliente( nome, nif, morada, login, pass, ativo, idPacote);
+			cliente = new Cliente( nome, nif, morada, login, pass, ativo);
 		}
 
 		try {

@@ -35,15 +35,12 @@ public class CriarOperadorDialog extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textFieldNome;
-	private JTextField textFieldNIF;
-	private JTextField textFieldLogin;
+	private JTextField textFieldNome, textFieldNIF, textFieldLogin;
 	private JPasswordField textFieldPassword;
 	private JCheckBox checkBoxAtivo;
 	private GUI_gestor_operador operadorPesquisaApp;
 	private Funcionario funcionarioAntigo;
 	private boolean modoEditar = false;
-	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 
 	public static void main(String[] args) {
 		try {

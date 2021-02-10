@@ -84,7 +84,6 @@ public class PacoteClienteDAO {
 	public PacoteCliente criarPacoteCliente(PacoteCliente pacoteCliente) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
-		
 
 			myStmt = myConn.prepareStatement("insert into pacote_cliente(id_pacote_comercial, data_inicio, id_criado_por) "
 					+ "VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
@@ -112,7 +111,7 @@ public class PacoteClienteDAO {
 		return pacoteCliente;
 	}
 	
-	public void adicionarPromocao(PacoteCliente pacoteCliente, Promocao promocao) throws SQLException{
+	public int adicionarPromocao(PacoteCliente pacoteCliente, Promocao promocao) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
 			myStmt = myConn.prepareStatement("INSERT INTO pacote_cliente_promoçao(id_pacote_cliente, id_promocao) VALUES(?, ?);");
@@ -124,6 +123,8 @@ public class PacoteClienteDAO {
 		}finally {
 			myStmt.close();
 		}
+		
+		return 1;
 	}
 	
 	public void removerPromocao(PacoteCliente pacoteCliente, Promocao promocao) throws SQLException{
