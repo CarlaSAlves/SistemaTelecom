@@ -24,7 +24,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import guiComponentes.GUI_total;
-
+import guiComponentes.gestorOperador.CriarOperadorDialog;
 import java.awt.Color;
 
 public class CriarPacotesDialog extends JDialog {
@@ -129,6 +129,11 @@ public class CriarPacotesDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 
 					public void actionPerformed(ActionEvent arg0) {
+						
+						if (textFieldNome.getText().isBlank() || textFieldDescricao.getText().isBlank()) {
+							JOptionPane.showMessageDialog( CriarPacotesDialog.this, "Todos os dados têm de ser preenchidos!");
+							return;
+						}
 						gravarPacoteComercial();
 					}
 				});
