@@ -99,7 +99,7 @@ public class GUI_total extends JFrame {
 		setLayout(null);
 
 		login = new GUI_login(this);
-		homepage = new GUI_homepage();
+		homepage = new GUI_homepage(this);
 		gestor_cliente = new GUI_gestor_cliente();
 		gestor_operador = new GUI_gestor_operador();
 		gestor_pacotes = new GUI_gestor_pacotes();
@@ -149,55 +149,7 @@ public class GUI_total extends JFrame {
 			}
 		});
 
-		homepage.getBtGerirClientes().addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				homepagePanel.setVisible(false);
-				gestor_clientePanel.setVisible(true);
-			}
-		});
-
-		homepage.getBtGerirOperadores().addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				homepagePanel.setVisible(false);
-				gestor_operadorPanel.setVisible(true);				
-			}
-		});
-
-
-		homepage.getBtGerirPromocoes().addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {				
-				homepagePanel.setVisible(false);				
-				gestor_promocaoPanel.setVisible(true);
-
-			}
-		});
-
-		homepage.getBtGerirPacotes().addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				homepagePanel.setVisible(false);
-				gestor_pacotesPanel.setVisible(true);
-			}
-		});
-
-		// BOTÃO VOLTAR
-		homepage.getBtVoltar().addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				gravarFicheiro(username, temporizador, dataEHoraDeLog, "sessaolog.txt");
-				loginPanel.setVisible(true);
-				homepagePanel.setVisible(false);
-			
-			}
-		});
+		
 
 		gestor_cliente.btVoltarGestorCliente().addActionListener(new ActionListener() {
 
@@ -327,6 +279,46 @@ public class GUI_total extends JFrame {
 		homepagePanel.setVisible(true);
 		comecarTemporizador();
 		
+	}
+
+
+	public void voltarBtHomePage() {
+		gravarFicheiro(username, temporizador, dataEHoraDeLog, "sessaolog.txt");
+		loginPanel.setVisible(true);
+		homepagePanel.setVisible(false);
+	}
+
+
+	public void gerirClientes() {
+		homepagePanel.setVisible(false);
+		gestor_clientePanel.setVisible(true);
+	}
+
+
+
+
+
+	public void gerirOperadores() {
+		homepagePanel.setVisible(false);
+		gestor_operadorPanel.setVisible(true);
+	}
+
+
+
+
+
+	public void gerirPromocoes() {
+		homepagePanel.setVisible(false);				
+		gestor_promocaoPanel.setVisible(true);
+	}
+
+
+
+
+
+	public void gerirPacotes() {
+		homepagePanel.setVisible(false);
+		gestor_pacotesPanel.setVisible(true);
 	}
 }
 
