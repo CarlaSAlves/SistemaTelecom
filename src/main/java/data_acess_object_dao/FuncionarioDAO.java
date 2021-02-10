@@ -459,7 +459,7 @@ public class FuncionarioDAO {
 		}
 		
 	}
-
+	
 	public List<HistoricoOperador> getHistoricoOperador(int id_operador) throws Exception {
 		List<HistoricoOperador> list = new ArrayList<HistoricoOperador>();
 

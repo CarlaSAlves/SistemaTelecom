@@ -159,9 +159,7 @@ public class GUI_login extends JFrame {
 				//primeiro vamos ver se o utilizador � um cliente
 				String login = textFieldUser.getText();
 				String pass = passwordField.getText();
-				
-				System.out.println("login: " + login + "\nPass: " + pass);
-				
+			
 				if(login.isBlank() || pass.isBlank()) {
 					JOptionPane.showMessageDialog(null, "Campos não podem estar vazios.");
 					return;
@@ -221,9 +219,9 @@ public class GUI_login extends JFrame {
 				panel.add(lblNewLabel);
 				
 				JLabel lblNewLabel_1 = new JLabel("");
-				lblNewLabel_1.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/fundoAltran.png")));
-				lblNewLabel_1.setBounds(0, 89, 1394, 586);
-				panel.add(lblNewLabel_1);
+                lblNewLabel_1.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/fundoAltran.png")));
+                lblNewLabel_1.setBounds(0, 89, 1394, 586);
+                panel.add(lblNewLabel_1);
 	}
 
 
