@@ -226,8 +226,6 @@ public class GUI_total extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				homepagePanel.setVisible(true);
 				gestor_pacotesPanel.setVisible(false);
-
-				System.out.println("Teste botão voltar !!!!");
 			}
 		});
 

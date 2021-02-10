@@ -106,3 +106,9 @@
 <duração da sessão:	0:3>
 </sessao>
 
+<sessao>
+<username:	admin>
+<data e hora do login:	10-02-2021 16:30:46>
+<duração da sessão:	3:44>
+</sessao>
+
