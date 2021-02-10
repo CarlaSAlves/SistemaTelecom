@@ -76,22 +76,22 @@ public class TesteFuncionarioDAO {
 	public void testCriarFuncionario() throws Exception {
 		Funcionario operador = new Funcionario("TesteCriarFunc", 555666, "testeLoginFunc", 
 				"testPass", true, 2);
-		assertNotEquals(0, funcionarioDAO.criarFuncionario(operador, funcionarioDAO.pesquisaFuncionarioById(1)).getId());
+		assertNotEquals(0, funcionarioDAO.criarFuncionario(operador, funcionarioDAO.pesquisaFuncionarioById(1)).getId()  );
 	}
 	
-//	@Test
-//	public void testEditarFuncionario() throws Exception {
-//		String novoNome = "testeEditar";
-//		
-//		//funcionario com id 5 é um operador
-//		Funcionario operador = funcionarioDAO.pesquisaFuncionarioById(5);
-//		operador.setNome(novoNome);
-//		//funcionario com id 1 é um admin
-//		Funcionario admin = funcionarioDAO.pesquisaFuncionarioById(1);
-//		funcionarioDAO.editarFuncionario(operador, admin);
-//		
-//		assertEquals(expected, actual);
-//	}
+	@Test
+	public void testEditarFuncionario() throws Exception {
+		String novoNome = "testeEditar";
+		
+		//funcionario com id 5 é um operador
+		Funcionario operador = funcionarioDAO.pesquisaFuncionarioById(5);
+		operador.setNome(novoNome);
+		//funcionario com id 1 é um admin
+		Funcionario admin = funcionarioDAO.pesquisaFuncionarioById(1);
+		operador = funcionarioDAO.editarFuncionario(operador, admin);
+		
+		assertTrue(novoNome.equals(operador.getNome()));
+	}
 	
 	//estabelece a ligaçao com a base de dados definida no documento sistema_tele.properties
 	private Connection startConnection() throws FileNotFoundException, IOException, SQLException {
