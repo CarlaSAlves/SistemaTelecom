@@ -197,7 +197,7 @@ public class CriarClienteDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						if(modoEditar) {
-							
+
 							if (textFieldNome.getText().isBlank() || textFieldMorada.getText().isBlank() || textFieldLogin.getText().isBlank()) {
 								JOptionPane.showMessageDialog( CriarClienteDialog.this, "Todos os dados têm de ser preenchidos!");
 								return;
@@ -217,6 +217,7 @@ public class CriarClienteDialog extends JDialog {
 							gravarCliente();
 
 						}else {
+
 							if (textFieldNome.getText().isBlank() || textFieldMorada.getText().isBlank() || textFieldLogin.getText().isBlank() || textFieldPassword.getText().isBlank()) {
 								JOptionPane.showMessageDialog( CriarClienteDialog.this, "Todos os dados têm de ser preenchidos!");
 								return;
@@ -232,7 +233,7 @@ public class CriarClienteDialog extends JDialog {
 								JOptionPane.showMessageDialog( CriarClienteDialog.this, "A NIF tem de ser um inteiro!");
 								return;
 							}
-
+							gravarCliente();
 						}
 					}
 				});
