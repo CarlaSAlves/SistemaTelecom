@@ -71,7 +71,7 @@ public class TesteClienteDAO {
 		Cliente cliente = clienteDAO.pesquisaClienteAuxiliarID(5);
 		cliente.setNome(novoNome);
 		
-		clienteDAO.editarCliente(cliente, funcionario);
+		clienteDAO.editarCliente(cliente, funcionario, null);
 		
 		assertEquals(novoNome, clienteDAO.pesquisaClienteAuxiliarID(5).getNome());
 	}

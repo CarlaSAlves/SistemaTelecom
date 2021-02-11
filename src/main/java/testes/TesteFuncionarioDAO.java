@@ -89,7 +89,7 @@ public class TesteFuncionarioDAO {
 		operador.setNome(novoNome);
 		//funcionario com id 1 é um admin
 		Funcionario admin = funcionarioDAO.pesquisaFuncionarioById(1);
-		operador = funcionarioDAO.editarFuncionario(operador, admin);
+		operador = funcionarioDAO.editarFuncionario(operador, admin, null);
 		
 		assertTrue(novoNome.equals(operador.getNome()));
 	}

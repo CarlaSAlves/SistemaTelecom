@@ -247,9 +247,25 @@ public class ClienteDAO {
 	}
 
 	@SuppressWarnings("resource")
-	public Cliente editarCliente(Cliente cliente, Funcionario funcionario) throws Exception {
+	public Cliente editarCliente(Cliente cliente, Funcionario funcionario, String novaPass) throws Exception {
 		PreparedStatement myStmt = null;
 		try {
+			
+			StringBuilder query = new StringBuilder();
+			query.append("UPDATE `funcionario` SET "
+					+ "`nome`= \"" + cliente.getNome() + "\","
+					+ "`nif`=" + cliente.getNif() + ","
+					+ "`login`= \"" + cliente.getLogin() +"\", "
+					+ "`ativo`=" + cliente.isAtivo() +", "
+					+ "`morada`= \"" + cliente.getMorada() +"\", ");
+			
+			if (novaPass != null && !novaPass.isBlank()) {
+				query.append("`password`= \"" + PasswordEncryption.get_SHA_512_SecurePassword(novaPass) + "\",");
+			}
+			query.append("WHERE  `id`=" + cliente.getId() + ",");
+			
+			myStmt = myConn.prepareStatement(query.toString());
+			myStmt.executeUpdate();
 
 			myStmt = myConn.prepareStatement("UPDATE `cliente` SET `nome`=?, `nif`=?, `morada`=?, "
 					+ "`login`=?, `password`=?, `ativo`=?, `id_pacote_cliente`=? WHERE  `id`=?");
