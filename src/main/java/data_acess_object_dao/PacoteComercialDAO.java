@@ -307,9 +307,9 @@ public class PacoteComercialDAO {
 		try {
 			myStmt = myConn.createStatement();
 
-			String sql = "SELECT HistoricoPacoteComercial.id_funcionario, HistoricoPacoteComercial.id_operador, HistoricoPacoteComercial.descricao, "
-					+ "HistoricoPacoteComercial.data_registo, admin.nome "
-					+ "FROM funcionario_log_PacoteComercial HistoricoPacoteComercial, funcionario admin WHERE HistoricoPacoteComercial.id_funcionario=admin.id AND HistoricoPacoteComercial.id_operador=" + id_pacoteComercial;
+			String sql = "SELECT HistoricoPacoteComercial.id_funcionario, HistoricoPacoteComercial.id_pacote_comercial, HistoricoPacoteComercial.descricao, "
+					+ "HistoricoPacoteComercial.data_registo, admin.nome"
+					+ "FROM funcionario_log_pacote_comercial HistoricoPacoteComercial, funcionario admin WHERE HistoricoPacoteComercial.id_funcionario=admin.id AND HistoricoPacoteComercial.id_pacote_comercial=" + id_pacoteComercial;
 
 			myRs = myStmt.executeQuery(sql);
 
