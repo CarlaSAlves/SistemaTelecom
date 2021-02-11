@@ -132,13 +132,14 @@ public class PacoteComercialDAO {
 	}
 
 	@SuppressWarnings("resource")
-	public void criarPacoteComercial (PacoteComercial pacote , Funcionario funcionario) throws Exception {
+	public PacoteComercial criarPacoteComercial (PacoteComercial pacote , Funcionario funcionario) throws Exception {
 		PreparedStatement myStmt = null;
 
 		//se se pode criar um pacoteComercial com ativo = false, entao nao faz sentido ter data_inicio definida de forma automatica
 		//pelo mysql. � preciso que seja definida manualmente
 		try {
-			myStmt = myConn.prepareStatement("INSERT INTO pacote_comercial(nome, descricao, ativo, data_inicio) VALUES(?,?,?,?)");
+			myStmt = myConn.prepareStatement("INSERT INTO pacote_comercial(nome, descricao, ativo, data_inicio) VALUES(?,?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
 			myStmt.setString(1, pacote.getNome());
 			myStmt.setString(2, pacote.getDescricao());
 			myStmt.setBoolean(3, pacote.isAtivo());
@@ -146,12 +147,10 @@ public class PacoteComercialDAO {
 			myStmt.setTimestamp(4, pacote.isAtivo() ? new Timestamp(System.currentTimeMillis()) : null);
 			myStmt.executeUpdate();
 
-
 			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
 				if (generatedKeys.next()) {
 					//recuperamos o id do cliente recém-criado e vamos atribui-lo ao objeto cliente enviado como parametro nesta funçao, só para o reaproveitar
 					pacote.setId((int)generatedKeys.getLong(1));
-
 				}
 				else {
 					throw new SQLException("Criacao do Pacote Comercial falhou, nenhum ID foi devolvido.");
@@ -161,18 +160,17 @@ public class PacoteComercialDAO {
 			myStmt.executeUpdate();	
 			//o nosso objeto cliente já contém o id, por isso podemos usa-lo diretamente na funçao seguinte
 
-
-
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			myStmt.close();
 		}
+		return pacote;
 	}
 
 	// Este metodo serve apenas para editar nome e descri�ao. Para Ativar/Desativar, usar os metodos correspondentes
 	@SuppressWarnings("resource")
-	public void editarPacoteComercial(PacoteComercial pacote, Funcionario funcionario) throws Exception {
+	public PacoteComercial editarPacoteComercial(PacoteComercial pacote, Funcionario funcionario) throws Exception {
 		PreparedStatement myState = null; 
 
 		try {
@@ -192,6 +190,7 @@ public class PacoteComercialDAO {
 		} finally {
 			myState.close();
 		}
+		return pacote;
 	}
 
 	public List<HistoricoPacoteComercial> getHistoricoPacoteComercial(int id_pacote) throws Exception {
