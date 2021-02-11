@@ -73,8 +73,11 @@ public class CriarOperadorDialog extends JDialog {
 
 				@Override
 				public void focusLost(FocusEvent e) {
-					lblNewLabel.setText("Deixe este campo vazio senao deseja redifinir a password");
-					lblNewLabel.setVisible(true);
+					if(textFieldPassword.getText().isBlank()) {
+						lblNewLabel.setVisible(true);
+					}else {
+						lblNewLabel.setVisible(false);
+					}
 
 				}
 
