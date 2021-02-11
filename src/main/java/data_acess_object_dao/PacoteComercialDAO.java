@@ -204,7 +204,7 @@ public class PacoteComercialDAO {
 			myStmt = myConn.createStatement();
 
 			String sql = "SELECT HistoricoPacoteComercial.id_funcionario, HistoricoPacoteComercial.id_pacote_comercial, HistoricoPacoteComercial.descricao, "
-					+ "HistoricoPacoteComercial.data_registo, admin.nome "
+					+ "HistoricoPacoteComercial.data_registo, admin.nome"
 					+ "FROM funcionario_log_pacote_comercial HistoricoPacoteComercial, funcionario admin WHERE HistoricoPacoteComercial.id_funcionario=admin.id AND HistoricoPacoteComercial.id_pacote_comercial=" + id_pacote;
 
 			myRs = myStmt.executeQuery(sql);

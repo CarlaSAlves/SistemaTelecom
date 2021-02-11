@@ -253,6 +253,7 @@ public class GUI_login extends JFrame {
 					//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
 					//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
 					guit.loginEfetuado();
+				labelConfm.setVisible(false);
 					return;
 				//role 2 = operador	
 				case(2):
