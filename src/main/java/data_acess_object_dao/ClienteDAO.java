@@ -249,38 +249,32 @@ public class ClienteDAO {
 	@SuppressWarnings("resource")
 	public Cliente editarCliente(Cliente cliente, Funcionario funcionario, String novaPass) throws Exception {
 		PreparedStatement myStmt = null;
+		String passEncriptada = null;
 		try {
 			
 			StringBuilder query = new StringBuilder();
-			query.append("UPDATE `funcionario` SET "
+			query.append("UPDATE `cliente` SET "
 					+ "`nome`= \"" + cliente.getNome() + "\","
 					+ "`nif`=" + cliente.getNif() + ","
+					+ "`morada`= \"" + cliente.getMorada() +"\", "
 					+ "`login`= \"" + cliente.getLogin() +"\", "
-					+ "`ativo`=" + cliente.isAtivo() +", "
-					+ "`morada`= \"" + cliente.getMorada() +"\", ");
+					+ "`ativo`=" + cliente.isAtivo() +", ");
 			
 			if (novaPass != null && !novaPass.isBlank()) {
-				query.append("`password`= \"" + PasswordEncryption.get_SHA_512_SecurePassword(novaPass) + "\",");
+				passEncriptada = PasswordEncryption.get_SHA_512_SecurePassword(novaPass);
+				query.append("`password`= \"" + passEncriptada + "\" ");
 			}
-			query.append("WHERE  `id`=" + cliente.getId() + ",");
+			query.append(" WHERE `id`=" + cliente.getId() + ";");
+			
+//			System.out.println(query.toString());
 			
 			myStmt = myConn.prepareStatement(query.toString());
 			myStmt.executeUpdate();
 
-			myStmt = myConn.prepareStatement("UPDATE `cliente` SET `nome`=?, `nif`=?, `morada`=?, "
-					+ "`login`=?, `password`=?, `ativo`=?, `id_pacote_cliente`=? WHERE  `id`=?");
-
-			myStmt.setString(1, cliente.getNome());
-			myStmt.setLong(2, cliente.getNif());
-			myStmt.setString(3, cliente.getMorada());
-			myStmt.setString(4, cliente.getLogin());
-			myStmt.setString(5, PasswordEncryption.get_SHA_512_SecurePassword(cliente.getPassword()));
-			myStmt.setBoolean(6, cliente.isAtivo());
-			myStmt.setInt(8, cliente.getId());
-			myStmt.executeUpdate();
-
 			myStmt = logUpdate(funcionario, cliente, "Editar Cliente");	
 			myStmt.executeUpdate();
+			
+			cliente.setPassword(passEncriptada);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -370,8 +364,9 @@ public class ClienteDAO {
 		String login = myRs.getString("login");
 		String password = myRs.getString("password");
 		boolean ativo = myRs.getBoolean("ativo");
+		int id_pacote_cliente = myRs.getInt("id_pacote_cliente");
 
-		Cliente cliente = new Cliente(id, nome, nif, morada, login, password, ativo);
+		Cliente cliente = new Cliente(id, nome, nif, morada, login, password, ativo, id_pacote_cliente);
 
 		return cliente;
 	}

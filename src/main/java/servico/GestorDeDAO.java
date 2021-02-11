@@ -65,8 +65,8 @@ public class GestorDeDAO {
 		clienteDAO.criarCliente(cliente, funcionario);
 	}
 
-	public void editarCliente(Cliente cliente, Funcionario funcionario) throws Exception {
-		clienteDAO.editarCliente(cliente, funcionario);
+	public void editarCliente(Cliente cliente, Funcionario funcionario, String novaPass) throws Exception {
+		clienteDAO.editarCliente(cliente, funcionario, novaPass);
 	}
 
 	public void desativarCliente(int id, Funcionario funcionario) throws SQLException {
@@ -98,8 +98,8 @@ public class GestorDeDAO {
 		funcionarioDAO.criarFuncionario(funcionario, admin);
 	}
 
-	public void editarFuncionario(Funcionario funcionario, Funcionario admin) throws Exception {
-		funcionarioDAO.editarFuncionario(funcionario, admin);
+	public void editarFuncionario(Funcionario funcionario, Funcionario admin, String novaPass) throws Exception {
+		funcionarioDAO.editarFuncionario(funcionario, admin, novaPass);
 	}
 
 	public void desativarFuncionario(int id, Funcionario admin) throws Exception {
