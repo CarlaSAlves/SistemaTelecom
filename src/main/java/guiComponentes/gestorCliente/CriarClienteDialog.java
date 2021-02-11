@@ -65,9 +65,9 @@ public class CriarClienteDialog extends JDialog {
 			lblPassword.setText("Nova Password");
 			lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 11));
 			popularTextFields(clienteAntigo);
-			lblNewLabel.setText("Deixe este campo vazio senao deseja redifinir a password");
+			lblNewLabel.setText("Nao preencher se desejar manter a password atual");
 			lblNewLabel.setVisible(true);
-		
+
 			textFieldPassword.addFocusListener(new FocusListener() {
 
 				@Override
@@ -77,7 +77,7 @@ public class CriarClienteDialog extends JDialog {
 					}else {
 						lblNewLabel.setVisible(false);
 					}
-				
+
 				}
 
 				@Override
@@ -86,8 +86,8 @@ public class CriarClienteDialog extends JDialog {
 
 				}
 			});
-			
-			
+
+
 		}
 	}
 
@@ -111,7 +111,7 @@ public class CriarClienteDialog extends JDialog {
 		lblNewLabel = new JLabel();
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lblNewLabel.setForeground(Color.LIGHT_GRAY);
-		lblNewLabel.setBounds(111, 170, 290, 14);
+		lblNewLabel.setBounds(130, 170, 262, 14);
 		lblNewLabel.setVisible(false);
 		contentPanel.add(lblNewLabel);
 		{
@@ -196,25 +196,44 @@ public class CriarClienteDialog extends JDialog {
 				okButton.setFocusPainted(false);
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						if(modoEditar) {
+							
+							if (textFieldNome.getText().isBlank() || textFieldMorada.getText().isBlank() || textFieldPassword.getText().isBlank()) {
+								JOptionPane.showMessageDialog( CriarClienteDialog.this, "Todos os dados têm de ser preenchidos!");
+								return;
+							}
+							if( textFieldNIF.getText().isBlank()) {
+								JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem que estar preenchido!");
+								return;
+							}
+							try {
+								Integer.parseInt( textFieldNIF.getText() );
+							}
+							catch( Exception ex ){
+								JOptionPane.showMessageDialog( CriarClienteDialog.this, "A NIF tem de ser um inteiro!");
+								return;
+							}
 
-						if (textFieldNome.getText().isBlank() || textFieldMorada.getText().isBlank() || textFieldLogin.getText().isBlank()) {
-							JOptionPane.showMessageDialog( CriarClienteDialog.this, "Todos os dados têm de ser preenchidos!");
-							return;
-						}
-						if( textFieldNIF.getText().isBlank()) {
-							JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem que estar preenchido!");
-							return;
-						}
-						try {
-							Integer.parseInt( textFieldNIF.getText() );
-						}
-						catch( Exception ex ){
-							JOptionPane.showMessageDialog( CriarClienteDialog.this, "A NIF tem de ser um inteiro!");
-							return;
-						}
+							gravarCliente();
 
-						gravarCliente();
+						}else {
+							if (textFieldNome.getText().isBlank() || textFieldMorada.getText().isBlank() || textFieldLogin.getText().isBlank() || textFieldLogin.getText().isBlank()) {
+								JOptionPane.showMessageDialog( CriarClienteDialog.this, "Todos os dados têm de ser preenchidos!");
+								return;
+							}
+							if( textFieldNIF.getText().isBlank()) {
+								JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem que estar preenchido!");
+								return;
+							}
+							try {
+								Integer.parseInt( textFieldNIF.getText() );
+							}
+							catch( Exception ex ){
+								JOptionPane.showMessageDialog( CriarClienteDialog.this, "A NIF tem de ser um inteiro!");
+								return;
+							}
 
+						}
 					}
 				});
 
