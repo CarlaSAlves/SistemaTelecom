@@ -211,11 +211,11 @@ public class GUI_gestor_pacotes extends JFrame {
 							int ativo = checkBoxAtivo.isSelected() ? 1 : 0;
 
 							if (!textPesquisaID.getText().isBlank()) {
-								id = Integer.parseInt(textPesquisaID.getText());
+								id = Integer.parseInt(textPesquisaID.getText().trim());
 							}
 
 							if (!textFieldNome.getText().isBlank()) {
-								nome = textFieldNome.getText();
+								nome = textFieldNome.getText().trim();
 							}
 
 							List<PacoteComercial> pacotesComerciais = null;

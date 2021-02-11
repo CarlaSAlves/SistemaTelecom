@@ -197,19 +197,19 @@ public class GUI_gestor_cliente extends JFrame {
 					int ativo = checkBoxAtivo.isSelected()? 1:0;
 
 					if(!textPesquisaID.getText().isBlank()) {
-						id = Integer.parseInt(textPesquisaID.getText());
+						id = Integer.parseInt(textPesquisaID.getText().trim());
 					}
 
 					if(!textPesquisaNIF.getText().isBlank()) {
-						nif = textPesquisaNIF.getText();
+						nif = textPesquisaNIF.getText().trim();
 					}
 
 					if(!textFieldNome.getText().isBlank()) {
-						nome = textFieldNome.getText();
+						nome = textFieldNome.getText().trim();
 					}
 
 					if(!textFieldMorada.getText().isBlank()) {
-						morada = textFieldMorada.getText();
+						morada = textFieldMorada.getText().trim();
 					}
 
 
