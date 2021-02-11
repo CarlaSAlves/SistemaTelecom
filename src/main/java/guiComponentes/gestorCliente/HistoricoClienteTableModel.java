@@ -15,7 +15,7 @@ public class HistoricoClienteTableModel extends AbstractTableModel {
 	private static final int FUNCIONARIO_COL = 2;
 	private static final int ID_COL = 3;
 
-
+int test;
 	private String[] columnNames = { "Data", "Registo", "Funcionario", "ID Admin" };
 
 	private List<HistoricoCliente> historicoLista;
