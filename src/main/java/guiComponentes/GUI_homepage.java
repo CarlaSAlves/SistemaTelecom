@@ -66,7 +66,7 @@ public class GUI_homepage extends JFrame {
 		lblUsernameLogged.setText("Username:");
 		lblUsernameLogged.setBounds(1215, 699, 166, 16);
 		panel.add(lblUsernameLogged);
-		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 
 
 
@@ -75,7 +75,7 @@ public class GUI_homepage extends JFrame {
 		lblTempoSessao.setText("Sessao:");
 		lblTempoSessao.setBounds(1215, 717, 159, 18);
 		panel.add(lblTempoSessao);
-		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 
 
 
@@ -84,7 +84,7 @@ public class GUI_homepage extends JFrame {
 		lblHoraSistema.setBounds(1215, 737, 159, 18);
 		panel.add(lblHoraSistema);
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 
 		JLabel lblPoesia = new JLabel("Portal Do Administrador");
 		lblPoesia.setBounds(161, 117, 508, 33);
