@@ -198,7 +198,7 @@ public class CriarClienteDialog extends JDialog {
 					public void actionPerformed(ActionEvent arg0) {
 						if(modoEditar) {
 							
-							if (textFieldNome.getText().isBlank() || textFieldMorada.getText().isBlank() || textFieldPassword.getText().isBlank()) {
+							if (textFieldNome.getText().isBlank() || textFieldMorada.getText().isBlank() || textFieldLogin.getText().isBlank()) {
 								JOptionPane.showMessageDialog( CriarClienteDialog.this, "Todos os dados têm de ser preenchidos!");
 								return;
 							}
@@ -217,7 +217,7 @@ public class CriarClienteDialog extends JDialog {
 							gravarCliente();
 
 						}else {
-							if (textFieldNome.getText().isBlank() || textFieldMorada.getText().isBlank() || textFieldLogin.getText().isBlank() || textFieldLogin.getText().isBlank()) {
+							if (textFieldNome.getText().isBlank() || textFieldMorada.getText().isBlank() || textFieldLogin.getText().isBlank() || textFieldPassword.getText().isBlank()) {
 								JOptionPane.showMessageDialog( CriarClienteDialog.this, "Todos os dados têm de ser preenchidos!");
 								return;
 							}
