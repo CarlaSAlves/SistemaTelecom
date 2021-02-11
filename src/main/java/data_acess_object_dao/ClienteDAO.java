@@ -247,34 +247,43 @@ public class ClienteDAO {
 	}
 
 	@SuppressWarnings("resource")
-	public Cliente editarCliente(Cliente cliente, Funcionario funcionario, String novaPass) throws Exception {
+	public Cliente editarCliente(Cliente cliente, Funcionario funcionario, String password) throws Exception {
 		PreparedStatement myStmt = null;
-		String passEncriptada = null;
+
 		try {
-			
-			StringBuilder query = new StringBuilder();
-			query.append("UPDATE `cliente` SET "
-					+ "`nome`= \"" + cliente.getNome() + "\","
-					+ "`nif`=" + cliente.getNif() + ","
-					+ "`morada`= \"" + cliente.getMorada() +"\", "
-					+ "`login`= \"" + cliente.getLogin() +"\", "
-					+ "`ativo`=" + cliente.isAtivo() +", ");
-			
-			if (novaPass != null && !novaPass.isBlank()) {
-				passEncriptada = PasswordEncryption.get_SHA_512_SecurePassword(novaPass);
-				query.append("`password`= \"" + passEncriptada + "\" ");
+
+			if(password == null) {
+				myStmt = myConn.prepareStatement("UPDATE `cliente` SET `nome`=?, `nif`=?, `morada`=?, "
+						+ "`login`=? WHERE  `id`=?");
+
+				myStmt.setString(1, cliente.getNome());
+				myStmt.setLong(2, cliente.getNif());
+				myStmt.setString(3, cliente.getMorada());
+				myStmt.setString(4, cliente.getLogin());
+				myStmt.setInt(5, cliente.getId());
+
+				myStmt.executeUpdate();
+
+			}else {
+
+				myStmt = myConn.prepareStatement("UPDATE `cliente` SET `nome`=?, `nif`=?, `morada`=?, "
+						+ "`login`=?, `password`=? WHERE  `id`=?");
+
+				myStmt.setString(1, cliente.getNome());
+				myStmt.setLong(2, cliente.getNif());
+				myStmt.setString(3, cliente.getMorada());
+				myStmt.setString(4, cliente.getLogin());
+				myStmt.setString(5, PasswordEncryption.get_SHA_512_SecurePassword(password));
+				myStmt.setInt(6, cliente.getId());
+
+				myStmt.executeUpdate();
+
+
 			}
-			query.append(" WHERE `id`=" + cliente.getId() + ";");
-			
-//			System.out.println(query.toString());
-			
-			myStmt = myConn.prepareStatement(query.toString());
-			myStmt.executeUpdate();
 
 			myStmt = logUpdate(funcionario, cliente, "Editar Cliente");	
 			myStmt.executeUpdate();
-			
-			cliente.setPassword(passEncriptada);
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -287,12 +296,12 @@ public class ClienteDAO {
 	public void desativarCliente(int id, Funcionario funcionario ) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
-			
+
 			Cliente cliente = pesquisaClienteAuxiliarID(id);
 
 			myStmt = myConn.prepareStatement("update cliente SET `ativo`= 0 where id=?");
 			myStmt.setLong(1, id);
-			
+
 			myStmt.executeUpdate();
 
 
@@ -307,17 +316,17 @@ public class ClienteDAO {
 		}
 	}
 
+	@SuppressWarnings("resource")
 	public void ativarCliente(int id, Funcionario funcionario ) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
-			
+
 			Cliente cliente = pesquisaClienteAuxiliarID(id);
 
 			myStmt = myConn.prepareStatement("update cliente SET `ativo`= 1 where id=?");
 			myStmt.setLong(1, id);
-			
-			myStmt.executeUpdate();
 
+			myStmt.executeUpdate();
 
 			myStmt = logUpdate(funcionario, cliente, "Ativar Cliente");	
 
@@ -329,7 +338,7 @@ public class ClienteDAO {
 			myStmt.close();
 		}
 	}
-	
+
 	public void atribuirPacoteCliente(PacoteCliente pacoteCliente, Cliente cliente) throws Exception {
 		PreparedStatement myStmt = null;
 

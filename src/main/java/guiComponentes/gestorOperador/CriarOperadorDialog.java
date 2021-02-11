@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -40,6 +43,8 @@ public class CriarOperadorDialog extends JDialog {
 	private GUI_gestor_operador operadorPesquisaApp;
 	private Funcionario funcionarioAntigo;
 	private boolean modoEditar = false;
+	private JLabel lblPassword, lblNewLabel;
+
 
 	public static void main(String[] args) {
 		try {
@@ -65,7 +70,25 @@ public class CriarOperadorDialog extends JDialog {
 		if(modoEditar) {
 			setTitle("Editar Operador");
 			popularTextFields(funcionarioTemp);
+			lblPassword.setText("Nova Password");
+			lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 11));
+			lblNewLabel.setText("Deixe este campo vazio senao deseja redifinir a password");
+			lblNewLabel.setVisible(true);
+			textFieldPassword.addFocusListener(new FocusListener() {
 
+				@Override
+				public void focusLost(FocusEvent e) {
+					lblNewLabel.setText("Deixe este campo vazio senao deseja redifinir a password");
+					lblNewLabel.setVisible(true);
+
+				}
+
+				@Override
+				public void focusGained(FocusEvent e) {
+					lblNewLabel.setVisible(false);
+
+				}
+			});
 		}
 	}
 
@@ -73,7 +96,6 @@ public class CriarOperadorDialog extends JDialog {
 		textFieldNome.setText(funcionarioTemp.getNome()+ "");
 		textFieldNIF.setText(funcionarioTemp.getNif() + "");
 		textFieldLogin.setText(funcionarioTemp.getLogin());
-		textFieldPassword.setText(funcionarioTemp.getPassword()); //.substring(0,8)
 	}
 
 	public CriarOperadorDialog() {
@@ -84,6 +106,13 @@ public class CriarOperadorDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		setTitle("Novo Operador");
 		contentPanel.setLayout(null);
+		
+		lblNewLabel = new JLabel();
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblNewLabel.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel.setBounds(111, 132, 290, 14);
+		lblNewLabel.setVisible(false);
+		contentPanel.add(lblNewLabel);
 		{
 			JLabel lblNome = new JLabel("Nome");
 			lblNome.setBounds(17, 11, 70, 27);
@@ -106,7 +135,7 @@ public class CriarOperadorDialog extends JDialog {
 		}
 
 		{
-			JLabel lblPassword = new JLabel("Password");
+			lblPassword = new JLabel("Password");
 			lblPassword.setBounds(17, 125, 70, 27);
 			lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblPassword);
@@ -163,7 +192,7 @@ public class CriarOperadorDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 
-						if (textFieldNome.getText().isBlank() || textFieldLogin.getText().isBlank() || textFieldPassword.getPassword().length == 0) {
+						if (textFieldNome.getText().isBlank() || textFieldLogin.getText().isBlank()) {
 							JOptionPane.showMessageDialog( CriarOperadorDialog.this, "Todos os dados têm de ser preenchidos!");
 							return;
 						}
@@ -209,10 +238,15 @@ public class CriarOperadorDialog extends JDialog {
 
 	@SuppressWarnings("deprecation")
 	private void gravarOperador() {
+		String pass;
 		String nome = textFieldNome.getText();
 		int nif = Integer.parseInt(textFieldNIF.getText());
 		String login = textFieldLogin.getText();
-		String pass = textFieldPassword.getText();
+		if(textFieldPassword.getText().isBlank()) {
+			pass = null;
+		}else {
+			pass = textFieldPassword.getText();
+		}
 		boolean ativo = true; 
 
 		Funcionario funcionario = null;
@@ -223,8 +257,12 @@ public class CriarOperadorDialog extends JDialog {
 			funcionario.setNif(nif);
 			funcionario.setNome(nome);
 			funcionario.setLogin(login);
-			funcionario.setPassword(pass);
-			funcionario.setAtivo(ativo);
+			if(textFieldPassword.getText().isBlank()) {
+				funcionario.setPassword(funcionarioAntigo.getPassword());
+			}else {
+				funcionario.setPassword(pass);
+			}
+			funcionario.setAtivo(funcionarioAntigo.isAtivo());
 
 		} else {
 			funcionario = new Funcionario(nome, nif, login, pass, ativo, 2);

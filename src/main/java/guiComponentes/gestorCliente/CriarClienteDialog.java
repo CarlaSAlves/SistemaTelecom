@@ -4,6 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -30,8 +36,7 @@ public class CriarClienteDialog extends JDialog {
 	private Cliente clienteAntigo;
 	private boolean modoEditar = false;
 	private String username;
-	private JLabel lblPassword;
-
+	private JLabel lblPassword, lblNewLabel;
 
 
 	public static void main(String[] args) {
@@ -60,7 +65,26 @@ public class CriarClienteDialog extends JDialog {
 		if(modoEditar) {
 			setTitle("Editar Cliente");
 			lblPassword.setText("Nova Password");
+			lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 11));
 			popularTextFields(clienteAntigo);
+			lblNewLabel.setText("Deixe este campo vazio senao deseja redifinir a password");
+			lblNewLabel.setVisible(true);
+			textFieldPassword.addFocusListener(new FocusListener() {
+
+				@Override
+				public void focusLost(FocusEvent e) {
+					lblNewLabel.setText("Deixe este campo vazio senao deseja redifinir a password");
+					lblNewLabel.setVisible(true);
+
+				}
+
+				@Override
+				public void focusGained(FocusEvent e) {
+					lblNewLabel.setVisible(false);
+
+				}
+			});
+
 		}
 	}
 
@@ -80,6 +104,13 @@ public class CriarClienteDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		setTitle("Novo Cliente");
 		contentPanel.setLayout(null);
+
+		lblNewLabel = new JLabel();
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblNewLabel.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel.setBounds(111, 170, 290, 14);
+		lblNewLabel.setVisible(false);
+		contentPanel.add(lblNewLabel);
 		{
 			JLabel lblNome = new JLabel("Nome");
 			lblNome.setBounds(9, 11, 82, 27);
@@ -143,6 +174,7 @@ public class CriarClienteDialog extends JDialog {
 			textFieldPassword.setBounds(101, 163, 290, 27);
 			textFieldPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldPassword.setColumns(10);
+
 			contentPanel.add(textFieldPassword);
 		}
 		{

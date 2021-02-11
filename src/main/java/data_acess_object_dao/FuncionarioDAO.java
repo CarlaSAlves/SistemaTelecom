@@ -392,31 +392,37 @@ public class FuncionarioDAO {
 	@SuppressWarnings("resource")
 	public Funcionario editarFuncionario(Funcionario operador, Funcionario admin, String novaPass) throws Exception {
 		PreparedStatement myStmt = null;
-		String passEncriptada = null;
+		
 		try {
-			StringBuilder query = new StringBuilder();
-			query.append("UPDATE `funcionario` SET "
-					+ "`nome`= \"" + operador.getNome() + "\","
-					+ "`nif`=" + operador.getNif() + ","
-					+ "`login`= \"" + operador.getLogin() +"\", "
-					+ "`ativo`=" + operador.isAtivo() +", ");
-			
-			if (novaPass != null && !novaPass.isBlank()) {
-				passEncriptada = PasswordEncryption.get_SHA_512_SecurePassword(novaPass);
-				query.append("`password`= \"" + passEncriptada + "\",");
+
+			if(novaPass == null) {
+				myStmt = myConn.prepareStatement("UPDATE `funcionario` SET `nome`=?, `nif`=?, `login`=? WHERE  `id`=?");
+
+				myStmt.setString(1, operador.getNome());
+				myStmt.setLong(2, operador.getNif());
+				myStmt.setString(3, operador.getLogin());
+				myStmt.setInt(4, operador.getId());
+
+				myStmt.executeUpdate();
+
+			}else {
+
+				myStmt = myConn.prepareStatement("UPDATE `funcionario` SET `nome`=?, `nif`=?, `login`=?, `password`=? WHERE  `id`=?");
+
+				myStmt.setString(1, operador.getNome());
+				myStmt.setLong(2, operador.getNif());
+				myStmt.setString(3, operador.getLogin());
+				myStmt.setString(4, PasswordEncryption.get_SHA_512_SecurePassword(novaPass));
+				myStmt.setInt(5, operador.getId());
+
+				myStmt.executeUpdate();
+
+
 			}
-			query.append("`id_role`=" + operador.getId_role()
-					+ " WHERE `id`=" + operador.getId() + ";");
-			
-//			System.out.println(query.toString());
-			
-			myStmt = myConn.prepareStatement(query.toString());
-			myStmt.executeUpdate();
 			
 			myStmt = logUpdate(operador, admin, "Editar Operador");	
 			myStmt.executeUpdate();
 			
-			operador.setPassword(passEncriptada);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

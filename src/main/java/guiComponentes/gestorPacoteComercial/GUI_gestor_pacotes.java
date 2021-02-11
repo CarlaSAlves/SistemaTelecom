@@ -266,7 +266,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 				if (row < 0) {
 					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
-							"Por favor selecione um Cliente", "Error", JOptionPane.ERROR_MESSAGE);
+							"Por favor selecione um Pacote Comercial", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 
@@ -289,7 +289,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
 		botaoVisualizarHistorico.setBounds(609, 236, 218, 43);
-		botaoVisualizarHistorico.setEnabled(true);
+		botaoVisualizarHistorico.setEnabled(false);
 	}
 
 	private void btVoltarGestorPacotesSetup() {
@@ -431,6 +431,7 @@ public class GUI_gestor_pacotes extends JFrame {
 				if (table.getSelectedRowCount() > 1) {
 					botaoEditarPacoteComercial.setEnabled(false);
 					botaoDesativarPacoteComercial.setEnabled(true);
+					botaoVisualizarHistorico.setEnabled(false);
 				} else if (table.getSelectedRows().length == 1) {
 					int row = table.getSelectedRow();
 					botaoEditarPacoteComercial.setEnabled(true);
@@ -438,9 +439,11 @@ public class GUI_gestor_pacotes extends JFrame {
 					PacoteComercial pacoteComercial = (PacoteComercial) table.getValueAt(row, PacoteComercialPesquisaModelTable.OBJECT_COL);
 					textAreaDescricao.setText(pacoteComercial.getDescricao());
 					botaoAtivarDinamico();
+					botaoVisualizarHistorico.setEnabled(true);
 				} else if (table.getSelectedRowCount() == 0) {
 					botaoEditarPacoteComercial.setEnabled(false);
 					botaoDesativarPacoteComercial.setEnabled(false);
+					botaoVisualizarHistorico.setEnabled(false);
 				}
 				
 			}
