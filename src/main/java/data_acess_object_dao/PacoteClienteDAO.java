@@ -162,6 +162,11 @@ public class PacoteClienteDAO {
 	@SuppressWarnings("resource")
 	public int eliminarPacoteById(int id) throws SQLException{
 		PreparedStatement myStmt = null;
+		
+		if (id <= 0) {
+			return 0;
+		}
+		
 		try {
 			String query1 = "Update `cliente` Set `id_pacote_cliente` = NULL Where (`id_pacote_cliente` =" + id + ");";
 			String query2 = "DELETE from `pacote_cliente` where (`id`=" + id + ");";

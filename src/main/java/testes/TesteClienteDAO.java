@@ -3,6 +3,7 @@ package testes;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.FileInputStream;
@@ -36,7 +37,7 @@ public class TesteClienteDAO {
 	
 	@Test
 	public void testGetAllClientes() throws Exception{
-		assertEquals(5, clienteDAO.getAllClientes().size());
+		assertEquals(6, clienteDAO.getAllClientes().size());
 	}
 	
 	@Test
@@ -52,9 +53,19 @@ public class TesteClienteDAO {
 	}
 	
 	@Test
+	public void testPesquisaClienteAuxiliarIDNulo() throws Exception{
+		assertNull(clienteDAO.pesquisaClienteAuxiliarID(0));
+	}
+	
+	@Test
 	public void testPesquisaClienteLoginPass() throws Exception{
 		Cliente cliente = clienteDAO.pesquisaClienteLoginPass("AnaSousa", "pass1");
 		assertNotNull(cliente);
+	}
+	
+	@Test
+	public void testPesquisaClienteLoginPassNulo() throws Exception{
+		assertNull(clienteDAO.pesquisaClienteLoginPass("1111", "1111"));
 	}
 	
 	@Test
@@ -75,6 +86,22 @@ public class TesteClienteDAO {
 		cliente.setNome(novoNome);
 		
 		cliente = clienteDAO.editarCliente(cliente, funcionario, "123");
+//		System.out.println("Nova passe: " + cliente.getPassword());
+		
+		assertTrue(novoNome.equals(cliente.getNome()));
+	}
+	
+	@Test
+	public void testEditarClientePassNull() throws Exception{
+		String novoNome = "testEditarCliente";
+		
+		Funcionario funcionario = new Funcionario(4, "JUnitCriarClienteTeste", 112233, "JUnitTest", "func10", true, 1);
+		Cliente cliente = clienteDAO.pesquisaClienteAuxiliarID(3);
+//		System.out.println("Velha passe: " + cliente.getPassword());
+		
+		cliente.setNome(novoNome);
+		
+		cliente = clienteDAO.editarCliente(cliente, funcionario, null);
 //		System.out.println("Nova passe: " + cliente.getPassword());
 		
 		assertTrue(novoNome.equals(cliente.getNome()));
