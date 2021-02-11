@@ -65,12 +65,16 @@ public class GestorDeDAO {
 		clienteDAO.criarCliente(cliente, funcionario);
 	}
 
-	public void editarCliente(Cliente cliente, Funcionario funcionario) throws Exception {
-		clienteDAO.editarCliente(cliente, funcionario);
+	public void editarCliente(Cliente cliente, Funcionario funcionario, String password) throws Exception {
+		clienteDAO.editarCliente(cliente, funcionario, password);
 	}
 
 	public void desativarCliente(int id, Funcionario funcionario) throws SQLException {
 		clienteDAO.desativarCliente(id, funcionario);;
+	}
+	
+	public void ativarCliente(int id, Funcionario funcionario ) throws SQLException{
+		clienteDAO.ativarCliente(id, funcionario);
 	}
 
 	public List<Cliente> getAllClientes() throws Exception{
@@ -104,6 +108,10 @@ public class GestorDeDAO {
 
 	public void desativarFuncionario(int id, Funcionario admin) throws Exception {
 		funcionarioDAO.desativarFuncionario(id, admin);
+	}
+	
+	public void ativarFuncionario(int id, Funcionario admin) throws SQLException{
+		funcionarioDAO.ativarFuncionario(id, admin);
 	}
 	
 	public Funcionario pesquisaFuncionarioAdmin(String login) throws Exception {
@@ -154,6 +162,10 @@ public class GestorDeDAO {
 
 	public void desativarPacoteComercial(int id, Funcionario funcionario) throws Exception {
 		pacoteComercialDAO.desativarPacoteComercial(id,funcionario);
+	}
+	
+	public void ativarPacoteComercial (int id, Funcionario funcionario) throws Exception {
+		pacoteComercialDAO.ativarPacoteComercial(id, funcionario);
 	}
 
 	public List<PacoteComercial> getAllPacotesComerciais() throws Exception{

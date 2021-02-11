@@ -14,12 +14,11 @@ public class ClientePesquisaModelTable extends AbstractTableModel {
 	private static final int NOME_COL = 2;
 	private static final int MORADA_COL = 3;
 	private static final int LOGIN_COL = 4;
-	private static final int PASSWORD_COL = 5;
-	private static final int ATIVO_COL = 6;
+	private static final int ATIVO_COL = 5;
 
 
 	private String[] nomesColunas = { "ID","NIF", "Nome", "Morada",
-			"Login", "Password", "Ativo"};
+			"Login", "Ativo"};
 
 	private List<Cliente> clientes;
 
@@ -58,8 +57,6 @@ public class ClientePesquisaModelTable extends AbstractTableModel {
 			return cliente.getMorada();
 		case LOGIN_COL:
 			return cliente.getLogin();
-		case PASSWORD_COL:
-			return cliente.getPassword();
 		case ATIVO_COL:
 			return cliente.isAtivo();
 		case OBJECT_COL:

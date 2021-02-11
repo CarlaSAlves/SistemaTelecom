@@ -14,9 +14,9 @@ public class PromocaoPesquisaModelTable extends AbstractTableModel {
 	private static final int ATIVO_COL = 3;
 	public static final int DATA_INICIO_COL = 4;
 	public static final int DATA_FIM_COL = 5;
-	
+
 	private String[] nomesColunas = { "ID", "Nome", "Descricao", "Ativo", "Data de Inicio", "Data de Fim"};
-	
+
 	private List<Promocao> promocoes;
 
 	public PromocaoPesquisaModelTable(List<Promocao> promocoes) {
@@ -26,7 +26,7 @@ public class PromocaoPesquisaModelTable extends AbstractTableModel {
 	@Override
 	public int getColumnCount() {
 		return nomesColunas.length;
-		
+
 	}
 
 	@Override
@@ -54,11 +54,15 @@ public class PromocaoPesquisaModelTable extends AbstractTableModel {
 		case ATIVO_COL:
 			return promocao.isAtiva();
 		case DATA_INICIO_COL:
-		return promocao.getData_inicio();
+			return promocao.getData_inicio();
 		case DATA_FIM_COL:
-		return promocao.getData_fim();
+			if  (promocao.getData_fim()==null) {
+				return "Nao Atribuido";
+			}else {
+				return promocao.getData_fim();
+			}
 		case OBJECT_COL:
-			return promocao;
+			return promocao; 
 		default:
 			return promocao.getId();
 		}
@@ -68,8 +72,8 @@ public class PromocaoPesquisaModelTable extends AbstractTableModel {
 	@Override
 	public Class getColumnClass(int c) {
 		return getValueAt(0, c).getClass();
-		
 
-}
+
+	}
 
 }

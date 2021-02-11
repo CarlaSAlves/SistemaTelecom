@@ -44,22 +44,8 @@ public class GUI_homepage extends JFrame {
 
 	public GUI_homepage(GUI_total guit) {
 		this.guit = guit;
-		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-			if ("Nimbus".equals(info.getName())) {
-				try {
-					UIManager.setLookAndFeel(info.getClassName());
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e) {
-					e.printStackTrace();
-				}
-				break;
-			}
-		}
+		
+		ativarNimbusLookAndFeel();
 
 		panel = new JPanel();
 		setContentPane(panel);
@@ -194,6 +180,25 @@ public class GUI_homepage extends JFrame {
 				
 			}
 		});
+	}
+
+	private void ativarNimbusLookAndFeel() {
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+			if ("Nimbus".equals(info.getName())) {
+				try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
 	}
 
 	public JPanel returnPanel() {

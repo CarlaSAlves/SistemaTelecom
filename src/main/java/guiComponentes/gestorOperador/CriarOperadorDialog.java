@@ -37,7 +37,6 @@ public class CriarOperadorDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldNome, textFieldNIF, textFieldLogin;
 	private JPasswordField textFieldPassword;
-	private JCheckBox checkBoxAtivo;
 	private GUI_gestor_operador operadorPesquisaApp;
 	private Funcionario funcionarioAntigo;
 	private boolean modoEditar = false;
@@ -66,8 +65,7 @@ public class CriarOperadorDialog extends JDialog {
 		if(modoEditar) {
 			setTitle("Editar Operador");
 			popularTextFields(funcionarioTemp);
-			if (funcionarioTemp.isAtivo())
-				checkBoxAtivo.setVisible(false);
+
 		}
 	}
 
@@ -76,7 +74,6 @@ public class CriarOperadorDialog extends JDialog {
 		textFieldNIF.setText(funcionarioTemp.getNif() + "");
 		textFieldLogin.setText(funcionarioTemp.getLogin());
 		textFieldPassword.setText(funcionarioTemp.getPassword()); //.substring(0,8)
-		checkBoxAtivo.setSelected(funcionarioTemp.isAtivo());
 
 	}
 
@@ -148,12 +145,7 @@ public class CriarOperadorDialog extends JDialog {
 			contentPanel.add(textFieldPassword);
 		}
 
-		checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setSelected(true);
-		checkBoxAtivo.setBounds(204, 159, 97, 23);
-		checkBoxAtivo.setBackground(Color.WHITE);
-		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		contentPanel.add(checkBoxAtivo);
+
 
 		{
 			JPanel buttonPane = new JPanel();
@@ -171,7 +163,7 @@ public class CriarOperadorDialog extends JDialog {
 				okButton.setFocusPainted(false);
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						
+
 						if (textFieldNome.getText().isBlank() || textFieldLogin.getText().isBlank() || textFieldPassword.getPassword().length == 0) {
 							JOptionPane.showMessageDialog( CriarOperadorDialog.this, "Todos os dados têm de ser preenchidos!");
 							return;
@@ -187,7 +179,7 @@ public class CriarOperadorDialog extends JDialog {
 							JOptionPane.showMessageDialog( CriarOperadorDialog.this, "A NIF tem de ser um inteiro!");
 							return;
 						}
-						
+
 
 						gravarOperador();
 					}
@@ -195,22 +187,23 @@ public class CriarOperadorDialog extends JDialog {
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancelar");
-				cancelButton.setBackground(SystemColor.activeCaption);
-				cancelButton.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-				cancelButton.setFocusPainted(false);
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-				cancelButton.addActionListener(new ActionListener() {
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						dispose();
+				{
+					JButton cancelButton = new JButton("Cancelar");
+					cancelButton.setBackground(SystemColor.activeCaption);
+					cancelButton.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+					cancelButton.setFocusPainted(false);
+					cancelButton.setActionCommand("Cancel");
+					buttonPane.add(cancelButton);
+					cancelButton.addActionListener(new ActionListener() {
 
-					}
-				});
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							dispose();
+
+						}
+					});
+				}
 			}
 		}
 	}
@@ -221,7 +214,7 @@ public class CriarOperadorDialog extends JDialog {
 		int nif = Integer.parseInt(textFieldNIF.getText());
 		String login = textFieldLogin.getText();
 		String pass = textFieldPassword.getText();
-		boolean ativo = checkBoxAtivo.isSelected();
+		boolean ativo = true; 
 
 		Funcionario funcionario = null;
 

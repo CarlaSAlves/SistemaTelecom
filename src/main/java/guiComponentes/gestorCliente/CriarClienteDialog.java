@@ -24,13 +24,13 @@ public class CriarClienteDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textFieldNIF, textFieldMorada, textFieldLogin, textFieldPacote, textFieldNome ;
-	private JCheckBox checkBoxAtivo;
+	private JTextField textFieldNIF, textFieldMorada, textFieldLogin, textFieldNome ;
 	private JPasswordField textFieldPassword;
 	private GUI_gestor_cliente clientePesquisaApp;
 	private Cliente clienteAntigo;
 	private boolean modoEditar = false;
 	private String username;
+	private JLabel lblPassword;
 
 
 
@@ -59,6 +59,7 @@ public class CriarClienteDialog extends JDialog {
 
 		if(modoEditar) {
 			setTitle("Editar Cliente");
+			lblPassword.setText("Nova Password");
 			popularTextFields(clienteAntigo);
 		}
 	}
@@ -68,9 +69,6 @@ public class CriarClienteDialog extends JDialog {
 		textFieldNIF.setText(clienteAntigo2.getNif() + "");
 		textFieldMorada.setText(clienteAntigo2.getMorada());
 		textFieldLogin.setText(clienteAntigo2.getLogin());
-		textFieldPassword.setText(clienteAntigo2.getPassword()); // .substring(0,8)
-		checkBoxAtivo.setSelected(clienteAntigo2.isAtivo());
-
 	}
 
 	public CriarClienteDialog() {
@@ -135,7 +133,7 @@ public class CriarClienteDialog extends JDialog {
 			contentPanel.add(textFieldLogin);
 		}
 		{
-			JLabel lblPassword = new JLabel("Password");
+			lblPassword = new JLabel( "Password");
 			lblPassword.setBounds(9, 163, 82, 27);
 			lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblPassword);
@@ -163,8 +161,8 @@ public class CriarClienteDialog extends JDialog {
 				okButton.setFocusPainted(false);
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						
-						if (textFieldNome.getText().isBlank() || textFieldMorada.getText().isBlank() || textFieldLogin.getText().isBlank() || textFieldPassword.getPassword().length == 0) {
+
+						if (textFieldNome.getText().isBlank() || textFieldMorada.getText().isBlank() || textFieldLogin.getText().isBlank()) {
 							JOptionPane.showMessageDialog( CriarClienteDialog.this, "Todos os dados têm de ser preenchidos!");
 							return;
 						}
@@ -184,7 +182,7 @@ public class CriarClienteDialog extends JDialog {
 
 					}
 				});
-				
+
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -196,13 +194,8 @@ public class CriarClienteDialog extends JDialog {
 				cancelButton.setFocusPainted(false);
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
-				
-				checkBoxAtivo = new JCheckBox("Ativo");
-				checkBoxAtivo.setSelected(true);
-				checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-				checkBoxAtivo.setBackground(Color.WHITE);
-				checkBoxAtivo.setBounds(159, 212, 86, 23);
-				contentPanel.add(checkBoxAtivo);
+
+
 				cancelButton.addActionListener(new ActionListener() {
 
 					@Override
@@ -217,12 +210,17 @@ public class CriarClienteDialog extends JDialog {
 
 	@SuppressWarnings("deprecation")
 	private void gravarCliente() {
+		String pass;
 		String nome = textFieldNome.getText();
 		int nif = Integer.parseInt(textFieldNIF.getText());
 		String morada = textFieldMorada.getText();
 		String login = textFieldLogin.getText();
-		String pass = textFieldPassword.getText();
-		boolean ativo = checkBoxAtivo.isSelected();
+		if(textFieldPassword.getText().isBlank()) {
+			pass = null;
+		}else {
+			pass = textFieldPassword.getText();
+		}
+		boolean ativo = true;
 
 
 		Cliente cliente = null;
@@ -234,8 +232,12 @@ public class CriarClienteDialog extends JDialog {
 			cliente.setNome(nome);
 			cliente.setMorada(morada);
 			cliente.setLogin(login);
-			cliente.setPassword(pass);
-			cliente.setAtivo(ativo);
+			if(textFieldPassword.getText().isBlank()) {
+				cliente.setPassword(clienteAntigo.getPassword());
+			}else {
+				cliente.setPassword(pass);
+			}
+			cliente.setAtivo(clienteAntigo.isAtivo());
 
 		} else {
 			cliente = new Cliente( nome, nif, morada, login, pass, ativo);
@@ -244,8 +246,9 @@ public class CriarClienteDialog extends JDialog {
 		try {
 			Funcionario funcionario = null;
 			if (modoEditar) {
+
 				funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(username);
-				GestorDeDAO.getGestorDeDAO().editarCliente(cliente, funcionario);
+				GestorDeDAO.getGestorDeDAO().editarCliente(cliente, funcionario, pass);
 				clientePesquisaApp.refreshClienteTable();
 				JOptionPane.showMessageDialog(clientePesquisaApp,
 						"Cliente Editado com sucesso!", "Cliente Editado",

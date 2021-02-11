@@ -41,13 +41,13 @@ import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class GUI_gestor_operador extends JFrame {
-	
+
 	private int numberRows;
 	private JTable table;
 	private JPanel contentPane, painelPesquisa;
 	private JLabel lblResultados, lblCamposPesquisas, lblUsernameLogged, lblTempoSessao, lblHoraSistema, labelID, labelNIF, labelNome;
 	private JButton botaoDesativarOperador, botaoEditarOperador, btVoltarGestorOperador, botaoPesquisa, botaoVisualizarHistorico;
-	private int indices[];
+	private int indice;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JTextField textPesquisaID, textPesquisaNIF, textFieldNome;
 	private JCheckBox checkBoxAtivo;
@@ -73,31 +73,16 @@ public class GUI_gestor_operador extends JFrame {
 
 		// visual look and feel - Nimbus 
 
-		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-			if ("Nimbus".equals(info.getName())) {
-				try {
-					UIManager.setLookAndFeel(info.getClassName());
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e) {
-					e.printStackTrace();
-				}
-				break;
-			}
-		}
+		ativarNimbusLookAndFeel();
 
 		// -- Campo Pesquisa -- 
 
 		lblCamposPesquisasSetup();
 		contentPane.add(lblCamposPesquisas);
-		
+
 		painelPesquisa();
 
-	
+
 		// -- Botões --  
 
 		JButton botaoCriarOperador = botaoCriarOperadorSetup();
@@ -153,26 +138,46 @@ public class GUI_gestor_operador extends JFrame {
 
 		JLabel lbFooter = lbFooterSetup();
 		contentPane.add(lbFooter);
-		
+
+	}
+
+	private void ativarNimbusLookAndFeel() {
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+			if ("Nimbus".equals(info.getName())) {
+				try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
 		}
+	}
+
 	/**
 	 * 
 	 */
-	
+
 
 	private void botaoAtivarDinamico() {
-	
+
 		try {
-		int row = table.getSelectedRow();
-		Funcionario funcionario = (Funcionario) table.getValueAt(row, OperadorPesquisaModelTable.OBJECT_COL);
-		if (funcionario.isAtivo())
-			botaoDesativarOperador.setText("Desativar operador");
-		else
-			botaoDesativarOperador.setText("Ativar operador");
+			int row = table.getSelectedRow();
+			Funcionario funcionario = (Funcionario) table.getValueAt(row, OperadorPesquisaModelTable.OBJECT_COL);
+			if (funcionario.isAtivo())
+				botaoDesativarOperador.setText("Desativar operador");
+			else
+				botaoDesativarOperador.setText("Ativar operador");
 		} catch  (Exception e) {
 		}
 	}
-	
+
 	private void contentPaneSetup() {
 		contentPane = new JPanel();
 		setContentPane(contentPane);
@@ -189,7 +194,7 @@ public class GUI_gestor_operador extends JFrame {
 		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
 		lblCamposPesquisas.setBounds(98, 29, 294, 26);
 	}
-	
+
 	protected void painelPesquisa() {
 		{
 			painelPesquisa = new JPanel();
@@ -290,8 +295,8 @@ public class GUI_gestor_operador extends JFrame {
 					}
 				});
 			}
-				painelPesquisa.add(botaoPesquisa);
-			}
+			painelPesquisa.add(botaoPesquisa);
+		}
 	}
 
 	private void botaoEditarOperadorSetup() {
@@ -333,33 +338,54 @@ public class GUI_gestor_operador extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 
 				try {
-					indices = table.getSelectedRows();
+					indice = table.getSelectedRow();
 
-					if (indices.length < 0) {
+					if (indice < 0) {
 						JOptionPane.showMessageDialog(GUI_gestor_operador.this,
 								"Por favor selecione um Operador", "Error",
 								JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					int resposta = JOptionPane.showConfirmDialog(GUI_gestor_operador.this,
-							"Desativar este Operador?", "Confirmar Desactivar",
-							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+					Funcionario funcionarioTemp = (Funcionario) table.getValueAt(indice, OperadorPesquisaModelTable.OBJECT_COL);
 
-					if (resposta != JOptionPane.YES_OPTION) {
-						return;
-					}
+					if(funcionarioTemp.isAtivo()) {
+						int resposta = JOptionPane.showConfirmDialog(GUI_gestor_operador.this,
+								"Desativar este Operador?", "Confirmar Desactivar",
+								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-					for(int i = 0; i < indices.length; i++) {
-						Funcionario funcionarioTemp = (Funcionario) table.getValueAt(indices[i], OperadorPesquisaModelTable.OBJECT_COL);
+						if (resposta != JOptionPane.YES_OPTION) {
+							return;
+						}
+
 						Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
 						GestorDeDAO.getGestorDeDAO().desativarFuncionario(funcionarioTemp.getId(),admin );
+
+						JOptionPane.showMessageDialog(GUI_gestor_operador.this,
+								"Operador desativado com sucesso", "Operador Desativado",
+								JOptionPane.INFORMATION_MESSAGE);
+
+						refreshOperadorTable();
+
+					}else {
+
+						int resposta = JOptionPane.showConfirmDialog(GUI_gestor_operador.this,
+								"Ativar este Operador?", "Confirmar Ativar",
+								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+						if (resposta != JOptionPane.YES_OPTION) {
+							return;
+						}
+
+						Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+						GestorDeDAO.getGestorDeDAO().ativarFuncionario(funcionarioTemp.getId(), admin);
+
+						JOptionPane.showMessageDialog(GUI_gestor_operador.this,
+								"Operador Ativado com sucesso", "Operador Ativado",
+								JOptionPane.INFORMATION_MESSAGE);
+
+						refreshOperadorTable();
+
 					}
-
-					JOptionPane.showMessageDialog(GUI_gestor_operador.this,
-							"Operador desativado com sucesso", "Operador Desativado",
-							JOptionPane.INFORMATION_MESSAGE);
-
-					refreshOperadorTable();
 				} catch (Exception e1) {
 
 				}
@@ -461,6 +487,7 @@ public class GUI_gestor_operador extends JFrame {
 					botaoEditarOperador.setEnabled(true);
 					botaoDesativarOperador.setEnabled(true);
 					botaoVisualizarHistorico.setEnabled(true);
+					botaoAtivarDinamico();
 				}
 				else if (table.getSelectedRowCount()==0)
 				{
@@ -468,7 +495,7 @@ public class GUI_gestor_operador extends JFrame {
 					botaoDesativarOperador.setEnabled(false);
 					botaoVisualizarHistorico.setEnabled(false);
 				}
-				botaoAtivarDinamico();
+				
 			}
 		});
 		return scrollPane;

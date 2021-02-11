@@ -14,7 +14,6 @@ import java.time.Instant;
 import java.util.Calendar;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -24,9 +23,7 @@ import guiComponentes.gestorCliente.GUI_gestor_cliente;
 import guiComponentes.gestorOperador.GUI_gestor_operador;
 import guiComponentes.gestorPacoteComercial.GUI_gestor_pacotes;
 import guiComponentes.gestorPromocao.GUI_gestor_promocao;
-import servico.GestorDeDAO;
-import standard_value_object.Cliente;
-import standard_value_object.Funcionario;
+
 
 
 public class GUI_total extends JFrame {
@@ -43,22 +40,22 @@ public class GUI_total extends JFrame {
 	private Duration temporizador;
 	private String dataEHoraDeLog;
 	private SimpleDateFormat dateFormat ;
-	
+
 	private GUI_login login;
-	
+
 	private JPanel loginPanel, homepagePanel, gestor_clientePanel, gestor_operadorPanel, gestor_pacotesPanel, gestor_promocaoPanel;
 
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					GUI_total frame = new GUI_total();
 					for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				        if ("Nimbus".equals(info.getName())) {
-				            UIManager.setLookAndFeel(info.getClassName());
-				            break;
-				        }
+						if ("Nimbus".equals(info.getName())) {
+							UIManager.setLookAndFeel(info.getClassName());
+							break;
+						}
 					}
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -68,29 +65,11 @@ public class GUI_total extends JFrame {
 		});
 	}
 
-	
 
-	
-	
 	public GUI_total() {
-		
-		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-	        if ("Nimbus".equals(info.getName())) {
-	            try {
-					UIManager.setLookAndFeel(info.getClassName());
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e) {
-					e.printStackTrace();
-				}
-	            break;
-	        }
-		}
-		
+
+		ativarNimbusLookAndFeel();
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
 		contentPane = new JPanel();
@@ -104,7 +83,7 @@ public class GUI_total extends JFrame {
 		gestor_operador = new GUI_gestor_operador();
 		gestor_pacotes = new GUI_gestor_pacotes();
 		gestor_promocao = new GUI_gestor_promocao();
-		
+
 		loginPanel = login.returnPanel();
 		loginPanel.setBounds(0, 0, 1400, 800);
 		getContentPane().add(loginPanel);
@@ -134,11 +113,7 @@ public class GUI_total extends JFrame {
 		gestor_promocaoPanel.setBounds(0, 0, 1400, 800);
 		getContentPane().add(gestor_promocaoPanel);
 
-		gestor_cliente.getTable().setModel(new DefaultTableModel());	
-		gestor_operador.getTable().setModel(new DefaultTableModel());
-		gestor_pacotes.getTable().setModel(new DefaultTableModel());
-		gestor_promocao.getTable().setModel(new DefaultTableModel());
-		
+
 		// LOGIN
 		login.getBtnSair().addActionListener(new ActionListener() {
 
@@ -149,7 +124,7 @@ public class GUI_total extends JFrame {
 			}
 		});
 
-		
+
 
 		gestor_cliente.btVoltarGestorCliente().addActionListener(new ActionListener() {
 
@@ -157,8 +132,8 @@ public class GUI_total extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				homepagePanel.setVisible(true);
 				gestor_clientePanel.setVisible(false);
-				
-		
+
+
 			}
 		});
 
@@ -191,6 +166,26 @@ public class GUI_total extends JFrame {
 			}
 		});
 
+	}
+
+
+	private void ativarNimbusLookAndFeel() {
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+			if ("Nimbus".equals(info.getName())) {
+				try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
 	}
 
 	private void labelUsernameNavegaPaginas(GUI_login login, GUI_homepage homepage,
@@ -278,7 +273,7 @@ public class GUI_total extends JFrame {
 		loginPanel.setVisible(false);
 		homepagePanel.setVisible(true);
 		comecarTemporizador();
-		
+
 	}
 
 
@@ -286,6 +281,10 @@ public class GUI_total extends JFrame {
 		gravarFicheiro(username, temporizador, dataEHoraDeLog, "sessaolog.txt");
 		loginPanel.setVisible(true);
 		homepagePanel.setVisible(false);
+		gestor_cliente.getTable().setModel(new DefaultTableModel());	
+		gestor_operador.getTable().setModel(new DefaultTableModel());
+		gestor_pacotes.getTable().setModel(new DefaultTableModel());
+		gestor_promocao.getTable().setModel(new DefaultTableModel());
 	}
 
 

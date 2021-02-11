@@ -62,22 +62,7 @@ public class GUI_login extends JFrame {
 		
 		setBackground(Color.WHITE);
 		
-		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-	        if ("Nimbus".equals(info.getName())) {
-	            try {
-					UIManager.setLookAndFeel(info.getClassName());
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e) {
-					e.printStackTrace();
-				}
-	            break;
-	        }
-		}
+		ativarNimbusLookAndFeel();
 
 		panel = new JPanel();
 		setContentPane(panel);
@@ -208,6 +193,27 @@ public class GUI_login extends JFrame {
                 lblNewLabel_1.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/fundoAltran.png")));
                 lblNewLabel_1.setBounds(0, 89, 1394, 586);
                 panel.add(lblNewLabel_1);
+	}
+
+
+
+	private void ativarNimbusLookAndFeel() {
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+	        if ("Nimbus".equals(info.getName())) {
+	            try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+	            break;
+	        }
+		}
 	}
 	private void login(GUI_total guit) {
 		//login vai usar metodos e entidades que estao nos dao do package V2

@@ -36,10 +36,10 @@ import java.awt.Color;
 
 
 public class GUI_gestor_promocao extends JFrame {
-	
+
 	private static final long serialVersionUID = 1L;
 	private int numberRows;
-	private int indices[];
+	private int indice;
 	private JPanel contentPane, painelPesquisa;
 	private JTable table;
 	private JButton btVoltarGestorPromocao, btPesquisar, botaoDesativarPromocao, botaoEditarPromocao;
@@ -70,22 +70,7 @@ public class GUI_gestor_promocao extends JFrame {
 
 		// look and feel Nimbus 
 
-		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-			if ("Nimbus".equals(info.getName())) {
-				try {
-					UIManager.setLookAndFeel(info.getClassName());
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e) {
-					e.printStackTrace();
-				}
-				break;
-			}
-		}
+		ativarNimbusLookAndFeel();
 
 		// Campo de pesquisa 
 
@@ -93,7 +78,7 @@ public class GUI_gestor_promocao extends JFrame {
 		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
 		lblCamposPesquisas.setBounds(98, 26, 294, 26);
 		contentPane.add(lblCamposPesquisas);
-		
+
 		painelPesquisa();
 
 		textAreaDescricao = new JTextArea();
@@ -140,27 +125,45 @@ public class GUI_gestor_promocao extends JFrame {
 		setUpUserSessao();
 
 	}
+	private void ativarNimbusLookAndFeel() {
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+			if ("Nimbus".equals(info.getName())) {
+				try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
+	}
 
 	private void setUpUserSessao() {
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setBounds(1215, 717, 159, 18);
 		contentPane.add(lblTempoSessao);
-		
+
 		lblTempoSessao.setText("Sessão:");
 		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblUsernameLogged = new JLabel();
 		lblUsernameLogged.setBounds(1215, 698, 159, 18);
 		contentPane.add(lblUsernameLogged);
-		
+
 		lblUsernameLogged.setText("Username:");
 		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setBounds(1215, 737, 159, 18);
 		contentPane.add(lblHoraSistema);
-		
+
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 12));
-		
+
 	}
 	/**
 	 * 
@@ -213,7 +216,7 @@ public class GUI_gestor_promocao extends JFrame {
 							int id = 0;
 							String nome = null;
 							int ativo = checkBoxAtivo.isSelected()? 1:0;
-							
+
 							if(!textPesquisaID.getText().isBlank()) {
 								id = Integer.parseInt(textPesquisaID.getText());
 							}
@@ -221,11 +224,11 @@ public class GUI_gestor_promocao extends JFrame {
 							if(!textFieldNome.getText().isBlank()) {
 								nome = textFieldNome.getText();
 							}
-							
+
 							List<Promocao> Promocoes = null;
 
 							if ((id != 0) || (nome != null) || (ativo!=0) ) {
-							
+
 								Promocoes = GestorDeDAO.getGestorDeDAO().pesquisaPromocao(id, nome, ativo);
 							} else  {
 								Promocoes = GestorDeDAO.getGestorDeDAO().getAllPromocoes();
@@ -293,32 +296,54 @@ public class GUI_gestor_promocao extends JFrame {
 		botaoDesativarPromocao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					indices = table.getSelectedRows();
+					indice = table.getSelectedRow();
 
-					if (indices.length < 0) {
+					if (indice < 0) {
 						JOptionPane.showMessageDialog(GUI_gestor_promocao.this,
 								"Por favor selecione um Promocao", "Error",
 								JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					int resposta = JOptionPane.showConfirmDialog(GUI_gestor_promocao.this,
-							"Desativar este Promocao?", "Confirmar Desativar",
-							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+					
+					Promocao PromocaoTemp = (Promocao) table.getValueAt(indice, PromocaoPesquisaModelTable.OBJECT_COL);
+					if(PromocaoTemp.isAtiva()){
+						
+						int resposta = JOptionPane.showConfirmDialog(GUI_gestor_promocao.this,
+								"Desativar este Promocao?", "Confirmar Desativar",
+								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-					if (resposta != JOptionPane.YES_OPTION) {
-						return;
-					}
-
-					for(int i = 0; i < indices.length; i++) {
-						Promocao PromocaoTemp = (Promocao) table.getValueAt(indices[i], PromocaoPesquisaModelTable.OBJECT_COL);
+						if (resposta != JOptionPane.YES_OPTION) {
+							return;
+						}
+						
 						GestorDeDAO.getGestorDeDAO().desativarPromocao(PromocaoTemp.getId());
 
-					}
-					JOptionPane.showMessageDialog(GUI_gestor_promocao.this,
-							"Promocao Desativada com sucesso", "Promocao Desativada",
-							JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(GUI_gestor_promocao.this,
+								"Promocao Desativada com sucesso", "Promocao Desativada",
+								JOptionPane.INFORMATION_MESSAGE);
 
-					refreshPromocaoTable();
+						refreshPromocaoTable();
+						
+					}else {
+						
+						int resposta = JOptionPane.showConfirmDialog(GUI_gestor_promocao.this,
+								"Ativar este Promocao?", "Confirmar Ativar",
+								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+						if (resposta != JOptionPane.YES_OPTION) {
+							return;
+						}
+						
+						GestorDeDAO.getGestorDeDAO().desativarPromocao(PromocaoTemp.getId());
+
+						JOptionPane.showMessageDialog(GUI_gestor_promocao.this,
+								"Promocao Ativada com sucesso", "Promocao Ativada",
+								JOptionPane.INFORMATION_MESSAGE);
+
+						refreshPromocaoTable();
+						
+					}
+					
 				} catch (Exception e1) {
 
 				}
@@ -382,6 +407,7 @@ public class GUI_gestor_promocao extends JFrame {
 					botaoDesativarPromocao.setEnabled(true);
 					Promocao pacoteComercial = (Promocao) table.getValueAt(row, PromocaoPesquisaModelTable.OBJECT_COL);
 					textAreaDescricao.setText(pacoteComercial.getDescricao());
+					botaoAtivarDinamico();
 				}
 				else if (table.getSelectedRowCount()==0)
 				{
@@ -445,6 +471,20 @@ public class GUI_gestor_promocao extends JFrame {
 					JOptionPane.ERROR_MESSAGE);
 		}
 
+	}
+
+	private void botaoAtivarDinamico() {
+
+		try {
+			int row = table.getSelectedRow();
+			Promocao PromocaoTemp = (Promocao) table.getValueAt(row, PromocaoPesquisaModelTable.OBJECT_COL);
+			if (PromocaoTemp.isAtiva())
+				botaoDesativarPromocao.setText("Desativar Promocao");
+			else
+				botaoDesativarPromocao.setText("Ativar Promocao");
+		} catch  (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public JTable getTable() {

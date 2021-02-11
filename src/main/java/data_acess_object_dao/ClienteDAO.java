@@ -43,13 +43,13 @@ public class ClienteDAO {
 				Cliente cliente = converteRowParaCliente(myRs);
 				listaClientes.add(cliente);
 			}
-					
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close(myStmt, myRs);
 		}
-		
+
 		return listaClientes;
 	}
 
@@ -132,17 +132,17 @@ public class ClienteDAO {
 			myStmt = myConn.prepareStatement("select * from cliente where nif like ?");
 			myStmt.setString(1, nif);
 			myRs = myStmt.executeQuery();
-			
+
 			while (myRs.next()) {
 				cliente = converteRowParaCliente(myRs);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close(myStmt, myRs);
 		}
-		
+
 		return cliente;
 	}
 
@@ -164,24 +164,24 @@ public class ClienteDAO {
 		} finally {
 			close(myStmt, myRs);
 		}
-		
+
 		return cliente;
 	}
-	
+
 	public Cliente pesquisaClienteLoginPass(String login, String pass) throws Exception {
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
 		Cliente cliente = null;
-		
+
 		try {
 			myStmt = myConn.prepareStatement("SELECT * FROM cliente WHERE login=? AND password=?;");
 			myStmt.setString(1, login);
-			
+
 			//vamos encriptar a palavra pass antes de a enviar
 			myStmt.setString(2, PasswordEncryption.get_SHA_512_SecurePassword(pass));
-			
+
 			myRs = myStmt.executeQuery();
-			
+
 			if (myRs.next()) {
 				cliente = new Cliente();
 				cliente.setId(myRs.getInt(1));
@@ -192,13 +192,13 @@ public class ClienteDAO {
 				cliente.setPassword(myRs.getString(6));
 				cliente.setAtivo(myRs.getInt(7) == 1 ? true : false);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close(myStmt, myRs);
 		}
-		
+
 		return cliente;
 	}
 
@@ -210,10 +210,10 @@ public class ClienteDAO {
 			//Statement.RETURN_GENERATED_KEYS permite ao driver jdbc devolver o id da entidade criada, caso a criaçao seja bem sucedida
 			myStmt = myConn.prepareStatement("INSERT INTO cliente(nome, nif, morada, login, password, ativo, id_pacote_cliente) "
 					+ "VALUES(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-			
+
 			//encriptar palavra pass do cliente antes da cria��o
 			cliente.setPassword(PasswordEncryption.get_SHA_512_SecurePassword(cliente.getPassword()));
-			
+
 			myStmt.setString(1, cliente.getNome());
 			myStmt.setLong(2, cliente.getNif());
 			myStmt.setString(3, cliente.getMorada());
@@ -222,49 +222,68 @@ public class ClienteDAO {
 			myStmt.setBoolean(6, cliente.isAtivo());
 			myStmt.setNull(7, java.sql.Types.INTEGER);
 			myStmt.executeUpdate();
-			
+
 			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
-	            if (generatedKeys.next()) {
-	            	//recuperamos o id do cliente recém-criado e vamos atribui-lo ao objeto cliente enviado como parametro nesta funçao, só para o reaproveitar
-	            	cliente.setId((int)generatedKeys.getLong(1));
-	            }
-	            else {
-	                throw new SQLException("Criação de cliente falhou, nenhum ID foi devolvido.");
-	            }
-	        }
-			
+				if (generatedKeys.next()) {
+					//recuperamos o id do cliente recém-criado e vamos atribui-lo ao objeto cliente enviado como parametro nesta funçao, só para o reaproveitar
+					cliente.setId((int)generatedKeys.getLong(1));
+				}
+				else {
+					throw new SQLException("Criação de cliente falhou, nenhum ID foi devolvido.");
+				}
+			}
+
 			//o nosso objeto cliente já contém o id, por isso podemos usa-lo diretamente na funçao seguinte
 			myStmt = logUpdate(funcionario, cliente, "Criar Cliente");	
-			
+
 			myStmt.executeUpdate();	
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			myStmt.close();
 		}
-		
+
 		return cliente;
 	}
 
 	@SuppressWarnings("resource")
-	public Cliente editarCliente(Cliente cliente, Funcionario funcionario) throws Exception {
+	public Cliente editarCliente(Cliente cliente, Funcionario funcionario, String password) throws Exception {
 		PreparedStatement myStmt = null;
 		try {
 
-			myStmt = myConn.prepareStatement("UPDATE `cliente` SET `nome`=?, `nif`=?, `morada`=?, "
-					+ "`login`=?, `password`=?, `ativo`=?, `id_pacote_cliente`=? WHERE  `id`=?");
+			if(password == null) {
 
-			myStmt.setString(1, cliente.getNome());
-			myStmt.setLong(2, cliente.getNif());
-			myStmt.setString(3, cliente.getMorada());
-			myStmt.setString(4, cliente.getLogin());
-			myStmt.setString(5, PasswordEncryption.get_SHA_512_SecurePassword(cliente.getPassword()));
-			myStmt.setBoolean(6, cliente.isAtivo());
-			myStmt.setInt(8, cliente.getId());
-			myStmt.executeUpdate();
+				myStmt = myConn.prepareStatement("UPDATE `cliente` SET `nome`=?, `nif`=?, `morada`=?, "
+						+ "`login`=? WHERE  `id`=?");
+
+				myStmt.setString(1, cliente.getNome());
+				myStmt.setLong(2, cliente.getNif());
+				myStmt.setString(3, cliente.getMorada());
+				myStmt.setString(4, cliente.getLogin());
+				myStmt.setInt(5, cliente.getId());
+
+				myStmt.executeUpdate();
+
+			}else {
+
+				myStmt = myConn.prepareStatement("UPDATE `cliente` SET `nome`=?, `nif`=?, `morada`=?, "
+						+ "`login`=?, `password`=? WHERE  `id`=?");
+
+				myStmt.setString(1, cliente.getNome());
+				myStmt.setLong(2, cliente.getNif());
+				myStmt.setString(3, cliente.getMorada());
+				myStmt.setString(4, cliente.getLogin());
+				myStmt.setString(5, PasswordEncryption.get_SHA_512_SecurePassword(password));
+				myStmt.setInt(6, cliente.getId());
+
+				myStmt.executeUpdate();
+
+
+			}
 
 			myStmt = logUpdate(funcionario, cliente, "Editar Cliente");	
 			myStmt.executeUpdate();
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -277,16 +296,39 @@ public class ClienteDAO {
 	public void desativarCliente(int id, Funcionario funcionario ) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
+			
 			Cliente cliente = pesquisaClienteAuxiliarID(id);
-			if (cliente.isAtivo())
-				myStmt = myConn.prepareStatement("update cliente SET `ativo`= 0 where id=?");
-			else
-				myStmt = myConn.prepareStatement("update cliente SET `ativo`= 1 where id=?");
+
+			myStmt = myConn.prepareStatement("update cliente SET `ativo`= 0 where id=?");
 			myStmt.setLong(1, id);
+			
 			myStmt.executeUpdate();
 
-			
+
 			myStmt = logUpdate(funcionario, cliente, "Desativar Cliente");	
+
+			myStmt.executeUpdate();
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			myStmt.close();
+		}
+	}
+
+	public void ativarCliente(int id, Funcionario funcionario ) throws SQLException{
+		PreparedStatement myStmt = null;
+		try {
+			
+			Cliente cliente = pesquisaClienteAuxiliarID(id);
+
+			myStmt = myConn.prepareStatement("update cliente SET `ativo`= 1 where id=?");
+			myStmt.setLong(1, id);
+			
+			myStmt.executeUpdate();
+
+
+			myStmt = logUpdate(funcionario, cliente, "Ativar Cliente");	
 
 			myStmt.executeUpdate();
 
@@ -299,7 +341,7 @@ public class ClienteDAO {
 	
 	public void atribuirPacoteCliente(PacoteCliente pacoteCliente, Cliente cliente) throws Exception {
 		PreparedStatement myStmt = null;
-		
+
 		try {
 			myStmt = myConn.prepareStatement("UPDATE `cliente` SET `id_pacote_cliente`=? WHERE `id`=?");
 			myStmt.setInt(1, pacoteCliente.getId());
@@ -336,7 +378,7 @@ public class ClienteDAO {
 				HistoricoCliente historico = new HistoricoCliente(id_cliente, id_funcionario, descricao, data_registo, nome);
 				list.add(historico);
 			}
-			
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -370,7 +412,7 @@ public class ClienteDAO {
 		myStmt.setString(4, descricao);
 		return myStmt;
 	}
-	
+
 
 	private void close(Statement myStmt, ResultSet myRs) throws SQLException {
 		close(null, myStmt, myRs);		

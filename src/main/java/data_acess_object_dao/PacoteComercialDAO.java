@@ -55,7 +55,7 @@ public class PacoteComercialDAO {
 		ResultSet myRs = null; 
 		StringJoiner sj = new StringJoiner (" AND ");
 		String query = "SELECT * FROM PACOTE_COMERCIAL WHERE ";
-		
+
 		try {
 			@SuppressWarnings("rawtypes")
 			List<Comparable> values = new ArrayList<Comparable>();
@@ -75,8 +75,8 @@ public class PacoteComercialDAO {
 			}
 
 			query += sj.toString();
-		
-		
+
+
 			myStmt = myConn.prepareStatement(query);
 
 			for (int index = 0; index < values.size(); index++){
@@ -97,7 +97,7 @@ public class PacoteComercialDAO {
 		}
 		return list;
 	}
-	
+
 	public PacoteComercial pesquisaPacoteComercialById(int id) throws Exception {
 		PacoteComercial pacoteComercial = null;
 		PreparedStatement myStmt = null;
@@ -114,11 +114,11 @@ public class PacoteComercialDAO {
 				pacoteComercial.setNome(myRs.getString(2));
 				pacoteComercial.setDescricao(myRs.getString(3));
 				pacoteComercial.setAtivo(myRs.getBoolean(4));
-				
+
 				if (myRs.getTimestamp(5) != null) {
 					pacoteComercial.setData_inicio( new java.sql.Date(myRs.getTimestamp(5).getTime()));
 				}
-				
+
 				if (myRs.getTimestamp(6) != null) {
 					pacoteComercial.setData_fim( new java.sql.Date(myRs.getTimestamp(6).getTime()));
 				}
@@ -129,7 +129,7 @@ public class PacoteComercialDAO {
 		} finally {
 			close(myStmt, myRs);
 		}
-		
+
 		return pacoteComercial;
 	}
 
@@ -146,24 +146,24 @@ public class PacoteComercialDAO {
 			//se ativo = true, mudar a data_inicio para agora. De outro modo, colocar nulo na data_inicio
 			myStmt.setTimestamp(4, pacote.isAtivo() ? new Timestamp(System.currentTimeMillis()) : null);
 			myStmt.executeUpdate();
-			
+
 
 			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
-	            if (generatedKeys.next()) {
-	            	//recuperamos o id do cliente recém-criado e vamos atribui-lo ao objeto cliente enviado como parametro nesta funçao, só para o reaproveitar
-	            	pacote.setId((int)generatedKeys.getLong(1));
-	            	
-	            }
-	            else {
-	                throw new SQLException("Criacao do Pacote Comercial falhou, nenhum ID foi devolvido.");
-	            }
-	        }
+				if (generatedKeys.next()) {
+					//recuperamos o id do cliente recém-criado e vamos atribui-lo ao objeto cliente enviado como parametro nesta funçao, só para o reaproveitar
+					pacote.setId((int)generatedKeys.getLong(1));
+
+				}
+				else {
+					throw new SQLException("Criacao do Pacote Comercial falhou, nenhum ID foi devolvido.");
+				}
+			}
 			myStmt = logUpdate(funcionario, pacote, "Criar Pacote Comercial");	
-        	myStmt.executeUpdate();	
+			myStmt.executeUpdate();	
 			//o nosso objeto cliente já contém o id, por isso podemos usa-lo diretamente na funçao seguinte
-			
-			
-			
+
+
+
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -181,9 +181,9 @@ public class PacoteComercialDAO {
 			myState.setString(1, pacote.getNome());
 			myState.setString(2, pacote.getDescricao());
 			myState.setInt(3, pacote.getId());
-			
+
 			myState.executeUpdate();
-			
+
 			//o nosso objeto cliente já contém o id, por isso podemos usa-lo diretamente na funçao seguinte
 			myState = logUpdate(funcionario, pacote, "Editar Pacote Comercial");	
 			myState.executeUpdate();	
@@ -193,7 +193,7 @@ public class PacoteComercialDAO {
 			myState.close();
 		}
 	}
-	
+
 	public List<HistoricoPacoteComercial> getHistoricoPacoteComercial(int id_pacote) throws Exception {
 		List<HistoricoPacoteComercial> list = new ArrayList<HistoricoPacoteComercial>();
 
@@ -229,7 +229,7 @@ public class PacoteComercialDAO {
 			close(myStmt, myRs);
 		}
 	}
-	
+
 	private PreparedStatement logUpdate(Funcionario funcionario, PacoteComercial pacote, String descricao) throws SQLException {
 		PreparedStatement myStmt;
 		myStmt = myConn.prepareStatement("insert into funcionario_log_pacote_comercial(id_funcionario, id_pacote_comercial, data_registo, descricao) VALUES (?, ?, ?, ?)");
@@ -250,50 +250,54 @@ public class PacoteComercialDAO {
 			myState = myConn.prepareStatement("Select ativo From pacote_comercial Where id =" + id + ";");
 			ResultSet rs = myState.executeQuery();
 
-				myState = myConn.prepareStatement("UPDATE pacote_comercial SET ativo = 0,"
-						+ "data_fim = current_timestamp() WHERE id=?");
-				System.out.println("entrei aqui");
-				myState.setInt(1, id);
-				myState.executeUpdate();
-				
-				myState = logUpdate(funcionario, pacote, "Desativar Pacote Comercial");	
-				
-				myState.executeUpdate();	
-			
+			myState = myConn.prepareStatement("UPDATE pacote_comercial SET ativo = 0,"
+					+ "data_fim = current_timestamp() WHERE id=?");
+			System.out.println("entrei aqui");
+			myState.setInt(1, id);
+			myState.executeUpdate();
+
+			myState = logUpdate(funcionario, pacote, "Desativar Pacote Comercial");	
+
+			myState.executeUpdate();	
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			myState.close();
 		}
 	}
-	
+
 	//primeiro ve se o pacote com o id inserido esta inativo, e s� depois ativa e insere a data atual
 	//no campo data_inicio e faz set a data_fim para null
-	public void ativarPacoteComercial (int id) throws Exception {
+	public void ativarPacoteComercial (int id, Funcionario funcionario) throws Exception {
 		PreparedStatement myState = null; 
-
+		PacoteComercial pacote = pesquisaPacoteComercialAuxiliarID(id);
 		try {
 			myState = myConn.prepareStatement("Select ativo From pacote_comercial Where id =" + id + ";");
 			ResultSet rs = myState.executeQuery();
-			
+
 			boolean estaAtivo = false;;
 			if(rs.next()) {
 				estaAtivo = rs.getBoolean(1);
 			}
-			
+
 			if(!estaAtivo) {
 				myState = myConn.prepareStatement("UPDATE pacote_comercial SET ativo = 1,"
 						+ "data_inicio = current_timestamp(), data_fim = NULL WHERE id=?");
 				myState.setInt(1, id);
 				myState.executeUpdate();
 			}
+			
+			myState = logUpdate(funcionario, pacote, "Ativar Pacote Comercial");	
+
+			myState.executeUpdate();	
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			myState.close();
 		}
 	}
-	
+
 	public List<HistoricoPacoteComercial> getHistoricoOperador(int id_pacoteComercial) throws Exception {
 		List<HistoricoPacoteComercial> list = new ArrayList<HistoricoPacoteComercial>();
 
@@ -347,7 +351,7 @@ public class PacoteComercialDAO {
 		} finally {
 			close(myStmt, myRs);
 		}
-		
+
 		return pacoteComercial;
 	}
 	public PacoteComercial converteRowParaPacoteComercial(ResultSet myRs) throws SQLException {
@@ -359,12 +363,12 @@ public class PacoteComercialDAO {
 
 		java.sql.Date data_inicio = null;
 		java.sql.Date data_fim = null;
-		
+
 		//datas podem ser nulas, � necess�rio testar nulidade
 		if (myRs.getTimestamp("data_inicio") != null) {
 			data_inicio = new java.sql.Date(myRs.getTimestamp("data_inicio").getTime());
 		}
-		
+
 		if (myRs.getTimestamp("data_fim") != null) {
 			data_fim = new java.sql.Date(myRs.getTimestamp("data_fim").getTime());
 		}
@@ -380,7 +384,7 @@ public class PacoteComercialDAO {
 	}
 
 	private void close(Connection myConn, Statement myState, ResultSet myRes) throws SQLException {
-		
+
 		if (myRes != null) {
 			myRes.close();
 		}

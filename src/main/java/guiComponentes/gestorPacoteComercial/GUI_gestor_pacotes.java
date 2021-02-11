@@ -71,22 +71,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 	protected void inicialize() {
 
-		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-			if ("Nimbus".equals(info.getName())) {
-				try {
-					UIManager.setLookAndFeel(info.getClassName());
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e) {
-					e.printStackTrace();
-				}
-				break;
-			}
-		}
+		ativarNimbusLookAndFeel();
 
 		// Botões
 
@@ -101,7 +86,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		btVoltarGestorPacotesSetup();
 		getContentPane().add(btVoltarGestorPacotes);
-		
+
 		textAreaDescricao = new JTextArea();
 		textAreaDescricao.setBounds(905, 71, 367, 151);
 		textAreaDescricao.setLineWrap(true);
@@ -133,10 +118,10 @@ public class GUI_gestor_pacotes extends JFrame {
 		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
 		lblCamposPesquisas.setBounds(98, 50, 294, 26);
 		contentPane.add(lblCamposPesquisas);
-		
+
 		painelPesquisa();
 
-		
+
 		// Footer
 
 		JLabel lbFooter = lbFooterSetup();
@@ -145,22 +130,40 @@ public class GUI_gestor_pacotes extends JFrame {
 		lblUsernameLogged = new JLabel();
 		lblUsernameLogged.setBounds(1215, 698, 159, 18);
 		contentPane.add(lblUsernameLogged);
-		
+
 		lblUsernameLogged.setText("Username:");
 		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setBounds(1215, 717, 159, 18);
 		contentPane.add(lblTempoSessao);
-		
+
 		lblTempoSessao.setText("Sessão:");
 		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setBounds(1215, 737, 159, 18);
 		contentPane.add(lblHoraSistema);
-		
+
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 12));
-		
+
+	}
+	private void ativarNimbusLookAndFeel() {
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+			if ("Nimbus".equals(info.getName())) {
+				try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
 	}
 	/**
 	 * 
@@ -315,25 +318,45 @@ public class GUI_gestor_pacotes extends JFrame {
 								JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					int resposta = JOptionPane.showConfirmDialog(GUI_gestor_pacotes.this,
-							"Desativar este Pacote?", "Confirmar Desativar",
-							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+					PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indice,	PacoteComercialPesquisaModelTable.OBJECT_COL);
 
-					if (resposta != JOptionPane.YES_OPTION) {
-						return;
-					}
+					if(pacoteTemp.isAtivo()) {
+						
+						int resposta = JOptionPane.showConfirmDialog(GUI_gestor_pacotes.this,
+								"Desativar este Pacote Comercial?", "Confirmar Desativar",
+								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-					
-						PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indice,
-								PacoteComercialPesquisaModelTable.OBJECT_COL);
+						if (resposta != JOptionPane.YES_OPTION) {
+							return;
+						}
+
 						Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
 						GestorDeDAO.getGestorDeDAO().desativarPacoteComercial(pacoteTemp.getId(),admin );
-						
-						JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
-							"Pacotes Desativado com sucesso", "Pacote Desativado",
-							JOptionPane.INFORMATION_MESSAGE);
 
-					refreshPacotesTable();
+						JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
+								"Pacote Comercial Desativado com sucesso", "Pacote Comercial Desativado",
+								JOptionPane.INFORMATION_MESSAGE);
+
+						refreshPacotesTable();
+					} else {
+						
+						int resposta = JOptionPane.showConfirmDialog(GUI_gestor_pacotes.this,
+								"Ativar este Pacote Comercial?", "Confirmar Ativar",
+								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+						if (resposta != JOptionPane.YES_OPTION) {
+							return;
+						}
+
+						Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+						GestorDeDAO.getGestorDeDAO().ativarPacoteComercial(pacoteTemp.getId(), admin );
+
+						JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
+								"Pacote Comercial Ativado com sucesso", "Pacote Comercial Ativado",
+								JOptionPane.INFORMATION_MESSAGE);
+
+						refreshPacotesTable();
+					}
 				} catch (Exception e1) {
 
 				}
@@ -378,11 +401,11 @@ public class GUI_gestor_pacotes extends JFrame {
 			int row = table.getSelectedRow();
 			PacoteComercial pacoteComercial = (PacoteComercial) table.getValueAt(row, PacoteComercialPesquisaModelTable.OBJECT_COL);
 			if (pacoteComercial.isAtivo())
-				botaoDesativarPacoteComercial.setText("Desativa pacote");
+				botaoDesativarPacoteComercial.setText("Desativar Pacote Comercial");
 			else
-				botaoDesativarPacoteComercial.setText("Ativa pacote");
+				botaoDesativarPacoteComercial.setText("Ativar Pacote Comercial");
 		} catch  (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 
@@ -414,13 +437,12 @@ public class GUI_gestor_pacotes extends JFrame {
 					botaoDesativarPacoteComercial.setEnabled(true);
 					PacoteComercial pacoteComercial = (PacoteComercial) table.getValueAt(row, PacoteComercialPesquisaModelTable.OBJECT_COL);
 					textAreaDescricao.setText(pacoteComercial.getDescricao());
-
-
+					botaoAtivarDinamico();
 				} else if (table.getSelectedRowCount() == 0) {
 					botaoEditarPacoteComercial.setEnabled(false);
 					botaoDesativarPacoteComercial.setEnabled(false);
 				}
-				botaoAtivarDinamico();
+				
 			}
 		});
 	}

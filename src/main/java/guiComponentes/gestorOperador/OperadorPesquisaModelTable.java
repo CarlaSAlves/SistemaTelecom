@@ -12,10 +12,9 @@ public class OperadorPesquisaModelTable extends AbstractTableModel {
 	private static final int NIF_COL = 1;
 	private static final int NOME_COL = 2;
 	private static final int LOGIN_COL = 3;
-	private static final int PASSWORD_COL = 4;
-	private static final int ATIVO_COL = 5;
+	private static final int ATIVO_COL = 4;
 	
-	private String[] nomesColunas = { "ID", "NIF", "Nome", "Login", "Password", "Ativo" };
+	private String[] nomesColunas = { "ID", "NIF", "Nome", "Login", "Ativo" };
 	
 	private List<Funcionario> funcionarios;
 	
@@ -53,8 +52,6 @@ public class OperadorPesquisaModelTable extends AbstractTableModel {
 			return funcionario.getNif();
 		case LOGIN_COL:
 			return funcionario.getLogin();
-		case PASSWORD_COL:
-			return funcionario.getPassword();
 		case ATIVO_COL:
 			return funcionario.isAtivo();
 		case OBJECT_COL:

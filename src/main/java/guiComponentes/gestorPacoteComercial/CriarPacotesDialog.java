@@ -31,7 +31,6 @@ public class CriarPacotesDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JCheckBox checkBoxAtivo;	
 	private GUI_gestor_pacotes pacoteComercialPesquisaApp;
 	private PacoteComercial pacoteComercialAntigo;
 	private boolean modoEditar = false;
@@ -67,7 +66,6 @@ public class CriarPacotesDialog extends JDialog {
 	private void popularTextFields(PacoteComercial pacoteComercialAntigo2) {
 		textFieldNome.setText(pacoteComercialAntigo2.getNome()+ "");
 		textFieldDescricao.setText(pacoteComercialAntigo2.getDescricao());
-		checkBoxAtivo.setSelected(pacoteComercialAntigo2.isAtivo());
 
 	}
 	public CriarPacotesDialog() {
@@ -105,12 +103,7 @@ public class CriarPacotesDialog extends JDialog {
 			contentPanel.add(textFieldDescricao);
 		}
 
-		checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setSelected(true);
-		checkBoxAtivo.setBounds(170, 96, 86, 23);
-		checkBoxAtivo.setBackground(Color.WHITE);
-		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		contentPanel.add(checkBoxAtivo);
+
 		{
 			JPanel painelConfirmacao = new JPanel();
 			painelConfirmacao.setBounds(5, 135, 396, 44);
@@ -160,7 +153,7 @@ public class CriarPacotesDialog extends JDialog {
 	private void gravarPacoteComercial() {
 		String nome = textFieldNome.getText();
 		String descricao = textFieldDescricao.getText();
-		boolean ativo = checkBoxAtivo.isSelected();
+		boolean ativo = true;
 
 		PacoteComercial pacoteComercial = null;
 

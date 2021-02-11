@@ -29,7 +29,6 @@ public class CriarPromocaoDialog extends JDialog {
 	private Promocao promocaoAntiga;
 	private boolean modoEditar = false;
 	private final JPanel contentPanel = new JPanel();
-	private JCheckBox checkBoxAtivo;	
 	private JTextField textFieldNome, textFieldDescricao;
 
 	public static void main(String[] args) {
@@ -62,7 +61,6 @@ public class CriarPromocaoDialog extends JDialog {
 	private void popularTextFields(Promocao promocaoAntigo2) {
 		textFieldNome.setText(promocaoAntigo2.getNome());
 		textFieldDescricao.setText(promocaoAntigo2.getDescricao());
-		checkBoxAtivo.setSelected(promocaoAntigo2.isAtiva());
 
 	}
 
@@ -101,12 +99,7 @@ public class CriarPromocaoDialog extends JDialog {
 			contentPanel.add(textFieldDescricao);
 		}
 
-		checkBoxAtivo = new JCheckBox("Ativa");
-		checkBoxAtivo.setSelected(true);
-		checkBoxAtivo.setBounds(170, 96, 86, 23);
-		checkBoxAtivo.setBackground(Color.WHITE);
-		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		contentPanel.add(checkBoxAtivo);
+
 		{
 			JPanel painelConfirmacao = new JPanel();
 			painelConfirmacao.setBounds(5, 135, 396, 44);
@@ -155,7 +148,7 @@ public class CriarPromocaoDialog extends JDialog {
 	private void gravarPromocao() {
 		String nome = textFieldNome.getText();
 		String descricao = textFieldDescricao.getText();
-		boolean ativo = checkBoxAtivo.isSelected();
+		boolean ativo = true;
 
 		Promocao promocao = null;
 

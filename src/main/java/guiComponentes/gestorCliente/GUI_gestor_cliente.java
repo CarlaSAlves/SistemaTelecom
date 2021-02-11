@@ -48,7 +48,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private JButton botaoDesativarCliente, botaoEditarCliente, botaoVisualizarHistorico, botaoPesquisa;
 	private JTextField textPesquisaID, textPesquisaNIF,textFieldNome,textFieldMorada;
 	private JCheckBox checkBoxAtivo;
-	
+
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -65,24 +65,9 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	public GUI_gestor_cliente() {
-		
-		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-	        if ("Nimbus".equals(info.getName())) {
-	            try {
-					UIManager.setLookAndFeel(info.getClassName());
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e) {
-					e.printStackTrace();
-				}
-	            break;
-	        }
-		}
-		
+
+		ativarNimbusLookAndFeel();
+
 
 		contentPaneSetup();
 
@@ -122,17 +107,17 @@ public class GUI_gestor_cliente extends JFrame {
 		panelSetup();
 		panelContentSetup();
 		contentPane.add(painelPesquisa);
-		
+
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setBounds(1215, 737, 159, 18);
 		contentPane.add(lblHoraSistema);
-		
+
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setBounds(1215, 717, 159, 18);
 		contentPane.add(lblTempoSessao);
-		
+
 		lblTempoSessao.setText("Sessão:");
 		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 		lblUsernameLogged = new JLabel();
@@ -143,6 +128,25 @@ public class GUI_gestor_cliente extends JFrame {
 
 
 
+	}
+
+	private void ativarNimbusLookAndFeel() {
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+			if ("Nimbus".equals(info.getName())) {
+				try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
 	}
 
 	private void panelContentSetup() {
@@ -286,7 +290,7 @@ public class GUI_gestor_cliente extends JFrame {
 		labelID.setBounds(6, 15, 39, 18);
 		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 	}
-	
+
 	private void panelSetup() {
 		painelPesquisa = new JPanel();
 		painelPesquisa.setBackground(Color.WHITE);
@@ -333,7 +337,7 @@ public class GUI_gestor_cliente extends JFrame {
 		botaoVisualizarHistorico.setBounds(655, 263, 161, 33);
 		botaoVisualizarHistorico.setEnabled(false);
 	}
-	
+
 
 	private JLabel lbFooterSetup() {
 		JLabel lbFooter = new JLabel("");
@@ -369,26 +373,48 @@ public class GUI_gestor_cliente extends JFrame {
 								JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					int resposta = JOptionPane.showConfirmDialog(GUI_gestor_cliente.this,
-							"Desativar Cliente(s)?", "Confirmar Desativar",
-							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+					Cliente clienteTemp = (Cliente) table.getValueAt(indice, ClientePesquisaModelTable.OBJECT_COL);
 
-					if (resposta != JOptionPane.YES_OPTION) {
-						return;
-					}
+					if(clienteTemp.isAtivo()) {
+						int resposta = JOptionPane.showConfirmDialog(GUI_gestor_cliente.this,
+								"Desativar Cliente(s)?", "Confirmar Desativar",
+								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-					Funcionario funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
-					
-						Cliente clienteTemp = (Cliente) table.getValueAt(indice, ClientePesquisaModelTable.OBJECT_COL);
+						if (resposta != JOptionPane.YES_OPTION) {
+							return;
+						}
+
+						Funcionario funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+
+
 						GestorDeDAO.getGestorDeDAO().desativarCliente(clienteTemp.getId(), funcionario);
-					
-					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
-							"Cliente(s) Desativado(s) com sucesso", "Cliente(s) Desativado",
-							JOptionPane.INFORMATION_MESSAGE);
 
-					refreshClienteTable();
+						JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
+								"Cliente(s) Desativado(s) com sucesso", "Cliente(s) Desativado",
+								JOptionPane.INFORMATION_MESSAGE);
+
+						refreshClienteTable();
+					}else {
+						
+						int resposta = JOptionPane.showConfirmDialog(GUI_gestor_cliente.this,
+								"Ativar Cliente(s)?", "Confirmar Ativar",
+								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+						if (resposta != JOptionPane.YES_OPTION) {
+							return;
+						}
+
+						Funcionario funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+						GestorDeDAO.getGestorDeDAO().ativarCliente(clienteTemp.getId(), funcionario);
+
+						JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
+								"Cliente(s) Ativado(s) com sucesso", "Cliente(s) Ativado",
+								JOptionPane.INFORMATION_MESSAGE);
+
+						refreshClienteTable();
+					}
 				} catch (Exception e1) {
-
+					e1.printStackTrace();
 				}
 
 			}
@@ -449,6 +475,7 @@ public class GUI_gestor_cliente extends JFrame {
 					botaoEditarCliente.setEnabled(true);
 					botaoDesativarCliente.setEnabled(true);
 					botaoVisualizarHistorico.setEnabled(true);
+					botaoAtivarDinamico();
 				}
 				else if (table.getSelectedRowCount()==0)
 				{
@@ -456,22 +483,22 @@ public class GUI_gestor_cliente extends JFrame {
 					botaoDesativarCliente.setEnabled(false);
 					botaoVisualizarHistorico.setEnabled(false);
 				}
-				botaoAtivarDinamico();
+				
 			}
 
-		
+
 		});
 	}
-	
+
 	private void botaoAtivarDinamico() {
-		// TODO Auto-generated method stub
+
 		try {
-		int row = table.getSelectedRow();
-		Cliente cliente = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
-		if (cliente.isAtivo())
-			botaoDesativarCliente.setText("Desativar cliente");
-		else
-			botaoDesativarCliente.setText("Ativar Cliente");
+			int row = table.getSelectedRow();
+			Cliente cliente = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
+			if (cliente.isAtivo())
+				botaoDesativarCliente.setText("Desativar cliente");
+			else
+				botaoDesativarCliente.setText("Ativar Cliente");
 		} catch  (Exception e) {
 		}
 	}
@@ -535,7 +562,7 @@ public class GUI_gestor_cliente extends JFrame {
 		}
 
 	}
-	
+
 
 	public JTable getTable() {
 		return table;
