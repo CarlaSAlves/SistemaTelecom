@@ -247,43 +247,34 @@ public class ClienteDAO {
 	}
 
 	@SuppressWarnings("resource")
-	public Cliente editarCliente(Cliente cliente, Funcionario funcionario, String password) throws Exception {
+	public Cliente editarCliente(Cliente cliente, Funcionario funcionario, String novaPass) throws Exception {
 		PreparedStatement myStmt = null;
+		String passEncriptada = null;
 		try {
-
-			if(password == null) {
-
-				myStmt = myConn.prepareStatement("UPDATE `cliente` SET `nome`=?, `nif`=?, `morada`=?, "
-						+ "`login`=? WHERE  `id`=?");
-
-				myStmt.setString(1, cliente.getNome());
-				myStmt.setLong(2, cliente.getNif());
-				myStmt.setString(3, cliente.getMorada());
-				myStmt.setString(4, cliente.getLogin());
-				myStmt.setInt(5, cliente.getId());
-
-				myStmt.executeUpdate();
-
-			}else {
-
-				myStmt = myConn.prepareStatement("UPDATE `cliente` SET `nome`=?, `nif`=?, `morada`=?, "
-						+ "`login`=?, `password`=? WHERE  `id`=?");
-
-				myStmt.setString(1, cliente.getNome());
-				myStmt.setLong(2, cliente.getNif());
-				myStmt.setString(3, cliente.getMorada());
-				myStmt.setString(4, cliente.getLogin());
-				myStmt.setString(5, PasswordEncryption.get_SHA_512_SecurePassword(password));
-				myStmt.setInt(6, cliente.getId());
-
-				myStmt.executeUpdate();
-
-
+			
+			StringBuilder query = new StringBuilder();
+			query.append("UPDATE `cliente` SET "
+					+ "`nome`= \"" + cliente.getNome() + "\","
+					+ "`nif`=" + cliente.getNif() + ","
+					+ "`morada`= \"" + cliente.getMorada() +"\", "
+					+ "`login`= \"" + cliente.getLogin() +"\", "
+					+ "`ativo`=" + cliente.isAtivo() +", ");
+			
+			if (novaPass != null && !novaPass.isBlank()) {
+				passEncriptada = PasswordEncryption.get_SHA_512_SecurePassword(novaPass);
+				query.append("`password`= \"" + passEncriptada + "\" ");
 			}
+			query.append(" WHERE `id`=" + cliente.getId() + ";");
+			
+//			System.out.println(query.toString());
+			
+			myStmt = myConn.prepareStatement(query.toString());
+			myStmt.executeUpdate();
 
 			myStmt = logUpdate(funcionario, cliente, "Editar Cliente");	
 			myStmt.executeUpdate();
-
+			
+			cliente.setPassword(passEncriptada);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -396,8 +387,9 @@ public class ClienteDAO {
 		String login = myRs.getString("login");
 		String password = myRs.getString("password");
 		boolean ativo = myRs.getBoolean("ativo");
+		int id_pacote_cliente = myRs.getInt("id_pacote_cliente");
 
-		Cliente cliente = new Cliente(id, nome, nif, morada, login, password, ativo);
+		Cliente cliente = new Cliente(id, nome, nif, morada, login, password, ativo, id_pacote_cliente);
 
 		return cliente;
 	}

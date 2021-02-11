@@ -74,7 +74,6 @@ public class CriarOperadorDialog extends JDialog {
 		textFieldNIF.setText(funcionarioTemp.getNif() + "");
 		textFieldLogin.setText(funcionarioTemp.getLogin());
 		textFieldPassword.setText(funcionarioTemp.getPassword()); //.substring(0,8)
-
 	}
 
 	public CriarOperadorDialog() {
@@ -234,7 +233,7 @@ public class CriarOperadorDialog extends JDialog {
 		try {
 			if (modoEditar) {
 				Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
-				GestorDeDAO.getGestorDeDAO().editarFuncionario(funcionario, admin);
+				GestorDeDAO.getGestorDeDAO().editarFuncionario(funcionario, admin, pass);
 				operadorPesquisaApp.refreshOperadorTable();
 				JOptionPane.showMessageDialog(operadorPesquisaApp,
 						"Operador Editado com sucesso!", "Operador Editado",

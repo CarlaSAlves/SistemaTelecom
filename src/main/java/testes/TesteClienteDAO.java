@@ -3,6 +3,7 @@ package testes;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -69,11 +70,14 @@ public class TesteClienteDAO {
 		
 		Funcionario funcionario = new Funcionario(1, "JUnitCriarClienteTeste", 112233, "JUnitTest", "func10", true, 1);
 		Cliente cliente = clienteDAO.pesquisaClienteAuxiliarID(5);
+//		System.out.println("Velha passe: " + cliente.getPassword());
+		
 		cliente.setNome(novoNome);
 		
-		clienteDAO.editarCliente(cliente, funcionario);
+		cliente = clienteDAO.editarCliente(cliente, funcionario, "123");
+//		System.out.println("Nova passe: " + cliente.getPassword());
 		
-		assertEquals(novoNome, clienteDAO.pesquisaClienteAuxiliarID(5).getNome());
+		assertTrue(novoNome.equals(cliente.getNome()));
 	}
 	
 	@Test

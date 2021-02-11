@@ -86,10 +86,13 @@ public class TesteFuncionarioDAO {
 		
 		//funcionario com id 5 é um operador
 		Funcionario operador = funcionarioDAO.pesquisaFuncionarioById(5);
+//		System.out.println("Pass velha: " + operador.getPassword());
 		operador.setNome(novoNome);
+		
 		//funcionario com id 1 é um admin
 		Funcionario admin = funcionarioDAO.pesquisaFuncionarioById(1);
-		operador = funcionarioDAO.editarFuncionario(operador, admin);
+		operador = funcionarioDAO.editarFuncionario(operador, admin, "123");
+//		System.out.println("Pass nova: " + operador.getPassword());
 		
 		assertTrue(novoNome.equals(operador.getNome()));
 	}
