@@ -62,21 +62,30 @@ public class CriarPromocaoDialog extends JDialog {
 	}
 
 	public CriarPromocaoDialog() {
-		setBounds(500, 300, 415, 227);
+		setBounds(500, 300, 465, 412);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
+			textFieldDescricao = new JTextArea();
+			textFieldDescricao.setBackground(Color.WHITE);
+			textFieldDescricao.setLineWrap(true);
+			textFieldDescricao.setBounds(101, 118, 290, 193);
+			textFieldDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			textFieldDescricao.setColumns(10);
+			contentPanel.add(textFieldDescricao);
+		}
+		{
 			JLabel lblNome = new JLabel("Nome");
-			lblNome.setBounds(5, 10, 86, 28);
+			lblNome.setBounds(5, 48, 86, 28);
 			lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblNome);
 		}
 		{
 			textFieldNome = new JTextField();
-			textFieldNome.setBounds(101, 11, 290, 27);
+			textFieldNome.setBounds(103, 45, 290, 35);
 			textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldNome.setColumns(10);
 			contentPanel.add(textFieldNome);
@@ -84,22 +93,15 @@ public class CriarPromocaoDialog extends JDialog {
 
 		{
 			JLabel lblDescricao = new JLabel("Descrição");
-			lblDescricao.setBounds(5, 49, 86, 28);
+			lblDescricao.setBounds(5, 117, 86, 51);
 			lblDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblDescricao);
-		}
-		{
-			textFieldDescricao = new JTextArea();
-			textFieldDescricao.setBounds(101, 49, 290, 75);
-			textFieldDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			textFieldDescricao.setColumns(10);
-			contentPanel.add(textFieldDescricao);
 		}
 
 
 		{
 			JPanel painelConfirmacao = new JPanel();
-			painelConfirmacao.setBounds(5, 135, 396, 44);
+			painelConfirmacao.setBounds(5, 322, 444, 44);
 			contentPanel.add(painelConfirmacao);
 			painelConfirmacao.setBackground(Color.WHITE);
 			painelConfirmacao.setLayout(new FlowLayout(FlowLayout.RIGHT));

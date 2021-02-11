@@ -66,7 +66,7 @@ public class CriarPacotesDialog extends JDialog {
 
 	}
 	public CriarPacotesDialog() {
-		setBounds(500, 300, 423, 224);
+		setBounds(500, 300, 465, 412);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -74,13 +74,13 @@ public class CriarPacotesDialog extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JLabel lblNome = new JLabel("Nome");
-			lblNome.setBounds(5, 11, 86, 27);
+			lblNome.setBounds(5, 40, 86, 35);
 			lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblNome);
 		}
 		{
 			textFieldNome = new JTextField();
-			textFieldNome.setBounds(101, 11, 290, 27);
+			textFieldNome.setBounds(103, 45, 290, 35);
 			textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldNome.setColumns(10);
 			contentPanel.add(textFieldNome);
@@ -88,13 +88,13 @@ public class CriarPacotesDialog extends JDialog {
 
 		{
 			JLabel lblDescricao = new JLabel("Descrição");
-			lblDescricao.setBounds(5, 48, 86, 28);
+			lblDescricao.setBounds(5, 117, 86, 51);
 			lblDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblDescricao);
 		}
 		{
 			textFieldDescricao = new JTextArea();
-			textFieldDescricao.setBounds(101, 49, 290, 75);
+			textFieldDescricao.setBounds(101, 118, 290, 174);
 			textFieldDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldDescricao.setColumns(10);
 			contentPanel.add(textFieldDescricao);
@@ -103,7 +103,7 @@ public class CriarPacotesDialog extends JDialog {
 
 		{
 			JPanel painelConfirmacao = new JPanel();
-			painelConfirmacao.setBounds(5, 135, 396, 44);
+			painelConfirmacao.setBounds(5, 323, 438, 44);
 			contentPanel.add(painelConfirmacao);
 			painelConfirmacao.setBackground(Color.WHITE);
 			painelConfirmacao.setLayout(new FlowLayout(FlowLayout.RIGHT));
