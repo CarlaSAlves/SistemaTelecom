@@ -541,7 +541,7 @@ public class GUI_gestor_operador extends JFrame {
 	}
 
 	public void setUsernameLoggedIn(String username) {
-		lblUsernameLogged.setText("Username : " + username);
+		lblUsernameLogged.setText("Username: " + username);
 
 	}
 

@@ -517,7 +517,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 
 	public void setUsernameLoggedIn(String username) {
-		lblUsernameLogged.setText("Username : " + username);
+		lblUsernameLogged.setText("Username: " + username);
 
 	}
 
