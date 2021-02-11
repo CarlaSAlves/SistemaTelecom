@@ -11,17 +11,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 import org.junit.Test;
 
 import data_acess_object_dao.ClienteDAO;
-import historicos.HistoricoCliente;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 import standard_value_object.PacoteCliente;
@@ -73,6 +69,7 @@ public class TesteClienteDAO {
 		Cliente cliente = new Cliente(110011, "JUnitTest", "JUnitMorada", "JUnitLogin", "pass1", true);
 		Funcionario funcionario = new Funcionario(1, "JUnitCriarClienteTeste", 112233, "JUnitTest", "func10", true, 1);
 		assertNotEquals(0, clienteDAO.criarCliente(cliente, funcionario).getId());
+		
 	}
 	
 	@Test
@@ -131,14 +128,12 @@ public class TesteClienteDAO {
 	
 	//estabelece a ligaçao com a base de dados definida no documento sistema_tele.properties
 	private Connection startConnection() throws FileNotFoundException, IOException, SQLException {
-//		Properties props = new Properties();
-//		props.load(new FileInputStream("sistema_tele.properties"));
-//		String user = props.getProperty("user");
-//		String password = props.getProperty("password");
-//		String dburl = props.getProperty("dburl");
-		String user = "hbstudent";
-		String password = "hbstudent";
-		String dburl = "jdbc:mysql://localhost:3306/sistema_tele?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+		Properties props = new Properties();
+		props.load(new FileInputStream("sistema_tele.properties"));
+		String user = props.getProperty("user");
+		String password = props.getProperty("password");
+		String dburl = props.getProperty("dburl");
+
 
 		Connection connection = DriverManager.getConnection(dburl, user, password);
 		connection.setAutoCommit(false);

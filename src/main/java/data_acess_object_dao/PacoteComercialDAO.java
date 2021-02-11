@@ -315,9 +315,9 @@ public class PacoteComercialDAO {
 
 			while (myRs.next()) {
 
-				int id_funcionario = myRs.getInt("HistoricoOperador.id_funcionario");
-				String descricao = myRs.getString("HistoricoOperador.descricao");
-				Timestamp timestamp = myRs.getTimestamp("HistoricoOperador.data_registo");
+				int id_funcionario = myRs.getInt("HistoricoPacoteComercial.id_funcionario");
+				String descricao = myRs.getString("HistoricoPacoteComercial.descricao");
+				Timestamp timestamp = myRs.getTimestamp("HistoricoPacoteComercial.data_registo");
 				java.sql.Date data_registo = new java.sql.Date(timestamp.getTime());
 				String nome = myRs.getString("admin.nome");
 
