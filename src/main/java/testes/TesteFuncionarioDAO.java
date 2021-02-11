@@ -34,8 +34,14 @@ public class TesteFuncionarioDAO {
 	}
 	
 	@Test
+	public void testPesquisaOperadorAuxiliarIDNulo() throws Exception {
+		assertNull(funcionarioDAO.pesquisaFuncionarioById(0));
+	}
+	
+	
+	@Test
 	public void testGetAllFuncionarioOperador() throws Exception {
-		assertEquals(1, funcionarioDAO.getAllFuncionarioOperador().size());
+		assertEquals(3, funcionarioDAO.getAllFuncionarioOperador().size());
 	}
 	
 	@Test
@@ -50,7 +56,7 @@ public class TesteFuncionarioDAO {
 	
 	@Test
 	public void testPesquisaTodosFuncionarios() throws Exception {
-		assertEquals(5, funcionarioDAO.pesquisaTodosFuncionarios().size());
+		assertEquals(7, funcionarioDAO.pesquisaTodosFuncionarios().size());
 	}
 	
 	@Test
@@ -59,8 +65,18 @@ public class TesteFuncionarioDAO {
 	}
 	
 	@Test
+	public void testPesquisaFuncionarioByNifNulo() throws Exception {
+		assertEquals(0, funcionarioDAO.pesquisaFuncionarioByNif("99999999").size());
+	}
+	
+	@Test
 	public void testPesquisaFuncionarioByNome() throws Exception {
 		assertEquals(1, funcionarioDAO.pesquisaFuncionarioByNome("admin").size());
+	}
+	
+	@Test
+	public void testPesquisaFuncionarioByNomeNulo() throws Exception {
+		assertEquals(0, funcionarioDAO.pesquisaFuncionarioByNome("999999999").size());
 	}
 	
 	@Test
@@ -69,8 +85,18 @@ public class TesteFuncionarioDAO {
 	}
 	
 	@Test
+	public void testPesquisaFuncionarioByIdNulo() throws Exception {
+		assertNull(funcionarioDAO.pesquisaFuncionarioById(999));
+	}
+	
+	@Test
 	public void testPesquisarFuncionarioLoginPass() throws Exception {
-		assertNotNull(funcionarioDAO.pesquisaFuncionarioById(1));
+		assertNotNull(funcionarioDAO.pesquisarFuncionarioLoginPass("admin", "func1"));
+	}
+	
+	@Test
+	public void testPesquisarFuncionarioLoginPassNulo() throws Exception {
+		assertNull(funcionarioDAO.pesquisarFuncionarioLoginPass("123", "678"));
 	}
 	
 	@Test
@@ -91,7 +117,24 @@ public class TesteFuncionarioDAO {
 		
 		//funcionario com id 1 é um admin
 		Funcionario admin = funcionarioDAO.pesquisaFuncionarioById(1);
-		operador = funcionarioDAO.editarFuncionario(operador, admin, "123");
+		operador = funcionarioDAO.editarFuncionario(operador, admin, "000");
+//		System.out.println("Pass nova: " + operador.getPassword());
+		
+		assertTrue(novoNome.equals(operador.getNome()));
+	}
+	
+	@Test
+	public void testEditarFuncionarioPassNull() throws Exception {
+		String novoNome = "testeEditar";
+		
+		//funcionario com id 5 é um operador
+		Funcionario operador = funcionarioDAO.pesquisaFuncionarioById(6);
+//		System.out.println("Pass velha: " + operador.getPassword());
+		operador.setNome(novoNome);
+		
+		//funcionario com id 1 é um admin
+		Funcionario admin = funcionarioDAO.pesquisaFuncionarioById(3);
+		operador = funcionarioDAO.editarFuncionario(operador, admin, null);
 //		System.out.println("Pass nova: " + operador.getPassword());
 		
 		assertTrue(novoNome.equals(operador.getNome()));

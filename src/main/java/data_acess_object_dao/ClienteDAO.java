@@ -248,7 +248,7 @@ public class ClienteDAO {
 
 		try {
 
-			if(password == null) {
+			if(password == null || password.isBlank()) {
 				myStmt = myConn.prepareStatement("UPDATE `cliente` SET `nome`=?, `nif`=?, `morada`=?, "
 						+ "`login`=? WHERE  `id`=?");
 
@@ -260,7 +260,7 @@ public class ClienteDAO {
 
 				myStmt.executeUpdate();
 
-			}else {
+			}else if (password != null && !password.isBlank()) {
 
 				myStmt = myConn.prepareStatement("UPDATE `cliente` SET `nome`=?, `nif`=?, `morada`=?, "
 						+ "`login`=?, `password`=? WHERE  `id`=?");

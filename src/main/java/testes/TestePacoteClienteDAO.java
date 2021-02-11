@@ -68,6 +68,11 @@ public class TestePacoteClienteDAO {
 		assertEquals(1, pacoteClienteDAO.eliminarPacoteById(4));
 	}
 	
+	@Test
+	public void testEliminarPacoteByIdNull() throws Exception {
+		assertEquals(0, pacoteClienteDAO.eliminarPacoteById(0));
+	}
+	
 	//estabelece a ligaçao com a base de dados definida no documento sistema_tele.properties
 	private Connection startConnection() throws FileNotFoundException, IOException, SQLException {
 //		Properties props = new Properties();
