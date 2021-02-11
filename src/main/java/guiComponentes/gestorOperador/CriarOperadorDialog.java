@@ -39,7 +39,7 @@ public class CriarOperadorDialog extends JDialog {
 	private Funcionario funcionarioAntigo;
 	private boolean modoEditar = false;
 	private JLabel lblPassword, lblNewLabel;
-
+	int test;
 
 	public static void main(String[] args) {
 		try {
