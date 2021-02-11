@@ -285,6 +285,12 @@ public class GUI_total extends JFrame {
 		gestor_operador.getTable().setModel(new DefaultTableModel());
 		gestor_pacotes.getTable().setModel(new DefaultTableModel());
 		gestor_promocao.getTable().setModel(new DefaultTableModel());
+		gestor_cliente.getLblResultados().setText("Resultados: ");
+		gestor_operador.getLblResultados().setText("Resultados: ");
+		gestor_pacotes.getLblResultados().setText("Resultados: ");
+		gestor_promocao.getLblResultados().setText("Resultados: ");
+		gestor_pacotes.getTextAreaDescricao().setText(" ");
+		gestor_promocao.getTextAreaDescricao().setText(" ");
 	}
 
 

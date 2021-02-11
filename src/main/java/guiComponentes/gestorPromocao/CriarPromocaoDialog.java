@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import servico.GestorDeDAO;
 import standard_value_object.Promocao;
@@ -29,7 +30,8 @@ public class CriarPromocaoDialog extends JDialog {
 	private Promocao promocaoAntiga;
 	private boolean modoEditar = false;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textFieldNome, textFieldDescricao;
+	private JTextField textFieldNome;
+	private JTextArea textFieldDescricao;
 
 	public static void main(String[] args) {
 		try {
@@ -92,8 +94,8 @@ public class CriarPromocaoDialog extends JDialog {
 			contentPanel.add(lblDescricao);
 		}
 		{
-			textFieldDescricao = new JTextField();
-			textFieldDescricao.setBounds(101, 49, 290, 27);
+			textFieldDescricao = new JTextArea();
+			textFieldDescricao.setBounds(101, 49, 290, 75);
 			textFieldDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldDescricao.setColumns(10);
 			contentPanel.add(textFieldDescricao);

@@ -49,6 +49,7 @@ public class GUI_gestor_promocao extends JFrame {
 	private JCheckBox checkBoxAtivo;
 	private JTextArea textAreaDescricao;
 
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -150,19 +151,19 @@ public class GUI_gestor_promocao extends JFrame {
 		contentPane.add(lblTempoSessao);
 
 		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 12));
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 		lblUsernameLogged = new JLabel();
 		lblUsernameLogged.setBounds(1215, 698, 159, 18);
 		contentPane.add(lblUsernameLogged);
 
 		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 12));
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setBounds(1215, 737, 159, 18);
 		contentPane.add(lblHoraSistema);
 
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 12));
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10 ));
 
 	}
 	/**
@@ -508,9 +509,15 @@ public class GUI_gestor_promocao extends JFrame {
 		lblHoraSistema.setText("Data: " + agora);
 
 	}
-
-
+	
 	public JButton getBtVoltarGestorPromocao() {
 		return btVoltarGestorPromocao;
+	}
+	
+	public JLabel getLblResultados() {
+		return lblResultados;
+	}
+	public JTextArea getTextAreaDescricao() {
+		return textAreaDescricao;
 	}
 }

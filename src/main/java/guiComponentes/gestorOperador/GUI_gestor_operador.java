@@ -106,21 +106,21 @@ public class GUI_gestor_operador extends JFrame {
 		contentPane.add(lblTempoSessao);
 
 		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 12));
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 
 		lblUsernameLogged = new JLabel();
 		lblUsernameLogged.setBounds(1215, 698, 159, 18);
 		contentPane.add(lblUsernameLogged);
 
 		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 12));
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setBounds(1215, 737, 159, 18);
 		contentPane.add(lblHoraSistema);
 
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 12));
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 
 		// tabela
 
@@ -561,4 +561,11 @@ public class GUI_gestor_operador extends JFrame {
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
+	
+	public JLabel getLblResultados() {
+		return lblResultados;
+	}
+	
+	
+	
 }

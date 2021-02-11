@@ -132,19 +132,19 @@ public class GUI_gestor_pacotes extends JFrame {
 		contentPane.add(lblUsernameLogged);
 
 		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 12));
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setBounds(1215, 717, 159, 18);
 		contentPane.add(lblTempoSessao);
 
 		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 12));
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setBounds(1215, 737, 159, 18);
 		contentPane.add(lblHoraSistema);
 
 		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 12));
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 
 	}
 	private void ativarNimbusLookAndFeel() {
@@ -539,4 +539,12 @@ public class GUI_gestor_pacotes extends JFrame {
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
+	public JLabel getLblResultados() {
+		return lblResultados;
+	}
+	public JTextArea getTextAreaDescricao() {
+		return textAreaDescricao;
+	}
+	
+	
 }

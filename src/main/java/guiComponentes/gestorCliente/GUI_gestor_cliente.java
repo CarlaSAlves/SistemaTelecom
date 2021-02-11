@@ -593,4 +593,9 @@ public class GUI_gestor_cliente extends JFrame {
 		lblHoraSistema.setText("Data: " + agora);
 
 	}
+	
+	public JLabel getLblResultados() {
+		return lblResultados;
+	}
+	
 }

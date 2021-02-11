@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import servico.GestorDeDAO;
@@ -34,7 +35,8 @@ public class CriarPacotesDialog extends JDialog {
 	private GUI_gestor_pacotes pacoteComercialPesquisaApp;
 	private PacoteComercial pacoteComercialAntigo;
 	private boolean modoEditar = false;
-	private JTextField textFieldNome, textFieldDescricao;
+	private JTextField textFieldNome;
+	private JTextArea textFieldDescricao;
 
 	public static void main(String[] args) {
 		try {
@@ -96,8 +98,8 @@ public class CriarPacotesDialog extends JDialog {
 			contentPanel.add(lblDescricao);
 		}
 		{
-			textFieldDescricao = new JTextField();
-			textFieldDescricao.setBounds(101, 49, 290, 27);
+			textFieldDescricao = new JTextArea();
+			textFieldDescricao.setBounds(101, 49, 290, 75);
 			textFieldDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			textFieldDescricao.setColumns(10);
 			contentPanel.add(textFieldDescricao);
