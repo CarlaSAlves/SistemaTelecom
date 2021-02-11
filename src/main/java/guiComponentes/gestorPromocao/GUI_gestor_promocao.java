@@ -24,13 +24,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import servico.GestorDeDAO;
-import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import guiComponentes.gestorPacoteComercial.PacoteComercialPesquisaModelTable;
-import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JCheckBox;
 import java.awt.Color;
 
@@ -251,24 +245,6 @@ public class GUI_gestor_promocao extends JFrame {
 				painelPesquisa.add(btPesquisar);
 			}
 		}
-	}
-
-
-
-	private void panel_1ContentSetup(JPanel panel_1) {
-
-		textPesquisaIDSetup();
-
-		textFieldNomeSetup();
-	}
-
-
-
-	private void textFieldNomeSetup() {
-	}
-
-
-	private void textPesquisaIDSetup() {
 	}
 
 

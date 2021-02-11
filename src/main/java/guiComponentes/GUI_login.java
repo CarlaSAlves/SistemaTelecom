@@ -27,8 +27,6 @@ import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 
 
-
-
 public class GUI_login extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -36,8 +34,6 @@ public class GUI_login extends JFrame {
 	private JButton btLogin, btnSair;
 	private JLabel labelPass, labelConfm;
 	private JPasswordField passwordField;
-	private GUI_total guit;
-	private JLabel icon;
 	private JPanel panel;
 	
 
@@ -57,8 +53,6 @@ public class GUI_login extends JFrame {
 
 
 	public GUI_login(GUI_total guit) {
-		
-		this.guit = guit;
 		
 		setBackground(Color.WHITE);
 		
@@ -219,6 +213,7 @@ public class GUI_login extends JFrame {
 		//login vai usar metodos e entidades que estao nos dao do package V2
 		//primeiro vamos ver se o utilizador � um cliente
 		String login = textFieldUser.getText();
+		@SuppressWarnings("deprecation")
 		String pass = passwordField.getText();
 	
 		if(login.isBlank() || pass.isBlank()) {

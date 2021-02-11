@@ -1,11 +1,8 @@
 package data_acess_object_dao;
 
-import java.io.FileInputStream;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,11 +10,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.StringJoiner;
-
-import data_acess_object_dao.PasswordEncryption;
-
 import historicos.HistoricoOperador;
 import standard_value_object.Funcionario;
 import standard_value_object.Role;
@@ -25,7 +18,6 @@ import standard_value_object.Role;
 public class FuncionarioDAO {
 
 	private Connection myConn;
-	private Funcionario funcionario = new Funcionario();
 
 	public FuncionarioDAO(Connection connection) throws FileNotFoundException, IOException, SQLException {
 		this.myConn = connection;
@@ -74,6 +66,7 @@ public class FuncionarioDAO {
 		return funcionario;
 	}
 
+	@SuppressWarnings("unused")
 	private Funcionario pesquisaOperadorAuxiliarNIF(String nif) throws Exception {
 		Funcionario funcionario = null;
 

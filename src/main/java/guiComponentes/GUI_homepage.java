@@ -26,8 +26,6 @@ public class GUI_homepage extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JLabel lblUsernameLogged,lblTempoSessao,lblHoraSistema;
 
-	private GUI_total guit;
-
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -43,8 +41,7 @@ public class GUI_homepage extends JFrame {
 	}
 
 	public GUI_homepage(GUI_total guit) {
-		this.guit = guit;
-		
+			
 		ativarNimbusLookAndFeel();
 
 		panel = new JPanel();

@@ -11,12 +11,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
-
 import historicos.HistoricoCliente;
-
-import data_acess_object_dao.PasswordEncryption;
-import historicos.HistoricoCliente;
-
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 import standard_value_object.PacoteCliente;
@@ -122,6 +117,7 @@ public class ClienteDAO {
 	}
 
 	//nao vai ser necess�rio visto eu ter alterado o metodo criarCliente para usar o id da entidade recem-criada
+	@SuppressWarnings("unused")
 	private Cliente pesquisaClienteAuxiliarNIF(String nif) throws Exception {
 		Cliente cliente = null;
 		PreparedStatement myStmt = null;

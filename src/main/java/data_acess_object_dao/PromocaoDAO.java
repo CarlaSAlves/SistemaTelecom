@@ -222,6 +222,7 @@ public class PromocaoDAO {
 	
 	//primeiro ve se a promocao com o id inserido esta ativa, e s� depois desativa e insere a data atual
 	//no campo data_fim
+	@SuppressWarnings("resource")
 	public void desativarPromocao (int id) throws Exception {
 		PreparedStatement myState = null; 
 
@@ -249,6 +250,7 @@ public class PromocaoDAO {
 	
 	//primeiro ve se a promocao com o id inserido esta desativa, e s� depois ativa e insere a data atual
 	//no campo data_inicio e coloca data_fim a nulo
+	@SuppressWarnings("resource")
 	public void ativarPromocao (int id) throws Exception {
 		PreparedStatement myState = null; 
 

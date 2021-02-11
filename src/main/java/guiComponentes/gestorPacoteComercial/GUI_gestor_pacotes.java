@@ -19,7 +19,6 @@ import java.time.Duration;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
-import java.awt.TextArea;
 
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
@@ -30,12 +29,8 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.JTextArea;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 
 import guiComponentes.GUI_total;
-import guiComponentes.gestorCliente.ClientePesquisaModelTable;
 import historicos.HistoricoPacoteComercial;
 import javax.swing.JCheckBox;
 import java.awt.Color;

@@ -14,14 +14,9 @@ import standard_value_object.Promocao;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JCheckBox;
 import java.awt.Font;
 import java.awt.SystemColor;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
-import guiComponentes.gestorPacoteComercial.CriarPacotesDialog;
+
 import java.awt.Color;
 
 public class CriarPromocaoDialog extends JDialog {

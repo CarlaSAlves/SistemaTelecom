@@ -18,16 +18,11 @@ import standard_value_object.Funcionario;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JCheckBox;
 import java.awt.Font;
 import java.awt.SystemColor;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
+
 
 import guiComponentes.GUI_total;
-import guiComponentes.gestorCliente.CriarClienteDialog;
 import java.awt.Color;
 
 

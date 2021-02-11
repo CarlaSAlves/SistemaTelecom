@@ -12,9 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-import historicos.HistoricoOperador;
 import historicos.HistoricoPacoteComercial;
-import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 import standard_value_object.PacoteComercial;
 
@@ -133,6 +131,7 @@ public class PacoteComercialDAO {
 		return pacoteComercial;
 	}
 
+	@SuppressWarnings("resource")
 	public void criarPacoteComercial (PacoteComercial pacote , Funcionario funcionario) throws Exception {
 		PreparedStatement myStmt = null;
 
@@ -172,6 +171,7 @@ public class PacoteComercialDAO {
 	}
 
 	// Este metodo serve apenas para editar nome e descri�ao. Para Ativar/Desativar, usar os metodos correspondentes
+	@SuppressWarnings("resource")
 	public void editarPacoteComercial(PacoteComercial pacote, Funcionario funcionario) throws Exception {
 		PreparedStatement myState = null; 
 
@@ -243,16 +243,16 @@ public class PacoteComercialDAO {
 
 	//primeiro ve se o pacote com o id inserido esta ativo, e s� depois desativa e insere a data atual
 	//no campo data_fim
+	@SuppressWarnings("resource")
 	public void desativarPacoteComercial (int id, Funcionario funcionario) throws Exception {
 		PreparedStatement myState = null; 
 		PacoteComercial pacote = pesquisaPacoteComercialAuxiliarID(id);
 		try {
 			myState = myConn.prepareStatement("Select ativo From pacote_comercial Where id =" + id + ";");
-			ResultSet rs = myState.executeQuery();
-
+			
 			myState = myConn.prepareStatement("UPDATE pacote_comercial SET ativo = 0,"
 					+ "data_fim = current_timestamp() WHERE id=?");
-			System.out.println("entrei aqui");
+		
 			myState.setInt(1, id);
 			myState.executeUpdate();
 
@@ -269,6 +269,7 @@ public class PacoteComercialDAO {
 
 	//primeiro ve se o pacote com o id inserido esta inativo, e s� depois ativa e insere a data atual
 	//no campo data_inicio e faz set a data_fim para null
+	@SuppressWarnings("resource")
 	public void ativarPacoteComercial (int id, Funcionario funcionario) throws Exception {
 		PreparedStatement myState = null; 
 		PacoteComercial pacote = pesquisaPacoteComercialAuxiliarID(id);
