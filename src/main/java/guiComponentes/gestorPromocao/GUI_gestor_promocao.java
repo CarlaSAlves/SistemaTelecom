@@ -311,7 +311,7 @@ public class GUI_gestor_promocao extends JFrame {
 							return;
 						}
 						
-						GestorDeDAO.getGestorDeDAO().desativarPromocao(PromocaoTemp.getId());
+						GestorDeDAO.getGestorDeDAO().ativarPromocao(PromocaoTemp.getId());
 
 						JOptionPane.showMessageDialog(GUI_gestor_promocao.this,
 								"Promocao Ativada com sucesso", "Promocao Ativada",

@@ -192,6 +192,9 @@ public class GestorDeDAO {
 		promocaoDAO.desativarPromocao(id);
 	}
 	
+	public void ativarPromocao (int id) throws Exception {
+		promocaoDAO.ativarPromocao(id);
+	}
 
 	public List<Promocao> getAllPromocoes() throws Exception {
 		return promocaoDAO.getAllPromocoes();
