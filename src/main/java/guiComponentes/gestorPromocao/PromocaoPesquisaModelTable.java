@@ -56,7 +56,11 @@ public class PromocaoPesquisaModelTable extends AbstractTableModel {
 		case DATA_INICIO_COL:
 			return promocao.getData_inicio();
 		case DATA_FIM_COL:
-			return promocao.getData_fim();
+			if(promocao.getData_fim() != null) {
+				return promocao.getData_fim();
+				}else {
+					return "Nao Atribuido";
+				}
 		case OBJECT_COL:
 			return promocao; 
 		default:
