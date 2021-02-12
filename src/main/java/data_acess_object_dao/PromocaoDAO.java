@@ -277,22 +277,25 @@ public class PromocaoDAO {
 	}
 	
 	private Promocao converteRowParaPromocoes(ResultSet myRs) throws SQLException {
+		java.sql.Date data_fim;
+		java.sql.Date data_inicio;
 		
 		int id = myRs.getInt("id");
 		String nome = myRs.getString("nome");
 		String descricao = myRs.getString("descricao");
 		boolean ativo = myRs.getBoolean("ativa");
 		
-		java.sql.Date data_inicio = null;
-		java.sql.Date data_fim = null;
-		
-		//datas podem ser nulas, � necess�rio testar nulidade
-		if (myRs.getTimestamp("data_inicio") != null) {
-			data_inicio = new java.sql.Date(myRs.getTimestamp("data_inicio").getTime());
+		Timestamp timestamp_inicio = myRs.getTimestamp("data_inicio");
+		if(timestamp_inicio != null ) {
+			data_inicio = new java.sql.Date(timestamp_inicio.getTime());
+		}else {
+			data_inicio = null;
 		}
-		
-		if (myRs.getTimestamp("data_fim") != null) {
-			data_fim = new java.sql.Date(myRs.getTimestamp("data_fim").getTime());
+		Timestamp timestamp_fim = myRs.getTimestamp("data_fim");
+		if(timestamp_fim != null ) {
+			data_fim = new java.sql.Date(timestamp_fim.getTime());
+		}else {
+			data_fim = null;
 		}
 		
 		Promocao promocao = new Promocao(id, nome, descricao, ativo, data_inicio, data_fim);

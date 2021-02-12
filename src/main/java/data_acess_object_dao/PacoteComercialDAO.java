@@ -138,13 +138,14 @@ public class PacoteComercialDAO {
 		//se se pode criar um pacoteComercial com ativo = false, entao nao faz sentido ter data_inicio definida de forma automatica
 		//pelo mysql. � preciso que seja definida manualmente
 		try {
-			myStmt = myConn.prepareStatement("INSERT INTO pacote_comercial(nome, descricao, ativo, data_inicio) VALUES(?,?,?,?)",
+			myStmt = myConn.prepareStatement("INSERT INTO pacote_comercial(nome, descricao, ativo, data_inicio, data_fim) VALUES(?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			myStmt.setString(1, pacote.getNome());
 			myStmt.setString(2, pacote.getDescricao());
 			myStmt.setBoolean(3, pacote.isAtivo());
 			//se ativo = true, mudar a data_inicio para agora. De outro modo, colocar nulo na data_inicio
 			myStmt.setTimestamp(4, pacote.isAtivo() ? new Timestamp(System.currentTimeMillis()) : null);
+			myStmt.setTimestamp(5, pacote.isAtivo() ? null : new Timestamp(System.currentTimeMillis()));
 			myStmt.executeUpdate();
 
 			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
@@ -202,17 +203,17 @@ public class PacoteComercialDAO {
 		try {
 			myStmt = myConn.createStatement();
 
-			String sql = "SELECT HistoricoPacoteComercial.id_funcionario, HistoricoPacoteComercial.id_pacote_comercial, HistoricoPacoteComercial.descricao, "
-					+ "HistoricoPacoteComercial.data_registo, admin.nome"
-					+ "FROM funcionario_log_pacote_comercial HistoricoPacoteComercial, funcionario admin WHERE HistoricoPacoteComercial.id_funcionario=admin.id AND HistoricoPacoteComercial.id_pacote_comercial=" + id_pacote;
+			String sql = "SELECT HistoricoPacote_comercial.id_funcionario, HistoricoPacote_comercial.id_pacote_comercial, HistoricoPacote_comercial.descricao, "
+					+ "HistoricoPacote_comercial.data_registo, admin.nome "
+					+ "FROM funcionario_log_pacote_comercial HistoricoPacote_comercial, funcionario admin WHERE HistoricoPacote_comercial.id_funcionario=admin.id AND HistoricoPacote_comercial.id_pacote_comercial=" + id_pacote;
 
 			myRs = myStmt.executeQuery(sql);
 
 			while (myRs.next()) {
 
-				int id_funcionario = myRs.getInt("HistoricoPacoteComercial.id_funcionario");
-				String descricao = myRs.getString("HistoricoPacoteComercial.descricao");
-				Timestamp timestamp = myRs.getTimestamp("HistoricoPacoteComercial.data_registo");
+				int id_funcionario = myRs.getInt("HistoricoPacote_comercial.id_funcionario");
+				String descricao = myRs.getString("HistoricoPacote_comercial.descricao");
+				Timestamp timestamp = myRs.getTimestamp("HistoricoPacote_comercial.data_registo");
 				java.sql.Date data_registo = new java.sql.Date(timestamp.getTime());
 				String nome = myRs.getString("admin.nome");
 
@@ -248,10 +249,10 @@ public class PacoteComercialDAO {
 		PacoteComercial pacote = pesquisaPacoteComercialAuxiliarID(id);
 		try {
 			myState = myConn.prepareStatement("Select ativo From pacote_comercial Where id =" + id + ";");
-			
+
 			myState = myConn.prepareStatement("UPDATE pacote_comercial SET ativo = 0,"
 					+ "data_fim = current_timestamp() WHERE id=?");
-		
+
 			myState.setInt(1, id);
 			myState.executeUpdate();
 
@@ -287,7 +288,7 @@ public class PacoteComercialDAO {
 				myState.setInt(1, id);
 				myState.executeUpdate();
 			}
-			
+
 			myState = logUpdate(funcionario, pacote, "Ativar Pacote Comercial");	
 
 			myState.executeUpdate();	
@@ -308,16 +309,16 @@ public class PacoteComercialDAO {
 			myStmt = myConn.createStatement();
 
 			String sql = "SELECT HistoricoPacoteComercial.id_funcionario, HistoricoPacoteComercial.id_pacote_comercial, HistoricoPacoteComercial.descricao, "
-					+ "HistoricoPacoteComercial.data_registo, admin.nome"
-					+ "FROM funcionario_log_pacote_comercial HistoricoPacoteComercial, funcionario admin WHERE HistoricoPacoteComercial.id_funcionario=admin.id AND HistoricoPacoteComercial.id_pacote_comercial=" + id_pacoteComercial;
+					+ "HistoricoPacoteComercial.data_registo, admin.nome "
+					+ "FROM funcionario_log_pacote_comercial HistoricoPacoteComercial, funcionario admin WHERE HistoricoPacoteComercial.id_funcionario = admin.id AND HistoricoPacoteComercial.id_pacote_comercial= " + id_pacoteComercial;
 
 			myRs = myStmt.executeQuery(sql);
 
 			while (myRs.next()) {
 
-				int id_funcionario = myRs.getInt("HistoricoOperador.id_funcionario");
-				String descricao = myRs.getString("HistoricoOperador.descricao");
-				Timestamp timestamp = myRs.getTimestamp("HistoricoOperador.data_registo");
+				int id_funcionario = myRs.getInt("HistoricoPacoteComercial.id_funcionario");
+				String descricao = myRs.getString("HistoricoPacoteComercial.descricao");
+				Timestamp timestamp = myRs.getTimestamp("HistoricoPacoteComercial.data_registo");
 				java.sql.Date data_registo = new java.sql.Date(timestamp.getTime());
 				String nome = myRs.getString("admin.nome");
 
@@ -355,23 +356,27 @@ public class PacoteComercialDAO {
 		return pacoteComercial;
 	}
 	public PacoteComercial converteRowParaPacoteComercial(ResultSet myRs) throws SQLException {
+		java.sql.Date data_fim;
+		java.sql.Date data_inicio;
 
 		int id = myRs.getInt("id");
 		String nome = myRs.getString("nome");
 		String descricao = myRs.getString("descricao");
 		boolean ativo = myRs.getBoolean("ativo");
 
-		java.sql.Date data_inicio = null;
-		java.sql.Date data_fim = null;
-
-		//datas podem ser nulas, � necess�rio testar nulidade
-		if (myRs.getTimestamp("data_inicio") != null) {
-			data_inicio = new java.sql.Date(myRs.getTimestamp("data_inicio").getTime());
+		Timestamp timestamp_inicio = myRs.getTimestamp("data_inicio");
+		if(timestamp_inicio != null ) {
+			data_inicio = new java.sql.Date(timestamp_inicio.getTime());
+		}else {
+			data_inicio = null;
+		}
+		Timestamp timestamp_fim = myRs.getTimestamp("data_fim");
+		if(timestamp_fim != null ) {
+			data_fim = new java.sql.Date(timestamp_fim.getTime());
+		}else {
+			data_fim = null;
 		}
 
-		if (myRs.getTimestamp("data_fim") != null) {
-			data_fim = new java.sql.Date(myRs.getTimestamp("data_fim").getTime());
-		}
 
 		PacoteComercial pacoteComercial = new PacoteComercial(id, nome, descricao, ativo, data_inicio, data_fim);
 

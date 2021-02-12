@@ -42,7 +42,7 @@ public class HistoricoPromocaoDialog extends JDialog {
 		}
 	}
 
-	public void preencherTable(Funcionario funcionario,List<HistoricoOperador> historicoFuncionario) {
+	public void preencherTable(Funcionario funcionario, List<HistoricoOperador> historicoFuncionario) {
 		operadorRegistoLabel.setText(funcionario.getNome());
 		
 		HistoricoPromocaoTableModel model = new HistoricoPromocaoTableModel(historicoFuncionario); 

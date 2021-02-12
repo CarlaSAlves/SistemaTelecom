@@ -15,13 +15,18 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+
 import servico.GestorDeDAO;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -34,6 +39,7 @@ import guiComponentes.GUI_total;
 import historicos.HistoricoPacoteComercial;
 import javax.swing.JCheckBox;
 import java.awt.Color;
+import java.awt.Component;
 
 public class GUI_gestor_pacotes extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -230,6 +236,7 @@ public class GUI_gestor_pacotes extends JFrame {
 							PacoteComercialPesquisaModelTable model =
 									new PacoteComercialPesquisaModelTable(pacotesComerciais);
 							table.setModel(model);
+
 							numberRows = table.getRowCount();
 							lblResultados.setText("Resultados: " + numberRows);
 
@@ -316,7 +323,7 @@ public class GUI_gestor_pacotes extends JFrame {
 					PacoteComercial pacoteTemp = (PacoteComercial) table.getValueAt(indice,	PacoteComercialPesquisaModelTable.OBJECT_COL);
 
 					if(pacoteTemp.isAtivo()) {
-						
+
 						int resposta = JOptionPane.showConfirmDialog(GUI_gestor_pacotes.this,
 								"Desativar este Pacote Comercial?", "Confirmar Desativar",
 								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -334,7 +341,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 						refreshPacotesTable();
 					} else {
-						
+
 						int resposta = JOptionPane.showConfirmDialog(GUI_gestor_pacotes.this,
 								"Ativar este Pacote Comercial?", "Confirmar Ativar",
 								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -440,7 +447,7 @@ public class GUI_gestor_pacotes extends JFrame {
 					botaoDesativarPacoteComercial.setEnabled(false);
 					botaoVisualizarHistorico.setEnabled(false);
 				}
-				
+
 			}
 		});
 	}
@@ -540,6 +547,5 @@ public class GUI_gestor_pacotes extends JFrame {
 	public JTextArea getTextAreaDescricao() {
 		return textAreaDescricao;
 	}
-	
-	
+
 }

@@ -15,9 +15,9 @@ public class PacoteComercialPesquisaModelTable extends AbstractTableModel {
 	public static final int DATA_INICIO_COL = 4;
 	public static final int DATA_FIM_COL = 5;
 
-	
+
 	private String[] nomesColunas = { "ID", "Nome", "Descricao", "Ativo","Data de Inicio", "Data de Fim" };
-	
+
 	private List<PacoteComercial> pacotesComerciais;
 
 	public PacoteComercialPesquisaModelTable(List<PacoteComercial> pacotesComerciais) {
@@ -27,7 +27,7 @@ public class PacoteComercialPesquisaModelTable extends AbstractTableModel {
 	@Override
 	public int getColumnCount() {
 		return nomesColunas.length;
-		
+
 	}
 
 	@Override
@@ -56,12 +56,8 @@ public class PacoteComercialPesquisaModelTable extends AbstractTableModel {
 			return pacoteComercial.isAtivo();
 		case DATA_INICIO_COL:
 			return pacoteComercial.getData_inicio();
-			case DATA_FIM_COL:
-				if  (pacoteComercial.getData_fim()==null) {
-					return "Nao Atribuido";
-				}else {
-					return pacoteComercial.getData_fim();
-				}
+		case DATA_FIM_COL:
+			return pacoteComercial.getData_fim();
 		case OBJECT_COL:
 			return pacoteComercial;
 		default:
@@ -73,8 +69,8 @@ public class PacoteComercialPesquisaModelTable extends AbstractTableModel {
 	@Override
 	public Class getColumnClass(int c) {
 		return getValueAt(0, c).getClass();
-		
 
-}
+
+	}
 
 }

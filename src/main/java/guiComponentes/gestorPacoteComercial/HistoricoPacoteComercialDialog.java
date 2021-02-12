@@ -43,7 +43,7 @@ public class HistoricoPacoteComercialDialog extends JDialog {
 	}
 
 	public void preencherTable(PacoteComercial pacote,List<HistoricoPacoteComercial> historicoPacoteComercial) {
-		pacoteComercialRegistosTable.setText(pacote.getDescricao());
+		pacoteComercialRegistosTable.setText(pacote.getNome());
 
 		HistoricoPacoteComercialTableModel model = new HistoricoPacoteComercialTableModel(historicoPacoteComercial); 
 
