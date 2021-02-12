@@ -168,7 +168,78 @@
 
 <sessao>
 <username:	admin>
+<<<<<<< HEAD
 <data e hora do login:	12-02-2021 08:01:45>
 <duração da sessão:	1:16>
+=======
+<data e hora do login:	11-02-2021 17:10:05>
+<duração da sessão:	2:36>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	11-02-2021 17:12:43>
+<duração da sessão:	0:9>
+</sessao>
+
+<sessao>
+<username:	Admin>
+<data e hora do login:	11-02-2021 17:37:19>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	Admin>
+<data e hora do login:	11-02-2021 17:37:42>
+<duração da sessão:	0:5>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	11-02-2021 17:37:51>
+<duração da sessão:	2:37>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	11-02-2021 17:40:30>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	11-02-2021 17:40:34>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	11-02-2021 17:40:39>
+<duração da sessão:	0:7>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	11-02-2021 17:43:35>
+<duração da sessão:	0:59>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	11-02-2021 17:44:52>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	11-02-2021 17:45:51>
+<duração da sessão:	0:4>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	11-02-2021 17:46:00>
+<duração da sessão:	1:49>
+>>>>>>> branch 'master' of https://github.com/CarlaSAlves/SistemaTelecom
 </sessao>
 
