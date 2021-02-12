@@ -222,13 +222,7 @@ public class CriarClienteDialog extends JDialog {
 							} catch (Exception e) {
 
 							}
-							for( Cliente c : listaClientes) {
-								if(c.getLogin().equalsIgnoreCase(textFieldLogin.getText())) {
-									JOptionPane.showMessageDialog( CriarClienteDialog.this, "Login Invalido, ja em uso!");
-									return;
-								}
-							}		
-
+							
 							gravarCliente();
 
 						}else {

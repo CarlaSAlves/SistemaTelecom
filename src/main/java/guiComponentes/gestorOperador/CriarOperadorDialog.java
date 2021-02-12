@@ -206,19 +206,7 @@ public class CriarOperadorDialog extends JDialog {
 								return;
 							}
 							
-							List<Funcionario> listaOperadores = null;
-							try {
-								listaOperadores = GestorDeDAO.getGestorDeDAO().getAllFuncionarioOperador();
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-							for( Funcionario f : listaOperadores) {
-								if(f.getLogin().equalsIgnoreCase(textFieldLogin.getText())) {
-									JOptionPane.showMessageDialog( CriarOperadorDialog.this, "Login Invalido, ja em uso!");
-									return;
-								}
-							}		
-
+			
 							gravarOperador();
 						}
 						else {
