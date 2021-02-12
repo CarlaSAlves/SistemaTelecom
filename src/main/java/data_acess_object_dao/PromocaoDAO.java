@@ -264,7 +264,7 @@ public class PromocaoDAO {
 			}
 			
 			if(!estaAtiva) {
-				myState = myConn.prepareStatement("UPDATE promocao SET ativa = 0,"
+				myState = myConn.prepareStatement("UPDATE promocao SET ativa = 1,"
 						+ "data_inicio = current_timestamp(), data_fim = NULL WHERE id=?");
 				myState.setInt(1, id);
 				myState.executeUpdate();
