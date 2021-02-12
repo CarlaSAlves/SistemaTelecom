@@ -57,9 +57,11 @@ public class PacoteComercialPesquisaModelTable extends AbstractTableModel {
 		case DATA_INICIO_COL:
 			return pacoteComercial.getData_inicio();
 		case DATA_FIM_COL:
-
-			return pacoteComercial.getData_fim();
-		
+			if(pacoteComercial.getData_fim()==null) {
+				return "Nao Atribuido";
+			}else {
+				return "" + pacoteComercial.getData_fim();		
+			}
 		case OBJECT_COL:
 			return pacoteComercial;
 		default:
