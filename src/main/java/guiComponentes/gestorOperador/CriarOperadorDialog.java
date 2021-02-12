@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -21,8 +22,8 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.SystemColor;
 
-
 import guiComponentes.GUI_total;
+
 import java.awt.Color;
 
 
@@ -201,10 +202,22 @@ public class CriarOperadorDialog extends JDialog {
 								Integer.parseInt( textFieldNIF.getText() );
 							}
 							catch( Exception ex ){
-								JOptionPane.showMessageDialog( CriarOperadorDialog.this, "A NIF tem de ser um inteiro!");
+								JOptionPane.showMessageDialog( CriarOperadorDialog.this, "O NIF tem de ser um inteiro!");
 								return;
 							}
-
+							
+							List<Funcionario> listaOperadores = null;
+							try {
+								listaOperadores = GestorDeDAO.getGestorDeDAO().getAllFuncionarioOperador();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							for( Funcionario f : listaOperadores) {
+								if(f.getLogin().equalsIgnoreCase(textFieldLogin.getText())) {
+									JOptionPane.showMessageDialog( CriarOperadorDialog.this, "Login Invalido, ja em uso!");
+									return;
+								}
+							}		
 
 							gravarOperador();
 						}
@@ -221,10 +234,22 @@ public class CriarOperadorDialog extends JDialog {
 								Integer.parseInt( textFieldNIF.getText() );
 							}
 							catch( Exception ex ){
-								JOptionPane.showMessageDialog( CriarOperadorDialog.this, "A NIF tem de ser um inteiro!");
+								JOptionPane.showMessageDialog( CriarOperadorDialog.this, "O NIF tem de ser um inteiro!");
 								return;
 							}
 
+							List<Funcionario> listaOperadores = null;
+							try {
+								listaOperadores = GestorDeDAO.getGestorDeDAO().getAllFuncionarioOperador();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							for( Funcionario f : listaOperadores) {
+								if(f.getLogin().equalsIgnoreCase(textFieldLogin.getText())) {
+									JOptionPane.showMessageDialog( CriarOperadorDialog.this, "Login Invalido, ja em uso!");
+									return;
+								}
+							}	
 
 							gravarOperador();
 

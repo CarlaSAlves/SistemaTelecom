@@ -8,6 +8,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -210,9 +212,22 @@ public class CriarClienteDialog extends JDialog {
 								Integer.parseInt( textFieldNIF.getText() );
 							}
 							catch( Exception ex ){
-								JOptionPane.showMessageDialog( CriarClienteDialog.this, "A NIF tem de ser um inteiro!");
+								JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem de ser um inteiro!");
 								return;
 							}
+
+							List<Cliente> listaClientes = null;
+							try {
+								listaClientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
+							} catch (Exception e) {
+
+							}
+							for( Cliente c : listaClientes) {
+								if(c.getLogin().equalsIgnoreCase(textFieldLogin.getText())) {
+									JOptionPane.showMessageDialog( CriarClienteDialog.this, "Login Invalido, ja em uso!");
+									return;
+								}
+							}		
 
 							gravarCliente();
 
@@ -230,9 +245,23 @@ public class CriarClienteDialog extends JDialog {
 								Integer.parseInt( textFieldNIF.getText() );
 							}
 							catch( Exception ex ){
-								JOptionPane.showMessageDialog( CriarClienteDialog.this, "A NIF tem de ser um inteiro!");
+								JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem de ser um inteiro!");
 								return;
 							}
+
+							List<Cliente> listaClientes = null;
+							try {
+								listaClientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
+							} catch (Exception e) {
+
+							}
+							for( Cliente c : listaClientes) {
+								if(c.getLogin().equalsIgnoreCase(textFieldLogin.getText())) {
+									JOptionPane.showMessageDialog( CriarClienteDialog.this, "Login Invalido, ja em uso!");
+									return;
+								}
+							}							
+							
 							gravarCliente();
 						}
 					}
