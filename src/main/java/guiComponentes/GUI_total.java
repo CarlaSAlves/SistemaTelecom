@@ -40,7 +40,7 @@ public class GUI_total extends JFrame {
 	private Duration temporizador;
 	private String dataEHoraDeLog;
 	private SimpleDateFormat dateFormat ;
-
+	int test;
 	private GUI_login login;
 
 	private JPanel loginPanel, homepagePanel, gestor_clientePanel, gestor_operadorPanel, gestor_pacotesPanel, gestor_promocaoPanel;
