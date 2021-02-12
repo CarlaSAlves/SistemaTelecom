@@ -1,4 +1,4 @@
-package guiComponentes.gestorPromocao;
+package guiComponentes.Admin_gestorOperador;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -6,7 +6,7 @@ import javax.swing.table.AbstractTableModel;
 import historicos.HistoricoOperador;
 
 
-public class HistoricoPromocaoTableModel extends AbstractTableModel {
+public class HistoricoOperadorTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 	public static final int OBJECT_COL = -1;
@@ -20,7 +20,7 @@ public class HistoricoPromocaoTableModel extends AbstractTableModel {
 
 	private List<HistoricoOperador> historicoLista;
 
-	public HistoricoPromocaoTableModel(List<HistoricoOperador> historicoLista) {
+	public HistoricoOperadorTableModel(List<HistoricoOperador> historicoLista) {
 		this.historicoLista = historicoLista;
 	}
 

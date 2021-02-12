@@ -1,4 +1,4 @@
-package guiComponentes.gestorCliente;
+package guiComponentes.Admin_gestorCliente;
 
 
 import java.util.List;

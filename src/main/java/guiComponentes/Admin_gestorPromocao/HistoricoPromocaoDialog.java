@@ -1,4 +1,4 @@
-package guiComponentes.gestorPromocao;
+package guiComponentes.Admin_gestorPromocao;
 
 import java.awt.BorderLayout;
 import java.awt.Component;

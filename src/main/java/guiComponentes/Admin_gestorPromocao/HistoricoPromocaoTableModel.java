@@ -1,12 +1,12 @@
-package guiComponentes.gestorPacoteComercial;
+package guiComponentes.Admin_gestorPromocao;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-import historicos.HistoricoPacoteComercial;
+import historicos.HistoricoOperador;
 
 
-public class HistoricoPacoteComercialTableModel extends AbstractTableModel {
+public class HistoricoPromocaoTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 	public static final int OBJECT_COL = -1;
@@ -18,9 +18,9 @@ public class HistoricoPacoteComercialTableModel extends AbstractTableModel {
 
 	private String[] columnNames = { "Data", "Registo", "Funcionario", "ID Admin" };
 
-	private List<HistoricoPacoteComercial> historicoLista;
+	private List<HistoricoOperador> historicoLista;
 
-	public HistoricoPacoteComercialTableModel(List<HistoricoPacoteComercial> historicoLista) {
+	public HistoricoPromocaoTableModel(List<HistoricoOperador> historicoLista) {
 		this.historicoLista = historicoLista;
 	}
 
@@ -42,21 +42,21 @@ public class HistoricoPacoteComercialTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int row, int col) {
 
-		HistoricoPacoteComercial historicoPacoteComercial = historicoLista.get(row);
+		HistoricoOperador historicoOperador = historicoLista.get(row);
 
 		switch (col) {
 		case DATA_COL:			
-			return historicoPacoteComercial.getData_registo();
+			return historicoOperador.getData_registo();
 		case REGISTO_COL:
-			return historicoPacoteComercial.getDescricao();
+			return historicoOperador.getDescricao();
 		case FUNCIONARIO_COL:
-			return historicoPacoteComercial.getNome_funcionario();
+			return historicoOperador.getNome_funcionario();
 		case ID_COL:
-			return historicoPacoteComercial.getId_funcionario();
+			return historicoOperador.getId_funcionario();
 		case OBJECT_COL:
-			return historicoPacoteComercial;
+			return historicoOperador;
 		default:
-			return historicoPacoteComercial.getNome_funcionario();
+			return historicoOperador.getNome_funcionario();
 		}
 	}
 

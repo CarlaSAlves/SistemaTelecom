@@ -19,10 +19,10 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.UIManager.*;
-import guiComponentes.gestorCliente.GUI_gestor_cliente;
-import guiComponentes.gestorOperador.GUI_gestor_operador;
-import guiComponentes.gestorPacoteComercial.GUI_gestor_pacotes;
-import guiComponentes.gestorPromocao.GUI_gestor_promocao;
+import guiComponentes.Admin_gestorCliente.GUI_gestor_cliente;
+import guiComponentes.Admin_gestorOperador.GUI_gestor_operador;
+import guiComponentes.Admin_gestorPacoteComercial.GUI_gestor_pacotes;
+import guiComponentes.Admin_gestorPromocao.GUI_gestor_promocao;
 
 
 
