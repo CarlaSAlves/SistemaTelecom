@@ -17,16 +17,21 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import guiComponentes.Admin_GUI_homepage;
 import guiComponentes.GUI_total;
+import javax.swing.JList;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
 
 public class AreaCliente extends JFrame {
 
 
 	private static final long serialVersionUID = 1L;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);	
-	private JButton btVoltar, btAtualizaDados, btVerPacotes, btVerPromocoes;
+	private JButton btVoltar, btAtualizaDados, btVerPacotes;
 	private JPanel panel;
 	private JLabel lblUsernameLogged,lblTempoSessao,lblHoraSistema;
 	private JPanel pane;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -59,6 +64,7 @@ public class AreaCliente extends JFrame {
 	private void initialize(GUI_total guit) {
 		
 		setupTempoSessao();
+		
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel = new JPanel();
@@ -70,11 +76,17 @@ public class AreaCliente extends JFrame {
 		setBounds(100, 30, 1400, 800);
 		getContentPane().setLayout(null);
 		
+		JTextArea textArea_1 = new JTextArea();
+		textArea_1.setBackground(SystemColor.menu);
+		textArea_1.setForeground(Color.WHITE);
+		textArea_1.setBounds(78, 249, 260, 136);
+		panel.add(textArea_1);
+		
 		
 		// Label portal cliente
 
 		JLabel lblPortalCliente = new JLabel("Portal Do Cliente");
-		lblPortalCliente.setBounds(161, 117, 508, 33);
+		lblPortalCliente.setBounds(109, 45, 508, 33);
 		lblPortalCliente.setForeground(new Color(70,74,101));
 		lblPortalCliente.setFont(new Font("Dubai", Font.BOLD, 40));
 		getContentPane().add(lblPortalCliente);
@@ -82,7 +94,7 @@ public class AreaCliente extends JFrame {
 		JLabel lblBemVindo = new JLabel("Bem Vindo");
 		lblBemVindo.setForeground(new Color(70,74,101));
 		lblBemVindo.setFont(new Font("Dubai Light", Font.BOLD, 17));
-		lblBemVindo.setBounds(171, 161, 208, 72);
+		lblBemVindo.setBounds(94, 89, 208, 60);
 		panel.add(lblBemVindo);
 		
 		
@@ -90,7 +102,7 @@ public class AreaCliente extends JFrame {
 		// Botão Atualiza dados 
 
 		btAtualizaDados = new JButton("Atualizar Dados");
-		btAtualizaDados.setBounds(161, 271, 286, 60);
+		btAtualizaDados.setBounds(469, 43, 268, 50);
 		btAtualizaDados.setForeground(Color.DARK_GRAY);
 		btAtualizaDados.setToolTipText("Atualize os seus dados aqui.");	
 		btAtualizaDados.setFocusPainted(false);
@@ -99,23 +111,13 @@ public class AreaCliente extends JFrame {
 
 		// Botão ver todos os pacotes
 
-		btVerPacotes = new JButton("Ver Pacotes");
-		btVerPacotes.setBounds(161, 384, 286, 60);
+		btVerPacotes = new JButton("Ver Todos os Pacotes");
+		btVerPacotes.setBounds(78, 412, 260, 50);
 		btVerPacotes.setToolTipText("Ver todos os Pacotes disponíveis.");
 		btVerPacotes.setForeground(Color.DARK_GRAY);
 		btVerPacotes.setFocusPainted(false);
 		btVerPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		getContentPane().add(btVerPacotes);
-
-		// Botão ver todas as promoções
-
-		btVerPromocoes = new JButton("Ver Promoções");
-		btVerPromocoes.setBounds(161, 496, 286, 60);
-		btVerPromocoes.setToolTipText("Ver todas as Promoções");
-		btVerPromocoes.setForeground(Color.DARK_GRAY);
-		btVerPromocoes.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-		btVerPromocoes.setFocusPainted(false);
-		getContentPane().add(btVerPromocoes);
 
 		//Botão voltar
 		
@@ -135,6 +137,50 @@ public class AreaCliente extends JFrame {
 		lblFooter.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/Altran1.1.png")));
 		getContentPane().add(lblFooter);
 		
+		JLabel lblPacote = new JLabel("Seu pacote:");
+		lblPacote.setFont(new Font("Dubai", Font.PLAIN, 20));
+		lblPacote.setBounds(78, 160, 133, 44);
+		panel.add(lblPacote);
+		
+		JLabel lblAsSuasPromoes = new JLabel("As suas promoções:");
+		lblAsSuasPromoes.setFont(new Font("Dubai", Font.PLAIN, 20));
+		lblAsSuasPromoes.setBounds(477, 160, 202, 44);
+		panel.add(lblAsSuasPromoes);
+		
+		textField = new JTextField();
+		textField.setBounds(78, 198, 260, 33);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnVerTodasAs = new JButton("Ver Todas as Promoções");
+		btnVerTodasAs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnVerTodasAs.setToolTipText("Ver todos os Pacotes disponíveis.");
+		btnVerTodasAs.setForeground(Color.DARK_GRAY);
+		btnVerTodasAs.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btnVerTodasAs.setFocusPainted(false);
+		btnVerTodasAs.setBounds(477, 412, 260, 50);
+		panel.add(btnVerTodasAs);
+		
+		JTextArea textArea_1_1 = new JTextArea();
+		textArea_1_1.setForeground(Color.WHITE);
+		textArea_1_1.setBackground(SystemColor.menu);
+		textArea_1_1.setBounds(477, 249, 260, 136);
+		panel.add(textArea_1_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(477, 198, 260, 33);
+		panel.add(textField_1);
+		
+		JLabel icon = new JLabel("");
+		icon.setBounds(0, 89, 1394, 586);
+		icon.setBackground(new Color(240, 240, 240));
+		icon.setIcon(new ImageIcon(AreaCliente.class.getResource("/guiComponentes/img/AltranClientes.png")));
+		getContentPane().add(icon);
+		
 
 		//TODO criar os action listener Atualizar dados/ Ver Pacotes / Ver Promoções
 		
@@ -148,15 +194,6 @@ public class AreaCliente extends JFrame {
 		});
 		
 		btVerPacotes.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
-		btVerPromocoes.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -236,7 +273,4 @@ public class AreaCliente extends JFrame {
 			}
 		}
 	}
-	
-	
-	
 }

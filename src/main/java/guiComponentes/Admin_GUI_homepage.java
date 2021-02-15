@@ -55,8 +55,6 @@ public class Admin_GUI_homepage extends JFrame {
 		panel.add(lblUsernameLogged);
 		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 
-
-
 		lblTempoSessao = new JLabel();
 		lblTempoSessao.setForeground(Color.BLACK);
 		lblTempoSessao.setText("Sessao:");
