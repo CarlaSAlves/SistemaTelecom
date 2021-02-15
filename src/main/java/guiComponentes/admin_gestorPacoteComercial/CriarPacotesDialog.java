@@ -158,14 +158,14 @@ public class CriarPacotesDialog extends JDialog {
 		try {
 			Funcionario funcionario = null;
 			if (modoEditar) {
-				funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+				funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(GUI_total.getUsername());
 				GestorDeDAO.getGestorDeDAO().editarPacoteComercial(pacoteComercial,funcionario );
 				pacoteComercialPesquisaApp.refreshPacotesTable();
 				JOptionPane.showMessageDialog(pacoteComercialPesquisaApp,
 						"Pacote Comercial Editado com sucesso!", "Pacote Comercial Editado",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+				funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(GUI_total.getUsername());
 				GestorDeDAO.getGestorDeDAO().criarPacoteComercial(pacoteComercial, funcionario);
 				pacoteComercialPesquisaApp.refreshPacotesTable();
 				JOptionPane.showMessageDialog(pacoteComercialPesquisaApp,

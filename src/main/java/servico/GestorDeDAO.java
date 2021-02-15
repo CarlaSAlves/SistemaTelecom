@@ -115,10 +115,11 @@ public class GestorDeDAO {
 		funcionarioDAO.ativarFuncionario(id, admin);
 	}
 	
-	public Funcionario pesquisaFuncionarioAdmin(String login) throws Exception {
-		return this.funcionarioDAO.pesquisaFuncionarioAdmin(login);
+	public Funcionario pesquisaFuncionarioLogin(String login) throws Exception {
+		return funcionarioDAO.pesquisaFuncionarioLogin(login);
 		
 	}
+	
 	
 	public List<HistoricoOperador> getHistoricoOperador(int id_operador) throws Exception {
 		return funcionarioDAO.getHistoricoOperador(id_operador);

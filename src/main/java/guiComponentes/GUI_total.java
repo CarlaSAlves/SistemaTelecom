@@ -23,6 +23,8 @@ import guiComponentes.admin_gestorCliente.GUI_gestor_cliente;
 import guiComponentes.admin_gestorOperador.GUI_gestor_operador;
 import guiComponentes.admin_gestorPacoteComercial.GUI_gestor_pacotes;
 import guiComponentes.admin_gestorPromocao.GUI_gestor_promocao;
+import servico.GestorDeDAO;
+import standard_value_object.Funcionario;
 
 
 
@@ -212,7 +214,7 @@ public class GUI_total extends JFrame {
 
 	private void labelUsernameNavegaPaginas(GUI_login login, Admin_GUI_homepage homepage,
 			GUI_gestor_cliente gestor_cliente, GUI_gestor_operador gestor_operador,
-			GUI_gestor_pacotes gestor_pacotes, GUI_gestor_promocao gestor_promocao, Operador_homepage operador_homepage) {
+			GUI_gestor_pacotes gestor_pacotes, GUI_gestor_promocao gestor_promocao, Operador_homepage operador_homepage) throws Exception {
 		username = login.getUserText().getText();
 		gestor_cliente.setUsernameLoggedIn(username);
 		gestor_operador.setUsernameLoggedIn(username);
@@ -220,6 +222,12 @@ public class GUI_total extends JFrame {
 		gestor_promocao.setUsernameLoggedIn(username);
 		homepage.setUsernameLoggedIn(username);
 		operador_homepage.setUsernameLoggedIn(username);
+		
+		Funcionario func = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
+		
+		if (func.getId_role() == 2) {
+		operador_homepage.setLabelBoasVindas(func.getNome());
+		}
 	}
 
 
@@ -290,7 +298,7 @@ public class GUI_total extends JFrame {
 		return username;
 	}
 
-	public void loginEfetuado(int role) {
+	public void loginEfetuado(int role) throws Exception {
 		inicio = Instant.now();
 		labelUsernameNavegaPaginas(login, homepage, gestor_cliente, gestor_operador, gestor_pacotes,
 				gestor_promocao, operador_homepage);

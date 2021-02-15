@@ -294,14 +294,14 @@ public class CriarOperadorDialog extends JDialog {
 
 		try {
 			if (modoEditar) {
-				Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+				Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(GUI_total.getUsername());
 				GestorDeDAO.getGestorDeDAO().editarFuncionario(funcionario, admin, pass);
 				operadorPesquisaApp.refreshOperadorTable();
 				JOptionPane.showMessageDialog(operadorPesquisaApp,
 						"Operador Editado com sucesso!", "Operador Editado",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+				Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(GUI_total.getUsername());
 				GestorDeDAO.getGestorDeDAO().criarFuncionario(funcionario, admin);
 				operadorPesquisaApp.refreshOperadorTable();
 				JOptionPane.showMessageDialog(operadorPesquisaApp,

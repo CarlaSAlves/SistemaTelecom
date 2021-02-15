@@ -342,7 +342,7 @@ public class GUI_gestor_operador extends JFrame {
 							return;
 						}
 
-						Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+						Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(GUI_total.getUsername());
 						GestorDeDAO.getGestorDeDAO().desativarFuncionario(funcionarioTemp.getId(),admin );
 
 						JOptionPane.showMessageDialog(GUI_gestor_operador.this,
@@ -361,7 +361,7 @@ public class GUI_gestor_operador extends JFrame {
 							return;
 						}
 
-						Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+						Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(GUI_total.getUsername());
 						GestorDeDAO.getGestorDeDAO().ativarFuncionario(funcionarioTemp.getId(), admin);
 
 						JOptionPane.showMessageDialog(GUI_gestor_operador.this,

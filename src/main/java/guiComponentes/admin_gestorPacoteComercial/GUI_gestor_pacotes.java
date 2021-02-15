@@ -322,7 +322,7 @@ public class GUI_gestor_pacotes extends JFrame {
 							return;
 						}
 
-						Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+						Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(GUI_total.getUsername());
 						GestorDeDAO.getGestorDeDAO().desativarPacoteComercial(pacoteTemp.getId(),admin );
 
 						JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
@@ -340,7 +340,7 @@ public class GUI_gestor_pacotes extends JFrame {
 							return;
 						}
 
-						Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+						Funcionario admin = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(GUI_total.getUsername());
 						GestorDeDAO.getGestorDeDAO().ativarPacoteComercial(pacoteTemp.getId(), admin );
 
 						JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,

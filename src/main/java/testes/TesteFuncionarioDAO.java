@@ -46,7 +46,7 @@ public class TesteFuncionarioDAO {
 	
 	@Test
 	public void testPesquisaFuncionarioAdmin() throws Exception {
-		assertNotNull(funcionarioDAO.pesquisaFuncionarioAdmin("admin"));
+		assertNotNull(funcionarioDAO.pesquisaFuncionarioLogin("admin"));
 	}
 	
 	@Test

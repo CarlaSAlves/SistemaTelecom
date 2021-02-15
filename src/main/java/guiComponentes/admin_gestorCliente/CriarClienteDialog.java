@@ -318,7 +318,7 @@ public class CriarClienteDialog extends JDialog {
 			Funcionario funcionario = null;
 			if (modoEditar) {
 
-				funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(username);
+				funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
 				GestorDeDAO.getGestorDeDAO().editarCliente(cliente, funcionario, pass);
 				clientePesquisaApp.refreshClienteTable();
 				JOptionPane.showMessageDialog(clientePesquisaApp,
@@ -327,7 +327,7 @@ public class CriarClienteDialog extends JDialog {
 			} else {
 				try {
 
-					funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(username);
+					funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
 					GestorDeDAO.getGestorDeDAO().criarCliente(cliente, funcionario);
 					clientePesquisaApp.refreshClienteTable();
 					JOptionPane.showMessageDialog(clientePesquisaApp,

@@ -112,7 +112,11 @@ public class GUI_login extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode()==KeyEvent.VK_ENTER){
-					login(guit);
+					try {
+						login(guit);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
 		        }
 				
 			}
@@ -135,7 +139,11 @@ public class GUI_login extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode()==KeyEvent.VK_ENTER){
-					login(guit);
+					try {
+						login(guit);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
 		        }
 				
 			}
@@ -155,7 +163,11 @@ public class GUI_login extends JFrame {
 		btLogin.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				login(guit);
+				try {
+					login(guit);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 
 			
@@ -194,7 +206,7 @@ public class GUI_login extends JFrame {
 	        }
 		}
 	}
-	private void login(GUI_total guit) {
+	private void login(GUI_total guit) throws Exception {
 		//login vai usar metodos e entidades que estao nos dao do package V2
 		//primeiro vamos ver se o utilizador � um cliente
 		String login = textFieldUser.getText();

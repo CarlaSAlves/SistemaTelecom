@@ -371,7 +371,7 @@ public class GUI_gestor_cliente extends JFrame {
 							return;
 						}
 
-						Funcionario funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+						Funcionario funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(GUI_total.getUsername());
 
 
 						GestorDeDAO.getGestorDeDAO().desativarCliente(clienteTemp.getId(), funcionario);
@@ -391,7 +391,7 @@ public class GUI_gestor_cliente extends JFrame {
 							return;
 						}
 
-						Funcionario funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+						Funcionario funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(GUI_total.getUsername());
 						GestorDeDAO.getGestorDeDAO().ativarCliente(clienteTemp.getId(), funcionario);
 
 						JOptionPane.showMessageDialog(GUI_gestor_cliente.this,

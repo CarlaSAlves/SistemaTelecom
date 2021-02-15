@@ -24,6 +24,7 @@ public class Operador_homepage extends JFrame {
 	private JButton btVoltar;
 	private JLabel lblUsernameLogged, lblTempoSessao, lblHoraSistema;
 	private JButton btClientes, btPacotesPromo;
+	private JLabel labelBoasVindas;
 
 
 
@@ -70,6 +71,14 @@ public class Operador_homepage extends JFrame {
 		lblPoesia.setForeground(new Color(70,74,101));
 		lblPoesia.setFont(new Font("Dubai", Font.BOLD, 40));
 		pane.add(lblPoesia);
+		
+		labelBoasVindas = new JLabel("");
+		labelBoasVindas.setFont(new Font("Dubai", Font.BOLD, 18));
+		labelBoasVindas.setForeground(new Color(70,74,101));
+		labelBoasVindas.setBounds(161, 162, 606, 33);
+		pane.add(labelBoasVindas);
+		
+		
 
 		// Botões Menu 
 
@@ -104,14 +113,16 @@ public class Operador_homepage extends JFrame {
 		lblFooter.setBounds(599, 690, 214, 65);
 		lblFooter.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/Altran1.1.png")));
 		getContentPane().add(lblFooter);
-
-		// Imagem de Fundo
-
-		JLabel icon = new JLabel("");
-		icon.setBounds(0, 89, 1394, 586);
-		icon.setBackground(new Color(240, 240, 240));
-		icon.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
-		getContentPane().add(icon);
+		
+		
+		
+				// Imagem de Fundo
+		
+				JLabel icon = new JLabel("");
+				icon.setBounds(0, 89, 1394, 586);
+				icon.setBackground(new Color(240, 240, 240));
+				icon.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
+				getContentPane().add(icon);
 
 		btVoltar.addActionListener(new ActionListener() {
 
@@ -125,6 +136,8 @@ public class Operador_homepage extends JFrame {
 	}
 
 
+
+	
 
 	/**
 	 * Define as caracteristicas das labels usernameLogged, tempoSessao e horaSistema
@@ -170,6 +183,13 @@ public class Operador_homepage extends JFrame {
 			}
 		}
 
+	}
+	
+	/**
+	 * @return the labelBoasVindas
+	 */
+	public void setLabelBoasVindas(String username) {
+		labelBoasVindas.setText( username );;
 	}
 
 	public JPanel returnPanel() {
