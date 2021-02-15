@@ -33,7 +33,7 @@ public class GUI_total extends JFrame {
 	private static String username;
 	private Instant inicio;
 	private GUI_gestor_cliente gestor_cliente;
-	private GUI_homepage homepage;
+	private Admin_GUI_homepage homepage;
 	private	GUI_gestor_operador gestor_operador;
 	private GUI_gestor_pacotes gestor_pacotes;
 	private	GUI_gestor_promocao gestor_promocao;
@@ -77,7 +77,7 @@ public class GUI_total extends JFrame {
 		setLayout(null);
 
 		login = new GUI_login(this);
-		homepage = new GUI_homepage(this);
+		homepage = new Admin_GUI_homepage(this);
 		gestor_cliente = new GUI_gestor_cliente();
 		gestor_operador = new GUI_gestor_operador();
 		gestor_pacotes = new GUI_gestor_pacotes();
@@ -187,7 +187,7 @@ public class GUI_total extends JFrame {
 		}
 	}
 
-	private void labelUsernameNavegaPaginas(GUI_login login, GUI_homepage homepage,
+	private void labelUsernameNavegaPaginas(GUI_login login, Admin_GUI_homepage homepage,
 			GUI_gestor_cliente gestor_cliente, GUI_gestor_operador gestor_operador,
 			GUI_gestor_pacotes gestor_pacotes, GUI_gestor_promocao gestor_promocao) {
 		username = login.getUserText().getText();
