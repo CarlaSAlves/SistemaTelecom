@@ -115,7 +115,6 @@ public class GUI_gestor_operador extends JFrame {
 		JScrollPane scrollPane = scrollPaneSetup();
 		panelDaTable.add(scrollPane);
 
-		tableSetup();
 		lblResultadosSetup();
 		panelDaTable.add(lblResultados);
 
@@ -180,59 +179,51 @@ public class GUI_gestor_operador extends JFrame {
 	}
 
 	protected void painelPesquisa() {
-		{
 			painelPesquisa = new JPanel();
 			painelPesquisa.setLayout(null);
 			painelPesquisa.setBackground(Color.WHITE);
 			painelPesquisa.setBounds(98, 75, 453, 221);
 			contentPane.add(painelPesquisa);
-			{
+		
 				labelID = new JLabel("ID");
 				labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				labelID.setBounds(6, 15, 39, 18);
 				painelPesquisa.add(labelID);
-			}
-			{
+				
 				textPesquisaID = new JTextField();
 				textPesquisaID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				textPesquisaID.setColumns(10);
 				textPesquisaID.setBounds(72, 6, 371, 27);
 				painelPesquisa.add(textPesquisaID);
-			}
-			{
+
 				labelNIF = new JLabel("NIF");
 				labelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				labelNIF.setBounds(6, 49, 56, 18);
 				painelPesquisa.add(labelNIF);
-			}
-			{
+
 				textPesquisaNIF = new JTextField();
 				textPesquisaNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				textPesquisaNIF.setColumns(10);
 				textPesquisaNIF.setBounds(72, 40, 371, 27);
 				painelPesquisa.add(textPesquisaNIF);
-			}
-			{
+
 				labelNome = new JLabel("Nome");
 				labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				labelNome.setBounds(6, 78, 56, 27);
 				painelPesquisa.add(labelNome);
-			}
-			{
+
 				textFieldNome = new JTextField();
 				textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				textFieldNome.setColumns(10);
 				textFieldNome.setBounds(72, 78, 371, 27);
 				painelPesquisa.add(textFieldNome);
-			}
-			{
+
 				checkBoxAtivo = new JCheckBox("Ativo");
 				checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				checkBoxAtivo.setBackground(Color.WHITE);
 				checkBoxAtivo.setBounds(235, 112, 69, 24);
 				painelPesquisa.add(checkBoxAtivo);
-			}
-			{
+
 				botaoPesquisa = new JButton("Pesquisar");
 				botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 				botaoPesquisa.setBackground(SystemColor.activeCaption);
@@ -273,15 +264,12 @@ public class GUI_gestor_operador extends JFrame {
 						} catch (Exception e1) {
 
 						}
-
-
-
 					}
 				});
-			}
+	
 			painelPesquisa.add(botaoPesquisa);
 		}
-	}
+	
 
 	private void botaoEditarOperadorSetup() {
 		botaoEditarOperador = new JButton("Editar Operador");
@@ -443,10 +431,6 @@ public class GUI_gestor_operador extends JFrame {
 		lblResultados = new JLabel("Resultados: ");
 		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		lblResultados.setBounds(33, 6, 136, 25);
-	}
-
-
-	private void tableSetup() {
 	}
 
 	private JScrollPane scrollPaneSetup() {
