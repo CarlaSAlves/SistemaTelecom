@@ -100,9 +100,9 @@ public class CriarClienteDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		setTitle("Novo Cliente");
 		contentPanel.setLayout(null);
-	
-		
-		
+
+
+
 		lblNewLabel = new JLabel();
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lblNewLabel.setForeground(Color.LIGHT_GRAY);
@@ -213,9 +213,9 @@ public class CriarClienteDialog extends JDialog {
 							try {
 								listaClientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
 							} catch (Exception e) {
-
+								e.printStackTrace();
 							}
-							
+
 							gravarCliente();
 
 						}else {
@@ -248,7 +248,7 @@ public class CriarClienteDialog extends JDialog {
 									return;
 								}
 							}							
-							
+
 							gravarCliente();
 						}
 					}

@@ -46,3 +46,81 @@
 <duração da sessão:	2:32>
 </sessao>
 
+<sessao>
+<username:	admin>
+<data e hora do login:	15-02-2021 13:53:42>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	15-02-2021 13:53:47>
+<duração da sessão:	0:10>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 13:54:00>
+<duração da sessão:	0:4>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 13:54:05>
+<duração da sessão:	4:18>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	15-02-2021 13:58:28>
+<duração da sessão:	0:4>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 13:58:38>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 13:58:43>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 13:58:45>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 13:58:47>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 13:58:49>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 13:58:51>
+<duração da sessão:	0:0>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 13:58:53>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 13:58:55>
+<duração da sessão:	0:1>
+</sessao>
+
