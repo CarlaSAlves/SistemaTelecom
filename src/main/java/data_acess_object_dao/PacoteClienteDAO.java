@@ -16,14 +16,24 @@ import standard_value_object.PacoteCliente;
 
 import standard_value_object.Promocao;
 
+/*
+ * Classe que vai estabelecer a ligaçao com a base de dados e interagir principalmente com a tabela "pacote_cliente"
+ */
 public class PacoteClienteDAO {
 
 	private Connection myConn;
 
+	/*
+	 * Construtor que recebe um objeto do tipo java.sql.Connection, a ser fornecido pela classe servico.GestorDeDAO
+	 */
 	public PacoteClienteDAO(Connection connection) throws FileNotFoundException, IOException, SQLException {
 		this.myConn = connection;
 	}
 	
+	/*
+	 * Método que devolve uma lista com todos os pacotes existentes na tabela "pacote_cliente". 
+	 * Caso não existam pacotes, é devolvida uma lista vazia.
+	 */
 	public List<PacoteCliente> pesquisarTodosPacotesCliente() throws Exception {
 		List<PacoteCliente> listaClientes = new ArrayList<>();
 
@@ -47,6 +57,10 @@ public class PacoteClienteDAO {
 		return listaClientes;	
 	}
 	
+	/*
+	 * Pesquisa e devolve o pacote com o id enviado como parametro.
+	 * Devolve pacote nulo se nenhum for encontrado.
+	 */
 	public PacoteCliente pesquisarPacoteClienteId(int id) throws Exception {
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
@@ -57,6 +71,7 @@ public class PacoteClienteDAO {
 			myStmt.setInt(1, id);
 			myRs = myStmt.executeQuery();
 
+			//converter o resultado devolvido pela base de dados num objeto java
 			if (myRs.next()) {
 				pacoteCliente = new PacoteCliente();
 				pacoteCliente.setId(myRs.getInt(1));
@@ -77,11 +92,15 @@ public class PacoteClienteDAO {
 		return pacoteCliente;
 	}
 	
-	
+	/*
+	 * Cria um novo pacote_cliente na base de dados com base do PacoteCliente enviado como parametro.
+	 * Caso a criaçao falhe, ira propagar uma exceçao.
+	 */
 	public PacoteCliente criarPacoteCliente(PacoteCliente pacoteCliente) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
 
+			//Statement.RETURN_GENERATED_KEYS permite ao driver jdbc devolver o id da entidade criada, caso a criaçao seja bem sucedida
 			myStmt = myConn.prepareStatement("insert into pacote_cliente(id_pacote_comercial, data_inicio, id_criado_por) "
 					+ "VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			
@@ -90,9 +109,10 @@ public class PacoteClienteDAO {
 			myStmt.setInt(3, pacoteCliente.getId_criado_por());
 			myStmt.executeUpdate();
 			
-		
+			// se criação foi bem sucedida, vamos fazer parse à resposta enviada pela base de dados para extratir o id da entidade criada
 			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
 	            if (generatedKeys.next()) {
+	            	//recuperamos o id do funcionario recém-criado e vamos atribui-lo ao objeto funcionario enviado como parametro nesta funçao, só para o reaproveitar
 	                pacoteCliente.setId((int)generatedKeys.getLong(1));
 	            }
 	            else {
@@ -108,6 +128,9 @@ public class PacoteClienteDAO {
 		return pacoteCliente;
 	}
 	
+	/*
+	 * Adiciona ao PacoteCliente enviado como parametro a promoçao enviada como segundo parametro.
+	 */
 	public int adicionarPromocao(PacoteCliente pacoteCliente, Promocao promocao) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
@@ -124,6 +147,9 @@ public class PacoteClienteDAO {
 		return 1;
 	}
 	
+	/*
+	 * Remove a promoçao enviada como parametro do PacoteCliente enviado como primeiro parametro.
+	 */
 	public int removerPromocao(PacoteCliente pacoteCliente, Promocao promocao) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
@@ -140,7 +166,7 @@ public class PacoteClienteDAO {
 		return 1;
 	}
 	
-	//por enquanto apenas muda o id_pacote_comercial do pacote_cliente. Ser� que deve poder mudar mais algo ?????
+	//Recebe como parametro um PacoteCliente e altera o pacote comercial associado a esse pacote cliente.
 	public int editarPacoteCliente(PacoteCliente pacoteCliente) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
@@ -157,6 +183,11 @@ public class PacoteClienteDAO {
 		return 1;
 	}
 	
+	/*
+	 * Elimina o pacote cliente com o id enviado como parametro da base de dados, bem como todas as promoçoes a ele associadas.
+	 * Coloca o campo id_pacote_cliente do cliente que possui esse pacote a nulo.
+	 * Caso a operaçao seja bem sucedida, devolve o valor 1. De outro modo, devolve 0.
+	 */
 	//para apagar um pacote_cliente, vai ser necessario remover todas as promo�oes associadas a esse pacote.
 	// Vai ser tambem necessario remover o pacote do cliente que o det�m. S� depois � possivel apagar o pacote cliente.
 	@SuppressWarnings("resource")
@@ -168,7 +199,10 @@ public class PacoteClienteDAO {
 		}
 		
 		try {
+			//remove o pacote cliente do cliente que o possui
 			String query1 = "Update `cliente` Set `id_pacote_cliente` = NULL Where (`id_pacote_cliente` =" + id + ");";
+			
+			//elimina o pacote cliente da base de dados
 			String query2 = "DELETE from `pacote_cliente` where (`id`=" + id + ");";
 					
 			myStmt = myConn.prepareStatement(query1);
@@ -185,6 +219,9 @@ public class PacoteClienteDAO {
 		return 1;
 	}
 	
+	/*
+	 * Convert cada entrada de um ResultSet num objeto do tipo PacoteCliente.
+	 */
 	private PacoteCliente convertRowToPacoteCliente(ResultSet myRs) throws SQLException {
 
 		int id = myRs.getInt("id");

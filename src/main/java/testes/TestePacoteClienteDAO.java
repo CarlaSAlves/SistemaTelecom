@@ -14,6 +14,7 @@ import data_acess_object_dao.PacoteClienteDAO;
 import standard_value_object.PacoteCliente;
 import standard_value_object.Promocao;
 
+//correr o script para criar a base de dados antes de correr estes testes
 public class TestePacoteClienteDAO {
 
 	private PacoteClienteDAO pacoteClienteDAO;

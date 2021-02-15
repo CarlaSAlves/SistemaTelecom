@@ -66,19 +66,18 @@ public class Operador_homepage extends JFrame {
 		setBounds(100, 30, 1400, 800);
 		getContentPane().setLayout(null);
 
+
 		JLabel lblPoesia = new JLabel("Portal do Operador");
 		lblPoesia.setBounds(161, 117, 415, 33);
-		lblPoesia.setForeground(new Color(235, 95, 30));
+		lblPoesia.setForeground(new Color(95, 79, 155));
 		lblPoesia.setFont(new Font("Dubai", Font.BOLD, 40));
 		pane.add(lblPoesia);
-		
+
 		labelBoasVindas = new JLabel("");
 		labelBoasVindas.setFont(new Font("Dubai", Font.BOLD, 18));
-		labelBoasVindas.setForeground(new Color(235, 95, 30));
+		labelBoasVindas.setForeground(new Color(95, 79, 155));
 		labelBoasVindas.setBounds(161, 162, 606, 33);
 		pane.add(labelBoasVindas);
-		
-		
 
 		// Botões Menu 
 
@@ -89,6 +88,14 @@ public class Operador_homepage extends JFrame {
 		btClientes.setFocusPainted(false);
 		btClientes.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		pane.add(btClientes);
+		btClientes.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				guit.gerirOperHomepage();
+				
+			}
+		});
 
 		btPacotesPromo = new JButton("Visualizar Pacotes Comerciais");
 		btPacotesPromo.setBounds(161, 373, 286, 60);
@@ -97,8 +104,15 @@ public class Operador_homepage extends JFrame {
 		btPacotesPromo.setFocusPainted(false);
 		btPacotesPromo.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		pane.add(btPacotesPromo);
-		
-		
+
+		JButton btnVisualizarPromoes = new JButton("Visualizar Promoções");
+		btnVisualizarPromoes.setToolTipText("Gestão de Pacotes Comerciais e Promoções");
+		btnVisualizarPromoes.setForeground(Color.DARK_GRAY);
+		btnVisualizarPromoes.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btnVisualizarPromoes.setFocusPainted(false);
+		btnVisualizarPromoes.setBounds(161, 465, 286, 60);
+		pane.add(btnVisualizarPromoes);
+
 
 		// Footer 
 
@@ -108,46 +122,31 @@ public class Operador_homepage extends JFrame {
 		btVoltar.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		btVoltar.setFocusPainted(false);
 		getContentPane().add(btVoltar);
+		btVoltar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				guit.voltarBtOperadorHomePage();
+				
+			}
+		});
 
 		setupTempoSessao();
 
 		JLabel lblFooter = new JLabel("");
 		lblFooter.setBounds(599, 690, 214, 65);
-		lblFooter.setIcon(new ImageIcon(Operador_homepage.class.getResource("/guiComponentes/img/AltranOperador.png")));
+		lblFooter.setIcon(new ImageIcon(Operador_homepage.class.getResource("/guiComponentes/img/AltranOperador2.png")));
 		getContentPane().add(lblFooter);
-				
-				JButton btnVisualizarPromoes = new JButton("Visualizar Promoções");
-				btnVisualizarPromoes.setToolTipText("Gestão de Pacotes Comerciais e Promoções");
-				btnVisualizarPromoes.setForeground(Color.DARK_GRAY);
-				btnVisualizarPromoes.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-				btnVisualizarPromoes.setFocusPainted(false);
-				btnVisualizarPromoes.setBounds(161, 465, 286, 60);
-				pane.add(btnVisualizarPromoes);
-				
-				
-				
-						// Imagem de Fundo
-				
-						JLabel icon = new JLabel("");
-						icon.setBounds(6, 75, 1394, 586);
-						icon.setBackground(new Color(240, 240, 240));
-						icon.setIcon(new ImageIcon(Operador_homepage.class.getResource("/guiComponentes/img/AltranOperadores.png")));
-						getContentPane().add(icon);
-
-		btVoltar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				guit.voltarBtOperadorHomePage();
-
-			}
-		});
+		
+				// Imagem de Fundo
+		
+				JLabel icon = new JLabel("");
+				icon.setBounds(0, 89, 1394, 586);
+				icon.setBackground(new Color(240, 240, 240));
+				icon.setIcon(new ImageIcon(Operador_homepage.class.getResource("/guiComponentes/img/AltranOper.png")));
+				getContentPane().add(icon);
 
 	}
-
-
-
-	
 
 	/**
 	 * Define as caracteristicas das labels usernameLogged, tempoSessao e horaSistema
@@ -194,7 +193,7 @@ public class Operador_homepage extends JFrame {
 		}
 
 	}
-	
+
 	/**
 	 * @return the labelBoasVindas
 	 */
@@ -205,7 +204,6 @@ public class Operador_homepage extends JFrame {
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
-
 
 	public void setUsernameLoggedIn(String username) {
 		lblUsernameLogged.setText("Username: " + username);
