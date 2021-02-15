@@ -126,7 +126,7 @@ public class Admin_GUI_homepage extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				guit.gerirClientes();
+				guit.gerirAdminClientes();
 			}
 		});
 
@@ -134,7 +134,7 @@ public class Admin_GUI_homepage extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				guit.gerirOperadores();				
+				guit.gerirAdminOperadores();				
 			}
 		});
 
@@ -143,7 +143,7 @@ public class Admin_GUI_homepage extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {				
-				guit.gerirPromocoes();
+				guit.gerirAdminPromocoes();
 
 			}
 		});
@@ -152,7 +152,7 @@ public class Admin_GUI_homepage extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				guit.gerirPacotes();
+				guit.gerirAdminPacotes();
 			}
 		});
 		
@@ -160,7 +160,7 @@ public class Admin_GUI_homepage extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				guit.voltarBtHomePage();
+				guit.voltarBtAdminHomePage();
 				
 			}
 		});

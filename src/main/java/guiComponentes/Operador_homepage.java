@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.Duration;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -45,15 +47,15 @@ public class Operador_homepage extends JFrame {
 	 * Create the frame.
 	 */
 	public Operador_homepage(GUI_total guit) {
-		
-		inicialize();
-		
+
+		inicialize(guit);
+
 	}
 
-	private void inicialize() {
-		
+	private void inicialize(GUI_total guit) {
+
 		ativarNimbusLookAndFeel();
-		
+
 		pane = new JPanel();
 		setContentPane(pane);
 		pane.setLayout(null);
@@ -62,15 +64,15 @@ public class Operador_homepage extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
 		getContentPane().setLayout(null);
-		
+
 		JLabel lblPoesia = new JLabel("Portal do Operador");
 		lblPoesia.setBounds(161, 117, 508, 33);
 		lblPoesia.setForeground(new Color(70,74,101));
 		lblPoesia.setFont(new Font("Dubai", Font.BOLD, 40));
 		pane.add(lblPoesia);
-		
+
 		// Botões Menu 
-		
+
 		btClientes = new JButton("Clientes");
 		btClientes.setBounds(235, 334, 286, 60);
 		btClientes.setForeground(Color.DARK_GRAY);
@@ -88,30 +90,41 @@ public class Operador_homepage extends JFrame {
 		pane.add(btPacotesPromo);
 
 		// Footer 
-		
+
 		btVoltar = new JButton("Terminar Sessão");
 		btVoltar.setForeground(Color.DARK_GRAY);
 		btVoltar.setBounds(16, 687, 180, 50);
 		btVoltar.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		btVoltar.setFocusPainted(false);
 		getContentPane().add(btVoltar);
-		
+
 		setupTempoSessao();
-		
+
 		JLabel lblFooter = new JLabel("");
 		lblFooter.setBounds(599, 690, 214, 65);
 		lblFooter.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/Altran1.1.png")));
 		getContentPane().add(lblFooter);
-		
+
 		// Imagem de Fundo
-		
+
 		JLabel icon = new JLabel("");
 		icon.setBounds(0, 89, 1394, 586);
 		icon.setBackground(new Color(240, 240, 240));
 		icon.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
 		getContentPane().add(icon);
-		
+
+		btVoltar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				guit.voltarBtOperadorHomePage();
+
+			}
+		});
+
 	}
+
+
 
 	/**
 	 * Define as caracteristicas das labels usernameLogged, tempoSessao e horaSistema
@@ -156,14 +169,14 @@ public class Operador_homepage extends JFrame {
 				break;
 			}
 		}
-		
+
 	}
-	
+
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
 
-	
+
 	public void setUsernameLoggedIn(String username) {
 		lblUsernameLogged.setText("Username: " + username);
 	}

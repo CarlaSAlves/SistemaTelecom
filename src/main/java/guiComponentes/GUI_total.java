@@ -37,12 +37,13 @@ public class GUI_total extends JFrame {
 	private	GUI_gestor_operador gestor_operador;
 	private GUI_gestor_pacotes gestor_pacotes;
 	private	GUI_gestor_promocao gestor_promocao;
+	private Operador_homepage operador_homepage;
 	private Duration temporizador;
 	private String dataEHoraDeLog;
 	private SimpleDateFormat dateFormat ;
 	private GUI_login login;
 
-	private JPanel loginPanel, homepagePanel, gestor_clientePanel, gestor_operadorPanel, gestor_pacotesPanel, gestor_promocaoPanel;
+	private JPanel loginPanel, homepagePanel, gestor_clientePanel, gestor_operadorPanel, gestor_pacotesPanel, gestor_promocaoPanel, operador_homepagePanel;
 
 
 	public static void main(String[] args) {
@@ -85,6 +86,7 @@ public class GUI_total extends JFrame {
 		gestor_operador = new GUI_gestor_operador();
 		gestor_pacotes = new GUI_gestor_pacotes();
 		gestor_promocao = new GUI_gestor_promocao();
+		operador_homepage = new Operador_homepage(this);
 
 		// ligação - login 
 		
@@ -176,8 +178,16 @@ public class GUI_total extends JFrame {
 			}
 		});
 
+		// ligação Operador homepage
+		
+		operador_homepagePanel = operador_homepage.returnPanel();
+		operador_homepagePanel.setVisible(false);
+		operador_homepagePanel.setBounds(0, 0, 1400, 800);
+		getContentPane().add(operador_homepagePanel);
+		
+		
+		
 	
-
 	}
 
 
@@ -202,13 +212,14 @@ public class GUI_total extends JFrame {
 
 	private void labelUsernameNavegaPaginas(GUI_login login, Admin_GUI_homepage homepage,
 			GUI_gestor_cliente gestor_cliente, GUI_gestor_operador gestor_operador,
-			GUI_gestor_pacotes gestor_pacotes, GUI_gestor_promocao gestor_promocao) {
+			GUI_gestor_pacotes gestor_pacotes, GUI_gestor_promocao gestor_promocao, Operador_homepage operador_homepage) {
 		username = login.getUserText().getText();
 		gestor_cliente.setUsernameLoggedIn(username);
 		gestor_operador.setUsernameLoggedIn(username);
 		gestor_pacotes.setUsernameLoggedIn(username);
 		gestor_promocao.setUsernameLoggedIn(username);
 		homepage.setUsernameLoggedIn(username);
+		operador_homepage.setUsernameLoggedIn(username);
 	}
 
 
@@ -278,18 +289,24 @@ public class GUI_total extends JFrame {
 		return username;
 	}
 
-	public void loginEfetuado() {
+	public void loginEfetuado(int role) {
 		inicio = Instant.now();
 		labelUsernameNavegaPaginas(login, homepage, gestor_cliente, gestor_operador, gestor_pacotes,
-				gestor_promocao);
+				gestor_promocao, operador_homepage);
 		loginPanel.setVisible(false);
-		homepagePanel.setVisible(true);
+		if (role == 1) {
+			homepagePanel.setVisible(true);
+		} else {
+			operador_homepagePanel.setVisible(true);
+		}
 		comecarTemporizador();
+		
+		
 
 	}
 
 
-	public void voltarBtHomePage() {
+	public void voltarBtAdminHomePage() {
 		gravarFicheiro(username, temporizador, dataEHoraDeLog, "sessaolog.txt");
 		loginPanel.setVisible(true);
 		homepagePanel.setVisible(false);
@@ -306,37 +323,43 @@ public class GUI_total extends JFrame {
 	}
 
 
-	public void gerirClientes() {
+	public void gerirAdminClientes() {
 		homepagePanel.setVisible(false);
 		gestor_clientePanel.setVisible(true);
 	}
 
-
-
-
-
-	public void gerirOperadores() {
+	public void gerirAdminOperadores() {
 		homepagePanel.setVisible(false);
 		gestor_operadorPanel.setVisible(true);
 	}
 
-
-
-
-
-	public void gerirPromocoes() {
+	public void gerirAdminPromocoes() {
 		homepagePanel.setVisible(false);				
 		gestor_promocaoPanel.setVisible(true);
 	}
 
-
-
-
-
-	public void gerirPacotes() {
+	public void gerirAdminPacotes() {
 		homepagePanel.setVisible(false);
 		gestor_pacotesPanel.setVisible(true);
 	}
+	
+	public void voltarBtOperadorHomePage() {
+		gravarFicheiro(username, temporizador, dataEHoraDeLog, "sessaolog.txt");
+		loginPanel.setVisible(true);
+		operador_homepagePanel.setVisible(false);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 

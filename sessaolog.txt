@@ -1,0 +1,36 @@
+<sessao>
+<username:	admin>
+<data e hora do login:	15-02-2021 11:49:38>
+<duração da sessão:	0:33>
+</sessao>
+
+<sessao>
+<username:	oper>
+<data e hora do login:	15-02-2021 11:51:02>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	oper>
+<data e hora do login:	15-02-2021 11:51:05>
+<duração da sessão:	0:0>
+</sessao>
+
+<sessao>
+<username:	oper>
+<data e hora do login:	15-02-2021 11:51:07>
+<duração da sessão:	0:4>
+</sessao>
+
+<sessao>
+<username:	oper>
+<data e hora do login:	15-02-2021 11:51:13>
+<duração da sessão:	0:0>
+</sessao>
+
+<sessao>
+<username:	oper>
+<data e hora do login:	15-02-2021 11:51:15>
+<duração da sessão:	0:0>
+</sessao>
+

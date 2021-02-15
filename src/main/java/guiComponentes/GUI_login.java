@@ -237,14 +237,15 @@ public class GUI_login extends JFrame {
 				case(1):
 					//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
 					//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
-					guit.loginEfetuado();
+					guit.loginEfetuado(1);
 				labelConfm.setVisible(false);
 					return;
 				//role 2 = operador	
 				case(2):
+					guit.loginEfetuado(2);
 					//linha para abrir a janela do operador (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o operador atualmente logado)
 					//TODO: abrir Janela da area operador e passar o operador que loga no seu construtor
-					JOptionPane.showMessageDialog(null, "Menu operador em construção.");
+					//JOptionPane.showMessageDialog(null, "Menu operador em construção.");
 			
 					return;
 			}
