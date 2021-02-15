@@ -122,6 +122,14 @@ public class Operador_homepage extends JFrame {
 		btVoltar.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		btVoltar.setFocusPainted(false);
 		getContentPane().add(btVoltar);
+		btVoltar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				guit.voltarBtOperadorHomePage();
+				
+			}
+		});
 
 		setupTempoSessao();
 
@@ -196,7 +204,6 @@ public class Operador_homepage extends JFrame {
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
-
 
 	public void setUsernameLoggedIn(String username) {
 		lblUsernameLogged.setText("Username: " + username);
