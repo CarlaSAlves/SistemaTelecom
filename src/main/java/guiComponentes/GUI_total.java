@@ -66,7 +66,8 @@ public class GUI_total extends JFrame {
 
 
 	public GUI_total() {
-
+		
+		
 		ativarNimbusLookAndFeel();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,6 +77,8 @@ public class GUI_total extends JFrame {
 		setContentPane(contentPane);
 		setLayout(null);
 
+		// criação dos objectos referentes às páginas
+		
 		login = new GUI_login(this);
 		homepage = new Admin_GUI_homepage(this);
 		gestor_cliente = new GUI_gestor_cliente();
@@ -83,37 +86,12 @@ public class GUI_total extends JFrame {
 		gestor_pacotes = new GUI_gestor_pacotes();
 		gestor_promocao = new GUI_gestor_promocao();
 
+		// ligação - login 
+		
 		loginPanel = login.returnPanel();
 		loginPanel.setBounds(0, 0, 1400, 800);
 		getContentPane().add(loginPanel);
-
-		homepagePanel = homepage.returnPanel();
-		homepagePanel.setVisible(false);
-		homepagePanel.setBounds(0, 0, 1400, 800);
-		getContentPane().add(homepagePanel);
-
-		gestor_clientePanel = gestor_cliente.returnPanel();
-		gestor_clientePanel.setVisible(false);
-		gestor_clientePanel.setBounds(0, 0, 1400, 800);
-		getContentPane().add(gestor_clientePanel);
-
-		gestor_operadorPanel = gestor_operador.returnPanel();
-		gestor_operadorPanel.setVisible(false);
-		gestor_operadorPanel.setBounds(0, 0, 1400, 800);
-		getContentPane().add(gestor_operadorPanel);
-
-		gestor_pacotesPanel = gestor_pacotes.returnPanel();
-		gestor_pacotesPanel.setVisible(false);
-		gestor_pacotesPanel.setBounds(0, 0, 1400, 800);
-		getContentPane().add(gestor_pacotesPanel);
-
-		gestor_promocaoPanel = gestor_promocao.returnPanel();
-		gestor_promocaoPanel.setVisible(false);
-		gestor_promocaoPanel.setBounds(0, 0, 1400, 800);
-		getContentPane().add(gestor_promocaoPanel);
-
-
-		// LOGIN
+		
 		login.getBtnSair().addActionListener(new ActionListener() {
 
 			@Override
@@ -124,7 +102,20 @@ public class GUI_total extends JFrame {
 		});
 
 
+		// ligação homepage
+		
+		homepagePanel = homepage.returnPanel();
+		homepagePanel.setVisible(false);
+		homepagePanel.setBounds(0, 0, 1400, 800);
+		getContentPane().add(homepagePanel);
 
+		// ligação Admin gestor Cliente
+		
+		gestor_clientePanel = gestor_cliente.returnPanel();
+		gestor_clientePanel.setVisible(false);
+		gestor_clientePanel.setBounds(0, 0, 1400, 800);
+		getContentPane().add(gestor_clientePanel);
+		
 		gestor_cliente.btVoltarGestorCliente().addActionListener(new ActionListener() {
 
 			@Override
@@ -136,6 +127,13 @@ public class GUI_total extends JFrame {
 			}
 		});
 
+		// ligação Admin gestor Operador
+		
+		gestor_operadorPanel = gestor_operador.returnPanel();
+		gestor_operadorPanel.setVisible(false);
+		gestor_operadorPanel.setBounds(0, 0, 1400, 800);
+		getContentPane().add(gestor_operadorPanel);
+		
 		gestor_operador.btVoltarGestorOperador().addActionListener(new ActionListener() {
 
 			@Override
@@ -146,6 +144,13 @@ public class GUI_total extends JFrame {
 			}
 		});
 
+		// ligação Admin gestor Pacotes Comerciais
+		
+		gestor_pacotesPanel = gestor_pacotes.returnPanel();
+		gestor_pacotesPanel.setVisible(false);
+		gestor_pacotesPanel.setBounds(0, 0, 1400, 800);
+		getContentPane().add(gestor_pacotesPanel);
+		
 		gestor_pacotes.btVoltarGestorPacotes().addActionListener(new ActionListener() {
 
 			@Override
@@ -155,7 +160,13 @@ public class GUI_total extends JFrame {
 			}
 		});
 
-
+		// ligação Admin gestor Promoção
+		
+		gestor_promocaoPanel = gestor_promocao.returnPanel();
+		gestor_promocaoPanel.setVisible(false);
+		gestor_promocaoPanel.setBounds(0, 0, 1400, 800);
+		getContentPane().add(gestor_promocaoPanel);
+		
 		gestor_promocao.getBtVoltarGestorPromocao().addActionListener(new ActionListener() {
 
 			@Override
@@ -164,6 +175,8 @@ public class GUI_total extends JFrame {
 				gestor_promocaoPanel.setVisible(false);
 			}
 		});
+
+	
 
 	}
 
