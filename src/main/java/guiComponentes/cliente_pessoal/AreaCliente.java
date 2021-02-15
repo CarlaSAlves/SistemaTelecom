@@ -36,7 +36,7 @@ public class AreaCliente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AreaCliente frame = new AreaCliente();
+					AreaCliente frame = new AreaCliente(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
