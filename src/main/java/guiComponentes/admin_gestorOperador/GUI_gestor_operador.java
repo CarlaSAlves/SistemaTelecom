@@ -149,7 +149,6 @@ public class GUI_gestor_operador extends JFrame {
 	 * 
 	 */
 
-
 	private void botaoAtivarDinamico() {
 
 		try {
