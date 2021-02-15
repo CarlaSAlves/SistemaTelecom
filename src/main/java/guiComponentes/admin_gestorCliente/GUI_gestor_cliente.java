@@ -1,4 +1,4 @@
-package guiComponentes.Admin_gestorCliente;
+package guiComponentes.admin_gestorCliente;
 
 
 import java.awt.EventQueue;

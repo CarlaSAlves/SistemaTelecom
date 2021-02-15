@@ -1,5 +1,5 @@
 
-package guiComponentes.Admin_gestorPacoteComercial;
+package guiComponentes.admin_gestorPacoteComercial;
 
 import java.awt.EventQueue;
 import java.awt.Font;

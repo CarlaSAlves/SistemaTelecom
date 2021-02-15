@@ -1,4 +1,4 @@
-package guiComponentes.Admin_gestorPacoteComercial;
+package guiComponentes.admin_gestorPacoteComercial;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;

@@ -1,12 +1,12 @@
-package guiComponentes.Admin_gestorCliente;
+package guiComponentes.admin_gestorOperador;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-import historicos.HistoricoCliente;
+import historicos.HistoricoOperador;
 
 
-public class HistoricoClienteTableModel extends AbstractTableModel {
+public class HistoricoOperadorTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 	public static final int OBJECT_COL = -1;
@@ -15,11 +15,12 @@ public class HistoricoClienteTableModel extends AbstractTableModel {
 	private static final int FUNCIONARIO_COL = 2;
 	private static final int ID_COL = 3;
 
+
 	private String[] columnNames = { "Data", "Registo", "Funcionario", "ID Admin" };
 
-	private List<HistoricoCliente> historicoLista;
+	private List<HistoricoOperador> historicoLista;
 
-	public HistoricoClienteTableModel(List<HistoricoCliente> historicoLista) {
+	public HistoricoOperadorTableModel(List<HistoricoOperador> historicoLista) {
 		this.historicoLista = historicoLista;
 	}
 
@@ -41,21 +42,21 @@ public class HistoricoClienteTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int row, int col) {
 
-		HistoricoCliente historicoCliente = historicoLista.get(row);
+		HistoricoOperador historicoOperador = historicoLista.get(row);
 
 		switch (col) {
 		case DATA_COL:			
-			return historicoCliente.getData_registo();
+			return historicoOperador.getData_registo();
 		case REGISTO_COL:
-			return historicoCliente.getDescricao();
+			return historicoOperador.getDescricao();
 		case FUNCIONARIO_COL:
-			return historicoCliente.getNome_funcionario();
+			return historicoOperador.getNome_funcionario();
 		case ID_COL:
-			return historicoCliente.getId_funcionario();
+			return historicoOperador.getId_funcionario();
 		case OBJECT_COL:
-			return historicoCliente;
+			return historicoOperador;
 		default:
-			return historicoCliente.getNome_funcionario();
+			return historicoOperador.getNome_funcionario();
 		}
 	}
 

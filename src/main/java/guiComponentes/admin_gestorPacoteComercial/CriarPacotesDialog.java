@@ -1,4 +1,4 @@
-package guiComponentes.Admin_gestorPromocao;
+package guiComponentes.admin_gestorPacoteComercial;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -9,50 +9,54 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+
 import servico.GestorDeDAO;
-import standard_value_object.Promocao;
+import standard_value_object.Funcionario;
+import standard_value_object.PacoteComercial;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.SystemColor;
 
+
+import guiComponentes.GUI_total;
 import java.awt.Color;
 
-public class CriarPromocaoDialog extends JDialog {
-	private GUI_gestor_promocao promocaoPesquisaApp;
+public class CriarPacotesDialog extends JDialog {
+
 	private static final long serialVersionUID = 1L;
-	private Promocao promocaoAntiga;
-	private boolean modoEditar = false;
 	private final JPanel contentPanel = new JPanel();
+	private GUI_gestor_pacotes pacoteComercialPesquisaApp;
+	private PacoteComercial pacoteComercialAntigo;
+	private boolean modoEditar = false;
 	private JTextField textFieldNome;
 	private JTextArea textFieldDescricao;
 
 
-	public CriarPromocaoDialog(GUI_gestor_promocao promocaoPesquisaApp ) {
+	public CriarPacotesDialog(GUI_gestor_pacotes pacoteComercialPesquisaApp ) {
 		this();
-		this.promocaoPesquisaApp = promocaoPesquisaApp;
+		this.pacoteComercialPesquisaApp = pacoteComercialPesquisaApp;
 	}
 
-	public CriarPromocaoDialog(GUI_gestor_promocao promocaoPesquisaApp, Promocao promocaoTemp, boolean modoEditar ) {
+	public CriarPacotesDialog(GUI_gestor_pacotes pacoteComercialPesquisaApp, PacoteComercial pacoteComercialAntigo, boolean modoEditar ) {
 		this();
-		this.promocaoPesquisaApp = promocaoPesquisaApp;
-		this.promocaoAntiga = promocaoTemp;
+		this.pacoteComercialPesquisaApp = pacoteComercialPesquisaApp;
+		this.pacoteComercialAntigo = pacoteComercialAntigo;
 		this.modoEditar = modoEditar;
 
 		if(modoEditar) {
-			setTitle("Editar Promoção");
-			popularTextFields(promocaoTemp);
+			setTitle("Editar Pacote Comercial");
+			popularTextFields(pacoteComercialAntigo);
 		}
 	}
 
-	private void popularTextFields(Promocao promocaoAntigo2) {
-		textFieldNome.setText(promocaoAntigo2.getNome());
-		textFieldDescricao.setText(promocaoAntigo2.getDescricao());
+	private void popularTextFields(PacoteComercial pacoteComercialAntigo2) {
+		textFieldNome.setText(pacoteComercialAntigo2.getNome()+ "");
+		textFieldDescricao.setText(pacoteComercialAntigo2.getDescricao());
 
 	}
-
-	public CriarPromocaoDialog() {
+	public CriarPacotesDialog() {
 		setBounds(500, 300, 465, 412);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
@@ -60,17 +64,8 @@ public class CriarPromocaoDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
-			textFieldDescricao = new JTextArea();
-			textFieldDescricao.setBackground(Color.WHITE);
-			textFieldDescricao.setLineWrap(true);
-			textFieldDescricao.setBounds(101, 118, 290, 193);
-			textFieldDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			textFieldDescricao.setColumns(10);
-			contentPanel.add(textFieldDescricao);
-		}
-		{
 			JLabel lblNome = new JLabel("Nome");
-			lblNome.setBounds(5, 48, 86, 28);
+			lblNome.setBounds(5, 40, 86, 35);
 			lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblNome);
 		}
@@ -88,11 +83,18 @@ public class CriarPromocaoDialog extends JDialog {
 			lblDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 			contentPanel.add(lblDescricao);
 		}
+		{
+			textFieldDescricao = new JTextArea();
+			textFieldDescricao.setBounds(101, 118, 290, 174);
+			textFieldDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+			textFieldDescricao.setColumns(10);
+			contentPanel.add(textFieldDescricao);
+		}
 
 
 		{
 			JPanel painelConfirmacao = new JPanel();
-			painelConfirmacao.setBounds(5, 322, 444, 44);
+			painelConfirmacao.setBounds(5, 323, 438, 44);
 			contentPanel.add(painelConfirmacao);
 			painelConfirmacao.setBackground(Color.WHITE);
 			painelConfirmacao.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -105,11 +107,12 @@ public class CriarPromocaoDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 
 					public void actionPerformed(ActionEvent arg0) {
+
 						if (textFieldNome.getText().isBlank() || textFieldDescricao.getText().isBlank()) {
-							JOptionPane.showMessageDialog( CriarPromocaoDialog.this, "Todos os dados têm de ser preenchidos!");
+							JOptionPane.showMessageDialog( CriarPacotesDialog.this, "Todos os dados têm de ser preenchidos!");
 							return;
 						}
-						gravarPromocao();
+						gravarPacoteComercial();
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -135,49 +138,51 @@ public class CriarPromocaoDialog extends JDialog {
 		}
 	}
 
-	private void gravarPromocao() {
+	private void gravarPacoteComercial() {
 		String nome = textFieldNome.getText();
 		String descricao = textFieldDescricao.getText();
 		boolean ativo = true;
 
-		Promocao promocao = null;
+		PacoteComercial pacoteComercial = null;
 
 		if (modoEditar) {
-			promocao = promocaoAntiga;
-
-			promocao.setNome(nome);
-			promocao.setDescricao(descricao);			
-			promocao.setAtiva(ativo);
+			pacoteComercial = pacoteComercialAntigo;
+			pacoteComercial.setNome(nome);
+			pacoteComercial.setDescricao(descricao);            
+			pacoteComercial.setAtivo(ativo);	 
 
 		} else {
-			promocao = new Promocao( nome, descricao, ativo);
+			pacoteComercial = new PacoteComercial( nome, descricao, ativo);
 		}
 
 		try {
+			Funcionario funcionario = null;
 			if (modoEditar) {
-				GestorDeDAO.getGestorDeDAO().editarPromocao(promocao);
-
-				promocaoPesquisaApp.refreshPromocaoTable();
-				JOptionPane.showMessageDialog(promocaoPesquisaApp,
-						"Promoção editada com sucesso!", "Promoção Editada",
+				funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+				GestorDeDAO.getGestorDeDAO().editarPacoteComercial(pacoteComercial,funcionario );
+				pacoteComercialPesquisaApp.refreshPacotesTable();
+				JOptionPane.showMessageDialog(pacoteComercialPesquisaApp,
+						"Pacote Comercial Editado com sucesso!", "Pacote Comercial Editado",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				GestorDeDAO.getGestorDeDAO().criarPromocao(promocao);
-				promocaoPesquisaApp.refreshPromocaoTable();
-				JOptionPane.showMessageDialog(promocaoPesquisaApp,
-						"Promoção criada com sucesso!", "Promoção Criada",
+				funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioAdmin(GUI_total.getUsername());
+				GestorDeDAO.getGestorDeDAO().criarPacoteComercial(pacoteComercial, funcionario);
+				pacoteComercialPesquisaApp.refreshPacotesTable();
+				JOptionPane.showMessageDialog(pacoteComercialPesquisaApp,
+						"Pacote comercial criado com sucesso!", "Pacote Comercial Criado",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 
 			setVisible(false);
 			dispose();
 
-
 		} catch (Exception exc) {
-			JOptionPane.showMessageDialog(promocaoPesquisaApp,
-					"Error a criar a Promoção " + exc.getMessage(), "Error",
+			JOptionPane.showMessageDialog(pacoteComercialPesquisaApp,
+					"Error a criar o Pacote Comercial " + exc.getMessage(), "Error",
 					JOptionPane.ERROR_MESSAGE);
 		}
+
+
 
 	}
 

@@ -1,4 +1,4 @@
-package guiComponentes.Admin_gestorPromocao;
+package guiComponentes.admin_gestorPromocao;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;

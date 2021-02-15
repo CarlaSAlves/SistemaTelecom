@@ -1,12 +1,12 @@
-package guiComponentes.Admin_gestorPromocao;
+package guiComponentes.admin_gestorPacoteComercial;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-import historicos.HistoricoOperador;
+import historicos.HistoricoPacoteComercial;
 
 
-public class HistoricoPromocaoTableModel extends AbstractTableModel {
+public class HistoricoPacoteComercialTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 	public static final int OBJECT_COL = -1;
@@ -18,9 +18,9 @@ public class HistoricoPromocaoTableModel extends AbstractTableModel {
 
 	private String[] columnNames = { "Data", "Registo", "Funcionario", "ID Admin" };
 
-	private List<HistoricoOperador> historicoLista;
+	private List<HistoricoPacoteComercial> historicoLista;
 
-	public HistoricoPromocaoTableModel(List<HistoricoOperador> historicoLista) {
+	public HistoricoPacoteComercialTableModel(List<HistoricoPacoteComercial> historicoLista) {
 		this.historicoLista = historicoLista;
 	}
 
@@ -42,21 +42,21 @@ public class HistoricoPromocaoTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int row, int col) {
 
-		HistoricoOperador historicoOperador = historicoLista.get(row);
+		HistoricoPacoteComercial historicoPacoteComercial = historicoLista.get(row);
 
 		switch (col) {
 		case DATA_COL:			
-			return historicoOperador.getData_registo();
+			return historicoPacoteComercial.getData_registo();
 		case REGISTO_COL:
-			return historicoOperador.getDescricao();
+			return historicoPacoteComercial.getDescricao();
 		case FUNCIONARIO_COL:
-			return historicoOperador.getNome_funcionario();
+			return historicoPacoteComercial.getNome_funcionario();
 		case ID_COL:
-			return historicoOperador.getId_funcionario();
+			return historicoPacoteComercial.getId_funcionario();
 		case OBJECT_COL:
-			return historicoOperador;
+			return historicoPacoteComercial;
 		default:
-			return historicoOperador.getNome_funcionario();
+			return historicoPacoteComercial.getNome_funcionario();
 		}
 	}
 

@@ -1,4 +1,4 @@
-package guiComponentes.Admin_gestorPacoteComercial;
+package guiComponentes.admin_gestorPacoteComercial;
 
 import java.awt.BorderLayout;
 import java.awt.Component;

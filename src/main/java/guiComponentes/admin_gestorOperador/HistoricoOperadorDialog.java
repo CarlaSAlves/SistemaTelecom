@@ -1,4 +1,4 @@
-package guiComponentes.Admin_gestorOperador;
+package guiComponentes.admin_gestorOperador;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
