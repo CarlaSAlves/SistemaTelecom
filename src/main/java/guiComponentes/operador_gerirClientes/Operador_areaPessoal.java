@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.Duration;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,13 +35,15 @@ import standard_value_object.Funcionario;
 @SuppressWarnings("serial")
 public class Operador_areaPessoal extends JFrame {
 
+	private int numberRows;
 	private JPanel pane, painelPesquisa;
-	private JLabel lblCamposPesquisas, labelID, labelNIF, labelNome, lblTempoSessao, lblUsernameLogged, lblHoraSistema, lblResultados;
+	private JLabel lblCampoPesquisas, labelID, labelNIF, labelNome, lblTempoSessao, lblUsernameLogged, lblHoraSistema, lblResultados;
 	private JTextField textPesquisaID, textFieldNome, textPesquisaNIF;
 	private JCheckBox checkBoxAtivo;
 	private JButton botaoPesquisa, btAtribuirPacote, btAtribuirPromocao, visualizarPromocao, btHistorico, btVoltarOperador;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JTable table;
+	
 	
 
 	/**
@@ -83,7 +86,7 @@ public class Operador_areaPessoal extends JFrame {
 
 		lblCamposPesquisasSetup();
 
-		pane.add(lblCamposPesquisas);
+		pane.add(lblCampoPesquisas);
 
 		painelPesquisa();
 
@@ -177,7 +180,30 @@ public class Operador_areaPessoal extends JFrame {
 		table.setBackground(UIManager.getColor("CheckBox.light"));
 		table.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		table.setRowHeight(20);
-
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if (table.getSelectedRowCount()>1) {
+					btAtribuirPacote.setEnabled(false);
+					btAtribuirPromocao.setEnabled(false);
+					visualizarPromocao.setEnabled(false);
+					btHistorico.setEnabled(false);
+				}
+				else if (table.getSelectedRows().length==1) {
+					btAtribuirPacote.setEnabled(true);
+					btAtribuirPromocao.setEnabled(true);
+					visualizarPromocao.setEnabled(true);
+					btHistorico.setEnabled(true);
+				}
+				else if (table.getSelectedRowCount()==0)
+				{
+					btAtribuirPacote.setEnabled(false);
+					btAtribuirPromocao.setEnabled(false);
+					visualizarPromocao.setEnabled(false);
+					btHistorico.setEnabled(false);
+				}
+				
+			}	
+		});
 		return scrollPane;
 	}
 
@@ -202,9 +228,9 @@ public class Operador_areaPessoal extends JFrame {
 	}
 
 	private void lblCamposPesquisasSetup() {
-		lblCamposPesquisas = new JLabel("Campo de Pesquisa");
-		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-		lblCamposPesquisas.setBounds(96, 39, 294, 26);
+		lblCampoPesquisas = new JLabel("Campo de Pesquisa");
+		lblCampoPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
+		lblCampoPesquisas.setBounds(96, 39, 294, 26);
 
 	}
 
@@ -259,11 +285,81 @@ public class Operador_areaPessoal extends JFrame {
 		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		botaoPesquisa.setBackground(SystemColor.activeCaption);
 		botaoPesquisa.setBounds(72, 143, 371, 27);	
+		botaoPesquisa.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					int id = 0;
+					String nif = null;
+					String nome = null;
+					int ativo = checkBoxAtivo.isSelected()? 1:0;
+
+					if(!textPesquisaID.getText().isBlank()) {
+						id = Integer.parseInt(textPesquisaID.getText().trim());
+					}
+
+					if(!textPesquisaNIF.getText().isBlank()) {
+						nif = textPesquisaNIF.getText().trim();
+					}
+
+					if(!textFieldNome.getText().isBlank()) {
+						nome = textFieldNome.getText().trim();
+					}
+
+					List<Funcionario> operadores = null;
+
+					if ((id != 0) || (nif != null) || (nome != null) || (ativo!=0) ) {	
+						operadores = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioOperador(id, nif, nome, ativo);
+					} else {
+						operadores = GestorDeDAO.getGestorDeDAO().getAllFuncionarioOperador();
+					}
+
+					OperadorPesquisaModelTable model = new OperadorPesquisaModelTable(operadores);
+					table.setModel(model);
+					numberRows = table.getRowCount();
+					lblResultados.setText("Resultados: " + numberRows);
+					
+				} catch (Exception e1) {
+				}
+			}
+		});
 
 		painelPesquisa.add(botaoPesquisa);
 	}
 
+	public JTable getTable() {
+		return table;
+	}
 
+	public JButton btVoltarOperador() {
+		return btVoltarOperador;
+	}
+
+	public void setBtVoltarOperador(JButton botaoVoltar2) {
+		this.btVoltarOperador = botaoVoltar2;
+	}
+
+	public void setUsernameLoggedIn(String username) {
+		lblUsernameLogged.setText("Username: " + username);
+
+	}
+
+	public void setLblTempoSessao(Duration temporizador) {
+		lblTempoSessao.setText("Sessao: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
+	}
+
+	public void setLblHoraSistema(String agora) {
+		lblHoraSistema.setText("Data: " + agora);
+
+	}
+
+	public JPanel returnPanel() {
+		return (JPanel) getContentPane();
+	}
+	
+	public JLabel getLblResultados() {
+		return lblResultados;
+	}
 	
 
 
