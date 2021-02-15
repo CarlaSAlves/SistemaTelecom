@@ -243,8 +243,6 @@ public class GUI_total extends JFrame {
 					dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 					String dataEHora = dateFormat.format(cal1.getTime());
 
-
-
 					homepage.setLblTempoSessao(temporizador);
 					homepage.setLblHoraSistema(dataEHora);
 
@@ -259,6 +257,9 @@ public class GUI_total extends JFrame {
 
 					gestor_promocao.setLblTempoSessao(temporizador); 
 					gestor_promocao.setLblHoraSistema(dataEHora);
+					
+					operador_homepage.setLblTempoSessao(temporizador);
+					operador_homepage.setLblHoraSistema(dataEHora);
 					try {
 						sleep(1000);
 					} catch (InterruptedException e) {

@@ -34,3 +34,9 @@
 <duração da sessão:	0:0>
 </sessao>
 
+<sessao>
+<username:	oper>
+<data e hora do login:	15-02-2021 11:53:12>
+<duração da sessão:	0:13>
+</sessao>
+
