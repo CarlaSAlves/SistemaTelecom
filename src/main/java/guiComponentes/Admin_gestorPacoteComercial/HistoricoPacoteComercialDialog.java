@@ -32,15 +32,6 @@ public class HistoricoPacoteComercialDialog extends JDialog {
 	private JLabel pacoteComercialRegistosTable;
 
 
-	public static void main(String[] args) {
-		try {
-			HistoricoPacoteComercialDialog dialog = new HistoricoPacoteComercialDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	public void preencherTable(PacoteComercial pacote,List<HistoricoPacoteComercial> historicoPacoteComercial) {
 		pacoteComercialRegistosTable.setText(pacote.getNome());

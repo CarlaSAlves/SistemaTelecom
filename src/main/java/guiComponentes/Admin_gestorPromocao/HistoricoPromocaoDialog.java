@@ -32,15 +32,6 @@ public class HistoricoPromocaoDialog extends JDialog {
 	private JLabel operadorRegistoLabel;
 
 	
-	public static void main(String[] args) {
-		try {
-			HistoricoPromocaoDialog dialog = new HistoricoPromocaoDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	public void preencherTable(Funcionario funcionario, List<HistoricoOperador> historicoFuncionario) {
 		operadorRegistoLabel.setText(funcionario.getNome());

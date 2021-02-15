@@ -28,15 +28,6 @@ public class CriarPromocaoDialog extends JDialog {
 	private JTextField textFieldNome;
 	private JTextArea textFieldDescricao;
 
-	public static void main(String[] args) {
-		try {
-			CriarPromocaoDialog dialog = new CriarPromocaoDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	public CriarPromocaoDialog(GUI_gestor_promocao promocaoPesquisaApp ) {
 		this();

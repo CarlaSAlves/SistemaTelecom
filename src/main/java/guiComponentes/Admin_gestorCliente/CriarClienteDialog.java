@@ -39,15 +39,6 @@ public class CriarClienteDialog extends JDialog {
 	private JLabel lblPassword, lblNewLabel;
 
 
-	public static void main(String[] args) {
-		try {
-			CriarClienteDialog dialog = new CriarClienteDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	public CriarClienteDialog(GUI_gestor_cliente clientePesquisaApp, String username) {
 		this();

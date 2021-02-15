@@ -50,20 +50,6 @@ public class GUI_gestor_cliente extends JFrame {
 	private JCheckBox checkBoxAtivo;
 
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-
-					GUI_gestor_cliente frame = new GUI_gestor_cliente();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	public GUI_gestor_cliente() {
 
 		ativarNimbusLookAndFeel();

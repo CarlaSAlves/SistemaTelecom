@@ -44,18 +44,6 @@ public class GUI_gestor_promocao extends JFrame {
 	private JTextArea textAreaDescricao;
 
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI_gestor_promocao frame = new GUI_gestor_promocao();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	public  GUI_gestor_promocao() {
 		contentPaneSetup();
 		inicialize();

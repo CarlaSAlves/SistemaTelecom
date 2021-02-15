@@ -27,19 +27,6 @@ public class GUI_homepage extends JFrame {
 	private JLabel lblUsernameLogged,lblTempoSessao,lblHoraSistema;
 
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI_homepage frame = new GUI_homepage(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	public GUI_homepage(GUI_total guit) {
 			
 		ativarNimbusLookAndFeel();

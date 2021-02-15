@@ -41,15 +41,7 @@ public class CriarOperadorDialog extends JDialog {
 	private boolean modoEditar = false;
 	private JLabel lblPassword, lblNewLabel;
 
-	public static void main(String[] args) {
-		try {
-			CriarOperadorDialog dialog = new CriarOperadorDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	public CriarOperadorDialog(GUI_gestor_operador operadorPesquisaApp ) {
 		this();

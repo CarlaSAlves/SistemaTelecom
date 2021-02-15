@@ -32,15 +32,6 @@ public class HistoricoClienteDialog extends JDialog {
 	private JLabel clienteRegistosLabel;
 
 
-	public static void main(String[] args) {
-		try {
-			HistoricoClienteDialog dialog = new HistoricoClienteDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	public void preencherTable(Cliente cliente,List<HistoricoCliente> historicoCliente) {
 		clienteRegistosLabel.setText(cliente.getNome());
