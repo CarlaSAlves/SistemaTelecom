@@ -35,12 +35,12 @@ public class GUI_login extends JFrame {
 	private JLabel labelPass, labelConfm;
 	private JPasswordField passwordField;
 	private JPanel panel;
-	
+
 
 	public GUI_login(GUI_total guit) {
-		
+
 		setBackground(Color.WHITE);
-		
+
 		ativarNimbusLookAndFeel();
 
 		panel = new JPanel();
@@ -51,11 +51,18 @@ public class GUI_login extends JFrame {
 		setBounds(100, 30, 1400, 800);
 		getContentPane().setLayout(null);
 		
-				JLabel lblFooter = new JLabel();
-				lblFooter.setBounds(599, 690, 214, 65);
-				lblFooter.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/Altran1.1.png")));
-				getContentPane().add(lblFooter);
+		// imagem user e de fundo
 		
+		JLabel iconUser = new JLabel();
+		iconUser.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/user.png")));
+		iconUser.setBounds(301, 89, 238, 298);
+		panel.add(iconUser);
+
+		JLabel lblFooter = new JLabel();
+		lblFooter.setBounds(599, 690, 214, 65);
+		lblFooter.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/Altran1.1.png")));
+		getContentPane().add(lblFooter);
+
 		btnSair = new JButton("Sair");
 		btnSair.setToolTipText("Carregue para fazer signout");
 		btnSair.setForeground(Color.BLACK);
@@ -92,8 +99,8 @@ public class GUI_login extends JFrame {
 		labelConfm.setBounds(359, 578, 251, 18);
 		labelConfm.setForeground(new Color(70,74,101));
 		labelConfm.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		
-		
+
+
 		//labelConfirm devia estar escondida de origem, n�o ?
 		labelConfm.setVisible(false);
 		getContentPane().add(labelConfm);
@@ -105,10 +112,10 @@ public class GUI_login extends JFrame {
 		btLogin.setToolTipText("Carregue para fazer login");
 		btLogin.setFocusPainted(false);
 		btLogin.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		
-		
+
+
 		textFieldUser.addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode()==KeyEvent.VK_ENTER){
@@ -117,25 +124,25 @@ public class GUI_login extends JFrame {
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
-		        }
-				
+				}
+
 			}
 
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
+
 		passwordField.addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode()==KeyEvent.VK_ENTER){
@@ -144,24 +151,24 @@ public class GUI_login extends JFrame {
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
-		        }
-				
+				}
+
 			}
 
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		btLogin.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
 				try {
 					login(guit);
@@ -170,28 +177,25 @@ public class GUI_login extends JFrame {
 				}
 			}
 
-			
+
 		});
-		
+
 		getContentPane().add(btLogin);
-				
-				JLabel lblNewLabel = new JLabel();
-				lblNewLabel.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/user.png")));
-				lblNewLabel.setBounds(301, 89, 238, 298);
-				panel.add(lblNewLabel);
-				
-				JLabel lblNewLabel_1 = new JLabel("");
-                lblNewLabel_1.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/fundoAltran.png")));
-                lblNewLabel_1.setBounds(0, 89, 1394, 586);
-                panel.add(lblNewLabel_1);
+		
+				JLabel icon = new JLabel("");
+				icon.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/fundoAltran.png")));
+				icon.setBounds(0, 89, 1394, 586);
+				panel.add(icon);
+
+		
 	}
 
 
 
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-	        if ("Nimbus".equals(info.getName())) {
-	            try {
+			if ("Nimbus".equals(info.getName())) {
+				try {
 					UIManager.setLookAndFeel(info.getClassName());
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
@@ -202,8 +206,8 @@ public class GUI_login extends JFrame {
 				} catch (UnsupportedLookAndFeelException e) {
 					e.printStackTrace();
 				}
-	            break;
-	        }
+				break;
+			}
 		}
 	}
 	private void login(GUI_total guit) throws Exception {
@@ -212,12 +216,12 @@ public class GUI_login extends JFrame {
 		String login = textFieldUser.getText();
 		@SuppressWarnings("deprecation")
 		String pass = passwordField.getText();
-	
+
 		if(login.isBlank() || pass.isBlank()) {
 			JOptionPane.showMessageDialog(null, "Campos não podem estar vazios.");
 			return;
 		}
-		
+
 		//verifica se � um cliente
 		Cliente cliente = null;
 		try {
@@ -231,7 +235,7 @@ public class GUI_login extends JFrame {
 			JOptionPane.showMessageDialog(null, "Menu cliente em construção.");
 			return;
 		}
-		
+
 		//se nao é  cliente, é  funcion�rio 
 		Funcionario funcionario = null;
 		try {
@@ -242,7 +246,7 @@ public class GUI_login extends JFrame {
 		if(funcionario != null) {
 			//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
 			//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
-			
+
 			//TODO: arranjar algo melhor que um switch case para tratar da abertura da janela correspondente. Tenho que perceber mais sobre patterns
 			switch(funcionario.getId_role()) {
 				//role 1 = admin
@@ -251,15 +255,15 @@ public class GUI_login extends JFrame {
 					//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
 					guit.loginEfetuado(1);
 				labelConfm.setVisible(false);
-					return;
+				return;
 				//role 2 = operador	
 				case(2):
 					guit.loginEfetuado(2);
-					//linha para abrir a janela do operador (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o operador atualmente logado)
-					//TODO: abrir Janela da area operador e passar o operador que loga no seu construtor
-					//JOptionPane.showMessageDialog(null, "Menu operador em construção.");
-			
-					return;
+				//linha para abrir a janela do operador (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o operador atualmente logado)
+				//TODO: abrir Janela da area operador e passar o operador que loga no seu construtor
+				//JOptionPane.showMessageDialog(null, "Menu operador em construção.");
+
+				return;
 			}
 		}
 		labelConfm.setVisible(true);
@@ -268,11 +272,11 @@ public class GUI_login extends JFrame {
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
-	
+
 	public JTextField getUserText() {
 		return textFieldUser;
 	}
-	
+
 	public JButton getBtnSair() {
 		return btnSair;
 	}
