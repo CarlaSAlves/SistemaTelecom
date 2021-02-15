@@ -350,7 +350,7 @@ public class GUI_gestor_promocao extends JFrame {
 				Promocao PromocaoTemp = (Promocao) table.getValueAt(row, PromocaoPesquisaModelTable.OBJECT_COL);
 
 				CriarPromocaoDialog dialog = new CriarPromocaoDialog(GUI_gestor_promocao.this, PromocaoTemp, true);
-
+				dialog.setResizable(false);
 				dialog.setVisible(true);
 			}
 		});
@@ -422,6 +422,7 @@ public class GUI_gestor_promocao extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				CriarPromocaoDialog dialog = new CriarPromocaoDialog(GUI_gestor_promocao.this);
 				dialog.setVisible(true);
+				dialog.setResizable(false);
 			}
 		});
 		return botaoCriarPromocao;

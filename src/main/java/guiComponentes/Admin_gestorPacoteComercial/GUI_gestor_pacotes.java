@@ -281,6 +281,7 @@ public class GUI_gestor_pacotes extends JFrame {
 					HistoricoPacoteComercialDialog dialogHistorico = new HistoricoPacoteComercialDialog();
 					dialogHistorico.preencherTable(pacoteComercial, list);
 					dialogHistorico.setVisible(true);
+					dialogHistorico.setResizable(false);
 
 				} catch (Exception e1) {
 					e1.printStackTrace();
@@ -389,9 +390,8 @@ public class GUI_gestor_pacotes extends JFrame {
 				PacoteComercial pacoteComercialTemp = (PacoteComercial) table.getValueAt(row,
 						PacoteComercialPesquisaModelTable.OBJECT_COL);
 
-				CriarPacotesDialog dialog =
-						new CriarPacotesDialog(GUI_gestor_pacotes.this, pacoteComercialTemp, true);
-
+				CriarPacotesDialog dialog =	new CriarPacotesDialog(GUI_gestor_pacotes.this, pacoteComercialTemp, true);
+				dialog.setResizable(false);
 				dialog.setVisible(true);
 			}
 		});
@@ -478,6 +478,7 @@ public class GUI_gestor_pacotes extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				CriarPacotesDialog dialog = new CriarPacotesDialog(GUI_gestor_pacotes.this);
 				dialog.setVisible(true);
+				dialog.setResizable(false);
 			}
 		});
 		return botaoCriarPacotes;

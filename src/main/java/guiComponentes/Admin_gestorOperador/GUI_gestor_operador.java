@@ -316,7 +316,7 @@ public class GUI_gestor_operador extends JFrame {
 				Funcionario funcionarioTemp = (Funcionario) table.getValueAt(row, OperadorPesquisaModelTable.OBJECT_COL);
 
 				CriarOperadorDialog dialog = new CriarOperadorDialog(GUI_gestor_operador.this,funcionarioTemp, true);
-
+				dialog.setResizable(false);
 				dialog.setVisible(true);
 
 			}
@@ -401,6 +401,7 @@ public class GUI_gestor_operador extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				CriarOperadorDialog dialog = new CriarOperadorDialog(GUI_gestor_operador.this);
 				dialog.setVisible(true);
+				dialog.setResizable(false);
 			}
 		});
 		return botaoCriarOperador;
@@ -435,7 +436,8 @@ public class GUI_gestor_operador extends JFrame {
 					HistoricoOperadorDialog dialogHistorico = new HistoricoOperadorDialog();
 					dialogHistorico.preencherTable(operadorTemp, list);
 					dialogHistorico.setVisible(true);
-
+					dialogHistorico.setResizable(false);
+					
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}

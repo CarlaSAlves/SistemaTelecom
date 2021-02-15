@@ -325,6 +325,7 @@ public class GUI_gestor_cliente extends JFrame {
 					HistoricoClienteDialog dialogHistorico = new HistoricoClienteDialog();
 					dialogHistorico.preencherTable(clienteTemp, list);
 					dialogHistorico.setVisible(true);
+					dialogHistorico.setResizable(false);
 
 				} catch (Exception e1) {
 					e1.printStackTrace();
@@ -443,6 +444,7 @@ public class GUI_gestor_cliente extends JFrame {
 				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
 				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this,clienteTemp, true, GUI_total.getUsername() );
 				dialog.setVisible(true);
+				dialog.setResizable(false);
 			}
 		});
 	}
@@ -529,6 +531,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this, GUI_total.getUsername());
 				dialog.setVisible(true);
+				dialog.setResizable(false);
 
 			}
 		});
