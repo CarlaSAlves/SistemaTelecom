@@ -68,13 +68,13 @@ public class Operador_homepage extends JFrame {
 
 		JLabel lblPoesia = new JLabel("Portal do Operador");
 		lblPoesia.setBounds(161, 117, 508, 33);
-		lblPoesia.setForeground(new Color(70,74,101));
+		lblPoesia.setForeground(new Color(235, 95, 30));
 		lblPoesia.setFont(new Font("Dubai", Font.BOLD, 40));
 		pane.add(lblPoesia);
 		
 		labelBoasVindas = new JLabel("");
 		labelBoasVindas.setFont(new Font("Dubai", Font.BOLD, 18));
-		labelBoasVindas.setForeground(new Color(70,74,101));
+		labelBoasVindas.setForeground(new Color(235, 95, 30));
 		labelBoasVindas.setBounds(161, 162, 606, 33);
 		pane.add(labelBoasVindas);
 		
@@ -83,7 +83,7 @@ public class Operador_homepage extends JFrame {
 		// Botões Menu 
 
 		btClientes = new JButton("Clientes");
-		btClientes.setBounds(235, 334, 286, 60);
+		btClientes.setBounds(236, 320, 286, 60);
 		btClientes.setForeground(Color.DARK_GRAY);
 		btClientes.setToolTipText("Gestão de Clientes");	
 		btClientes.setFocusPainted(false);
@@ -91,12 +91,14 @@ public class Operador_homepage extends JFrame {
 		pane.add(btClientes);
 
 		btPacotesPromo = new JButton("Pacotes Comerciais e Promoções");
-		btPacotesPromo.setBounds(235, 427, 286, 60);
+		btPacotesPromo.setBounds(236, 413, 286, 60);
 		btPacotesPromo.setToolTipText("Gestão de Pacotes Comerciais e Promoções");
 		btPacotesPromo.setForeground(Color.DARK_GRAY);
 		btPacotesPromo.setFocusPainted(false);
 		btPacotesPromo.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		pane.add(btPacotesPromo);
+		
+		
 
 		// Footer 
 
@@ -111,7 +113,7 @@ public class Operador_homepage extends JFrame {
 
 		JLabel lblFooter = new JLabel("");
 		lblFooter.setBounds(599, 690, 214, 65);
-		lblFooter.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/Altran1.1.png")));
+		lblFooter.setIcon(new ImageIcon(Operador_homepage.class.getResource("/guiComponentes/img/AltranOperador.png")));
 		getContentPane().add(lblFooter);
 		
 		
@@ -119,9 +121,9 @@ public class Operador_homepage extends JFrame {
 				// Imagem de Fundo
 		
 				JLabel icon = new JLabel("");
-				icon.setBounds(0, 89, 1394, 586);
+				icon.setBounds(6, 75, 1394, 586);
 				icon.setBackground(new Color(240, 240, 240));
-				icon.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
+				icon.setIcon(new ImageIcon(Operador_homepage.class.getResource("/guiComponentes/img/AltranOperadores.png")));
 				getContentPane().add(icon);
 
 		btVoltar.addActionListener(new ActionListener() {
