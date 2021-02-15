@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.EmptyBorder;
 import guiComponentes.Admin_GUI_homepage;
 import guiComponentes.GUI_total;
 
@@ -33,10 +32,11 @@ public class AreaCliente extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		//GUI_total guit = new GUI_total();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AreaCliente frame = new AreaCliente();
+					AreaCliente frame = new AreaCliente(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -86,9 +86,7 @@ public class AreaCliente extends JFrame {
 		panel.add(lblBemVindo);
 		
 		
-		
-		
-
+	
 		// Botão Atualiza dados 
 
 		btAtualizaDados = new JButton("Atualizar Dados");
@@ -137,15 +135,6 @@ public class AreaCliente extends JFrame {
 		lblFooter.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/Altran1.1.png")));
 		getContentPane().add(lblFooter);
 		
-
-		//Imagem de fundo 
-
-		JLabel icon = new JLabel("");
-		icon.setBounds(0, 89, 1394, 586);
-		icon.setBackground(new Color(240, 240, 240));
-		icon.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
-		getContentPane().add(icon);
-
 
 		//TODO criar os action listener Atualizar dados/ Ver Pacotes / Ver Promoções
 		
@@ -228,8 +217,6 @@ public class AreaCliente extends JFrame {
 	}
 	
 	
-
-
 
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

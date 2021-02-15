@@ -53,8 +53,6 @@ public class GUI_gestor_cliente extends JFrame {
 	public GUI_gestor_cliente() {
 
 		ativarNimbusLookAndFeel();
-
-
 		contentPaneSetup();
 
 		JButton botaoCriarCliente = botaoCriarClienteSetup();
