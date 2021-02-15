@@ -115,7 +115,6 @@ public class GUI_gestor_operador extends JFrame {
 		JScrollPane scrollPane = scrollPaneSetup();
 		panelDaTable.add(scrollPane);
 
-		tableSetup();
 		lblResultadosSetup();
 		panelDaTable.add(lblResultados);
 
@@ -443,10 +442,6 @@ public class GUI_gestor_operador extends JFrame {
 		lblResultados = new JLabel("Resultados: ");
 		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		lblResultados.setBounds(33, 6, 136, 25);
-	}
-
-
-	private void tableSetup() {
 	}
 
 	private JScrollPane scrollPaneSetup() {
