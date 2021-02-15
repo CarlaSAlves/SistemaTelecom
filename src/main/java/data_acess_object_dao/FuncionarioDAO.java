@@ -15,14 +15,23 @@ import historicos.HistoricoOperador;
 import standard_value_object.Funcionario;
 import standard_value_object.Role;
 
+/*
+ * Classe que vai estabelecer a ligaçao com a base de dados e interagir principalmente com a tabela "funcionario"
+ */
 public class FuncionarioDAO {
 
 	private Connection myConn;
 
+	/*
+	 * Construtor que recebe um objeto do tipo java.sql.Connection, a ser fornecido pela classe servico.GestorDeDAO
+	 */
 	public FuncionarioDAO(Connection connection) throws FileNotFoundException, IOException, SQLException {
 		this.myConn = connection;
 	}
 
+	/*
+	 * Método que devolve uma lista com todos os admins existentes na tabela "funcionario". Caso não existam admins, é devolvida uma lista vazia.
+	 */
 	public List<Funcionario> getAllFuncionarioAdmin() throws Exception {
 		List<Funcionario> listaFuncionarioAdmin = new ArrayList<>();
 		Statement myStmt = null;
@@ -32,6 +41,7 @@ public class FuncionarioDAO {
 			myStmt = myConn.createStatement();
 			myRs = myStmt.executeQuery("select * from funcionario where id_role=1");
 
+			//faz parse ao resultado enviado pela base de dados e converte cada entrada num objeto funcionario
 			while (myRs.next()) {
 				Funcionario funcionario = convertRowParaFuncionario(myRs);
 				listaFuncionarioAdmin.add(funcionario);
@@ -43,6 +53,11 @@ public class FuncionarioDAO {
 			close(myStmt, myRs);
 		}
 	}
+	
+	/*
+	 * Pesquisa e devolve o funcionario com o id enviado como parametro.
+	 * Devolve funcionario nulo se nenhum for encontrado.
+	 */
 	private Funcionario pesquisaOperadorAuxiliarID(int id) throws Exception {
 		Funcionario funcionario = null;
 
@@ -53,6 +68,8 @@ public class FuncionarioDAO {
 			myStmt = myConn.prepareStatement("select * from funcionario where id=?");
 			myStmt.setInt(1, id);
 			myRs = myStmt.executeQuery();
+			
+			//converter o resultado devolvido pela base de dados num objeto java
 			while (myRs.next()) {
 				funcionario = convertRowParaFuncionario(myRs);
 			}
@@ -66,10 +83,13 @@ public class FuncionarioDAO {
 		return funcionario;
 	}
 
+	/*
+	 * Pesquisa e devolve o primeiro funcionario encontrado que possua um nif que contenha o substring nif enviado como parametro da funçao.
+	 * Devolve um funcionario nulo se nenhum funcionario for encontrado.
+	 */
 	@SuppressWarnings("unused")
 	private Funcionario pesquisaOperadorAuxiliarNIF(String nif) throws Exception {
 		Funcionario funcionario = null;
-
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
 
@@ -79,6 +99,7 @@ public class FuncionarioDAO {
 			myStmt.setString(1, nif);
 			myRs = myStmt.executeQuery();
 
+			//converter o resultado devolvido pela base de dados num objeto java
 			while (myRs.next()) {
 				funcionario = convertRowParaFuncionario(myRs);
 			}
@@ -92,6 +113,10 @@ public class FuncionarioDAO {
 		return funcionario;
 	}
 
+	/*
+	 * Método que devolve uma lista com todos os operadores existentes na tabela "funcionario". 
+	 * Caso não existam operadores, é devolvida uma lista vazia.
+	 */
 	public List<Funcionario> getAllFuncionarioOperador() throws Exception {
 		List<Funcionario> listaFuncionarioOperador = new ArrayList<>();
 
@@ -100,9 +125,9 @@ public class FuncionarioDAO {
 
 		try {
 			myStmt = myConn.createStatement();
-
 			myRs = myStmt.executeQuery("select * from funcionario where id_role=2");
 
+			//converter o resultado devolvido pela base de dados num objeto java
 			while (myRs.next()) {
 				Funcionario funcionario = convertRowParaFuncionario(myRs);
 				listaFuncionarioOperador.add(funcionario);
@@ -117,19 +142,17 @@ public class FuncionarioDAO {
 		return listaFuncionarioOperador;
 	}
 
-	//substituir pelo metodo pesquisarFuncionarioLoginPass
+	/*
+	 * Método temporário que pesquisa e devolve o funcionario com o login inserido.
+	 */
 	public Funcionario pesquisaFuncionarioLogin(String login) throws Exception {
 		Funcionario funcionario = null;
-
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
 
 		try {
-
 			myStmt = myConn.prepareStatement("select * from funcionario where login=?");
-
 			myStmt.setString(1, login);
-
 			myRs = myStmt.executeQuery();
 
 			while (myRs.next()) {
@@ -142,7 +165,14 @@ public class FuncionarioDAO {
 		}
 	}
 	
-
+	/*
+	 * Método que devolve uma lista de todos os operadores que respeitem os seguintes critérios:
+	 * - possuam o id passado como parametro e/ou
+	 * - possuam um nif que contenha os carateres no nif enviado como parametro e/ou
+	 * - possuam um nome que contenha o substring nome enviado no parametro da funçao e/ou
+	 * - possuam o campo ativo igual ao parametro ativo enviado para a função.
+	 * Caso não existam operadores que satisfaçam os critérios inseridos nos parâmetros da função, devolve uma lista vazia.
+	 */
 	public List<Funcionario> pesquisaFuncionarioOperador(int id ,String nif, String nome, int ativo) throws Exception {
 		List<Funcionario> list = new ArrayList<>();
 
@@ -151,6 +181,7 @@ public class FuncionarioDAO {
 		StringJoiner sj = new StringJoiner (" AND ");
 		String query = "SELECT * FROM FUNCIONARIO WHERE ";
 
+		// analisar os parametros enviados para a funçao e construir uma query com base na sua existencia (ou nao)
 		try {
 			@SuppressWarnings("rawtypes")
 			List<Comparable> values = new ArrayList<Comparable>();
@@ -185,6 +216,7 @@ public class FuncionarioDAO {
 
 			myRs = myStmt.executeQuery();
 
+			//converter o resultado devolvido pela base de dados em objetos java
 			while (myRs.next()) {
 				Funcionario funcionario = convertRowParaFuncionario(myRs);
 				list.add(funcionario);
@@ -199,6 +231,10 @@ public class FuncionarioDAO {
 		return list;
 	}
 
+	/*
+	 * Pesquisa e devolve todos os funcionários existentes, independentemente do seu id.
+	 * Caso não existam funcionarios, devolve uma lista vazia.
+	 */
 	public List<Funcionario> pesquisaTodosFuncionarios() throws Exception {
 		List<Funcionario> listaFuncionario = new ArrayList<>();
 		Statement myStmt = null;
@@ -208,6 +244,7 @@ public class FuncionarioDAO {
 			myStmt = myConn.createStatement();
 			myRs = myStmt.executeQuery("select * from funcionario");
 
+			//converter o resultado devolvido pela base de dados em objetos java
 			while (myRs.next()) {
 				Funcionario funcionario = convertRowParaFuncionario(myRs);
 				listaFuncionario.add(funcionario);
@@ -224,6 +261,11 @@ public class FuncionarioDAO {
 		return listaFuncionario;
 	}
 
+	/*
+	 * Pesquisa e devolve todos os funcionarios encontrados que possuam um nif 
+	 * que contenha o substring nif enviado como parametro da funçao.
+	 * Devolve uma lista vazia se nenhum funcionario for encontrado.
+	 */
 	public List<Funcionario> pesquisaFuncionarioByNif(String nif) throws Exception {
 		List<Funcionario> list = new ArrayList<>();
 
@@ -237,10 +279,12 @@ public class FuncionarioDAO {
 			myStmt.setString(1, nif);
 			myRs = myStmt.executeQuery();
 
+			//converter o resultado devolvido pela base de dados em objetos java
 			while (myRs.next()) {
 				Funcionario funcionario = convertRowParaFuncionario(myRs);
 				list.add(funcionario);
 			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -251,6 +295,11 @@ public class FuncionarioDAO {
 		return list;
 	}
 
+	/*
+	 * Pesquisa e devolve todos os funcionarios encontrados que possuam nome 
+	 * que contenha o substring nif enviado como parametro da funçao.
+	 * Devolve uma lista vazia se nenhum funcionario for encontrado.
+	 */
 	public List<Funcionario> pesquisaFuncionarioByNome(String nome) throws Exception {
 		List<Funcionario> list = new ArrayList<>();
 
@@ -263,10 +312,12 @@ public class FuncionarioDAO {
 			myStmt.setString(1, nome);
 			myRs = myStmt.executeQuery();
 
+			//converter o resultado devolvido pela base de dados em objetos java
 			while (myRs.next()) {
 				Funcionario funcionario = convertRowParaFuncionario(myRs);
 				list.add(funcionario);
 			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -277,6 +328,10 @@ public class FuncionarioDAO {
 		return list;
 	}
 
+	/*
+	 * Pesquisa e devolve o funcionario com o id enviado como parametro.
+	 * Devolve um funcionario nulo se nenhum for encontrado.
+	 */
 	public Funcionario pesquisaFuncionarioById(int id) throws Exception {
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
@@ -288,6 +343,7 @@ public class FuncionarioDAO {
 			myStmt.setInt(1, id);
 			myRs = myStmt.executeQuery();
 
+			//converter o resultado devolvido pela base de dados num objeto java
 			if (myRs.next()) {
 				funcionario = new Funcionario();
 				funcionario.setId(myRs.getInt(1));
@@ -298,6 +354,7 @@ public class FuncionarioDAO {
 				funcionario.setAtivo(myRs.getInt(6) == 1 ? true : false);
 				funcionario.setId_role(myRs.getInt(7));	
 			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -308,6 +365,10 @@ public class FuncionarioDAO {
 		return funcionario;
 	}
 
+	/*
+	 * Pesquisa e devolve o funcionario com o login e a password enviados como parametros. A função trata de encriptar a password antes de consultar a base de dados
+	 * Devolve um funcionario nulo se não existir um funcionario com essas credenciais na base de dados.
+	 */
 	public Funcionario pesquisarFuncionarioLoginPass(String login, String pass) throws Exception {
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
@@ -322,6 +383,7 @@ public class FuncionarioDAO {
 
 			myRs = myStmt.executeQuery();
 
+			//converter o resultado devolvido pela base de dados num objeto java
 			if (myRs.next()) {
 				funcionario = new Funcionario();
 				funcionario.setId(myRs.getInt(1));
@@ -342,16 +404,26 @@ public class FuncionarioDAO {
 		return funcionario;
 	}
 
+	/*
+	 * Cria um novo funcionario na tabela "funcionario" com base no primeiro objeto funcionario (operador) enviado como parâmetro. 
+	 * O id dessa nova entidade é automaticamente gerado pela base de dados
+	 * e é de seguida devolvido pelo driver JDBC para poder ser colocado no mesmo objeto funcionario (operador) passado como parâmetro. De seguida, faz log à operação efetuada usando os dados
+	 * do funcionário enviado como segundo parâmetro à função.
+	 * Devolve um funcionario com o id gerado automaticamente pela base de dados. Caso a criação falhe irá ser propagada uma exceção pelo JDBC.
+	 */
 	@SuppressWarnings("resource")
 	public Funcionario criarFuncionario(Funcionario operador, Funcionario admin) throws Exception {
 		PreparedStatement myStmt = null;
 
 		try {
+			//Statement.RETURN_GENERATED_KEYS permite ao driver jdbc devolver o id da entidade criada, caso a criaçao seja bem sucedida
 			myStmt = myConn.prepareStatement("INSERT INTO funcionario(nome, nif, login, password, ativo, id_role) "
 					+ "VALUES(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
+			//encriptar palavra pass do funcionario antes da cria��o
 			operador.setPassword(PasswordEncryption.get_SHA_512_SecurePassword(operador.getPassword()));
 
+			//preencher a query com os atributos do objeto cliente passado como parametro da funçao
 			myStmt.setString(1, operador.getNome());
 			myStmt.setLong(2, operador.getNif());
 			myStmt.setString(3, operador.getLogin());
@@ -361,8 +433,10 @@ public class FuncionarioDAO {
 
 			myStmt.executeUpdate();
 
+			// se criação foi bem sucedida, vamos fazer parse à resposta enviada pela base de dados para extratir o id da entidade criada
 			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
 				if (generatedKeys.next()) {
+					//recuperamos o id do funcionario recém-criado e vamos atribui-lo ao objeto funcionario enviado como parametro nesta funçao, só para o reaproveitar
 					operador.setId((int)generatedKeys.getLong(1));
 				}
 				else {
@@ -370,8 +444,8 @@ public class FuncionarioDAO {
 				}
 			}
 
+			//registo da operação
 			myStmt = logUpdate(operador, admin, "Criar Operador");	
-
 			myStmt.executeUpdate();	
 
 		}catch(Exception e) {
@@ -383,12 +457,17 @@ public class FuncionarioDAO {
 		return operador;
 	}
 
+	/*
+	 * Edita o funcionario com id igual ao funcionario (operador) passado como argumento à função. De seguida, regista a operação usando o funcionário passado como segundo argumento.
+	 * Caso seja passado um argumento password não-nulo, troca a password. Caso não seja passado, mantém a password anterior.
+	 * Devolve o objeto funcionario enviado como argumento (incluindo nova password, caso esta tenha sido modificada).
+	 */
 	@SuppressWarnings("resource")
 	public Funcionario editarFuncionario(Funcionario operador, Funcionario admin, String novaPass) throws Exception {
 		PreparedStatement myStmt = null;
 		
 		try {
-
+			//se password é nula ou em branco, não troca a pass
 			if(novaPass == null) {
 				myStmt = myConn.prepareStatement("UPDATE `funcionario` SET `nome`=?, `nif`=?, `login`=? WHERE  `id`=?");
 
@@ -398,7 +477,8 @@ public class FuncionarioDAO {
 				myStmt.setInt(4, operador.getId());
 
 				myStmt.executeUpdate();
-
+			
+			//se string não-nulo e não-vazio for passado como argumento, encripta essa string e usa-a como nova password para o cliente
 			}else {
 
 				myStmt = myConn.prepareStatement("UPDATE `funcionario` SET `nome`=?, `nif`=?, `login`=?, `password`=? WHERE  `id`=?");
@@ -410,10 +490,9 @@ public class FuncionarioDAO {
 				myStmt.setInt(5, operador.getId());
 
 				myStmt.executeUpdate();
-
-
 			}
 			
+			//efetua log
 			myStmt = logUpdate(operador, admin, "Editar Operador");	
 			myStmt.executeUpdate();
 			
@@ -426,6 +505,10 @@ public class FuncionarioDAO {
 		return operador;
 	}
 
+	/*
+	 * Atribui a funçao role passada como primeiro argumento ao funcionario passado como segundo argumento.
+	 * Caso a role nao exista na base de dados, ira gerar uma exceçao.
+	 */
 	public void atribuirRoleAFuncionario(Role role, Funcionario funcionario) throws Exception {
 		PreparedStatement myStmt = null;
 
@@ -441,11 +524,15 @@ public class FuncionarioDAO {
 		}
 	}
 
-
+	/*
+	 * Desativa o funcionario com o id enviado como parametro e, caso a desativaçao seja bem sucedida, regista a operaçao
+	 * usando o funcionario passado como parametro.
+	 */
 	@SuppressWarnings("resource")
 	public void desativarFuncionario(int id, Funcionario admin) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
+			//obtem o funcionario com o id enviado
 			Funcionario operador = pesquisaOperadorAuxiliarID(id);
 
 			myStmt = myConn.prepareStatement("update funcionario SET `ativo`= 0 where id=?");
@@ -453,6 +540,7 @@ public class FuncionarioDAO {
 
 			myStmt.executeUpdate();
 
+			//regista a operaçao
 			myStmt = logUpdate(operador, admin, "Desativar Operador");	
 			myStmt.executeUpdate();
 
@@ -464,20 +552,23 @@ public class FuncionarioDAO {
 
 	}
 
-
+	/*
+	 * Ativa o funcionario com o id enviado como parametro e, caso a ativaçao seja bem sucedida, regista a operaçao
+	 * usando o funcionario passado como parametro.
+	 */
 	@SuppressWarnings("resource")
 	public void ativarFuncionario(int id, Funcionario admin) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
+			//obtem o funcionario com o id enviado
 			Funcionario operador = pesquisaOperadorAuxiliarID(id);
 
 			myStmt = myConn.prepareStatement("update funcionario SET `ativo`= 1 where id=?");
 			myStmt.setInt(1, id);
-
 			myStmt.executeUpdate();
 
+			//regista a operaçao
 			myStmt = logUpdate(operador, admin, "Ativar Operador");	
-
 			myStmt.executeUpdate();
 
 		}catch(Exception e) {
@@ -488,6 +579,9 @@ public class FuncionarioDAO {
 
 	}
 
+	/*
+	 * Pesquisa a tabela funcionario_log_operador e devolve todos os logs contendo o operador com id_operador.
+	 */
 	public List<HistoricoOperador> getHistoricoOperador(int id_operador) throws Exception {
 		List<HistoricoOperador> list = new ArrayList<HistoricoOperador>();
 
@@ -503,6 +597,7 @@ public class FuncionarioDAO {
 
 			myRs = myStmt.executeQuery(sql);
 
+			//fazer parse ao resultado para construir os objetos HistoricoOperador que contém informação de registo
 			while (myRs.next()) {
 
 				int id_funcionario = myRs.getInt("HistoricoOperador.id_funcionario");
@@ -510,7 +605,6 @@ public class FuncionarioDAO {
 				Timestamp timestamp = myRs.getTimestamp("HistoricoOperador.data_registo");
 				java.sql.Date data_registo = new java.sql.Date(timestamp.getTime());
 				String nome = myRs.getString("admin.nome");
-
 
 				HistoricoOperador historico = new HistoricoOperador(id_operador, id_funcionario, descricao, data_registo, nome);
 
@@ -524,6 +618,9 @@ public class FuncionarioDAO {
 		}
 	}
 
+	/*
+	 * Método para converter cada entrada de um ResultSet num objeto java representando um funcionario.
+	 */
 	private Funcionario convertRowParaFuncionario(ResultSet myRs) throws SQLException {
 
 		int id = myRs.getInt("id");
@@ -539,6 +636,9 @@ public class FuncionarioDAO {
 		return funcionario;
 	}
 
+	/*
+	 * Função para registar is detalhes de uma operação, incluindo o funcionario operador e funcionario admin envolvidos.
+	 */
 	private PreparedStatement logUpdate(Funcionario operador, Funcionario admin, String descricao) throws SQLException {
 		PreparedStatement myStmt;
 		myStmt = myConn.prepareStatement("insert into funcionario_log_operador(id_funcionario, id_operador, data_registo, descricao) VALUES (?, ?, ?, ?)");
