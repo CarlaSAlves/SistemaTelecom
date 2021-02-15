@@ -28,9 +28,9 @@ public class TabbedPane extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	private JPanel panelDados2;
-	private JPanel panelDados3;
-	private JPanel panelDados4;
+	private JPanel panelProdutos;
+	private JPanel panelPacotes;
+	private JPanel panelPromocoes;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_1;
@@ -68,7 +68,7 @@ public class TabbedPane extends JFrame {
 		
 	
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				if ("CDE/Motif".equals(info.getName())) {
+				if ("Nimbus".equals(info.getName())) {
 					try {
 						UIManager.setLookAndFeel(info.getClassName());
 					} catch (ClassNotFoundException e) {
@@ -96,12 +96,14 @@ public class TabbedPane extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(10, 80, 720, 359);
 		contentPane.add(tabbedPane);
-	
-		panelDados3 = new JPanel();
-		
-		panelDados4 = new JPanel();
 		
 		panelDados = new JPanel();
+	
+		panelPacotes = new JPanel();
+		
+		panelPromocoes = new JPanel();
+		
+	
 		
 		tabbedPane.addTab("Os Meus Dados", null , panelDados);
 		panelDados.setLayout(null);
@@ -142,105 +144,112 @@ public class TabbedPane extends JFrame {
 		textField_7.setBounds(124, 205, 236, 20);
 		panelDados.add(textField_7);
 		
-		panelDados2 = new JPanel();
-		tabbedPane.addTab("Os Meus produtos", null , panelDados2);
-		panelDados2.setLayout(null);
+		// SEgundo painel -  Meus produtos
+		
+		panelProdutos = new JPanel();
+		tabbedPane.addTab("Os Meus produtos", null , panelProdutos);
+		panelProdutos.setLayout(null);
 		
 		JLabel lblNewLabel_5 = new JLabel("O seu pacote comercial");
 		lblNewLabel_5.setBounds(42, 31, 156, 43);
-		panelDados2.add(lblNewLabel_5);
+		panelProdutos.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Nome");
 		lblNewLabel_6.setBounds(10, 77, 46, 14);
-		panelDados2.add(lblNewLabel_6);
+		panelProdutos.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_6_1 = new JLabel("Descricao");
 		lblNewLabel_6_1.setBounds(10, 156, 46, 14);
-		panelDados2.add(lblNewLabel_6_1);
+		panelProdutos.add(lblNewLabel_6_1);
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(66, 72, 132, 68);
-		panelDados2.add(textArea);
+		panelProdutos.add(textArea);
 		
 		JTextArea textArea_1 = new JTextArea();
 		textArea_1.setBounds(66, 151, 132, 68);
-		panelDados2.add(textArea_1);
+		panelProdutos.add(textArea_1);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(66, 254, 132, 22);
-		panelDados2.add(comboBox);
+		panelProdutos.add(comboBox);
 		
 		JLabel lblNewLabel_7 = new JLabel("As suas promocoes");
 		lblNewLabel_7.setBounds(287, 37, 138, 31);
-		panelDados2.add(lblNewLabel_7);
+		panelProdutos.add(lblNewLabel_7);
 		
 		textArea_2 = new JTextArea();
 		textArea_2.setBounds(281, 77, 132, 68);
-		panelDados2.add(textArea_2);
+		panelProdutos.add(textArea_2);
 		
 		lblNewLabel_8 = new JLabel("Nome");
 		lblNewLabel_8.setBounds(225, 82, 46, 14);
-		panelDados2.add(lblNewLabel_8);
+		panelProdutos.add(lblNewLabel_8);
 		
 		lblNewLabel_6_2 = new JLabel("Descricao");
 		lblNewLabel_6_2.setBounds(225, 161, 46, 14);
-		panelDados2.add(lblNewLabel_6_2);
+		panelProdutos.add(lblNewLabel_6_2);
+		
+		// Terceiro separador Ver pacotes comerciais
 		
 		textArea_3 = new JTextArea();
 		textArea_3.setBounds(281, 156, 132, 68);
-		panelDados2.add(textArea_3);
-		tabbedPane.addTab("Ver todos os pacotes", null , panelDados3);
-		panelDados3.setLayout(null);
+		panelProdutos.add(textArea_3);
+		tabbedPane.addTab("Ver todos os pacotes", null , panelPacotes);
+		panelPacotes.setLayout(null);
 		
 		JLabel lblNewLabel_9 = new JLabel("Pacotes comercias");
 		lblNewLabel_9.setBounds(26, 24, 165, 14);
-		panelDados3.add(lblNewLabel_9);
+		panelPacotes.add(lblNewLabel_9);
 		
 		JTextArea textArea_4 = new JTextArea();
 		textArea_4.setBounds(26, 49, 92, 271);
-		panelDados3.add(textArea_4);
+		panelPacotes.add(textArea_4);
 		
 		JLabel lblNewLabel_8_1 = new JLabel("Nome");
 		lblNewLabel_8_1.setBounds(255, 85, 46, 14);
-		panelDados3.add(lblNewLabel_8_1);
+		panelPacotes.add(lblNewLabel_8_1);
 		
 		JTextArea textArea_2_1 = new JTextArea();
 		textArea_2_1.setBounds(311, 80, 132, 68);
-		panelDados3.add(textArea_2_1);
+		panelPacotes.add(textArea_2_1);
 		
 		JLabel lblNewLabel_6_2_1 = new JLabel("Descricao");
 		lblNewLabel_6_2_1.setBounds(255, 164, 46, 14);
-		panelDados3.add(lblNewLabel_6_2_1);
+		panelPacotes.add(lblNewLabel_6_2_1);
+		
+		
+		// Terceiro separador Ver pacotes comerciais (Painel dados 4)
 		
 		JTextArea textArea_3_1 = new JTextArea();
 		textArea_3_1.setBounds(311, 159, 132, 68);
-		panelDados3.add(textArea_3_1);
-		tabbedPane.addTab("Ver todas as promocoes", null , panelDados4);
-		panelDados4.setLayout(null);
+		panelPacotes.add(textArea_3_1);
+		tabbedPane.addTab("Ver todas as promocoes", null , panelPromocoes);
+		panelPromocoes.setLayout(null);
 		
 		JLabel lblNewLabel_8_1_1 = new JLabel("Nome");
 		lblNewLabel_8_1_1.setBounds(264, 72, 46, 14);
-		panelDados4.add(lblNewLabel_8_1_1);
+		panelPromocoes.add(lblNewLabel_8_1_1);
 		
 		JTextArea textArea_2_1_1 = new JTextArea();
 		textArea_2_1_1.setBounds(320, 67, 132, 68);
-		panelDados4.add(textArea_2_1_1);
+		panelPromocoes.add(textArea_2_1_1);
 		
 		JLabel lblNewLabel_6_2_1_1 = new JLabel("Descricao");
 		lblNewLabel_6_2_1_1.setBounds(264, 151, 46, 14);
-		panelDados4.add(lblNewLabel_6_2_1_1);
+		panelPromocoes.add(lblNewLabel_6_2_1_1);
 		
 		JTextArea textArea_3_1_1 = new JTextArea();
 		textArea_3_1_1.setBounds(320, 146, 132, 68);
-		panelDados4.add(textArea_3_1_1);
+		panelPromocoes.add(textArea_3_1_1);
 		
 		JTextArea textArea_4_1 = new JTextArea();
 		textArea_4_1.setBounds(35, 36, 92, 271);
-		panelDados4.add(textArea_4_1);
+		panelPromocoes.add(textArea_4_1);
 		
 		JLabel lblNewLabel_9_1 = new JLabel("Promocoes");
 		lblNewLabel_9_1.setBounds(35, 11, 165, 14);
-		panelDados4.add(lblNewLabel_9_1);
+		panelPromocoes.add(lblNewLabel_9_1);
 		
 		lblNewLabel_2 = new JLabel("A sua Area");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));

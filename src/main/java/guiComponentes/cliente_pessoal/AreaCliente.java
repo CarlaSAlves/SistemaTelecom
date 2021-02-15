@@ -20,18 +20,25 @@ import guiComponentes.GUI_total;
 import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
+import javax.swing.JTabbedPane;
 
 public class AreaCliente extends JFrame {
 
 
 	private static final long serialVersionUID = 1L;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);	
-	private JButton btVoltar, btAtualizaDados, btVerPacotes;
+	private JButton btVoltar, btAtualizaDados;
 	private JPanel panel;
 	private JLabel lblUsernameLogged,lblTempoSessao,lblHoraSistema;
 	private JPanel pane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JPanel panelMeusDados;
+	private JPanel panelDados2;
+	private JPanel panelDados3;
+	private JPanel panelDados4;
+	private JTextField textFieldNome;
+	private JTextField textFieldNIF;
+	private JTextField textFieldLogin;
+	private JTextField textFieldPassword;
 
 	/**
 	 * Launch the application.
@@ -64,29 +71,109 @@ public class AreaCliente extends JFrame {
 	private void initialize(GUI_total guit) {
 		
 		setupTempoSessao();
+		ativarNimbusLookAndFeel(); 
 		
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		panel = new JPanel();
 		setContentPane(panel);
 		panel.setLayout(null);
-		getContentPane().setFont(new Font("Verdana", Font.PLAIN, 11));
+		getContentPane().setFont(new Font("Dubai", Font.PLAIN, 12));
 		getContentPane().setBackground(SystemColor.text);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
 		getContentPane().setLayout(null);
 		
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setBackground(SystemColor.menu);
-		textArea_1.setForeground(Color.WHITE);
-		textArea_1.setBounds(78, 249, 260, 136);
-		panel.add(textArea_1);
+		// Construção JTabbedPane
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(192, 168, 1008, 456);
+		panel.add(tabbedPane);
+		
+		// Separador os meus dados
+		
+		panelMeusDados = new JPanel();
+		tabbedPane.addTab("Meus Dados",null,  panelMeusDados);
+		panelMeusDados.setLayout(null);
+		panelMeusDados.setForeground(Color.BLUE);
+		panelMeusDados.setFont(new Font("Dubai", Font.PLAIN, 12 ));
+		
+		
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setFont(new Font("Dubai", Font.PLAIN, 18));
+		lblNome.setBounds(51, 77, 69, 36);
+		panelMeusDados.add(lblNome);
+		
+		textFieldNome = new JTextField();
+		textFieldNome.setBounds(145, 77, 246, 29);
+		panelMeusDados.add(textFieldNome);
+		textFieldNome.setColumns(10);
+		
+		JLabel lblNIF = new JLabel("NIF:");
+		lblNIF.setFont(new Font("Dubai", Font.PLAIN, 18));
+		lblNIF.setBounds(51, 138, 69, 36);
+		panelMeusDados.add(lblNIF);
+		
+		textFieldNIF = new JTextField();
+		textFieldNIF.setColumns(10);
+		textFieldNIF.setBounds(145, 138, 246, 29);
+		panelMeusDados.add(textFieldNIF);
+		
+		JLabel lblLogin = new JLabel("Login");
+		lblLogin.setFont(new Font("Dubai", Font.PLAIN, 18));
+		lblLogin.setBounds(51, 205, 69, 36);
+		panelMeusDados.add(lblLogin);
+		
+		textFieldLogin = new JTextField();
+		textFieldLogin.setColumns(10);
+		textFieldLogin.setBounds(145, 205, 246, 29);
+		panelMeusDados.add(textFieldLogin);
+		
+		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setFont(new Font("Dubai", Font.PLAIN, 18));
+		lblPassword.setBounds(51, 279, 81, 36);
+		panelMeusDados.add(lblPassword);
+		
+		textFieldPassword = new JTextField();
+		textFieldPassword.setColumns(10);
+		textFieldPassword.setBounds(145, 279, 246, 29);
+		panelMeusDados.add(textFieldPassword);
+		
+
+
+		
+		
+			
+		JPanel panelMeusProdutos = new JPanel();
+		tabbedPane.addTab("Os Meus produtos",null,  panelMeusProdutos);
+		panelMeusProdutos.setLayout(null);
+		
+		// Separador Produtos
+		
+		JPanel panelPromoções = new JPanel();
+		tabbedPane.addTab("As suas promocoes",null,  panelPromoções);
+		panelPromoções.setLayout(null);
+		
+		// Separador Pacotes
+		
+		JPanel panelVerPacotes = new JPanel();
+		tabbedPane.addTab("Ver todos os pacotes comercial",null,  panelVerPacotes);
+		panelVerPacotes.setLayout(null);
+		
+		// Separador Promoções
+		
+		JPanel panelVerPromocoes = new JPanel();
+		tabbedPane.addTab("Ver todas as promoções",null,  panelVerPromocoes);
+		panelVerPromocoes.setLayout(null);
+		
+		
+		
 		
 		
 		// Label portal cliente
 
 		JLabel lblPortalCliente = new JLabel("Portal Do Cliente");
-		lblPortalCliente.setBounds(109, 45, 508, 33);
+		lblPortalCliente.setBounds(53, 45, 508, 33);
 		lblPortalCliente.setForeground(new Color(70,74,101));
 		lblPortalCliente.setFont(new Font("Dubai", Font.BOLD, 40));
 		getContentPane().add(lblPortalCliente);
@@ -98,27 +185,26 @@ public class AreaCliente extends JFrame {
 		panel.add(lblBemVindo);
 		
 		
+
+
 	
+		
+		
+		
 		// Botão Atualiza dados 
 
-		btAtualizaDados = new JButton("Atualizar Dados");
-		btAtualizaDados.setBounds(469, 43, 268, 50);
-		btAtualizaDados.setForeground(Color.DARK_GRAY);
-		btAtualizaDados.setToolTipText("Atualize os seus dados aqui.");	
-		btAtualizaDados.setFocusPainted(false);
-		btAtualizaDados.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-		getContentPane().add(btAtualizaDados);
-
-		// Botão ver todos os pacotes
-
-		btVerPacotes = new JButton("Ver Todos os Pacotes");
-		btVerPacotes.setBounds(78, 412, 260, 50);
-		btVerPacotes.setToolTipText("Ver todos os Pacotes disponíveis.");
-		btVerPacotes.setForeground(Color.DARK_GRAY);
-		btVerPacotes.setFocusPainted(false);
-		btVerPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-		getContentPane().add(btVerPacotes);
-
+//		btAtualizaDados = new JButton("Atualizar Dados");
+//		btAtualizaDados.setBounds(468, 27, 268, 50);
+//		btAtualizaDados.setForeground(Color.DARK_GRAY);
+//		btAtualizaDados.setToolTipText("Atualize os seus dados aqui.");	
+//		btAtualizaDados.setFocusPainted(false);
+//		btAtualizaDados.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+//		getContentPane().add(btAtualizaDados);
+		
+		
+		
+		
+		/* RUDAPÉ */
 		//Botão voltar
 		
 		btVoltar = new JButton("Terminar Sessão");
@@ -137,70 +223,17 @@ public class AreaCliente extends JFrame {
 		lblFooter.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/Altran1.1.png")));
 		getContentPane().add(lblFooter);
 		
-		JLabel lblPacote = new JLabel("Seu pacote:");
-		lblPacote.setFont(new Font("Dubai", Font.PLAIN, 20));
-		lblPacote.setBounds(78, 160, 133, 44);
-		panel.add(lblPacote);
 		
-		JLabel lblAsSuasPromoes = new JLabel("As suas promoções:");
-		lblAsSuasPromoes.setFont(new Font("Dubai", Font.PLAIN, 20));
-		lblAsSuasPromoes.setBounds(477, 160, 202, 44);
-		panel.add(lblAsSuasPromoes);
 		
-		textField = new JTextField();
-		textField.setBounds(78, 198, 260, 33);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JButton btnVerTodasAs = new JButton("Ver Todas as Promoções");
-		btnVerTodasAs.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnVerTodasAs.setToolTipText("Ver todos os Pacotes disponíveis.");
-		btnVerTodasAs.setForeground(Color.DARK_GRAY);
-		btnVerTodasAs.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-		btnVerTodasAs.setFocusPainted(false);
-		btnVerTodasAs.setBounds(477, 412, 260, 50);
-		panel.add(btnVerTodasAs);
-		
-		JTextArea textArea_1_1 = new JTextArea();
-		textArea_1_1.setForeground(Color.WHITE);
-		textArea_1_1.setBackground(SystemColor.menu);
-		textArea_1_1.setBounds(477, 249, 260, 136);
-		panel.add(textArea_1_1);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(477, 198, 260, 33);
-		panel.add(textField_1);
-		
-		JLabel icon = new JLabel("");
-		icon.setBounds(0, 89, 1394, 586);
-		icon.setBackground(new Color(240, 240, 240));
-		icon.setIcon(new ImageIcon(AreaCliente.class.getResource("/guiComponentes/img/AltranClientes.png")));
-		getContentPane().add(icon);
+//		JLabel icon = new JLabel("");
+//		icon.setBounds(0, 89, 1394, 586);
+//		icon.setBackground(new Color(240, 240, 240));
+//		icon.setIcon(new ImageIcon(AreaCliente.class.getResource("/guiComponentes/img/AltranClientes.png")));
+//		getContentPane().add(icon);
 		
 
 		//TODO criar os action listener Atualizar dados/ Ver Pacotes / Ver Promoções
 		
-		btAtualizaDados.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Criar uma dialog para aparecerem os dados do cliente ver exemplo no gertor cliente GUI
-				
-			}
-		});
-		
-		btVerPacotes.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
 		
 		btVoltar.addActionListener(new ActionListener() {
 			
