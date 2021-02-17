@@ -23,7 +23,7 @@ import guiComponentes.admin_gestorCliente.GUI_gestor_cliente;
 import guiComponentes.admin_gestorOperador.GUI_gestor_operador;
 import guiComponentes.admin_gestorPacoteComercial.GUI_gestor_pacotes;
 import guiComponentes.admin_gestorPromocao.GUI_gestor_promocao;
-import guiComponentes.operador_gerirClientes.Operador_areaPessoal;
+import guiComponentes.operador_gerirClientes.Operador_gerirClientes;
 import servico.GestorDeDAO;
 import standard_value_object.Funcionario;
 
@@ -41,7 +41,7 @@ public class GUI_total extends JFrame {
 	private GUI_gestor_pacotes gestor_pacotes;
 	private	GUI_gestor_promocao gestor_promocao;
 	private Operador_homepage operador_homepage;
-	private Operador_areaPessoal operador_areaPessoal;
+	private Operador_gerirClientes operador_gerirClientes;
 	private Duration temporizador;
 	private String dataEHoraDeLog;
 	private SimpleDateFormat dateFormat ;
@@ -91,7 +91,7 @@ public class GUI_total extends JFrame {
 		gestor_pacotes = new GUI_gestor_pacotes();
 		gestor_promocao = new GUI_gestor_promocao();
 		operador_homepage = new Operador_homepage(this);
-		operador_areaPessoal = new Operador_areaPessoal();
+		operador_gerirClientes = new Operador_gerirClientes();
 
 		// ligação - login 
 		
@@ -188,11 +188,11 @@ public class GUI_total extends JFrame {
 		
 		// ligação Operador Area Pessoal
 		
-		operador_areaPessoalPanel = operador_areaPessoal.returnPanel();
+		operador_areaPessoalPanel = operador_gerirClientes.returnPanel();
 		operador_areaPessoalPanel.setVisible(false);
 		operador_areaPessoalPanel.setBounds(0, 0, 1400, 800);
 		pane.add(operador_areaPessoalPanel);
-		operador_areaPessoal.btVoltarOperador().addActionListener(new ActionListener() {
+		operador_gerirClientes.btVoltarOperador().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
