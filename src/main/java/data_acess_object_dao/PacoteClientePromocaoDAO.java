@@ -20,7 +20,7 @@ import standard_value_object.Promocao;
 public class PacoteClientePromocaoDAO {
 
 	private Connection myConn;
-
+int test;
 	/*
 	 * Construtor que recebe um objeto do tipo java.sql.Connection, a ser fornecido pela classe servico.GestorDeDAO
 	 */
