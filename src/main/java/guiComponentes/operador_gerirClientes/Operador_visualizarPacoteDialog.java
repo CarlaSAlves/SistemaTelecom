@@ -7,46 +7,49 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import standard_value_object.PacoteComercial;
-import standard_value_object.Promocao;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class Operador_atribuirPromoDialog extends JDialog {
+public class Operador_visualizarPacoteDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private JTextField textField;
+
 
 	/**
 	 * Create the dialog.
-	 * @param string 
 	 * @param operador_gerirClientes 
+	 * @param string 
 	 */
-	public Operador_atribuirPromoDialog(Operador_gerirClientes operador_gerirClientes) {
+	public Operador_visualizarPacoteDialog(Operador_gerirClientes operador_gerirClientes) {
 		setBounds(500, 300, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
-		setTitle("Atribuir Promoção");
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setTitle("Atribuir Pacote Comercial");
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
-		JComboBox<Promocao> comboBox = new JComboBox<Promocao>();
-		comboBox.setBounds(63, 52, 296, 22);
-		contentPanel.add(comboBox);
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(63, 85, 296, 107);
 		contentPanel.add(textArea);
 		
-		JLabel labelPromo = new JLabel("Promoções");
-		labelPromo.setForeground(Color.BLACK);
-		labelPromo.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		labelPromo.setBounds(17, 16, 130, 16);
+		JLabel labelPacote = new JLabel("Pacote Comercial");
+		labelPacote.setForeground(Color.BLACK);
+		labelPacote.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		labelPacote.setBounds(17, 16, 130, 16);
 		
-		contentPanel.add(labelPromo);
+		contentPanel.add(labelPacote);
+		
+		textField = new JTextField();
+		textField.setBounds(63, 52, 298, 20);
+		contentPanel.add(textField);
+		textField.setColumns(10);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(Color.WHITE);

@@ -34,17 +34,17 @@ public class Operador_atribuirPacoteDialog extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JComboBox<PacoteComercial> comboBox = new JComboBox<PacoteComercial>();
-		comboBox.setBounds(44, 49, 296, 22);
+		comboBox.setBounds(63, 52, 296, 22);
 		contentPanel.add(comboBox);
 		
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(44, 82, 296, 107);
+		textArea.setBounds(63, 85, 296, 107);
 		contentPanel.add(textArea);
 		
 		JLabel labelPacote = new JLabel("Pacote Comercial");
 		labelPacote.setForeground(Color.BLACK);
 		labelPacote.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		labelPacote.setBounds(10, 11, 130, 16);
+		labelPacote.setBounds(17, 16, 130, 16);
 		
 		contentPanel.add(labelPacote);
 		{
