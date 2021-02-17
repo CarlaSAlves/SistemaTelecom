@@ -45,6 +45,7 @@ public class AreaCliente extends JFrame {
 	private JButton btTerminarSessao;
 	
 	private AreaCliente_MeusDados areaClienteDados = new AreaCliente_MeusDados();
+	private AreaCliente_MeusProdutos areaClienteProdutos = new AreaCliente_MeusProdutos();
 
 
 	/**
@@ -115,8 +116,9 @@ public class AreaCliente extends JFrame {
 		panel.add(tabbedPane);
 		
 		
-		
-		// Classe AreaCliente_MeusDados -  Separador os meus dados
+		/****************************/
+		//Ligação a Classe AreaCliente_MeusDados -  Separador os meus dados
+		/***************************/
 
 		JPanel panelMeusDados = areaClienteDados.returnAreaClienteMeusDados();	
 		tabbedPane.addTab("Meus Dados",null,  panelMeusDados);
@@ -126,57 +128,15 @@ public class AreaCliente extends JFrame {
 
 
 		/****************************/
-		// OS meus produtos
+		// Ligação a Classe AreaCliente_MeusProdutos-  Separador MeusProdutos
 		/****************************/
 
-		JPanel panelMeusProdutos = new JPanel();
+		JPanel panelMeusProdutos = areaClienteProdutos.returnAreaClienteMeusProdutos();
 		tabbedPane.addTab("Os Meus produtos",null,  panelMeusProdutos);
 		panelMeusProdutos.setLayout(null);
-
-		JComboBox comboBoxPromocoes = new JComboBox();
-		comboBoxPromocoes.setBounds(472, 157, 234, 41);
-		panelMeusProdutos.add(comboBoxPromocoes);
-
-		JLabel lblAsSuasPromoes = new JLabel("As suas Promoções");
-		lblAsSuasPromoes.setFont(new Font("Dubai Light", Font.PLAIN, 20));
-		lblAsSuasPromoes.setBounds(472, 109, 219, 36); 
-		panelMeusProdutos.add(lblAsSuasPromoes);
-
-		JTextArea textAreaDescricaoPromocoes = new JTextArea();
-		textAreaDescricaoPromocoes.setBounds(472, 218, 234, 92);
-		panelMeusProdutos.add(textAreaDescricaoPromocoes);
-
-		JTextArea textAreaDescricaoPacote = new JTextArea();
-		textAreaDescricaoPacote.setBounds(157, 218, 234, 92);
-		panelMeusProdutos.add(textAreaDescricaoPacote);
-
-		JTextArea textAreaNomePacote = new JTextArea();
-		textAreaNomePacote.setBounds(157, 161, 234, 41);
-		panelMeusProdutos.add(textAreaNomePacote);
-
-		JLabel lblDescricaoPacote = new JLabel("Descrição:");
-		lblDescricaoPacote.setBounds(55, 214, 95, 36);
-		lblDescricaoPacote.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		panelMeusProdutos.add(lblDescricaoPacote);
-
-		JLabel lblNomePacote = new JLabel("Nome:");
-		lblNomePacote.setBounds(55, 157, 69, 36);
-		lblNomePacote.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		panelMeusProdutos.add(lblNomePacote);
-
-		JLabel lblSeuPacote = new JLabel("O seu Pacote Comercial:");
-		lblSeuPacote.setBounds(55, 109, 219, 36);
-		lblSeuPacote.setFont(new Font("Dubai Light", Font.PLAIN, 20));
-		panelMeusProdutos.add(lblSeuPacote);
-
-		//Imagem de fundo - Provisoria
-		JLabel imagemProdutos = new JLabel("");
-		imagemProdutos.setBounds(6, -41, 1394, 598);
-		panelMeusProdutos.add(imagemProdutos);
-		imagemProdutos.setBackground(new Color(240, 240, 240));
-		imagemProdutos.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
-
-
+		panelMeusProdutos.setForeground(Color.BLUE);
+		panelMeusProdutos.setFont(new Font("Dubai", Font.PLAIN, 12 ));
+		
 
 		/****************************/
 		// Separador Pacotes
