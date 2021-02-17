@@ -131,8 +131,50 @@
 </sessao>
 
 <sessao>
+<<<<<<< Updated upstream
 <username:	admin>
 <data e hora do login:	17-02-2021 12:56:20>
 <duração da sessão:	0:45>
+=======
+<username:	asd>
+<data e hora do login:	17-02-2021 16:20:40>
+<duração da sessão:	0:28>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	17-02-2021 16:21:12>
+<duração da sessão:	0:37>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	17-02-2021 16:24:32>
+<duração da sessão:	0:11>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	17-02-2021 16:24:47>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	17-02-2021 16:31:45>
+<duração da sessão:	0:22>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	17-02-2021 16:32:12>
+<duração da sessão:	0:19>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	17-02-2021 17:42:53>
+<duração da sessão:	5:54>
+>>>>>>> Stashed changes
 </sessao>
 
