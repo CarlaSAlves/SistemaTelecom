@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,7 +28,7 @@ public class AreaCliente extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);	
-	private JButton btVoltar, btAtualizaDados;
+	private JButton btAtualizarDados, btAtualizaDados;
 	private JPanel panel;
 	private JLabel lblUsernameLogged,lblTempoSessao,lblHoraSistema;
 	private JPanel pane;
@@ -38,7 +39,14 @@ public class AreaCliente extends JFrame {
 	private JTextField textFieldNome;
 	private JTextField textFieldNIF;
 	private JTextField textFieldLogin;
-	private JTextField textFieldPassword;
+	private JTextField textFieldMorada;
+	private JPanel panelProdutos; 
+	
+	private JTextArea textArea_2;
+	private JLabel lblNewLabel_8;
+	
+	private JLabel lblNewLabel_6_2;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -84,10 +92,26 @@ public class AreaCliente extends JFrame {
 		setBounds(100, 30, 1400, 800);
 		getContentPane().setLayout(null);
 		
+		// Label portal cliente
+
+				JLabel lblPortalCliente = new JLabel("Portal Do Cliente");
+				lblPortalCliente.setBounds(51, 16, 508, 33);
+				lblPortalCliente.setForeground(new Color(70,74,101));
+				lblPortalCliente.setFont(new Font("Dubai", Font.BOLD, 40));
+				getContentPane().add(lblPortalCliente);
+				
+				JLabel lblBemVindo = new JLabel("Bem Vindo");
+				lblBemVindo.setForeground(new Color(70,74,101));
+				lblBemVindo.setFont(new Font("Dubai Light", Font.BOLD, 17));
+				lblBemVindo.setBounds(51, 49, 104, 33);
+				panel.add(lblBemVindo);
+				
+		
 		// Construção JTabbedPane
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(192, 168, 1008, 456);
+		tabbedPane.setFont(new Font("Dubai Light", Font.PLAIN, 16));
+		tabbedPane.setBounds(0, 89, 1384, 586);
 		panel.add(tabbedPane);
 		
 		// Separador os meus dados
@@ -100,7 +124,7 @@ public class AreaCliente extends JFrame {
 		
 		
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setFont(new Font("Dubai", Font.PLAIN, 18));
+		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		lblNome.setBounds(51, 77, 69, 36);
 		panelMeusDados.add(lblNome);
 		
@@ -110,7 +134,7 @@ public class AreaCliente extends JFrame {
 		textFieldNome.setColumns(10);
 		
 		JLabel lblNIF = new JLabel("NIF:");
-		lblNIF.setFont(new Font("Dubai", Font.PLAIN, 18));
+		lblNIF.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		lblNIF.setBounds(51, 138, 69, 36);
 		panelMeusDados.add(lblNIF);
 		
@@ -120,7 +144,7 @@ public class AreaCliente extends JFrame {
 		panelMeusDados.add(textFieldNIF);
 		
 		JLabel lblLogin = new JLabel("Login");
-		lblLogin.setFont(new Font("Dubai", Font.PLAIN, 18));
+		lblLogin.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		lblLogin.setBounds(51, 205, 69, 36);
 		panelMeusDados.add(lblLogin);
 		
@@ -129,31 +153,69 @@ public class AreaCliente extends JFrame {
 		textFieldLogin.setBounds(145, 205, 246, 29);
 		panelMeusDados.add(textFieldLogin);
 		
-		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setFont(new Font("Dubai", Font.PLAIN, 18));
-		lblPassword.setBounds(51, 279, 81, 36);
-		panelMeusDados.add(lblPassword);
+		JLabel lblMorada = new JLabel("Morada");
+		lblMorada.setFont(new Font("Dubai Light", Font.PLAIN, 18));
+		lblMorada.setBounds(51, 268, 81, 36);
+		panelMeusDados.add(lblMorada);
 		
-		textFieldPassword = new JTextField();
-		textFieldPassword.setColumns(10);
-		textFieldPassword.setBounds(145, 279, 246, 29);
-		panelMeusDados.add(textFieldPassword);
+		textFieldMorada = new JTextField();
+		textFieldMorada.setColumns(10);
+		textFieldMorada.setBounds(145, 272, 246, 29);
+		panelMeusDados.add(textFieldMorada);
 		
-
-
+		btAtualizarDados = new JButton("Atualizar dados");
+		btAtualizarDados.setBounds(175, 362, 180, 50);
+		panelMeusDados.add(btAtualizarDados);
+		btAtualizarDados.setForeground(Color.DARK_GRAY);
+		btAtualizarDados.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btAtualizarDados.setFocusPainted(false);
 		
+		//Imagem lateral - Provisoria
 		
-			
+		JLabel imagem = new JLabel("");
+		imagem.setBounds(6, -41, 1394, 598);
+		panelMeusDados.add(imagem);
+		imagem.setBackground(new Color(240, 240, 240));
+		imagem.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
+		
+		// OS meus produtos
+		
 		JPanel panelMeusProdutos = new JPanel();
 		tabbedPane.addTab("Os Meus produtos",null,  panelMeusProdutos);
 		panelMeusProdutos.setLayout(null);
 		
-		// Separador Produtos
+			
+		JLabel lblDescricaoProdutos = new JLabel("Descrição:");
+		lblDescricaoProdutos.setBounds(54, 252, 95, 36);
+		lblDescricaoProdutos.setFont(new Font("Dubai", Font.PLAIN, 18));
+		panelMeusProdutos.add(lblDescricaoProdutos);
+		
+		JLabel lblNomeProdutos_1 = new JLabel("Nome:");
+		lblNomeProdutos_1.setBounds(54, 101, 69, 36);
+		lblNomeProdutos_1.setFont(new Font("Dubai", Font.PLAIN, 18));
+		panelMeusProdutos.add(lblNomeProdutos_1);
+		
+		JLabel lblNomeProdutos_1_1 = new JLabel("O seu Pacote Comercial:");
+		lblNomeProdutos_1_1.setBounds(185, 31, 219, 36);
+		lblNomeProdutos_1_1.setFont(new Font("Dubai", Font.PLAIN, 18));
+		panelMeusProdutos.add(lblNomeProdutos_1_1);
+		
+		textField = new JTextField();
+		textField.setBounds(332, 117, 122, 28);
+		panelMeusProdutos.add(textField);
+		textField.setColumns(10);
+		
+		
+		
+		// Separador Promoções
 		
 		JPanel panelPromoções = new JPanel();
 		tabbedPane.addTab("As suas promocoes",null,  panelPromoções);
 		panelPromoções.setLayout(null);
 		
+
+		
+			
 		// Separador Pacotes
 		
 		JPanel panelVerPacotes = new JPanel();
@@ -167,29 +229,7 @@ public class AreaCliente extends JFrame {
 		panelVerPromocoes.setLayout(null);
 		
 		
-		
-		
-		
-		// Label portal cliente
-
-		JLabel lblPortalCliente = new JLabel("Portal Do Cliente");
-		lblPortalCliente.setBounds(53, 45, 508, 33);
-		lblPortalCliente.setForeground(new Color(70,74,101));
-		lblPortalCliente.setFont(new Font("Dubai", Font.BOLD, 40));
-		getContentPane().add(lblPortalCliente);
-		
-		JLabel lblBemVindo = new JLabel("Bem Vindo");
-		lblBemVindo.setForeground(new Color(70,74,101));
-		lblBemVindo.setFont(new Font("Dubai Light", Font.BOLD, 17));
-		lblBemVindo.setBounds(94, 89, 208, 60);
-		panel.add(lblBemVindo);
-		
-		
-
-
 	
-		
-		
 		
 		// Botão Atualiza dados 
 
@@ -207,12 +247,12 @@ public class AreaCliente extends JFrame {
 		/* RUDAPÉ */
 		//Botão voltar
 		
-		btVoltar = new JButton("Terminar Sessão");
-		btVoltar.setForeground(Color.DARK_GRAY);
-		btVoltar.setBounds(16, 687, 180, 50);
-		btVoltar.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-		btVoltar.setFocusPainted(false);
-		getContentPane().add(btVoltar);
+		btAtualizarDados = new JButton("Terminar Sessão");
+		btAtualizarDados.setForeground(Color.DARK_GRAY);
+		btAtualizarDados.setBounds(16, 687, 180, 50);
+		btAtualizarDados.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btAtualizarDados.setFocusPainted(false);
+		getContentPane().add(btAtualizarDados);
 		
 		
 		// Logotipo no rodapé
@@ -235,7 +275,7 @@ public class AreaCliente extends JFrame {
 		//TODO criar os action listener Atualizar dados/ Ver Pacotes / Ver Promoções
 		
 		
-		btVoltar.addActionListener(new ActionListener() {
+		btAtualizarDados.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
