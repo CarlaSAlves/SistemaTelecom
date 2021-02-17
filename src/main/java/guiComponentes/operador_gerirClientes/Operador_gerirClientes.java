@@ -43,7 +43,7 @@ public class Operador_gerirClientes extends JFrame {
 	private JLabel lblCampoPesquisas, labelID, labelNIF, labelNome, lblTempoSessao, lblUsernameLogged, lblHoraSistema, lblResultados;
 	private JTextField textPesquisaID, textFieldNome, textPesquisaNIF;
 	private JCheckBox checkBoxAtivo;
-	private JButton botaoPesquisa, btAtribuirPacote, btAtribuirPromocao, visualizarPromocao, btHistorico, btVoltarOperador;
+	private JButton botaoPesquisa, btAtribuirPacote, btAtribuirPromocao, btVisualizarPromocao, btHistorico, btVoltarOperador;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JTable table;
 	
@@ -124,9 +124,33 @@ public class Operador_gerirClientes extends JFrame {
 				}
 			});
 
-		visualizarPromocao = new JButton("Visualizar Promoções");
-		visualizarPromocao.setBounds(947, 179, 157, 40);
-		pane.add(visualizarPromocao);
+		btVisualizarPromocao = new JButton("Visualizar Promoções");
+		btVisualizarPromocao.setBounds(947, 179, 157, 40);
+		pane.add(btVisualizarPromocao);
+		btVisualizarPromocao.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Operador_visualizarPacoteDialog dialog = new Operador_visualizarPacoteDialog(Operador_gerirClientes.this);
+				dialog.setVisible(true);
+				dialog.setResizable(false);
+				
+			}
+		});
+		
+		JButton btnVisualizarPacote = new JButton("Visualizar Pacote Comercial");
+		btnVisualizarPacote.setBounds(1135, 179, 187, 40);
+		pane.add(btnVisualizarPacote);
+		btnVisualizarPacote.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Operador_visualizarPromocaoDialog dialog = new Operador_visualizarPromocaoDialog(Operador_gerirClientes.this);
+				dialog.setVisible(true);
+				dialog.setResizable(false);
+				
+			}
+		});
 
 		btHistorico = new JButton("Histórico");
 		btHistorico.setBounds(764, 232, 154, 40);
@@ -187,9 +211,7 @@ public class Operador_gerirClientes extends JFrame {
 		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 		pane.add(lblHoraSistema);
 		
-		JButton btnVisualizarPacote = new JButton("Visualizar Pacote Comercial");
-		btnVisualizarPacote.setBounds(1135, 179, 187, 40);
-		pane.add(btnVisualizarPacote);
+	
 
 	}
 
@@ -213,20 +235,20 @@ public class Operador_gerirClientes extends JFrame {
 				if (table.getSelectedRowCount()>1) {
 					btAtribuirPacote.setEnabled(false);
 					btAtribuirPromocao.setEnabled(false);
-					visualizarPromocao.setEnabled(false);
+					btVisualizarPromocao.setEnabled(false);
 					btHistorico.setEnabled(false);
 				}
 				else if (table.getSelectedRows().length==1) {
 					btAtribuirPacote.setEnabled(true);
 					btAtribuirPromocao.setEnabled(true);
-					visualizarPromocao.setEnabled(true);
+					btVisualizarPromocao.setEnabled(true);
 					btHistorico.setEnabled(true);
 				}
 				else if (table.getSelectedRowCount()==0)
 				{
 					btAtribuirPacote.setEnabled(false);
 					btAtribuirPromocao.setEnabled(false);
-					visualizarPromocao.setEnabled(false);
+					btVisualizarPromocao.setEnabled(false);
 					btHistorico.setEnabled(false);
 				}
 				
