@@ -1,6 +1,5 @@
 package guiComponentes;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -16,8 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.EmptyBorder;
 
+@SuppressWarnings("serial")
 public class Operador_homepage extends JFrame {
 
 	private JPanel pane;
@@ -48,7 +47,6 @@ public class Operador_homepage extends JFrame {
 	 * Create the frame.
 	 */
 	public Operador_homepage(GUI_total guit) {
-
 		inicialize(guit);
 
 	}
@@ -113,13 +111,21 @@ public class Operador_homepage extends JFrame {
 			}
 		});
 
-		JButton btnVisualizarPromoes = new JButton("Visualizar Promoções");
-		btnVisualizarPromoes.setToolTipText("Gestão de Pacotes Comerciais e Promoções");
-		btnVisualizarPromoes.setForeground(Color.DARK_GRAY);
-		btnVisualizarPromoes.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-		btnVisualizarPromoes.setFocusPainted(false);
-		btnVisualizarPromoes.setBounds(161, 465, 286, 60);
-		pane.add(btnVisualizarPromoes);
+		JButton btnVisualizarPromocoes = new JButton("Visualizar Promoções");
+		btnVisualizarPromocoes.setToolTipText("Gestão de Pacotes Comerciais e Promoções");
+		btnVisualizarPromocoes.setForeground(Color.DARK_GRAY);
+		btnVisualizarPromocoes.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btnVisualizarPromocoes.setFocusPainted(false);
+		btnVisualizarPromocoes.setBounds(161, 465, 286, 60);
+		pane.add(btnVisualizarPromocoes);
+		btnVisualizarPromocoes.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					guit.operador_visualizarPromo();
+				
+			}
+		});
 
 
 		// Footer 
