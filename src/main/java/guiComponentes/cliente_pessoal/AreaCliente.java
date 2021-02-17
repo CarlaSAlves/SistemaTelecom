@@ -203,9 +203,9 @@ public class AreaCliente extends JFrame {
 		textAreaDescricaoPacote.setBounds(157, 218, 234, 92);
 		panelMeusProdutos.add(textAreaDescricaoPacote);
 
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(157, 161, 234, 41);
-		panelMeusProdutos.add(textArea);
+		JTextArea textAreaNomePacote = new JTextArea();
+		textAreaNomePacote.setBounds(157, 161, 234, 41);
+		panelMeusProdutos.add(textAreaNomePacote);
 
 		JLabel lblDescricaoPacote = new JLabel("Descrição:");
 		lblDescricaoPacote.setBounds(55, 214, 95, 36);
@@ -232,24 +232,6 @@ public class AreaCliente extends JFrame {
 
 
 		/****************************/
-		// Separador promoções
-		/****************************/
-
-
-		JPanel panelPromocoes = new JPanel();
-		tabbedPane.addTab("As suas Promoções",null,  panelPromocoes);
-		panelPromocoes.setLayout(null);
-
-		//Imagem de fundo - Provisoria
-		JLabel imagemPromocoes = new JLabel("");
-		imagemPromocoes.setBounds(6, -41, 1394, 598);
-		panelPromocoes.add(imagemPromocoes);
-		imagemPromocoes.setBackground(new Color(240, 240, 240));
-		imagemPromocoes.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
-
-
-
-		/****************************/
 		// Separador Pacotes
 		/****************************/
 
@@ -257,6 +239,18 @@ public class AreaCliente extends JFrame {
 		JPanel panelVerPacotes = new JPanel();
 		tabbedPane.addTab("Ver todos os pacotes comercial",null,  panelVerPacotes);
 		panelVerPacotes.setLayout(null);
+		
+		JTextArea textAreaVerDescricaoPacote = new JTextArea();
+		textAreaVerDescricaoPacote.setBounds(488, 209, 234, 92);
+		panelVerPacotes.add(textAreaVerDescricaoPacote);
+		
+		JTextArea textAreaNomeVerPacote = new JTextArea();
+		textAreaNomeVerPacote.setBounds(488, 132, 234, 41);
+		panelVerPacotes.add(textAreaNomeVerPacote);
+		
+		JTextArea textAreaVerPacotes = new JTextArea();
+		textAreaVerPacotes.setBounds(77, 132, 301, 351);
+		panelVerPacotes.add(textAreaVerPacotes);
 
 		//Imagem de fundo - Provisoria
 		JLabel imagemVerPacotes = new JLabel("");
@@ -264,6 +258,10 @@ public class AreaCliente extends JFrame {
 		panelVerPacotes.add(imagemVerPacotes);
 		imagemVerPacotes.setBackground(new Color(240, 240, 240));
 		imagemVerPacotes.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(0, 0, 55, 16);
+		panelVerPacotes.add(lblNewLabel);
 
 
 
