@@ -15,14 +15,24 @@ import java.util.StringJoiner;
 import standard_value_object.PacoteCliente;
 import standard_value_object.Promocao;
 
+/*
+ * Classe que vai estabelecer a ligaçao com a base de dados e interagir principalmente com a tabela "promocao"
+ */
 public class PromocaoDAO {
 
 	private Connection myConn;
 
+	/*
+	 * Construtor que recebe um objeto do tipo java.sql.Connection, a ser fornecido pela classe servico.GestorDeDAO
+	 */
 	public PromocaoDAO(Connection connection) throws FileNotFoundException, IOException, SQLException {
 		this.myConn = connection;
 	}
 	
+	/*
+	 * Método que devolve uma lista com todos os pacotes existentes na tabela "promocao". 
+	 * Caso não existam promoçoes, é devolvida uma lista vazia.
+	 */
 	public List<Promocao> getAllPromocoes() throws Exception {
 		List<Promocao> listaPromocoes = new ArrayList<>();
 		Statement myStmt = null;
@@ -32,6 +42,7 @@ public class PromocaoDAO {
 			myStmt = myConn.createStatement();
 			myRs = myStmt.executeQuery("select * from promocao");
 			
+			//faz parse ao resultado enviado pela base de dados e converte cada entrada num objeto funcionario
 			while (myRs.next()) {
 				Promocao promocao = converteRowParaPromocoes(myRs);
 				listaPromocoes.add(promocao);
@@ -45,6 +56,13 @@ public class PromocaoDAO {
 		return listaPromocoes;
 	}
 
+	/*
+	 * Método que devolve uma lista de todos as promoçoes que respeitem os seguintes critérios:
+	 * - possuam o id passado como parametro e/ou
+	 * - possuam um nome que contenha o substring nome enviado no parametro da funçao e/ou
+	 * - possuam o campo ativo igual ao parametro ativo enviado para a função.
+	 * Caso não existam promoçoes que satisfaçam os critérios inseridos nos parâmetros da função, devolve uma lista vazia.
+	 */
 	public List<Promocao> pesquisaPromocao(int id, String nome, int ativo) throws Exception {
 		List<Promocao> list = new ArrayList<>();
 
@@ -53,6 +71,7 @@ public class PromocaoDAO {
 		StringJoiner sj = new StringJoiner (" AND ");
 		String query = "SELECT * FROM PROMOCAO WHERE ";
 		
+		// analisar os parametros enviados para a funçao e construir uma query com base na sua existencia (ou nao)
 		try {
 			@SuppressWarnings("rawtypes")
 			List<Comparable> values = new ArrayList<Comparable>();
@@ -82,6 +101,7 @@ public class PromocaoDAO {
 
 			myRs = myStmt.executeQuery();
 
+			//converter o resultado devolvido pela base de dados em objetos java
 			while (myRs.next()) {
 				Promocao promocao = converteRowParaPromocoes(myRs);
 				list.add(promocao);
@@ -96,6 +116,10 @@ public class PromocaoDAO {
 		return list;
 	}
 	
+	/*
+	 * Pesquisa e devolve a promocao com o id enviado como parametro.
+	 * Devolve um objeto nulo se nenhum for encontrado.
+	 */
 	public Promocao pesquisarPromocaoById(int id) throws Exception {
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
@@ -106,6 +130,7 @@ public class PromocaoDAO {
 			myStmt.setInt(1, id);
 			myRs = myStmt.executeQuery();
 
+			//converter o resultado devolvido pela base de dados num objeto java
 			if (myRs.next()) {
 				promocao = new Promocao();
 				promocao.setId(myRs.getInt(1));
@@ -130,6 +155,10 @@ public class PromocaoDAO {
 		return promocao;
 	}
 	
+	/*
+	 * Devolve uma lista com todas as promoçoes que contenham o string passado como atributo no seu nome.
+	 * Devolve uma lista vazia caso nao existam promoçoes contendo esse substring.
+	 */
 	public List<Promocao> pesquisarPromocaoNome(String nome) throws Exception {
 		List<Promocao> list = new ArrayList<>();
 		PreparedStatement myStmt = null;
@@ -141,6 +170,7 @@ public class PromocaoDAO {
 			myStmt.setString(1, nome);
 			myRs = myStmt.executeQuery();
 
+			//converter os resultados devolvidos pela base de dados num objeto java
 			while (myRs.next()) {
 				Promocao promocao = converteRowParaPromocoes(myRs);
 				list.add(promocao);
@@ -155,6 +185,10 @@ public class PromocaoDAO {
 		return list;
 	}
 	
+	/*
+	 * Devolve uma lista contendo todas as promoçoes pertencentes ao objeto PacoteCliente enviado.
+	 * Caso esse pacote nao tenha promoçoes, devolve uma lista vazia.
+	 */
 	public List<Promocao> pesquisarPromocoesPacoteCliente(PacoteCliente pacote) throws Exception {
 		List<Promocao> list = null;
 		PreparedStatement myStmt = null;
@@ -168,6 +202,7 @@ public class PromocaoDAO {
 			
 			list = new ArrayList<Promocao>();
 			
+			//converter os resultados devolvidos pela base de dados num objeto java
 			while (myRs.next()) {
 				Promocao promocao = converteRowParaPromocoes(myRs);
 				list.add(promocao);
@@ -182,6 +217,11 @@ public class PromocaoDAO {
 		return list;
 	}
 
+	/*
+	 * Metodo para persistir o objeto promoçao recebido na base de dados. Se a promocao a ser criada estiver ativa,
+	 * coloca a data atual no campo data_inicio. De outro modo, deixa esse campo a nulo.
+	 * Caso a criaçao de uma nova entidade falhe, ira propagar uma exceçao.
+	 */
 	public void criarPromocao(Promocao promocao) throws Exception {
 		PreparedStatement myStmt = null;
 
@@ -204,7 +244,10 @@ public class PromocaoDAO {
 		}
 	}
 
-	// Este metodo serve apenas para editar nome e descri�ao. Para Ativar/Desativar, usar os metodos correspondentes
+	/*
+	 * Metodo para alterar o nome e/ou a descriçao de uma promoçao ja existente. Recebe um objeto promoçao e de seguida
+	 * atualiza o nome e/ou a descriçao dessa entidade na base de dados com esse id. 
+	 */
 	public void editarPromocao(Promocao promocao) throws Exception {
 		PreparedStatement myStmt = null;
 		try {
@@ -227,6 +270,7 @@ public class PromocaoDAO {
 		PreparedStatement myState = null; 
 
 		try {
+			//verificar se a promoçao esta de facto ativada
 			myState = myConn.prepareStatement("Select ativa From promocao Where id =" + id + ";");
 			ResultSet rs = myState.executeQuery();
 			
@@ -235,12 +279,14 @@ public class PromocaoDAO {
 				estaAtiva = rs.getBoolean(1);
 			}
 			
+			//se esta desativado, vamos desativar e colocar as datas corretas
 			if(estaAtiva) {
 				myState = myConn.prepareStatement("UPDATE promocao SET ativa = 0,"
 						+ "data_fim = current_timestamp() WHERE id=?");
 				myState.setInt(1, id);
 				myState.executeUpdate();
 			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -255,6 +301,7 @@ public class PromocaoDAO {
 		PreparedStatement myState = null; 
 
 		try {
+			//verificar se o pacote comercial esta de facto sativada
 			myState = myConn.prepareStatement("Select ativa From promocao Where id =" + id + ";");
 			ResultSet rs = myState.executeQuery();
 			
@@ -263,12 +310,14 @@ public class PromocaoDAO {
 				estaAtiva = rs.getBoolean(1);
 			}
 			
+			//se esta desativado, vamos ativar e colocar as datas corretas
 			if(!estaAtiva) {
 				myState = myConn.prepareStatement("UPDATE promocao SET ativa = 1,"
 						+ "data_inicio = current_timestamp(), data_fim = NULL WHERE id=?");
 				myState.setInt(1, id);
 				myState.executeUpdate();
 			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -276,6 +325,9 @@ public class PromocaoDAO {
 		}
 	}
 	
+	/*
+	 * Converte cada entrade de um ResultSet num objeto Promoçao
+	 */
 	private Promocao converteRowParaPromocoes(ResultSet myRs) throws SQLException {
 		java.sql.Date data_fim;
 		java.sql.Date data_inicio;

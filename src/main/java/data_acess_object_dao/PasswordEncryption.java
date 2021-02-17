@@ -7,6 +7,10 @@ import java.security.NoSuchAlgorithmException;
 //classe para encriptar passwords usando o algoritmo SHA512
 public class PasswordEncryption {
 	
+	/*
+	 * Recebe um string como parametro e encripta-o usando o algoritmo SHA512.
+	 * Devolve um string com 128 carateres.
+	 */
 	public static String get_SHA_512_SecurePassword(String passwordToHash){
 	   
 		String passwordGerada = null;
