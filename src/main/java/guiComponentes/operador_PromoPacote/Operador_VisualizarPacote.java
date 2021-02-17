@@ -286,22 +286,7 @@ public class Operador_VisualizarPacote extends JFrame {
 			}
 		}
 	}
-	
-	public void refreshPacotesTable() {
 
-		try {
-			List<PacoteComercial> pacotesComerciais =
-					GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
-			PacoteComercialPesquisaModelTable model =
-					new PacoteComercialPesquisaModelTable(pacotesComerciais);
-			table.setModel(model);
-
-		} catch (Exception exc) {
-			JOptionPane.showMessageDialog(this, "Error: " + exc, "Error",
-					JOptionPane.ERROR_MESSAGE);
-		}
-
-	}
 	
 	public JTable getTable() {
 		return table;

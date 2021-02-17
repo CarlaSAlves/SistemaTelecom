@@ -24,6 +24,7 @@ import guiComponentes.admin_gestorOperador.GUI_gestor_operador;
 import guiComponentes.admin_gestorPacoteComercial.GUI_gestor_pacotes;
 import guiComponentes.admin_gestorPromocao.GUI_gestor_promocao;
 import guiComponentes.operador_PromoPacote.Operador_VisualizarPacote;
+import guiComponentes.operador_PromoPacote.Operador_VisualizarPromocoes;
 import guiComponentes.operador_gerirClientes.Operador_gerirClientes;
 import servico.GestorDeDAO;
 import standard_value_object.Funcionario;
@@ -43,13 +44,14 @@ public class GUI_total extends JFrame {
 	private	GUI_gestor_promocao gestor_promocao;
 	private Operador_homepage operador_homepage;
 	private Operador_gerirClientes operador_gerirClientes;
-	private Operador_VisualizarPacote operador_VisualizarPacote;
+	private Operador_VisualizarPacote operador_visualizarPacote;
+	private Operador_VisualizarPromocoes operador_visualizarPromo;
 	private Duration temporizador;
 	private String dataEHoraDeLog;
 	private SimpleDateFormat dateFormat ;
 	private GUI_login login;
 
-	private JPanel loginPanel, homepagePanel, gestor_clientePanel, gestor_operadorPanel, gestor_pacotesPanel, gestor_promocaoPanel, operador_homepagePanel, operador_gerirClientesPanel;
+	private JPanel loginPanel, homepagePanel, gestor_clientePanel, gestor_operadorPanel, gestor_pacotesPanel, gestor_promocaoPanel, operador_homepagePanel, operador_gerirClientesPanel, operador_visualizarPromoPanel;
 	private JPanel operador_visualizarPacotePanel;
 	
 
@@ -96,7 +98,7 @@ public class GUI_total extends JFrame {
 		gestor_promocao = new GUI_gestor_promocao();
 		operador_homepage = new Operador_homepage(this);
 		operador_gerirClientes = new Operador_gerirClientes();
-		operador_VisualizarPacote = new Operador_VisualizarPacote();
+		operador_visualizarPacote = new Operador_VisualizarPacote();
 
 		// ligação - login 
 		
@@ -209,11 +211,11 @@ public class GUI_total extends JFrame {
 		
 		// ligação Operador - Visualizar Pacotes Comerciais
 		
-		operador_visualizarPacotePanel = operador_VisualizarPacote.returnPanel();
+		operador_visualizarPacotePanel = operador_visualizarPacote.returnPanel();
 		operador_visualizarPacotePanel.setVisible(false);
 		operador_visualizarPacotePanel.setBounds(0, 0, 1400, 800);
 		pane.add(operador_visualizarPacotePanel);
-		operador_VisualizarPacote.btVoltarOperadorHomepage().addActionListener(new ActionListener() {
+		operador_visualizarPacote.btVoltarOperadorHomepage().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {

@@ -26,8 +26,10 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import guiComponentes.admin_gestorPacoteComercial.PacoteComercialPesquisaModelTable;
+import guiComponentes.admin_gestorPromocao.PromocaoPesquisaModelTable;
 import servico.GestorDeDAO;
 import standard_value_object.PacoteComercial;
+import standard_value_object.Promocao;
 
 @SuppressWarnings("serial")
 public class Operador_VisualizarPromocoes extends JFrame {
@@ -75,7 +77,7 @@ public class Operador_VisualizarPromocoes extends JFrame {
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setTitle("Pesquisa de Pacotes Comerciais");
+		setTitle("Pesquisa de Promoções");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
 		contentPane.setBackground(Color.WHITE);
@@ -197,19 +199,18 @@ public class Operador_VisualizarPromocoes extends JFrame {
 						nome = textFieldNome.getText().trim();
 					}
 
-					List<PacoteComercial> pacotesComerciais = null;
+					List<Promocao> promocoes = null;
 					
 					if ((id != 0) || (nome != null) || (ativo != 0)) {
-						pacotesComerciais = GestorDeDAO.getGestorDeDAO().pesquisaPacoteComercial(id,
-								nome, ativo);
+						promocoes = GestorDeDAO.getGestorDeDAO().pesquisaPromocao(id, nome, ativo);
+								
 					} else {
-						pacotesComerciais = GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
+						promocoes = GestorDeDAO.getGestorDeDAO().getAllPromocoes();
 					}
 
-					PacoteComercialPesquisaModelTable model =
-							new PacoteComercialPesquisaModelTable(pacotesComerciais);
+					PromocaoPesquisaModelTable model = new PromocaoPesquisaModelTable(promocoes);
+					
 					table.setModel(model);
-
 					numberRows = table.getRowCount();
 					lblResultados.setText("Resultados: " + numberRows);
 
@@ -241,8 +242,8 @@ public class Operador_VisualizarPromocoes extends JFrame {
 					if (table.getSelectedRows().length == 1) {
 					int row = table.getSelectedRow();
 	
-					PacoteComercial pacoteComercial = (PacoteComercial) table.getValueAt(row, PacoteComercialPesquisaModelTable.OBJECT_COL);
-					textAreaDescricao.setText(pacoteComercial.getDescricao());
+					Promocao promocao = (Promocao) table.getValueAt(row, PromocaoPesquisaModelTable.OBJECT_COL);
+					textAreaDescricao.setText(promocao.getDescricao());
 					
 				}
 			}
@@ -287,21 +288,6 @@ public class Operador_VisualizarPromocoes extends JFrame {
 		}
 	}
 	
-	public void refreshPacotesTable() {
-
-		try {
-			List<PacoteComercial> pacotesComerciais =
-					GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
-			PacoteComercialPesquisaModelTable model =
-					new PacoteComercialPesquisaModelTable(pacotesComerciais);
-			table.setModel(model);
-
-		} catch (Exception exc) {
-			JOptionPane.showMessageDialog(this, "Error: " + exc, "Error",
-					JOptionPane.ERROR_MESSAGE);
-		}
-
-	}
 	
 	public JTable getTable() {
 		return table;
@@ -312,7 +298,7 @@ public class Operador_VisualizarPromocoes extends JFrame {
 	}
 
 
-	public void setBtVoltarGestorPacotes(JButton btVoltar) {
+	public void setBtVoltarOperadorHomepage(JButton btVoltar) {
 		this.btVoltarOperadorHomepage = btVoltar;
 	}
 
