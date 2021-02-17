@@ -289,9 +289,11 @@ public class GUI_total extends JFrame {
 		operador_homepage.setUsernameLoggedIn(username);
 		operador_visualizarPacotes.setUsernameLoggedIn(username);
 		operador_visualizarPromocoes.setUsernameLoggedIn(username);
+<<<<<<< Updated upstream
 		areaCliente.setUsernameLoggedIn(username);
 		
-
+=======
+>>>>>>> Stashed changes
 		Funcionario func = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
 		
 		if (func != null && func.getId_role() == 2) {
