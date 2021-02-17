@@ -46,7 +46,6 @@ public class AreaCliente extends JFrame {
 	private JLabel lblNewLabel_8;
 	
 	private JLabel lblNewLabel_6_2;
-	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -189,36 +188,52 @@ public class AreaCliente extends JFrame {
 		tabbedPane.addTab("Os Meus produtos",null,  panelMeusProdutos);
 		panelMeusProdutos.setLayout(null);
 		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(472, 157, 234, 41);
+		panelMeusProdutos.add(comboBox);
+		
+		JLabel lblAsSuasPromoes = new JLabel("As suas Promoções");
+		lblAsSuasPromoes.setFont(new Font("Dubai Light", Font.PLAIN, 20));
+		lblAsSuasPromoes.setBounds(472, 109, 219, 36);
+		panelMeusProdutos.add(lblAsSuasPromoes);
+		
+		JTextArea textAreaDescricaoPromocoes = new JTextArea();
+		textAreaDescricaoPromocoes.setBounds(472, 218, 234, 92);
+		panelMeusProdutos.add(textAreaDescricaoPromocoes);
+		
+		JTextArea textAreaDescricaoPacote = new JTextArea();
+		textAreaDescricaoPacote.setBounds(157, 218, 234, 92);
+		panelMeusProdutos.add(textAreaDescricaoPacote);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(157, 161, 234, 41);
+		panelMeusProdutos.add(textArea);
+		
+		
+		
+		
+			
+		JLabel lblDescricaoPacote = new JLabel("Descrição:");
+		lblDescricaoPacote.setBounds(55, 214, 95, 36);
+		lblDescricaoPacote.setFont(new Font("Dubai Light", Font.PLAIN, 18));
+		panelMeusProdutos.add(lblDescricaoPacote);
+		
+		JLabel lblNomePacote = new JLabel("Nome:");
+		lblNomePacote.setBounds(55, 157, 69, 36);
+		lblNomePacote.setFont(new Font("Dubai Light", Font.PLAIN, 18));
+		panelMeusProdutos.add(lblNomePacote);
+		
+		JLabel lblSeuPacote = new JLabel("O seu Pacote Comercial:");
+		lblSeuPacote.setBounds(55, 109, 219, 36);
+		lblSeuPacote.setFont(new Font("Dubai Light", Font.PLAIN, 20));
+		panelMeusProdutos.add(lblSeuPacote);
+		
 		//Imagem de fundo - Provisoria
 		JLabel imagemProdutos = new JLabel("");
 		imagemProdutos.setBounds(6, -41, 1394, 598);
 		panelMeusProdutos.add(imagemProdutos);
 		imagemProdutos.setBackground(new Color(240, 240, 240));
 		imagemProdutos.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
-		
-		
-		
-		
-			
-		JLabel lblDescricaoProdutos = new JLabel("Descrição:");
-		lblDescricaoProdutos.setBounds(54, 252, 95, 36);
-		lblDescricaoProdutos.setFont(new Font("Dubai", Font.PLAIN, 18));
-		panelMeusProdutos.add(lblDescricaoProdutos);
-		
-		JLabel lblNomeProdutos_1 = new JLabel("Nome:");
-		lblNomeProdutos_1.setBounds(54, 101, 69, 36);
-		lblNomeProdutos_1.setFont(new Font("Dubai", Font.PLAIN, 18));
-		panelMeusProdutos.add(lblNomeProdutos_1);
-		
-		JLabel lblNomeProdutos_1_1 = new JLabel("O seu Pacote Comercial:");
-		lblNomeProdutos_1_1.setBounds(185, 31, 219, 36);
-		lblNomeProdutos_1_1.setFont(new Font("Dubai", Font.PLAIN, 18));
-		panelMeusProdutos.add(lblNomeProdutos_1_1);
-		
-		textField = new JTextField();
-		textField.setBounds(332, 117, 122, 28);
-		panelMeusProdutos.add(textField);
-		textField.setColumns(10);
 		
 		
 		
