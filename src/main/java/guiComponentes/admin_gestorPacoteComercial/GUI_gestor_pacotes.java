@@ -104,12 +104,12 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		// Campo de pesquisa 
 
-		JLabel lblCamposPesquisas = new JLabel("Campo de Pesquisa");
-		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-		lblCamposPesquisas.setBounds(98, 50, 294, 26);
-		contentPane.add(lblCamposPesquisas);
+				JLabel lblCamposPesquisas = new JLabel("Campo de Pesquisa");
+				lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
+				lblCamposPesquisas.setBounds(98, 50, 294, 26);
+				contentPane.add(lblCamposPesquisas);
 
-		painelPesquisa();
+				painelPesquisa();
 
 
 		// Footer
@@ -159,6 +159,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	 * 
 	 */
 	protected void painelPesquisa() {
+		
 		{
 			painelPesquisa = new JPanel();
 			painelPesquisa.setLayout(null);
