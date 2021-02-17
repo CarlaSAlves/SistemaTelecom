@@ -23,6 +23,7 @@ import guiComponentes.admin_gestorCliente.GUI_gestor_cliente;
 import guiComponentes.admin_gestorOperador.GUI_gestor_operador;
 import guiComponentes.admin_gestorPacoteComercial.GUI_gestor_pacotes;
 import guiComponentes.admin_gestorPromocao.GUI_gestor_promocao;
+import guiComponentes.operador_PromoPacote.Operador_VisualizarPacote;
 import guiComponentes.operador_gerirClientes.Operador_gerirClientes;
 import servico.GestorDeDAO;
 import standard_value_object.Funcionario;
@@ -42,12 +43,15 @@ public class GUI_total extends JFrame {
 	private	GUI_gestor_promocao gestor_promocao;
 	private Operador_homepage operador_homepage;
 	private Operador_gerirClientes operador_gerirClientes;
+	private Operador_VisualizarPacote operador_VisualizarPacote;
 	private Duration temporizador;
 	private String dataEHoraDeLog;
 	private SimpleDateFormat dateFormat ;
 	private GUI_login login;
 
-	private JPanel loginPanel, homepagePanel, gestor_clientePanel, gestor_operadorPanel, gestor_pacotesPanel, gestor_promocaoPanel, operador_homepagePanel, operador_areaPessoalPanel;
+	private JPanel loginPanel, homepagePanel, gestor_clientePanel, gestor_operadorPanel, gestor_pacotesPanel, gestor_promocaoPanel, operador_homepagePanel, operador_gerirClientesPanel;
+	private JPanel operador_visualizarPacotePanel;
+	
 
 
 	public static void main(String[] args) {
@@ -92,6 +96,7 @@ public class GUI_total extends JFrame {
 		gestor_promocao = new GUI_gestor_promocao();
 		operador_homepage = new Operador_homepage(this);
 		operador_gerirClientes = new Operador_gerirClientes();
+		operador_VisualizarPacote = new Operador_VisualizarPacote();
 
 		// ligação - login 
 		
@@ -186,22 +191,37 @@ public class GUI_total extends JFrame {
 		operador_homepagePanel.setBounds(0, 0, 1400, 800);
 		pane.add(operador_homepagePanel);
 		
-		// ligação Operador Area Pessoal
+		// ligação Operador gerir clientes
 		
-		operador_areaPessoalPanel = operador_gerirClientes.returnPanel();
-		operador_areaPessoalPanel.setVisible(false);
-		operador_areaPessoalPanel.setBounds(0, 0, 1400, 800);
-		pane.add(operador_areaPessoalPanel);
+		operador_gerirClientesPanel = operador_gerirClientes.returnPanel();
+		operador_gerirClientesPanel.setVisible(false);
+		operador_gerirClientesPanel.setBounds(0, 0, 1400, 800);
+		pane.add(operador_gerirClientesPanel);
 		operador_gerirClientes.btVoltarOperador().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				operador_areaPessoalPanel.setVisible(false);
+				operador_gerirClientesPanel.setVisible(false);
 				operador_homepagePanel.setVisible(true);
 				
 			}
 		});
 		
+		// ligação Operador - Visualizar Pacotes Comerciais
+		
+		operador_visualizarPacotePanel = operador_VisualizarPacote.returnPanel();
+		operador_visualizarPacotePanel.setVisible(false);
+		operador_visualizarPacotePanel.setBounds(0, 0, 1400, 800);
+		pane.add(operador_visualizarPacotePanel);
+		operador_VisualizarPacote.btVoltarOperadorHomepage().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				operador_visualizarPacotePanel.setVisible(false);
+				operador_homepagePanel.setVisible(true);
+				
+			}
+		});
 	
 	}
 
@@ -374,7 +394,12 @@ public class GUI_total extends JFrame {
 	
 	public void gerirOperHomepage() {
 		operador_homepagePanel.setVisible(false);
-		operador_areaPessoalPanel.setVisible(true);
+		operador_gerirClientesPanel.setVisible(true);
+	}
+	
+	public void operador_visualizarPacote() {
+		operador_homepagePanel.setVisible(false);
+		operador_visualizarPacotePanel.setVisible(true);
 	}
 	
 	

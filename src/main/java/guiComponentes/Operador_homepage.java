@@ -104,6 +104,14 @@ public class Operador_homepage extends JFrame {
 		btPacotesPromo.setFocusPainted(false);
 		btPacotesPromo.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		pane.add(btPacotesPromo);
+		btPacotesPromo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					guit.operador_visualizarPacote();
+				
+			}
+		});
 
 		JButton btnVisualizarPromoes = new JButton("Visualizar Promoções");
 		btnVisualizarPromoes.setToolTipText("Gestão de Pacotes Comerciais e Promoções");

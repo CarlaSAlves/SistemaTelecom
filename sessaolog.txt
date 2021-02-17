@@ -124,3 +124,9 @@
 <duração da sessão:	0:1>
 </sessao>
 
+<sessao>
+<username:	andreCar>
+<data e hora do login:	17-02-2021 11:21:32>
+<duração da sessão:	3:29>
+</sessao>
+
