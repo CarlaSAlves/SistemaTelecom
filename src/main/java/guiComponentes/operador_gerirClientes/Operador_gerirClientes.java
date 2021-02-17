@@ -25,14 +25,11 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+
 import guiComponentes.GUI_total;
 import guiComponentes.admin_gestorCliente.ClientePesquisaModelTable;
-import guiComponentes.admin_gestorCliente.CriarClienteDialog;
-import guiComponentes.admin_gestorCliente.GUI_gestor_cliente;
-import guiComponentes.admin_gestorOperador.GUI_gestor_operador;
-import guiComponentes.admin_gestorOperador.HistoricoOperadorDialog;
-import guiComponentes.admin_gestorOperador.OperadorPesquisaModelTable;
-import historicos.HistoricoOperador;
+import guiComponentes.admin_gestorCliente.HistoricoClienteDialog;
+import historicos.HistoricoCliente;
 import servico.GestorDeDAO;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
@@ -45,13 +42,16 @@ public class Operador_gerirClientes extends JFrame {
 	private int numberRows;
 	private JPanel pane;
 	private JLabel lblCampoPesquisas, lblTempoSessao, lblUsernameLogged, lblHoraSistema, lblResultados;
-	private JButton btAtribuirPacote, btAtribuirPromocao, btVisualizarPromocao, btHistorico, btVoltarOperador, btnVisualizarPacote ;
+	private JButton btAtribuirPacote, btAtribuirPromocao, btVisualizarPromocao, btVoltarOperador, btnVisualizarPacote, btnRemoverPromo ;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JTable table;
 	private JTextField textPesquisaID;
 	private JTextField textPesquisaNIF;
 	private JTextField textFieldNome;
 	private JTextField textFieldMorada;
+	private JButton btnVerHistorico;
+	private JButton botaoPesquisa;
+	private String username;
 
 
 
@@ -82,7 +82,7 @@ public class Operador_gerirClientes extends JFrame {
 	private void inicialize() {
 
 		ativarNimbusLookAndFeel();
-
+		
 		pane = new JPanel();
 		setContentPane(pane);
 		pane.setLayout(null);
@@ -102,29 +102,75 @@ public class Operador_gerirClientes extends JFrame {
 		// -- Botões --  
 
 		btAtribuirPacote = new JButton("Atribuir Pacote Comercial");
-		btAtribuirPacote.setBounds(1135, 231, 187, 40);
+		btAtribuirPacote.setBounds(939, 255, 187, 40);
 		pane.add(btAtribuirPacote);
 
 		btAtribuirPacote.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Operador_atribuirDialog dialog = new Operador_atribuirDialog();
-				dialog.setVisible(true);
-				dialog.setResizable(false);
+							
+				List<PacoteComercial> pacotes = null;
+				int row = table.getSelectedRow();
+				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTableOP.OBJECT_COL);
+				Funcionario func = null;
+				
+				if(clienteTemp.getId_pacote_cliente()==0) {
+					try {
+						pacotes = GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
 
+					Operador_atribuirDialog dialog = new Operador_atribuirDialog(Operador_gerirClientes.this, pacotes, clienteTemp);
+					dialog.setVisible(true);
+					dialog.setResizable(false);
+				} else {
+					int resposta = JOptionPane.showConfirmDialog(Operador_gerirClientes.this,
+							"Remover Pacote Comercial?\nINFO: Todas as Promoções associadas também serão removidas!", "Confirmar Remover Pacote Comercial",
+							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+					if (resposta != JOptionPane.YES_OPTION) {
+						return;
+					}else {
+
+						try {
+							func = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
+							GestorDeDAO.getGestorDeDAO().eliminarPacoteById(clienteTemp.getId_pacote_cliente(), func, clienteTemp);
+							JOptionPane.showMessageDialog(Operador_gerirClientes.this,
+									"Pacote Comercial removido com sucesso!", "Pacote Comercial Removido",
+									JOptionPane.INFORMATION_MESSAGE);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+
+
+					}
+
+					refreshClienteTable();
+				}
 			}
 		});
 
 		btAtribuirPromocao = new JButton("Atribuir Promoção");
-		btAtribuirPromocao.setBounds(947, 231, 157, 40);
+		btAtribuirPromocao.setBounds(939, 204, 187, 40);
 		pane.add(btAtribuirPromocao);
 		btAtribuirPromocao.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				Operador_atribuirDialog dialog = new Operador_atribuirDialog();
+				List<Promocao> promocoes = null;
+				int row = table.getSelectedRow();
+				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTableOP.OBJECT_COL);
+
+				try {
+					promocoes = GestorDeDAO.getGestorDeDAO().getAllPromocoes();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+
+				Operador_atribuirDialog dialog = new Operador_atribuirDialog(Operador_gerirClientes.this, promocoes, clienteTemp, true);
 				dialog.setVisible(true);
 				dialog.setResizable(false);
 
@@ -132,7 +178,7 @@ public class Operador_gerirClientes extends JFrame {
 		});
 
 		btVisualizarPromocao = new JButton("Visualizar Promoções");
-		btVisualizarPromocao.setBounds(947, 179, 157, 40);
+		btVisualizarPromocao.setBounds(1136, 204, 187, 40);
 		pane.add(btVisualizarPromocao);
 		btVisualizarPromocao.addActionListener(new ActionListener() {
 
@@ -150,20 +196,20 @@ public class Operador_gerirClientes extends JFrame {
 
 				if(listaPromocao.isEmpty()) {
 					JOptionPane.showMessageDialog(Operador_gerirClientes.this,
-							"Não existem Promoções Atribuidas", "Erro", JOptionPane.ERROR_MESSAGE);
+							"Não existem Promoções Atribuidas!", "Erro", JOptionPane.ERROR_MESSAGE);
 					return;
 				}else {
 					Operador_visualizarDialog dialog = new Operador_visualizarDialog(listaPromocao, true, clienteTemp.getNome());
 					dialog.setVisible(true);
 					dialog.setResizable(false);
 				}
-				
+
 
 			}
 		});
 
 		btnVisualizarPacote = new JButton("Visualizar Pacote Comercial");
-		btnVisualizarPacote.setBounds(1135, 179, 187, 40);
+		btnVisualizarPacote.setBounds(1136, 255, 187, 40);
 		pane.add(btnVisualizarPacote);
 		btnVisualizarPacote.addActionListener(new ActionListener() {
 
@@ -195,13 +241,6 @@ public class Operador_gerirClientes extends JFrame {
 			}
 		});
 
-		btHistorico = new JButton("Histórico");
-		btHistorico.setBounds(764, 232, 154, 40);
-		btHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		btHistorico.setBackground(SystemColor.activeCaption);
-		btHistorico.setEnabled(false);
-		pane.add(btHistorico);
-
 		// tabela
 
 		JPanel painelTabela = new JPanel();
@@ -224,7 +263,7 @@ public class Operador_gerirClientes extends JFrame {
 		btVoltarOperador = new JButton("Voltar");
 		btVoltarOperador.setBounds(6, 709, 119, 38);
 		btVoltarOperador.setFont(font);
-		btVoltarOperador.setBackground(SystemColor.activeCaption);
+		btVoltarOperador.setBackground(Color.WHITE);
 		btVoltarOperador.setFocusPainted(false);
 		pane.add(btVoltarOperador);
 
@@ -306,9 +345,7 @@ public class Operador_gerirClientes extends JFrame {
 		checkBoxAtivo.setBounds(234, 150, 69, 24);
 		painelPesquisa.add(checkBoxAtivo);
 
-		JButton botaoPesquisa = new JButton("Pesquisar");
-		botaoPesquisa.setFont(new Font("Dialog", Font.PLAIN, 13));
-		botaoPesquisa.setBackground(SystemColor.activeCaption);
+		botaoPesquisa = new JButton("Pesquisar");
 		botaoPesquisa.setBounds(72, 181, 371, 27);
 		botaoPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -358,14 +395,80 @@ public class Operador_gerirClientes extends JFrame {
 			}
 		});
 		painelPesquisa.add(botaoPesquisa);
+
 		btnVisualizarPacote.setEnabled(false);
 		btAtribuirPacote.setEnabled(false);
 		btAtribuirPromocao.setEnabled(false);
 		btVisualizarPromocao.setEnabled(false);
-		btHistorico.setEnabled(false);
+
+		btnRemoverPromo = new JButton("Remover Promoção");
+		btnRemoverPromo.setEnabled(false);
+		btnRemoverPromo.setBounds(742, 204, 187, 40);
+		pane.add(btnRemoverPromo);
+		btnRemoverPromo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				List<Promocao> promocoes = null;
+				int row = table.getSelectedRow();
+				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTableOP.OBJECT_COL);
+
+				try {
+					promocoes = GestorDeDAO.getGestorDeDAO().getPacoteClientePromocaoInfo(clienteTemp.getId_pacote_cliente());
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+
+				if(!promocoes.isEmpty()) {
+					Operador_removerPromoDialog dialog = new Operador_removerPromoDialog(Operador_gerirClientes.this, promocoes, clienteTemp);
+					dialog.setVisible(true);
+					dialog.setResizable(false);
+				}else {
+					JOptionPane.showMessageDialog(Operador_gerirClientes.this,
+							"Não existem Promoções Atribuidas!", "Erro", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+			}
+		});
+
+
+
+		btnVerHistorico = new JButton("Ver Historico");
+		btnVerHistorico.setEnabled(false);
+		btnVerHistorico.setBounds(742, 255, 187, 40);
+		btnVerHistorico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row = table.getSelectedRow();
+
+
+				if (row < 0) {
+					JOptionPane.showMessageDialog(Operador_gerirClientes.this,
+							"Por favor selecione um Cliente", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
+				List<HistoricoCliente> list;
+
+				try {
+
+					list = GestorDeDAO.getGestorDeDAO().getHistoricoCliente(clienteTemp.getId());
+					HistoricoClienteDialog dialogHistorico = new HistoricoClienteDialog();
+					dialogHistorico.preencherTable(clienteTemp, list);
+					dialogHistorico.setVisible(true);
+					dialogHistorico.setResizable(false);
+
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		pane.add(btnVerHistorico);
 	}
 
+
 	
+
 	private JScrollPane scrollPaneSetup() {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(33, 33, 1224, 330);
@@ -385,27 +488,30 @@ public class Operador_gerirClientes extends JFrame {
 					btAtribuirPacote.setEnabled(false);
 					btAtribuirPromocao.setEnabled(false);
 					btVisualizarPromocao.setEnabled(false);
-					btHistorico.setEnabled(false);
+					btnVerHistorico.setEnabled(false);
 					btnVisualizarPacote.setEnabled(false);
+					btnRemoverPromo.setEnabled(false);
 				}
 				else if (table.getSelectedRows().length==1) {
-					btAtribuirPacote.setEnabled(true);
+
+
 					if(table.getValueAt(table.getSelectedRow(), 6 ).equals("Não Atribuido")) {
 						btAtribuirPromocao.setEnabled(false);
+						btnVisualizarPacote.setEnabled(false);
+						btnRemoverPromo.setEnabled(false);
+						btVisualizarPromocao.setEnabled(false);
 						btnVisualizarPacote.setEnabled(false);
 					}else {
 						btAtribuirPromocao.setEnabled(true);
 						btnVisualizarPacote.setEnabled(true);
-					}
-					if(table.getValueAt(table.getSelectedRow(), 6 ).equals("Não Atribuido")) {
-						btVisualizarPromocao.setEnabled(false);
-						btnVisualizarPacote.setEnabled(false);
-					}else {
+						btnRemoverPromo.setEnabled(true);
 						btVisualizarPromocao.setEnabled(true);
 						btnVisualizarPacote.setEnabled(true);
-
 					}
-					btHistorico.setEnabled(true);
+
+					btAtribuirPacote.setEnabled(true);
+					btnVerHistorico.setEnabled(true);
+					botaoAtribuirDinamico();
 				}
 				else if (table.getSelectedRowCount()==0)
 				{
@@ -413,7 +519,8 @@ public class Operador_gerirClientes extends JFrame {
 					btAtribuirPacote.setEnabled(false);
 					btAtribuirPromocao.setEnabled(false);
 					btVisualizarPromocao.setEnabled(false);
-					btHistorico.setEnabled(false);
+					btnVerHistorico.setEnabled(false);
+					btnRemoverPromo.setEnabled(false);
 				}
 
 			}	
@@ -447,6 +554,35 @@ public class Operador_gerirClientes extends JFrame {
 		lblCampoPesquisas.setBounds(96, 39, 294, 26);
 
 	}
+
+	public void refreshClienteTable() {
+
+		try {
+			List<Cliente> clientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
+			ClientePesquisaModelTableOP model = new ClientePesquisaModelTableOP(clientes);
+			table.setModel(model);
+			numberRows = table.getRowCount();
+			lblResultados.setText("Resultados: " + numberRows);
+		} catch (Exception exc) {
+			JOptionPane.showMessageDialog(this, "Error: " + exc, "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+
+	private void botaoAtribuirDinamico() {
+
+		try {
+			int row = table.getSelectedRow();
+			Cliente cliente = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
+			if (cliente.getId_pacote_cliente()!=0)
+				btAtribuirPacote.setText("Remover Pacote Comercial");
+			else
+				btAtribuirPacote.setText("Atribuir Pacote Comercial");
+		} catch  (Exception e) {
+		}
+	}
+
 
 	protected void painelPesquisa() {
 	}
@@ -484,4 +620,12 @@ public class Operador_gerirClientes extends JFrame {
 	public JLabel getLblResultados() {
 		return lblResultados;
 	}
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 }
