@@ -11,8 +11,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import standard_value_object.Cliente;
-import standard_value_object.Funcionario;
+
 import standard_value_object.PacoteCliente;
 import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
@@ -105,6 +104,7 @@ public class PacoteClienteDAO {
 				pacoteCliente = new PacoteCliente();
 				pacoteCliente.setId(myRs.getInt(1));
 				pacoteCliente.setId_pacote_comercial(myRs.getInt(2));
+				
 				java.sql.Date data_inicio = new java.sql.Date(myRs.getTimestamp(3).getTime());
 				pacoteCliente.setData_inicio(data_inicio);
 				
@@ -124,8 +124,7 @@ public class PacoteClienteDAO {
 	 * Cria um novo pacote_cliente na base de dados com base do PacoteCliente enviado como parametro.
 	 * Caso a criaçao falhe, ira propagar uma exceçao.
 	 */
-	@SuppressWarnings("resource")
-	public PacoteCliente criarPacoteCliente(PacoteCliente pacoteCliente, Cliente cliente, Funcionario funcionario) throws SQLException{
+	public PacoteCliente criarPacoteCliente(PacoteCliente pacoteCliente) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
 
@@ -148,18 +147,6 @@ public class PacoteClienteDAO {
 	                throw new SQLException("Criação de pacote falhou. Nenhum ID foi devolvido.");
 	            }
 	        }
-			
-			myStmt =  myConn.prepareStatement("UPDATE `cliente` SET `id_pacote_cliente`=? WHERE  `id`=?");
-			
-			myStmt.setInt(1, pacoteCliente.getId());
-			myStmt.setInt(2, cliente.getId());
-					
-			myStmt.executeUpdate();	
-			
-			myStmt = logUpdate(funcionario, cliente, "Pacote Comercial atribuido");	
-
-			myStmt.executeUpdate();	
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -191,21 +178,13 @@ public class PacoteClienteDAO {
 	/*
 	 * Remove a promoçao enviada como parametro do PacoteCliente enviado como primeiro parametro.
 	 */
-	@SuppressWarnings("resource")
-	public int removerPromocao(int id_pacote_cliente, int id_promocao, Funcionario funcionario, Cliente cliente) throws SQLException{
+	public int removerPromocao(PacoteCliente pacoteCliente, Promocao promocao) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
-			myStmt = myConn.prepareStatement("DELETE FROM `sistema_tele`.`pacote_cliente_promocao` WHERE (`id_pacote_cliente` = ?) and (`id_promocao` = ?);");
-		
-			myStmt.setInt(1, id_pacote_cliente);
-			myStmt.setInt(2, id_promocao);
-			
+			myStmt = myConn.prepareStatement("DELETE FROM `sistema_tele`.`pacote_cliente_promoçao` WHERE (`id_pacote_cliente` = ?) and (`id_promocao` = ?);");
+			myStmt.setInt(1, pacoteCliente.getId());
+			myStmt.setInt(2, promocao.getId());
 			myStmt.executeUpdate();
-			
-			myStmt = logUpdate(funcionario, cliente, "Promoção Removida");	
-
-			myStmt.executeUpdate();	
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -240,7 +219,7 @@ public class PacoteClienteDAO {
 	//para apagar um pacote_cliente, vai ser necessario remover todas as promo�oes associadas a esse pacote.
 	// Vai ser tambem necessario remover o pacote do cliente que o det�m. S� depois � possivel apagar o pacote cliente.
 	@SuppressWarnings("resource")
-	public int eliminarPacoteById(int id, Funcionario funcionario, Cliente cliente) throws SQLException{
+	public int eliminarPacoteById(int id) throws SQLException{
 		PreparedStatement myStmt = null;
 		
 		if (id <= 0) {
@@ -253,22 +232,12 @@ public class PacoteClienteDAO {
 			
 			//elimina o pacote cliente da base de dados
 			String query2 = "DELETE from `pacote_cliente` where (`id`=" + id + ");";
-			
-			//elimina promocoes associadas da base de dados
-			String query3 = "DELETE from `pacote_cliente_promocao` where (`id_pacote_cliente` =" + id + ");";
-			
+					
 			myStmt = myConn.prepareStatement(query1);
 			myStmt.executeUpdate();
 			
 			myStmt = myConn.prepareStatement(query2);
 			myStmt.executeUpdate();
-			
-			myStmt = myConn.prepareStatement(query3);
-			myStmt.executeUpdate();
-			
-			myStmt = logUpdate(funcionario, cliente, "Pacote Comercial Removido");
-			myStmt.executeUpdate();
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -292,18 +261,6 @@ public class PacoteClienteDAO {
 
 		return pacoteCliente;
 	}
-	
-	private PreparedStatement logUpdate(Funcionario funcionario, Cliente cliente, String descricao) throws SQLException {
-		PreparedStatement myStmt;
-		myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
-
-		myStmt.setInt(1, funcionario.getId());
-		myStmt.setInt(2, cliente.getId());
-		myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-		myStmt.setString(4, descricao);
-		return myStmt;
-	}
-	
 	
 	private void close(Statement myStmt, ResultSet myRs) throws SQLException {
 		close(null, myStmt, myRs);		

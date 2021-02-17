@@ -26,7 +26,6 @@ import guiComponentes.admin_gestorPromocao.GUI_gestor_promocao;
 import guiComponentes.cliente_pessoal.AreaCliente;
 import guiComponentes.operador_PromoPacote.Operador_VisualizarPacote;
 import guiComponentes.operador_PromoPacote.Operador_VisualizarPromocoes;
-import guiComponentes.operador_gerirClientes.Operador_atribuirDialog;
 import guiComponentes.operador_gerirClientes.Operador_gerirClientes;
 import servico.GestorDeDAO;
 import standard_value_object.Funcionario;
@@ -289,11 +288,8 @@ public class GUI_total extends JFrame {
 		operador_homepage.setUsernameLoggedIn(username);
 		operador_visualizarPacotes.setUsernameLoggedIn(username);
 		operador_visualizarPromocoes.setUsernameLoggedIn(username);
-<<<<<<< Updated upstream
 		areaCliente.setUsernameLoggedIn(username);
 		
-=======
->>>>>>> Stashed changes
 		Funcionario func = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
 		
 		if (func != null && func.getId_role() == 2) {
@@ -469,10 +465,17 @@ public class GUI_total extends JFrame {
 		operador_visualizarPromoPanel.setVisible(true);
 	}
 	
-	public String mandarUsername() {
-		return username;
-	}
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 
