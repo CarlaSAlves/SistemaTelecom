@@ -124,3 +124,111 @@
 <duração da sessão:	0:1>
 </sessao>
 
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 16:27:35>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 16:27:38>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 16:27:41>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 16:27:46>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 16:27:49>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 16:27:53>
+<duração da sessão:	0:4>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 16:27:59>
+<duração da sessão:	0:7>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 16:28:08>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 16:28:10>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 16:28:14>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 16:28:16>
+<duração da sessão:	0:0>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 16:28:22>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 16:28:24>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 16:28:45>
+<duração da sessão:	2:57>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 16:31:44>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	15-02-2021 16:53:42>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	15-02-2021 16:53:45>
+<duração da sessão:	0:0>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	15-02-2021 16:53:51>
+<duração da sessão:	0:1>
+</sessao>
+
