@@ -465,16 +465,9 @@ public class GUI_total extends JFrame {
 		operador_visualizarPromoPanel.setVisible(true);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public String mandarUsername() {
+		return username;
+	}
 	
 }
 
