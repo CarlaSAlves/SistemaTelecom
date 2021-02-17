@@ -55,7 +55,7 @@ public class GUI_total extends JFrame {
 
 	private JPanel loginPanel, homepagePanel, gestor_clientePanel, gestor_operadorPanel, gestor_pacotesPanel, gestor_promocaoPanel, operador_homepagePanel, operador_gerirClientesPanel, operador_visualizarPromoPanel, areaClientePanel;
 	private JPanel operador_visualizarPacotePanel;
-	
+
 
 
 	public static void main(String[] args) {
@@ -79,8 +79,8 @@ public class GUI_total extends JFrame {
 
 
 	public GUI_total() {
-		
-		
+
+
 		ativarNimbusLookAndFeel();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,7 +91,7 @@ public class GUI_total extends JFrame {
 		setLayout(null);
 
 		// criação dos objectos referentes às páginas
-		
+
 		login = new GUI_login(this);
 		homepage = new Admin_GUI_homepage(this);
 		gestor_cliente = new GUI_gestor_cliente();
@@ -104,11 +104,11 @@ public class GUI_total extends JFrame {
 		operador_visualizarPromo = new Operador_VisualizarPromocoes();
 		areaCliente = new AreaCliente(this);
 		// ligação - login 
-		
+
 		loginPanel = login.returnPanel();
 		loginPanel.setBounds(0, 0, 1400, 800);
 		pane.add(loginPanel);
-		
+
 		login.getBtnSair().addActionListener(new ActionListener() {
 
 			@Override
@@ -120,14 +120,14 @@ public class GUI_total extends JFrame {
 
 
 		// ligação homepage
-		
+
 		homepagePanel = homepage.returnPanel();
 		homepagePanel.setVisible(false);
 		homepagePanel.setBounds(0, 0, 1400, 800);
 		pane.add(homepagePanel);
 
 		// ligação Admin gestor Cliente
-		
+
 		gestor_clientePanel = gestor_cliente.returnPanel();
 		gestor_clientePanel.setVisible(false);
 		gestor_clientePanel.setBounds(0, 0, 1400, 800);
@@ -144,7 +144,7 @@ public class GUI_total extends JFrame {
 		});
 
 		// ligação Admin gestor Operador
-		
+
 		gestor_operadorPanel = gestor_operador.returnPanel();
 		gestor_operadorPanel.setVisible(false);
 		gestor_operadorPanel.setBounds(0, 0, 1400, 800);
@@ -160,7 +160,7 @@ public class GUI_total extends JFrame {
 		});
 
 		// ligação Admin gestor Pacotes Comerciais
-		
+
 		gestor_pacotesPanel = gestor_pacotes.returnPanel();
 		gestor_pacotesPanel.setVisible(false);
 		gestor_pacotesPanel.setBounds(0, 0, 1400, 800);
@@ -175,7 +175,7 @@ public class GUI_total extends JFrame {
 		});
 
 		// ligação Admin gestor Promoção
-		
+
 		gestor_promocaoPanel = gestor_promocao.returnPanel();
 		gestor_promocaoPanel.setVisible(false);
 		gestor_promocaoPanel.setBounds(0, 0, 1400, 800);
@@ -190,70 +190,70 @@ public class GUI_total extends JFrame {
 		});
 
 		// ligação Operador homepage
-		
+
 		operador_homepagePanel = operador_homepage.returnPanel();
 		operador_homepagePanel.setVisible(false);
 		operador_homepagePanel.setBounds(0, 0, 1400, 800);
 		pane.add(operador_homepagePanel);
-		
+
 		// ligação Operador gerir clientes
-		
+
 		operador_gerirClientesPanel = operador_gerirClientes.returnPanel();
 		operador_gerirClientesPanel.setVisible(false);
 		operador_gerirClientesPanel.setBounds(0, 0, 1400, 800);
 		pane.add(operador_gerirClientesPanel);
 		operador_gerirClientes.btVoltarOperador().addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				operador_gerirClientesPanel.setVisible(false);
 				operador_homepagePanel.setVisible(true);
-				
+
 			}
 		});
-		
+
 		// ligação Operador - Visualizar Pacotes Comerciais
-		
+
 		operador_visualizarPacotePanel = operador_visualizarPacote.returnPanel();
 		operador_visualizarPacotePanel.setVisible(false);
 		operador_visualizarPacotePanel.setBounds(0, 0, 1400, 800);
 		pane.add(operador_visualizarPacotePanel);
 		operador_visualizarPacote.btVoltarOperadorHomepage().addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				operador_visualizarPacotePanel.setVisible(false);
 				operador_homepagePanel.setVisible(true);
-				
+
 			}
 		});
-	
+
 		// ligação Operador - Visualizar Promocoes
-		
+
 		operador_visualizarPromoPanel = operador_visualizarPacote.returnPanel();
 		operador_visualizarPromoPanel.setVisible(false);
 		operador_visualizarPromoPanel.setBounds(0, 0, 1400, 800);
 		pane.add(operador_visualizarPromoPanel);
 		operador_visualizarPromo.btVoltarOperadorHomepage().addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				operador_visualizarPromoPanel.setVisible(false);
 				operador_homepagePanel.setVisible(true);
-				
+
 			}
 		});
-		
+
 		//ligação ao painel do cliente
-		
+
 		areaClientePanel = areaCliente.returnPanel();
 		areaClientePanel.setVisible(false);
 		areaClientePanel.setBounds(0, 0, 1400, 800);
 		pane.add(areaClientePanel);
-		
-			
+
+
 	}
-	
+
 
 
 	private void ativarNimbusLookAndFeel() {
@@ -289,11 +289,11 @@ public class GUI_total extends JFrame {
 		operador_visualizarPacotes.setUsernameLoggedIn(username);
 		operador_visualizarPromocoes.setUsernameLoggedIn(username);
 		areaCliente.setUsernameLoggedIn(username);
-		
+
 		Funcionario func = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
-		
+
 		if (func != null && func.getId_role() == 2) {
-		operador_homepage.setLabelBoasVindas(func.getNome());
+			operador_homepage.setLabelBoasVindas(func.getNome());
 		}
 	}
 
@@ -332,19 +332,19 @@ public class GUI_total extends JFrame {
 
 					gestor_promocao.setLblTempoSessao(temporizador); 
 					gestor_promocao.setLblHoraSistema(dataEHora);
-					
+
 					operador_homepage.setLblTempoSessao(temporizador);
 					operador_homepage.setLblHoraSistema(dataEHora);
-					
+
 					operador_visualizarPacote.setLblTempoSessao(temporizador);
 					operador_visualizarPacote.setLblHoraSistema(dataEHora);
-					
+
 					operador_visualizarPromo.setLblTempoSessao(temporizador);
 					operador_visualizarPromo.setLblHoraSistema(dataEHora);
-					
+
 					areaCliente.setLblTempoSessao(temporizador);
 					areaCliente.setLblHoraSistema(dataEHora);
-					
+
 					try {
 						sleep(1000);
 					} catch (InterruptedException e) {
@@ -388,8 +388,8 @@ public class GUI_total extends JFrame {
 			areaClientePanel.setVisible(true);
 		}
 		comecarTemporizador();
-		
-		
+
+
 
 	}
 
@@ -398,28 +398,28 @@ public class GUI_total extends JFrame {
 		gravarFicheiro(username, temporizador, dataEHoraDeLog, "sessaolog.txt");
 		loginPanel.setVisible(true);
 		homepagePanel.setVisible(false);
-		
+
 		gestor_cliente.getTable().setModel(new DefaultTableModel());	
 		gestor_cliente.getLblResultados().setText("Resultados: ");
 		gestor_operador.getTable().setModel(new DefaultTableModel());
 		gestor_operador.getLblResultados().setText("Resultados: ");
-		
+
 		gestor_pacotes.getTable().setModel(new DefaultTableModel());
 		gestor_pacotes.getLblResultados().setText("Resultados: ");
 		gestor_pacotes.getTextAreaDescricao().setText(" ");	
-		
+
 		gestor_promocao.getTable().setModel(new DefaultTableModel());
 		gestor_promocao.getLblResultados().setText("Resultados: ");
 		gestor_promocao.getTextAreaDescricao().setText(" ");	
-		
+
 		operador_visualizarPacote.getTable().setModel(new DefaultTableModel());
 		operador_visualizarPacote.getLblResultados().setText("Resultados: ");
 		operador_visualizarPacote.getTextAreaDescricao().setText(" ");
-		
+
 		operador_visualizarPromo.getTable().setModel(new DefaultTableModel());
 		operador_visualizarPromo.getLblResultados().setText("Resultados: ");
 		operador_visualizarPromo.getTextAreaDescricao().setText(" ");
-		
+
 	}
 
 
@@ -442,40 +442,32 @@ public class GUI_total extends JFrame {
 		homepagePanel.setVisible(false);
 		gestor_pacotesPanel.setVisible(true);
 	}
-	
+
 	public void voltarBtOperadorHomePage() {
 		gravarFicheiro(username, temporizador, dataEHoraDeLog, "sessaolog.txt");
 		loginPanel.setVisible(true);
 		operador_homepagePanel.setVisible(false);
-		
+
 	}
-	
+
 	public void gerirOperHomepage() {
 		operador_homepagePanel.setVisible(false);
 		operador_gerirClientesPanel.setVisible(true);
 	}
-	
+
 	public void operador_visualizarPacote() {
 		operador_homepagePanel.setVisible(false);
 		operador_visualizarPacotePanel.setVisible(true);
 	}
-	
+
 	public void operador_visualizarPromo() {
 		operador_homepagePanel.setVisible(false);
 		operador_visualizarPromoPanel.setVisible(true);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public String mandarUsername() {
+		return username;
+	}	
 }
 
 

@@ -22,6 +22,7 @@ import historicos.HistoricoPacoteComercial;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 import standard_value_object.PacoteCliente;
+import standard_value_object.PacoteClientePromocao;
 import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
 
@@ -56,7 +57,7 @@ public class GestorDeDAO {
 		}
 		return GestorDeDAOInstance;    
 	}
-	
+
 	/*
 	 * Método responsável por inicializar a ligação com a base de dados, usando os parametros armazenados no documento "sistema_tele.properties".
 	 */
@@ -83,7 +84,7 @@ public class GestorDeDAO {
 	public void desativarCliente(int id, Funcionario funcionario) throws SQLException {
 		clienteDAO.desativarCliente(id, funcionario);;
 	}
-	
+
 	public void ativarCliente(int id, Funcionario funcionario ) throws SQLException{
 		clienteDAO.ativarCliente(id, funcionario);
 	}
@@ -105,7 +106,7 @@ public class GestorDeDAO {
 	public List<HistoricoCliente> getHistoricoCliente(int id_cliente) throws Exception {
 		return clienteDAO.getHistoricoCliente(id_cliente);
 	}
-	
+
 	public List<HistoricoPacoteComercial> getHistoricoPacoteComercial(int id_pacote) throws Exception {
 		return pacoteComercialDAO.getHistoricoPacoteComercial(id_pacote);
 	}
@@ -120,20 +121,20 @@ public class GestorDeDAO {
 	public void desativarFuncionario(int id, Funcionario admin) throws Exception {
 		funcionarioDAO.desativarFuncionario(id, admin);
 	}
-	
+
 	public void ativarFuncionario(int id, Funcionario admin) throws SQLException{
 		funcionarioDAO.ativarFuncionario(id, admin);
 	}
-	
+
 	public Funcionario pesquisaFuncionarioLogin(String login) throws Exception {
 		return funcionarioDAO.pesquisaFuncionarioLogin(login);
-		
+
 	}
-	
-	
+
+
 	public List<HistoricoOperador> getHistoricoOperador(int id_operador) throws Exception {
 		return funcionarioDAO.getHistoricoOperador(id_operador);
-		
+
 	}
 	public List<Funcionario> getAllFuncionarioAdmin() throws Exception{
 		return funcionarioDAO. getAllFuncionarioAdmin();    
@@ -155,14 +156,14 @@ public class GestorDeDAO {
 	//metodo que vai ver se o cliente nao possui um pacote cliente e , caso nao tenha, vai criar um pacote_cliente novo e
 	//atribui-lo ao mesmo cliente. Deste modo assegura-se que nao ha pacotes sem clientes e que cada cliente tem apenas um pacote (e que cada pacote tem um cliente so)
 	//VEJAM QUAL é A MELHOR MANEIRA DE CRIAR E ATRIBUIR UM PACOTE, SABENDO QUE UM PACOTE SO PODE TER UM CLIENTE, E VICE-VERSA, E NAO PODEM HAVER PACOTES SEM CLIENTES
-//	public void criarEAtribuirPacoteCliente(Cliente cliente, PacoteCliente pacoteCliente) throws SQLException, Exception {
-//		if (cliente.getId_pacote_cliente() > 0) {
-//			throw new RuntimeException("Cliente com id " + cliente.getId() + " já tem um pacote cliente.");
-//		}
-//		
-//		clienteDAO.atribuirPacoteCliente(pacoteClienteDAO.criarPacoteCliente(pacoteCliente), cliente);
-//	}
-	
+	//	public void criarEAtribuirPacoteCliente(Cliente cliente, PacoteCliente pacoteCliente) throws SQLException, Exception {
+	//		if (cliente.getId_pacote_cliente() > 0) {
+	//			throw new RuntimeException("Cliente com id " + cliente.getId() + " já tem um pacote cliente.");
+	//		}
+	//		
+	//		clienteDAO.atribuirPacoteCliente(pacoteClienteDAO.criarPacoteCliente(pacoteCliente), cliente);
+	//	}
+
 	public void criarPacoteComercial(PacoteComercial pacoteComercial, Funcionario funcionario) throws Exception {
 		pacoteComercialDAO.criarPacoteComercial(pacoteComercial,funcionario);
 	}
@@ -175,7 +176,7 @@ public class GestorDeDAO {
 	public void desativarPacoteComercial(int id, Funcionario funcionario) throws Exception {
 		pacoteComercialDAO.desativarPacoteComercial(id,funcionario);
 	}
-	
+
 	public void ativarPacoteComercial (int id, Funcionario funcionario) throws Exception {
 		pacoteComercialDAO.ativarPacoteComercial(id, funcionario);
 	}
@@ -202,7 +203,7 @@ public class GestorDeDAO {
 	public void desativarPromocao(int id) throws Exception {
 		promocaoDAO.desativarPromocao(id);
 	}
-	
+
 	public void ativarPromocao (int id) throws Exception {
 		promocaoDAO.ativarPromocao(id);
 	}
@@ -214,13 +215,36 @@ public class GestorDeDAO {
 	public List<Promocao> pesquisaPromocao(int id, String nome, int ativo) throws Exception{
 		return promocaoDAO.pesquisaPromocao(id, nome, ativo);
 	}
-	
+
 	public PacoteComercial getPacoteClienteInfo(int id) throws Exception {
 		return pacoteClienteDAO.getPacoteClienteInfo(id);
 	}
 	
+	public PacoteCliente pesquisarPacoteClienteId(int id) throws Exception {
+		return pacoteClienteDAO.pesquisarPacoteClienteId(id);
+	}
+
+	public PacoteCliente criarPacoteCliente(PacoteCliente pacoteCliente, Cliente cliente, Funcionario funcionario) throws SQLException{
+		return pacoteClienteDAO.criarPacoteCliente(pacoteCliente, cliente, funcionario);
+	}
+
+	public int eliminarPacoteById(int id, Funcionario funcionario, Cliente cliente) throws SQLException{
+		return pacoteClienteDAO.eliminarPacoteById(id, funcionario, cliente);
+	}
+	
+	public int removerPromocao(int id_pacote_cliente, int id_promocao, Funcionario funcionario, Cliente cliente) throws SQLException{
+		return pacoteClienteDAO.removerPromocao(id_pacote_cliente, id_promocao, funcionario, cliente);
+	}
+	
+	public PacoteClientePromocao criarPacoteClientePromocao(PacoteClientePromocao pacoteClientePromocao, Cliente cliente, Funcionario funcionario) throws SQLException{
+		return pacoteClientePromocaoDAO.criarPacoteClientePromocao(pacoteClientePromocao, cliente, funcionario);
+	}
 	public List<Promocao> getPacoteClientePromocaoInfo(int id) throws Exception {
 		return pacoteClientePromocaoDAO.getPacoteClientePromocaoInfo(id);
+	}
+
+	public List<PacoteClientePromocao> pesquisarTodosPacotesClientePromocao() throws Exception {
+		return pacoteClientePromocaoDAO.pesquisarTodosPacotesClientePromocao();
 	}
 
 }

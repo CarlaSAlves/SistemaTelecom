@@ -40,6 +40,15 @@ public class Promocao {
 		this.descricao = descricao;
 		this.ativa = ativa;
 	}
+	
+	public Promocao(int id, String nome, String descricao, boolean ativa) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.ativa = ativa;
+	}
+
 
 	public int getId() {
 		return id;
