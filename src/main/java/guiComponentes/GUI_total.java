@@ -290,6 +290,7 @@ public class GUI_total extends JFrame {
 		operador_visualizarPromocoes.setUsernameLoggedIn(username);
 		areaCliente.setUsernameLoggedIn(username);
 		operador_gerirClientes.setUsername(username);
+		operador_gerirClientes.setUsername(username);
 
 		Funcionario func = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
 
@@ -346,6 +347,9 @@ public class GUI_total extends JFrame {
 					areaCliente.setLblTempoSessao(temporizador);
 					areaCliente.setLblHoraSistema(dataEHora);
 
+					operador_gerirClientes.setLblTempoSessao(temporizador);
+					operador_gerirClientes.setLblHoraSistema(dataEHora);
+					
 					try {
 						sleep(1000);
 					} catch (InterruptedException e) {

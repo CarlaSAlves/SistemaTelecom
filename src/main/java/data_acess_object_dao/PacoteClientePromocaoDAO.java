@@ -108,7 +108,7 @@ public class PacoteClientePromocaoDAO {
 
 			myStmt.executeUpdate();
 
-			myStmt = logUpdate(funcionario, cliente, "Promoção atribuida");	
+			myStmt = logUpdate(funcionario, cliente, "Atribuir Promoção");	
 
 			myStmt.executeUpdate();	
 

@@ -156,7 +156,7 @@ public class PacoteClienteDAO {
 
 			myStmt.executeUpdate();	
 
-			myStmt = logUpdate(funcionario, cliente, "Pacote Comercial atribuido");	
+			myStmt = logUpdate(funcionario, cliente, "Atribuir Pacote Comercial");	
 
 			myStmt.executeUpdate();	
 
@@ -202,7 +202,7 @@ public class PacoteClienteDAO {
 
 			myStmt.executeUpdate();
 
-			myStmt = logUpdate(funcionario, cliente, "Promoção Removida");	
+			myStmt = logUpdate(funcionario, cliente, "Remover Promoção");	
 
 			myStmt.executeUpdate();	
 
@@ -266,7 +266,7 @@ public class PacoteClienteDAO {
 			myStmt = myConn.prepareStatement(query3);
 			myStmt.executeUpdate();
 
-			myStmt = logUpdate(funcionario, cliente, "Pacote Comercial Removido");
+			myStmt = logUpdate(funcionario, cliente, "Remover Pacote Comercial");
 			myStmt.executeUpdate();
 
 		}catch(Exception e) {

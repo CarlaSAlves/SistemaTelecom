@@ -172,3 +172,21 @@
 <duração da sessão:	0:2>
 </sessao>
 
+<sessao>
+<username:	admin>
+<data e hora do login:	17-02-2021 21:10:40>
+<duração da sessão:	0:26>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	17-02-2021 21:11:09>
+<duração da sessão:	0:13>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	17-02-2021 21:11:26>
+<duração da sessão:	0:6>
+</sessao>
+
