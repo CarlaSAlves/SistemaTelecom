@@ -170,19 +170,34 @@ public class AreaCliente extends JFrame {
 		btAtualizarDados.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		btAtualizarDados.setFocusPainted(false);
 		
-		//Imagem lateral - Provisoria
+		//Imagem de fundo - Provisoria
 		
-		JLabel imagem = new JLabel("");
-		imagem.setBounds(6, -41, 1394, 598);
-		panelMeusDados.add(imagem);
-		imagem.setBackground(new Color(240, 240, 240));
-		imagem.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
+		JLabel imagemDados = new JLabel("");
+		imagemDados.setBounds(6, -41, 1394, 598);
+		panelMeusDados.add(imagemDados);
+		imagemDados.setBackground(new Color(240, 240, 240));
+		imagemDados.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
 		
-		// OS meus produtos
+		
+		/****************************/
+			// OS meus produtos
+		/****************************/
+		
+		
 		
 		JPanel panelMeusProdutos = new JPanel();
 		tabbedPane.addTab("Os Meus produtos",null,  panelMeusProdutos);
 		panelMeusProdutos.setLayout(null);
+		
+		//Imagem de fundo - Provisoria
+		JLabel imagemProdutos = new JLabel("");
+		imagemProdutos.setBounds(6, -41, 1394, 598);
+		panelMeusProdutos.add(imagemProdutos);
+		imagemProdutos.setBackground(new Color(240, 240, 240));
+		imagemProdutos.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
+		
+		
+		
 		
 			
 		JLabel lblDescricaoProdutos = new JLabel("Descrição:");
