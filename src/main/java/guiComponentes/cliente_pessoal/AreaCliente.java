@@ -121,6 +121,9 @@ public class AreaCliente extends JFrame {
 
 		// Separador os meus dados
 
+		//Cliente_Dados clienteDados = new ClienteDados();
+		//JPanelMeusDados = clienteDados.returnPenel
+		//clienteDados.returnPenel() 
 		panelMeusDados = new JPanel();
 		tabbedPane.addTab("Meus Dados",null,  panelMeusDados);
 		panelMeusDados.setLayout(null);
@@ -130,46 +133,46 @@ public class AreaCliente extends JFrame {
 
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		lblNome.setBounds(51, 77, 69, 36);
+		lblNome.setBounds(76, 77, 69, 36);
 		panelMeusDados.add(lblNome);
 
 		textFieldNome = new JTextField();
-		textFieldNome.setBounds(145, 77, 246, 29);
+		textFieldNome.setBounds(170, 77, 246, 36);
 		panelMeusDados.add(textFieldNome);
 		textFieldNome.setColumns(10);
 
 		JLabel lblNIF = new JLabel("NIF:");
 		lblNIF.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		lblNIF.setBounds(51, 138, 69, 36);
+		lblNIF.setBounds(76, 138, 69, 36);
 		panelMeusDados.add(lblNIF);
 
 		textFieldNIF = new JTextField();
 		textFieldNIF.setColumns(10);
-		textFieldNIF.setBounds(145, 138, 246, 29);
+		textFieldNIF.setBounds(170, 138, 246, 36);
 		panelMeusDados.add(textFieldNIF);
 
 		JLabel lblLogin = new JLabel("Login");
 		lblLogin.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		lblLogin.setBounds(51, 205, 69, 36);
+		lblLogin.setBounds(76, 205, 69, 36);
 		panelMeusDados.add(lblLogin);
 
 		textFieldLogin = new JTextField();
 		textFieldLogin.setColumns(10);
-		textFieldLogin.setBounds(145, 205, 246, 29);
+		textFieldLogin.setBounds(170, 205, 246, 36);
 		panelMeusDados.add(textFieldLogin);
 
 		JLabel lblMorada = new JLabel("Morada");
 		lblMorada.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		lblMorada.setBounds(51, 268, 81, 36);
+		lblMorada.setBounds(76, 268, 81, 36);
 		panelMeusDados.add(lblMorada);
 
 		textFieldMorada = new JTextField();
 		textFieldMorada.setColumns(10);
-		textFieldMorada.setBounds(145, 272, 246, 29);
+		textFieldMorada.setBounds(170, 272, 246, 36);
 		panelMeusDados.add(textFieldMorada);
 
 		btAtualizarDados = new JButton("Atualizar dados");
-		btAtualizarDados.setBounds(175, 362, 180, 50);
+		btAtualizarDados.setBounds(200, 362, 180, 50);
 		panelMeusDados.add(btAtualizarDados);
 		btAtualizarDados.setForeground(Color.DARK_GRAY);
 		btAtualizarDados.setFont(new Font("Dubai Light", Font.PLAIN, 17));
