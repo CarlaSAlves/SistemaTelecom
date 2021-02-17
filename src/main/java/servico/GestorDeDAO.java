@@ -24,6 +24,10 @@ import standard_value_object.PacoteCliente;
 import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
 
+/*
+ * Classe responsável por inicializar e agrupar todos os DAO. 
+ * Serve como intermediária entre os componentes que necessitam de interagir com a base de dados e os DAO.
+ */
 public class GestorDeDAO {
 
 	private ClienteDAO clienteDAO;
@@ -50,6 +54,9 @@ public class GestorDeDAO {
 		return GestorDeDAOInstance;    
 	}
 	
+	/*
+	 * Método responsável por inicializar a ligação com a base de dados, usando os parametros armazenados no documento "sistema_tele.properties".
+	 */
 	private void startConnection() throws FileNotFoundException, IOException, SQLException {
 		Properties props = new Properties();
 		props.load(new FileInputStream("sistema_tele.properties"));

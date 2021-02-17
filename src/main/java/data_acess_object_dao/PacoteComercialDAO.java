@@ -44,10 +44,12 @@ public class PacoteComercialDAO {
 			myStmt = myConn.createStatement();
 			myRs = myStmt.executeQuery("select * from pacote_comercial");
 
+			//faz parse ao resultado enviado pela base de dados e converte cada entrada num objeto funcionario
 			while (myRs.next()) {
 				PacoteComercial pacote = converteRowParaPacoteComercial(myRs);
 				listaPacotes.add(pacote);
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -61,7 +63,7 @@ public class PacoteComercialDAO {
 	 * - possuam o id passado como parametro e/ou
 	 * - possuam um nome que contenha o substring nome enviado no parametro da funçao e/ou
 	 * - possuam o campo ativo igual ao parametro ativo enviado para a função.
-	 * Caso não existam operadores que satisfaçam os critérios inseridos nos parâmetros da função, devolve uma lista vazia.
+	 * Caso não existam pacotes que satisfaçam os critérios inseridos nos parâmetros da função, devolve uma lista vazia.
 	 */
 	public List<PacoteComercial> pesquisaPacoteComercial(int id, String nome, int ativo) throws Exception {
 		List<PacoteComercial> list = new ArrayList<>();
