@@ -23,6 +23,7 @@ import guiComponentes.admin_gestorCliente.GUI_gestor_cliente;
 import guiComponentes.admin_gestorOperador.GUI_gestor_operador;
 import guiComponentes.admin_gestorPacoteComercial.GUI_gestor_pacotes;
 import guiComponentes.admin_gestorPromocao.GUI_gestor_promocao;
+import guiComponentes.cliente_pessoal.AreaCliente;
 import guiComponentes.operador_PromoPacote.Operador_VisualizarPacote;
 import guiComponentes.operador_PromoPacote.Operador_VisualizarPromocoes;
 import guiComponentes.operador_gerirClientes.Operador_gerirClientes;
@@ -46,12 +47,13 @@ public class GUI_total extends JFrame {
 	private Operador_gerirClientes operador_gerirClientes;
 	private Operador_VisualizarPacote operador_visualizarPacote;
 	private Operador_VisualizarPromocoes operador_visualizarPromo;
+	private AreaCliente areaCliente;
 	private Duration temporizador;
 	private String dataEHoraDeLog;
 	private SimpleDateFormat dateFormat ;
 	private GUI_login login;
 
-	private JPanel loginPanel, homepagePanel, gestor_clientePanel, gestor_operadorPanel, gestor_pacotesPanel, gestor_promocaoPanel, operador_homepagePanel, operador_gerirClientesPanel, operador_visualizarPromoPanel;
+	private JPanel loginPanel, homepagePanel, gestor_clientePanel, gestor_operadorPanel, gestor_pacotesPanel, gestor_promocaoPanel, operador_homepagePanel, operador_gerirClientesPanel, operador_visualizarPromoPanel, areaClientePanel;
 	private JPanel operador_visualizarPacotePanel;
 	
 
@@ -100,7 +102,7 @@ public class GUI_total extends JFrame {
 		operador_gerirClientes = new Operador_gerirClientes();
 		operador_visualizarPacote = new Operador_VisualizarPacote();
 		operador_visualizarPromo = new Operador_VisualizarPromocoes();
-
+		areaCliente = new AreaCliente(this);
 		// ligação - login 
 		
 		loginPanel = login.returnPanel();
@@ -241,7 +243,17 @@ public class GUI_total extends JFrame {
 				
 			}
 		});
+		
+		//ligação ao painel do cliente
+		
+		areaClientePanel = areaCliente.returnPanel();
+		areaClientePanel.setVisible(false);
+		areaClientePanel.setBounds(0, 0, 1400, 800);
+		pane.add(areaClientePanel);
+		
+			
 	}
+	
 
 
 	private void ativarNimbusLookAndFeel() {
@@ -265,7 +277,8 @@ public class GUI_total extends JFrame {
 
 	private void labelUsernameNavegaPaginas(GUI_login login, Admin_GUI_homepage homepage,
 			GUI_gestor_cliente gestor_cliente, GUI_gestor_operador gestor_operador,
-			GUI_gestor_pacotes gestor_pacotes, GUI_gestor_promocao gestor_promocao, Operador_homepage operador_homepage, Operador_VisualizarPacote operador_visualizarPacotes, Operador_VisualizarPromocoes operador_visualizarPromocoes) throws Exception {
+			GUI_gestor_pacotes gestor_pacotes, GUI_gestor_promocao gestor_promocao, Operador_homepage operador_homepage, 
+			Operador_VisualizarPacote operador_visualizarPacotes, Operador_VisualizarPromocoes operador_visualizarPromocoes, AreaCliente areaCliente) throws Exception {
 		username = login.getUserText().getText();
 		gestor_cliente.setUsernameLoggedIn(username);
 		gestor_operador.setUsernameLoggedIn(username);
@@ -275,10 +288,11 @@ public class GUI_total extends JFrame {
 		operador_homepage.setUsernameLoggedIn(username);
 		operador_visualizarPacotes.setUsernameLoggedIn(username);
 		operador_visualizarPromocoes.setUsernameLoggedIn(username);
+		areaCliente.setUsernameLoggedIn(username);
 		
 		Funcionario func = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
 		
-		if (func.getId_role() == 2) {
+		if (func != null && func.getId_role() == 2) {
 		operador_homepage.setLabelBoasVindas(func.getNome());
 		}
 	}
@@ -328,6 +342,9 @@ public class GUI_total extends JFrame {
 					operador_visualizarPromo.setLblTempoSessao(temporizador);
 					operador_visualizarPromo.setLblHoraSistema(dataEHora);
 					
+					areaCliente.setLblTempoSessao(temporizador);
+					areaCliente.setLblHoraSistema(dataEHora);
+					
 					try {
 						sleep(1000);
 					} catch (InterruptedException e) {
@@ -361,12 +378,14 @@ public class GUI_total extends JFrame {
 	public void loginEfetuado(int role) throws Exception {
 		inicio = Instant.now();
 		labelUsernameNavegaPaginas(login, homepage, gestor_cliente, gestor_operador, gestor_pacotes,
-				gestor_promocao, operador_homepage, operador_visualizarPacote, operador_visualizarPromo);
+				gestor_promocao, operador_homepage, operador_visualizarPacote, operador_visualizarPromo, areaCliente);
 		loginPanel.setVisible(false);
 		if (role == 1) {
 			homepagePanel.setVisible(true);
-		} else {
+		} else if(role == 2) {
 			operador_homepagePanel.setVisible(true);
+		} else if (role == 0) {
+			areaClientePanel.setVisible(true);
 		}
 		comecarTemporizador();
 		

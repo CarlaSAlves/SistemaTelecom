@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.Duration;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -46,6 +47,9 @@ public class AreaCliente extends JFrame {
 	private JLabel lblNewLabel_8;
 
 	private JLabel lblNewLabel_6_2;
+	private JButton btVoltarAreaCliente;
+	private JButton btTerminarSessao;
+
 
 	/**
 	 * Launch the application.
@@ -77,7 +81,7 @@ public class AreaCliente extends JFrame {
 
 	private void initialize(GUI_total guit) {
 
-		setupTempoSessao();
+
 		ativarNimbusLookAndFeel(); 
 
 
@@ -298,14 +302,14 @@ public class AreaCliente extends JFrame {
 
 
 		/* RUDAPÉ */
-		//Botão voltar
+		//Botão Termina sessão
 
-		btAtualizarDados = new JButton("Terminar Sessão");
-		btAtualizarDados.setForeground(Color.DARK_GRAY);
-		btAtualizarDados.setBounds(16, 687, 180, 50);
-		btAtualizarDados.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-		btAtualizarDados.setFocusPainted(false);
-		getContentPane().add(btAtualizarDados);
+		btTerminarSessao = new JButton("Terminar Sessão");
+		btTerminarSessao.setForeground(Color.DARK_GRAY);
+		btTerminarSessao.setBounds(16, 687, 180, 50);
+		btTerminarSessao.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btTerminarSessao.setFocusPainted(false);
+		getContentPane().add(btTerminarSessao);
 
 
 		// Logotipo no rodapé
@@ -315,6 +319,8 @@ public class AreaCliente extends JFrame {
 		lblFooter.setBounds(599, 690, 214, 65);
 		lblFooter.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/Altran1.1.png")));
 		getContentPane().add(lblFooter);
+		
+		setupTempoSessao();
 
 
 
@@ -328,7 +334,7 @@ public class AreaCliente extends JFrame {
 		//TODO criar os action listener Atualizar dados/ Ver Pacotes / Ver Promoções
 
 
-		btAtualizarDados.addActionListener(new ActionListener() {
+		btTerminarSessao.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -399,4 +405,38 @@ public class AreaCliente extends JFrame {
 			}
 		}
 	}
+	
+	
+	
+	
+	
+	/*Metodos usados pelo GUI Total para o funcionameto dos botões*/
+	/**
+     * @return the labelBoasVindas
+     */
+//    public void setLabelBoasVindas(String username) {
+//        labelBoasVindas.setText( username );;
+//    }
+
+ 
+    public JPanel returnPanel() {
+        return (JPanel) getContentPane();
+    }
+
+    public void setUsernameLoggedIn(String username) {
+        lblUsernameLogged.setText("Username: " + username);
+    }
+
+    public void setLblTempoSessao(Duration temporizador) {
+        lblTempoSessao.setText("Sessao: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
+    }
+
+    public void setLblHoraSistema(String agora) {
+        lblHoraSistema.setText("Data: " + agora);
+
+ 
+
+    }
+	
+
 }

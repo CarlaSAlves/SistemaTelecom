@@ -230,10 +230,7 @@ public class GUI_login extends JFrame {
 			e2.printStackTrace();
 		}
 		if( cliente != null) {
-			//linha para abrir a janela do cliente (de preferencia essa janela recebe um cliente no construtor, assim podemos passar a info sobre o cliente atualmente logado)
-			//TODO: abrir Janela da area cliente e passar o cliente que loga no seu construtor
-			JOptionPane.showMessageDialog(null, "Menu cliente em construção.");
-			return;
+			guit.loginEfetuado(0);
 		}
 
 		//se nao é  cliente, é  funcion�rio 
