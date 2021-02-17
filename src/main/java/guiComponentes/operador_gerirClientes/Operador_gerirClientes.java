@@ -36,6 +36,7 @@ import historicos.HistoricoOperador;
 import servico.GestorDeDAO;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
+import standard_value_object.PacoteComercial;
 
 @SuppressWarnings("serial")
 public class Operador_gerirClientes extends JFrame {
@@ -43,15 +44,15 @@ public class Operador_gerirClientes extends JFrame {
 	private int numberRows;
 	private JPanel pane;
 	private JLabel lblCampoPesquisas, lblTempoSessao, lblUsernameLogged, lblHoraSistema, lblResultados;
-	private JButton btAtribuirPacote, btAtribuirPromocao, btVisualizarPromocao, btHistorico, btVoltarOperador;
+	private JButton btAtribuirPacote, btAtribuirPromocao, btVisualizarPromocao, btHistorico, btVoltarOperador, btnVisualizarPacote ;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JTable table;
 	private JTextField textPesquisaID;
 	private JTextField textPesquisaNIF;
 	private JTextField textFieldNome;
 	private JTextField textFieldMorada;
-	
-	
+
+
 
 	/**
 	 * Launch the application.
@@ -102,14 +103,15 @@ public class Operador_gerirClientes extends JFrame {
 		btAtribuirPacote = new JButton("Atribuir Pacote Comercial");
 		btAtribuirPacote.setBounds(1135, 231, 187, 40);
 		pane.add(btAtribuirPacote);
+
 		btAtribuirPacote.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Operador_atribuirPacoteDialog dialog = new Operador_atribuirPacoteDialog(Operador_gerirClientes.this);
+				Operador_atribuirDialog dialog = new Operador_atribuirDialog();
 				dialog.setVisible(true);
 				dialog.setResizable(false);
-				
+
 			}
 		});
 
@@ -117,42 +119,61 @@ public class Operador_gerirClientes extends JFrame {
 		btAtribuirPromocao.setBounds(947, 231, 157, 40);
 		pane.add(btAtribuirPromocao);
 		btAtribuirPromocao.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-					Operador_atribuirPacoteDialog dialog = new Operador_atribuirPacoteDialog(Operador_gerirClientes.this);
-					dialog.setVisible(true);
-					dialog.setResizable(false);
+				Operador_atribuirDialog dialog = new Operador_atribuirDialog();
+				dialog.setVisible(true);
+				dialog.setResizable(false);
 
-				}
-			});
+			}
+		});
 
 		btVisualizarPromocao = new JButton("Visualizar Promoções");
 		btVisualizarPromocao.setBounds(947, 179, 157, 40);
 		pane.add(btVisualizarPromocao);
 		btVisualizarPromocao.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Operador_visualizarPacoteDialog dialog = new Operador_visualizarPacoteDialog(Operador_gerirClientes.this);
-				dialog.setVisible(true);
-				dialog.setResizable(false);
-				
+				//				Operador_visualizarDialog dialog = new Operador_visualizarDialog(Operador_gerirClientes.this);
+				//				dialog.setVisible(true);
+				//				dialog.setResizable(false);
+
 			}
 		});
-		
-		JButton btnVisualizarPacote = new JButton("Visualizar Pacote Comercial");
+
+		btnVisualizarPacote = new JButton("Visualizar Pacote Comercial");
 		btnVisualizarPacote.setBounds(1135, 179, 187, 40);
 		pane.add(btnVisualizarPacote);
 		btnVisualizarPacote.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Operador_visualizarPacoteDialog dialog = new Operador_visualizarPacoteDialog(Operador_gerirClientes.this);
-				dialog.setVisible(true);
-				dialog.setResizable(false);
-				
+				if(table.getValueAt(table.getSelectedRow(), 6 ).equals("Não Atribuido")) {
+
+					JOptionPane.showMessageDialog(Operador_gerirClientes.this,
+							"Não existe Pacote Comercial Atribuido", "Erro", JOptionPane.ERROR_MESSAGE);
+					return;
+				}else {
+					int row = table.getSelectedRow();
+					Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTableOP.OBJECT_COL);
+					PacoteComercial pacoteComercial = null;
+
+					try {
+						pacoteComercial = GestorDeDAO.getGestorDeDAO().getPacoteClienteInfo(clienteTemp.getId_pacote_cliente());
+					} catch (Exception e1) {
+
+						e1.printStackTrace();
+					}
+
+					Operador_visualizarDialog dialog = new Operador_visualizarDialog(pacoteComercial);
+					dialog.setVisible(true);
+					dialog.setResizable(false);
+				}
+
+
 			}
 		});
 
@@ -162,7 +183,7 @@ public class Operador_gerirClientes extends JFrame {
 		btHistorico.setBackground(SystemColor.activeCaption);
 		btHistorico.setEnabled(false);
 		pane.add(btHistorico);
-		
+
 		// tabela
 
 		JPanel painelTabela = new JPanel();
@@ -214,59 +235,59 @@ public class Operador_gerirClientes extends JFrame {
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 		pane.add(lblHoraSistema);
-		
+
 		JPanel painelPesquisa = new JPanel();
 		painelPesquisa.setLayout(null);
 		painelPesquisa.setBackground(Color.WHITE);
 		painelPesquisa.setBounds(96, 77, 453, 221);
 		pane.add(painelPesquisa);
-		
+
 		JLabel labelID = new JLabel("ID");
 		labelID.setFont(new Font("Dialog", Font.PLAIN, 13));
 		labelID.setBounds(6, 15, 39, 18);
 		painelPesquisa.add(labelID);
-		
+
 		textPesquisaID = new JTextField();
 		textPesquisaID.setColumns(10);
 		textPesquisaID.setBounds(72, 6, 371, 27);
 		painelPesquisa.add(textPesquisaID);
-		
+
 		JLabel labelNIF = new JLabel("NIF");
 		labelNIF.setFont(new Font("Dialog", Font.PLAIN, 13));
 		labelNIF.setBounds(6, 49, 56, 18);
 		painelPesquisa.add(labelNIF);
-		
+
 		textPesquisaNIF = new JTextField();
 		textPesquisaNIF.setColumns(10);
 		textPesquisaNIF.setBounds(72, 40, 371, 27);
 		painelPesquisa.add(textPesquisaNIF);
-		
+
 		JLabel labelNome = new JLabel("Nome");
 		labelNome.setFont(new Font("Dialog", Font.PLAIN, 13));
 		labelNome.setBounds(6, 87, 56, 18);
 		painelPesquisa.add(labelNome);
-		
+
 		textFieldNome = new JTextField();
 		textFieldNome.setColumns(10);
 		textFieldNome.setBounds(72, 78, 371, 27);
 		painelPesquisa.add(textFieldNome);
-		
+
 		JLabel labelMorada = new JLabel("Morada");
 		labelMorada.setFont(new Font("Dialog", Font.PLAIN, 13));
 		labelMorada.setBounds(6, 116, 56, 27);
 		painelPesquisa.add(labelMorada);
-		
+
 		textFieldMorada = new JTextField();
 		textFieldMorada.setColumns(10);
 		textFieldMorada.setBounds(72, 116, 371, 27);
 		painelPesquisa.add(textFieldMorada);
-		
+
 		JCheckBox checkBoxAtivo = new JCheckBox("Ativo");
 		checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
 		checkBoxAtivo.setBackground(Color.WHITE);
 		checkBoxAtivo.setBounds(234, 150, 69, 24);
 		painelPesquisa.add(checkBoxAtivo);
-		
+
 		JButton botaoPesquisa = new JButton("Pesquisar");
 		botaoPesquisa.setFont(new Font("Dialog", Font.PLAIN, 13));
 		botaoPesquisa.setBackground(SystemColor.activeCaption);
@@ -319,13 +340,14 @@ public class Operador_gerirClientes extends JFrame {
 			}
 		});
 		painelPesquisa.add(botaoPesquisa);
-		
-	
-
+		btnVisualizarPacote.setEnabled(false);
+		btAtribuirPacote.setEnabled(false);
+		btAtribuirPromocao.setEnabled(false);
+		btVisualizarPromocao.setEnabled(false);
+		btHistorico.setEnabled(false);
 	}
 
-	// Look Nimbus 
-
+	
 	private JScrollPane scrollPaneSetup() {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(33, 33, 1224, 330);
@@ -346,21 +368,36 @@ public class Operador_gerirClientes extends JFrame {
 					btAtribuirPromocao.setEnabled(false);
 					btVisualizarPromocao.setEnabled(false);
 					btHistorico.setEnabled(false);
+					btnVisualizarPacote.setEnabled(false);
 				}
 				else if (table.getSelectedRows().length==1) {
 					btAtribuirPacote.setEnabled(true);
-					btAtribuirPromocao.setEnabled(true);
-					btVisualizarPromocao.setEnabled(true);
+					if(table.getValueAt(table.getSelectedRow(), 6 ).equals("Não Atribuido")) {
+						btAtribuirPromocao.setEnabled(false);
+						btnVisualizarPacote.setEnabled(false);
+					}else {
+						btAtribuirPromocao.setEnabled(true);
+						btnVisualizarPacote.setEnabled(true);
+					}
+					if(table.getValueAt(table.getSelectedRow(), 6 ).equals("Não Atribuido")) {
+						btVisualizarPromocao.setEnabled(false);
+						btnVisualizarPacote.setEnabled(false);
+					}else {
+						btVisualizarPromocao.setEnabled(true);
+						btnVisualizarPacote.setEnabled(true);
+
+					}
 					btHistorico.setEnabled(true);
 				}
 				else if (table.getSelectedRowCount()==0)
 				{
+					btnVisualizarPacote.setEnabled(false);
 					btAtribuirPacote.setEnabled(false);
 					btAtribuirPromocao.setEnabled(false);
 					btVisualizarPromocao.setEnabled(false);
 					btHistorico.setEnabled(false);
 				}
-				
+
 			}	
 		});
 		return scrollPane;
@@ -425,7 +462,7 @@ public class Operador_gerirClientes extends JFrame {
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
-	
+
 	public JLabel getLblResultados() {
 		return lblResultados;
 	}
