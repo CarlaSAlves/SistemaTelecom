@@ -31,26 +31,20 @@ public class AreaCliente extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);	
-	private JButton btAtualizarDados, btAtualizaDados;
+	private JButton btAtualizarDados;
 	private JPanel panel;
 	private JLabel lblUsernameLogged,lblTempoSessao,lblHoraSistema;
 	private JPanel pane;
 	private JPanel panelMeusDados;
-	private JPanel panelDados2;
-	private JPanel panelDados3;
-	private JPanel panelDados4;
+
 	private JTextField textFieldNome;
 	private JTextField textFieldNIF;
 	private JTextField textFieldLogin;
 	private JTextField textFieldMorada;
-	private JPanel panelProdutos; 
 
-	private JTextArea textArea_2;
-	private JLabel lblNewLabel_8;
-
-	private JLabel lblNewLabel_6_2;
-	private JButton btVoltarAreaCliente;
 	private JButton btTerminarSessao;
+	
+	private AreaCliente_MeusDados areaClienteDados = new AreaCliente_MeusDados();
 
 
 	/**
@@ -83,9 +77,8 @@ public class AreaCliente extends JFrame {
 
 	private void initialize(GUI_total guit) {
 
-
 		ativarNimbusLookAndFeel(); 
-
+		
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		panel = new JPanel();
@@ -95,7 +88,9 @@ public class AreaCliente extends JFrame {
 		getContentPane().setBackground(SystemColor.text);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
-		getContentPane().setLayout(null);
+		getContentPane().setLayout(null);		
+			
+		//Criar o método para todos os paineis
 
 		// Label portal cliente
 
@@ -118,73 +113,16 @@ public class AreaCliente extends JFrame {
 		tabbedPane.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		tabbedPane.setBounds(0, 89, 1384, 586);
 		panel.add(tabbedPane);
+		
+		
+		
+		// Classe AreaCliente_MeusDados -  Separador os meus dados
 
-		// Separador os meus dados
-
-		//Cliente_Dados clienteDados = new ClienteDados();
-		//JPanelMeusDados = clienteDados.returnPenel
-		//clienteDados.returnPenel() 
-		panelMeusDados = new JPanel();
+		JPanel panelMeusDados = areaClienteDados.returnAreaClienteMeusDados();	
 		tabbedPane.addTab("Meus Dados",null,  panelMeusDados);
 		panelMeusDados.setLayout(null);
 		panelMeusDados.setForeground(Color.BLUE);
 		panelMeusDados.setFont(new Font("Dubai", Font.PLAIN, 12 ));
-
-
-		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		lblNome.setBounds(76, 77, 69, 36);
-		panelMeusDados.add(lblNome);
-
-		textFieldNome = new JTextField();
-		textFieldNome.setBounds(170, 77, 246, 36);
-		panelMeusDados.add(textFieldNome);
-		textFieldNome.setColumns(10);
-
-		JLabel lblNIF = new JLabel("NIF:");
-		lblNIF.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		lblNIF.setBounds(76, 138, 69, 36);
-		panelMeusDados.add(lblNIF);
-
-		textFieldNIF = new JTextField();
-		textFieldNIF.setColumns(10);
-		textFieldNIF.setBounds(170, 138, 246, 36);
-		panelMeusDados.add(textFieldNIF);
-
-		JLabel lblLogin = new JLabel("Login");
-		lblLogin.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		lblLogin.setBounds(76, 205, 69, 36);
-		panelMeusDados.add(lblLogin);
-
-		textFieldLogin = new JTextField();
-		textFieldLogin.setColumns(10);
-		textFieldLogin.setBounds(170, 205, 246, 36);
-		panelMeusDados.add(textFieldLogin);
-
-		JLabel lblMorada = new JLabel("Morada");
-		lblMorada.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		lblMorada.setBounds(76, 268, 81, 36);
-		panelMeusDados.add(lblMorada);
-
-		textFieldMorada = new JTextField();
-		textFieldMorada.setColumns(10);
-		textFieldMorada.setBounds(170, 272, 246, 36);
-		panelMeusDados.add(textFieldMorada);
-
-		btAtualizarDados = new JButton("Atualizar dados");
-		btAtualizarDados.setBounds(200, 362, 180, 50);
-		panelMeusDados.add(btAtualizarDados);
-		btAtualizarDados.setForeground(Color.DARK_GRAY);
-		btAtualizarDados.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-		btAtualizarDados.setFocusPainted(false);
-
-		//Imagem de fundo - Provisoria
-
-		JLabel imagemDados = new JLabel("");
-		imagemDados.setBounds(6, -41, 1394, 598);
-		panelMeusDados.add(imagemDados);
-		imagemDados.setBackground(new Color(240, 240, 240));
-		imagemDados.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
 
 
 		/****************************/
@@ -374,20 +312,6 @@ public class AreaCliente extends JFrame {
 
 
 
-
-		// Botão Atualiza dados 
-
-		//		btAtualizaDados = new JButton("Atualizar Dados");
-		//		btAtualizaDados.setBounds(468, 27, 268, 50);
-		//		btAtualizaDados.setForeground(Color.DARK_GRAY);
-		//		btAtualizaDados.setToolTipText("Atualize os seus dados aqui.");	
-		//		btAtualizaDados.setFocusPainted(false);
-		//		btAtualizaDados.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-		//		getContentPane().add(btAtualizaDados);
-
-
-
-
 		/* RUDAPÉ */
 		//Botão Termina sessão
 
@@ -462,6 +386,12 @@ public class AreaCliente extends JFrame {
 
 	}
 
+	
+	
+	/**
+	 * Cria uma Lable de Boas Vindas
+	 * @param name
+	 */
 
 	public void setLableBoasVindas(String name) {
 		//Passos a fazer: guitOTAL - SETAR A LBL DE BOAS VINDAS no método labelUsernameNavegaPaginas
