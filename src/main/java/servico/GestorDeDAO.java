@@ -218,5 +218,9 @@ public class GestorDeDAO {
 	public PacoteComercial getPacoteClienteInfo(int id) throws Exception {
 		return pacoteClienteDAO.getPacoteClienteInfo(id);
 	}
+	
+	public List<Promocao> getPacoteClientePromocaoInfo(int id) throws Exception {
+		return pacoteClientePromocaoDAO.getPacoteClientePromocaoInfo(id);
+	}
 
 }

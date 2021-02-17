@@ -37,6 +37,7 @@ import servico.GestorDeDAO;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 import standard_value_object.PacoteComercial;
+import standard_value_object.Promocao;
 
 @SuppressWarnings("serial")
 public class Operador_gerirClientes extends JFrame {
@@ -137,9 +138,26 @@ public class Operador_gerirClientes extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//				Operador_visualizarDialog dialog = new Operador_visualizarDialog(Operador_gerirClientes.this);
-				//				dialog.setVisible(true);
-				//				dialog.setResizable(false);
+				int row = table.getSelectedRow();
+				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTableOP.OBJECT_COL);
+				List<Promocao> listaPromocao = null;
+
+				try {
+					listaPromocao = GestorDeDAO.getGestorDeDAO().getPacoteClientePromocaoInfo(clienteTemp.getId_pacote_cliente());
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+
+				if(listaPromocao.isEmpty()) {
+					JOptionPane.showMessageDialog(Operador_gerirClientes.this,
+							"Não existem Promoções Atribuidas", "Erro", JOptionPane.ERROR_MESSAGE);
+					return;
+				}else {
+					Operador_visualizarDialog dialog = new Operador_visualizarDialog(listaPromocao, true, clienteTemp.getNome());
+					dialog.setVisible(true);
+					dialog.setResizable(false);
+				}
+				
 
 			}
 		});
@@ -168,7 +186,7 @@ public class Operador_gerirClientes extends JFrame {
 						e1.printStackTrace();
 					}
 
-					Operador_visualizarDialog dialog = new Operador_visualizarDialog(pacoteComercial);
+					Operador_visualizarDialog dialog = new Operador_visualizarDialog(pacoteComercial, clienteTemp.getNome());
 					dialog.setVisible(true);
 					dialog.setResizable(false);
 				}
