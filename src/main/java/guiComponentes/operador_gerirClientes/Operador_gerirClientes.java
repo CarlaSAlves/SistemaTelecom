@@ -25,6 +25,9 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import guiComponentes.GUI_total;
+import guiComponentes.admin_gestorCliente.CriarClienteDialog;
+import guiComponentes.admin_gestorCliente.GUI_gestor_cliente;
 import guiComponentes.admin_gestorOperador.GUI_gestor_operador;
 import guiComponentes.admin_gestorOperador.HistoricoOperadorDialog;
 import guiComponentes.admin_gestorOperador.OperadorPesquisaModelTable;
@@ -33,7 +36,7 @@ import servico.GestorDeDAO;
 import standard_value_object.Funcionario;
 
 @SuppressWarnings("serial")
-public class Operador_areaPessoal extends JFrame {
+public class Operador_gerirClientes extends JFrame {
 
 	private int numberRows;
 	private JPanel pane, painelPesquisa;
@@ -53,7 +56,7 @@ public class Operador_areaPessoal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Operador_areaPessoal frame = new Operador_areaPessoal();
+					Operador_gerirClientes frame = new Operador_gerirClientes();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -65,7 +68,7 @@ public class Operador_areaPessoal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Operador_areaPessoal() {
+	public Operador_gerirClientes() {
 		inicialize();
 
 	}
@@ -77,7 +80,7 @@ public class Operador_areaPessoal extends JFrame {
 		pane = new JPanel();
 		setContentPane(pane);
 		pane.setLayout(null);
-		setTitle("Área Pessoal Operador");
+		setTitle("Operador - Gerir Clientes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
 		pane.setBackground(SystemColor.text);
@@ -92,20 +95,41 @@ public class Operador_areaPessoal extends JFrame {
 
 		// -- Botões --  
 
-		btAtribuirPacote = new JButton("Atribuir Pacote");
-		btAtribuirPacote.setBounds(1160, 231, 154, 40);
+		btAtribuirPacote = new JButton("Atribuir Pacote Comercial");
+		btAtribuirPacote.setBounds(1135, 231, 187, 40);
 		pane.add(btAtribuirPacote);
+		btAtribuirPacote.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Operador_atribuirPacoteDialog dialog = new Operador_atribuirPacoteDialog(Operador_gerirClientes.this);
+				dialog.setVisible(true);
+				dialog.setResizable(false);
+				
+			}
+		});
 
 		btAtribuirPromocao = new JButton("Atribuir Promoção");
-		btAtribuirPromocao.setBounds(994, 231, 154, 40);
+		btAtribuirPromocao.setBounds(947, 231, 157, 40);
 		pane.add(btAtribuirPromocao);
+		btAtribuirPromocao.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
-		visualizarPromocao = new JButton("Visualizar Promoção");
-		visualizarPromocao.setBounds(833, 231, 154, 40);
+					Operador_atribuirPromoDialog dialog = new Operador_atribuirPromoDialog(Operador_gerirClientes.this);
+					dialog.setVisible(true);
+					dialog.setResizable(false);
+
+				}
+			});
+
+		visualizarPromocao = new JButton("Visualizar Promoções");
+		visualizarPromocao.setBounds(947, 179, 157, 40);
 		pane.add(visualizarPromocao);
 
 		btHistorico = new JButton("Histórico");
-		btHistorico.setBounds(667, 232, 154, 40);
+		btHistorico.setBounds(764, 232, 154, 40);
 		btHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		btHistorico.setBackground(SystemColor.activeCaption);
 		btHistorico.setEnabled(false);
@@ -138,7 +162,7 @@ public class Operador_areaPessoal extends JFrame {
 		pane.add(btVoltarOperador);
 
 		JLabel lbFooter = new JLabel();
-		lbFooter.setIcon(new ImageIcon(Operador_areaPessoal.class.getResource("/guiComponentes/img/AltranOperador.png")));
+		lbFooter.setIcon(new ImageIcon(Operador_gerirClientes.class.getResource("/guiComponentes/img/AltranOperadorFooter.png")));
 		lbFooter.setBounds(599, 690, 213, 65);
 		pane.add(lbFooter);
 
@@ -162,6 +186,10 @@ public class Operador_areaPessoal extends JFrame {
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 		pane.add(lblHoraSistema);
+		
+		JButton btnVisualizarPacote = new JButton("Visualizar Pacote Comercial");
+		btnVisualizarPacote.setBounds(1135, 179, 187, 40);
+		pane.add(btnVisualizarPacote);
 
 	}
 
@@ -360,13 +388,4 @@ public class Operador_areaPessoal extends JFrame {
 	public JLabel getLblResultados() {
 		return lblResultados;
 	}
-	
-
-
-
-
-
-
-
-
 }
