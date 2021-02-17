@@ -13,7 +13,7 @@ import java.util.List;
 
 
 import standard_value_object.PacoteCliente;
-
+import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
 
 /*
@@ -57,9 +57,37 @@ public class PacoteClienteDAO {
 		return listaClientes;	
 	}
 	
-	/*
+	
+	public PacoteComercial getPacoteClienteInfo(int id) throws Exception {
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+		PacoteComercial pacoteComercial = null;
+		
+		try {
+			myStmt = myConn.prepareStatement("SELECT pacote.nome, pacote.descricao, pacoteCliente.id, pacote.ativo  "
+					+ "FROM pacote_comercial pacote INNER JOIN pacote_cliente pacoteCliente ON pacote.id = pacoteCliente.id_pacote_comercial WHERE pacoteCliente.id = ?");
+			myStmt.setInt(1, id);
+			myRs = myStmt.executeQuery();
+
+			//converter o resultado devolvido pela base de dados num objeto java
+			if (myRs.next()) {
+				pacoteComercial = new PacoteComercial(myRs.getString(1), myRs.getString(2), myRs.getBoolean(4));
+			}
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(myStmt, myRs);
+		}
+		
+		return pacoteComercial;
+	}
+	
+	
+	/**
 	 * Pesquisa e devolve o pacote com o id enviado como parametro.
 	 * Devolve pacote nulo se nenhum for encontrado.
+	 * @param id do cliente
 	 */
 	public PacoteCliente pesquisarPacoteClienteId(int id) throws Exception {
 		PreparedStatement myStmt = null;

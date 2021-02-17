@@ -13,6 +13,7 @@ import java.util.Properties;
 import data_acess_object_dao.ClienteDAO;
 import data_acess_object_dao.FuncionarioDAO;
 import data_acess_object_dao.PacoteClienteDAO;
+import data_acess_object_dao.PacoteClientePromocaoDAO;
 import data_acess_object_dao.PacoteComercialDAO;
 import data_acess_object_dao.PromocaoDAO;
 import historicos.HistoricoCliente;
@@ -35,6 +36,7 @@ public class GestorDeDAO {
 	private PacoteComercialDAO pacoteComercialDAO;
 	private PromocaoDAO promocaoDAO;
 	private PacoteClienteDAO pacoteClienteDAO;
+	private PacoteClientePromocaoDAO pacoteClientePromocaoDAO;
 	private static GestorDeDAO GestorDeDAOInstance = null;
 	private Connection connection;
 
@@ -45,6 +47,7 @@ public class GestorDeDAO {
 		pacoteComercialDAO = new PacoteComercialDAO(this.connection);
 		promocaoDAO = new PromocaoDAO(this.connection);
 		pacoteClienteDAO = new PacoteClienteDAO(connection);
+		pacoteClientePromocaoDAO = new PacoteClientePromocaoDAO(connection);
 	}
 
 	public static synchronized GestorDeDAO getGestorDeDAO() throws Exception {
@@ -210,6 +213,10 @@ public class GestorDeDAO {
 
 	public List<Promocao> pesquisaPromocao(int id, String nome, int ativo) throws Exception{
 		return promocaoDAO.pesquisaPromocao(id, nome, ativo);
+	}
+	
+	public PacoteComercial getPacoteClienteInfo(int id) throws Exception {
+		return pacoteClienteDAO.getPacoteClienteInfo(id);
 	}
 
 }

@@ -15,6 +15,8 @@ public class PacoteComercial {
 		
 	}
 	
+
+
 	public PacoteComercial(String nome, String descricao, boolean ativo, Date data_inicio,
 			Date data_fim) {
 		super();
