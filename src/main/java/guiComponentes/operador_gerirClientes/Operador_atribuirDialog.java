@@ -133,6 +133,7 @@ public class Operador_atribuirDialog extends JDialog {
 
 							}else {
 								Promocao promocao = (Promocao) comboBoxPromo.getSelectedItem();
+					
 								clienteTemp = cliente;
 								func = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
 								pacoteClientePromocao = new PacoteClientePromocao(clienteTemp.getId_pacote_cliente(), promocao.getId());

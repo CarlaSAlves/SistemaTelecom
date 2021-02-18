@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.time.Duration;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.TabbedPaneUI;
 import javax.swing.UIManager.LookAndFeelInfo;
 import guiComponentes.Admin_GUI_homepage;
 import guiComponentes.GUI_total;
@@ -29,6 +31,7 @@ public class AreaCliente extends JFrame {
 	private JPanel panel;
 	private JLabel lblUsernameLogged,lblTempoSessao,lblHoraSistema;
 	JLabel lblBemVindo;
+	private JTabbedPane tabbedPane;
 	private JButton btTerminarSessao;
 	private AreaCliente_MeusDados areaClienteDados = new AreaCliente_MeusDados();
 	private AreaCliente_MeusProdutos areaClienteProdutos = new AreaCliente_MeusProdutos();
@@ -67,16 +70,11 @@ public class AreaCliente extends JFrame {
 
 		ativarNimbusLookAndFeel(); 
 
-
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		panel = new JPanel();
 		setContentPane(panel);
 		panel.setLayout(null);
-		getContentPane().setFont(new Font("Dubai", Font.PLAIN, 12));
-		getContentPane().setBackground(SystemColor.text);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 30, 1400, 800);
-		getContentPane().setLayout(null);		
+		setBounds(100, 30, 1400, 800);	
 
 
 		// Label portal cliente
@@ -96,36 +94,36 @@ public class AreaCliente extends JFrame {
 
 		// Construção JTabbedPane
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setFont(new Font("Dubai Light", Font.PLAIN, 20));
-		tabbedPane.setBounds(0, 89, 1384, 586); //180, 50
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(0, 89, 1384, 586); 
+		tabbedPane.setFont(new Font("Dubai Light", Font.PLAIN, 17 ));
+		tabbedPane.setBorder(null);
 		panel.add(tabbedPane);
 		
 
 		// Ligação a Classe AreaCliente_MeusDados -  Separador os meus dados
 		
 		JPanel panelMeusDados = areaClienteDados.returnAreaClienteMeusDados();	
-		tabbedPane.addTab("Meus Dados",null,  panelMeusDados);
+		tabbedPane.addTab("Meus Dados",null,  panelMeusDados);	
+		panelMeusDados.setBorder(null);
 		panelMeusDados.setLayout(null);
-	//	panelMeusDados.setForeground(Color.BLUE);
 		panelMeusDados.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
-
+		UIManager.put("TabbedPane.selected", Color.white);
 
 		// Ligação a Classe AreaCliente_MeusProdutos-  Separador MeusProdutos
 
 		JPanel panelMeusProdutos = areaClienteProdutos.returnAreaClienteMeusProdutos();
 		tabbedPane.addTab("Meus Produtos",null,  panelMeusProdutos);
 		panelMeusProdutos.setLayout(null);
-	//	panelMeusProdutos.setForeground(Color.BLUE));
+		panelMeusProdutos.setBorder(null);
 		panelMeusProdutos.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
 
 
-		// Ligação a classe ver Pacotes
+		// Ligação a classe ver Pacotes -
 
 		JPanel panelVerTodosPacotes = areaClienteVerPacotes.returnAreaClienteVerPacotes();
 		tabbedPane.addTab("Ver todos os Pacotes Comerciais",null,  panelVerTodosPacotes);
 		panelVerTodosPacotes.setLayout(null);
-	//	panelVerTodosPacotes.setForeground(Color.BLUE);
 		panelMeusProdutos.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
 		
 		// Ligação a classe ver Promoções
@@ -133,9 +131,9 @@ public class AreaCliente extends JFrame {
 		JPanel panelVerTodasPromo = areaClienteVerPromo.returnAreaClienteVerPromo();
 		tabbedPane.addTab("Ver todas as Promoções",null,  panelVerTodasPromo);
 		panelVerTodasPromo.setLayout(null);
-	//	panelVerTodasPromo.setForeground(Color.BLACK);
 		panelVerTodasPromo.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
 		
+	
 		/* RODAPÉ */
 		//Botão Termina sessão
 
@@ -234,6 +232,7 @@ public class AreaCliente extends JFrame {
 			}
 		}
 	}
+
 
 
 

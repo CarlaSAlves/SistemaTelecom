@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -94,14 +96,26 @@ public class GUI_login extends JFrame {
 		textFieldUser.setFont(new Font("Dialog", Font.PLAIN, 13));
 		getContentPane().add(textFieldUser);
 		textFieldUser.setColumns(10);
+		textFieldUser.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				passwordField.setText("");
+				
+			}
+		});
 
 		labelConfm = new JLabel("User ou Password incorreta");
 		labelConfm.setBounds(359, 578, 251, 18);
 		labelConfm.setForeground(new Color(70,74,101));
 		labelConfm.setFont(new Font("SansSerif", Font.PLAIN, 12));
 
-
-		//labelConfirm devia estar escondida de origem, n�o ?
 		labelConfm.setVisible(false);
 		getContentPane().add(labelConfm);
 
@@ -231,6 +245,7 @@ public class GUI_login extends JFrame {
 		}
 		if( cliente != null) {
 			guit.loginEfetuado(0);
+			labelConfm.setVisible(false);
 		}
 
 		//se nao é  cliente, é  funcion�rio 
@@ -256,6 +271,7 @@ public class GUI_login extends JFrame {
 				//role 2 = operador	
 				case(2):
 					guit.loginEfetuado(2);
+				labelConfm.setVisible(false);
 				//linha para abrir a janela do operador (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o operador atualmente logado)
 				//TODO: abrir Janela da area operador e passar o operador que loga no seu construtor
 				//JOptionPane.showMessageDialog(null, "Menu operador em construção.");

@@ -112,8 +112,10 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		
 		int i = 0;
 		for (Promocao promo : GestorDeDAO.getGestorDeDAO().getAllPromocoes()) {
+			if (promo.isAtiva()) {
 			promocoes[i] = promo.getNome();
 			i++;
+			}
 		}
 
 		JList<String> listVerPromo = new JList<String>(promocoes);

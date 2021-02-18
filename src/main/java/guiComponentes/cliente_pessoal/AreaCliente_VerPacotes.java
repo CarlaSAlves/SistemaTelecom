@@ -115,8 +115,10 @@ public class AreaCliente_VerPacotes extends JFrame {
 		String[] pacotes = new String[GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais().size()];
 		int i = 0;
 		for (PacoteComercial pacote : GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais()) {
+			if (pacote.isAtivo()) {
 			pacotes[i] = pacote.getNome();
 			i++;
+			}
 		}
 		
 		
