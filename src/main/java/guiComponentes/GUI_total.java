@@ -475,6 +475,17 @@ public class GUI_total extends JFrame {
 
 	public String mandarUsername() {
 		return username;
+	}
+
+
+	/**
+	 * Botão Voltar para pagina do login do cliente
+	 */
+	public void btTerminarSessaoCliente() {
+		gravarFicheiro(username, temporizador, dataEHoraDeLog, "sessaolog.txt");
+		loginPanel.setVisible(true);
+		areaClientePanel.setVisible(false);
+		
 	}	
 	
 
