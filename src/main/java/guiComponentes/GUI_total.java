@@ -416,14 +416,7 @@ public class GUI_total extends JFrame {
 		gestor_promocao.getTable().setModel(new DefaultTableModel());
 		gestor_promocao.getLblResultados().setText("Resultados: ");
 		gestor_promocao.getTextAreaDescricao().setText(" ");	
-
-		operador_visualizarPacote.getTable().setModel(new DefaultTableModel());
-		operador_visualizarPacote.getLblResultados().setText("Resultados: ");
-		operador_visualizarPacote.getTextAreaDescricao().setText(" ");
-
-		operador_visualizarPromo.getTable().setModel(new DefaultTableModel());
-		operador_visualizarPromo.getLblResultados().setText("Resultados: ");
-		operador_visualizarPromo.getTextAreaDescricao().setText(" ");
+		
 
 	}
 
@@ -453,6 +446,16 @@ public class GUI_total extends JFrame {
 		loginPanel.setVisible(true);
 		operador_homepagePanel.setVisible(false);
 
+		operador_visualizarPacote.getTable().setModel(new DefaultTableModel());
+		operador_visualizarPacote.getLblResultados().setText("Resultados: ");
+		operador_visualizarPacote.getTextAreaDescricao().setText(" ");
+
+		operador_visualizarPromo.getTable().setModel(new DefaultTableModel());
+		operador_visualizarPromo.getLblResultados().setText("Resultados: ");
+		operador_visualizarPromo.getTextAreaDescricao().setText(" ");
+		
+		operador_gerirClientes.getTable().setModel(new DefaultTableModel());
+		operador_gerirClientes.getLblResultados().setText("Resultados: ");
 	}
 
 	public void gerirOperHomepage() {
