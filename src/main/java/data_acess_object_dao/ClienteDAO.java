@@ -245,25 +245,14 @@ public class ClienteDAO {
 			myStmt.setString(1, login);
 			myRs = myStmt.executeQuery();
 
-			//se myRs.next() = true, então for detetado um cliente. Vamos produzir um objeto em java que o represente
-			if (myRs.next()) {
-				cliente = new Cliente();
-				cliente.setId(myRs.getInt(1));
-				cliente.setNome(myRs.getString(2));
-				cliente.setNif(myRs.getInt(3));
-				cliente.setMorada(myRs.getString(4));
-				cliente.setLogin(myRs.getString(5));
-				cliente.setPassword(myRs.getString(6));
-				cliente.setAtivo(myRs.getInt(7) == 1 ? true : false);
+			while (myRs.next()) {
+				cliente = converteRowParaCliente(myRs);
 			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
+			return cliente;
+		}
+		finally {
 			close(myStmt, myRs);
 		}
-
-		return cliente;
 	}
 	
 

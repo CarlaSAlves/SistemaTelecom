@@ -133,6 +133,6 @@ public class AreaCliente_MeusProdutos extends JFrame {
 	}
 
 	public JPanel returnAreaClienteMeusProdutos() {
-		return  panelMeusProdutos;
+		return  (JPanel) getContentPane();
 	}
 }// end class

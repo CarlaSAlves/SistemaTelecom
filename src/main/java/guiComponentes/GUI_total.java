@@ -104,6 +104,8 @@ public class GUI_total extends JFrame {
 		operador_visualizarPacote = new Operador_VisualizarPacote();
 		operador_visualizarPromo = new Operador_VisualizarPromocoes();
 		areaCliente = new AreaCliente(this);
+//		areaClienteDados = new AreaCliente_MeusDados();
+		
 		// ligação - login 
 
 		loginPanel = login.returnPanel();
@@ -288,10 +290,11 @@ public class GUI_total extends JFrame {
 		homepage.setUsernameLoggedIn(username);
 		operador_homepage.setUsernameLoggedIn(username);
 		operador_visualizarPacotes.setUsernameLoggedIn(username);
-		operador_visualizarPromocoes.setUsernameLoggedIn(username);
-		areaCliente.setUsernameLoggedIn(username);
+		operador_visualizarPromocoes.setUsernameLoggedIn(username);		
 		operador_gerirClientes.setUsername(username);
 		operador_gerirClientes.setUsernameLoggedIn(username);
+		areaCliente.setUsernameLoggedIn(username);
+		areaCliente.setUsername(username);
 
 		Funcionario func = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
 		Cliente cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLogin(username);
@@ -303,6 +306,7 @@ public class GUI_total extends JFrame {
 		}
 	}
 
+	
 
 	private void comecarTemporizador(){
 
@@ -387,7 +391,7 @@ public class GUI_total extends JFrame {
 	public void loginEfetuado(int role) throws Exception {
 		inicio = Instant.now();
 		labelUsernameNavegaPaginas(login, homepage, gestor_cliente, gestor_operador, gestor_pacotes,
-				gestor_promocao, operador_homepage, operador_visualizarPacote, operador_visualizarPromo, areaCliente, operador_gerirClientes);
+				gestor_promocao, operador_homepage, operador_visualizarPacote, operador_visualizarPromo, areaCliente ,operador_gerirClientes);
 		loginPanel.setVisible(false);
 		if (role == 1) {
 			homepagePanel.setVisible(true);

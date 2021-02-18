@@ -1,7 +1,7 @@
 package guiComponentes.admin_gestorCliente;
 
 
-import java.awt.EventQueue;
+
 import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
