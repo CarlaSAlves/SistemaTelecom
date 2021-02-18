@@ -101,7 +101,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 		textFieldNome = new JTextField();
 		textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		textFieldNome.setEditable(false);
-		textFieldNome.setBounds(446, 172, 200, 31);
+		textFieldNome.setBounds(446, 172, 240, 31);
 		panelVerTodosPacotes.add(textFieldNome);
 		textFieldNome.setColumns(10);
 		
@@ -109,7 +109,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		textArea.setBounds(446, 249, 200, 104);
+		textArea.setBounds(446, 249, 240, 104);
 		panelVerTodosPacotes.add(textArea);
 		
 		// Jlist e ScrollBar
@@ -124,7 +124,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 		
 		JList<String> listVerPacotes = new JList<String>(pacotes);
 		listVerPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		listVerPacotes.setBounds(57, 130, 226, 362);
+		listVerPacotes.setBounds(57, 120, 226, 362);
 		listVerPacotes.setSelectedIndex(0);
 		listVerPacotes.setForeground(Color.BLACK);
 		listVerPacotes.setLayoutOrientation( JList.HORIZONTAL_WRAP );
@@ -153,7 +153,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 		});
 		
 		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(57, 130, 226, 362);
+		scrollBar.setBounds(57, 120, 226, 362);
 		panelVerTodosPacotes.add(scrollBar);
 		
 		

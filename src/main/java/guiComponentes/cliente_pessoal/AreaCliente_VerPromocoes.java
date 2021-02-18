@@ -4,7 +4,6 @@ package guiComponentes.cliente_pessoal;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,7 +16,6 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import servico.GestorDeDAO;
-import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
 import javax.swing.JTextField;
 import javax.swing.JScrollBar;
@@ -49,9 +47,14 @@ public class AreaCliente_VerPromocoes extends JFrame {
 	 * Create the frame.
 	 * @throws Exception 
 	 */
-	public AreaCliente_VerPromocoes() throws Exception {
+	public AreaCliente_VerPromocoes() {
 
-		initialize();
+		try {
+			initialize();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -91,7 +94,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		textFieldNome = new JTextField();
 		textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		textFieldNome.setEditable(false);
-		textFieldNome.setBounds(446, 172, 200, 31);
+		textFieldNome.setBounds(446, 172, 240, 31);
 		panelVerTodasPromo.add(textFieldNome);
 		textFieldNome.setColumns(10);
 
@@ -99,7 +102,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		textArea.setBounds(446, 249, 200, 104);
+		textArea.setBounds(446, 249, 240, 104);
 		panelVerTodasPromo.add(textArea);
 
 
@@ -116,7 +119,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		JList<String> listVerPromo = new JList<String>(promocoes);
 
 		listVerPromo.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		listVerPromo.setBounds(57, 130, 226, 362);
+		listVerPromo.setBounds(57, 120, 226, 362);
 		listVerPromo.setSelectedIndex(0);
 		listVerPromo.setForeground(Color.BLACK);
 		listVerPromo.setLayoutOrientation( JList.HORIZONTAL_WRAP );
@@ -145,7 +148,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		});
 		
 		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(57, 130, 226, 362);
+		scrollBar.setBounds(57, 120, 226, 362);
 		panelVerTodasPromo.add(scrollBar);
 
 
