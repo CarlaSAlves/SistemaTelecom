@@ -17,11 +17,11 @@ import standard_value_object.Funcionario;
 import standard_value_object.PacoteComercial;
 
 //correr o script para criar a base de dados antes de correr estes testes
-public class TestesPacoteComercialDAO {
+public class TestePacoteComercialDAO {
 
 	private PacoteComercialDAO pacoteComercialDAO;
 	
-	public TestesPacoteComercialDAO() throws FileNotFoundException, IOException, SQLException {
+	public TestePacoteComercialDAO() throws FileNotFoundException, IOException, SQLException {
 		pacoteComercialDAO = new PacoteComercialDAO(startConnection());
 	}
 	

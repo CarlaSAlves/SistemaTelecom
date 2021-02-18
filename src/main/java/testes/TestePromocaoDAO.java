@@ -12,10 +12,10 @@ import org.junit.Test;
 
 import data_acess_object_dao.PromocaoDAO;
 
+//correr o script para criar a base de dados antes de correr estes testes
 public class TestePromocaoDAO {
-
-	//correr o script para criar a base de dados antes de correr estes testes
-private PromocaoDAO promocaoDAO;
+	
+	private PromocaoDAO promocaoDAO;
 	
 	public TestePromocaoDAO() throws FileNotFoundException, IOException, SQLException {
 		promocaoDAO = new PromocaoDAO(startConnection());
