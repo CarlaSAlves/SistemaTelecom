@@ -1,6 +1,7 @@
 package guiComponentes.cliente_pessoal;
 
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -13,6 +14,11 @@ import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import servico.GestorDeDAO;
+import standard_value_object.PacoteComercial;
+import standard_value_object.Promocao;
 import javax.swing.JTextField;
 import javax.swing.JScrollBar;
 
@@ -21,7 +27,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 
 	//private JPanel panel;
 	private JPanel panelVerTodasPromo;
-	private JTextField textField;
+	private JTextField textFieldNome;
 
 	/**
 	 * Launch the application.
@@ -41,78 +47,109 @@ public class AreaCliente_VerPromocoes extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws Exception 
 	 */
-	public AreaCliente_VerPromocoes() {
+	public AreaCliente_VerPromocoes() throws Exception {
 
 		initialize();
 
 	}
 
-	private void initialize() {
-		
+	private void initialize() throws Exception {
+
 		/**
 		 * 
 		 */
 		ativarNimbusLookAndFeel();
-		
+
 		/**
 		 * Define as caracteristicas dos painel base. 
 		 */
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		panelVerTodasPromo = new JPanel();
-		setContentPane(panelVerTodasPromo);
 		panelVerTodasPromo.setLayout(null);
-		getContentPane().setFont(new Font("Dubai", Font.PLAIN, 12));
-		getContentPane().setBackground(SystemColor.text);
+		setContentPane(panelVerTodasPromo);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1384, 586);
-		getContentPane().setLayout(null);
 		
-	
+		// Labels e textFieldNome da página 
 		
-		// Labels e textField da página 
-		JLabel labelVerPromo= new JLabel("Ver todas as Promoções:");
-		labelVerPromo.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-		labelVerPromo.setBounds(57, 101, 248, 23);
+		JLabel labelVerPromo = new JLabel("Ver todas as Promoções:");
+		labelVerPromo.setFont(new Font("Dubai Light", Font.PLAIN, 20));
+		labelVerPromo.setBounds(57, 58, 318, 23);
 		panelVerTodasPromo.add(labelVerPromo);
-		
+
 		JLabel labelPacoteNome = new JLabel("Nome:");
-		labelPacoteNome.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-		labelPacoteNome.setBounds(360, 189, 71, 23);
+		labelPacoteNome.setFont(new Font("Dubai Light", Font.PLAIN, 18));
+		labelPacoteNome.setBounds(343, 171, 71, 31);
 		panelVerTodasPromo.add(labelPacoteNome);
-		
+
 		JLabel labelPromoDescricao = new JLabel("Descrição:");
-		labelPromoDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-		labelPromoDescricao.setBounds(360, 252, 99, 23);
+		labelPromoDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 18));
+		labelPromoDescricao.setBounds(344, 249, 89, 23);
 		panelVerTodasPromo.add(labelPromoDescricao);
-		
-		textField = new JTextField();
-		textField.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		textField.setEditable(false);
-		textField.setBounds(462, 191, 170, 29);
-		panelVerTodasPromo.add(textField);
-		textField.setColumns(10);
-		
+
+		textFieldNome = new JTextField();
+		textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		textFieldNome.setEditable(false);
+		textFieldNome.setBounds(446, 172, 200, 31);
+		panelVerTodasPromo.add(textFieldNome);
+		textFieldNome.setColumns(10);
+
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
-		textArea.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		textArea.setBounds(462, 252, 170, 103);
+		textArea.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		textArea.setBounds(446, 249, 200, 104);
 		panelVerTodasPromo.add(textArea);
-		
+
+
 		// Jlist e ScrollBar
-		JList listVerPromo = new JList();
-		listVerPromo.setFont(new Font("Dubai Light", Font.PLAIN, 12));
-		listVerPromo.setBounds(57, 162, 225, 328);
+		
+		String[] promocoes = new String[GestorDeDAO.getGestorDeDAO().getAllPromocoes().size()];
+		
+		int i = 0;
+		for (Promocao promo : GestorDeDAO.getGestorDeDAO().getAllPromocoes()) {
+			promocoes[i] = promo.getNome();
+			i++;
+		}
+
+		JList<String> listVerPromo = new JList<String>(promocoes);
+
+		listVerPromo.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		listVerPromo.setBounds(57, 130, 226, 362);
+		listVerPromo.setSelectedIndex(0);
+		listVerPromo.setForeground(Color.BLACK);
+		listVerPromo.setLayoutOrientation( JList.HORIZONTAL_WRAP );
+		listVerPromo.setVisibleRowCount( -1 ); // -1 sig q ele é variavel
+
+		listVerPromo.setFixedCellHeight( 24 );
+		listVerPromo.setFixedCellWidth( 226 );
 		panelVerTodasPromo.add(listVerPromo);
+
+		listVerPromo.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (!e.getValueIsAdjusting()) {
+					String texto = listVerPromo.getSelectedValue();
+					try {
+						textFieldNome.setText((texto));
+						textArea.setText(texto);
+					} catch (Exception ex) {
+
+					}
+					return;
+				}
+				
+			}
+		});
 		
 		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(57, 162, 225, 328);
+		scrollBar.setBounds(57, 130, 226, 362);
 		panelVerTodasPromo.add(scrollBar);
-		
-		
 
-		
+
+
 		/*
 		 * Define a imagem de fundo através de uma label
 		 */

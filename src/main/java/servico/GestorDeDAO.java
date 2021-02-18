@@ -186,7 +186,7 @@ public class GestorDeDAO {
 		pacoteComercialDAO.ativarPacoteComercial(id, funcionario);
 	}
 
-	public List<PacoteComercial> getAllPacotesComerciais() throws Exception{
+	public List<PacoteComercial> getAllPacotesComerciais() throws Exception {
 		return pacoteComercialDAO.getAllPacotesComerciais();    
 	}
 
