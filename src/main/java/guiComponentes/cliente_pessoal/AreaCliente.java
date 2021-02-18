@@ -33,7 +33,7 @@ public class AreaCliente extends JFrame {
 	private AreaCliente_MeusDados areaClienteDados = new AreaCliente_MeusDados();
 	private AreaCliente_MeusProdutos areaClienteProdutos = new AreaCliente_MeusProdutos();
 	private AreaCliente_VerPacotes areaClienteVerPacotes = new AreaCliente_VerPacotes();
-
+	private AreaCliente_VerPromocoes areaClienteVerPromo = new AreaCliente_VerPromocoes();
 
 	/**
 	 * Launch the application.
@@ -107,8 +107,8 @@ public class AreaCliente extends JFrame {
 		JPanel panelMeusDados = areaClienteDados.returnAreaClienteMeusDados();	
 		tabbedPane.addTab("Meus Dados",null,  panelMeusDados);
 		panelMeusDados.setLayout(null);
-		panelMeusDados.setForeground(Color.BLUE);
-		panelMeusDados.setFont(new Font("Dubai", Font.PLAIN, 12 ));
+	//	panelMeusDados.setForeground(Color.BLUE);
+		panelMeusDados.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
 
 
 		// Ligação a Classe AreaCliente_MeusProdutos-  Separador MeusProdutos
@@ -116,19 +116,26 @@ public class AreaCliente extends JFrame {
 		JPanel panelMeusProdutos = areaClienteProdutos.returnAreaClienteMeusProdutos();
 		tabbedPane.addTab("Meus Produtos",null,  panelMeusProdutos);
 		panelMeusProdutos.setLayout(null);
-		panelMeusProdutos.setForeground(Color.BLUE);
-		panelMeusProdutos.setFont(new Font("Dubai", Font.PLAIN, 12 ));
+	//	panelMeusProdutos.setForeground(Color.BLUE));
+		panelMeusProdutos.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
 
 
 		// Ligação a classe ver Pacotes
 
 		JPanel panelVerTodosPacotes = areaClienteVerPacotes.returnAreaClienteVerPacotes();
-		tabbedPane.addTab("Ver Todos os Pacotes Comerciais",null,  panelVerTodosPacotes);
+		tabbedPane.addTab("Ver todos os Pacotes Comerciais",null,  panelVerTodosPacotes);
 		panelVerTodosPacotes.setLayout(null);
-		panelVerTodosPacotes.setForeground(Color.BLUE);
-		panelMeusProdutos.setFont(new Font("Dubai", Font.PLAIN, 12 ));
+	//	panelVerTodosPacotes.setForeground(Color.BLUE);
+		panelMeusProdutos.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
+		
+		// Ligação a classe ver Promoções
 
-
+		JPanel panelVerTodasPromo = areaClienteVerPromo.returnAreaClienteVerPromo();
+		tabbedPane.addTab("Ver todas as Promoções",null,  panelVerTodasPromo);
+		panelVerTodasPromo.setLayout(null);
+	//	panelVerTodasPromo.setForeground(Color.BLACK);
+		panelVerTodasPromo.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
+		
 		/* RODAPÉ */
 		//Botão Termina sessão
 
