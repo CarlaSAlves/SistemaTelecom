@@ -1,6 +1,6 @@
 package guiComponentes.cliente_pessoal;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.time.Duration;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,32 +18,18 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import guiComponentes.Admin_GUI_homepage;
 import guiComponentes.GUI_total;
-import javax.swing.JList;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
 import javax.swing.JTabbedPane;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
+
 
 public class AreaCliente extends JFrame {
 
 
 	private static final long serialVersionUID = 1L;
-	private Font font = new Font("Dubai Light", Font.PLAIN, 15);	
-	private JButton btAtualizarDados;
+
 	private JPanel panel;
 	private JLabel lblUsernameLogged,lblTempoSessao,lblHoraSistema;
 	JLabel lblBemVindo;
-
-	private JPanel panelMeusDados;
-
-	private JTextField textFieldNome;
-	private JTextField textFieldNIF;
-	private JTextField textFieldLogin;
-	private JTextField textFieldMorada;
-
 	private JButton btTerminarSessao;
-
 	private AreaCliente_MeusDados areaClienteDados = new AreaCliente_MeusDados();
 	private AreaCliente_MeusProdutos areaClienteProdutos = new AreaCliente_MeusProdutos();
 	private AreaCliente_VerPacotes areaClienteVerPacotes = new AreaCliente_VerPacotes();
@@ -93,7 +78,6 @@ public class AreaCliente extends JFrame {
 		setBounds(100, 30, 1400, 800);
 		getContentPane().setLayout(null);		
 
-		//Criar o método para todos os paineis
 
 		// Label portal cliente
 
@@ -116,12 +100,10 @@ public class AreaCliente extends JFrame {
 		tabbedPane.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		tabbedPane.setBounds(0, 89, 1384, 586);
 		panel.add(tabbedPane);
+		
 
-
-		/****************************/
-		//Ligação a Classe AreaCliente_MeusDados -  Separador os meus dados
-		/***************************/
-
+		// Ligação a Classe AreaCliente_MeusDados -  Separador os meus dados
+		
 		JPanel panelMeusDados = areaClienteDados.returnAreaClienteMeusDados();	
 		tabbedPane.addTab("Meus Dados",null,  panelMeusDados);
 		panelMeusDados.setLayout(null);
@@ -129,9 +111,7 @@ public class AreaCliente extends JFrame {
 		panelMeusDados.setFont(new Font("Dubai", Font.PLAIN, 12 ));
 
 
-		/****************************/
 		// Ligação a Classe AreaCliente_MeusProdutos-  Separador MeusProdutos
-		/****************************/
 
 		JPanel panelMeusProdutos = areaClienteProdutos.returnAreaClienteMeusProdutos();
 		tabbedPane.addTab("Meus Produtos",null,  panelMeusProdutos);
@@ -140,10 +120,7 @@ public class AreaCliente extends JFrame {
 		panelMeusProdutos.setFont(new Font("Dubai", Font.PLAIN, 12 ));
 
 
-		/****************************/
 		// Ligação a classe ver Pacotes
-		/****************************/
-
 
 		JPanel panelVerTodosPacotes = areaClienteVerPacotes.returnAreaClienteVerPacotes();
 		tabbedPane.addTab("Ver Todos os Pacotes Comerciais",null,  panelVerTodosPacotes);
@@ -152,8 +129,7 @@ public class AreaCliente extends JFrame {
 		panelMeusProdutos.setFont(new Font("Dubai", Font.PLAIN, 12 ));
 
 
-
-		/* RUDAPÉ */
+		/* RODAPÉ */
 		//Botão Termina sessão
 
 		btTerminarSessao = new JButton("Terminar Sessão");
@@ -162,11 +138,10 @@ public class AreaCliente extends JFrame {
 		btTerminarSessao.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		btTerminarSessao.setFocusPainted(false);
 		getContentPane().add(btTerminarSessao);
+
+
+		// Action listener botão terminar sessão
 		
-
-		//TODO criar os action listener Atualizar dados/ Ver Pacotes / Ver Promoções
-
-
 		btTerminarSessao.addActionListener(new ActionListener() {
 
 			@Override
@@ -187,13 +162,14 @@ public class AreaCliente extends JFrame {
 
 		setupTempoSessao();
 
-		
+
 	}//end initialize method
 
 
-
-	// TODO  Coloca a lable de boas vindas
-
+	/**
+	 * Definição da lable do tempo de sessão
+	 * 
+	 */
 	protected void setupTempoSessao() {
 		lblUsernameLogged = new JLabel();
 		lblUsernameLogged.setForeground(Color.BLACK);
@@ -225,7 +201,6 @@ public class AreaCliente extends JFrame {
 	 * Cria uma Lable de Boas Vindas
 	 * @param name
 	 */
-
 	public void setLabelBoasVindas(String name) {
 		lblBemVindo.setText(name);
 
@@ -234,8 +209,6 @@ public class AreaCliente extends JFrame {
 	 * Activa o Nimbus Look and Feel
 	 * 
 	 */
-
-
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 			if ("Nimbus".equals(info.getName())) {
@@ -257,17 +230,6 @@ public class AreaCliente extends JFrame {
 
 
 
-
-
-	/*Metodos usados pelo GUI Total para o funcionameto dos botões*/
-	/**
-	 * @return the labelBoasVindas
-	 */
-	//    public void setLabelBoasVindas(String username) {
-	//        labelBoasVindas.setText( username );;
-	//    }
-
-
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
@@ -282,8 +244,6 @@ public class AreaCliente extends JFrame {
 
 	public void setLblHoraSistema(String agora) {
 		lblHoraSistema.setText("Data: " + agora);
-
-
 
 	}
 }
