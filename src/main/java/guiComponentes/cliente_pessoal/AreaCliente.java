@@ -187,7 +187,7 @@ public class AreaCliente extends JFrame {
 		lblNomeVerTodosPacotes.setBounds(406, 136, 69, 36);
 		panelVerTodosPacotes.add(lblNomeVerTodosPacotes);
 		
-		JLabel lblVerTodosPacotesComerciais = new JLabel("Ver todas os Pacotes Comerciais:");
+		JLabel lblVerTodosPacotesComerciais = new JLabel("Ver todos os Pacotes Comerciais:");
 		lblVerTodosPacotesComerciais.setFont(new Font("Dubai Light", Font.PLAIN, 20));
 		lblVerTodosPacotesComerciais.setBounds(88, 83, 270, 36);
 		panelVerTodosPacotes.add(lblVerTodosPacotesComerciais);
@@ -215,7 +215,7 @@ public class AreaCliente extends JFrame {
 
 
 		JPanel panelVerTodasPromocoes = new JPanel();
-		tabbedPane.addTab("Ver todas as promoções",null,  panelVerTodasPromocoes);
+		tabbedPane.addTab("Ver todas as Promoções",null,  panelVerTodasPromocoes);
 		panelVerTodasPromocoes.setLayout(null);
 				
 				JTextArea textAreaNomeVerPacote_1 = new JTextArea();

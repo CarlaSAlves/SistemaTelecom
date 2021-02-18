@@ -1,12 +1,10 @@
 package guiComponentes.cliente_pessoal;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import guiComponentes.Admin_GUI_homepage;
-import guiComponentes.GUI_total;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -16,8 +14,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.SystemColor;
 
+@SuppressWarnings("serial")
 public class AreaCliente_MeusDados extends JFrame {
 
 	private JPanel panelMeusDados1;
@@ -122,7 +120,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		//Imagem fundo
 
 		JLabel imagemDados = new JLabel("");
-		imagemDados.setBounds(0, -35, 1384, 622);
+		imagemDados.setBounds(0, -39, 1384, 637);
 		panelMeusDados.add(imagemDados);
 		imagemDados.setBackground(new Color(240, 240,240 ));
 		imagemDados.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/AltranClientes.png")));

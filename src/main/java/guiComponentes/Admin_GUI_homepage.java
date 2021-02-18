@@ -62,8 +62,6 @@ public class Admin_GUI_homepage extends JFrame {
 		panel.add(lblTempoSessao);
 		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 
-
-
 		lblHoraSistema = new JLabel();
 		lblHoraSistema.setForeground(Color.BLACK);
 		lblHoraSistema.setBounds(1215, 737, 159, 18);
