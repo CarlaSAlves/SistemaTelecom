@@ -104,7 +104,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		imagemDados.setBounds(5, 5, 1358, 537);
 		panelMeusProdutos.add(imagemDados);
 		imagemDados.setBackground(new Color(240, 240,240 ));
-		imagemDados.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
+		imagemDados.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/AltranClientes.png")));
 			
 	}
 	
