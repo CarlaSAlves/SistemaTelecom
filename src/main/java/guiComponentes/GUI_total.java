@@ -24,6 +24,7 @@ import guiComponentes.admin_gestorOperador.GUI_gestor_operador;
 import guiComponentes.admin_gestorPacoteComercial.GUI_gestor_pacotes;
 import guiComponentes.admin_gestorPromocao.GUI_gestor_promocao;
 import guiComponentes.cliente_pessoal.AreaCliente;
+import guiComponentes.cliente_pessoal.AreaCliente_MeusDados;
 import guiComponentes.operador_PromoPacote.Operador_VisualizarPacote;
 import guiComponentes.operador_PromoPacote.Operador_VisualizarPromocoes;
 import guiComponentes.operador_gerirClientes.Operador_gerirClientes;
@@ -48,6 +49,7 @@ public class GUI_total extends JFrame {
 	private Operador_gerirClientes operador_gerirClientes;
 	private Operador_VisualizarPacote operador_visualizarPacote;
 	private Operador_VisualizarPromocoes operador_visualizarPromo;
+	private AreaCliente_MeusDados areaClienteDados;
 	private AreaCliente areaCliente;
 	private Duration temporizador;
 	private String dataEHoraDeLog;
@@ -104,6 +106,7 @@ public class GUI_total extends JFrame {
 		operador_visualizarPacote = new Operador_VisualizarPacote();
 		operador_visualizarPromo = new Operador_VisualizarPromocoes();
 		areaCliente = new AreaCliente(this);
+		areaClienteDados = new AreaCliente_MeusDados();
 		// ligação - login 
 
 		loginPanel = login.returnPanel();
@@ -279,7 +282,7 @@ public class GUI_total extends JFrame {
 	private void labelUsernameNavegaPaginas(GUI_login login, Admin_GUI_homepage homepage,
 			GUI_gestor_cliente gestor_cliente, GUI_gestor_operador gestor_operador,
 			GUI_gestor_pacotes gestor_pacotes, GUI_gestor_promocao gestor_promocao, Operador_homepage operador_homepage, 
-			Operador_VisualizarPacote operador_visualizarPacotes, Operador_VisualizarPromocoes operador_visualizarPromocoes, AreaCliente areaCliente, Operador_gerirClientes operador_gerirClientes) throws Exception {
+			Operador_VisualizarPacote operador_visualizarPacotes, Operador_VisualizarPromocoes operador_visualizarPromocoes, AreaCliente areaCliente, AreaCliente_MeusDados areaClienteDados, Operador_gerirClientes operador_gerirClientes) throws Exception {
 		username = login.getUserText().getText();
 		gestor_cliente.setUsernameLoggedIn(username);
 		gestor_operador.setUsernameLoggedIn(username);
@@ -288,10 +291,11 @@ public class GUI_total extends JFrame {
 		homepage.setUsernameLoggedIn(username);
 		operador_homepage.setUsernameLoggedIn(username);
 		operador_visualizarPacotes.setUsernameLoggedIn(username);
-		operador_visualizarPromocoes.setUsernameLoggedIn(username);
-		areaCliente.setUsernameLoggedIn(username);
+		operador_visualizarPromocoes.setUsernameLoggedIn(username);		
 		operador_gerirClientes.setUsername(username);
 		operador_gerirClientes.setUsernameLoggedIn(username);
+		areaCliente.setUsernameLoggedIn(username);
+		areaClienteDados.setUserName(username);
 
 		Funcionario func = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
 		Cliente cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLogin(username);
@@ -387,7 +391,7 @@ public class GUI_total extends JFrame {
 	public void loginEfetuado(int role) throws Exception {
 		inicio = Instant.now();
 		labelUsernameNavegaPaginas(login, homepage, gestor_cliente, gestor_operador, gestor_pacotes,
-				gestor_promocao, operador_homepage, operador_visualizarPacote, operador_visualizarPromo, areaCliente, operador_gerirClientes);
+				gestor_promocao, operador_homepage, operador_visualizarPacote, operador_visualizarPromo, areaCliente, areaClienteDados,operador_gerirClientes);
 		loginPanel.setVisible(false);
 		if (role == 1) {
 			homepagePanel.setVisible(true);

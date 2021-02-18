@@ -76,10 +76,10 @@ public class AreaCliente extends JFrame {
 		getContentPane().setBackground(SystemColor.text);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
-		getContentPane().setLayout(null);		
+		getContentPane().setLayout(null);
 
-
-		// Label portal cliente
+		/* Cabeçalho */
+		//  Label portal cliente
 
 		JLabel lblPortalCliente = new JLabel("Portal do Cliente");
 		lblPortalCliente.setBounds(16, 6, 508, 33);
@@ -97,7 +97,7 @@ public class AreaCliente extends JFrame {
 		// Construção JTabbedPane
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setFont(new Font("Dubai Light", Font.PLAIN, 16));
+		tabbedPane.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		tabbedPane.setBounds(0, 89, 1384, 586);
 		panel.add(tabbedPane);
 		
@@ -191,8 +191,7 @@ public class AreaCliente extends JFrame {
 		panel.add(lblHoraSistema);
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
-
-
+		
 	}
 
 

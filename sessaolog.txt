@@ -334,3 +334,39 @@
 <duração da sessão:	0:20>
 </sessao>
 
+<sessao>
+<username:	qwe>
+<data e hora do login:	18-02-2021 16:41:04>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	18-02-2021 16:41:08>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	18-02-2021 17:07:46>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	18-02-2021 17:07:51>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	18-02-2021 17:09:59>
+<duração da sessão:	0:6>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	18-02-2021 17:14:26>
+<duração da sessão:	0:4>
+</sessao>
+

@@ -241,7 +241,7 @@ public class ClienteDAO {
 		ResultSet myRs = null;
 
 		try {
-			myStmt = myConn.prepareStatement("select * from cliente where login=?");
+			myStmt = myConn.prepareStatement("select * from cliente where login = ?");
 			myStmt.setString(1, login);
 			myRs = myStmt.executeQuery();
 
