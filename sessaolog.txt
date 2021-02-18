@@ -370,3 +370,9 @@
 <duração da sessão:	0:4>
 </sessao>
 
+<sessao>
+<username:	qwe>
+<data e hora do login:	18-02-2021 17:47:29>
+<duração da sessão:	0:5>
+</sessao>
+

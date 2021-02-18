@@ -192,6 +192,6 @@ public class AreaCliente_VerPromocoes extends JFrame {
 
 
 	public JPanel returnAreaClienteVerPromo() {
-		return  panelVerTodasPromo;
+		return (JPanel) getContentPane();
 	}
 }// end class

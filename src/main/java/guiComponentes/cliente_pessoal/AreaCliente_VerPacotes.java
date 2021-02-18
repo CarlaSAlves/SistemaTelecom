@@ -197,6 +197,6 @@ public class AreaCliente_VerPacotes extends JFrame {
 
 
 	public JPanel returnAreaClienteVerPacotes() {
-		return  panelVerTodosPacotes;
+		return (JPanel) getContentPane();
 	}
 }// end class

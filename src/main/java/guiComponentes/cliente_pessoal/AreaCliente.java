@@ -18,6 +18,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import guiComponentes.Admin_GUI_homepage;
 import guiComponentes.GUI_total;
+import servico.GestorDeDAO;
+import standard_value_object.Cliente;
 import javax.swing.JTabbedPane;
 
 
@@ -30,10 +32,17 @@ public class AreaCliente extends JFrame {
 	private JLabel lblUsernameLogged,lblTempoSessao,lblHoraSistema;
 	JLabel lblBemVindo;
 	private JButton btTerminarSessao;
-	private AreaCliente_MeusDados areaClienteDados = new AreaCliente_MeusDados();
+	private AreaCliente_MeusDados areaClienteDados;
 	private AreaCliente_MeusProdutos areaClienteProdutos = new AreaCliente_MeusProdutos();
 	private AreaCliente_VerPacotes areaClienteVerPacotes = new AreaCliente_VerPacotes();
 	private AreaCliente_VerPromocoes areaClienteVerPromo = new AreaCliente_VerPromocoes();
+	
+	private String username;
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 
 	/**
 	 * Launch the application.
@@ -58,6 +67,16 @@ public class AreaCliente extends JFrame {
 	 * @param guit 
 	 */
 	public AreaCliente(GUI_total guit) {
+		
+		
+		Cliente cliente = null;
+		try {
+			System.out.println("" + username);
+			cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLogin(username);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		areaClienteDados  = new AreaCliente_MeusDados(cliente);
 		initialize(guit);
 		ativarNimbusLookAndFeel();
 
