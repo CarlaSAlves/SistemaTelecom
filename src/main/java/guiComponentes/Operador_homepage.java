@@ -84,7 +84,7 @@ public class Operador_homepage extends JFrame {
 		btClientes.setForeground(Color.DARK_GRAY);
 		btClientes.setToolTipText("Gestão de Clientes");	
 		btClientes.setFocusPainted(false);
-		btClientes.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btClientes.setFont(new Font("Dialog", Font.PLAIN, 15));
 		pane.add(btClientes);
 		btClientes.addActionListener(new ActionListener() {
 			
@@ -100,7 +100,7 @@ public class Operador_homepage extends JFrame {
 		btPacotesPromo.setToolTipText("Gestão de Pacotes Comerciais e Promoções");
 		btPacotesPromo.setForeground(Color.DARK_GRAY);
 		btPacotesPromo.setFocusPainted(false);
-		btPacotesPromo.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btPacotesPromo.setFont(new Font("Dialog", Font.PLAIN, 15));
 		pane.add(btPacotesPromo);
 		btPacotesPromo.addActionListener(new ActionListener() {
 			
@@ -114,7 +114,7 @@ public class Operador_homepage extends JFrame {
 		JButton btnVisualizarPromocoes = new JButton("Visualizar Promoções");
 		btnVisualizarPromocoes.setToolTipText("Gestão de Pacotes Comerciais e Promoções");
 		btnVisualizarPromocoes.setForeground(Color.DARK_GRAY);
-		btnVisualizarPromocoes.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btnVisualizarPromocoes.setFont(new Font("Dialog", Font.PLAIN, 15));
 		btnVisualizarPromocoes.setFocusPainted(false);
 		btnVisualizarPromocoes.setBounds(161, 465, 286, 60);
 		pane.add(btnVisualizarPromocoes);
@@ -133,7 +133,7 @@ public class Operador_homepage extends JFrame {
 		btVoltar = new JButton("Terminar Sessão");
 		btVoltar.setForeground(Color.DARK_GRAY);
 		btVoltar.setBounds(16, 687, 180, 50);
-		btVoltar.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btVoltar.setFont(new Font("Dialog", Font.PLAIN, 15));
 		btVoltar.setFocusPainted(false);
 		getContentPane().add(btVoltar);
 		btVoltar.addActionListener(new ActionListener() {

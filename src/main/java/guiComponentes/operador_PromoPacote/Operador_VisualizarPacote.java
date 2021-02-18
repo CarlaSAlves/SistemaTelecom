@@ -220,7 +220,7 @@ public class Operador_VisualizarPacote extends JFrame {
 		});
 
 		btPesquisar.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		btPesquisar.setBackground(SystemColor.activeCaption);
+		
 		btPesquisar.setBounds(72, 121, 371, 27);
 		painelPesquisa.add(btPesquisar);
 	}
@@ -262,8 +262,8 @@ public class Operador_VisualizarPacote extends JFrame {
 	private void btVoltarOperadorHomepageSetup() {
 		btVoltarOperadorHomepage = new JButton("Voltar");
 		btVoltarOperadorHomepage.setBounds(6, 709, 119, 38);
-		btVoltarOperadorHomepage.setFont(font);
-		btVoltarOperadorHomepage.setBackground(SystemColor.activeCaption);
+		btVoltarOperadorHomepage.setFont(new Font("Dialog", Font.PLAIN, 13));
+		
 		btVoltarOperadorHomepage.setFocusPainted(false);
 
 	}
