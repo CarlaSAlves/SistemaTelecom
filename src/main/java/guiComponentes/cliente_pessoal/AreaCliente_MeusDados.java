@@ -120,7 +120,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		//Imagem fundo
 
 		JLabel imagemDados = new JLabel("");
-		imagemDados.setBounds(0, -39, 1384, 637);
+		imagemDados.setBounds(0, 0, 1368, 547);
 		panelMeusDados.add(imagemDados);
 		imagemDados.setBackground(new Color(240, 240,240 ));
 		imagemDados.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/AltranClientes.png")));

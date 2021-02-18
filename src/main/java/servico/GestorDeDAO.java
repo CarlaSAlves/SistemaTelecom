@@ -102,6 +102,11 @@ public class GestorDeDAO {
 	public Cliente pesquisaClienteLoginPass(String login, String password) throws Exception {
 		return clienteDAO.pesquisaClienteLoginPass(login, password);
 	}
+	
+	public Cliente pesquisaClienteLogin(String login) throws Exception  {
+		return clienteDAO.pesquisaClienteLogin(login);
+		
+	}
 
 	public List<HistoricoCliente> getHistoricoCliente(int id_cliente) throws Exception {
 		return clienteDAO.getHistoricoCliente(id_cliente);
@@ -246,5 +251,6 @@ public class GestorDeDAO {
 	public List<PacoteClientePromocao> pesquisarTodosPacotesClientePromocao() throws Exception {
 		return pacoteClientePromocaoDAO.pesquisarTodosPacotesClientePromocao();
 	}
+
 
 }

@@ -28,6 +28,7 @@ import guiComponentes.operador_PromoPacote.Operador_VisualizarPacote;
 import guiComponentes.operador_PromoPacote.Operador_VisualizarPromocoes;
 import guiComponentes.operador_gerirClientes.Operador_gerirClientes;
 import servico.GestorDeDAO;
+import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 
 
@@ -293,9 +294,12 @@ public class GUI_total extends JFrame {
 		operador_gerirClientes.setUsernameLoggedIn(username);
 
 		Funcionario func = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
+		Cliente cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLogin(username);
 
 		if (func != null && func.getId_role() == 2) {
 			operador_homepage.setLabelBoasVindas(func.getNome());
+		} else if (cliente != null) {
+			areaCliente.setLabelBoasVindas(cliente.getNome());
 		}
 	}
 

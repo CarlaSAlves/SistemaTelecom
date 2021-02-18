@@ -231,6 +231,41 @@ public class ClienteDAO {
 
 		return cliente;
 	}
+	
+	/*
+	 * Método temporário que pesquisa e devolve o Cliente com o login inserido.
+	 */
+	public Cliente pesquisaClienteLogin(String login) throws Exception {
+		Cliente cliente = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			myStmt = myConn.prepareStatement("select * from cliente where login=?");
+			myStmt.setString(1, login);
+			myRs = myStmt.executeQuery();
+
+			//se myRs.next() = true, então for detetado um cliente. Vamos produzir um objeto em java que o represente
+			if (myRs.next()) {
+				cliente = new Cliente();
+				cliente.setId(myRs.getInt(1));
+				cliente.setNome(myRs.getString(2));
+				cliente.setNif(myRs.getInt(3));
+				cliente.setMorada(myRs.getString(4));
+				cliente.setLogin(myRs.getString(5));
+				cliente.setPassword(myRs.getString(6));
+				cliente.setAtivo(myRs.getInt(7) == 1 ? true : false);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(myStmt, myRs);
+		}
+
+		return cliente;
+	}
+	
 
 	/*
 	 * Cria um novo cliente na tabela "cliente" com base no objeto cliente enviado como parâmetro. O id dessa nova entidade é automaticamente gerado pela base de dados

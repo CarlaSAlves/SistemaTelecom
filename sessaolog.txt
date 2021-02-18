@@ -244,3 +244,93 @@
 <duração da sessão:	0:5>
 </sessao>
 
+<sessao>
+<username:	asd>
+<data e hora do login:	18-02-2021 12:13:32>
+<duração da sessão:	0:8>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	18-02-2021 12:13:55>
+<duração da sessão:	0:21>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	18-02-2021 12:14:19>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	18-02-2021 12:14:23>
+<duração da sessão:	4:14>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	18-02-2021 12:18:42>
+<duração da sessão:	0:29>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	18-02-2021 12:19:32>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	18-02-2021 12:19:41>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	18-02-2021 12:19:43>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	18-02-2021 12:19:46>
+<duração da sessão:	0:52>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	18-02-2021 12:57:13>
+<duração da sessão:	1:33>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	18-02-2021 12:59:12>
+<duração da sessão:	0:18>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	18-02-2021 13:07:11>
+<duração da sessão:	0:23>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	18-02-2021 13:07:43>
+<duração da sessão:	0:6>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	18-02-2021 13:07:51>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	18-02-2021 13:08:01>
+<duração da sessão:	0:20>
+</sessao>
+
