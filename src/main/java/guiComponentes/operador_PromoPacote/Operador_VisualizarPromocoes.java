@@ -181,6 +181,7 @@ public class Operador_VisualizarPromocoes extends JFrame {
 		painelPesquisa.add(checkBoxAtivo);
 
 		btPesquisar = new JButton("Pesquisar");
+		btPesquisar.setFont(new Font("Dialog", Font.PLAIN, 13));
 		btPesquisar.addActionListener(new ActionListener() {
 		
 		
@@ -220,8 +221,7 @@ public class Operador_VisualizarPromocoes extends JFrame {
 			}
 		});
 
-		btPesquisar.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		btPesquisar.setBackground(SystemColor.activeCaption);
+		
 		btPesquisar.setBounds(72, 121, 371, 27);
 		painelPesquisa.add(btPesquisar);
 	}
@@ -262,9 +262,8 @@ public class Operador_VisualizarPromocoes extends JFrame {
 
 	private void btVoltarOperadorHomepageSetup() {
 		btVoltarOperadorHomepage = new JButton("Voltar");
+		btVoltarOperadorHomepage.setFont(new Font("Dialog", Font.PLAIN, 13));
 		btVoltarOperadorHomepage.setBounds(6, 709, 119, 38);
-		btVoltarOperadorHomepage.setFont(font);
-		btVoltarOperadorHomepage.setBackground(SystemColor.activeCaption);
 		btVoltarOperadorHomepage.setFocusPainted(false);
 
 	}

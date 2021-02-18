@@ -98,12 +98,12 @@ public class AreaCliente extends JFrame {
 
 		JLabel lblPortalCliente = new JLabel("Portal Do Cliente");
 		lblPortalCliente.setBounds(16, 44, 508, 33);
-		lblPortalCliente.setForeground(new Color(70,74,101));
+		lblPortalCliente.setForeground(new Color(255,165,0));
 		lblPortalCliente.setFont(new Font("Dubai", Font.BOLD, 40));
 		getContentPane().add(lblPortalCliente);
 
 		JLabel lblBemVindo = new JLabel("Bem Vindo");
-		lblBemVindo.setForeground(new Color(70,74,101));
+		lblBemVindo.setForeground(new Color(255,165,0));
 		lblBemVindo.setFont(new Font("Dubai Light", Font.BOLD, 17));
 		lblBemVindo.setBounds(16, 6, 104, 33);
 		panel.add(lblBemVindo);
@@ -205,7 +205,7 @@ public class AreaCliente extends JFrame {
 		imagemVerPacotes.setBounds(6, -41, 1394, 598);
 		panelVerTodosPacotes.add(imagemVerPacotes);
 		imagemVerPacotes.setBackground(new Color(240, 240, 240));
-		imagemVerPacotes.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
+		imagemVerPacotes.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/AltranClientes.png")));
 
 
 
@@ -264,7 +264,7 @@ public class AreaCliente extends JFrame {
 				imagemVerPromocoes.setBounds(6, -41, 1394, 598);
 				panelVerTodasPromocoes.add(imagemVerPromocoes);
 				imagemVerPromocoes.setBackground(new Color(240, 240, 240));
-				imagemVerPromocoes.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
+				imagemVerPromocoes.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/AltranClientes.png")));
 				
 				JScrollPane scrollPaneVerTodosPacotes_2 = new JScrollPane();
 				scrollPaneVerTodosPacotes_2.setBounds(91, 123, 244, 343);
@@ -292,7 +292,7 @@ public class AreaCliente extends JFrame {
 		JLabel lblFooter = new JLabel("");
 		lblFooter.setForeground(new Color(0, 0, 0));
 		lblFooter.setBounds(599, 690, 214, 65);
-		lblFooter.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/Altran1.1.png")));
+		lblFooter.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/AltranClienteFooter.png")));
 		getContentPane().add(lblFooter);
 		
 		setupTempoSessao();

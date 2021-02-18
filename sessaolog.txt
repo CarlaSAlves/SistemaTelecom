@@ -208,3 +208,39 @@
 <duração da sessão:	3:47>
 </sessao>
 
+<sessao>
+<username:	asd>
+<data e hora do login:	18-02-2021 09:33:18>
+<duração da sessão:	3:0>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	18-02-2021 10:26:48>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	18-02-2021 10:26:52>
+<duração da sessão:	0:13>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	18-02-2021 10:27:06>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	18-02-2021 10:27:46>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	18-02-2021 10:27:49>
+<duração da sessão:	0:5>
+</sessao>
+

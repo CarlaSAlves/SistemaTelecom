@@ -125,7 +125,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		imagemDados.setBounds(0, -35, 1384, 622);
 		panelMeusDados.add(imagemDados);
 		imagemDados.setBackground(new Color(240, 240,240 ));
-		imagemDados.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/fundoAltran.png")));
+		imagemDados.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/AltranClientes.png")));
 		
 	}// end initialize
 	

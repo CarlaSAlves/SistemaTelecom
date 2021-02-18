@@ -102,6 +102,7 @@ public class Operador_gerirClientes extends JFrame {
 		// -- Botões --  
 
 		btAtribuirPacote = new JButton("Atribuir Pacote Comercial");
+		btAtribuirPacote.setFont(new Font("Dialog", Font.PLAIN, 13));
 		btAtribuirPacote.setBounds(939, 255, 187, 40);
 		pane.add(btAtribuirPacote);
 
@@ -153,6 +154,7 @@ public class Operador_gerirClientes extends JFrame {
 		});
 
 		btAtribuirPromocao = new JButton("Atribuir Promoção");
+		btAtribuirPromocao.setFont(new Font("Dialog", Font.PLAIN, 13));
 		btAtribuirPromocao.setBounds(939, 204, 187, 40);
 		pane.add(btAtribuirPromocao);
 		btAtribuirPromocao.addActionListener(new ActionListener() {
@@ -178,6 +180,7 @@ public class Operador_gerirClientes extends JFrame {
 		});
 
 		btVisualizarPromocao = new JButton("Visualizar Promoções");
+		btVisualizarPromocao.setFont(new Font("Dialog", Font.PLAIN, 13));
 		btVisualizarPromocao.setBounds(1136, 204, 187, 40);
 		pane.add(btVisualizarPromocao);
 		btVisualizarPromocao.addActionListener(new ActionListener() {
@@ -209,6 +212,7 @@ public class Operador_gerirClientes extends JFrame {
 		});
 
 		btnVisualizarPacote = new JButton("Visualizar Pacote Comercial");
+		btnVisualizarPacote.setFont(new Font("Dialog", Font.PLAIN, 13));
 		btnVisualizarPacote.setBounds(1136, 255, 187, 40);
 		pane.add(btnVisualizarPacote);
 		btnVisualizarPacote.addActionListener(new ActionListener() {
@@ -262,7 +266,7 @@ public class Operador_gerirClientes extends JFrame {
 
 		btVoltarOperador = new JButton("Voltar");
 		btVoltarOperador.setBounds(6, 709, 119, 38);
-		btVoltarOperador.setFont(font);
+		btVoltarOperador.setFont(new Font("Dialog", Font.PLAIN, 13));
 		btVoltarOperador.setBackground(Color.WHITE);
 		btVoltarOperador.setFocusPainted(false);
 		pane.add(btVoltarOperador);
@@ -346,6 +350,7 @@ public class Operador_gerirClientes extends JFrame {
 		painelPesquisa.add(checkBoxAtivo);
 
 		botaoPesquisa = new JButton("Pesquisar");
+		botaoPesquisa.setFont(new Font("Dialog", Font.PLAIN, 13));
 		botaoPesquisa.setBounds(72, 181, 371, 27);
 		botaoPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -402,6 +407,7 @@ public class Operador_gerirClientes extends JFrame {
 		btVisualizarPromocao.setEnabled(false);
 
 		btnRemoverPromo = new JButton("Remover Promoção");
+		btnRemoverPromo.setFont(new Font("Dialog", Font.PLAIN, 13));
 		btnRemoverPromo.setEnabled(false);
 		btnRemoverPromo.setBounds(742, 204, 187, 40);
 		pane.add(btnRemoverPromo);
@@ -433,6 +439,7 @@ public class Operador_gerirClientes extends JFrame {
 
 
 		btnVerHistorico = new JButton("Ver Historico");
+		btnVerHistorico.setFont(new Font("Dialog", Font.PLAIN, 13));
 		btnVerHistorico.setEnabled(false);
 		btnVerHistorico.setBounds(742, 255, 187, 40);
 		btnVerHistorico.addActionListener(new ActionListener() {
