@@ -230,7 +230,7 @@ public class GUI_total extends JFrame {
 
 		// ligação Operador - Visualizar Promocoes
 
-		operador_visualizarPromoPanel = operador_visualizarPacote.returnPanel();
+		operador_visualizarPromoPanel = operador_visualizarPromo.returnPanel();
 		operador_visualizarPromoPanel.setVisible(false);
 		operador_visualizarPromoPanel.setBounds(0, 0, 1400, 800);
 		pane.add(operador_visualizarPromoPanel);
