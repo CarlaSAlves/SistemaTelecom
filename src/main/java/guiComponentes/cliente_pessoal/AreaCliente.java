@@ -46,6 +46,7 @@ public class AreaCliente extends JFrame {
 	
 	private AreaCliente_MeusDados areaClienteDados = new AreaCliente_MeusDados();
 	private AreaCliente_MeusProdutos areaClienteProdutos = new AreaCliente_MeusProdutos();
+	private AreaCliente_VerPacotes areaClienteVerPacotes = new AreaCliente_VerPacotes();
 
 
 	/**
@@ -139,13 +140,16 @@ public class AreaCliente extends JFrame {
 		
 
 		/****************************/
-		// Separador Pacotes
+		// Ligação a classe ver Pacotes
 		/****************************/
 
 
-		JPanel panelVerTodosPacotes = new JPanel();
+		JPanel panelVerTodosPacotes = areaClienteVerPacotes.returnAreaClienteVerPacotes();
 		tabbedPane.addTab("Ver todos os pacotes comercial",null,  panelVerTodosPacotes);
 		panelVerTodosPacotes.setLayout(null);
+		panelVerTodosPacotes.setForeground(Color.BLUE);
+		panelMeusProdutos.setFont(new Font("Dubai", Font.PLAIN, 12 ));
+		
 		
 		JPanel panel_VerTodosPacotes = new JPanel();
 		panel_VerTodosPacotes.setBounds(86, 131, 246, 342);
@@ -361,7 +365,10 @@ public class AreaCliente extends JFrame {
 		// funcionario f = gestorDeDaoget...pesquisaFuncionario  Admin
 
 	}
-
+	/**
+	 * Activa o Nimbus Look and Feel
+	 * 
+	 */
 
 
 	private void ativarNimbusLookAndFeel() {

@@ -40,9 +40,8 @@ public class AreaCliente_MeusProdutos extends JFrame {
 	 * Create the frame.
 	 */
 	public AreaCliente_MeusProdutos() {	
-		initialize();
 		
-	
+		initialize();	
 	}
 	
 	private void initialize() {
@@ -60,7 +59,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		textAreaNomePromocoes.setBounds(472, 156, 234, 41);
 		panelMeusProdutos.add(textAreaNomePromocoes);
 
-		// Criação da da janela Meus produtos
+		// Criação da da  Meus produtos
 		
 		JComboBox comboBoxPromocoes = new JComboBox();
 		comboBoxPromocoes.setBounds(472, 349, 234, 41);
@@ -108,6 +107,11 @@ public class AreaCliente_MeusProdutos extends JFrame {
 			
 	}
 	
+	
+	/**
+	 * Activa o Nimbus Look and Feel
+	 * 
+	 */
 	
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
