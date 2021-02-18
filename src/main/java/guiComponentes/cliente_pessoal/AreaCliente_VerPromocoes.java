@@ -1,7 +1,6 @@
 package guiComponentes.cliente_pessoal;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -10,20 +9,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.EmptyBorder;
-import guiComponentes.Admin_GUI_homepage;
 import javax.swing.JTextField;
 import javax.swing.JScrollBar;
 
-public class AreaCliente_VerPacotes extends JFrame {
+@SuppressWarnings("serial")
+public class AreaCliente_VerPromocoes extends JFrame {
 
 	//private JPanel panel;
-	private JPanel panelVerTodosPacotes;
+	private JPanel panelVerTodasPromo;
 	private JTextField textField;
 
 	/**
@@ -33,7 +30,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AreaCliente_VerPacotes frame = new AreaCliente_VerPacotes();
+					AreaCliente_VerPromocoes frame = new AreaCliente_VerPromocoes();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +42,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AreaCliente_VerPacotes() {
+	public AreaCliente_VerPromocoes() {
 
 		initialize();
 
@@ -62,9 +59,9 @@ public class AreaCliente_VerPacotes extends JFrame {
 		 * Define as caracteristicas dos painel base. 
 		 */
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		panelVerTodosPacotes = new JPanel();
-		setContentPane(panelVerTodosPacotes);
-		panelVerTodosPacotes.setLayout(null);
+		panelVerTodasPromo = new JPanel();
+		setContentPane(panelVerTodasPromo);
+		panelVerTodasPromo.setLayout(null);
 		getContentPane().setFont(new Font("Dubai", Font.PLAIN, 12));
 		getContentPane().setBackground(SystemColor.text);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,26 +71,26 @@ public class AreaCliente_VerPacotes extends JFrame {
 	
 		
 		// Labels e textField da página 
-		JLabel labelVerPacotes = new JLabel("Ver todos os Pacotes Comerciais:");
-		labelVerPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-		labelVerPacotes.setBounds(57, 101, 248, 23);
-		panelVerTodosPacotes.add(labelVerPacotes);
+		JLabel labelVerPromo= new JLabel("Ver todas as Promoções:");
+		labelVerPromo.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		labelVerPromo.setBounds(57, 101, 248, 23);
+		panelVerTodasPromo.add(labelVerPromo);
 		
 		JLabel labelPacoteNome = new JLabel("Nome:");
 		labelPacoteNome.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		labelPacoteNome.setBounds(360, 189, 71, 23);
-		panelVerTodosPacotes.add(labelPacoteNome);
+		panelVerTodasPromo.add(labelPacoteNome);
 		
-		JLabel labelPacoteDescricao = new JLabel("Descrição:");
-		labelPacoteDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 17));
-		labelPacoteDescricao.setBounds(360, 252, 99, 23);
-		panelVerTodosPacotes.add(labelPacoteDescricao);
+		JLabel labelPromoDescricao = new JLabel("Descrição:");
+		labelPromoDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		labelPromoDescricao.setBounds(360, 252, 99, 23);
+		panelVerTodasPromo.add(labelPromoDescricao);
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		textField.setEditable(false);
-		textField.setBounds(462, 191, 170, 20);
-		panelVerTodosPacotes.add(textField);
+		textField.setBounds(462, 191, 170, 29);
+		panelVerTodasPromo.add(textField);
 		textField.setColumns(10);
 		
 		JTextArea textArea = new JTextArea();
@@ -101,17 +98,17 @@ public class AreaCliente_VerPacotes extends JFrame {
 		textArea.setLineWrap(true);
 		textArea.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		textArea.setBounds(462, 252, 170, 103);
-		panelVerTodosPacotes.add(textArea);
+		panelVerTodasPromo.add(textArea);
 		
 		// Jlist e ScrollBar
-		JList listVerPacotes = new JList();
-		listVerPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 12));
-		listVerPacotes.setBounds(57, 162, 225, 328);
-		panelVerTodosPacotes.add(listVerPacotes);
+		JList listVerPromo = new JList();
+		listVerPromo.setFont(new Font("Dubai Light", Font.PLAIN, 12));
+		listVerPromo.setBounds(57, 162, 225, 328);
+		panelVerTodasPromo.add(listVerPromo);
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(57, 162, 225, 328);
-		panelVerTodosPacotes.add(scrollBar);
+		panelVerTodasPromo.add(scrollBar);
 		
 		
 
@@ -120,9 +117,9 @@ public class AreaCliente_VerPacotes extends JFrame {
 		 * Define a imagem de fundo através de uma label
 		 */
 		JLabel labelIconFundo = new JLabel("");
-		labelIconFundo.setIcon(new ImageIcon(AreaCliente_VerPacotes.class.getResource("/guiComponentes/img/AltranClientes.png")));
+		labelIconFundo.setIcon(new ImageIcon(AreaCliente_VerPromocoes.class.getResource("/guiComponentes/img/AltranClientes.png")));
 		labelIconFundo.setBounds(0, 0, 1368, 547);
-		getContentPane().add(labelIconFundo);
+		panelVerTodasPromo.add(labelIconFundo);
 
 
 	}//end initialize
@@ -154,7 +151,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 	}
 
 
-	public JPanel returnAreaClienteVerPacotes() {
-		return  panelVerTodosPacotes;
+	public JPanel returnAreaClienteVerPromo() {
+		return  panelVerTodasPromo;
 	}
 }// end class
