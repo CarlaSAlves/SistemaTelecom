@@ -290,7 +290,7 @@ public class GUI_total extends JFrame {
 		operador_visualizarPromocoes.setUsernameLoggedIn(username);
 		areaCliente.setUsernameLoggedIn(username);
 		operador_gerirClientes.setUsername(username);
-		operador_gerirClientes.setUsername(username);
+		operador_gerirClientes.setUsernameLoggedIn(username);
 
 		Funcionario func = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
 

@@ -190,3 +190,21 @@
 <duração da sessão:	0:6>
 </sessao>
 
+<sessao>
+<username:	admin>
+<data e hora do login:	17-02-2021 21:21:51>
+<duração da sessão:	0:10>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	17-02-2021 21:22:04>
+<duração da sessão:	0:13>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	17-02-2021 21:26:29>
+<duração da sessão:	3:47>
+</sessao>
+
