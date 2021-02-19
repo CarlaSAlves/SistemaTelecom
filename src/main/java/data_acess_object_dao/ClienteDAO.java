@@ -362,6 +362,28 @@ public class ClienteDAO {
 		return cliente;
 	}
 
+	@SuppressWarnings("resource")
+	public Cliente editarClienteDadosBasicos(Cliente cliente) throws Exception {
+		PreparedStatement myStmt = null;
+		
+		try {
+				myStmt = myConn.prepareStatement("UPDATE `cliente` SET `nome`=?, `nif`=?, `morada`=? WHERE  `id`=?");
+
+				myStmt.setString(1, cliente.getNome());
+				myStmt.setLong(2, cliente.getNif());
+				myStmt.setString(3, cliente.getMorada());
+				myStmt.setInt(4, cliente.getId());
+				
+				myStmt.executeUpdate();
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			myStmt.close();
+		}
+		return cliente;
+	}
+	
 	/*
 	 * Desativa o cliente com o id enviado como argumento, e de seguida regista a operação usando o mesmo cliente e o
 	 * funcionário passado como argumento à função.
