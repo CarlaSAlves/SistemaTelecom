@@ -104,7 +104,7 @@ public class AreaCliente extends JFrame {
 		lblBemVindo = new JLabel("Bem Vindo");
 		lblBemVindo.setForeground(new Color(255,165,0));
 		lblBemVindo.setFont(new Font("Dubai Light", Font.BOLD, 17));
-		lblBemVindo.setBounds(16, 44, 104, 33);
+		lblBemVindo.setBounds(16, 44, 200, 33);
 		panel.add(lblBemVindo);
 
 
@@ -142,7 +142,7 @@ public class AreaCliente extends JFrame {
 		// Ligação a classe ver Promoções
 
 		JPanel panelVerTodasPromo = areaClienteVerPromo.returnAreaClienteVerPromo();
-		tabbedPane.addTab("Ver todas as Promoções",null,  panelVerTodasPromo);
+		tabbedPane.addTab("Ver todas as Promoções", null,  panelVerTodasPromo);
 		panelVerTodasPromo.setLayout(null);
 		panelVerTodasPromo.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
 

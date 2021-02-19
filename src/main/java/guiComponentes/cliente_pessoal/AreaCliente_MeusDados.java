@@ -3,6 +3,8 @@ package guiComponentes.cliente_pessoal;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import data_acess_object_dao.PasswordEncryption;
 import guiComponentes.Admin_GUI_homepage;
 import guiComponentes.admin_gestorCliente.CriarClienteDialog;
 import guiComponentes.admin_gestorCliente.GUI_gestor_cliente;
@@ -59,8 +61,9 @@ public class AreaCliente_MeusDados extends JFrame {
 	private JLabel lblNovaPass;
 	private JLabel lblNovoLogin;
 	private Cliente cliente;
-	private boolean nomeAlterado = false, nifAlterado = false, moradaAlterado = false, todosDadosValidos = false;
-	private boolean modoEditar = false;
+	private boolean nomeAlterado = false, nifAlterado = false, 
+			moradaAlterado = false, todosDadosValidos = false, 
+			loginAlterado = false, passwordCorreta = false, passwordNovaIgual = false;
 	private JLabel lblNovaPassword_1;
 	private JPasswordField passwordField_1;
 	private JLabel lblNovaPassword_2;
@@ -307,27 +310,35 @@ public class AreaCliente_MeusDados extends JFrame {
 					String morada = clienteNovo.getMorada();
 					int nif = (int) clienteNovo.getNif();
 
+					if(textFieldDadosNIF.getText().isBlank() || textFieldDadosNome.getText().isBlank() ||  textFieldDadosMorada.getText().isBlank()) {
+						JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "Tem Campos por preencher!", "Error", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+
 					char[] nomeEmArray = new char[textFieldDadosNome.getText().length()]; 
 
 					for(int i = 0; i < nomeEmArray.length; i++) {
 						nomeEmArray[i] = textFieldDadosNome.getText().charAt(i);
-						System.out.println(nomeEmArray[i]);
-						if (nomeEmArray[i]<65 || nomeEmArray[i] > 122) {
+						if(nomeEmArray[i]==32) {
+							continue;
+						}
+						if (nomeEmArray[i]<65 || nomeEmArray[i] > 122 ) {
 							JOptionPane.showMessageDialog(AreaCliente_MeusDados.this,
 									"O Nome não pode conter números!", "Error", JOptionPane.ERROR_MESSAGE);
 							return;
 						}
 					}
-					if(cliente.getNome().equalsIgnoreCase(textFieldDadosNome.getText().trim())) {
+					
+					if(cliente.getNome().equalsIgnoreCase(textFieldDadosNome.getText())) {
 						nomeAlterado = false;
 					}else {
 						nomeAlterado = true;
-						nome = textFieldDadosNome.getText().trim();
+						nome = textFieldDadosNome.getText();
 					}
 
 
 					try {
-						
+
 						for(Cliente c : todosClientes) {
 							if(cliente.getNif() != Integer.parseInt(textFieldDadosNIF.getText().trim())) {
 								if(c.getNif() == Integer.parseInt(textFieldDadosNIF.getText().trim())){
@@ -336,47 +347,51 @@ public class AreaCliente_MeusDados extends JFrame {
 								}
 							}
 						}
-						
+
 						if(cliente.getNif() == Integer.parseInt(textFieldDadosNIF.getText().trim())) {
 							nifAlterado = false;
 						}else {
 							nifAlterado = true;
+							System.out.println("true? nif");
 							nif = Integer.parseInt( textFieldDadosNIF.getText().trim());
 						}
-						
-						
+
+
 					}catch( Exception ex ){
 						JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "O NIF tem de ser um inteiro!", "Error", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 
-					if(cliente.getMorada().equalsIgnoreCase(textFieldDadosMorada.getText().trim())) {
+					if(cliente.getMorada().equalsIgnoreCase(textFieldDadosMorada.getText())) {
 						moradaAlterado = false;
 					}else {
 						moradaAlterado = true;
+						System.out.println("true?why ?");
 						morada = textFieldDadosMorada.getText();
-					}
-
-					if(textFieldDadosNIF.getText().isBlank() || textFieldDadosNome.getText().isBlank() ||  textFieldDadosNIF.getText().isBlank()) {
-						JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "Tem Campos por preencher!", "Error", JOptionPane.ERROR_MESSAGE);
-						return;
 					}
 
 					todosDadosValidos = true;
 
 					if(todosDadosValidos) {
+
 						if(nomeAlterado) {
 							clienteNovo.setNome(nome);
-						} else if(nifAlterado) {
+						}
+
+						if(nifAlterado) {
 							clienteNovo.setNif(nif);
-						} else if(moradaAlterado){
+						} 
+
+						if(moradaAlterado){
 							clienteNovo.setMorada(morada);
 						}
+
 						try {
 							GestorDeDAO.getGestorDeDAO().editarClienteDadosBasicos(clienteNovo);
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
+
 					}
 				}
 
@@ -387,7 +402,7 @@ public class AreaCliente_MeusDados extends JFrame {
 				textFieldDadosNome.setEditable(false);
 				textFieldDadosNIF.setEditable(false);
 				textFieldDadosMorada.setEditable(false);
-				
+
 				if(nomeAlterado || nifAlterado || moradaAlterado) {
 					JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "Dados alterados com sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
 				}
@@ -445,14 +460,14 @@ public class AreaCliente_MeusDados extends JFrame {
 		lblNovoLogin.setForeground(Color.LIGHT_GRAY);
 		lblNovoLogin.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		lblNovoLogin.setVisible(false);
-		
+
 		lblNovaPass_2 = new JLabel("Insira a Nova Password");
 		lblNovaPass_2.setForeground(Color.LIGHT_GRAY);
 		lblNovaPass_2.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		lblNovaPass_2.setBounds(29, 239, 224, 14);
 		lblNovaPass_2.setVisible(false);
 		panelPasswords.add(lblNovaPass_2);
-		
+
 		lblNovaPassConfirm = new JLabel("Insira a Nova Password");
 		lblNovaPassConfirm.setForeground(Color.LIGHT_GRAY);
 		lblNovaPassConfirm.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -512,22 +527,22 @@ public class AreaCliente_MeusDados extends JFrame {
 				btAtualizarDadosPass.setVisible(false);
 				btCancelarPass.setVisible(true);
 				btConfirmarPass.setVisible(true);
-				
+
 				textFieldDadosLogin.setEditable(true);
 				passwordField.setEditable(true);
-				
+
 				lblNovaPassword_1.setVisible(true);
 				passwordField_1.setVisible(true);
 				lblNovaPassword_2.setVisible(true);
 				passwordField_2.setVisible(true);
-				
+
 				lblPassword.setText("Password Atual");
 				lblDadosLogin.setText("Novo Login");
-				
+
 				lblNovaPass.setVisible(true);
 				lblNovaPass_2.setVisible(true);
 				lblNovaPassConfirm.setVisible(true);
-				
+
 				textFieldDadosLogin.addFocusListener(new FocusListener() {
 
 					@Override
@@ -563,7 +578,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 					}
 				});
-	
+
 				passwordField_1.setText("");
 				passwordField_1.addFocusListener(new FocusListener() {
 
@@ -582,7 +597,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 					}
 				});
-				
+
 				passwordField_2.setText("");
 				passwordField_2.addFocusListener(new FocusListener() {
 
@@ -601,7 +616,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 					}
 				});
-				
+
 			}
 		});
 		panelPasswords.add(btAtualizarDadosPass);
@@ -613,26 +628,119 @@ public class AreaCliente_MeusDados extends JFrame {
 		btConfirmarPass.setBounds(17, 341, 120, 30);
 		btConfirmarPass.setVisible(false);
 		btConfirmarPass.addActionListener(new ActionListener() {
+
+
 			public void actionPerformed(ActionEvent e) {
-				
+
+
+				if(cliente != null) {
+
+					Cliente clienteNovo = cliente;
+					List<Cliente> todosClientes = null;
+
+					try {
+						todosClientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
+					} catch (Exception e2) {
+						e2.printStackTrace();
+					}
+
+					String login = clienteNovo.getLogin();
+					String password = clienteNovo.getPassword();
+
+					//					for(Cliente c : todosClientes) {
+					//						if(login.toLowerCase() != textFieldDadosLogin.getText().trim().toLowerCase()) {
+					//							if(login.equalsIgnoreCase(c.getLogin())) {
+					//								continue;
+					//							}else if( textFieldDadosLogin.getText().trim().equals(c.getLogin())){
+					//								JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "Login já se encontra em uso!", "Error", JOptionPane.ERROR_MESSAGE);
+					//								return;
+					//							}
+					//						}
+					//					}
+
+					if(textFieldDadosLogin.getText().isBlank() || passwordField.getText().isBlank() ||  passwordField_1.getText().isBlank() || passwordField_2.getText().isBlank() ) {
+						JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "Tem Campos por preencher!", "Error", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+
+					for(Cliente c : todosClientes) {
+						if(!login.equalsIgnoreCase(textFieldDadosLogin.getText().trim())) {
+							if(c.getLogin().equalsIgnoreCase(textFieldDadosLogin.getText().trim())){
+								JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "Login já se encontra em uso!", "Error", JOptionPane.ERROR_MESSAGE);
+								return;
+							}
+						}
+					}
+
+					if(login.equalsIgnoreCase(textFieldDadosLogin.getText().trim())) {
+						loginAlterado = false;
+					}else {
+						loginAlterado = true;
+						login = textFieldDadosLogin.getText().trim();
+					}
+
+					if(password.equals(PasswordEncryption.get_SHA_512_SecurePassword(passwordField.getText()))) {
+						passwordCorreta = true;
+					}else {
+						passwordCorreta = false;
+						JOptionPane.showMessageDialog(AreaCliente_MeusDados.this, "Password Incorreta!", "Error", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+
+					if(passwordField_1.getText().equals(passwordField_2.getText())) {
+						passwordNovaIgual = true;
+					}else {
+						passwordNovaIgual = false;
+						JOptionPane.showMessageDialog(AreaCliente_MeusDados.this, "Nova Password e Confirmar Password não estão iguais!", "Error", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+
+					todosDadosValidos = true;
+
+					if(todosDadosValidos) {
+
+						if(loginAlterado) {
+							clienteNovo.setLogin(login);
+						} 
+
+						if(passwordCorreta && passwordNovaIgual) {
+							password = passwordField_1.getText();
+						}
+
+						try {
+							GestorDeDAO.getGestorDeDAO().editarClienteDadosLoginEPassword(clienteNovo, password);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+
+					}
+
+					if(loginAlterado || (passwordCorreta && passwordNovaIgual)) {
+						JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "Dados alterados com sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+
 				btAtualizarDadosPass.setVisible(true);
 				btCancelarPass.setVisible(false);
 				btConfirmarPass.setVisible(false);
-				
+
 				lblNovaPassword_1.setVisible(false);
 				passwordField_1.setVisible(false);
 				lblNovaPassword_2.setVisible(false);
 				passwordField_2.setVisible(false);
-				
+
 				lblNovaPass_2.setVisible(false);
 				lblNovaPassConfirm.setVisible(false);
 				lblNovoLogin.setVisible(false);
 				lblNovaPass.setVisible(false);
-				
+
 				lblPassword.setText("Password");
 				lblDadosLogin.setText("Login");
-				
+
+				passwordField.setText(PasswordEncryption.get_SHA_512_SecurePassword(cliente.getPassword()).substring(0, 8));
+
 			}
+
 		});
 		panelPasswords.add(btConfirmarPass);
 
@@ -647,31 +755,38 @@ public class AreaCliente_MeusDados extends JFrame {
 				btAtualizarDadosPass.setVisible(true);
 				btCancelarPass.setVisible(false);
 				btConfirmarPass.setVisible(false);
-				
+
 				lblNovaPassword_1.setVisible(false);
 				passwordField_1.setVisible(false);
 				lblNovaPassword_2.setVisible(false);
 				passwordField_2.setVisible(false);
-				
+
 				lblNovaPass_2.setVisible(false);
 				lblNovaPassConfirm.setVisible(false);
 				lblNovoLogin.setVisible(false);
 				lblNovaPass.setVisible(false);
-				
+
 				lblPassword.setText("Password");
 				lblDadosLogin.setText("Login");
-				
+
+				if(cliente != null) {
+					textFieldDadosLogin.setText(cliente.getLogin());
+					passwordField.setText(PasswordEncryption.get_SHA_512_SecurePassword(cliente.getPassword()).substring(0, 8));
+				}
+
 			}
+
+
 		});
 		panelPasswords.add(btCancelarPass);
-		
+
 		lblNovaPassword_1 = new JLabel("Nova Password");
 		lblNovaPassword_1.setForeground(Color.DARK_GRAY);
 		lblNovaPassword_1.setFont(new Font("Dialog", Font.PLAIN, 15));
 		lblNovaPassword_1.setVisible(false);
 		lblNovaPassword_1.setBounds(19, 207, 234, 28);
 		panelPasswords.add(lblNovaPassword_1);
-		
+
 		passwordField_1 = new JPasswordField();
 		passwordField_1.setForeground(Color.BLACK);
 		passwordField_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -679,14 +794,14 @@ public class AreaCliente_MeusDados extends JFrame {
 		passwordField_1.setVisible(false);
 		passwordField_1.setBounds(17, 231, 252, 30);
 		panelPasswords.add(passwordField_1);
-		
+
 		lblNovaPassword_2 = new JLabel("Confirmar Nova Password");
 		lblNovaPassword_2.setForeground(Color.DARK_GRAY);
 		lblNovaPassword_2.setFont(new Font("Dialog", Font.PLAIN, 15));
 		lblNovaPassword_2.setVisible(false);
 		lblNovaPassword_2.setBounds(19, 272, 250, 28);
 		panelPasswords.add(lblNovaPassword_2);
-		
+
 		passwordField_2 = new JPasswordField();
 		passwordField_2.setForeground(Color.BLACK);
 		passwordField_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -747,29 +862,29 @@ public class AreaCliente_MeusDados extends JFrame {
 				textFieldDadosLogin.setText(cliente.getLogin());
 				textFieldDadosMorada.setText(cliente.getMorada());
 				textFieldID.setText("" +cliente.getId());
-				passwordField.setText(cliente.getPassword().substring(0, 8));
+				passwordField.setText(PasswordEncryption.get_SHA_512_SecurePassword(cliente.getPassword()).substring(0, 8));
 			}
-			
+
 			btAtualizarDadosPass.setVisible(true);
 			btCancelarPass.setVisible(false);
 			btConfirmarPass.setVisible(false);
 			btAtualizarDados.setVisible(true);
 			btCancelar.setVisible(false);
 			btConfirmar.setVisible(false);
-			
+
 			lblNovaPassword_1.setVisible(false);
 			passwordField_1.setVisible(false);
 			lblNovaPassword_2.setVisible(false);
 			passwordField_2.setVisible(false);
-			
+
 			lblNovaPass_2.setVisible(false);
 			lblNovaPassConfirm.setVisible(false);
 			lblNovoLogin.setVisible(false);
 			lblNovaPass.setVisible(false);
-			
+
 			lblPassword.setText("Password");
 			lblDadosLogin.setText("Login");
-			
+
 			textFieldDadosNome.setEditable(false);
 			textFieldDadosNIF.setEditable(false);
 			textFieldDadosMorada.setEditable(false);
@@ -777,8 +892,8 @@ public class AreaCliente_MeusDados extends JFrame {
 			lblNovoNome.setVisible(false);
 			lblNovaMorada.setVisible(false);
 			lblNovoNIF.setVisible(false);
-			
-			
+
+
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -375,6 +375,37 @@ public class ClienteDAO {
 				myStmt.setInt(4, cliente.getId());
 				
 				myStmt.executeUpdate();
+				
+//				myStmt = logUpdateCliente(cliente, "Editar Cliente Dados Basicos");	
+//				myStmt.executeUpdate();
+				
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			myStmt.close();
+		}
+		return cliente;
+	}
+	
+	@SuppressWarnings("resource")
+	public Cliente editarClienteDadosLoginEPassword(Cliente cliente, String password) throws Exception {
+		PreparedStatement myStmt = null;
+		String novaPassEncriptada = null;
+		
+		try {
+				myStmt = myConn.prepareStatement("UPDATE `cliente` SET `login`=?, `password`=? WHERE  `id`=?");
+
+				novaPassEncriptada = PasswordEncryption.get_SHA_512_SecurePassword(password);
+				
+				myStmt.setString(1, cliente.getLogin());
+				myStmt.setString(2, novaPassEncriptada);
+				myStmt.setInt(3, cliente.getId());
+				
+				myStmt.executeUpdate();
+				
+//				myStmt = logUpdateCliente(cliente, "Editar Cliente Login & Password");	
+//				myStmt.executeUpdate();
 		
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -522,6 +553,17 @@ public class ClienteDAO {
 		myStmt.setString(4, descricao);
 		return myStmt;
 	}
+	
+//	private PreparedStatement logUpdateCliente( Cliente cliente, String descricao) throws SQLException {
+//		PreparedStatement myStmt;
+//		myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");
+//
+//		myStmt.setInt(1, cliente.getId());
+//		myStmt.setInt(2, cliente.getId());
+//		myStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+//		myStmt.setString(4, descricao);
+//		return myStmt;
+//	}
 
 
 	private void close(Statement myStmt, ResultSet myRs) throws SQLException {

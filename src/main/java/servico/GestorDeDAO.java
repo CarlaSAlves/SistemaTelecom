@@ -107,6 +107,7 @@ public class GestorDeDAO {
 		return clienteDAO.pesquisaClienteLogin(login);
 		
 	}
+	
 
 	public List<HistoricoCliente> getHistoricoCliente(int id_cliente) throws Exception {
 		return clienteDAO.getHistoricoCliente(id_cliente);
@@ -114,6 +115,10 @@ public class GestorDeDAO {
 	
 	public Cliente editarClienteDadosBasicos(Cliente cliente) throws Exception {
 		return clienteDAO.editarClienteDadosBasicos(cliente);
+	}
+	
+	public Cliente editarClienteDadosLoginEPassword(Cliente cliente, String password) throws Exception {
+		return clienteDAO.editarClienteDadosLoginEPassword(cliente, password);
 	}
 
 	public List<HistoricoPacoteComercial> getHistoricoPacoteComercial(int id_pacote) throws Exception {
