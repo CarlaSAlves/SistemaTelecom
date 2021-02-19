@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
@@ -32,7 +31,60 @@ public class HistoricoClienteDialog extends JDialog {
 	private JLabel clienteRegistosLabel;
 
 
+	public HistoricoClienteDialog() {
 
+		setTitle("Histórico de Registos");
+		setModal(true);
+		setBounds(200, 100, 651, 300);
+		getContentPane().setLayout(new BorderLayout());
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		setResizable(false);
+		contentPanel.setLayout(new BorderLayout(0, 0));
+
+		// Painel de histórico 
+		JPanel panel = new JPanel();
+		contentPanel.add(panel, BorderLayout.NORTH);
+		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+
+		JLabel labelHistorico = new JLabel("Histórico do Cliente :");
+		panel.add(labelHistorico);
+
+		clienteRegistosLabel = new JLabel("");
+		panel.add(clienteRegistosLabel);
+
+		// Tabela e Scrollpane de histórico 
+		
+		JScrollPane scrollPane = new JScrollPane();
+		contentPanel.add(scrollPane, BorderLayout.CENTER);
+
+		table = new JTable();
+		scrollPane.setViewportView(table);
+
+		// Painel de rodapé - botão sair 
+		
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
+		{
+			JButton okButton = new JButton("Sair");
+			okButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					setVisible(false);
+					dispose();
+				}
+			});
+			okButton.setActionCommand("OK");
+			buttonPane.add(okButton);
+			getRootPane().setDefaultButton(okButton);
+		}
+	}		
+
+
+	/**
+	 * Método que preenche a tabela com o registos
+	 * @param cliente
+	 * @param historicoCliente
+	 */
 	public void preencherTable(Cliente cliente,List<HistoricoCliente> historicoCliente) {
 		clienteRegistosLabel.setText(cliente.getNome());
 
@@ -45,56 +97,10 @@ public class HistoricoClienteDialog extends JDialog {
 
 	}
 
-	public HistoricoClienteDialog() {
-		setBounds(100, 100, 450, 300);
-		setTitle("Historico de Registos");
-		setModal(true);
-		setBounds(100, 100, 651, 300);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		setResizable(false);
-		contentPanel.setLayout(new BorderLayout(0, 0));
-		{
-			JPanel panel = new JPanel();
-			contentPanel.add(panel, BorderLayout.NORTH);
-			panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-			{
-				JLabel lblAuditHistoryFor = new JLabel("Historico do Cliente :");
-				panel.add(lblAuditHistoryFor);
-			}
-			{
-				clienteRegistosLabel = new JLabel("");
-				panel.add(clienteRegistosLabel);
-			}
-		}
-		{
-			JScrollPane scrollPane = new JScrollPane();
-			contentPanel.add(scrollPane, BorderLayout.CENTER);
-			{
-				table = new JTable();
-				scrollPane.setViewportView(table);
-			}
-		}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("Sair");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						setVisible(false);
-						dispose();
-					}
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-		}		
-	}
-
+	/**
+	 * 
+	 * Renderer da tabela
+	 */
 	private final class DateTimeCellRenderer extends DefaultTableCellRenderer {
 
 		private static final long serialVersionUID = 5466469925138317415L;
@@ -111,4 +117,4 @@ public class HistoricoClienteDialog extends JDialog {
 		}
 	}
 
-}
+} // end class

@@ -5,6 +5,10 @@ import javax.swing.table.AbstractTableModel;
 
 import historicos.HistoricoCliente;
 
+/**
+ * Esta classe configura a tabela de histórico de registos. 
+ *
+ */
 
 public class HistoricoClienteTableModel extends AbstractTableModel {
 
@@ -19,6 +23,11 @@ public class HistoricoClienteTableModel extends AbstractTableModel {
 
 	private List<HistoricoCliente> historicoLista;
 
+	/**
+	 * Criação das linhas e colunas da tabela, consoante o tamanho 
+	 * da lista de registos dando-lhe o nome da coluna correspondente.
+	 * @param historicoLista
+	 */
 	public HistoricoClienteTableModel(List<HistoricoCliente> historicoLista) {
 		this.historicoLista = historicoLista;
 	}
@@ -38,6 +47,9 @@ public class HistoricoClienteTableModel extends AbstractTableModel {
 		return columnNames[col];
 	}
 
+	/**
+	 * Dependendo das constantes, vai buscar os valores correspondentes aos registos.
+	 */
 	@Override
 	public Object getValueAt(int row, int col) {
 

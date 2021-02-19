@@ -1,7 +1,5 @@
 package guiComponentes.admin_gestorCliente;
 
-
-
 import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -34,7 +32,6 @@ import historicos.HistoricoCliente;
 import javax.swing.JCheckBox;
 import java.awt.Color;
 
-
 public class GUI_gestor_cliente extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -47,7 +44,6 @@ public class GUI_gestor_cliente extends JFrame {
 	private JButton botaoDesativarCliente, botaoEditarCliente, botaoVisualizarHistorico, botaoPesquisa, btVoltarGestorCliente;
 	private JTextField textFieldID, textFieldNIF,textFieldNome,textFieldMorada;
 	private JCheckBox checkBoxAtivo;
-
 
 	/**
 	 * Construtor que inicia com o método que configura o painel base e o método inicialize, 
