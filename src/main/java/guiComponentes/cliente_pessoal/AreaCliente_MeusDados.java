@@ -4,13 +4,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import guiComponentes.Admin_GUI_homepage;
+import guiComponentes.admin_gestorCliente.CriarClienteDialog;
+import guiComponentes.admin_gestorCliente.GUI_gestor_cliente;
 import servico.GestorDeDAO;
 import standard_value_object.Cliente;
+import standard_value_object.PacoteComercial;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -18,8 +23,13 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import javax.swing.JCheckBox;
 
 @SuppressWarnings("serial")
 
@@ -33,14 +43,22 @@ public class AreaCliente_MeusDados extends JFrame {
 	private JTextField textFieldID;
 	private JLabel lblPassword;
 	private JPasswordField passwordField;
-	private JLabel lblPacoteCliente;
-	private JTextField textFieldPacoteComercial;
 	private JPanel panelDados;
 	private JLabel lblTitulo;
 	private JPanel panelPasswords;
 	private JLabel lblTituloPass;
 	private JLabel lblDadosLogin;
 	private String username;
+	private JLabel lblNovoNome;
+	private JLabel lblNovoNIF;
+	private JLabel lblNovaMorada;
+	private JLabel lblNovaPass;
+	private JLabel lblNovoLogin;
+	private Cliente cliente;
+	private boolean nomeAlterado = false;
+	private boolean nifAlterado = false;
+	private boolean moradaAlterado = false;
+	private boolean todosDadosValidos = false;
 
 	/**
 	 * Launch the application.
@@ -77,28 +95,49 @@ public class AreaCliente_MeusDados extends JFrame {
 		panelMeusDados.setLayout(null);
 
 		panelDados = new JPanel();
-		panelDados.setBounds(10, 11, 390, 465);
+		panelDados.setBounds(10, 11, 390, 495);
 		panelDados.setBackground(new Color(0, 178, 188));
 		panelMeusDados.add(panelDados);
 		panelDados.setLayout(null);
 
 		panelPasswords = new JPanel();
-		panelPasswords.setBounds(410, 11, 299, 429);
+		panelPasswords.setBounds(410, 11, 299, 465);
 		panelMeusDados.add(panelPasswords);
 		panelPasswords.setBackground(new Color(0, 178, 188));
 		panelPasswords.setLayout(null);
 
+		lblNovaMorada = new JLabel("Ensira a Nova Morada");
+		lblNovaMorada.setForeground(Color.LIGHT_GRAY);
+		lblNovaMorada.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblNovaMorada.setBounds(66, 304, 224, 14);
+		lblNovaMorada.setVisible(false);
+		panelDados.add(lblNovaMorada);
+
+		lblNovoNome = new JLabel("Ensira o Novo Nome");
+		lblNovoNome.setForeground(Color.LIGHT_GRAY);
+		lblNovoNome.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblNovoNome.setBounds(66, 176, 224, 14);
+		lblNovoNome.setVisible(false);
+		panelDados.add(lblNovoNome);
+
+		lblNovoNIF = new JLabel("Ensira o Novo NIF");
+		lblNovoNIF.setForeground(Color.LIGHT_GRAY);
+		lblNovoNIF.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblNovoNIF.setBounds(66, 239, 224, 14);
+		lblNovoNIF.setVisible(false);
+		panelDados.add(lblNovoNIF);
+
 		JLabel lblDadosNome = new JLabel("Nome ");
 		lblDadosNome.setForeground(Color.DARK_GRAY);
 		lblDadosNome.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblDadosNome.setBounds(56, 199, 69, 28);
+		lblDadosNome.setBounds(56, 144, 69, 28);
 		panelDados.add(lblDadosNome);
 
 
 		JLabel lblDadosMorada = new JLabel("Morada ");
 		lblDadosMorada.setForeground(Color.DARK_GRAY);
 		lblDadosMorada.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblDadosMorada.setBounds(56, 319, 81, 28);
+		lblDadosMorada.setBounds(56, 272, 81, 28);
 		panelDados.add(lblDadosMorada);
 
 
@@ -110,13 +149,13 @@ public class AreaCliente_MeusDados extends JFrame {
 		textFieldDadosNome.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		textFieldDadosNome.setEditable(false);
 		textFieldDadosNome.setColumns(10);
-		textFieldDadosNome.setBounds(54, 223, 252, 30);
+		textFieldDadosNome.setBounds(54, 168, 252, 30);
 		panelDados.add(textFieldDadosNome);
 
 		JLabel lblDadosNIF = new JLabel("NIF ");
 		lblDadosNIF.setForeground(Color.DARK_GRAY);
 		lblDadosNIF.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblDadosNIF.setBounds(56, 259, 69, 28);
+		lblDadosNIF.setBounds(56, 207, 69, 28);
 		panelDados.add(lblDadosNIF);
 
 		textFieldDadosNIF = new JTextField();
@@ -124,7 +163,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		textFieldDadosNIF.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		textFieldDadosNIF.setEditable(false);
 		textFieldDadosNIF.setColumns(10);
-		textFieldDadosNIF.setBounds(54, 283, 252, 30);
+		textFieldDadosNIF.setBounds(54, 231, 252, 30);
 		panelDados.add(textFieldDadosNIF);
 
 		textFieldDadosMorada = new JTextField();
@@ -132,7 +171,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		textFieldDadosMorada.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		textFieldDadosMorada.setEditable(false);
 		textFieldDadosMorada.setColumns(10);
-		textFieldDadosMorada.setBounds(54, 343, 252, 30);
+		textFieldDadosMorada.setBounds(54, 296, 252, 30);
 		panelDados.add(textFieldDadosMorada);
 
 		JLabel lblID = new JLabel("ID");
@@ -149,31 +188,84 @@ public class AreaCliente_MeusDados extends JFrame {
 		textFieldID.setBounds(54, 103, 252, 30);
 		panelDados.add(textFieldID);
 
-		lblPacoteCliente = new JLabel("Pacote Comercial ID");
-		lblPacoteCliente.setForeground(Color.DARK_GRAY);
-		lblPacoteCliente.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblPacoteCliente.setBounds(56, 139, 223, 28);
-		panelDados.add(lblPacoteCliente);
-
-		textFieldPacoteComercial = new JTextField();
-		textFieldPacoteComercial.setForeground(Color.BLACK);
-		textFieldPacoteComercial.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		textFieldPacoteComercial.setEditable(false);
-		textFieldPacoteComercial.setColumns(10);
-		textFieldPacoteComercial.setBounds(54, 163, 252, 30);
-		panelDados.add(textFieldPacoteComercial);
-
 
 		// Botão Atualiza dados 
 
 		btAtualizarDados = new JButton("Atualizar Dados ");
-		btAtualizarDados.setBounds(169, 392, 139, 30);
+		btAtualizarDados.setBounds(167, 341, 139, 30);
 		panelDados.add(btAtualizarDados);
 		btAtualizarDados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btAtualizarDados.setVisible(false);
 				btCancelar.setVisible(true);
 				btConfirmar.setVisible(true);
+
+
+				textFieldDadosNome.setEditable(true);
+				textFieldDadosNIF.setEditable(true);
+				textFieldDadosMorada.setEditable(true);
+				nomeAlterado = false;
+				nifAlterado = false;
+				moradaAlterado = false;
+				todosDadosValidos = false;
+				popularTextFields(cliente);
+
+
+				textFieldDadosNome.addFocusListener(new FocusListener() {
+
+					@Override
+					public void focusLost(FocusEvent e) {
+						if(textFieldDadosNome.getText().isBlank()) {
+							lblNovoNome.setVisible(true);
+						}else {
+							lblNovoNome.setVisible(false);
+						}
+					}
+
+					@Override
+					public void focusGained(FocusEvent e) {
+						lblNovoNome.setVisible(false);
+
+					}
+				});
+
+				textFieldDadosNIF.addFocusListener(new FocusListener() {
+
+					@Override
+					public void focusLost(FocusEvent e) {
+						if(textFieldDadosNIF.getText().isBlank()) {
+							lblNovoNIF.setVisible(true);
+						}else {
+							lblNovoNIF.setVisible(false);
+						}
+					}
+
+					@Override
+					public void focusGained(FocusEvent e) {
+						lblNovoNIF.setVisible(false);
+
+					}
+				});
+
+				textFieldDadosMorada.addFocusListener(new FocusListener() {
+
+					@Override
+					public void focusLost(FocusEvent e) {
+						if(textFieldDadosMorada.getText().isBlank()) {
+							lblNovaMorada.setVisible(true);
+						}else {
+							lblNovaMorada.setVisible(false);
+						}
+					}
+
+					@Override
+					public void focusGained(FocusEvent e) {
+						lblNovaMorada.setVisible(false);
+
+					}
+				});
+
+
 			}
 		});
 		btAtualizarDados.setForeground(Color.DARK_GRAY);
@@ -181,13 +273,89 @@ public class AreaCliente_MeusDados extends JFrame {
 		btAtualizarDados.setFocusPainted(false);
 
 		btConfirmar = new JButton("Confirmar");
-		btConfirmar.setBounds(56, 392, 120, 30);
+		btConfirmar.setBounds(54, 341, 120, 30);
 		panelDados.add(btConfirmar);
 		btConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+
+				if(cliente != null) {
+
+					Cliente clienteNovo = cliente;
+					String nome = clienteNovo.getNome();
+					String morada = clienteNovo.getMorada();
+					int nif = (int) clienteNovo.getNif();
+
+					char[] nomeEmArray = new char[textFieldDadosNome.getText().length()]; 
+
+					for(int i = 0; i < nomeEmArray.length; i++) {
+						nomeEmArray[i] = textFieldDadosNome.getText().charAt(i);
+						System.out.println(nomeEmArray[i]);
+						if (nomeEmArray[i]<65 || nomeEmArray[i] > 122) {
+							JOptionPane.showMessageDialog(AreaCliente_MeusDados.this,
+									"O Nome não pode conter números!", "Error", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+					}
+					if(cliente.getNome().equalsIgnoreCase(textFieldDadosNome.getText().trim())) {
+						nomeAlterado = false;
+					}else {
+						nomeAlterado = true;
+						nome = textFieldDadosNome.getText().trim();
+					}
+
+
+					try {
+						if(cliente.getNif() == Integer.parseInt(textFieldDadosNIF.getText().trim())) {
+							nifAlterado = false;
+						}else {
+							nifAlterado = true;
+							nif = Integer.parseInt( textFieldDadosNIF.getText().trim());
+						}
+					}
+					catch( Exception ex ){
+						JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "O NIF tem de ser um inteiro!", "Error", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+
+					if(cliente.getMorada().equalsIgnoreCase(textFieldDadosMorada.getText().trim())) {
+						moradaAlterado = false;
+					}else {
+						moradaAlterado = true;
+						morada = textFieldDadosMorada.getText();
+					}
+
+					if(textFieldDadosNIF.getText().isBlank() || textFieldDadosNome.getText().isBlank() ||  textFieldDadosNIF.getText().isBlank()) {
+						JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "Tem Campos por preencher!", "Error", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+
+					todosDadosValidos = true;
+
+					if(todosDadosValidos) {
+						if(nomeAlterado) {
+							clienteNovo.setNome(nome);
+						} else if(nifAlterado) {
+							clienteNovo.setNif(nif);
+						} else if(moradaAlterado){
+							clienteNovo.setMorada(morada);
+						}
+						try {
+							GestorDeDAO.getGestorDeDAO().editarClienteDadosBasicos(clienteNovo);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+					}
+				}
+
 				btAtualizarDados.setVisible(true);
 				btCancelar.setVisible(false);
 				btConfirmar.setVisible(false);
+
+				textFieldDadosNome.setEditable(false);
+				textFieldDadosNIF.setEditable(false);
+				textFieldDadosMorada.setEditable(false);
+
 			}
 		});
 		btConfirmar.setForeground(Color.DARK_GRAY);
@@ -196,13 +364,26 @@ public class AreaCliente_MeusDados extends JFrame {
 		btConfirmar.setFocusPainted(false);
 
 		btCancelar = new JButton("Cancelar");
-		btCancelar.setBounds(188, 392, 120, 30);
+		btCancelar.setBounds(186, 341, 120, 30);
 		panelDados.add(btCancelar);
 		btCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btAtualizarDados.setVisible(true);
 				btCancelar.setVisible(false);
 				btConfirmar.setVisible(false);
+
+				if(cliente != null && !todosDadosValidos) {
+					textFieldDadosNome.setText(cliente.getNome());
+					textFieldDadosNIF.setText( "" + cliente.getNif());
+					textFieldDadosMorada.setText(cliente.getMorada());
+					textFieldID.setText("" +cliente.getId());
+				}
+
+
+				textFieldDadosNome.setEditable(false);
+				textFieldDadosNIF.setEditable(false);
+				textFieldDadosMorada.setEditable(false);
+
 			}
 		});
 		btCancelar.setForeground(Color.DARK_GRAY);
@@ -215,6 +396,20 @@ public class AreaCliente_MeusDados extends JFrame {
 		lblTitulo.setFont(new Font("Dialog", Font.BOLD, 20));
 		lblTitulo.setBounds(56, 43, 224, 28);
 		panelDados.add(lblTitulo);
+
+		lblNovoLogin = new JLabel("Ensira o Novo Login");
+		lblNovoLogin.setForeground(Color.LIGHT_GRAY);
+		lblNovoLogin.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblNovoLogin.setVisible(false);
+		lblNovoLogin.setBounds(29, 111, 224, 14);
+		panelPasswords.add(lblNovoLogin);
+
+		lblNovaPass = new JLabel("Ensira a Nova Password");
+		lblNovaPass.setForeground(Color.LIGHT_GRAY);
+		lblNovaPass.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblNovaPass.setVisible(false);
+		lblNovaPass.setBounds(29, 171, 224, 14);
+		panelPasswords.add(lblNovaPass);
 
 		passwordField = new JPasswordField();
 		passwordField.setForeground(Color.BLACK);
@@ -253,12 +448,14 @@ public class AreaCliente_MeusDados extends JFrame {
 		btAtualizarDadosPass.setForeground(Color.DARK_GRAY);
 		btAtualizarDadosPass.setFont(new Font("Dialog", Font.PLAIN, 15));
 		btAtualizarDadosPass.setFocusPainted(false);
-		btAtualizarDadosPass.setBounds(132, 212, 139, 30);
+		btAtualizarDadosPass.setBounds(130, 212, 139, 30);
 		btAtualizarDadosPass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btAtualizarDadosPass.setVisible(false);
 				btCancelarPass.setVisible(true);
 				btConfirmarPass.setVisible(true);
+
+
 			}
 		});
 		panelPasswords.add(btAtualizarDadosPass);
@@ -303,6 +500,8 @@ public class AreaCliente_MeusDados extends JFrame {
 
 	}// end initialize
 
+
+
 	/**
 	 * Activa o Nimbus Look and Feel
 	 */
@@ -335,6 +534,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		try {
 
 			Cliente cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLogin(username);
+<<<<<<< Updated upstream
 			if (cliente != null) {
 			textFieldDadosNome.setText(cliente.getNome());
 			textFieldDadosNIF.setText( "" + cliente.getNif());
@@ -344,14 +544,30 @@ public class AreaCliente_MeusDados extends JFrame {
 			textFieldID.setText("" +cliente.getId());
 			passwordField.setText(cliente.getPassword().substring(0, 8));
 			}
+=======
+			this.cliente = cliente;
+			if(cliente != null) {
+				textFieldDadosNome.setText(cliente.getNome());
+				textFieldDadosNIF.setText( "" + cliente.getNif());
+				textFieldDadosLogin.setText(cliente.getLogin());
+				textFieldDadosMorada.setText(cliente.getMorada());
+				textFieldID.setText("" +cliente.getId());
+				passwordField.setText(cliente.getPassword().substring(0, 8));
+			}
+
+>>>>>>> Stashed changes
 		} catch (Exception e) {
 
 			e.printStackTrace();
 
 		}
-
-
 	}
 
+	private void popularTextFields(Cliente clienteAntigo) {
+		textFieldDadosNome.setText(clienteAntigo.getNome()+ "");
+		textFieldDadosNIF.setText(clienteAntigo.getNif() + "");
+		textFieldDadosMorada.setText(clienteAntigo.getMorada());
+
+	}
 
 }//end class

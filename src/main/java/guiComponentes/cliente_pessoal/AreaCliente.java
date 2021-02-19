@@ -36,6 +36,7 @@ public class AreaCliente extends JFrame {
 	private AreaCliente_VerPacotes areaClienteVerPacotes;
 	private AreaCliente_VerPromocoes areaClienteVerPromo;
 	private String username;
+	private JTabbedPane tabbedPane;
 	
 	
 	/**
@@ -106,7 +107,7 @@ public class AreaCliente extends JFrame {
 
 		// Construção JTabbedPane
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		tabbedPane.setBounds(0, 89, 1384, 586); //180, 50
 		panel.add(tabbedPane);
