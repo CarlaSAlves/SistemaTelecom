@@ -86,12 +86,13 @@ public class AreaCliente_MeusDados extends JFrame {
 
 		JButton btConfirmar = new JButton("Confirmar");
 		btConfirmar.setForeground(Color.DARK_GRAY);
-		btConfirmar.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btConfirmar.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		btConfirmar.setFocusPainted(false);
 		btConfirmar.setBounds(269, 389, 180, 50);
 
 		panelMeusDados.add(btConfirmar);
 		textFieldDadosNome = new JTextField();
+		textFieldDadosNome.setEditable(false);
 		textFieldDadosNome.setColumns(10);
 		textFieldDadosNome.setBounds(252, 93, 246, 36);		
 		panelMeusDados.add(textFieldDadosNome);
@@ -102,16 +103,19 @@ public class AreaCliente_MeusDados extends JFrame {
 		panelMeusDados.add(lblDadosNIF);
 
 		textFieldDadosNIF = new JTextField();
+		textFieldDadosNIF.setEditable(false);
 		textFieldDadosNIF.setColumns(10);
 		textFieldDadosNIF.setBounds(252, 154, 246, 36);
 		panelMeusDados.add(textFieldDadosNIF);
 
 		textFieldDadosLogin = new JTextField();
+		textFieldDadosLogin.setEditable(false);
 		textFieldDadosLogin.setColumns(10);
 		textFieldDadosLogin.setBounds(252, 221, 246, 36);
 		panelMeusDados.add(textFieldDadosLogin);
 		
 		textFieldDadosMorada = new JTextField();
+		textFieldDadosMorada.setEditable(false);
 		textFieldDadosMorada.setColumns(10);
 		textFieldDadosMorada.setBounds(252, 288, 246, 36);
 		panelMeusDados.add(textFieldDadosMorada);
@@ -121,14 +125,14 @@ public class AreaCliente_MeusDados extends JFrame {
 
 		JButton btAtualizarDados = new JButton("Atualizar Dados ");
 		btAtualizarDados.setForeground(Color.DARK_GRAY);
-		btAtualizarDados.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btAtualizarDados.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		btAtualizarDados.setFocusPainted(false);
 		btAtualizarDados.setBounds(79, 389, 180, 50);
 		panelMeusDados.add(btAtualizarDados);
 
 		JButton btCancelar = new JButton("Cancelar");
 		btCancelar.setForeground(Color.DARK_GRAY);
-		btCancelar.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btCancelar.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		btCancelar.setFocusPainted(false);
 		btCancelar.setBounds(459, 389, 180, 50);
 		panelMeusDados.add(btCancelar);
@@ -137,7 +141,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		//Imagem fundo
 
 		JLabel imagemDados = new JLabel("");
-		imagemDados.setBounds(0, 0, 1368, 547);
+		imagemDados.setBounds(0, 0, 1432, 547);
 		panelMeusDados.add(imagemDados);
 		imagemDados.setBackground(new Color(240, 240,240 ));
 		imagemDados.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/AltranClientes.png")));
