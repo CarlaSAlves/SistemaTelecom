@@ -162,7 +162,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 		textFieldDadosNome = new JTextField();
 		textFieldDadosNome.setForeground(Color.BLACK);
-		textFieldDadosNome.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		textFieldDadosNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textFieldDadosNome.setEditable(false);
 		textFieldDadosNome.setColumns(10);
 		textFieldDadosNome.setBounds(54, 168, 252, 30);
@@ -176,7 +176,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 		textFieldDadosNIF = new JTextField();
 		textFieldDadosNIF.setForeground(Color.BLACK);
-		textFieldDadosNIF.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		textFieldDadosNIF.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textFieldDadosNIF.setEditable(false);
 		textFieldDadosNIF.setColumns(10);
 		textFieldDadosNIF.setBounds(54, 231, 252, 30);
@@ -184,7 +184,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 		textFieldDadosMorada = new JTextField();
 		textFieldDadosMorada.setForeground(Color.BLACK);
-		textFieldDadosMorada.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		textFieldDadosMorada.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textFieldDadosMorada.setEditable(false);
 		textFieldDadosMorada.setColumns(10);
 		textFieldDadosMorada.setBounds(54, 296, 252, 30);
@@ -198,7 +198,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 		textFieldID = new JTextField();
 		textFieldID.setForeground(Color.BLACK);
-		textFieldID.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		textFieldID.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textFieldID.setEditable(false);
 		textFieldID.setColumns(10);
 		textFieldID.setBounds(54, 103, 252, 30);
@@ -450,7 +450,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		btCancelar.setFont(new Font("Dialog", Font.PLAIN, 15));
 		btCancelar.setFocusPainted(false);
 
-		lblTitulo = new JLabel("Meus Dados");
+		lblTitulo = new JLabel("Os Seus Dados");
 		lblTitulo.setForeground(Color.DARK_GRAY);
 		lblTitulo.setFont(new Font("Dialog", Font.BOLD, 20));
 		lblTitulo.setBounds(56, 43, 224, 28);
@@ -489,7 +489,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		passwordField.setBounds(17, 163, 252, 30);
 		passwordField.setEditable(false);
 		panelPasswords.add(passwordField);
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		lblDadosLogin = new JLabel("Login ");
 		lblDadosLogin.setForeground(Color.DARK_GRAY);
@@ -501,7 +501,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		textFieldDadosLogin.setForeground(Color.BLACK);
 		textFieldDadosLogin.setBounds(17, 103, 252, 30);
 		panelPasswords.add(textFieldDadosLogin);
-		textFieldDadosLogin.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		textFieldDadosLogin.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textFieldDadosLogin.setEditable(false);
 		textFieldDadosLogin.setColumns(10);
 
@@ -511,10 +511,10 @@ public class AreaCliente_MeusDados extends JFrame {
 		panelPasswords.add(lblPassword);
 		lblPassword.setFont(new Font("Dialog", Font.PLAIN, 15));
 
-		lblTituloPass = new JLabel("Login & Password");
+		lblTituloPass = new JLabel("O Seu Login & Password");
 		lblTituloPass.setForeground(Color.DARK_GRAY);
 		lblTituloPass.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblTituloPass.setBounds(19, 43, 224, 28);
+		lblTituloPass.setBounds(19, 43, 300, 28);
 		panelPasswords.add(lblTituloPass);
 
 		btAtualizarDadosPass = new JButton("Atualizar Login");
@@ -789,7 +789,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 		passwordField_1 = new JPasswordField();
 		passwordField_1.setForeground(Color.BLACK);
-		passwordField_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		passwordField_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		passwordField_1.setEditable(true);
 		passwordField_1.setVisible(false);
 		passwordField_1.setBounds(17, 231, 252, 30);
@@ -804,7 +804,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 		passwordField_2 = new JPasswordField();
 		passwordField_2.setForeground(Color.BLACK);
-		passwordField_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		passwordField_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		passwordField_2.setEditable(true);
 		passwordField_2.setVisible(false);
 		passwordField_2.setBounds(17, 296, 252, 30);
