@@ -45,6 +45,10 @@ public class CriarClienteDialog extends JDialog {
 		this.username = username;
 	}
 
+	/**
+	 * Preenche as textFields com os valores do cliente, antes de editar.
+	 * @param clienteAntigo2
+	 */
 	private void popularTextFields(Cliente clienteAntigo2) {
 		textFieldNome.setText(clienteAntigo2.getNome()+ "");
 		textFieldNIF.setText(clienteAntigo2.getNif() + "");
@@ -58,14 +62,14 @@ public class CriarClienteDialog extends JDialog {
 	 */
 	public CriarClienteDialog() {
 
-		setBounds(500, 300, 440, 329);
-		getContentPane().setLayout(new BorderLayout());
 		setTitle("Novo Cliente");
+		setBounds(500, 300, 440, 329);
+		contentPanel.setLayout(null);
+		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.window);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
-
+		
 		inicialize();
 
 	}
@@ -97,15 +101,102 @@ public class CriarClienteDialog extends JDialog {
 	}
 
 	/**
+	 * Configuração das labels da janela 
+	 * @lblNome
+	 * @lblNIF
+	 * @lblMorada
+	 * @lblLogin
+	 * @lblPassword
+	 * @lblAuxiliar - label inserida no textField da password
+	 */
+	private void labelsSetup() {
+		JLabel lblNome = new JLabel("Nome");
+		lblNome.setBounds(9, 11, 82, 27);
+		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		contentPanel.add(lblNome);
+
+		JLabel lblNif = new JLabel("NIF");
+		lblNif.setBounds(9, 51, 82, 27);
+		lblNif.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		contentPanel.add(lblNif);
+
+		JLabel lblMorada = new JLabel("Morada");
+		lblMorada.setBounds(9, 89, 82, 27);
+		lblMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		contentPanel.add(lblMorada);
+
+		JLabel lblLogin = new JLabel("Login");
+		lblLogin.setBounds(9, 125, 82, 27);
+		lblLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		contentPanel.add(lblLogin);
+
+		lblPassword = new JLabel( "Password");
+		lblPassword.setBounds(9, 163, 82, 27);
+		lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		contentPanel.add(lblPassword);
+
+		lblAuxiliar = new JLabel();
+		lblAuxiliar.setFont(new Font("Dubai Light", Font.PLAIN, 10));
+		lblAuxiliar.setForeground(Color.LIGHT_GRAY);
+		lblAuxiliar.setBounds(111, 163, 280, 27);
+		lblAuxiliar.setVisible(false);
+		contentPanel.add(lblAuxiliar);
+
+	}
+
+	/**
+	 * Configuração das textFields 
+	 * @textFieldNome
+	 * @textFieldNIF
+	 * @textFieldMorada
+	 * @textFieldLogin
+	 * @textFieldPassword
+	 * 
+	 */
+	private void textFieldSetup() {
+		textFieldNome = new JTextField();
+		textFieldNome.setBounds(101, 11, 290, 27);
+		textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		textFieldNome.setColumns(10);
+		contentPanel.add(textFieldNome);
+
+		textFieldNIF = new JTextField();
+		textFieldNIF.setBounds(101, 49, 290, 27);
+		textFieldNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		textFieldNIF.setColumns(10);
+		contentPanel.add(textFieldNIF);
+
+		textFieldMorada = new JTextField();
+		textFieldMorada.setBounds(101, 87, 290, 27);
+		textFieldMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		textFieldMorada.setColumns(10);
+		contentPanel.add(textFieldMorada);
+
+		textFieldLogin = new JTextField();
+		textFieldLogin.setBounds(101, 125, 290, 27);
+		textFieldLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		textFieldLogin.setColumns(10);
+		contentPanel.add(textFieldLogin);
+
+		textFieldPassword = new JPasswordField();
+		textFieldPassword.setBounds(101, 163, 290, 27);
+		textFieldPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		textFieldPassword.setColumns(10);
+		contentPanel.add(textFieldPassword);
+
+	}
+	
+	/**
 	 * Configura os botões do rodapé da página 
 	 * 
 	 * @buttonPane - painel de confirmação
 	 * @okButton - botão de confirmação, aciona as validações de campos e 
-	 * o método que grava o cliente na base de dados.
+	 * o método que grava os dados do cliente na base de dados.
 	 * @CancelButton - botão cancelar, cancela a ação e fecha a janela.
 	 * 
 	 */
 	protected void painelConfirmacaoSetup() {
+		
 		JPanel buttonPane = new JPanel();
 		buttonPane.setBounds(0, 245, 424, 41);
 		contentPanel.add(buttonPane);
@@ -209,91 +300,6 @@ public class CriarClienteDialog extends JDialog {
 	}
 
 
-	/**
-	 * Configuração das labels da janela 
-	 * @lblNome
-	 * @lblNIF
-	 * @lblMorada
-	 * @lblLogin
-	 * @lblPassword
-	 * @lblAuxiliar - label inserida no textField da password
-	 */
-	private void labelsSetup() {
-		JLabel lblNome = new JLabel("Nome");
-		lblNome.setBounds(9, 11, 82, 27);
-		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		contentPanel.add(lblNome);
-
-		JLabel lblNif = new JLabel("NIF");
-		lblNif.setBounds(9, 51, 82, 27);
-		lblNif.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		contentPanel.add(lblNif);
-
-		JLabel lblMorada = new JLabel("Morada");
-		lblMorada.setBounds(9, 89, 82, 27);
-		lblMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		contentPanel.add(lblMorada);
-
-		JLabel lblLogin = new JLabel("Login");
-		lblLogin.setBounds(9, 125, 82, 27);
-		lblLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		contentPanel.add(lblLogin);
-
-		lblPassword = new JLabel( "Password");
-		lblPassword.setBounds(9, 163, 82, 27);
-		lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		contentPanel.add(lblPassword);
-
-		lblAuxiliar = new JLabel();
-		lblAuxiliar.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblAuxiliar.setForeground(Color.LIGHT_GRAY);
-		lblAuxiliar.setBounds(111, 163, 280, 27);
-		lblAuxiliar.setVisible(false);
-		contentPanel.add(lblAuxiliar);
-
-	}
-
-	/**
-	 * Configuração das textFields 
-	 * @textFieldNome
-	 * @textFieldNIF
-	 * @textFieldMorada
-	 * @textFieldLogin
-	 * @textFieldPassword
-	 * 
-	 */
-	private void textFieldSetup() {
-		textFieldNome = new JTextField();
-		textFieldNome.setBounds(101, 11, 290, 27);
-		textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		textFieldNome.setColumns(10);
-		contentPanel.add(textFieldNome);
-
-		textFieldNIF = new JTextField();
-		textFieldNIF.setBounds(101, 49, 290, 27);
-		textFieldNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		textFieldNIF.setColumns(10);
-		contentPanel.add(textFieldNIF);
-
-		textFieldMorada = new JTextField();
-		textFieldMorada.setBounds(101, 87, 290, 27);
-		textFieldMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		textFieldMorada.setColumns(10);
-		contentPanel.add(textFieldMorada);
-
-		textFieldLogin = new JTextField();
-		textFieldLogin.setBounds(101, 125, 290, 27);
-		textFieldLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		textFieldLogin.setColumns(10);
-		contentPanel.add(textFieldLogin);
-
-		textFieldPassword = new JPasswordField();
-		textFieldPassword.setBounds(101, 163, 290, 27);
-		textFieldPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		textFieldPassword.setColumns(10);
-		contentPanel.add(textFieldPassword);
-
-	}
 
 	/**
 	 * Configuração da janela se for acionada pelo botão editar - apresenta os campos editáveis.
@@ -317,7 +323,6 @@ public class CriarClienteDialog extends JDialog {
 			popularTextFields(clienteAntigo);
 			lblAuxiliar.setText("Não preencher se desejar manter a password atual");
 			lblAuxiliar.setVisible(true);
-
 			textFieldPassword.addFocusListener(new FocusListener() {
 
 				@Override
@@ -339,7 +344,7 @@ public class CriarClienteDialog extends JDialog {
 	}
 
 	/**
-	 * Método que conecta ao gestor DAO e grava o cliente na base de dados
+	 * Método que conecta ao gestor DAO e grava os dados do cliente na base de dados
 	 * 
 	 */
 	@SuppressWarnings("deprecation")
