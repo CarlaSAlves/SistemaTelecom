@@ -65,6 +65,25 @@ public class AreaCliente extends JFrame {
 		areaClienteProdutos = new AreaCliente_MeusProdutos();
 		areaClienteVerPacotes = new AreaCliente_VerPacotes();
 		areaClienteVerPromo = new AreaCliente_VerPromocoes();
+		
+		areaClienteProdutos.getBtnPesquisarPacotes().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.setSelectedIndex(2);
+				
+			}
+		});
+		
+		areaClienteProdutos.getBtnPesquisarPromocoes().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.setSelectedIndex(3);
+				
+			}
+		});
+		
 		initialize(guit);
 		ativarNimbusLookAndFeel();
 	}
@@ -74,6 +93,11 @@ public class AreaCliente extends JFrame {
 		areaClienteDados.enviarUsernameMeusDados(this.username);
 		areaClienteProdutos.enviarUsernameMeusProdutos(this.username);
 	}
+
+	public JTabbedPane getTabbedPane() {
+		return tabbedPane;
+	}
+
 
 	private void initialize(GUI_total guit) {
 
@@ -178,7 +202,7 @@ public class AreaCliente extends JFrame {
 		getContentPane().add(lblFooter);
 
 		setupTempoSessao();
-
+		tabbedPane.setSelectedIndex(0);
 
 	}//end initialize method
 

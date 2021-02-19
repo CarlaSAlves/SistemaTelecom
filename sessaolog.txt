@@ -456,3 +456,387 @@
 <duração da sessão:	0:10>
 </sessao>
 
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:02:42>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	19-02-2021 21:02:47>
+<duração da sessão:	0:0>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:02:51>
+<duração da sessão:	0:7>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:07:05>
+<duração da sessão:	0:8>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	19-02-2021 21:07:17>
+<duração da sessão:	0:4>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:07:22>
+<duração da sessão:	0:5>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:07:31>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:08:41>
+<duração da sessão:	0:8>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:17:36>
+<duração da sessão:	0:12>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:18:39>
+<duração da sessão:	0:5>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:18:46>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:18:52>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:19:10>
+<duração da sessão:	0:5>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:20:03>
+<duração da sessão:	0:6>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:20:16>
+<duração da sessão:	0:5>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:20:24>
+<duração da sessão:	0:4>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:20:31>
+<duração da sessão:	0:6>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:21:42>
+<duração da sessão:	0:4>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:21:50>
+<duração da sessão:	0:7>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:25:22>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:25:35>
+<duração da sessão:	0:5>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:25:43>
+<duração da sessão:	0:9>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:27:11>
+<duração da sessão:	1:48>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:29:02>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:29:09>
+<duração da sessão:	0:7>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:29:20>
+<duração da sessão:	0:4>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:29:27>
+<duração da sessão:	0:6>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:29:36>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:29:45>
+<duração da sessão:	0:5>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:29:52>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:29:57>
+<duração da sessão:	0:21>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:30:21>
+<duração da sessão:	0:5>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:30:29>
+<duração da sessão:	0:7>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:30:50>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	19-02-2021 21:30:56>
+<duração da sessão:	0:10>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:31:08>
+<duração da sessão:	0:9>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:31:21>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	19-02-2021 21:31:26>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:31:30>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:35:15>
+<duração da sessão:	0:5>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:35:22>
+<duração da sessão:	0:4>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:36:45>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:36:49>
+<duração da sessão:	0:7>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:36:59>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:37:04>
+<duração da sessão:	0:6>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:37:56>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:38:02>
+<duração da sessão:	0:6>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:38:11>
+<duração da sessão:	0:6>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	19-02-2021 21:38:19>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:38:24>
+<duração da sessão:	0:6>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:39:36>
+<duração da sessão:	0:5>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:39:46>
+<duração da sessão:	0:6>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:39:53>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:39:58>
+<duração da sessão:	0:6>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:40:06>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:40:11>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:44:02>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:44:06>
+<duração da sessão:	0:5>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:44:13>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:44:19>
+<duração da sessão:	0:5>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:44:26>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 21:44:31>
+<duração da sessão:	0:7>
+</sessao>
+
+<sessao>
+<username:	test>
+<data e hora do login:	19-02-2021 21:44:40>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	19-02-2021 21:44:44>
+<duração da sessão:	0:1>
+</sessao>
+

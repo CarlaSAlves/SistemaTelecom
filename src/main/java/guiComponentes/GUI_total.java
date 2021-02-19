@@ -294,6 +294,7 @@ public class GUI_total extends JFrame {
 		operador_gerirClientes.setUsernameLoggedIn(username);
 		areaCliente.setUsernameLoggedIn(username);
 		areaCliente.enviarUsernameAreaCliente(username);
+		areaCliente.getTabbedPane().setSelectedIndex(0);
 		
 		Funcionario func = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
 		Cliente cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLogin(username);

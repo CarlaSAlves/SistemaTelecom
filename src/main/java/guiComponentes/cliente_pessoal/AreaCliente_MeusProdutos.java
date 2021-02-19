@@ -27,17 +27,19 @@ import standard_value_object.Promocao;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
+import javax.swing.JButton;
 
 public class AreaCliente_MeusProdutos extends JFrame {
 
 	private JPanel panelMeusProdutos;
 	private JTextArea textAreaNomePacote;
 	private JTextArea textAreaDescricaoPacote;
-
 	private JTextArea textAreaDescricaoPromocoes;
-
-	private String userName;
 	private JComboBox<Promocao> comboBoxPromocoes;
+	private JLabel lblAsSuasPromoces, lblSeuPacote;
+	private String userName;
+	private JButton btnPesquisarPacotes;
+	private JButton btnPesquisarPromocoes;
 
 
 
@@ -65,30 +67,16 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 		// Área Pacote Comercial
 
-		JLabel lblSeuPacote = new JLabel("Pacote Comercial");
+		lblSeuPacote = new JLabel("Pacote Comercial");
 		lblSeuPacote.setForeground(Color.DARK_GRAY);
 		lblSeuPacote.setBounds(66, 122, 315, 36);
 		lblSeuPacote.setFont(new Font("Dialog", Font.BOLD, 15));
 		panelMeusProdutos.add(lblSeuPacote);
 
-		JLabel lblNomePacote = new JLabel("Nome");
-		lblNomePacote.setForeground(Color.DARK_GRAY);
-		lblNomePacote.setBounds(10, 169, 69, 31);
-		lblNomePacote.setVisible(false);
-		lblNomePacote.setFont(new Font("Dialog", Font.PLAIN, 15));
-		panelMeusProdutos.add(lblNomePacote);
-
 		textAreaNomePacote = new JTextArea();
 		textAreaNomePacote.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textAreaNomePacote.setBounds(66, 169, 300, 31);
 		panelMeusProdutos.add(textAreaNomePacote);
-
-		JLabel lblDescricaoPacote = new JLabel("Descrição");
-		lblDescricaoPacote.setForeground(Color.DARK_GRAY);
-		lblDescricaoPacote.setBounds(10, 222, 95, 31);
-		lblDescricaoPacote.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblDescricaoPacote.setVisible(false);
-		panelMeusProdutos.add(lblDescricaoPacote);
 
 		textAreaDescricaoPacote = new JTextArea();
 		textAreaDescricaoPacote.setLineWrap(true);
@@ -99,10 +87,10 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 
 		// Promoções
-		JLabel lblAsSuasPromoces = new JLabel("Promoções");
+		lblAsSuasPromoces = new JLabel("Promoções");
 		lblAsSuasPromoces.setForeground(Color.DARK_GRAY);
 		lblAsSuasPromoces.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblAsSuasPromoces.setBounds(400, 120, 315, 36); 
+		lblAsSuasPromoces.setBounds(400, 122, 315, 36); 
 		panelMeusProdutos.add(lblAsSuasPromoces);
 
 		textAreaDescricaoPromocoes = new JTextArea();
@@ -115,13 +103,26 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		comboBoxPromocoes.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		comboBoxPromocoes.setBounds(400, 169, 300, 31);
 		panelMeusProdutos.add(comboBoxPromocoes);
-		
+
+		btnPesquisarPromocoes = new JButton("Pesquisar Promoções");
+		btnPesquisarPromocoes.setFont(new Font("Dialog", Font.PLAIN, 12));
+		btnPesquisarPromocoes.setBounds(400, 168, 300, 32);
+		btnPesquisarPromocoes.setVisible(false);
+		panelMeusProdutos.add(btnPesquisarPromocoes);
+
+		btnPesquisarPacotes = new JButton("Pesquisar Pacotes Comerciais");
+		btnPesquisarPacotes.setFont(new Font("Dialog", Font.PLAIN, 12));
+		btnPesquisarPacotes.setBounds(66, 168, 300, 32);
+		btnPesquisarPacotes.setVisible(false);
+		panelMeusProdutos.add(btnPesquisarPacotes);
+
+
 		JLabel lblOsSeusProdutos = new JLabel("Os Seus Produtos");
 		lblOsSeusProdutos.setForeground(Color.DARK_GRAY);
 		lblOsSeusProdutos.setFont(new Font("Dialog", Font.BOLD, 20));
 		lblOsSeusProdutos.setBounds(66, 54, 234, 28);
 		panelMeusProdutos.add(lblOsSeusProdutos);
-		
+
 		//Imagem fundo
 
 		JLabel imagemDados = new JLabel("");
@@ -132,29 +133,30 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 	}
 
+
 	/**
 	 * Cria o renderer da ComboBox
 	 * 
 	 *
 	 */
 
-		private class PromocaoComboRenderer implements ListCellRenderer<Promocao> {
-	
-			private JLabel display;
-	
-			PromocaoComboRenderer(){
-				display = new JLabel();
-				display.setFont(new Font("Tahoma", Font.PLAIN, 11));
-				display.setOpaque( true );
-			}
-	
-			@Override
-			public Component getListCellRendererComponent(JList<? extends Promocao> list, Promocao value, int index,
-					boolean isSelected, boolean cellHasFocus) {
-				display.setText("  " + value.getNome());
-				return display;
-			}
+	private class PromocaoComboRenderer implements ListCellRenderer<Promocao> {
+
+		private JLabel display;
+
+		PromocaoComboRenderer(){
+			display = new JLabel();
+			display.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			display.setOpaque( true );
 		}
+
+		@Override
+		public Component getListCellRendererComponent(JList<? extends Promocao> list, Promocao value, int index,
+				boolean isSelected, boolean cellHasFocus) {
+			display.setText("  " + value.getNome());
+			return display;
+		}
+	}
 
 
 	/**
@@ -187,44 +189,88 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 	public void enviarUsernameMeusProdutos(String username) {
 		this.userName = username;
-		
-		
-		comboBoxPromocoes.setRenderer(new PromocaoComboRenderer());
-		
 
 		try {
 
 			Cliente cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLogin(username);
-			if(cliente.getId_pacote_cliente()!= 0) {
-				PacoteComercial pacoteCliente = GestorDeDAO.getGestorDeDAO().getPacoteClienteInfo(cliente.getId_pacote_cliente());
-				List<Promocao> promocoesCliente = GestorDeDAO.getGestorDeDAO().getPacoteClientePromocaoInfo(cliente.getId_pacote_cliente());
-
-				textAreaNomePacote.setText(pacoteCliente.getNome());
-				textAreaDescricaoPacote.setText(pacoteCliente.getDescricao());
 
 
-				for(Promocao pro : promocoesCliente) {
-					comboBoxPromocoes.addItem(pro);
-				}			
-				Promocao promocao = (Promocao) comboBoxPromocoes.getSelectedItem();
-				textAreaDescricaoPromocoes.setText(promocao.getDescricao());
-				comboBoxPromocoes.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
+			if(cliente != null) {
+
+				if( cliente.getId_pacote_cliente()!= 0) {
+					
+					textAreaNomePacote.setVisible(true);
+					textAreaDescricaoPacote.setVisible(true);
+					lblSeuPacote.setText("Pacote Comercial");
+					btnPesquisarPacotes.setVisible(false);
+					
+					PacoteComercial pacoteCliente = GestorDeDAO.getGestorDeDAO().getPacoteClienteInfo(cliente.getId_pacote_cliente());
+					textAreaNomePacote.setText(pacoteCliente.getNome());
+					textAreaDescricaoPacote.setText(pacoteCliente.getDescricao());
+
+					List<Promocao> promocoesCliente = GestorDeDAO.getGestorDeDAO().getPacoteClientePromocaoInfo(cliente.getId_pacote_cliente());
+
+					if(promocoesCliente.size() > 0 ) {
+						
+						textAreaDescricaoPromocoes.setVisible(true);
+						comboBoxPromocoes.setVisible(true);
+						lblAsSuasPromoces.setText("Promoções");
+						btnPesquisarPromocoes.setVisible(false);
+						
+						comboBoxPromocoes.setRenderer(new PromocaoComboRenderer());
+						for(Promocao pro : promocoesCliente) {
+							comboBoxPromocoes.addItem(pro);
+						}			
 						Promocao promocao = (Promocao) comboBoxPromocoes.getSelectedItem();
 						textAreaDescricaoPromocoes.setText(promocao.getDescricao());
+						comboBoxPromocoes.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								Promocao promocao = (Promocao) comboBoxPromocoes.getSelectedItem();
+								textAreaDescricaoPromocoes.setText(promocao.getDescricao());
+							}
+						});
+					}else {
+						textAreaDescricaoPromocoes.setVisible(false);
+						comboBoxPromocoes.setVisible(false);
+						lblAsSuasPromoces.setText("Não tem nenhuma Promoção Atribuida");
+						btnPesquisarPromocoes.setVisible(true);
 					}
-				});
 
+				}else {
 
+					textAreaNomePacote.setVisible(false);
+					textAreaDescricaoPacote.setVisible(false);
+					lblSeuPacote.setText("Não tem nenhum Pacote Comercial Atribuido");
+					btnPesquisarPacotes.setVisible(true);
+
+					textAreaDescricaoPromocoes.setVisible(false);
+					comboBoxPromocoes.setVisible(false);
+					lblAsSuasPromoces.setText("Não tem nenhuma Promoção Atribuida");
+					btnPesquisarPromocoes.setVisible(true);
+				}
 			}
+
+
+
 		} catch (Exception e) {
-
 			e.printStackTrace();
-
 		}
 
 
 	}
+	
+
+
+	public JButton getBtnPesquisarPacotes() {
+		return btnPesquisarPacotes;
+	}
+
+
+
+	public JButton getBtnPesquisarPromocoes() {
+		return btnPesquisarPromocoes;
+	}
+
 
 }// end class
