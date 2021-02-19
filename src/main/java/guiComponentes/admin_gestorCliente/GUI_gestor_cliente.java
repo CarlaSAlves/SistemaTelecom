@@ -98,8 +98,8 @@ public class GUI_gestor_cliente extends JFrame {
 		 *  Campos de Pesquisa:
 		 *  
 		 *  ID
-		 *  Nome
 		 *  NIF
+		 *  Nome
 		 *  Morada 
 		 *  Ativo
 		 *  Botão Pesquisar
@@ -391,16 +391,16 @@ public class GUI_gestor_cliente extends JFrame {
 		labelID.setBounds(6, 15, 39, 18);
 		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		painelPesquisa.add(labelID);
-
-		labelNome = new JLabel("Nome");
-		labelNome.setBounds(6, 87, 56, 18);
-		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		painelPesquisa.add(labelNome);
 		
 		labelNIF = new JLabel("NIF");
 		labelNIF.setBounds(6, 49, 56, 18);
 		labelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		painelPesquisa.add(labelNIF);
+
+		labelNome = new JLabel("Nome");
+		labelNome.setBounds(6, 87, 56, 18);
+		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		painelPesquisa.add(labelNome);
 		
 		labelMorada = new JLabel("Morada");
 		labelMorada.setBounds(6, 116, 56, 27);
@@ -422,15 +422,15 @@ public class GUI_gestor_cliente extends JFrame {
 		textFieldID.setColumns(10);
 		painelPesquisa.add(textFieldID);
 		
-		textFieldNome = new JTextField();
-		textFieldNome.setBounds(72, 78, 371, 27);
-		textFieldNome.setColumns(10);
-		painelPesquisa.add(textFieldNome);
-		
 		textFieldNIF = new JTextField();
 		textFieldNIF.setBounds(72, 40, 371, 27);
 		textFieldNIF.setColumns(10);
 		painelPesquisa.add(textFieldNIF);
+		
+		textFieldNome = new JTextField();
+		textFieldNome.setBounds(72, 78, 371, 27);
+		textFieldNome.setColumns(10);
+		painelPesquisa.add(textFieldNome);
 		
 		textFieldMorada = new JTextField();
 		textFieldMorada.setBounds(72, 116, 371, 27);

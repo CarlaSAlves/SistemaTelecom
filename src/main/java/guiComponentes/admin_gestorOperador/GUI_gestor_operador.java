@@ -95,8 +95,8 @@ public class GUI_gestor_operador extends JFrame {
 		 *  Campos de Pesquisa:
 		 *  
 		 *  ID
-		 *  Nome
 		 *  NIF
+		 *  Nome
 		 *  Ativo
 		 *  Botão Pesquisar
 		 */ 
@@ -424,6 +424,14 @@ public class GUI_gestor_operador extends JFrame {
 		btVoltarGestorOperador.setBackground(SystemColor.activeCaption);
 		btVoltarGestorOperador.setFocusPainted(false);
 	}
+	private JPanel panelDaTableSetup() {
+		JPanel painelTabela = new JPanel();
+		painelTabela.setBackground(SystemColor.window);
+		painelTabela.setBounds(66, 309, 1279, 369);
+		painelTabela.setFont(font);
+		painelTabela.setLayout(null);
+		return painelTabela;
+	}
 
 	private void botaoVisualizarHistoricoSetup() {
 		botaoVisualizarHistorico = new JButton("Ver Historico");
@@ -505,14 +513,7 @@ public class GUI_gestor_operador extends JFrame {
 		return scrollPane;
 	}
 
-	private JPanel panelDaTableSetup() {
-		JPanel painelTabela = new JPanel();
-		painelTabela.setBackground(SystemColor.window);
-		painelTabela.setBounds(66, 309, 1279, 369);
-		painelTabela.setFont(font);
-		painelTabela.setLayout(null);
-		return painelTabela;
-	}
+	
 
 	private JLabel lbFooterSetup() {
 		JLabel lbFooter = new JLabel();
