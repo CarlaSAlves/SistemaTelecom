@@ -51,7 +51,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 	/**
 	 * Construtor que inicia com o método que configura o painel base e o método inicialize, 
-	 * que contém todos os métodos e elementes que compoem a página 
+	 * que contém todos os métodos e elementos que compõem a página 
 	 */
 	public GUI_gestor_cliente() {
 
