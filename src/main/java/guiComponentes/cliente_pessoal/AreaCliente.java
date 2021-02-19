@@ -71,6 +71,7 @@ public class AreaCliente extends JFrame {
 	public void enviarUsernameAreaCliente(String username) {
 		this.username = username;
 		areaClienteDados.enviarUsernameMeusDados(this.username);
+		areaClienteProdutos.enviarUsernameMeusProdutos(this.username);
 	}
 	
 	private void initialize(GUI_total guit) {
