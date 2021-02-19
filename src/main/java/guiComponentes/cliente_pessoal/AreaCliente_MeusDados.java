@@ -140,7 +140,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 		JButton btAtualizarDados = new JButton("Atualizar Dados ");
 		btAtualizarDados.setForeground(Color.DARK_GRAY);
-		btAtualizarDados.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btAtualizarDados.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		btAtualizarDados.setFocusPainted(false);
 		btAtualizarDados.setBounds(79, 389, 180, 50);
 		panelMeusDados.add(btAtualizarDados);
@@ -195,7 +195,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		
 		JButton btCancelar = new JButton("Cancelar");
 		btCancelar.setForeground(Color.DARK_GRAY);
-		btCancelar.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btCancelar.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		btCancelar.setFocusPainted(false);
 		btCancelar.setBounds(459, 389, 180, 50);
 		panelMeusDados.add(btCancelar);

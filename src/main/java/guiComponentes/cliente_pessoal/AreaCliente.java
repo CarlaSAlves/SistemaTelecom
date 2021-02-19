@@ -111,7 +111,7 @@ public class AreaCliente extends JFrame {
 		// Construção JTabbedPane
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setFont(new Font("Dubai Light", Font.PLAIN, 20));
+		tabbedPane.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		tabbedPane.setBounds(0, 89, 1384, 586); //180, 50
 		panel.add(tabbedPane);
 		
@@ -156,7 +156,7 @@ public class AreaCliente extends JFrame {
 		btTerminarSessao = new JButton("Terminar Sessão");
 		btTerminarSessao.setForeground(Color.DARK_GRAY);
 		btTerminarSessao.setBounds(16, 687, 180, 50);
-		btTerminarSessao.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		btTerminarSessao.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		btTerminarSessao.setFocusPainted(false);
 		getContentPane().add(btTerminarSessao);
 
