@@ -534,18 +534,8 @@ public class AreaCliente_MeusDados extends JFrame {
 		try {
 
 			Cliente cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLogin(username);
-<<<<<<< Updated upstream
-			if (cliente != null) {
-			textFieldDadosNome.setText(cliente.getNome());
-			textFieldDadosNIF.setText( "" + cliente.getNif());
-			textFieldDadosLogin.setText(cliente.getLogin());
-			textFieldDadosMorada.setText(cliente.getMorada());
-			textFieldPacoteComercial.setText(cliente.getId_pacote_cliente()== 0? "Não Atribuido" : "" + cliente.getId_pacote_cliente() );
-			textFieldID.setText("" +cliente.getId());
-			passwordField.setText(cliente.getPassword().substring(0, 8));
-			}
-=======
 			this.cliente = cliente;
+
 			if(cliente != null) {
 				textFieldDadosNome.setText(cliente.getNome());
 				textFieldDadosNIF.setText( "" + cliente.getNif());
@@ -555,11 +545,8 @@ public class AreaCliente_MeusDados extends JFrame {
 				passwordField.setText(cliente.getPassword().substring(0, 8));
 			}
 
->>>>>>> Stashed changes
 		} catch (Exception e) {
-
 			e.printStackTrace();
-
 		}
 	}
 

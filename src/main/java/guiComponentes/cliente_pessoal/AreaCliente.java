@@ -37,8 +37,8 @@ public class AreaCliente extends JFrame {
 	private AreaCliente_VerPromocoes areaClienteVerPromo;
 	private String username;
 	private JTabbedPane tabbedPane;
-	
-	
+
+
 	/**
 	 * Launch the application.
 	 */
@@ -74,7 +74,7 @@ public class AreaCliente extends JFrame {
 		areaClienteDados.enviarUsernameMeusDados(this.username);
 		areaClienteProdutos.enviarUsernameMeusProdutos(this.username);
 	}
-	
+
 	private void initialize(GUI_total guit) {
 
 		ativarNimbusLookAndFeel(); 
