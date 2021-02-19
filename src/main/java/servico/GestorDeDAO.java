@@ -111,6 +111,10 @@ public class GestorDeDAO {
 	public List<HistoricoCliente> getHistoricoCliente(int id_cliente) throws Exception {
 		return clienteDAO.getHistoricoCliente(id_cliente);
 	}
+	
+	public Cliente editarClienteDadosBasicos(Cliente cliente) throws Exception {
+		return clienteDAO.editarClienteDadosBasicos(cliente);
+	}
 
 	public List<HistoricoPacoteComercial> getHistoricoPacoteComercial(int id_pacote) throws Exception {
 		return pacoteComercialDAO.getHistoricoPacoteComercial(id_pacote);

@@ -36,7 +36,7 @@ public class CriarClienteDialog extends JDialog {
 	private Cliente clienteAntigo;
 	private boolean modoEditar = false;
 	private String username;
-	private JLabel lblPassword, labelAuxiliar;
+	private JLabel lblPassword, lblAuxiliar;
 
 
 	public CriarClienteDialog(GUI_gestor_cliente clientePesquisaApp, String username) {
@@ -52,199 +52,254 @@ public class CriarClienteDialog extends JDialog {
 		textFieldLogin.setText(clienteAntigo2.getLogin());
 	}
 
+	/**
+	 * Construtor que inicia com o método que configura a janela e o método inicialize, 
+	 * que contém todos os métodos e elementos que compõem a página 
+	 */
 	public CriarClienteDialog() {
 
 		setBounds(500, 300, 440, 329);
 		getContentPane().setLayout(new BorderLayout());
+		setTitle("Novo Cliente");
 		contentPanel.setBackground(SystemColor.window);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		setTitle("Novo Cliente");
 		contentPanel.setLayout(null);
 
+		inicialize();
 
-
-		labelAuxiliar = new JLabel();
-		labelAuxiliar.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		labelAuxiliar.setForeground(Color.LIGHT_GRAY);
-		labelAuxiliar.setBounds(130, 170, 262, 14);
-		labelAuxiliar.setVisible(false);
-		contentPanel.add(labelAuxiliar);
-		{
-			JLabel lblNome = new JLabel("Nome");
-			lblNome.setBounds(9, 11, 82, 27);
-			lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			contentPanel.add(lblNome);
-		}
-		{
-			JLabel lblNif = new JLabel("NIF");
-			lblNif.setBounds(9, 51, 82, 27);
-			lblNif.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			contentPanel.add(lblNif);
-		}
-		{
-			JLabel lblMorada = new JLabel("Morada");
-			lblMorada.setBounds(9, 89, 82, 27);
-			lblMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			contentPanel.add(lblMorada);
-		}
-		{
-			JLabel lblLogin = new JLabel("Login");
-			lblLogin.setBounds(9, 125, 82, 27);
-			lblLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			contentPanel.add(lblLogin);
-		}
-		{
-			textFieldNome = new JTextField();
-			textFieldNome.setBounds(101, 11, 290, 27);
-			textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			textFieldNome.setColumns(10);
-			contentPanel.add(textFieldNome);
-		}
-		{
-			textFieldNIF = new JTextField();
-			textFieldNIF.setBounds(101, 49, 290, 27);
-			textFieldNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			textFieldNIF.setColumns(10);
-			contentPanel.add(textFieldNIF);
-		}
-		{
-			textFieldMorada = new JTextField();
-			textFieldMorada.setBounds(101, 87, 290, 27);
-			textFieldMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			textFieldMorada.setColumns(10);
-			contentPanel.add(textFieldMorada);
-		}
-		{
-			textFieldLogin = new JTextField();
-			textFieldLogin.setBounds(101, 125, 290, 27);
-			textFieldLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			textFieldLogin.setColumns(10);
-			contentPanel.add(textFieldLogin);
-		}
-		{
-			lblPassword = new JLabel( "Password");
-			lblPassword.setBounds(9, 163, 82, 27);
-			lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			contentPanel.add(lblPassword);
-		}
-		{
-			textFieldPassword = new JPasswordField();
-			textFieldPassword.setBounds(101, 163, 290, 27);
-			textFieldPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-			textFieldPassword.setColumns(10);
-
-			contentPanel.add(textFieldPassword);
-		}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setBounds(0, 245, 424, 41);
-			contentPanel.add(buttonPane);
-			buttonPane.setBackground(SystemColor.window);
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-
-
-			{
-				JButton okButton = new JButton("Confirmar");
-				okButton.setForeground(SystemColor.activeCaptionText);
-				okButton.setBackground(SystemColor.activeCaption);
-				okButton.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-				okButton.setFocusPainted(false);
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						if(modoEditar) {
-
-							if (textFieldNome.getText().isBlank() || textFieldMorada.getText().isBlank() || textFieldLogin.getText().isBlank()) {
-								JOptionPane.showMessageDialog( CriarClienteDialog.this, "Todos os dados têm de ser preenchidos!");
-								return;
-							}
-							if( textFieldNIF.getText().isBlank()) {
-								JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem que estar preenchido!");
-								return;
-							}
-							try {
-								Integer.parseInt( textFieldNIF.getText() );
-							}
-							catch( Exception ex ){
-								JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem de ser um inteiro!");
-								return;
-							}
-
-							List<Cliente> listaClientes = null;
-							try {
-								listaClientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-
-							gravarCliente();
-
-						}else {
-
-							if (textFieldNome.getText().isBlank() || textFieldMorada.getText().isBlank() || textFieldLogin.getText().isBlank() || textFieldPassword.getText().isBlank()) {
-								JOptionPane.showMessageDialog( CriarClienteDialog.this, "Todos os dados têm de ser preenchidos!");
-								return;
-							}
-							if( textFieldNIF.getText().isBlank()) {
-								JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem que estar preenchido!");
-								return;
-							}
-							try {
-								Integer.parseInt( textFieldNIF.getText() );
-							}
-							catch( Exception ex ){
-								JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem de ser um inteiro!");
-								return;
-							}
-
-							List<Cliente> listaClientes = null;
-							try {
-								listaClientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
-							} catch (Exception e) {
-
-							}
-							for( Cliente c : listaClientes) {
-								if(c.getLogin().equalsIgnoreCase(textFieldLogin.getText())) {
-									JOptionPane.showMessageDialog( CriarClienteDialog.this, "Login Invalido, ja em uso!");
-									return;
-								}
-							}							
-
-							gravarCliente();
-						}
-					}
-				});
-
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancelar");
-				cancelButton.setBackground(SystemColor.activeCaption);
-				cancelButton.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-				cancelButton.setFocusPainted(false);
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-
-
-				cancelButton.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-
-					}
-				});
-			}
-		}
 	}
-	
+
 	/**
-	 * Configuração da janela. Se for acionado pelo botão criar editar, apresenta os campos editáveis.
+	 * Contém o corpo da página
+	 */
+	private void inicialize() {
+
+		/**
+		 *  Labels e textField da página:
+		 *  Nome
+		 *  NIF
+		 *  Morada
+		 *  Login
+		 *  Password
+		 */
+
+		labelsSetup();
+		textFieldSetup();
+
+		/**
+		 * Painel de Confirmação 
+		 * Botão Confirmar
+		 * Botão Cancelar
+		 */
+		painelConfirmacaoSetup();
+
+	}
+
+	/**
+	 * Configura os botões do rodapé da página 
+	 * 
+	 * @buttonPane - painel de confirmação
+	 * @okButton - botão de confirmação, aciona as validações de campos e 
+	 * o método que grava o cliente na base de dados.
+	 * @CancelButton - botão cancelar, cancela a ação e fecha a janela.
+	 * 
+	 */
+	protected void painelConfirmacaoSetup() {
+		JPanel buttonPane = new JPanel();
+		buttonPane.setBounds(0, 245, 424, 41);
+		contentPanel.add(buttonPane);
+		buttonPane.setBackground(SystemColor.window);
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+		JButton okButton = new JButton("Confirmar");
+		okButton.setForeground(SystemColor.activeCaptionText);
+		okButton.setBackground(SystemColor.activeCaption);
+		okButton.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		okButton.setFocusPainted(false);
+		okButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				// Validações dos campos de texto no modo editar
+				if(modoEditar) {
+
+					if (textFieldNome.getText().isBlank() || textFieldMorada.getText().isBlank() || textFieldLogin.getText().isBlank()) {
+						JOptionPane.showMessageDialog( CriarClienteDialog.this, "Todos os dados têm de ser preenchidos!");
+						return;
+					}
+					if( textFieldNIF.getText().isBlank()) {
+						JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem que estar preenchido!");
+						return;
+					}
+					try {
+						Integer.parseInt( textFieldNIF.getText() );
+					}
+					catch( Exception ex ){
+						JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem de ser um inteiro!");
+						return;
+					}
+
+					List<Cliente> listaClientes = null;
+					try {
+						listaClientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+					gravarCliente();
+
+					// Validações dos campos de texto no modo criar
+				}else {
+
+					if (textFieldNome.getText().isBlank() || textFieldMorada.getText().isBlank() || textFieldLogin.getText().isBlank() || textFieldPassword.getText().isBlank()) {
+						JOptionPane.showMessageDialog( CriarClienteDialog.this, "Todos os dados têm de ser preenchidos!");
+						return;
+					}
+					if( textFieldNIF.getText().isBlank()) {
+						JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem que estar preenchido!");
+						return;
+					}
+					try {
+						Integer.parseInt( textFieldNIF.getText() );
+					}
+					catch( Exception ex ){
+						JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem de ser um inteiro!");
+						return;
+					}
+
+					List<Cliente> listaClientes = null;
+					try {
+						listaClientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
+					} catch (Exception e) {
+
+					}
+					// verifica se já existe um cliente com o mesmo login
+					for( Cliente c : listaClientes) {
+						if(c.getLogin().equalsIgnoreCase(textFieldLogin.getText())) {
+							JOptionPane.showMessageDialog( CriarClienteDialog.this, "Login Invalido, ja em uso!");
+							return;
+						}
+					}							
+
+					gravarCliente();
+				}
+			}
+		});
+
+		okButton.setActionCommand("OK");
+		buttonPane.add(okButton);
+		getRootPane().setDefaultButton(okButton);
+
+		JButton cancelButton = new JButton("Cancelar");
+		cancelButton.setBackground(SystemColor.activeCaption);
+		cancelButton.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		cancelButton.setFocusPainted(false);
+		cancelButton.setActionCommand("Cancel");
+		buttonPane.add(cancelButton);
+
+
+		cancelButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+
+			}
+		});
+	}
+
+
+	/**
+	 * Configuração das labels da janela 
+	 * @lblNome
+	 * @lblNIF
+	 * @lblMorada
+	 * @lblLogin
+	 * @lblPassword
+	 * @lblAuxiliar - label inserida no textField da password
+	 */
+	private void labelsSetup() {
+		JLabel lblNome = new JLabel("Nome");
+		lblNome.setBounds(9, 11, 82, 27);
+		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		contentPanel.add(lblNome);
+
+		JLabel lblNif = new JLabel("NIF");
+		lblNif.setBounds(9, 51, 82, 27);
+		lblNif.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		contentPanel.add(lblNif);
+
+		JLabel lblMorada = new JLabel("Morada");
+		lblMorada.setBounds(9, 89, 82, 27);
+		lblMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		contentPanel.add(lblMorada);
+
+		JLabel lblLogin = new JLabel("Login");
+		lblLogin.setBounds(9, 125, 82, 27);
+		lblLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		contentPanel.add(lblLogin);
+
+		lblPassword = new JLabel( "Password");
+		lblPassword.setBounds(9, 163, 82, 27);
+		lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		contentPanel.add(lblPassword);
+
+		lblAuxiliar = new JLabel();
+		lblAuxiliar.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblAuxiliar.setForeground(Color.LIGHT_GRAY);
+		lblAuxiliar.setBounds(111, 163, 280, 27);
+		lblAuxiliar.setVisible(false);
+		contentPanel.add(lblAuxiliar);
+
+	}
+
+	/**
+	 * Configuração das textFields 
+	 * @textFieldNome
+	 * @textFieldNIF
+	 * @textFieldMorada
+	 * @textFieldLogin
+	 * @textFieldPassword
+	 * 
+	 */
+	private void textFieldSetup() {
+		textFieldNome = new JTextField();
+		textFieldNome.setBounds(101, 11, 290, 27);
+		textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		textFieldNome.setColumns(10);
+		contentPanel.add(textFieldNome);
+
+		textFieldNIF = new JTextField();
+		textFieldNIF.setBounds(101, 49, 290, 27);
+		textFieldNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		textFieldNIF.setColumns(10);
+		contentPanel.add(textFieldNIF);
+
+		textFieldMorada = new JTextField();
+		textFieldMorada.setBounds(101, 87, 290, 27);
+		textFieldMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		textFieldMorada.setColumns(10);
+		contentPanel.add(textFieldMorada);
+
+		textFieldLogin = new JTextField();
+		textFieldLogin.setBounds(101, 125, 290, 27);
+		textFieldLogin.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		textFieldLogin.setColumns(10);
+		contentPanel.add(textFieldLogin);
+
+		textFieldPassword = new JPasswordField();
+		textFieldPassword.setBounds(101, 163, 290, 27);
+		textFieldPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		textFieldPassword.setColumns(10);
+		contentPanel.add(textFieldPassword);
+
+	}
+
+	/**
+	 * Configuração da janela se for acionada pelo botão editar - apresenta os campos editáveis.
 	 * @param clientePesquisaApp
-	 * @param clienteAntigo
-	 * @param modoEditar
+	 * @param clienteAntigo - vai buscar os valores atuais do cliente
+	 * @param modoEditar - acionado pelo botão editar
 	 * @param username
 	 */
 	public CriarClienteDialog(GUI_gestor_cliente clientePesquisaApp, Cliente clienteAntigo, boolean modoEditar, String username) {
@@ -260,29 +315,33 @@ public class CriarClienteDialog extends JDialog {
 			lblPassword.setText("Nova Password");
 			lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 11));
 			popularTextFields(clienteAntigo);
-			labelAuxiliar.setText("Não preencher se desejar manter a password atual");
-			labelAuxiliar.setVisible(true);
+			lblAuxiliar.setText("Não preencher se desejar manter a password atual");
+			lblAuxiliar.setVisible(true);
 
 			textFieldPassword.addFocusListener(new FocusListener() {
 
 				@Override
 				public void focusLost(FocusEvent e) {
 					if(textFieldPassword.getText().isBlank()) {
-						labelAuxiliar.setVisible(true);
+						lblAuxiliar.setVisible(true);
 					}else {
-						labelAuxiliar.setVisible(false);
+						lblAuxiliar.setVisible(false);
 					}
 				}
 
 				@Override
 				public void focusGained(FocusEvent e) {
-					labelAuxiliar.setVisible(false);
+					lblAuxiliar.setVisible(false);
 
 				}
 			});
 		}
 	}
 
+	/**
+	 * Método que conecta ao gestor DAO e grava o cliente na base de dados
+	 * 
+	 */
 	@SuppressWarnings("deprecation")
 	private void gravarCliente() {
 		String pass;
@@ -296,7 +355,6 @@ public class CriarClienteDialog extends JDialog {
 			pass = textFieldPassword.getText();
 		}
 		boolean ativo = true;
-
 
 		Cliente cliente = null;
 
@@ -353,4 +411,4 @@ public class CriarClienteDialog extends JDialog {
 		}
 
 	}
-}
+} // end class
