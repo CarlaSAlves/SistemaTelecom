@@ -30,10 +30,17 @@ public class AreaCliente extends JFrame {
 	private JLabel lblUsernameLogged,lblTempoSessao,lblHoraSistema;
 	JLabel lblBemVindo;
 	private JButton btTerminarSessao;
-	private AreaCliente_MeusDados areaClienteDados = new AreaCliente_MeusDados();
+	private AreaCliente_MeusDados areaClienteDados;
 	private AreaCliente_MeusProdutos areaClienteProdutos = new AreaCliente_MeusProdutos();
 	private AreaCliente_VerPacotes areaClienteVerPacotes = new AreaCliente_VerPacotes();
 	private AreaCliente_VerPromocoes areaClienteVerPromo = new AreaCliente_VerPromocoes();
+	
+	private String username;
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 
 	/**
 	 * Launch the application.
@@ -58,6 +65,7 @@ public class AreaCliente extends JFrame {
 	 * @param guit 
 	 */
 	public AreaCliente(GUI_total guit) {
+		
 		initialize(guit);
 		ativarNimbusLookAndFeel();
 
@@ -66,8 +74,10 @@ public class AreaCliente extends JFrame {
 	private void initialize(GUI_total guit) {
 
 		ativarNimbusLookAndFeel(); 
-
-
+		
+		/**
+		 * Define as caracteristicas dos painel base. 
+		 */
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		panel = new JPanel();
 		setContentPane(panel);
