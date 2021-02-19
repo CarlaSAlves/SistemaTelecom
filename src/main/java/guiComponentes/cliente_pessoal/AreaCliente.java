@@ -18,6 +18,10 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import guiComponentes.Admin_GUI_homepage;
 import guiComponentes.GUI_total;
+import servico.GestorDeDAO;
+import standard_value_object.Cliente;
+import standard_value_object.Funcionario;
+
 import javax.swing.JTabbedPane;
 
 
@@ -261,5 +265,13 @@ public class AreaCliente extends JFrame {
 	public void setLblHoraSistema(String agora) {
 		lblHoraSistema.setText("Data: " + agora);
 
+	}
+	
+	public void preencheMeusDados(String username) throws Exception {
+		Cliente cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLogin(username);
+		areaClienteDados.getTextFieldDadosLogin().setText(cliente.getLogin());
+		areaClienteDados.getTextFieldDadosMorada().setText(cliente.getMorada());
+		areaClienteDados.getTextFieldDadosNIF().setText("" + cliente.getNif());
+		areaClienteDados.getTextFieldDadosNome().setText(cliente.getNome());
 	}
 }
