@@ -42,21 +42,92 @@ public class GUI_gestor_cliente extends JFrame {
 	private int indice;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JTable table;
-	private JButton btVoltarGestorCliente;
 	private JPanel contentPane, painelPesquisa ;	
-	private JLabel lblResultados, lblUsernameLogged, lblCamposPesquisas, labelID, labelNIF, labelNome, labelMorada, lblTempoSessao, lblHoraSistema ;
-	private JButton botaoDesativarCliente, botaoEditarCliente, botaoVisualizarHistorico, botaoPesquisa;
-	private JTextField textPesquisaID, textPesquisaNIF,textFieldNome,textFieldMorada;
+	private JLabel lblResultados, lblUsernameLogged, lblCampoPesquisa, labelID, labelNIF, labelNome, labelMorada, lblTempoSessao, lblHoraSistema ;
+	private JButton botaoDesativarCliente, botaoEditarCliente, botaoVisualizarHistorico, botaoPesquisa, btVoltarGestorCliente;
+	private JTextField textFieldID, textFieldNIF,textFieldNome,textFieldMorada;
 	private JCheckBox checkBoxAtivo;
 
 
+	/**
+	 * Construtor que inicia com o método que configura o painel base e o método inicialize, 
+	 * que contém todos os métodos e elementes que compoem a página 
+	 */
 	public GUI_gestor_cliente() {
 
 		ativarNimbusLookAndFeel();
-		contentPaneSetup();
+		contentPane = new JPanel();
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setTitle("Pesquisa de Clientes");
+		setFont(font);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 30, 1400, 800);
+		contentPane.setBackground(Color.WHITE);
+
+		inicialize();
+	}
+
+	/**
+	 * Contém o corpo da página
+	 */
+	private void inicialize() {
+
+		/*
+		 *  Botões da página:
+		 *  
+		 *  Criar Cliente 
+		 *  Editar Cliente
+		 *  Desativar Cliente
+		 *  Visualizar Historico
+		 *  Voltar 
+		 */
 
 		JButton botaoCriarCliente = botaoCriarClienteSetup();
 		getContentPane().add(botaoCriarCliente);
+
+		botaoEditarClienteSetup();
+		getContentPane().add(botaoEditarCliente);
+
+		botaoDesativarClienteSetup();
+		getContentPane().add(botaoDesativarCliente);
+
+		botaoVisualizarHistoricoSetup();
+		contentPane.add(botaoVisualizarHistorico);
+
+		btVoltarGestorClienteSetup();
+		getContentPane().add(btVoltarGestorCliente);
+
+		/**
+		 *  Campos de Pesquisa:
+		 *  
+		 *  ID
+		 *  Nome
+		 *  NIF
+		 *  Morada 
+		 *  Ativo
+		 *  Botão Pesquisar
+		 */
+
+		lblCampoPesquisa = new JLabel("Campo de Pesquisa");
+		lblCampoPesquisa.setFont(new Font("Dubai Light", Font.BOLD, 20));
+		lblCampoPesquisa.setBounds(98, 26, 294, 26);
+		contentPane.add(lblCampoPesquisa);
+
+		painelPesquisa = new JPanel();
+		painelPesquisa.setBackground(Color.WHITE);
+		painelPesquisa.setBounds(98, 63, 453, 221);
+
+		painelPesquisaSetup();
+		contentPane.add(painelPesquisa);
+
+		/**
+		 * Tabela de Resultados:
+		 * 
+		 * Tabela
+		 * ScrollPane
+		 * Label Resultados
+		 */
 
 		JPanel panelDaTable = panelDaTableSetup();
 		getContentPane().add(panelDaTable);
@@ -67,53 +138,29 @@ public class GUI_gestor_cliente extends JFrame {
 		tableSetup();
 		scrollPane.setViewportView(table);
 
-		lblResultadosSetup();
-		panelDaTable.add(lblResultados);
+		lblResultados = new JLabel("Resultados: ");
+		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		lblResultados.setBounds(33, 6, 136, 25);
+		panelDaTable.add(lblResultados);		
 
-		botaoEditarClienteSetup();
-		getContentPane().add(botaoEditarCliente);
+		/**
+		 * Footer:
+		 * 
+		 * Imagem de rodapé
+		 * Temporizador
+		 */
 
-		botaoDesativarClienteSetup();
-		getContentPane().add(botaoDesativarCliente);
-
-		btVoltarGestorClienteSetup();
-		getContentPane().add(btVoltarGestorCliente);
-
-		JLabel lbFooter = lbFooterSetup();
+		JLabel lbFooter = new JLabel("");
+		lbFooter.setIcon(new ImageIcon(GUI_gestor_cliente.class.getResource("/guiComponentes/img/Altran1.1.png")));
+		lbFooter.setBounds(599, 690, 214, 65);
 		contentPane.add(lbFooter);
 
-		botaoVisualizarHistoricoSetup();
-		contentPane.add(botaoVisualizarHistorico);
-
-		lblCamposPesquisasSetup();
-		contentPane.add(lblCamposPesquisas);
-
-		panelSetup();
-		panelContentSetup();
-		contentPane.add(painelPesquisa);
-
-		lblHoraSistema = new JLabel();
-		lblHoraSistema.setBounds(1215, 737, 159, 18);
-		contentPane.add(lblHoraSistema);
-
-		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
-		lblTempoSessao = new JLabel();
-		lblTempoSessao.setBounds(1215, 717, 159, 18);
-		contentPane.add(lblTempoSessao);
-
-		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 10));
-		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setBounds(1215, 698, 159, 18);
-		contentPane.add(lblUsernameLogged);
-		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 10));
-
-
-
+		timerSetup();
 	}
 
+	/**
+	 * Configurar interface, look and feel Nimbus 
+	 */
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 			if ("Nimbus".equals(info.getName())) {
@@ -133,166 +180,52 @@ public class GUI_gestor_cliente extends JFrame {
 		}
 	}
 
-	private void panelContentSetup() {
-		lblNewLabelIDSetup();
-		painelPesquisa.setLayout(null);
-		painelPesquisa.add(labelID);
-
-		textPesquisaIDSetup();
-		painelPesquisa.add(textPesquisaID);
-
-		lblNewLabelNIFSetup();
-		painelPesquisa.add(labelNIF);
-
-		textPesquisaNIFSetup();
-		painelPesquisa.add(textPesquisaNIF);
-
-		lblNomeSetup();
-		painelPesquisa.add(labelNome);
-
-		textFieldNomeSetup();
-		painelPesquisa.add(textFieldNome);
-
-		lblMoradaSetup();
-		painelPesquisa.add(labelMorada);
-
-		textFieldMoradaSetup();
-		painelPesquisa.add(textFieldMorada);
-
-		checkBoxAtivoSetup();
-		painelPesquisa.add(checkBoxAtivo);
-
-		botaoPesquisaSetup();
-		painelPesquisa.add(botaoPesquisa);
-	}
-
-	private void botaoPesquisaSetup() {
-		botaoPesquisa = new JButton("Pesquisar");
-		botaoPesquisa.setBounds(72, 181, 371, 27);
-		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		botaoPesquisa.setBackground(SystemColor.activeCaption);
-		botaoPesquisa.addActionListener(new ActionListener() {
+	/**
+	 *
+	 * Configuração do botão criar cliente.
+	 * Quando premido, abre a janela Dialog "CriarClienteDialog", 
+	 * para preencher os dados do novo cliente.
+	 * @return botaoCriarCliente 
+	 * @botaoCriarCliente - abre janela CriarClienteDialog
+	 * 
+	 */
+	private JButton botaoCriarClienteSetup() {
+		JButton botaoCriarCliente = new JButton("Criar Cliente");
+		botaoCriarCliente.setBounds(1168, 264, 152, 32);
+		botaoCriarCliente.setFont(font);
+		botaoCriarCliente.setBackground(SystemColor.activeCaption);
+		botaoCriarCliente.setFocusPainted(false);
+		botaoCriarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					int id = 0;
-					String nif = null;
-					String nome = null;
-					String morada = null;
-					int ativo = checkBoxAtivo.isSelected()? 1:0;
 
-					if(!textPesquisaID.getText().isBlank()) {
-						id = Integer.parseInt(textPesquisaID.getText().trim());
-					}
-
-					if(!textPesquisaNIF.getText().isBlank()) {
-						nif = textPesquisaNIF.getText().trim();
-					}
-
-					if(!textFieldNome.getText().isBlank()) {
-						nome = textFieldNome.getText().trim();
-					}
-
-					if(!textFieldMorada.getText().isBlank()) {
-						morada = textFieldMorada.getText().trim();
-					}
-
-
-					List<Cliente> clientes = null;
-
-					if ((id != 0) || (nif != null) || (nome != null) || (morada != null) || (ativo!=0) ) {
-						clientes = GestorDeDAO.getGestorDeDAO().pesquisaCliente(id, nif, nome, morada, ativo);
-					} else {
-						clientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
-					}
-
-					ClientePesquisaModelTable model = new ClientePesquisaModelTable(clientes);
-					table.setModel(model);
-					numberRows = table.getRowCount();
-					lblResultados.setText("Resultados: " + numberRows);
-
-				} catch (Exception e1) {
-
-				}
-
-
+				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this, GUI_total.getUsername());
+				dialog.setVisible(true);
+				dialog.setResizable(false);
 
 			}
 		});
+		return botaoCriarCliente;
 	}
 
-	private void checkBoxAtivoSetup() {
-		checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setBounds(234, 150, 69, 24);
-		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		checkBoxAtivo.setBackground(Color.WHITE);
-	}
+	/**
+	 * Configuração do botão editar cliente.
+	 * Quando premido, abre a janela Dialog "CriarClienteDialog", 
+	 * com os campos pré-preenchidos com a informação anterior mas editáveis, para se poder alterar.
+	 * Se não está nenhum cliente selecionado, o botão não está selecionável, no entanto, 
+	 * existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado.
+	 * @botaoEditarCliente - abre a CriarClienteDialog editável
+	 */
+	private void botaoEditarClienteSetup() {
+		botaoEditarCliente = new JButton("Editar Cliente");
+		botaoEditarCliente.setBounds(826, 264, 161, 33);
+		botaoEditarCliente.setFont(font);
+		botaoEditarCliente.setEnabled(false);
+		botaoEditarCliente.setBackground(SystemColor.activeCaption);
+		botaoEditarCliente.setFocusPainted(false);
+		botaoEditarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 
-	private void textFieldMoradaSetup() {
-		textFieldMorada = new JTextField();
-		textFieldMorada.setBounds(72, 116, 371, 27);
-		textFieldMorada.setColumns(10);
-	}
-
-	private void lblMoradaSetup() {
-		labelMorada = new JLabel("Morada");
-		labelMorada.setBounds(6, 116, 56, 27);
-		labelMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-	}
-
-	private void textFieldNomeSetup() {
-		textFieldNome = new JTextField();
-		textFieldNome.setBounds(72, 78, 371, 27);
-		textFieldNome.setColumns(10);
-	}
-
-	private void lblNomeSetup() {
-		labelNome = new JLabel("Nome");
-		labelNome.setBounds(6, 87, 56, 18);
-		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-	}
-
-	private void textPesquisaNIFSetup() {
-		textPesquisaNIF = new JTextField();
-		textPesquisaNIF.setBounds(72, 40, 371, 27);
-		textPesquisaNIF.setColumns(10);
-	}
-
-	private void lblNewLabelNIFSetup() {
-		labelNIF = new JLabel("NIF");
-		labelNIF.setBounds(6, 49, 56, 18);
-		labelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-	}
-
-	private void textPesquisaIDSetup() {
-		textPesquisaID = new JTextField();
-		textPesquisaID.setBounds(72, 6, 371, 27);
-		textPesquisaID.setColumns(10);
-	}
-
-	private void lblNewLabelIDSetup() {
-		labelID = new JLabel("ID");
-		labelID.setBounds(6, 15, 39, 18);
-		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-	}
-
-	private void panelSetup() {
-		painelPesquisa = new JPanel();
-		painelPesquisa.setBackground(Color.WHITE);
-		painelPesquisa.setBounds(98, 63, 453, 221);
-	}
-
-	private void lblCamposPesquisasSetup() {
-		lblCamposPesquisas = new JLabel("Campo de Pesquisa");
-		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-		lblCamposPesquisas.setBounds(98, 26, 294, 26);
-	}
-
-	private void botaoVisualizarHistoricoSetup() {
-		botaoVisualizarHistorico = new JButton("Ver Historico");
-		botaoVisualizarHistorico.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
-
 
 				if (row < 0) {
 					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
@@ -301,44 +234,22 @@ public class GUI_gestor_cliente extends JFrame {
 				}
 
 				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
-				List<HistoricoCliente> list;
-
-				try {
-
-					list = GestorDeDAO.getGestorDeDAO().getHistoricoCliente(clienteTemp.getId());
-					HistoricoClienteDialog dialogHistorico = new HistoricoClienteDialog();
-					dialogHistorico.preencherTable(clienteTemp, list);
-					dialogHistorico.setVisible(true);
-					dialogHistorico.setResizable(false);
-
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-
+				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this,clienteTemp, true, GUI_total.getUsername() );
+				dialog.setVisible(true);
+				dialog.setResizable(false);
 			}
 		});
-		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
-		botaoVisualizarHistorico.setBounds(655, 263, 161, 33);
-		botaoVisualizarHistorico.setEnabled(false);
 	}
 
-
-	private JLabel lbFooterSetup() {
-		JLabel lbFooter = new JLabel("");
-		lbFooter.setIcon(new ImageIcon(GUI_gestor_cliente.class.getResource("/guiComponentes/img/Altran1.1.png")));
-		lbFooter.setBounds(599, 690, 214, 65);
-		return lbFooter;
-	}
-
-	private void btVoltarGestorClienteSetup() {
-		btVoltarGestorCliente = new JButton("Voltar");
-		btVoltarGestorCliente.setBounds(6, 709, 119, 38);
-		btVoltarGestorCliente.setFont(font);
-		btVoltarGestorCliente.setBackground(SystemColor.activeCaption);
-		btVoltarGestorCliente.setFocusPainted(false);
-	}
-
+	/**
+	 * Configuração do botão desativar cliente.
+	 * Quando premido, faz a confirmação da ação. 
+	 * Se o cliente estiver ativo o botão indica "desactivar", se cliente está desativo
+	 * o botão indica "ativar".
+	 * Se não está nenhum cliente selecionado, o botão não está selecionável, no entanto, 
+	 * existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado.
+	 * @botaoDesativarCliente - botão dinâmico (ativo/desativo)
+	 */
 	private void botaoDesativarClienteSetup() {
 		botaoDesativarCliente = new JButton("Desativar Cliente");
 		botaoDesativarCliente.setBounds(997, 264, 161, 33);
@@ -380,7 +291,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 						refreshClienteTable();
 					}else {
-						
+
 						int resposta = JOptionPane.showConfirmDialog(GUI_gestor_cliente.this,
 								"Ativar Cliente(s)?", "Confirmar Ativar",
 								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -407,18 +318,24 @@ public class GUI_gestor_cliente extends JFrame {
 		});
 	}
 
-	private void botaoEditarClienteSetup() {
-		botaoEditarCliente = new JButton("Editar Cliente");
-		botaoEditarCliente.setBounds(826, 264, 161, 33);
-		botaoEditarCliente.setFont(font);
-		botaoEditarCliente.setEnabled(false);
-		botaoEditarCliente.setBackground(SystemColor.activeCaption);
-		botaoEditarCliente.setFocusPainted(false);
-		botaoEditarCliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
 
+	/**
+	 * Criação do botão Visualizar Histórico. 
+	 * Quando premido, desde que um cliente esteja selecionado, abre uma tabela com o 
+	 * histórico das alterações feitas no cliente selecionado. 
+	 * Se não está nenhum cliente selecionado, o botão não está selecionável, no entanto, 
+	 * existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado. 
+	 * @botaoVisualizarHistorico - abre janela com histórico de operações
+	 */
+	private void botaoVisualizarHistoricoSetup() {
+		botaoVisualizarHistorico = new JButton("Ver Historico");
+		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
+		botaoVisualizarHistorico.setBounds(655, 263, 161, 33);
+		botaoVisualizarHistorico.setEnabled(false);
+		botaoVisualizarHistorico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
-
 				if (row < 0) {
 					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
 							"Por favor selecione um Cliente", "Error", JOptionPane.ERROR_MESSAGE);
@@ -426,19 +343,201 @@ public class GUI_gestor_cliente extends JFrame {
 				}
 
 				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTable.OBJECT_COL);
-				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this,clienteTemp, true, GUI_total.getUsername() );
-				dialog.setVisible(true);
-				dialog.setResizable(false);
+				List<HistoricoCliente> list;
+
+				try {
+
+					list = GestorDeDAO.getGestorDeDAO().getHistoricoCliente(clienteTemp.getId());
+					HistoricoClienteDialog dialogHistorico = new HistoricoClienteDialog();
+					dialogHistorico.preencherTable(clienteTemp, list);
+					dialogHistorico.setVisible(true);
+					dialogHistorico.setResizable(false);
+
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+
+			}
+		});
+
+	}
+
+	/**
+	 * Configuração do botão voltar.
+	 * Quando premido volta à homepage de administrador.
+	 * @btVoltarGestorCliente - volta à homepage de administrador
+	 */
+	private void btVoltarGestorClienteSetup() {
+		btVoltarGestorCliente = new JButton("Voltar");
+		btVoltarGestorCliente.setBounds(6, 709, 119, 38);
+		btVoltarGestorCliente.setFont(font);
+		btVoltarGestorCliente.setBackground(SystemColor.activeCaption);
+		btVoltarGestorCliente.setFocusPainted(false);
+	}
+
+	/**
+	 * Configuração do painel de Pesquisa. 
+	 * Contém os campos de pesquisa e os botões.
+	 */
+	private void painelPesquisaSetup() {
+
+		painelPesquisa.setLayout(null);
+		labelsPesquisaSetup();
+		painelPesquisa.add(labelID);
+
+		textFieldsPesquisaSetup();
+		painelPesquisa.add(textFieldID);
+
+		botaoPesquisaSetup();
+		painelPesquisa.add(botaoPesquisa);
+	}
+
+	/**
+	 * Configuração das labels de pesquisa
+	 * @labelID
+	 * @labelNome
+	 * @labelNIF
+	 * @labelMorada
+	 */
+	private void labelsPesquisaSetup() {
+		labelID = new JLabel("ID");
+		labelID.setBounds(6, 15, 39, 18);
+		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+
+		labelNome = new JLabel("Nome");
+		labelNome.setBounds(6, 87, 56, 18);
+		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+
+		labelNIF = new JLabel("NIF");
+		labelNIF.setBounds(6, 49, 56, 18);
+		labelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+
+		labelMorada = new JLabel("Morada");
+		labelMorada.setBounds(6, 116, 56, 27);
+		labelMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+	}
+
+	/**
+	 * Configuração das textFields de Pesquisa e checkbox Ativo
+	 * @textFieldID
+	 * @textFieldNome
+	 * @textFieldNIF
+	 * @textFieldMorada
+	 * @checkboxAtivo
+	 */
+	private void textFieldsPesquisaSetup() {
+		textFieldID = new JTextField();
+		textFieldID.setBounds(72, 6, 371, 27);
+		textFieldID.setColumns(10);
+
+		textFieldNome = new JTextField();
+		textFieldNome.setBounds(72, 78, 371, 27);
+		textFieldNome.setColumns(10);
+
+		textFieldNIF = new JTextField();
+		textFieldNIF.setBounds(72, 40, 371, 27);
+		textFieldNIF.setColumns(10);
+
+		textFieldMorada = new JTextField();
+		textFieldMorada.setBounds(72, 116, 371, 27);
+		textFieldMorada.setColumns(10);
+
+		// Checkbox Ativo
+
+		checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setBounds(234, 150, 69, 24);
+		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		checkBoxAtivo.setBackground(Color.WHITE);
+	}
+
+	/**
+	 * Configuração do botão de pesquisa dinâmico. 
+	 * É possível pesquisar por vários campos ao mesmo tempo.
+	 * @botaoPesquisa 
+	 */
+	private void botaoPesquisaSetup() {
+		botaoPesquisa = new JButton("Pesquisar");
+		botaoPesquisa.setBounds(72, 181, 371, 27);
+		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		botaoPesquisa.setBackground(SystemColor.activeCaption);
+		botaoPesquisa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					int id = 0;
+					String nif = null;
+					String nome = null;
+					String morada = null;
+					int ativo = checkBoxAtivo.isSelected()? 1:0;
+
+					if(!textFieldID.getText().isBlank()) {
+						id = Integer.parseInt(textFieldID.getText().trim());
+					}
+
+					if(!textFieldNIF.getText().isBlank()) {
+						nif = textFieldNIF.getText().trim();
+					}
+
+					if(!textFieldNome.getText().isBlank()) {
+						nome = textFieldNome.getText().trim();
+					}
+
+					if(!textFieldMorada.getText().isBlank()) {
+						morada = textFieldMorada.getText().trim();
+					}
+
+
+					List<Cliente> clientes = null;
+
+					if ((id != 0) || (nif != null) || (nome != null) || (morada != null) || (ativo!=0) ) {
+						clientes = GestorDeDAO.getGestorDeDAO().pesquisaCliente(id, nif, nome, morada, ativo);
+					} else {
+						clientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
+					}
+
+					ClientePesquisaModelTable model = new ClientePesquisaModelTable(clientes);
+					table.setModel(model);
+					numberRows = table.getRowCount();
+					lblResultados.setText("Resultados: " + numberRows);
+
+				} catch (Exception e1) {
+
+				}
 			}
 		});
 	}
 
-	private void lblResultadosSetup() {
-		lblResultados = new JLabel("Resultados: ");
-		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		lblResultados.setBounds(33, 6, 136, 25);
+	/**
+	 * Configuração do painel que contém tabela de resultados
+	 * @return painel da Tabela
+	 */
+	private JPanel panelDaTableSetup() {
+		JPanel painelTabela = new JPanel();
+		painelTabela.setBackground(Color.WHITE);
+		painelTabela.setBounds(66, 309, 1279, 369);
+		painelTabela.setFont(font);
+		painelTabela.setLayout(null);
+		return painelTabela;
 	}
 
+	/**
+	 * ScrollPane da tabela.
+	 * @return scrollPane
+	 */
+	private JScrollPane scrollPaneSetup() {
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(33, 33, 1224, 330);
+		return scrollPane;
+	}
+
+
+
+	/**
+	 * Configuração da tabela de resultados.
+	 * Configuração de quais os botões selecionáveis consoante 
+	 * exista cliente selecionado ou não. 
+	 * Aqui está também referenciado o método do botão dinâmico (ativar/desativar).
+	 * @table
+	 */
 	private void tableSetup() {
 		table = new JTable();
 		table.setRowSelectionAllowed(true);
@@ -469,13 +568,17 @@ public class GUI_gestor_cliente extends JFrame {
 					botaoDesativarCliente.setEnabled(false);
 					botaoVisualizarHistorico.setEnabled(false);
 				}
-				
+
 			}
-
-
 		});
 	}
 
+	/**
+	 * Botão ativo/desativo dinâmico. 
+	 * Quando o cliente está ativo o botão apresenta "desativar".
+	 * Quando o cliente está desativo o botão apresenta "ativar".
+	 * @botaoDesativarCliente - botao dinâmico
+	 */
 	private void botaoAtivarDinamico() {
 
 		try {
@@ -489,52 +592,40 @@ public class GUI_gestor_cliente extends JFrame {
 		}
 	}
 
-	private JScrollPane scrollPaneSetup() {
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(33, 33, 1224, 330);
-		return scrollPane;
+	/**
+	 * Configuração das labels de username e temporização.
+	 * @lblUsernameLogged apresenta o username que está logado
+	 * @lblTempoSessao apresenta o tempo de sessão desde o momento que faz login
+	 * @lblHoraSistema apresenta a hora atual do sistema 
+	 */
+	protected void timerSetup() {
+
+		// Label Username
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setText("Username:");
+		lblUsernameLogged.setBounds(1215, 698, 159, 18);
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 10));
+		contentPane.add(lblUsernameLogged);
+
+		// Label Tempo de Sessão 
+		lblTempoSessao = new JLabel();
+		lblTempoSessao.setText("Sessão:");
+		lblTempoSessao.setBounds(1215, 717, 159, 18);
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 10));
+		contentPane.add(lblTempoSessao);
+
+		// Label Hora de Sistema 
+		lblHoraSistema = new JLabel();
+		lblHoraSistema.setText("Data:");
+		lblHoraSistema.setBounds(1215, 737, 159, 18);
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
+		contentPane.add(lblHoraSistema);
+
 	}
 
-	private JPanel panelDaTableSetup() {
-		JPanel painelTabela = new JPanel();
-		painelTabela.setBackground(Color.WHITE);
-		painelTabela.setBounds(66, 309, 1279, 369);
-		painelTabela.setFont(font);
-		painelTabela.setLayout(null);
-		return painelTabela;
-	}
-
-	private JButton botaoCriarClienteSetup() {
-		JButton botaoCriarCliente = new JButton("Criar Cliente");
-		botaoCriarCliente.setBounds(1168, 264, 152, 32);
-		botaoCriarCliente.setFont(font);
-		botaoCriarCliente.setBackground(SystemColor.activeCaption);
-		botaoCriarCliente.setFocusPainted(false);
-		botaoCriarCliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				CriarClienteDialog dialog = new CriarClienteDialog(GUI_gestor_cliente.this, GUI_total.getUsername());
-				dialog.setVisible(true);
-				dialog.setResizable(false);
-
-			}
-		});
-		return botaoCriarCliente;
-	}
-
-	private void contentPaneSetup() {
-		contentPane = new JPanel();
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		setTitle("Pesquisa de Clientes");
-		setFont(font);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 30, 1400, 800);
-		contentPane.setBackground(Color.WHITE);
-	}
-
-
-
+	/**
+	 * Ao fazer alterações no cliente a tabela é atualizada. 
+	 */
 	public void refreshClienteTable() {
 
 		try {
@@ -551,38 +642,69 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 
+	/**
+	 * Retorna a tabela
+	 * @return table
+	 */
 	public JTable getTable() {
 		return table;
 	}
 
+	/**
+	 * 
+	 * @return botão voltar
+	 */
 	public JButton btVoltarGestorCliente() {
 		return btVoltarGestorCliente;
 	}
 
-	public void setBtVoltarGestorCliente(JButton btnNewButtonVoltar2) {
-		this.btVoltarGestorCliente = btnNewButtonVoltar2;
+	/**
+	 * @return botao Voltar
+	 * @param botaoVoltar
+	 */
+	public void setBtVoltarGestorCliente(JButton botaoVoltar) {
+		this.btVoltarGestorCliente = botaoVoltar;
 	}
 
+	/**
+	 *
+	 * @return o painel
+	 */
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
 
+	/**
+	 * Configura a label usernameLogged 
+	 * @param username
+	 */
 	public void setUsernameLoggedIn(String username) {
 		lblUsernameLogged.setText("Username: " + username);
 
 	}
 
+	/**
+	 * Configura a label de temporizador. 
+	 * @param temporizador
+	 */
 	public void setLblTempoSessao(Duration temporizador) {
 		lblTempoSessao.setText("Sessao: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
 	}
 
+	/**
+	 * Configura a label de hora de sistema
+	 * @param agora
+	 */
 	public void setLblHoraSistema(String agora) {
 		lblHoraSistema.setText("Data: " + agora);
-
 	}
-	
+
+	/**
+	 * 
+	 * @return lblResultados
+	 */
 	public JLabel getLblResultados() {
 		return lblResultados;
 	}
-	
+
 }
