@@ -453,7 +453,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		lblTitulo = new JLabel("Os Seus Dados");
 		lblTitulo.setForeground(Color.DARK_GRAY);
 		lblTitulo.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblTitulo.setBounds(56, 43, 224, 28);
+		lblTitulo.setBounds(56, 43, 234, 28);
 		panelDados.add(lblTitulo);
 
 		lblNovoLogin = new JLabel("Insira o Novo Login");

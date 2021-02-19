@@ -76,33 +76,36 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		
 		// Labels e textFieldNome da página 
 		
-		JLabel labelVerPromo = new JLabel("Ver todas as Promoções:");
-		labelVerPromo.setFont(new Font("Dubai Light", Font.PLAIN, 20));
-		labelVerPromo.setBounds(57, 58, 318, 23);
+		JLabel labelVerPromo = new JLabel("Ver todas as Promoções");
+		labelVerPromo.setForeground(Color.DARK_GRAY);
+		labelVerPromo.setFont(new Font("Dialog", Font.BOLD, 20));
+		labelVerPromo.setBounds(66, 54, 318, 28);
 		panelVerTodasPromo.add(labelVerPromo);
 
-		JLabel labelPacoteNome = new JLabel("Nome:");
-		labelPacoteNome.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		labelPacoteNome.setBounds(343, 171, 71, 31);
+		JLabel labelPacoteNome = new JLabel("Nome");
+		labelPacoteNome.setForeground(Color.DARK_GRAY);
+		labelPacoteNome.setFont(new Font("Dialog", Font.PLAIN, 15));
+		labelPacoteNome.setBounds(319, 169, 71, 31);
 		panelVerTodasPromo.add(labelPacoteNome);
 
-		JLabel labelPromoDescricao = new JLabel("Descrição:");
-		labelPromoDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		labelPromoDescricao.setBounds(344, 249, 89, 23);
+		JLabel labelPromoDescricao = new JLabel("Descrição");
+		labelPromoDescricao.setForeground(Color.DARK_GRAY);
+		labelPromoDescricao.setFont(new Font("Dialog", Font.PLAIN, 15));
+		labelPromoDescricao.setBounds(319, 222, 89, 23);
 		panelVerTodasPromo.add(labelPromoDescricao);
 
 		textFieldNome = new JTextField();
-		textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		textFieldNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textFieldNome.setEditable(false);
-		textFieldNome.setBounds(446, 172, 240, 31);
+		textFieldNome.setBounds(400, 169, 300, 31);
 		panelVerTodasPromo.add(textFieldNome);
 		textFieldNome.setColumns(10);
 
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
-		textArea.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		textArea.setBounds(446, 249, 240, 104);
+		textArea.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textArea.setBounds(400, 222, 300, 104);
 		panelVerTodasPromo.add(textArea);
 
 
@@ -121,7 +124,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		JList<String> listVerPromo = new JList<String>(promocoes);
 
 		listVerPromo.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		listVerPromo.setBounds(57, 120, 226, 362);
+		listVerPromo.setBounds(66, 120, 226, 362);
 		listVerPromo.setSelectedIndex(0);
 		listVerPromo.setForeground(Color.BLACK);
 		listVerPromo.setLayoutOrientation( JList.HORIZONTAL_WRAP );
@@ -130,7 +133,10 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		listVerPromo.setFixedCellHeight( 24 );
 		listVerPromo.setFixedCellWidth( 226 );
 		panelVerTodasPromo.add(listVerPromo);
-
+		String texto = listVerPromo.getSelectedValue();
+		textFieldNome.setText((texto));
+		textArea.setText(texto);
+		
 		listVerPromo.addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
@@ -150,7 +156,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		});
 		
 		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(57, 120, 226, 362);
+		scrollBar.setBounds(66, 120, 226, 362);
 		panelVerTodasPromo.add(scrollBar);
 
 
