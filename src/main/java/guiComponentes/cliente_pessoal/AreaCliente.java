@@ -255,5 +255,18 @@ public class AreaCliente extends JFrame {
 		lblHoraSistema.setText("Data: " + agora);
 
 	}
+<<<<<<< HEAD
 
+=======
+	
+	public void preencheMeusDados(String username) throws Exception {
+		Cliente cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLogin(username);
+		if (cliente != null ) {
+		areaClienteDados.getTextFieldDadosLogin().setText(cliente.getLogin());
+		areaClienteDados.getTextFieldDadosMorada().setText(cliente.getMorada());
+		areaClienteDados.getTextFieldDadosNIF().setText("" + cliente.getNif());
+		areaClienteDados.getTextFieldDadosNome().setText(cliente.getNome());
+		}
+	}
+>>>>>>> 50620474771c22265ecb0006c3596febd2107871
 }

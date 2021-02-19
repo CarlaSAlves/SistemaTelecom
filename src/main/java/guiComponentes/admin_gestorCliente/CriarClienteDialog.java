@@ -36,52 +36,13 @@ public class CriarClienteDialog extends JDialog {
 	private Cliente clienteAntigo;
 	private boolean modoEditar = false;
 	private String username;
-	private JLabel lblPassword, lblNewLabel;
-
+	private JLabel lblPassword, labelAuxiliar;
 
 
 	public CriarClienteDialog(GUI_gestor_cliente clientePesquisaApp, String username) {
 		this();
 		this.clientePesquisaApp = clientePesquisaApp;
 		this.username = username;
-	}
-
-	public CriarClienteDialog(GUI_gestor_cliente clientePesquisaApp, Cliente clienteAntigo, boolean modoEditar, String username) {
-		this();
-		this.clientePesquisaApp = clientePesquisaApp;
-		this.clienteAntigo = clienteAntigo;
-		this.modoEditar = modoEditar;
-		this.username = username;
-
-		if(modoEditar) {
-			setTitle("Editar Cliente");
-			lblPassword.setText("Nova Password");
-			lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 11));
-			popularTextFields(clienteAntigo);
-			lblNewLabel.setText("Nao preencher se desejar manter a password atual");
-			lblNewLabel.setVisible(true);
-
-			textFieldPassword.addFocusListener(new FocusListener() {
-
-				@Override
-				public void focusLost(FocusEvent e) {
-					if(textFieldPassword.getText().isBlank()) {
-						lblNewLabel.setVisible(true);
-					}else {
-						lblNewLabel.setVisible(false);
-					}
-
-				}
-
-				@Override
-				public void focusGained(FocusEvent e) {
-					lblNewLabel.setVisible(false);
-
-				}
-			});
-
-
-		}
 	}
 
 	private void popularTextFields(Cliente clienteAntigo2) {
@@ -103,12 +64,12 @@ public class CriarClienteDialog extends JDialog {
 
 
 
-		lblNewLabel = new JLabel();
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblNewLabel.setForeground(Color.LIGHT_GRAY);
-		lblNewLabel.setBounds(130, 170, 262, 14);
-		lblNewLabel.setVisible(false);
-		contentPanel.add(lblNewLabel);
+		labelAuxiliar = new JLabel();
+		labelAuxiliar.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		labelAuxiliar.setForeground(Color.LIGHT_GRAY);
+		labelAuxiliar.setBounds(130, 170, 262, 14);
+		labelAuxiliar.setVisible(false);
+		contentPanel.add(labelAuxiliar);
 		{
 			JLabel lblNome = new JLabel("Nome");
 			lblNome.setBounds(9, 11, 82, 27);
@@ -276,6 +237,49 @@ public class CriarClienteDialog extends JDialog {
 					}
 				});
 			}
+		}
+	}
+	
+	/**
+	 * Configuração da janela. Se for acionado pelo botão criar editar, apresenta os campos editáveis.
+	 * @param clientePesquisaApp
+	 * @param clienteAntigo
+	 * @param modoEditar
+	 * @param username
+	 */
+	public CriarClienteDialog(GUI_gestor_cliente clientePesquisaApp, Cliente clienteAntigo, boolean modoEditar, String username) {
+		this();
+		this.clientePesquisaApp = clientePesquisaApp;
+		this.clienteAntigo = clienteAntigo;
+		this.modoEditar = modoEditar;
+		this.username = username;
+
+		// modo editar, accionado pelo clique no botão "editar"
+		if(modoEditar) {
+			setTitle("Editar Cliente");
+			lblPassword.setText("Nova Password");
+			lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 11));
+			popularTextFields(clienteAntigo);
+			labelAuxiliar.setText("Não preencher se desejar manter a password atual");
+			labelAuxiliar.setVisible(true);
+
+			textFieldPassword.addFocusListener(new FocusListener() {
+
+				@Override
+				public void focusLost(FocusEvent e) {
+					if(textFieldPassword.getText().isBlank()) {
+						labelAuxiliar.setVisible(true);
+					}else {
+						labelAuxiliar.setVisible(false);
+					}
+				}
+
+				@Override
+				public void focusGained(FocusEvent e) {
+					labelAuxiliar.setVisible(false);
+
+				}
+			});
 		}
 	}
 
