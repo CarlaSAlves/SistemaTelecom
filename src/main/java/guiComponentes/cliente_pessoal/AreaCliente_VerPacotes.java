@@ -165,7 +165,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 		 */
 		JLabel labelIconFundo = new JLabel("");
 		labelIconFundo.setIcon(new ImageIcon(AreaCliente_VerPacotes.class.getResource("/guiComponentes/img/AltranClientes.png")));
-		labelIconFundo.setBounds(0, 0, 1432, 547);
+		labelIconFundo.setBounds(0, -37, 1408, 586);
 		getContentPane().add(labelIconFundo);
 
 

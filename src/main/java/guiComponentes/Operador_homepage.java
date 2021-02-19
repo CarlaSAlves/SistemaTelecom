@@ -155,7 +155,7 @@ public class Operador_homepage extends JFrame {
 				// Imagem de Fundo
 		
 				JLabel icon = new JLabel("");
-				icon.setBounds(0, 89, 1394, 586);
+				icon.setBounds(0, 83, 1394, 586);
 				icon.setBackground(new Color(240, 240, 240));
 				icon.setIcon(new ImageIcon(Operador_homepage.class.getResource("/guiComponentes/img/AltranFundoOperador.png")));
 				getContentPane().add(icon);

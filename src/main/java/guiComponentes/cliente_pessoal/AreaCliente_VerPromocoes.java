@@ -160,7 +160,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		 */
 		JLabel labelIconFundo = new JLabel("");
 		labelIconFundo.setIcon(new ImageIcon(AreaCliente_VerPromocoes.class.getResource("/guiComponentes/img/AltranClientes.png")));
-		labelIconFundo.setBounds(0, 0, 1432, 547);
+		labelIconFundo.setBounds(0, -37, 1408, 586);
 		panelVerTodasPromo.add(labelIconFundo);
 
 

@@ -29,6 +29,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.JCheckBox;
@@ -57,10 +59,14 @@ public class AreaCliente_MeusDados extends JFrame {
 	private JLabel lblNovaPass;
 	private JLabel lblNovoLogin;
 	private Cliente cliente;
-	private boolean nomeAlterado = false;
-	private boolean nifAlterado = false;
-	private boolean moradaAlterado = false;
-	private boolean todosDadosValidos = false;
+	private boolean nomeAlterado = false, nifAlterado = false, moradaAlterado = false, todosDadosValidos = false;
+	private boolean modoEditar = false;
+	private JLabel lblNovaPassword_1;
+	private JPasswordField passwordField_1;
+	private JLabel lblNovaPassword_2;
+	private JPasswordField passwordField_2;
+	private JLabel lblNovaPass_2;
+	private JLabel lblNovaPassConfirm;
 
 	/**
 	 * Launch the application.
@@ -113,21 +119,21 @@ public class AreaCliente_MeusDados extends JFrame {
 		panelPasswords.setBackground(new Color(0, 178, 188));
 		panelPasswords.setLayout(null);
 
-		lblNovaMorada = new JLabel("Ensira a Nova Morada");
+		lblNovaMorada = new JLabel("Insira a Nova Morada");
 		lblNovaMorada.setForeground(Color.LIGHT_GRAY);
 		lblNovaMorada.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		lblNovaMorada.setBounds(66, 304, 224, 14);
 		lblNovaMorada.setVisible(false);
 		panelDados.add(lblNovaMorada);
 
-		lblNovoNome = new JLabel("Ensira o Novo Nome");
+		lblNovoNome = new JLabel("Insira o Novo Nome");
 		lblNovoNome.setForeground(Color.LIGHT_GRAY);
 		lblNovoNome.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		lblNovoNome.setBounds(66, 176, 224, 14);
 		lblNovoNome.setVisible(false);
 		panelDados.add(lblNovoNome);
 
-		lblNovoNIF = new JLabel("Ensira o Novo NIF");
+		lblNovoNIF = new JLabel("Insira o Novo NIF");
 		lblNovoNIF.setForeground(Color.LIGHT_GRAY);
 		lblNovoNIF.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		lblNovoNIF.setBounds(66, 239, 224, 14);
@@ -289,6 +295,14 @@ public class AreaCliente_MeusDados extends JFrame {
 				if(cliente != null) {
 
 					Cliente clienteNovo = cliente;
+					List<Cliente> todosClientes = null;
+
+					try {
+						todosClientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
+					} catch (Exception e2) {
+						e2.printStackTrace();
+					}
+
 					String nome = clienteNovo.getNome();
 					String morada = clienteNovo.getMorada();
 					int nif = (int) clienteNovo.getNif();
@@ -313,14 +327,25 @@ public class AreaCliente_MeusDados extends JFrame {
 
 
 					try {
+						
+						for(Cliente c : todosClientes) {
+							if(cliente.getNif() != Integer.parseInt(textFieldDadosNIF.getText().trim())) {
+								if(c.getNif() == Integer.parseInt(textFieldDadosNIF.getText().trim())){
+									JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "NIF já se encontra em uso!", "Error", JOptionPane.ERROR_MESSAGE);
+									return;
+								}
+							}
+						}
+						
 						if(cliente.getNif() == Integer.parseInt(textFieldDadosNIF.getText().trim())) {
 							nifAlterado = false;
 						}else {
 							nifAlterado = true;
 							nif = Integer.parseInt( textFieldDadosNIF.getText().trim());
 						}
-					}
-					catch( Exception ex ){
+						
+						
+					}catch( Exception ex ){
 						JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "O NIF tem de ser um inteiro!", "Error", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
@@ -362,6 +387,14 @@ public class AreaCliente_MeusDados extends JFrame {
 				textFieldDadosNome.setEditable(false);
 				textFieldDadosNIF.setEditable(false);
 				textFieldDadosMorada.setEditable(false);
+				
+				if(nomeAlterado || nifAlterado || moradaAlterado) {
+					JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "Dados alterados com sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+				}
+
+				lblNovoNome.setVisible(false);
+				lblNovaMorada.setVisible(false);
+				lblNovoNIF.setVisible(false);
 
 			}
 		});
@@ -391,6 +424,10 @@ public class AreaCliente_MeusDados extends JFrame {
 				textFieldDadosNIF.setEditable(false);
 				textFieldDadosMorada.setEditable(false);
 
+				lblNovoNome.setVisible(false);
+				lblNovaMorada.setVisible(false);
+				lblNovoNIF.setVisible(false);
+
 			}
 		});
 		btCancelar.setForeground(Color.DARK_GRAY);
@@ -404,14 +441,28 @@ public class AreaCliente_MeusDados extends JFrame {
 		lblTitulo.setBounds(56, 43, 224, 28);
 		panelDados.add(lblTitulo);
 
-		lblNovoLogin = new JLabel("Ensira o Novo Login");
+		lblNovoLogin = new JLabel("Insira o Novo Login");
 		lblNovoLogin.setForeground(Color.LIGHT_GRAY);
 		lblNovoLogin.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		lblNovoLogin.setVisible(false);
+		
+		lblNovaPass_2 = new JLabel("Insira a Nova Password");
+		lblNovaPass_2.setForeground(Color.LIGHT_GRAY);
+		lblNovaPass_2.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblNovaPass_2.setBounds(29, 239, 224, 14);
+		lblNovaPass_2.setVisible(false);
+		panelPasswords.add(lblNovaPass_2);
+		
+		lblNovaPassConfirm = new JLabel("Insira a Nova Password");
+		lblNovaPassConfirm.setForeground(Color.LIGHT_GRAY);
+		lblNovaPassConfirm.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblNovaPassConfirm.setBounds(29, 304, 224, 14);
+		lblNovaPassConfirm.setVisible(false);
+		panelPasswords.add(lblNovaPassConfirm);
 		lblNovoLogin.setBounds(29, 111, 224, 14);
 		panelPasswords.add(lblNovoLogin);
 
-		lblNovaPass = new JLabel("Ensira a Nova Password");
+		lblNovaPass = new JLabel("Insira a Password Atual");
 		lblNovaPass.setForeground(Color.LIGHT_GRAY);
 		lblNovaPass.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		lblNovaPass.setVisible(false);
@@ -427,7 +478,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 		lblDadosLogin = new JLabel("Login ");
 		lblDadosLogin.setForeground(Color.DARK_GRAY);
-		lblDadosLogin.setBounds(19, 79, 69, 28);
+		lblDadosLogin.setBounds(19, 79, 234, 28);
 		panelPasswords.add(lblDadosLogin);
 		lblDadosLogin.setFont(new Font("Dialog", Font.PLAIN, 15));
 
@@ -441,7 +492,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 		lblPassword = new JLabel("Password");
 		lblPassword.setForeground(Color.DARK_GRAY);
-		lblPassword.setBounds(19, 139, 69, 28);
+		lblPassword.setBounds(19, 139, 234, 28);
 		panelPasswords.add(lblPassword);
 		lblPassword.setFont(new Font("Dialog", Font.PLAIN, 15));
 
@@ -455,14 +506,102 @@ public class AreaCliente_MeusDados extends JFrame {
 		btAtualizarDadosPass.setForeground(Color.DARK_GRAY);
 		btAtualizarDadosPass.setFont(new Font("Dialog", Font.PLAIN, 15));
 		btAtualizarDadosPass.setFocusPainted(false);
-		btAtualizarDadosPass.setBounds(130, 212, 139, 30);
+		btAtualizarDadosPass.setBounds(130, 206, 139, 30);
 		btAtualizarDadosPass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btAtualizarDadosPass.setVisible(false);
 				btCancelarPass.setVisible(true);
 				btConfirmarPass.setVisible(true);
+				
+				textFieldDadosLogin.setEditable(true);
+				passwordField.setEditable(true);
+				
+				lblNovaPassword_1.setVisible(true);
+				passwordField_1.setVisible(true);
+				lblNovaPassword_2.setVisible(true);
+				passwordField_2.setVisible(true);
+				
+				lblPassword.setText("Password Atual");
+				lblDadosLogin.setText("Novo Login");
+				
+				lblNovaPass.setVisible(true);
+				lblNovaPass_2.setVisible(true);
+				lblNovaPassConfirm.setVisible(true);
+				
+				textFieldDadosLogin.addFocusListener(new FocusListener() {
 
+					@Override
+					public void focusLost(FocusEvent e) {
+						if(textFieldDadosLogin.getText().isBlank()) {
+							lblNovoLogin.setVisible(true);
+						}else {
+							lblNovoLogin.setVisible(false);
+						}
+					}
 
+					@Override
+					public void focusGained(FocusEvent e) {
+						lblNovoLogin.setVisible(false);
+					}
+				});
+
+				passwordField.setText("");
+				passwordField.addFocusListener(new FocusListener() {
+
+					@Override
+					public void focusLost(FocusEvent e) {
+						if(passwordField.getText().isBlank()) {
+							lblNovaPass.setVisible(true);
+						}else {
+							lblNovaPass.setVisible(false);
+						}
+					}
+
+					@Override
+					public void focusGained(FocusEvent e) {
+						lblNovaPass.setVisible(false);
+
+					}
+				});
+	
+				passwordField_1.setText("");
+				passwordField_1.addFocusListener(new FocusListener() {
+
+					@Override
+					public void focusLost(FocusEvent e) {
+						if(passwordField_1.getText().isBlank()) {
+							lblNovaPass_2.setVisible(true);
+						}else {
+							lblNovaPass_2.setVisible(false);
+						}
+					}
+
+					@Override
+					public void focusGained(FocusEvent e) {
+						lblNovaPass_2.setVisible(false);
+
+					}
+				});
+				
+				passwordField_2.setText("");
+				passwordField_2.addFocusListener(new FocusListener() {
+
+					@Override
+					public void focusLost(FocusEvent e) {
+						if(passwordField_2.getText().isBlank()) {
+							lblNovaPassConfirm.setVisible(true);
+						}else {
+							lblNovaPass_2.setVisible(false);
+						}
+					}
+
+					@Override
+					public void focusGained(FocusEvent e) {
+						lblNovaPassConfirm.setVisible(false);
+
+					}
+				});
+				
 			}
 		});
 		panelPasswords.add(btAtualizarDadosPass);
@@ -471,13 +610,28 @@ public class AreaCliente_MeusDados extends JFrame {
 		btConfirmarPass.setForeground(Color.DARK_GRAY);
 		btConfirmarPass.setFont(new Font("Dialog", Font.PLAIN, 15));
 		btConfirmarPass.setFocusPainted(false);
-		btConfirmarPass.setBounds(17, 212, 120, 30);
+		btConfirmarPass.setBounds(17, 341, 120, 30);
 		btConfirmarPass.setVisible(false);
 		btConfirmarPass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				btAtualizarDadosPass.setVisible(true);
 				btCancelarPass.setVisible(false);
 				btConfirmarPass.setVisible(false);
+				
+				lblNovaPassword_1.setVisible(false);
+				passwordField_1.setVisible(false);
+				lblNovaPassword_2.setVisible(false);
+				passwordField_2.setVisible(false);
+				
+				lblNovaPass_2.setVisible(false);
+				lblNovaPassConfirm.setVisible(false);
+				lblNovoLogin.setVisible(false);
+				lblNovaPass.setVisible(false);
+				
+				lblPassword.setText("Password");
+				lblDadosLogin.setText("Login");
+				
 			}
 		});
 		panelPasswords.add(btConfirmarPass);
@@ -487,20 +641,64 @@ public class AreaCliente_MeusDados extends JFrame {
 		btCancelarPass.setFont(new Font("Dialog", Font.PLAIN, 15));
 		btCancelarPass.setFocusPainted(false);
 		btCancelarPass.setVisible(false);
-		btCancelarPass.setBounds(149, 212, 120, 30);
+		btCancelarPass.setBounds(149, 341, 120, 30);
 		btCancelarPass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btAtualizarDadosPass.setVisible(true);
 				btCancelarPass.setVisible(false);
 				btConfirmarPass.setVisible(false);
+				
+				lblNovaPassword_1.setVisible(false);
+				passwordField_1.setVisible(false);
+				lblNovaPassword_2.setVisible(false);
+				passwordField_2.setVisible(false);
+				
+				lblNovaPass_2.setVisible(false);
+				lblNovaPassConfirm.setVisible(false);
+				lblNovoLogin.setVisible(false);
+				lblNovaPass.setVisible(false);
+				
+				lblPassword.setText("Password");
+				lblDadosLogin.setText("Login");
+				
 			}
 		});
 		panelPasswords.add(btCancelarPass);
+		
+		lblNovaPassword_1 = new JLabel("Nova Password");
+		lblNovaPassword_1.setForeground(Color.DARK_GRAY);
+		lblNovaPassword_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblNovaPassword_1.setVisible(false);
+		lblNovaPassword_1.setBounds(19, 207, 234, 28);
+		panelPasswords.add(lblNovaPassword_1);
+		
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setForeground(Color.BLACK);
+		passwordField_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		passwordField_1.setEditable(true);
+		passwordField_1.setVisible(false);
+		passwordField_1.setBounds(17, 231, 252, 30);
+		panelPasswords.add(passwordField_1);
+		
+		lblNovaPassword_2 = new JLabel("Confirmar Nova Password");
+		lblNovaPassword_2.setForeground(Color.DARK_GRAY);
+		lblNovaPassword_2.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblNovaPassword_2.setVisible(false);
+		lblNovaPassword_2.setBounds(19, 272, 250, 28);
+		panelPasswords.add(lblNovaPassword_2);
+		
+		passwordField_2 = new JPasswordField();
+		passwordField_2.setForeground(Color.BLACK);
+		passwordField_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		passwordField_2.setEditable(true);
+		passwordField_2.setVisible(false);
+		passwordField_2.setBounds(17, 296, 252, 30);
+		panelPasswords.add(passwordField_2);
 
 		//Imagem fundo
 
 		JLabel imagemDados = new JLabel("");
-		imagemDados.setBounds(10, 0, 1368, 547);
+		imagemDados.setBounds(0, -37, 1408, 586);
 		panelMeusDados.add(imagemDados);
 		imagemDados.setBackground(new Color(240, 240,240 ));
 		imagemDados.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/AltranClientes.png")));
@@ -551,6 +749,36 @@ public class AreaCliente_MeusDados extends JFrame {
 				textFieldID.setText("" +cliente.getId());
 				passwordField.setText(cliente.getPassword().substring(0, 8));
 			}
+			
+			btAtualizarDadosPass.setVisible(true);
+			btCancelarPass.setVisible(false);
+			btConfirmarPass.setVisible(false);
+			btAtualizarDados.setVisible(true);
+			btCancelar.setVisible(false);
+			btConfirmar.setVisible(false);
+			
+			lblNovaPassword_1.setVisible(false);
+			passwordField_1.setVisible(false);
+			lblNovaPassword_2.setVisible(false);
+			passwordField_2.setVisible(false);
+			
+			lblNovaPass_2.setVisible(false);
+			lblNovaPassConfirm.setVisible(false);
+			lblNovoLogin.setVisible(false);
+			lblNovaPass.setVisible(false);
+			
+			lblPassword.setText("Password");
+			lblDadosLogin.setText("Login");
+			
+			textFieldDadosNome.setEditable(false);
+			textFieldDadosNIF.setEditable(false);
+			textFieldDadosMorada.setEditable(false);
+
+			lblNovoNome.setVisible(false);
+			lblNovaMorada.setVisible(false);
+			lblNovoNIF.setVisible(false);
+			
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -561,7 +789,6 @@ public class AreaCliente_MeusDados extends JFrame {
 		textFieldDadosNome.setText(clienteAntigo.getNome()+ "");
 		textFieldDadosNIF.setText(clienteAntigo.getNif() + "");
 		textFieldDadosMorada.setText(clienteAntigo.getMorada());
-
 	}
 
 }//end class

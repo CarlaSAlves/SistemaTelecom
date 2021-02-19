@@ -211,8 +211,6 @@ public class AreaCliente extends JFrame {
 
 	}
 
-
-
 	/**
 	 * Cria uma Lable de Boas Vindas
 	 * @param name
