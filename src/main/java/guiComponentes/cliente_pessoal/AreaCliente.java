@@ -259,9 +259,9 @@ public class AreaCliente extends JFrame {
 	
 	public void preencheMeusDados(String username) throws Exception {
 		Cliente cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLogin(username);
-		areaClienteDados.getTextFieldDadosLogin().setText(username);
-		areaClienteDados.getTextFieldDadosMorada().setText(username);
-		areaClienteDados.getTextFieldDadosNIF().setText(username);
-		areaClienteDados.getTextFieldDadosNome().setText(username);
+		areaClienteDados.getTextFieldDadosLogin().setText(cliente.getLogin());
+		areaClienteDados.getTextFieldDadosMorada().setText(cliente.getMorada());
+		areaClienteDados.getTextFieldDadosNIF().setText("" + cliente.getNif());
+		areaClienteDados.getTextFieldDadosNome().setText(cliente.getNome());
 	}
 }
