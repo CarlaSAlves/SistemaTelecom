@@ -18,9 +18,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import guiComponentes.Admin_GUI_homepage;
 import guiComponentes.GUI_total;
-import servico.GestorDeDAO;
-import standard_value_object.Cliente;
-import standard_value_object.Funcionario;
 
 import javax.swing.JTabbedPane;
 
@@ -32,25 +29,19 @@ public class AreaCliente extends JFrame {
 
 	private JPanel panel;
 	private JLabel lblUsernameLogged,lblTempoSessao,lblHoraSistema;
-	JLabel lblBemVindo;
+	private JLabel lblBemVindo;
 	private JButton btTerminarSessao;
 	private AreaCliente_MeusDados areaClienteDados;
-	private AreaCliente_MeusProdutos areaClienteProdutos = new AreaCliente_MeusProdutos();
-	private AreaCliente_VerPacotes areaClienteVerPacotes = new AreaCliente_VerPacotes();
-	private AreaCliente_VerPromocoes areaClienteVerPromo = new AreaCliente_VerPromocoes();
-	
+	private AreaCliente_MeusProdutos areaClienteProdutos;
+	private AreaCliente_VerPacotes areaClienteVerPacotes;
+	private AreaCliente_VerPromocoes areaClienteVerPromo;
 	private String username;
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-
+	
+	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		//GUI_total guit = new GUI_total();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -69,12 +60,20 @@ public class AreaCliente extends JFrame {
 	 * @param guit 
 	 */
 	public AreaCliente(GUI_total guit) {
-		
+		areaClienteDados = new AreaCliente_MeusDados();
+		areaClienteProdutos = new AreaCliente_MeusProdutos();
+		areaClienteVerPacotes = new AreaCliente_VerPacotes();
+		areaClienteVerPromo = new AreaCliente_VerPromocoes();
 		initialize(guit);
 		ativarNimbusLookAndFeel();
-
 	}
 
+	public void enviarUsernameAreaCliente(String username) {
+		this.username = username;
+		areaClienteDados.enviarUsernameMeusDados(this.username);
+		areaClienteProdutos.enviarUsernameMeusProdutos(this.username);
+	}
+	
 	private void initialize(GUI_total guit) {
 
 		ativarNimbusLookAndFeel(); 
@@ -114,14 +113,13 @@ public class AreaCliente extends JFrame {
 		tabbedPane.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		tabbedPane.setBounds(0, 89, 1384, 586); //180, 50
 		panel.add(tabbedPane);
-		
+
 
 		// Ligação a Classe AreaCliente_MeusDados -  Separador os meus dados
-		
+
 		JPanel panelMeusDados = areaClienteDados.returnAreaClienteMeusDados();	
 		tabbedPane.addTab("Meus Dados",null,  panelMeusDados);
 		panelMeusDados.setLayout(null);
-	//	panelMeusDados.setForeground(Color.BLUE);
 		panelMeusDados.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
 
 
@@ -130,7 +128,6 @@ public class AreaCliente extends JFrame {
 		JPanel panelMeusProdutos = areaClienteProdutos.returnAreaClienteMeusProdutos();
 		tabbedPane.addTab("Meus Produtos",null,  panelMeusProdutos);
 		panelMeusProdutos.setLayout(null);
-	//	panelMeusProdutos.setForeground(Color.BLUE));
 		panelMeusProdutos.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
 
 
@@ -139,17 +136,15 @@ public class AreaCliente extends JFrame {
 		JPanel panelVerTodosPacotes = areaClienteVerPacotes.returnAreaClienteVerPacotes();
 		tabbedPane.addTab("Ver todos os Pacotes Comerciais",null,  panelVerTodosPacotes);
 		panelVerTodosPacotes.setLayout(null);
-	//	panelVerTodosPacotes.setForeground(Color.BLUE);
 		panelMeusProdutos.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
-		
+
 		// Ligação a classe ver Promoções
 
 		JPanel panelVerTodasPromo = areaClienteVerPromo.returnAreaClienteVerPromo();
 		tabbedPane.addTab("Ver todas as Promoções",null,  panelVerTodasPromo);
 		panelVerTodasPromo.setLayout(null);
-	//	panelVerTodasPromo.setForeground(Color.BLACK);
 		panelVerTodasPromo.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
-		
+
 		/* RODAPÉ */
 		//Botão Termina sessão
 
@@ -162,7 +157,7 @@ public class AreaCliente extends JFrame {
 
 
 		// Action listener botão terminar sessão
-		
+
 		btTerminarSessao.addActionListener(new ActionListener() {
 
 			@Override
@@ -212,7 +207,7 @@ public class AreaCliente extends JFrame {
 		panel.add(lblHoraSistema);
 		lblHoraSistema.setText("Data:");
 		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
-		
+
 	}
 
 
@@ -248,8 +243,6 @@ public class AreaCliente extends JFrame {
 		}
 	}
 
-
-
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
@@ -266,12 +259,5 @@ public class AreaCliente extends JFrame {
 		lblHoraSistema.setText("Data: " + agora);
 
 	}
-	
-	public void preencheMeusDados(String username) throws Exception {
-		Cliente cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLogin(username);
-		areaClienteDados.getTextFieldDadosLogin().setText(cliente.getLogin());
-		areaClienteDados.getTextFieldDadosMorada().setText(cliente.getMorada());
-		areaClienteDados.getTextFieldDadosNIF().setText("" + cliente.getNif());
-		areaClienteDados.getTextFieldDadosNome().setText(cliente.getNome());
-	}
+
 }

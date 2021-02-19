@@ -293,8 +293,8 @@ public class GUI_total extends JFrame {
 		operador_gerirClientes.setUsername(username);
 		operador_gerirClientes.setUsernameLoggedIn(username);
 		areaCliente.setUsernameLoggedIn(username);
-		areaCliente.preencheMeusDados(username);
-
+		areaCliente.enviarUsernameAreaCliente(username);
+		
 		Funcionario func = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
 		Cliente cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLogin(username);
 
@@ -492,7 +492,7 @@ public class GUI_total extends JFrame {
 		gravarFicheiro(username, temporizador, dataEHoraDeLog, "sessaolog.txt");
 		loginPanel.setVisible(true);
 		areaClientePanel.setVisible(false);
-		
+	
 	}	
 	
 
