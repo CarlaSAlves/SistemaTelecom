@@ -45,8 +45,8 @@ public class AreaCliente_MeusDados extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AreaCliente_MeusDados(Cliente cliente) {
-		this.cliente = cliente;
+	public AreaCliente_MeusDados( ) {
+
 		try {
 			initialize();
 		} catch (Exception e) {
@@ -143,19 +143,41 @@ public class AreaCliente_MeusDados extends JFrame {
 		imagemDados.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/AltranClientes.png")));
 
 		
-		textFieldDadosNome.setText(cliente.getNome());
-		textFieldDadosNIF.setText(cliente.getNif() + "");
-		textFieldDadosLogin.setText(cliente.getLogin());
-		textFieldDadosMorada.setText(cliente.getMorada());
-		
+//		textFieldDadosNome.setText(cliente.getNome());
+//		textFieldDadosNIF.setText(cliente.getNif() + "");
+//		textFieldDadosLogin.setText(cliente.getLogin());
+//		textFieldDadosMorada.setText(cliente.getMorada());
+//		
 
 	}// end initialize
 
 	
+	public JTextField getTextFieldDadosNome() {
+		return textFieldDadosNome;
+	}
+
+
+	public JTextField getTextFieldDadosNIF() {
+		return textFieldDadosNIF;
+	}
+
+	
+
+	public JTextField getTextFieldDadosLogin() {
+		return textFieldDadosLogin;
+	}
+
+	
+
+	public JTextField getTextFieldDadosMorada() {
+		return textFieldDadosMorada;
+	}
+
+
+
 	/**
 	 * Activa o Nimbus Look and Feel
 	 */
-
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 			if ("Nimbus".equals(info.getName())) {

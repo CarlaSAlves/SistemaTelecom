@@ -104,7 +104,6 @@ public class GUI_total extends JFrame {
 		operador_visualizarPacote = new Operador_VisualizarPacote();
 		operador_visualizarPromo = new Operador_VisualizarPromocoes();
 		areaCliente = new AreaCliente(this);
-//		areaClienteDados = new AreaCliente_MeusDados();
 		
 		// ligação - login 
 
@@ -294,7 +293,7 @@ public class GUI_total extends JFrame {
 		operador_gerirClientes.setUsername(username);
 		operador_gerirClientes.setUsernameLoggedIn(username);
 		areaCliente.setUsernameLoggedIn(username);
-		areaCliente.setUsername(username);
+		areaCliente.preencheMeusDados(username);
 
 		Funcionario func = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
 		Cliente cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLogin(username);
