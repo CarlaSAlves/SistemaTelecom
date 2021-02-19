@@ -6,6 +6,11 @@ import javax.swing.table.AbstractTableModel;
 import standard_value_object.Cliente;
 
 public class ClientePesquisaModelTable extends AbstractTableModel {
+	
+	/**
+	 * Esta classe configura a tabela de pesquisa, onde se mostra os clientes.
+	 * 
+	 */
 
 	private static final long serialVersionUID = 1L;
 	public static final int OBJECT_COL = -1;
@@ -15,17 +20,19 @@ public class ClientePesquisaModelTable extends AbstractTableModel {
 	private static final int MORADA_COL = 3;
 	private static final int LOGIN_COL = 4;
 	private static final int ATIVO_COL = 5;
-
-
 	private String[] nomesColunas = { "ID","NIF", "Nome", "Morada",
 			"Login", "Ativo"};
-
 	private List<Cliente> clientes;
-
+	
+	/**
+	 * Criação das linhas e colunas da tabela, consoante o tamanho 
+	 * da lista de clientes dando-lhe o nome da coluna correspondente.
+	 * @param osClientes
+	 */
 	public ClientePesquisaModelTable(List<Cliente> osClientes) {
 		clientes = osClientes;
 	}
-
+	
 	@Override
 	public int getColumnCount() {
 		return nomesColunas.length;
@@ -41,6 +48,9 @@ public class ClientePesquisaModelTable extends AbstractTableModel {
 		return nomesColunas[col];
 	}
 
+	/**
+	 * Dependendo das constantes, vai buscar os valores correspondentes ao cliente.
+	 */
 	@Override
 	public Object getValueAt(int row, int col) {
 

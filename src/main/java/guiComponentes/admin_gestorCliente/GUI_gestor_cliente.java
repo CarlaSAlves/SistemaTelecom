@@ -118,7 +118,13 @@ public class GUI_gestor_cliente extends JFrame {
 		painelPesquisa.setBackground(Color.WHITE);
 		painelPesquisa.setBounds(98, 63, 453, 221);
 
-		painelPesquisaSetup();
+		painelPesquisa.setLayout(null);
+		labelsPesquisaSetup();
+		
+		textFieldsPesquisaSetup();
+
+		botaoPesquisaSetup();
+		painelPesquisa.add(botaoPesquisa);
 		contentPane.add(painelPesquisa);
 
 		/**
@@ -375,22 +381,6 @@ public class GUI_gestor_cliente extends JFrame {
 		btVoltarGestorCliente.setFocusPainted(false);
 	}
 
-	/**
-	 * Configuração do painel de Pesquisa. 
-	 * Contém os campos de pesquisa e os botões.
-	 */
-	private void painelPesquisaSetup() {
-
-		painelPesquisa.setLayout(null);
-		labelsPesquisaSetup();
-		painelPesquisa.add(labelID);
-
-		textFieldsPesquisaSetup();
-		painelPesquisa.add(textFieldID);
-
-		botaoPesquisaSetup();
-		painelPesquisa.add(botaoPesquisa);
-	}
 
 	/**
 	 * Configuração das labels de pesquisa
@@ -403,18 +393,22 @@ public class GUI_gestor_cliente extends JFrame {
 		labelID = new JLabel("ID");
 		labelID.setBounds(6, 15, 39, 18);
 		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		painelPesquisa.add(labelID);
 
 		labelNome = new JLabel("Nome");
 		labelNome.setBounds(6, 87, 56, 18);
 		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-
+		painelPesquisa.add(labelNome);
+		
 		labelNIF = new JLabel("NIF");
 		labelNIF.setBounds(6, 49, 56, 18);
 		labelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-
+		painelPesquisa.add(labelNIF);
+		
 		labelMorada = new JLabel("Morada");
 		labelMorada.setBounds(6, 116, 56, 27);
 		labelMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		painelPesquisa.add(labelMorada);
 	}
 
 	/**
@@ -429,25 +423,30 @@ public class GUI_gestor_cliente extends JFrame {
 		textFieldID = new JTextField();
 		textFieldID.setBounds(72, 6, 371, 27);
 		textFieldID.setColumns(10);
-
+		painelPesquisa.add(textFieldID);
+		
 		textFieldNome = new JTextField();
 		textFieldNome.setBounds(72, 78, 371, 27);
 		textFieldNome.setColumns(10);
-
+		painelPesquisa.add(textFieldNome);
+		
 		textFieldNIF = new JTextField();
 		textFieldNIF.setBounds(72, 40, 371, 27);
 		textFieldNIF.setColumns(10);
-
+		painelPesquisa.add(textFieldNIF);
+		
 		textFieldMorada = new JTextField();
 		textFieldMorada.setBounds(72, 116, 371, 27);
 		textFieldMorada.setColumns(10);
-
+		painelPesquisa.add(textFieldMorada);
+		
 		// Checkbox Ativo
 
 		checkBoxAtivo = new JCheckBox("Ativo");
 		checkBoxAtivo.setBounds(234, 150, 69, 24);
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		checkBoxAtivo.setBackground(Color.WHITE);
+		painelPesquisa.add(checkBoxAtivo);
 	}
 
 	/**
