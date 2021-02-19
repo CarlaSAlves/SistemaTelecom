@@ -34,32 +34,12 @@ public class AreaCliente_MeusProdutos extends JFrame {
 	private JTextArea textAreaNomePacote;
 	private JTextArea textAreaDescricaoPacote;
 
-	private JTextArea textAreaNomePromocoes;
-
 	private JTextArea textAreaDescricaoPromocoes;
-	
+
 	private String userName;
 	private JComboBox<Promocao> comboBoxPromocoes;
-	
-	
 
 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					//AreaCliente_MeusProdutos frame = new AreaCliente_MeusProdutos(promocaoCliente, cliente);
-					//frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -85,7 +65,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 		// Área Pacote Comercial
 
-		JLabel lblSeuPacote = new JLabel("O seu Pacote Comercial:");
+		JLabel lblSeuPacote = new JLabel("O seu Pacote Comercial");
 		lblSeuPacote.setBounds(55, 109, 219, 36);
 		lblSeuPacote.setFont(new Font("Dubai Light", Font.PLAIN, 20));
 		panelMeusProdutos.add(lblSeuPacote);
@@ -99,7 +79,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		textAreaNomePacote.setBounds(157, 161, 234, 41);
 		panelMeusProdutos.add(textAreaNomePacote);
 
-		JLabel lblDescricaoPacote = new JLabel("Descrição:");
+		JLabel lblDescricaoPacote = new JLabel("Descrição");
 		lblDescricaoPacote.setBounds(55, 214, 95, 36);
 		lblDescricaoPacote.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		panelMeusProdutos.add(lblDescricaoPacote);
@@ -116,23 +96,14 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		lblAsSuasPromoces.setBounds(472, 109, 219, 36); 
 		panelMeusProdutos.add(lblAsSuasPromoces);
 
-		textAreaNomePromocoes = new JTextArea();
-		textAreaNomePromocoes.setBounds(472, 156, 234, 41);
-		panelMeusProdutos.add(textAreaNomePromocoes);
-
 		textAreaDescricaoPromocoes = new JTextArea();
 		textAreaDescricaoPromocoes.setBounds(472, 218, 234, 92);
 		panelMeusProdutos.add(textAreaDescricaoPromocoes);
 
-		//Combo Box Promoções
-
-		textAreaNomePromocoes.setVisible(false);
 		comboBoxPromocoes = new JComboBox<Promocao>();
-		comboBoxPromocoes.setRenderer(new PromocaoComboRenderer());
-		comboBoxPromocoes.setBounds(472, 349, 234, 41);
+		comboBoxPromocoes.setBounds(472, 161, 234, 41);
 		panelMeusProdutos.add(comboBoxPromocoes);
-
-
+		
 		//Imagem fundo
 
 		JLabel imagemDados = new JLabel("");
@@ -142,30 +113,30 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		imagemDados.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/AltranClientes.png")));
 
 	}
-	
+
 	/**
 	 * Cria o renderer da ComboBox
 	 * 
 	 *
 	 */
 
-	private class PromocaoComboRenderer implements ListCellRenderer<Promocao> {
-
-		private JLabel display;
-
-		PromocaoComboRenderer(){
-			display = new JLabel();
-			display.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			display.setOpaque( true );
+		private class PromocaoComboRenderer implements ListCellRenderer<Promocao> {
+	
+			private JLabel display;
+	
+			PromocaoComboRenderer(){
+				display = new JLabel();
+				display.setFont(new Font("Tahoma", Font.PLAIN, 11));
+				display.setOpaque( true );
+			}
+	
+			@Override
+			public Component getListCellRendererComponent(JList<? extends Promocao> list, Promocao value, int index,
+					boolean isSelected, boolean cellHasFocus) {
+				display.setText("  " + value.getNome());
+				return display;
+			}
 		}
-
-		@Override
-		public Component getListCellRendererComponent(JList<? extends Promocao> list, Promocao value, int index,
-				boolean isSelected, boolean cellHasFocus) {
-			display.setText("  " + value.getNome());
-			return display;
-		}
-	}
 
 
 	/**
@@ -198,30 +169,38 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 	public void enviarUsernameMeusProdutos(String username) {
 		this.userName = username;
+		
+		
+		comboBoxPromocoes.setRenderer(new PromocaoComboRenderer());
+		
+
 
 		try {
 
 			Cliente cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLogin(username);
-			PacoteComercial pacoteCliente = GestorDeDAO.getGestorDeDAO().getPacoteClienteInfo(cliente.getId_pacote_cliente());
-			List<Promocao> promocoesCliente = GestorDeDAO.getGestorDeDAO().getPacoteClientePromocaoInfo(cliente.getId_pacote_cliente());
-			
+			if(cliente.getId_pacote_cliente()!= 0) {
+				PacoteComercial pacoteCliente = GestorDeDAO.getGestorDeDAO().getPacoteClienteInfo(cliente.getId_pacote_cliente());
+				List<Promocao> promocoesCliente = GestorDeDAO.getGestorDeDAO().getPacoteClientePromocaoInfo(cliente.getId_pacote_cliente());
 
-			for(Promocao pro : promocoesCliente) {
-				comboBoxPromocoes.addItem(pro);
-			}			
-			Promocao promocao = (Promocao) comboBoxPromocoes.getSelectedItem();
-			textAreaNomePromocoes.setText(promocao.getNome());
-			comboBoxPromocoes.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					Promocao promocao = (Promocao) comboBoxPromocoes.getSelectedItem();
-					textAreaNomePromocoes.setText(promocao.getNome());
-				}
-			});
-			
-			
-			
-			
+				textAreaNomePacote.setText(pacoteCliente.getNome());
+				textAreaDescricaoPacote.setText(pacoteCliente.getDescricao());
+
+
+				for(Promocao pro : promocoesCliente) {
+					comboBoxPromocoes.addItem(pro);
+				}			
+				Promocao promocao = (Promocao) comboBoxPromocoes.getSelectedItem();
+				textAreaDescricaoPromocoes.setText(promocao.getDescricao());
+				comboBoxPromocoes.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Promocao promocao = (Promocao) comboBoxPromocoes.getSelectedItem();
+						textAreaDescricaoPromocoes.setText(promocao.getDescricao());
+					}
+				});
+
+
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();

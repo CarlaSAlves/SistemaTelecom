@@ -318,3 +318,21 @@
 >>>>>>> Stashed changes
 </sessao>
 
+<sessao>
+<username:	qwe>
+<data e hora do login:	19-02-2021 15:06:08>
+<duração da sessão:	0:11>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	19-02-2021 15:07:09>
+<duração da sessão:	0:37>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	19-02-2021 15:16:27>
+<duração da sessão:	2:4>
+</sessao>
+
