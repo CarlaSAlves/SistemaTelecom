@@ -52,13 +52,13 @@ public class GUI_gestor_cliente extends JFrame {
 	public GUI_gestor_cliente() {
 
 		ativarNimbusLookAndFeel();
-		contentPane = new JPanel();
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		setTitle("Pesquisa de Clientes");
+		setBounds(100, 30, 1400, 800);
+		contentPane = new JPanel();
+		contentPane.setLayout(null);
+		setContentPane(contentPane);
 		setFont(font);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 30, 1400, 800);
 		contentPane.setBackground(Color.WHITE);
 
 		inicialize();
@@ -111,17 +111,18 @@ public class GUI_gestor_cliente extends JFrame {
 		contentPane.add(lblCampoPesquisa);
 
 		painelPesquisa = new JPanel();
+		painelPesquisa.setLayout(null);
 		painelPesquisa.setBackground(Color.WHITE);
 		painelPesquisa.setBounds(98, 63, 453, 221);
-
-		painelPesquisa.setLayout(null);
+		contentPane.add(painelPesquisa);
+		
 		labelsPesquisaSetup();
 		
 		textFieldsPesquisaSetup();
 
 		botaoPesquisaSetup();
 		painelPesquisa.add(botaoPesquisa);
-		contentPane.add(painelPesquisa);
+		
 
 		/**
 		 * Tabela de Resultados:
