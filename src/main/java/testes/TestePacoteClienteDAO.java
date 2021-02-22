@@ -68,7 +68,7 @@ public class TestePacoteClienteDAO {
 //	public void testEliminarPacoteById() throws Exception {
 //		assertEquals(1, pacoteClienteDAO.eliminarPacoteById(4));
 //	}
-	
+//	
 //	@Test
 //	public void testEliminarPacoteByIdNull() throws Exception {
 //		assertEquals(0, pacoteClienteDAO.eliminarPacoteById(0));
