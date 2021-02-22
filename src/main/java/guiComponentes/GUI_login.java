@@ -236,7 +236,7 @@ public class GUI_login extends JFrame {
 			return;
 		}
 
-		//verifica se � um cliente
+		//verifica se é um cliente
 		Cliente cliente = null;
 		try {
 			cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLoginPass( login, pass);
@@ -257,14 +257,11 @@ public class GUI_login extends JFrame {
 		}
 		if(funcionario != null) {
 			//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
-			//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
-
-			//TODO: arranjar algo melhor que um switch case para tratar da abertura da janela correspondente. Tenho que perceber mais sobre patterns
+	
 			switch(funcionario.getId_role()) {
 				//role 1 = admin
 				case(1):
 					//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
-					//TODO: abrir Janela da area admin e passar o admin que loga no seu construtor
 					guit.loginEfetuado(1);
 				labelConfm.setVisible(false);
 				return;
@@ -273,7 +270,6 @@ public class GUI_login extends JFrame {
 					guit.loginEfetuado(2);
 				labelConfm.setVisible(false);
 				//linha para abrir a janela do operador (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o operador atualmente logado)
-				//TODO: abrir Janela da area operador e passar o operador que loga no seu construtor
 				//JOptionPane.showMessageDialog(null, "Menu operador em construção.");
 
 				return;
