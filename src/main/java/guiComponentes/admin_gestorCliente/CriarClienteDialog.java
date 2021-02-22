@@ -411,7 +411,7 @@ public class CriarClienteDialog extends JDialog {
 
 		} catch (Exception exc) {
 			JOptionPane.showMessageDialog(clientePesquisaApp,
-					"Error a criar cliente " + exc.getMessage(), "Error",
+					"Erro a criar cliente " + exc.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE);
 			
 		}

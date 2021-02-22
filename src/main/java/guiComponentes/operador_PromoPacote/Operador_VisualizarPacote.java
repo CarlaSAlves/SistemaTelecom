@@ -325,5 +325,4 @@ public class Operador_VisualizarPacote extends JFrame {
 	public JTextArea getTextAreaDescricao() {
 		return textAreaDescricao;
 	}
-
 }

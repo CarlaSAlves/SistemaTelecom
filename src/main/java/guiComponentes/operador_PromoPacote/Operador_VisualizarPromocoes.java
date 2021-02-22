@@ -174,7 +174,7 @@ public class Operador_VisualizarPromocoes extends JFrame {
 		textFieldNome.setBounds(72, 44, 371, 27);
 		painelPesquisa.add(textFieldNome);
 		
-		checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo = new JCheckBox("Ativa");
 		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		checkBoxAtivo.setBackground(Color.WHITE);
 		checkBoxAtivo.setBounds(232, 78, 69, 24);
