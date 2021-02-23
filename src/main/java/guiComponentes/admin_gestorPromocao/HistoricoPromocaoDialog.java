@@ -17,11 +17,12 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import historicos.HistoricoOperador;
-
+import historicos.HistoricoPromocoes;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import standard_value_object.Funcionario;
+import standard_value_object.Promocao;
 
 public class HistoricoPromocaoDialog extends JDialog {
 
@@ -29,14 +30,14 @@ public class HistoricoPromocaoDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
-	private JLabel operadorRegistoLabel;
+	private JLabel promocaoRegistoLabel;
 
 	
 
-	public void preencherTable(Funcionario funcionario, List<HistoricoOperador> historicoFuncionario) {
-		operadorRegistoLabel.setText(funcionario.getNome());
+	public void preencherTable(Promocao promo, List<HistoricoPromocoes> historicoPromo) {
+		promocaoRegistoLabel.setText(promo.getNome());
 		
-		HistoricoPromocaoTableModel model = new HistoricoPromocaoTableModel(historicoFuncionario); 
+		HistoricoPromocaoTableModel model = new HistoricoPromocaoTableModel(historicoPromo); 
 		
 		table.setModel(model);
 		
@@ -64,8 +65,8 @@ public class HistoricoPromocaoDialog extends JDialog {
 				panel.add(lblHistoricoPara);
 			}
 			{
-				operadorRegistoLabel = new JLabel("");
-				panel.add(operadorRegistoLabel);
+				promocaoRegistoLabel = new JLabel("");
+				panel.add(promocaoRegistoLabel);
 			}
 		}
 		{

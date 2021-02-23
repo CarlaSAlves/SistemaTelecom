@@ -11,7 +11,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
-
+import historicos.HistoricoPacoteComercial;
+import historicos.HistoricoPromocoes;
 import standard_value_object.PacoteCliente;
 import standard_value_object.Promocao;
 
@@ -260,6 +261,46 @@ public class PromocaoDAO {
 			e.printStackTrace();
 		}finally {
 			myStmt.close();
+		}
+	}
+	
+	/*
+	 * Devolve o histórico de operaçoes para as promocoes com o id passado como parametro.
+	 * Caso não existam operaçoes, devolve uma lista vazia.
+	 */
+	public List<HistoricoPromocoes> getHistoricoPromocao(int id_promocao) throws Exception {
+		List<HistoricoPromocoes> list = new ArrayList<HistoricoPromocoes>();
+
+		Statement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			myStmt = myConn.createStatement();
+
+			String sql = "SELECT HistoricoPromocao.id_funcionario, HistoricoPromocao.id_promocao, HistoricoPromocao.descricao, "
+					+ "HistoricoPromocao.data_registo, admin.nome "
+					+ "FROM funcionario_log_promocao HistoricoPromocao, funcionario admin WHERE HistoricoPromocao.id_funcionario=admin.id AND HistoricoPromocao.id_pacote_comercial=" + id_promocao;
+
+			myRs = myStmt.executeQuery(sql);
+
+			while (myRs.next()) {
+
+				int id_funcionario = myRs.getInt("HistoricoPromocao.id_funcionario");
+				String descricao = myRs.getString("HistoricoPromocao.descricao");
+				Timestamp timestamp = myRs.getTimestamp("HistoricoPromocao.data_registo");
+				java.sql.Date data_registo = new java.sql.Date(timestamp.getTime());
+				String nome = myRs.getString("admin.nome");
+
+
+				HistoricoPromocoes historico = new HistoricoPromocoes(id_promocao, id_funcionario, descricao, data_registo, nome);
+
+				list.add(historico);
+			}
+
+			return list;		
+		}
+		finally {
+			close(myStmt, myRs);
 		}
 	}
 	

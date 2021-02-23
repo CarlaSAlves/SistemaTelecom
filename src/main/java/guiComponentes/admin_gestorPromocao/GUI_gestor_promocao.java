@@ -23,7 +23,13 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import guiComponentes.admin_gestorPacoteComercial.GUI_gestor_pacotes;
+import guiComponentes.admin_gestorPacoteComercial.HistoricoPacoteComercialDialog;
+import guiComponentes.admin_gestorPacoteComercial.PacoteComercialPesquisaModelTable;
+import historicos.HistoricoPacoteComercial;
+import historicos.HistoricoPromocoes;
 import servico.GestorDeDAO;
+import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
 import javax.swing.JCheckBox;
 import java.awt.Color;
@@ -36,24 +42,63 @@ public class GUI_gestor_promocao extends JFrame {
 	private int indice;
 	private JPanel contentPane, painelPesquisa;
 	private JTable table;
-	private JButton btVoltarGestorPromocao, btPesquisar, botaoDesativarPromocao, botaoEditarPromocao;
+	private JButton btVoltarGestorPromocao, btPesquisar, botaoDesativarPromocao, botaoEditarPromocao,botaoVisualizarHistorico;
 	private JLabel lblResultados, lblUsernameLogged, lblTempoSessao, lblHoraSistema, labelID, labelNome;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JTextField textPesquisaID, textFieldNome;
 	private JCheckBox checkBoxAtivo;
 	private JTextArea textAreaDescricao;
 
-	
+	/**
+	 * Construtor que inicia com o método que configura o painel base e o método inicialize, 
+	 * que contém todos os métodos e elementos que compõem a página 
+	 */
 	public  GUI_gestor_promocao() {
-		contentPaneSetup();
+
+		ativarNimbusLookAndFeel();
+
+		setTitle("Pesquisa de Promocao");
+		setBounds(100, 30, 1400, 800);
+		contentPane = new JPanel();
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setFont(font);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		contentPane.setBackground(Color.WHITE);
+
 		inicialize();
 	}
 
+	/**
+	 * Contém o corpo da página
+	 */
 	protected void inicialize() {
 
-		// look and feel Nimbus 
+		/*
+		 *  Botões da página:
+		 *  
+		 *  Criar Promoção 
+		 *  Editar Promoção
+		 *  Desativar Promoção
+		 *  Visualizar Historico
+		 *  Voltar 
+		 *  TextArea Descrição
+		 */
 
-		ativarNimbusLookAndFeel();
+		JButton botaoCriarPromocao = botaoCriarPromocaoSetup();
+		getContentPane().add(botaoCriarPromocao);
+
+		botaoEditarPromocaoSetup();
+		getContentPane().add(botaoEditarPromocao);
+
+		botaoDesativarPromocaoSetup();
+		getContentPane().add(botaoDesativarPromocao);
+		
+		botaoVisualizarHistoricoSetup();
+		contentPane.add(botaoVisualizarHistorico);
+
+		btVoltarGestorPromocaoSetup();
+		getContentPane().add(btVoltarGestorPromocao);
 
 		// Campo de pesquisa 
 
@@ -71,19 +116,7 @@ public class GUI_gestor_promocao extends JFrame {
 		textAreaDescricao.setEditable(false);
 		contentPane.add(textAreaDescricao);
 
-		// Botões 
-
-		JButton botaoCriarPromocao = botaoCriarPromocaoSetup();
-		getContentPane().add(botaoCriarPromocao);
-
-		botaoEditarPromocaoSetup();
-		getContentPane().add(botaoEditarPromocao);
-
-		botaoDesativarPromocaoSetup();
-		getContentPane().add(botaoDesativarPromocao);
-
-		btVoltarGestorPromocaoSetup();
-		getContentPane().add(btVoltarGestorPromocao);
+		
 
 		// table 
 
@@ -108,6 +141,44 @@ public class GUI_gestor_promocao extends JFrame {
 		setUpUserSessao();
 
 	}
+	private void botaoVisualizarHistoricoSetup() {
+			botaoVisualizarHistorico = new JButton("Visualizar Historico");
+			botaoVisualizarHistorico.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					int row = table.getSelectedRow();
+
+
+					if (row < 0) {
+						JOptionPane.showMessageDialog(GUI_gestor_promocao.this,
+								"Por favor selecione uma Promoção", "Erro", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+
+					Promocao promocao = (Promocao) table.getValueAt(row, PromocaoPesquisaModelTable.OBJECT_COL);
+					List<HistoricoPromocoes> list;
+
+					try {
+
+						list = GestorDeDAO.getGestorDeDAO().getHistoricoPromocao(promocao.getId());
+						HistoricoPromocaoDialog dialogHistorico = new HistoricoPromocaoDialog();
+						dialogHistorico.preencherTable(promocao, list);
+						dialogHistorico.setVisible(true);
+						dialogHistorico.setResizable(false);
+
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+
+				}
+			});
+			botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+			botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
+			botaoVisualizarHistorico.setBounds(609, 236, 218, 43);
+			botaoVisualizarHistorico.setEnabled(false);
+		}
+		
+	
+
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 			if ("Nimbus".equals(info.getName())) {
@@ -269,10 +340,10 @@ public class GUI_gestor_promocao extends JFrame {
 								JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					
+
 					Promocao PromocaoTemp = (Promocao) table.getValueAt(indice, PromocaoPesquisaModelTable.OBJECT_COL);
 					if(PromocaoTemp.isAtiva()){
-						
+
 						int resposta = JOptionPane.showConfirmDialog(GUI_gestor_promocao.this,
 								"Desativar este Promocao?", "Confirmar Desativar",
 								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -280,7 +351,7 @@ public class GUI_gestor_promocao extends JFrame {
 						if (resposta != JOptionPane.YES_OPTION) {
 							return;
 						}
-						
+
 						GestorDeDAO.getGestorDeDAO().desativarPromocao(PromocaoTemp.getId());
 
 						JOptionPane.showMessageDialog(GUI_gestor_promocao.this,
@@ -288,9 +359,9 @@ public class GUI_gestor_promocao extends JFrame {
 								JOptionPane.INFORMATION_MESSAGE);
 
 						refreshPromocaoTable();
-						
+
 					}else {
-						
+
 						int resposta = JOptionPane.showConfirmDialog(GUI_gestor_promocao.this,
 								"Ativar este Promocao?", "Confirmar Ativar",
 								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -298,7 +369,7 @@ public class GUI_gestor_promocao extends JFrame {
 						if (resposta != JOptionPane.YES_OPTION) {
 							return;
 						}
-						
+
 						GestorDeDAO.getGestorDeDAO().ativarPromocao(PromocaoTemp.getId());
 
 						JOptionPane.showMessageDialog(GUI_gestor_promocao.this,
@@ -306,9 +377,9 @@ public class GUI_gestor_promocao extends JFrame {
 								JOptionPane.INFORMATION_MESSAGE);
 
 						refreshPromocaoTable();
-						
+
 					}
-					
+
 				} catch (Exception e1) {
 
 				}
@@ -372,6 +443,7 @@ public class GUI_gestor_promocao extends JFrame {
 					botaoDesativarPromocao.setEnabled(true);
 					Promocao pacoteComercial = (Promocao) table.getValueAt(row, PromocaoPesquisaModelTable.OBJECT_COL);
 					textAreaDescricao.setText(pacoteComercial.getDescricao());
+					botaoVisualizarHistorico.setEnabled(true);
 					botaoAtivarDinamico();
 				}
 				else if (table.getSelectedRowCount()==0)
@@ -414,17 +486,6 @@ public class GUI_gestor_promocao extends JFrame {
 			}
 		});
 		return botaoCriarPromocao;
-	}
-
-	private void contentPaneSetup() {
-		contentPane = new JPanel();
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		setTitle("Pesquisa de Promocao");
-		setFont(font);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 30, 1400, 800);
-		contentPane.setBackground(Color.WHITE);
 	}
 
 	public void refreshPromocaoTable() {
@@ -474,11 +535,11 @@ public class GUI_gestor_promocao extends JFrame {
 		lblHoraSistema.setText("Data: " + agora);
 
 	}
-	
+
 	public JButton getBtVoltarGestorPromocao() {
 		return btVoltarGestorPromocao;
 	}
-	
+
 	public JLabel getLblResultados() {
 		return lblResultados;
 	}

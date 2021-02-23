@@ -348,7 +348,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 				if (row < 0) {
 					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
-							"Por favor selecione um Pacote Comercial", "Error", JOptionPane.ERROR_MESSAGE);
+							"Por favor selecione um Pacote Comercial", "Erro", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 
