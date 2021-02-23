@@ -48,7 +48,7 @@ public class CriarOperadorDialog extends JDialog {
 		this.operadorPesquisaApp = operadorPesquisaApp;
 	}
 	/**
-	 * Preenche as textFields com os valores do operador, antes de editar.
+	 * Preenche as textFields com os valores anteriores do operador, antes de editar.
 	 * @param funcionarioTemp
 	 */
 	private void popularTextFields(Funcionario funcionarioTemp) {
@@ -180,7 +180,7 @@ public class CriarOperadorDialog extends JDialog {
 	 * @buttonPane - painel de confirmação
 	 * @okButton - botão de confirmação, aciona as validações de campos e 
 	 * o método que grava os dados do operador na base de dados.
-	 * @CancelButton - botão cancelar, cancela a ação e fecha a janela.
+	 * @cancelButton - botão cancelar, cancela a ação e fecha a janela.
 	 */
 	private void painelConfirmacaoSetup() {
 		

@@ -54,14 +54,18 @@ public class GUI_gestor_pacotes extends JFrame {
 	private JCheckBox checkBoxAtivo;
 	private JTextArea textAreaDescricao;
 
-
+	/**
+	 * 
+	 */
 	public GUI_gestor_pacotes() {
+		ativarNimbusLookAndFeel();
+		
 		contentPaneSetup();
 		inicialize();
 	}
 	protected void inicialize() {
 
-		ativarNimbusLookAndFeel();
+		
 
 		// Botões
 
