@@ -1,6 +1,5 @@
 package guiComponentes.admin_gestorPromocao;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -23,13 +22,8 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import guiComponentes.admin_gestorPacoteComercial.GUI_gestor_pacotes;
-import guiComponentes.admin_gestorPacoteComercial.HistoricoPacoteComercialDialog;
-import guiComponentes.admin_gestorPacoteComercial.PacoteComercialPesquisaModelTable;
-import historicos.HistoricoPacoteComercial;
 import historicos.HistoricoPromocoes;
 import servico.GestorDeDAO;
-import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
 import javax.swing.JCheckBox;
 import java.awt.Color;
