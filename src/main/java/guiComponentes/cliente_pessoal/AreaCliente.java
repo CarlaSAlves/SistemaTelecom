@@ -100,6 +100,11 @@ public class AreaCliente extends JFrame {
 
 
 	private void initialize(GUI_total guit) {
+		
+		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+		UIManager.put("OptionPane.noButtonText", "Não");
+		UIManager.put("OptionPane.okButtonText", "Okay");
+		UIManager.put("OptionPane.yesButtonText", "Sim");
 
 		ativarNimbusLookAndFeel(); 
 		

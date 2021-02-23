@@ -80,7 +80,12 @@ public class Operador_gerirClientes extends JFrame {
 	}
 
 	private void inicialize() {
-
+		
+		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+		UIManager.put("OptionPane.noButtonText", "Não");
+		UIManager.put("OptionPane.okButtonText", "Okay");
+		UIManager.put("OptionPane.yesButtonText", "Sim");
+		
 		ativarNimbusLookAndFeel();
 		
 		pane = new JPanel();
