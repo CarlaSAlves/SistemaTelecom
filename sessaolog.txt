@@ -840,3 +840,117 @@
 <duração da sessão:	0:1>
 </sessao>
 
+<sessao>
+<username:	qwe>
+<data e hora do login:	22-02-2021 09:53:59>
+<duração da sessão:	0:6>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	22-02-2021 09:54:22>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	22-02-2021 10:08:06>
+<duração da sessão:	0:16>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	22-02-2021 10:08:30>
+<duração da sessão:	0:42>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	22-02-2021 09:43:47>
+<duração da sessão:	26:5>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	22-02-2021 10:10:30>
+<duração da sessão:	0:9>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	22-02-2021 10:13:06>
+<duração da sessão:	2:31>
+</sessao>
+
+<sessao>
+<username:	oper>
+<data e hora do login:	22-02-2021 10:15:45>
+<duração da sessão:	0:2>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	22-02-2021 10:17:01>
+<duração da sessão:	0:42>
+</sessao>
+
+<sessao>
+<username:	cliente>
+<data e hora do login:	22-02-2021 10:17:58>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	cliente>
+<data e hora do login:	22-02-2021 10:31:30>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	cliente>
+<data e hora do login:	22-02-2021 10:50:53>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	cliente>
+<data e hora do login:	22-02-2021 11:38:08>
+<duração da sessão:	59:32>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	22-02-2021 12:37:47>
+<duração da sessão:	0:10>
+</sessao>
+
+<sessao>
+<username:	cliente>
+<data e hora do login:	22-02-2021 11:47:51>
+<duração da sessão:	21:11>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	22-02-2021 13:09:12>
+<duração da sessão:	0:3>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	22-02-2021 13:09:20>
+<duração da sessão:	0:41>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	23-02-2021 09:26:58>
+<duração da sessão:	0:9>
+</sessao>
+
+<sessao>
+<username:	cliente>
+<data e hora do login:	23-02-2021 09:27:14>
+<duração da sessão:	43:27>
+</sessao>
+
