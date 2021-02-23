@@ -247,7 +247,7 @@ public class GUI_gestor_cliente extends JFrame {
 	/**
 	 * Configuração do botão desativar cliente.
 	 * Quando premido, faz a confirmação da ação. 
-	 * Se o cliente estiver ativo o botão indica "desactivar", se cliente está desativo
+	 * Se o cliente estiver ativo o botão indica "desativar", se o cliente está desativo
 	 * o botão indica "ativar".
 	 * Se não está nenhum cliente selecionado, o botão não está selecionável, no entanto, 
 	 * existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado.
@@ -647,7 +647,6 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * 
 	 * @return botão voltar
 	 */
 	public JButton btVoltarGestorCliente() {
@@ -663,7 +662,6 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 *
 	 * @return o painel
 	 */
 	public JPanel returnPanel() {
@@ -696,7 +694,6 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * 
 	 * @return lblResultados
 	 */
 	public JLabel getLblResultados() {
