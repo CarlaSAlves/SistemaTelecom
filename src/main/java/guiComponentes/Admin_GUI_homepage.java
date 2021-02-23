@@ -26,8 +26,8 @@ public class Admin_GUI_homepage extends JFrame {
 
 	/**
 	 * Construtor que configura a página com o método inicialize, 
-	 * configura os action listeners dos botões da página 
-	 * @param guit - de forma a aceder aos métodos do GUI Total
+	 * configura os action listeners dos botões da página  
+	 * @param guit - de forma a aceder aos métodos do GUI Total para gerir os paineis
 	 */
 	public Admin_GUI_homepage(GUI_total guit) {
 
@@ -42,64 +42,14 @@ public class Admin_GUI_homepage extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		inicialize();
-		
-		/*
-		 * Action Listeners dos botões da página  
-		 */
-		
-		// botão Gerir Clientes 
 
-		btGerirClientes.addActionListener(new ActionListener() {
+		//action Listeners dos botões 
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				guit.gerirAdminClientes();
-			}
-		});
+		actionListenersBotoes(guit);
 
-		// Botão Gerir Operadores 
-		
-		btGerirOperadores.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				guit.gerirAdminOperadores();				
-			}
-		});
-		
-		//Botão Gerir Pacotes Comerciais 
-		
-		btGerirPacotes.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				guit.gerirAdminPacotes();
-			}
-		});
-
-		// Botão Gerir Promoções 
-		
-		btGerirPromocoes.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {				
-				guit.gerirAdminPromocoes();
-
-			}
-		});
-
-		// Botão Voltar
-
-		btVoltar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				guit.voltarBtAdminHomePage();
-
-			}
-		});
 	}
-	
+
+
 	/**
 	 * Configurar interface, look and feel Nimbus 
 	 */
@@ -169,7 +119,7 @@ public class Admin_GUI_homepage extends JFrame {
 		btGerirPacotes.setFont(new Font("Dialog", Font.PLAIN, 15));
 		btGerirPacotes.setFocusPainted(false);
 		getContentPane().add(btGerirPacotes);
-		
+
 		btGerirPromocoes = new JButton("Gerir Promoções");
 		btGerirPromocoes.setBounds(239, 483, 286, 60);
 		btGerirPromocoes.setToolTipText("Gerir Promoções");
@@ -208,6 +158,67 @@ public class Admin_GUI_homepage extends JFrame {
 		timerSetup();
 
 	}
+	
+	/**
+	 * ActionListeners dos botões da página 
+	 * Conectam-se com o gui total para gestão dos paineis 
+	 * @param guit - de forma a aceder aos métodos do GUI Total para gerir os paineis
+	 */
+	private void actionListenersBotoes(GUI_total guit) {
+
+		// botão Gerir Clientes 
+
+		btGerirClientes.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				guit.gerirAdminClientes();
+			}
+		});
+
+		// Botão Gerir Operadores 
+
+		btGerirOperadores.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				guit.gerirAdminOperadores();				
+			}
+		});
+
+		//Botão Gerir Pacotes Comerciais 
+
+		btGerirPacotes.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				guit.gerirAdminPacotes();
+			}
+		});
+
+		// Botão Gerir Promoções 
+
+		btGerirPromocoes.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {				
+				guit.gerirAdminPromocoes();
+
+			}
+		});
+
+		// Botão Voltar
+
+		btVoltar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				guit.voltarBtAdminHomePage();
+
+			}
+		});
+
+	}
 
 	/**
 	 * Configuração das labels de username e temporização.
@@ -238,7 +249,7 @@ public class Admin_GUI_homepage extends JFrame {
 		panel.add(lblHoraSistema);
 	}
 
-	
+
 	/**
 	 * 
 	 * @return panel
@@ -254,7 +265,7 @@ public class Admin_GUI_homepage extends JFrame {
 	public void setUsernameLoggedIn(String username) {
 		lblUsernameLogged.setText("Username: " + username);
 	}
-	
+
 	/**
 	 * 
 	 * @param temporizador
