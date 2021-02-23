@@ -312,7 +312,7 @@ public class CriarClienteDialog extends JDialog {
 		this.username = username;
 
 		// modo editar, accionado pelo clique no botão "editar"
-		
+
 		if(modoEditar) {
 			setTitle("Editar Cliente");
 			lblPassword.setText("Nova Password");
@@ -388,28 +388,29 @@ public class CriarClienteDialog extends JDialog {
 						"Cliente Editado com sucesso!", "Cliente Editado",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
-			//	try {
-
-					funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
-					GestorDeDAO.getGestorDeDAO().criarCliente(cliente, funcionario);
-					clientePesquisaApp.refreshClienteTable();
-					JOptionPane.showMessageDialog(clientePesquisaApp,
-							"Cliente Criado com sucesso!", "Cliente Criado",
-							JOptionPane.INFORMATION_MESSAGE);
-
-			//	} catch (Exception e) {
-			//		throw e;
-			//	}
+				funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
+				GestorDeDAO.getGestorDeDAO().criarCliente(cliente, funcionario);
+				clientePesquisaApp.refreshClienteTable();
+				JOptionPane.showMessageDialog(clientePesquisaApp,
+						"Cliente Criado com sucesso!", "Cliente Criado",
+						JOptionPane.INFORMATION_MESSAGE);		
 			}
 			setVisible(false);
 			dispose();
 
 
 		} catch (Exception exc) {
-			JOptionPane.showMessageDialog(clientePesquisaApp,
-					"Erro a criar cliente " + exc.getMessage(), "Erro",
-					JOptionPane.ERROR_MESSAGE);
-			
+
+			if (modoEditar) {
+				JOptionPane.showMessageDialog(clientePesquisaApp,
+						"Erro a editar cliente " + exc.getMessage(), "Erro",
+						JOptionPane.ERROR_MESSAGE);
+			}else {
+				JOptionPane.showMessageDialog(clientePesquisaApp,
+						"Erro a criar cliente " + exc.getMessage(), "Erro",
+						JOptionPane.ERROR_MESSAGE);
+			}
+
 		}
 
 	}

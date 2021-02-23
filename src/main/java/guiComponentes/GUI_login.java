@@ -52,9 +52,9 @@ public class GUI_login extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
 		getContentPane().setLayout(null);
-		
+
 		// imagem user e de fundo
-		
+
 		JLabel iconUser = new JLabel();
 		iconUser.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/user.png")));
 		iconUser.setBounds(301, 89, 238, 298);
@@ -97,26 +97,25 @@ public class GUI_login extends JFrame {
 		getContentPane().add(textFieldUser);
 		textFieldUser.setColumns(10);
 		textFieldUser.addFocusListener(new FocusListener() {
-			
+
 			@Override
 			public void focusLost(FocusEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void focusGained(FocusEvent e) {
 				passwordField.setText("");
-				
+
 			}
 		});
 
 		labelConfm = new JLabel("User ou Password incorreta");
 		labelConfm.setBounds(359, 578, 251, 18);
 		labelConfm.setForeground(new Color(70,74,101));
-		labelConfm.setFont(new Font("SansSerif", Font.PLAIN, 12));
-
 		labelConfm.setVisible(false);
+		labelConfm.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		getContentPane().add(labelConfm);
 
 		btLogin = new JButton("Login");
@@ -195,13 +194,13 @@ public class GUI_login extends JFrame {
 		});
 
 		getContentPane().add(btLogin);
-		
-				JLabel icon = new JLabel("");
-				icon.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/fundoAltran.png")));
-				icon.setBounds(0, 89, 1394, 586);
-				panel.add(icon);
 
-		
+		JLabel icon = new JLabel("");
+		icon.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/fundoAltran.png")));
+		icon.setBounds(0, 89, 1394, 586);
+		panel.add(icon);
+
+
 	}
 
 
@@ -224,6 +223,7 @@ public class GUI_login extends JFrame {
 			}
 		}
 	}
+
 	private void login(GUI_total guit) throws Exception {
 		//login vai usar metodos e entidades que estao nos dao do package V2
 		//primeiro vamos ver se o utilizador � um cliente
@@ -238,6 +238,9 @@ public class GUI_login extends JFrame {
 
 		//verifica se é um cliente
 		Cliente cliente = null;
+		//se nao é  cliente, é  funcion�rio 
+		Funcionario funcionario = null;
+
 		try {
 			cliente = GestorDeDAO.getGestorDeDAO().pesquisaClienteLoginPass( login, pass);
 		} catch (Exception e2) {
@@ -248,8 +251,7 @@ public class GUI_login extends JFrame {
 			labelConfm.setVisible(false);
 		}
 
-		//se nao é  cliente, é  funcion�rio 
-		Funcionario funcionario = null;
+
 		try {
 			funcionario = GestorDeDAO.getGestorDeDAO().pesquisarFuncionarioLoginPass( login, pass);
 		} catch (Exception e1) {
@@ -257,26 +259,32 @@ public class GUI_login extends JFrame {
 		}
 		if(funcionario != null) {
 			//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
-	
-			switch(funcionario.getId_role()) {
-				//role 1 = admin
-				case(1):
-					//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
-					guit.loginEfetuado(1);
-				labelConfm.setVisible(false);
-				return;
-				//role 2 = operador	
-				case(2):
-					guit.loginEfetuado(2);
-				labelConfm.setVisible(false);
-				//linha para abrir a janela do operador (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o operador atualmente logado)
-				//JOptionPane.showMessageDialog(null, "Menu operador em construção.");
 
-				return;
+			switch(funcionario.getId_role()) {
+			//role 1 = admin
+			case(1):
+				//linha para abrir a janela do admin (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o admin atualmente logado)
+				guit.loginEfetuado(1);
+			labelConfm.setVisible(false);
+			return;
+			//role 2 = operador	
+			case(2):
+				guit.loginEfetuado(2);
+			labelConfm.setVisible(false);
+			//linha para abrir a janela do operador (de preferencia essa janela recebe um funcionario no construtor, assim podemos passar a info sobre o operador atualmente logado)
+			//JOptionPane.showMessageDialog(null, "Menu operador em construção.");
+			return;
 			}
 		}
-		labelConfm.setVisible(true);
+		
+		if(cliente == null && funcionario == null) {
+			labelConfm.setVisible(true);
+		}
 	}
+
+
+
+
 
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
