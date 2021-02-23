@@ -900,3 +900,15 @@
 <duração da sessão:	0:39>
 </sessao>
 
+<sessao>
+<username:	oper>
+<data e hora do login:	23-02-2021 14:22:45>
+<duração da sessão:	15:14>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	23-02-2021 14:38:08>
+<duração da sessão:	0:18>
+</sessao>
+

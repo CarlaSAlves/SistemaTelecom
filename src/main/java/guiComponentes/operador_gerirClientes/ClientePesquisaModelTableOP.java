@@ -6,6 +6,11 @@ import javax.swing.table.AbstractTableModel;
 import standard_value_object.Cliente;
 
 public class ClientePesquisaModelTableOP extends AbstractTableModel {
+	
+	/**
+	 * Esta classe configura a tabela de pesquisa, onde se mostra os clientes.
+	 * 
+	 */
 
 	private static final long serialVersionUID = 1L;
 	public static final int OBJECT_COL = -1;
@@ -22,6 +27,12 @@ public class ClientePesquisaModelTableOP extends AbstractTableModel {
 			"Login", "Ativo", "Pacote Comercial"};
 
 	private List<Cliente> clientes;
+	
+	/**
+	 * Criação das linhas e colunas da tabela, consoante o tamanho 
+	 * da lista de clientes dando-lhe o nome da coluna correspondente.
+	 * @param osClientes
+	 */
 
 	public ClientePesquisaModelTableOP(List<Cliente> osClientes) {
 		clientes = osClientes;
@@ -41,6 +52,9 @@ public class ClientePesquisaModelTableOP extends AbstractTableModel {
 	public String getColumnName(int col) {
 		return nomesColunas[col];
 	}
+	/**
+	 * Dependendo das constantes, vai buscar os valores correspondentes ao cliente.
+	 */
 
 	@Override
 	public Object getValueAt(int row, int col) {
