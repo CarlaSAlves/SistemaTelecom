@@ -4,6 +4,11 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import standard_value_object.PacoteComercial;
 
+/**
+ * Esta classe configura a tabela de pesquisa, onde se mostra os pacotes comerciais.
+ * 
+ */
+
 public class PacoteComercialPesquisaModelTable extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
@@ -20,6 +25,11 @@ public class PacoteComercialPesquisaModelTable extends AbstractTableModel {
 
 	private List<PacoteComercial> pacotesComerciais;
 
+	/**
+	 * Criação das linhas e colunas da tabela, consoante o tamanho 
+	 * da lista de pacotes comerciais dando-lhe o nome da coluna correspondente.
+	 * @param pacotesComerciais
+	 */
 	public PacoteComercialPesquisaModelTable(List<PacoteComercial> pacotesComerciais) {
 		this.pacotesComerciais = pacotesComerciais;
 	}
@@ -40,6 +50,9 @@ public class PacoteComercialPesquisaModelTable extends AbstractTableModel {
 		return nomesColunas[col];
 	}
 
+	/**
+	 * Dependendo das constantes, vai buscar os valores correspondentes ao pacote comercial.
+	 */
 	@Override
 	public Object getValueAt(int row, int col) {
 

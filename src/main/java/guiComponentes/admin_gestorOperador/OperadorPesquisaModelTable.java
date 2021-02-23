@@ -5,7 +5,7 @@ import javax.swing.table.AbstractTableModel;
 import standard_value_object.Funcionario;
 
 /**
- * Esta classe configura a tabela de pesquisa, onde se mostra os clientes.
+ * Esta classe configura a tabela de pesquisa, onde se mostra os operadores.
  * 
  */
 

@@ -42,7 +42,7 @@ public class CriarClienteDialog extends JDialog {
 	}
 
 	/**
-	 * Preenche as textFields com os valores do cliente, antes de editar.
+	 * Preenche as textFields com os valores anteriores do cliente, antes de editar.
 	 * @param clienteAntigo2
 	 */
 	private void popularTextFields(Cliente clienteAntigo2) {
@@ -188,7 +188,7 @@ public class CriarClienteDialog extends JDialog {
 	 * @buttonPane - painel de confirmação
 	 * @okButton - botão de confirmação, aciona as validações de campos e 
 	 * o método que grava os dados do cliente na base de dados.
-	 * @CancelButton - botão cancelar, cancela a ação e fecha a janela.
+	 * @cancelButton - botão cancelar, cancela a ação e fecha a janela.
 	 * 
 	 */
 	protected void painelConfirmacaoSetup() {
@@ -312,6 +312,7 @@ public class CriarClienteDialog extends JDialog {
 		this.username = username;
 
 		// modo editar, accionado pelo clique no botão "editar"
+		
 		if(modoEditar) {
 			setTitle("Editar Cliente");
 			lblPassword.setText("Nova Password");
@@ -341,7 +342,6 @@ public class CriarClienteDialog extends JDialog {
 
 	/**
 	 * Método que conecta ao gestor DAO e grava os dados do cliente na base de dados
-	 * 
 	 */
 	@SuppressWarnings("deprecation")
 	private void gravarCliente() {
