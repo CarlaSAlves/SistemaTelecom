@@ -65,7 +65,7 @@ public class CriarClienteDialog extends JDialog {
 		contentPanel.setBackground(SystemColor.window);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		
+
 		inicialize();
 
 	}
@@ -181,7 +181,7 @@ public class CriarClienteDialog extends JDialog {
 		contentPanel.add(textFieldPassword);
 
 	}
-	
+
 	/**
 	 * Configura os botões do rodapé da página 
 	 * 
@@ -192,7 +192,7 @@ public class CriarClienteDialog extends JDialog {
 	 * 
 	 */
 	protected void painelConfirmacaoSetup() {
-		
+
 		JPanel buttonPane = new JPanel();
 		buttonPane.setBounds(0, 245, 424, 41);
 		contentPanel.add(buttonPane);
@@ -206,7 +206,7 @@ public class CriarClienteDialog extends JDialog {
 		okButton.setFocusPainted(false);
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				// Validações dos campos de texto no modo editar
 				if(modoEditar) {
 
@@ -254,13 +254,13 @@ public class CriarClienteDialog extends JDialog {
 						return;
 					}
 
+					// verifica se já existe um cliente com o mesmo login
 					List<Cliente> listaClientes = null;
 					try {
 						listaClientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
 					} catch (Exception e) {
 
 					}
-					// verifica se já existe um cliente com o mesmo login
 					for( Cliente c : listaClientes) {
 						if(c.getLogin().equalsIgnoreCase(textFieldLogin.getText())) {
 							JOptionPane.showMessageDialog( CriarClienteDialog.this, "Login Invalido, ja em uso!");
@@ -388,7 +388,7 @@ public class CriarClienteDialog extends JDialog {
 						"Cliente Editado com sucesso!", "Cliente Editado",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				try {
+			//	try {
 
 					funcionario = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
 					GestorDeDAO.getGestorDeDAO().criarCliente(cliente, funcionario);
@@ -397,9 +397,9 @@ public class CriarClienteDialog extends JDialog {
 							"Cliente Criado com sucesso!", "Cliente Criado",
 							JOptionPane.INFORMATION_MESSAGE);
 
-				} catch (Exception e) {
-
-				}
+			//	} catch (Exception e) {
+			//		throw e;
+			//	}
 			}
 			setVisible(false);
 			dispose();
@@ -407,8 +407,9 @@ public class CriarClienteDialog extends JDialog {
 
 		} catch (Exception exc) {
 			JOptionPane.showMessageDialog(clientePesquisaApp,
-					"Error a criar cliente " + exc.getMessage(), "Error",
+					"Erro a criar cliente " + exc.getMessage(), "Erro",
 					JOptionPane.ERROR_MESSAGE);
+			
 		}
 
 	}

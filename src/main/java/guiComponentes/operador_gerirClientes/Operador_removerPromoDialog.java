@@ -130,7 +130,7 @@ public class Operador_removerPromoDialog extends JDialog {
 
 		PromocaoComboRenderer(){
 			display = new JLabel();
-			display.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			display.setFont(new Font("Dubai Light", Font.PLAIN, 11));
 			display.setOpaque( true );
 		}
 

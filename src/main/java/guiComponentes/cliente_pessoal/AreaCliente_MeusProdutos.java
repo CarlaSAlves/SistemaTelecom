@@ -95,31 +95,31 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 		textAreaDescricaoPromocoes = new JTextArea();
 		textAreaDescricaoPromocoes.setLineWrap(true);
-		textAreaDescricaoPromocoes.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textAreaDescricaoPromocoes.setFont(new Font("Dialog Light", Font.PLAIN, 12));
 		textAreaDescricaoPromocoes.setBounds(400, 222, 300, 104);
 		panelMeusProdutos.add(textAreaDescricaoPromocoes);
 
 		comboBoxPromocoes = new JComboBox<Promocao>();
-		comboBoxPromocoes.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		comboBoxPromocoes.setFont(new Font("Dialog Light", Font.PLAIN, 12));
 		comboBoxPromocoes.setBounds(400, 169, 300, 31);
 		panelMeusProdutos.add(comboBoxPromocoes);
 
 		btnPesquisarPromocoes = new JButton("Pesquisar Promoções");
-		btnPesquisarPromocoes.setFont(new Font("Dialog", Font.PLAIN, 12));
-		btnPesquisarPromocoes.setBounds(400, 168, 300, 32);
+		btnPesquisarPromocoes.setFont(new Font("Dialog Light", Font.PLAIN, 12));
+		btnPesquisarPromocoes.setBounds(400, 168, 247, 32);
 		btnPesquisarPromocoes.setVisible(false);
 		panelMeusProdutos.add(btnPesquisarPromocoes);
 
 		btnPesquisarPacotes = new JButton("Pesquisar Pacotes Comerciais");
-		btnPesquisarPacotes.setFont(new Font("Dialog", Font.PLAIN, 12));
-		btnPesquisarPacotes.setBounds(66, 168, 300, 32);
+		btnPesquisarPacotes.setFont(new Font("Dialog Light", Font.PLAIN, 12));
+		btnPesquisarPacotes.setBounds(66, 168, 264, 32);
 		btnPesquisarPacotes.setVisible(false);
 		panelMeusProdutos.add(btnPesquisarPacotes);
 
 
 		JLabel lblOsSeusProdutos = new JLabel("Os Seus Produtos");
 		lblOsSeusProdutos.setForeground(Color.DARK_GRAY);
-		lblOsSeusProdutos.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblOsSeusProdutos.setFont(new Font("Dialog Light", Font.BOLD, 20));
 		lblOsSeusProdutos.setBounds(66, 54, 234, 28);
 		panelMeusProdutos.add(lblOsSeusProdutos);
 
@@ -146,7 +146,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 		PromocaoComboRenderer(){
 			display = new JLabel();
-			display.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			display.setFont(new Font("Dialog Light", Font.PLAIN, 11));
 			display.setOpaque( true );
 		}
 
@@ -230,10 +230,11 @@ public class AreaCliente_MeusProdutos extends JFrame {
 								textAreaDescricaoPromocoes.setText(promocao.getDescricao());
 							}
 						});
-					}else {
+						
+					} else {
 						textAreaDescricaoPromocoes.setVisible(false);
 						comboBoxPromocoes.setVisible(false);
-						lblAsSuasPromoces.setText("Não tem nenhuma Promoção Atribuida");
+						lblAsSuasPromoces.setText("Não tem nenhuma Promoção atribuida");
 						btnPesquisarPromocoes.setVisible(true);
 					}
 
@@ -241,32 +242,26 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 					textAreaNomePacote.setVisible(false);
 					textAreaDescricaoPacote.setVisible(false);
-					lblSeuPacote.setText("Não tem nenhum Pacote Comercial Atribuido");
+					lblSeuPacote.setText("Não tem nenhum Pacote Comercial atribuido");
 					btnPesquisarPacotes.setVisible(true);
 
 					textAreaDescricaoPromocoes.setVisible(false);
 					comboBoxPromocoes.setVisible(false);
-					lblAsSuasPromoces.setText("Não tem nenhuma Promoção Atribuida");
+					lblAsSuasPromoces.setText("Não tem nenhuma Promoção atribuida");
 					btnPesquisarPromocoes.setVisible(true);
 				}
 			}
-
 
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-
 	}
 	
-
-
 	public JButton getBtnPesquisarPacotes() {
 		return btnPesquisarPacotes;
 	}
-
-
 
 	public JButton getBtnPesquisarPromocoes() {
 		return btnPesquisarPromocoes;
