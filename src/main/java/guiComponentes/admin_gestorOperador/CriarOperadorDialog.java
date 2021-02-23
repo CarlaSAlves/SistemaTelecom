@@ -23,6 +23,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 
 import guiComponentes.GUI_total;
+import guiComponentes.admin_gestorCliente.CriarClienteDialog;
 
 import java.awt.Color;
 
@@ -208,6 +209,19 @@ public class CriarOperadorDialog extends JDialog {
 						JOptionPane.showMessageDialog( CriarOperadorDialog.this, "O NIF tem que estar preenchido!");
 						return;
 					}
+					char[] nomeEmArray = new char[textFieldNome.getText().length()]; 
+
+					for(int i = 0; i < nomeEmArray.length; i++) {
+						nomeEmArray[i] = textFieldNome.getText().charAt(i);
+						if(nomeEmArray[i]==32) {
+							continue;
+						}
+						if (nomeEmArray[i]<65 || nomeEmArray[i] > 122 ) {
+							JOptionPane.showMessageDialog(CriarOperadorDialog.this,
+									"O Nome não pode conter números!", "Erro", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+					}
 					try {
 						Integer.parseInt( textFieldNIF.getText() );
 					}
@@ -229,6 +243,19 @@ public class CriarOperadorDialog extends JDialog {
 					if( textFieldNIF.getText().isBlank()) {
 						JOptionPane.showMessageDialog( CriarOperadorDialog.this, "O NIF tem que estar preenchido!");
 						return;
+					}
+					char[] nomeEmArray = new char[textFieldNome.getText().length()]; 
+
+					for(int i = 0; i < nomeEmArray.length; i++) {
+						nomeEmArray[i] = textFieldNome.getText().charAt(i);
+						if(nomeEmArray[i]==32) {
+							continue;
+						}
+						if (nomeEmArray[i]<65 || nomeEmArray[i] > 122 ) {
+							JOptionPane.showMessageDialog(CriarOperadorDialog.this,
+									"O Nome não pode conter números!", "Erro", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
 					}
 					try {
 						Integer.parseInt( textFieldNIF.getText() );

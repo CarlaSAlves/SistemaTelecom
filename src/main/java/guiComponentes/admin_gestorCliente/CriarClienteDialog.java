@@ -12,6 +12,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
+
+import guiComponentes.cliente_pessoal.AreaCliente_MeusDados;
 import servico.GestorDeDAO;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
@@ -218,6 +220,19 @@ public class CriarClienteDialog extends JDialog {
 						JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem que estar preenchido!");
 						return;
 					}
+					char[] nomeEmArray = new char[textFieldNome.getText().length()]; 
+
+					for(int i = 0; i < nomeEmArray.length; i++) {
+						nomeEmArray[i] = textFieldNome.getText().charAt(i);
+						if(nomeEmArray[i]==32) {
+							continue;
+						}
+						if (nomeEmArray[i]<65 || nomeEmArray[i] > 122 ) {
+							JOptionPane.showMessageDialog(CriarClienteDialog.this,
+									"O Nome não pode conter números!", "Erro", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+					}
 					try {
 						Integer.parseInt( textFieldNIF.getText() );
 					}
@@ -245,6 +260,19 @@ public class CriarClienteDialog extends JDialog {
 					if( textFieldNIF.getText().isBlank()) {
 						JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem que estar preenchido!");
 						return;
+					}
+					char[] nomeEmArray = new char[textFieldNome.getText().length()]; 
+
+					for(int i = 0; i < nomeEmArray.length; i++) {
+						nomeEmArray[i] = textFieldNome.getText().charAt(i);
+						if(nomeEmArray[i]==32) {
+							continue;
+						}
+						if (nomeEmArray[i]<65 || nomeEmArray[i] > 122 ) {
+							JOptionPane.showMessageDialog(CriarClienteDialog.this,
+									"O Nome não pode conter números!", "Erro", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
 					}
 					try {
 						Integer.parseInt( textFieldNIF.getText() );
