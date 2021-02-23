@@ -55,7 +55,7 @@ public class GUI_total extends JFrame {
 	private String dataEHoraDeLog;
 	private SimpleDateFormat dateFormat ;
 	
- static void main(String[] args) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
