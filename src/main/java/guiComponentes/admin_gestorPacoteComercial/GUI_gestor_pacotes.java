@@ -653,7 +653,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	 * @param agora
 	 */
 	public void setLblHoraSistema(String agora) {
-		lblHoraSistema.setText("Data: " + agora)
+		lblHoraSistema.setText("Data: " + agora);
 	}
 
 	/**

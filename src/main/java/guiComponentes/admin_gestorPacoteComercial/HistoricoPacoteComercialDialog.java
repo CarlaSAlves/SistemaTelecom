@@ -32,7 +32,61 @@ public class HistoricoPacoteComercialDialog extends JDialog {
 	private JLabel pacoteComercialRegistosTable;
 
 
+	public HistoricoPacoteComercialDialog() {
 
+		setTitle("Historico de Registos");
+		setModal(true);
+		setBounds(100, 100, 651, 300);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		setResizable(false);
+		contentPanel.setLayout(new BorderLayout(0, 0));
+
+		// Painel de histórico 
+		
+		JPanel panel = new JPanel();
+		contentPanel.add(panel, BorderLayout.NORTH);
+		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+
+		JLabel lblHistoricoPara = new JLabel("Historico do Pacote Comercial :");
+		panel.add(lblHistoricoPara);
+
+		pacoteComercialRegistosTable = new JLabel("");
+		panel.add(pacoteComercialRegistosTable);
+
+		// Tabela e Scrollpane de histórico
+
+		JScrollPane scrollPane = new JScrollPane();
+		contentPanel.add(scrollPane, BorderLayout.CENTER);
+
+		table = new JTable();
+		scrollPane.setViewportView(table);
+
+		// Painel de rodapé - botão sair 
+
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
+
+		JButton okButton = new JButton("Sair");
+		okButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				dispose();
+			}
+		});
+		
+		okButton.setActionCommand("OK");
+		buttonPane.add(okButton);
+		getRootPane().setDefaultButton(okButton);
+	}
+
+	/**
+	 * Método que preenche a tabela com o registos
+	 * @param pacote
+	 * @param historicoPacoteComercial
+	 */
 	public void preencherTable(PacoteComercial pacote,List<HistoricoPacoteComercial> historicoPacoteComercial) {
 		pacoteComercialRegistosTable.setText(pacote.getNome());
 
@@ -45,56 +99,10 @@ public class HistoricoPacoteComercialDialog extends JDialog {
 
 	}
 
-	public HistoricoPacoteComercialDialog() {
-		setBounds(100, 100, 450, 300);
-		setTitle("Historico de Registos");
-		setModal(true);
-		setBounds(100, 100, 651, 300);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		setResizable(false);
-		contentPanel.setLayout(new BorderLayout(0, 0));
-		{
-			JPanel panel = new JPanel();
-			contentPanel.add(panel, BorderLayout.NORTH);
-			panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-			{
-				JLabel lblAuditHistoryFor = new JLabel("Historico do Pacote Comercial :");
-				panel.add(lblAuditHistoryFor);
-			}
-			{
-				pacoteComercialRegistosTable = new JLabel("");
-				panel.add(pacoteComercialRegistosTable);
-			}
-		}
-		{
-			JScrollPane scrollPane = new JScrollPane();
-			contentPanel.add(scrollPane, BorderLayout.CENTER);
-			{
-				table = new JTable();
-				scrollPane.setViewportView(table);
-			}
-		}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("Sair");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						setVisible(false);
-						dispose();
-					}
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-		}		
-	}
-
+	
+	/**
+	 * Renderer da tabela
+	 */
 	private final class DateTimeCellRenderer extends DefaultTableCellRenderer {
 
 		private static final long serialVersionUID = 5466469925138317415L;
