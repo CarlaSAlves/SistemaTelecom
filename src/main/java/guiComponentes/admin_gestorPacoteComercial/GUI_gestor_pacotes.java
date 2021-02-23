@@ -121,10 +121,10 @@ public class GUI_gestor_pacotes extends JFrame {
 		 *  Botão Pesquisar
 		 */ 
 		
-		JLabel lblCamposPesquisas = new JLabel("Campo de Pesquisa");
-		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-		lblCamposPesquisas.setBounds(98, 50, 294, 26);
-		contentPane.add(lblCamposPesquisas);
+		JLabel lblCamposPesquisa = new JLabel("Campo de Pesquisa");
+		lblCamposPesquisa.setFont(new Font("Dubai Light", Font.BOLD, 20));
+		lblCamposPesquisa.setBounds(98, 50, 294, 26);
+		contentPane.add(lblCamposPesquisa);
 		
 		painelPesquisa = new JPanel();
 		painelPesquisa.setLayout(null);
@@ -147,9 +147,9 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		JScrollPane scrollPane = scrollPaneSetup();
 		panel.add(scrollPane);
-
-		tableSetup();
 		scrollPane.setViewportView(table);
+		
+		tableSetup();
 
 		lblResultados = new JLabel("Resultados: ");
 		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 16));
@@ -540,7 +540,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	 * Botão ativo/desativo dinâmico. 
 	 * Quando o pacote comercial está ativo o botão apresenta "desativar".
 	 * Quando o pacote comercial está desativo o botão apresenta "ativar".
-	 * @botaoDesativarOperador - botao dinâmico
+	 * @botaoDesativarPacoteComercial - botao dinâmico
 	 */
 	private void botaoAtivarDinamico() {
 
@@ -663,8 +663,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		return lblResultados;
 	}
 	
-	/**
-	 * 
+	/** 
 	 * @return textAreaDescricao
 	 */
 	public JTextArea getTextAreaDescricao() {
