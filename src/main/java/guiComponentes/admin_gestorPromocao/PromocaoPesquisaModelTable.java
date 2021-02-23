@@ -4,6 +4,11 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import standard_value_object.Promocao;
 
+/**
+ * Esta classe configura a tabela de pesquisa, onde se mostra as promoções.
+ * 
+ */
+
 public class PromocaoPesquisaModelTable extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
@@ -19,6 +24,11 @@ public class PromocaoPesquisaModelTable extends AbstractTableModel {
 
 	private List<Promocao> promocoes;
 
+	/**
+	 * Criação das linhas e colunas da tabela, consoante o tamanho 
+	 * da lista de promoções dando-lhe o nome da coluna correspondente.
+	 * @param pacotesComerciais
+	 */
 	public PromocaoPesquisaModelTable(List<Promocao> promocoes) {
 		this.promocoes = promocoes;
 	}
@@ -39,6 +49,9 @@ public class PromocaoPesquisaModelTable extends AbstractTableModel {
 		return nomesColunas[col];
 	}
 
+	/**
+	 * Dependendo das constantes, vai buscar os valores correspondentes ao pacote comercial.
+	 */
 	@Override
 	public Object getValueAt(int row, int col) {
 

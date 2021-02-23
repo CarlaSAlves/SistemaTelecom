@@ -21,6 +21,11 @@ public class HistoricoPromocaoTableModel extends AbstractTableModel {
 
 	private List<HistoricoPromocoes> historicoLista;
 
+	/**
+	 * Criação das linhas e colunas da tabela, consoante o tamanho 
+	 * da lista de registos dando-lhe o nome da coluna correspondente.
+	 * @param historicoLista
+	 */
 	public HistoricoPromocaoTableModel(List<HistoricoPromocoes> historicoLista) {
 		this.historicoLista = historicoLista;
 	}
@@ -40,6 +45,9 @@ public class HistoricoPromocaoTableModel extends AbstractTableModel {
 		return columnNames[col];
 	}
 
+	/**
+	 * Dependendo das constantes, vai buscar os valores correspondentes aos registos.
+	 */
 	@Override
 	public Object getValueAt(int row, int col) {
 
