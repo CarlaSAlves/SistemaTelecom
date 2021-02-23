@@ -341,7 +341,7 @@ public class GUI_gestor_cliente extends JFrame {
 				int row = table.getSelectedRow();
 				if (row < 0) {
 					JOptionPane.showMessageDialog(GUI_gestor_cliente.this,
-							"Por favor selecione um Cliente", "Error", JOptionPane.ERROR_MESSAGE);
+							"Por favor selecione um Cliente", "Erro", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 
@@ -631,7 +631,7 @@ public class GUI_gestor_cliente extends JFrame {
 			numberRows = table.getRowCount();
 			lblResultados.setText("Resultados: " + numberRows);
 		} catch (Exception exc) {
-			JOptionPane.showMessageDialog(this, "Error: " + exc, "Error",
+			JOptionPane.showMessageDialog(this, "Erro: " + exc, "Erro",
 					JOptionPane.ERROR_MESSAGE);
 		}
 

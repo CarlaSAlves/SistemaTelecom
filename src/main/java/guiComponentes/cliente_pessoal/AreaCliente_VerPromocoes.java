@@ -77,25 +77,25 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		// Labels e textFieldNome da página 
 		
 		JLabel labelVerPromo = new JLabel("Ver todas as Promoções");
-		labelVerPromo.setForeground(Color.DARK_GRAY);
-		labelVerPromo.setFont(new Font("Dialog", Font.BOLD, 20));
+		labelVerPromo.setForeground(Color.WHITE);
+		labelVerPromo.setFont(new Font("Dubai Light", Font.BOLD, 22));
 		labelVerPromo.setBounds(66, 54, 318, 28);
 		panelVerTodasPromo.add(labelVerPromo);
 
 		JLabel labelPacoteNome = new JLabel("Nome");
-		labelPacoteNome.setForeground(Color.DARK_GRAY);
-		labelPacoteNome.setFont(new Font("Dialog", Font.PLAIN, 15));
+		labelPacoteNome.setForeground(Color.WHITE);
+		labelPacoteNome.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		labelPacoteNome.setBounds(319, 169, 71, 31);
 		panelVerTodasPromo.add(labelPacoteNome);
 
 		JLabel labelPromoDescricao = new JLabel("Descrição");
-		labelPromoDescricao.setForeground(Color.DARK_GRAY);
-		labelPromoDescricao.setFont(new Font("Dialog", Font.PLAIN, 15));
+		labelPromoDescricao.setForeground(Color.WHITE);
+		labelPromoDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		labelPromoDescricao.setBounds(319, 222, 89, 23);
 		panelVerTodasPromo.add(labelPromoDescricao);
 
 		textFieldNome = new JTextField();
-		textFieldNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textFieldNome.setEditable(false);
 		textFieldNome.setBounds(400, 169, 300, 31);
 		panelVerTodasPromo.add(textFieldNome);
@@ -104,7 +104,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
-		textArea.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textArea.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textArea.setBounds(400, 222, 300, 104);
 		panelVerTodasPromo.add(textArea);
 
@@ -123,7 +123,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 
 		JList<String> listVerPromo = new JList<String>(promocoes);
 
-		listVerPromo.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		listVerPromo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		listVerPromo.setBounds(66, 120, 226, 362);
 		listVerPromo.setSelectedIndex(0);
 		listVerPromo.setForeground(Color.BLACK);

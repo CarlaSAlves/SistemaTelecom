@@ -846,3 +846,57 @@
 <duração da sessão:	26:41>
 </sessao>
 
+<sessao>
+<username:	qwe>
+<data e hora do login:	23-02-2021 10:50:53>
+<duração da sessão:	0:24>
+</sessao>
+
+<sessao>
+<username:	oper>
+<data e hora do login:	23-02-2021 10:51:24>
+<duração da sessão:	0:34>
+</sessao>
+
+<sessao>
+<username:	oper>
+<data e hora do login:	23-02-2021 11:22:58>
+<duração da sessão:	10:25>
+</sessao>
+
+<sessao>
+<username:	oper>
+<data e hora do login:	23-02-2021 11:33:29>
+<duração da sessão:	14:41>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	23-02-2021 11:57:24>
+<duração da sessão:	0:29>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	23-02-2021 11:58:01>
+<duração da sessão:	0:8>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	23-02-2021 12:05:22>
+<duração da sessão:	0:56>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	23-02-2021 12:25:57>
+<duração da sessão:	0:27>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	23-02-2021 12:54:16>
+<duração da sessão:	0:39>
+</sessao>
+

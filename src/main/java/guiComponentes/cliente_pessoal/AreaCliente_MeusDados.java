@@ -124,59 +124,53 @@ public class AreaCliente_MeusDados extends JFrame {
 
 		lblNovaMorada = new JLabel("Insira a Nova Morada");
 		lblNovaMorada.setForeground(Color.LIGHT_GRAY);
-		lblNovaMorada.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblNovaMorada.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblNovaMorada.setBounds(66, 304, 224, 14);
-		lblNovaMorada.setVisible(false);
 		panelDados.add(lblNovaMorada);
 
 		lblNovoNome = new JLabel("Insira o Novo Nome");
 		lblNovoNome.setForeground(Color.LIGHT_GRAY);
-		lblNovoNome.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblNovoNome.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblNovoNome.setBounds(66, 176, 224, 14);
-		lblNovoNome.setVisible(false);
 		panelDados.add(lblNovoNome);
 
 		lblNovoNIF = new JLabel("Insira o Novo NIF");
 		lblNovoNIF.setForeground(Color.LIGHT_GRAY);
-		lblNovoNIF.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblNovoNIF.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblNovoNIF.setBounds(66, 239, 224, 14);
-		lblNovoNIF.setVisible(false);
 		panelDados.add(lblNovoNIF);
 
 		JLabel lblDadosNome = new JLabel("Nome ");
-		lblDadosNome.setForeground(Color.DARK_GRAY);
-		lblDadosNome.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblDadosNome.setForeground(new Color(255, 255, 255));
+		lblDadosNome.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		lblDadosNome.setBounds(56, 144, 69, 28);
 		panelDados.add(lblDadosNome);
 
 
 		JLabel lblDadosMorada = new JLabel("Morada ");
-		lblDadosMorada.setForeground(Color.DARK_GRAY);
-		lblDadosMorada.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblDadosMorada.setForeground(new Color(255, 255, 255));
+		lblDadosMorada.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		lblDadosMorada.setBounds(56, 272, 81, 28);
 		panelDados.add(lblDadosMorada);
 
 
-
-
-
 		textFieldDadosNome = new JTextField();
 		textFieldDadosNome.setForeground(Color.BLACK);
-		textFieldDadosNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textFieldDadosNome.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textFieldDadosNome.setEditable(false);
 		textFieldDadosNome.setColumns(10);
 		textFieldDadosNome.setBounds(54, 168, 252, 30);
 		panelDados.add(textFieldDadosNome);
 
 		JLabel lblDadosNIF = new JLabel("NIF ");
-		lblDadosNIF.setForeground(Color.DARK_GRAY);
-		lblDadosNIF.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblDadosNIF.setForeground(new Color(255, 255, 255));
+		lblDadosNIF.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		lblDadosNIF.setBounds(56, 207, 69, 28);
 		panelDados.add(lblDadosNIF);
 
 		textFieldDadosNIF = new JTextField();
 		textFieldDadosNIF.setForeground(Color.BLACK);
-		textFieldDadosNIF.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textFieldDadosNIF.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textFieldDadosNIF.setEditable(false);
 		textFieldDadosNIF.setColumns(10);
 		textFieldDadosNIF.setBounds(54, 231, 252, 30);
@@ -184,21 +178,21 @@ public class AreaCliente_MeusDados extends JFrame {
 
 		textFieldDadosMorada = new JTextField();
 		textFieldDadosMorada.setForeground(Color.BLACK);
-		textFieldDadosMorada.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textFieldDadosMorada.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textFieldDadosMorada.setEditable(false);
 		textFieldDadosMorada.setColumns(10);
 		textFieldDadosMorada.setBounds(54, 296, 252, 30);
 		panelDados.add(textFieldDadosMorada);
 
 		JLabel lblID = new JLabel("ID");
-		lblID.setForeground(Color.DARK_GRAY);
-		lblID.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblID.setForeground(new Color(255, 255, 255));
+		lblID.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		lblID.setBounds(56, 79, 69, 28);
 		panelDados.add(lblID);
 
 		textFieldID = new JTextField();
 		textFieldID.setForeground(Color.BLACK);
-		textFieldID.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textFieldID.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textFieldID.setEditable(false);
 		textFieldID.setColumns(10);
 		textFieldID.setBounds(54, 103, 252, 30);
@@ -285,7 +279,7 @@ public class AreaCliente_MeusDados extends JFrame {
 			}
 		});
 		btAtualizarDados.setForeground(Color.DARK_GRAY);
-		btAtualizarDados.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btAtualizarDados.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		btAtualizarDados.setFocusPainted(false);
 
 		btConfirmar = new JButton("Confirmar");
@@ -311,7 +305,7 @@ public class AreaCliente_MeusDados extends JFrame {
 					int nif = (int) clienteNovo.getNif();
 
 					if(textFieldDadosNIF.getText().isBlank() || textFieldDadosNome.getText().isBlank() ||  textFieldDadosMorada.getText().isBlank()) {
-						JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "Tem Campos por preencher!", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "Tem Campos por preencher!", "Erro", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 
@@ -324,7 +318,7 @@ public class AreaCliente_MeusDados extends JFrame {
 						}
 						if (nomeEmArray[i]<65 || nomeEmArray[i] > 122 ) {
 							JOptionPane.showMessageDialog(AreaCliente_MeusDados.this,
-									"O Nome não pode conter números!", "Error", JOptionPane.ERROR_MESSAGE);
+									"O Nome não pode conter números!", "Erro", JOptionPane.ERROR_MESSAGE);
 							return;
 						}
 					}
@@ -342,7 +336,7 @@ public class AreaCliente_MeusDados extends JFrame {
 						for(Cliente c : todosClientes) {
 							if(cliente.getNif() != Integer.parseInt(textFieldDadosNIF.getText().trim())) {
 								if(c.getNif() == Integer.parseInt(textFieldDadosNIF.getText().trim())){
-									JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "NIF já se encontra em uso!", "Error", JOptionPane.ERROR_MESSAGE);
+									JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "NIF já se encontra em uso!", "Erro", JOptionPane.ERROR_MESSAGE);
 									return;
 								}
 							}
@@ -358,7 +352,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 
 					}catch( Exception ex ){
-						JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "O NIF tem de ser um inteiro!", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "O NIF tem de ser um inteiro!", "Erro", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 
@@ -415,7 +409,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		});
 		btConfirmar.setForeground(Color.DARK_GRAY);
 		btConfirmar.setVisible(false);
-		btConfirmar.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btConfirmar.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		btConfirmar.setFocusPainted(false);
 
 		btCancelar = new JButton("Cancelar");
@@ -447,40 +441,36 @@ public class AreaCliente_MeusDados extends JFrame {
 		});
 		btCancelar.setForeground(Color.DARK_GRAY);
 		btCancelar.setVisible(false);
-		btCancelar.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btCancelar.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		btCancelar.setFocusPainted(false);
 
 		lblTitulo = new JLabel("Os Seus Dados");
-		lblTitulo.setForeground(Color.DARK_GRAY);
-		lblTitulo.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblTitulo.setForeground(Color.WHITE);
+		lblTitulo.setFont(new Font("Dubai Light", Font.BOLD, 22));
 		lblTitulo.setBounds(56, 43, 234, 28);
 		panelDados.add(lblTitulo);
 
 		lblNovoLogin = new JLabel("Insira o Novo Login");
 		lblNovoLogin.setForeground(Color.LIGHT_GRAY);
-		lblNovoLogin.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblNovoLogin.setVisible(false);
+		lblNovoLogin.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 
 		lblNovaPass_2 = new JLabel("Insira a Nova Password");
 		lblNovaPass_2.setForeground(Color.LIGHT_GRAY);
-		lblNovaPass_2.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblNovaPass_2.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblNovaPass_2.setBounds(29, 239, 224, 14);
-		lblNovaPass_2.setVisible(false);
 		panelPasswords.add(lblNovaPass_2);
 
 		lblNovaPassConfirm = new JLabel("Insira a Nova Password");
 		lblNovaPassConfirm.setForeground(Color.LIGHT_GRAY);
-		lblNovaPassConfirm.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblNovaPassConfirm.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblNovaPassConfirm.setBounds(29, 304, 224, 14);
-		lblNovaPassConfirm.setVisible(false);
 		panelPasswords.add(lblNovaPassConfirm);
 		lblNovoLogin.setBounds(29, 111, 224, 14);
 		panelPasswords.add(lblNovoLogin);
 
 		lblNovaPass = new JLabel("Insira a Password Atual");
 		lblNovaPass.setForeground(Color.LIGHT_GRAY);
-		lblNovaPass.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblNovaPass.setVisible(false);
+		lblNovaPass.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblNovaPass.setBounds(29, 171, 224, 14);
 		panelPasswords.add(lblNovaPass);
 
@@ -489,37 +479,37 @@ public class AreaCliente_MeusDados extends JFrame {
 		passwordField.setBounds(17, 163, 252, 30);
 		passwordField.setEditable(false);
 		panelPasswords.add(passwordField);
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		passwordField.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 
 		lblDadosLogin = new JLabel("Login ");
-		lblDadosLogin.setForeground(Color.DARK_GRAY);
+		lblDadosLogin.setForeground(Color.WHITE);
 		lblDadosLogin.setBounds(19, 79, 234, 28);
 		panelPasswords.add(lblDadosLogin);
-		lblDadosLogin.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblDadosLogin.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 
 		textFieldDadosLogin = new JTextField();
 		textFieldDadosLogin.setForeground(Color.BLACK);
 		textFieldDadosLogin.setBounds(17, 103, 252, 30);
 		panelPasswords.add(textFieldDadosLogin);
-		textFieldDadosLogin.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textFieldDadosLogin.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textFieldDadosLogin.setEditable(false);
 		textFieldDadosLogin.setColumns(10);
 
 		lblPassword = new JLabel("Password");
-		lblPassword.setForeground(Color.DARK_GRAY);
+		lblPassword.setForeground(Color.WHITE);
 		lblPassword.setBounds(19, 139, 234, 28);
 		panelPasswords.add(lblPassword);
-		lblPassword.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 
 		lblTituloPass = new JLabel("O Seu Login & Password");
-		lblTituloPass.setForeground(Color.DARK_GRAY);
-		lblTituloPass.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblTituloPass.setForeground(Color.WHITE);
+		lblTituloPass.setFont(new Font("Dubai Light", Font.BOLD, 22));
 		lblTituloPass.setBounds(19, 43, 300, 28);
 		panelPasswords.add(lblTituloPass);
 
 		btAtualizarDadosPass = new JButton("Atualizar Login");
 		btAtualizarDadosPass.setForeground(Color.DARK_GRAY);
-		btAtualizarDadosPass.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btAtualizarDadosPass.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		btAtualizarDadosPass.setFocusPainted(false);
 		btAtualizarDadosPass.setBounds(130, 206, 139, 30);
 		btAtualizarDadosPass.addActionListener(new ActionListener() {
@@ -623,7 +613,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 		btConfirmarPass = new JButton("Confirmar");
 		btConfirmarPass.setForeground(Color.DARK_GRAY);
-		btConfirmarPass.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btConfirmarPass.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		btConfirmarPass.setFocusPainted(false);
 		btConfirmarPass.setBounds(17, 341, 120, 30);
 		btConfirmarPass.setVisible(false);
@@ -652,7 +642,7 @@ public class AreaCliente_MeusDados extends JFrame {
 					//							if(login.equalsIgnoreCase(c.getLogin())) {
 					//								continue;
 					//							}else if( textFieldDadosLogin.getText().trim().equals(c.getLogin())){
-					//								JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "Login já se encontra em uso!", "Error", JOptionPane.ERROR_MESSAGE);
+					//								JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "Login já se encontra em uso!", "Erro", JOptionPane.ERROR_MESSAGE);
 					//								return;
 					//							}
 					//						}
@@ -746,7 +736,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 		btCancelarPass = new JButton("Cancelar");
 		btCancelarPass.setForeground(Color.DARK_GRAY);
-		btCancelarPass.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btCancelarPass.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		btCancelarPass.setFocusPainted(false);
 		btCancelarPass.setVisible(false);
 		btCancelarPass.setBounds(149, 341, 120, 30);
@@ -781,32 +771,30 @@ public class AreaCliente_MeusDados extends JFrame {
 		panelPasswords.add(btCancelarPass);
 
 		lblNovaPassword_1 = new JLabel("Nova Password");
-		lblNovaPassword_1.setForeground(Color.DARK_GRAY);
-		lblNovaPassword_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblNovaPassword_1.setForeground(Color.WHITE);
+		lblNovaPassword_1.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		lblNovaPassword_1.setVisible(false);
 		lblNovaPassword_1.setBounds(19, 207, 234, 28);
 		panelPasswords.add(lblNovaPassword_1);
 
 		passwordField_1 = new JPasswordField();
 		passwordField_1.setForeground(Color.BLACK);
-		passwordField_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		passwordField_1.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		passwordField_1.setEditable(true);
-		passwordField_1.setVisible(false);
 		passwordField_1.setBounds(17, 231, 252, 30);
 		panelPasswords.add(passwordField_1);
 
 		lblNovaPassword_2 = new JLabel("Confirmar Nova Password");
-		lblNovaPassword_2.setForeground(Color.DARK_GRAY);
-		lblNovaPassword_2.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblNovaPassword_2.setForeground(Color.WHITE);
+		lblNovaPassword_2.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		lblNovaPassword_2.setVisible(false);
 		lblNovaPassword_2.setBounds(19, 272, 250, 28);
 		panelPasswords.add(lblNovaPassword_2);
 
 		passwordField_2 = new JPasswordField();
 		passwordField_2.setForeground(Color.BLACK);
-		passwordField_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		passwordField_2.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		passwordField_2.setEditable(true);
-		passwordField_2.setVisible(false);
 		passwordField_2.setBounds(17, 296, 252, 30);
 		panelPasswords.add(passwordField_2);
 

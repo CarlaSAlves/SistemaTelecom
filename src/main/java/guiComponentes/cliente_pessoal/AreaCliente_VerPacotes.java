@@ -56,7 +56,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 		try {
 			initialize();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -82,25 +82,25 @@ public class AreaCliente_VerPacotes extends JFrame {
 		// Labels e textFieldNome da página 
 		
 		JLabel labelVerPacotes = new JLabel("Ver todos os Pacotes Comerciais");
-		labelVerPacotes.setForeground(Color.DARK_GRAY);
-		labelVerPacotes.setFont(new Font("Dialog", Font.BOLD, 20));
+		labelVerPacotes.setForeground(Color.WHITE);
+		labelVerPacotes.setFont(new Font("Dubai Light", Font.BOLD, 22));
 		labelVerPacotes.setBounds(66, 54, 318, 28);
 		panelVerTodosPacotes.add(labelVerPacotes);
 		
 		JLabel labelPacoteNome = new JLabel("Nome");
-		labelPacoteNome.setForeground(Color.DARK_GRAY);
-		labelPacoteNome.setFont(new Font("Dialog", Font.PLAIN, 15));
+		labelPacoteNome.setForeground(Color.WHITE);
+		labelPacoteNome.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		labelPacoteNome.setBounds(319, 169, 62, 31);
 		panelVerTodosPacotes.add(labelPacoteNome);
 		
 		JLabel labelPacoteDescricao = new JLabel("Descrição");
-		labelPacoteDescricao.setForeground(Color.DARK_GRAY);
-		labelPacoteDescricao.setFont(new Font("Dialog", Font.PLAIN, 15));
+		labelPacoteDescricao.setForeground(Color.WHITE);
+		labelPacoteDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		labelPacoteDescricao.setBounds(319, 223, 87, 23);
 		panelVerTodosPacotes.add(labelPacoteDescricao);
 		
 		textFieldNome = new JTextField();
-		textFieldNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textFieldNome.setEditable(false);
 		textFieldNome.setBounds(400, 169, 300, 31);
 		panelVerTodosPacotes.add(textFieldNome);
@@ -109,7 +109,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
-		textArea.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textArea.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textArea.setBounds(400, 222, 300, 104);
 		panelVerTodosPacotes.add(textArea);
 		
@@ -126,7 +126,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 		
 		
 		JList<String> listVerPacotes = new JList<String>(pacotes);
-		listVerPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		listVerPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		listVerPacotes.setBounds(66, 120, 226, 362);
 		listVerPacotes.setSelectedIndex(0);
 		listVerPacotes.setForeground(Color.BLACK);
@@ -163,10 +163,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 		scrollBar.setBounds(66, 120, 226, 362);
 		panelVerTodosPacotes.add(scrollBar);
 		
-		
-		
-
-		
+			
 		/*
 		 * Define a imagem de fundo através de uma label
 		 */

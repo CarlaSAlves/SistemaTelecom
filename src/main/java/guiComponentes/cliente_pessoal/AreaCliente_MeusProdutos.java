@@ -68,19 +68,19 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		// Área Pacote Comercial
 
 		lblSeuPacote = new JLabel("Pacote Comercial");
-		lblSeuPacote.setForeground(Color.DARK_GRAY);
+		lblSeuPacote.setForeground(Color.WHITE);
 		lblSeuPacote.setBounds(66, 122, 315, 36);
-		lblSeuPacote.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblSeuPacote.setFont(new Font("Dubai Light", Font.PLAIN, 20));
 		panelMeusProdutos.add(lblSeuPacote);
 
 		textAreaNomePacote = new JTextArea();
-		textAreaNomePacote.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textAreaNomePacote.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textAreaNomePacote.setBounds(66, 169, 300, 31);
 		panelMeusProdutos.add(textAreaNomePacote);
 
 		textAreaDescricaoPacote = new JTextArea();
 		textAreaDescricaoPacote.setLineWrap(true);
-		textAreaDescricaoPacote.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textAreaDescricaoPacote.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textAreaDescricaoPacote.setBounds(66, 222, 300, 104);
 		panelMeusProdutos.add(textAreaDescricaoPacote);
 
@@ -88,19 +88,19 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 		// Promoções
 		lblAsSuasPromoces = new JLabel("Promoções");
-		lblAsSuasPromoces.setForeground(Color.DARK_GRAY);
-		lblAsSuasPromoces.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblAsSuasPromoces.setForeground(Color.WHITE);
+		lblAsSuasPromoces.setFont(new Font("Dubai Light", Font.PLAIN, 20));
 		lblAsSuasPromoces.setBounds(400, 122, 315, 36); 
 		panelMeusProdutos.add(lblAsSuasPromoces);
 
 		textAreaDescricaoPromocoes = new JTextArea();
 		textAreaDescricaoPromocoes.setLineWrap(true);
-		textAreaDescricaoPromocoes.setFont(new Font("Dialog Light", Font.PLAIN, 12));
+		textAreaDescricaoPromocoes.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textAreaDescricaoPromocoes.setBounds(400, 222, 300, 104);
 		panelMeusProdutos.add(textAreaDescricaoPromocoes);
 
 		comboBoxPromocoes = new JComboBox<Promocao>();
-		comboBoxPromocoes.setFont(new Font("Dialog Light", Font.PLAIN, 12));
+		comboBoxPromocoes.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		comboBoxPromocoes.setBounds(400, 169, 300, 31);
 		panelMeusProdutos.add(comboBoxPromocoes);
 
@@ -118,15 +118,15 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 
 		JLabel lblOsSeusProdutos = new JLabel("Os Seus Produtos");
-		lblOsSeusProdutos.setForeground(Color.DARK_GRAY);
-		lblOsSeusProdutos.setFont(new Font("Dialog Light", Font.BOLD, 20));
-		lblOsSeusProdutos.setBounds(66, 54, 234, 28);
+		lblOsSeusProdutos.setForeground(Color.WHITE);
+		lblOsSeusProdutos.setFont(new Font("Dubai Light", Font.BOLD, 22));
+		lblOsSeusProdutos.setBounds(66, 55, 234, 28);
 		panelMeusProdutos.add(lblOsSeusProdutos);
 
 		//Imagem fundo
 
 		JLabel imagemDados = new JLabel("");
-		imagemDados.setBounds(0, -37, 1408, 586);
+		imagemDados.setBounds(6, -45, 1408, 586);
 		panelMeusProdutos.add(imagemDados);
 		imagemDados.setBackground(new Color(240, 240,240 ));
 		imagemDados.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/AltranClientes.png")));
@@ -146,7 +146,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 		PromocaoComboRenderer(){
 			display = new JLabel();
-			display.setFont(new Font("Dialog Light", Font.PLAIN, 11));
+			display.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 			display.setOpaque( true );
 		}
 

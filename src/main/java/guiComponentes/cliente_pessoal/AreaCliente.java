@@ -120,15 +120,15 @@ public class AreaCliente extends JFrame {
 		//  Label portal cliente
 
 		JLabel lblPortalCliente = new JLabel("Portal do Cliente");
-		lblPortalCliente.setBounds(16, 6, 508, 33);
-		lblPortalCliente.setForeground(new Color(255,165,0));
+		lblPortalCliente.setBounds(16, 17, 508, 33);
+		lblPortalCliente.setForeground(new Color(253,132,67));
 		lblPortalCliente.setFont(new Font("Dubai", Font.BOLD, 40));
 		getContentPane().add(lblPortalCliente);
 
-		lblBemVindo = new JLabel("Bem Vindo");
-		lblBemVindo.setForeground(new Color(255,165,0));
+		lblBemVindo = new JLabel("");
+		lblBemVindo.setForeground(new Color(253,132,67));
 		lblBemVindo.setFont(new Font("Dubai Light", Font.BOLD, 17));
-		lblBemVindo.setBounds(16, 44, 200, 33);
+		lblBemVindo.setBounds(16, 48, 200, 33);
 		panel.add(lblBemVindo);
 
 
