@@ -4,6 +4,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import historicos.HistoricoOperador;
+import historicos.HistoricoPromocoes;
 
 
 public class HistoricoPromocaoTableModel extends AbstractTableModel {
@@ -18,9 +19,14 @@ public class HistoricoPromocaoTableModel extends AbstractTableModel {
 
 	private String[] columnNames = { "Data", "Registo", "Funcionario", "ID Admin" };
 
-	private List<HistoricoOperador> historicoLista;
+	private List<HistoricoPromocoes> historicoLista;
 
-	public HistoricoPromocaoTableModel(List<HistoricoOperador> historicoLista) {
+	/**
+	 * Criação das linhas e colunas da tabela, consoante o tamanho 
+	 * da lista de registos dando-lhe o nome da coluna correspondente.
+	 * @param historicoLista
+	 */
+	public HistoricoPromocaoTableModel(List<HistoricoPromocoes> historicoLista) {
 		this.historicoLista = historicoLista;
 	}
 
@@ -39,24 +45,27 @@ public class HistoricoPromocaoTableModel extends AbstractTableModel {
 		return columnNames[col];
 	}
 
+	/**
+	 * Dependendo das constantes, vai buscar os valores correspondentes aos registos.
+	 */
 	@Override
 	public Object getValueAt(int row, int col) {
 
-		HistoricoOperador historicoOperador = historicoLista.get(row);
+		HistoricoPromocoes historicoPromocoes = historicoLista.get(row);
 
 		switch (col) {
 		case DATA_COL:			
-			return historicoOperador.getData_registo();
+			return historicoPromocoes.getData_registo();
 		case REGISTO_COL:
-			return historicoOperador.getDescricao();
+			return historicoPromocoes.getDescricao();
 		case FUNCIONARIO_COL:
-			return historicoOperador.getNome_funcionario();
+			return historicoPromocoes.getNome_funcionario();
 		case ID_COL:
-			return historicoOperador.getId_funcionario();
+			return historicoPromocoes.getId_funcionario();
 		case OBJECT_COL:
-			return historicoOperador;
+			return historicoPromocoes;
 		default:
-			return historicoOperador.getNome_funcionario();
+			return historicoPromocoes.getNome_funcionario();
 		}
 	}
 

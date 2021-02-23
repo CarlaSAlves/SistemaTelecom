@@ -79,6 +79,11 @@ public class GUI_gestor_pacotes extends JFrame {
 	 */
 	protected void inicialize() {
 
+		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+		UIManager.put("OptionPane.noButtonText", "Não");
+		UIManager.put("OptionPane.okButtonText", "Okay");
+		UIManager.put("OptionPane.yesButtonText", "Sim");
+		
 		/*
 		 *  Botões da página:
 		 *  
@@ -121,10 +126,10 @@ public class GUI_gestor_pacotes extends JFrame {
 		 *  Botão Pesquisar
 		 */ 
 		
-		JLabel lblCamposPesquisas = new JLabel("Campo de Pesquisa");
-		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-		lblCamposPesquisas.setBounds(98, 50, 294, 26);
-		contentPane.add(lblCamposPesquisas);
+		JLabel lblCamposPesquisa = new JLabel("Campo de Pesquisa");
+		lblCamposPesquisa.setFont(new Font("Dubai Light", Font.BOLD, 20));
+		lblCamposPesquisa.setBounds(98, 50, 294, 26);
+		contentPane.add(lblCamposPesquisa);
 		
 		painelPesquisa = new JPanel();
 		painelPesquisa.setLayout(null);
@@ -144,12 +149,12 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		JPanel panel = paneldaTabelaSetup();
 		getContentPane().add(panel);
-
+		tableSetup();
 		JScrollPane scrollPane = scrollPaneSetup();
 		panel.add(scrollPane);
-
-		tableSetup();
 		scrollPane.setViewportView(table);
+		
+		
 
 		lblResultados = new JLabel("Resultados: ");
 		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 16));
@@ -348,7 +353,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 				if (row < 0) {
 					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
-							"Por favor selecione um Pacote Comercial", "Error", JOptionPane.ERROR_MESSAGE);
+							"Por favor selecione um Pacote Comercial", "Erro", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 
@@ -540,7 +545,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	 * Botão ativo/desativo dinâmico. 
 	 * Quando o pacote comercial está ativo o botão apresenta "desativar".
 	 * Quando o pacote comercial está desativo o botão apresenta "ativar".
-	 * @botaoDesativarOperador - botao dinâmico
+	 * @botaoDesativarPacoteComercial - botao dinâmico
 	 */
 	private void botaoAtivarDinamico() {
 
@@ -663,8 +668,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		return lblResultados;
 	}
 	
-	/**
-	 * 
+	/** 
 	 * @return textAreaDescricao
 	 */
 	public JTextArea getTextAreaDescricao() {

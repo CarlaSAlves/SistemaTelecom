@@ -69,6 +69,11 @@ public class GUI_gestor_cliente extends JFrame {
 	 */
 	private void inicialize() {
 
+		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+		UIManager.put("OptionPane.noButtonText", "Não");
+		UIManager.put("OptionPane.okButtonText", "Okay");
+		UIManager.put("OptionPane.yesButtonText", "Sim");
+
 		/*
 		 *  Botões da página:
 		 *  
@@ -115,14 +120,14 @@ public class GUI_gestor_cliente extends JFrame {
 		painelPesquisa.setBackground(Color.WHITE);
 		painelPesquisa.setBounds(98, 63, 453, 221);
 		contentPane.add(painelPesquisa);
-		
+
 		labelsPesquisaSetup();
-		
+
 		textFieldsPesquisaSetup();
 
 		botaoPesquisaSetup();
 		painelPesquisa.add(botaoPesquisa);
-		
+
 
 		/**
 		 * Tabela de Resultados:
@@ -391,7 +396,7 @@ public class GUI_gestor_cliente extends JFrame {
 		labelID.setBounds(6, 15, 39, 18);
 		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		painelPesquisa.add(labelID);
-		
+
 		labelNIF = new JLabel("NIF");
 		labelNIF.setBounds(6, 49, 56, 18);
 		labelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
@@ -401,7 +406,7 @@ public class GUI_gestor_cliente extends JFrame {
 		labelNome.setBounds(6, 87, 56, 18);
 		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		painelPesquisa.add(labelNome);
-		
+
 		labelMorada = new JLabel("Morada");
 		labelMorada.setBounds(6, 116, 56, 27);
 		labelMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
@@ -421,22 +426,22 @@ public class GUI_gestor_cliente extends JFrame {
 		textFieldID.setBounds(72, 6, 371, 27);
 		textFieldID.setColumns(10);
 		painelPesquisa.add(textFieldID);
-		
+
 		textFieldNIF = new JTextField();
 		textFieldNIF.setBounds(72, 40, 371, 27);
 		textFieldNIF.setColumns(10);
 		painelPesquisa.add(textFieldNIF);
-		
+
 		textFieldNome = new JTextField();
 		textFieldNome.setBounds(72, 78, 371, 27);
 		textFieldNome.setColumns(10);
 		painelPesquisa.add(textFieldNome);
-		
+
 		textFieldMorada = new JTextField();
 		textFieldMorada.setBounds(72, 116, 371, 27);
 		textFieldMorada.setColumns(10);
 		painelPesquisa.add(textFieldMorada);
-		
+
 		// Checkbox Ativo
 
 		checkBoxAtivo = new JCheckBox("Ativo");

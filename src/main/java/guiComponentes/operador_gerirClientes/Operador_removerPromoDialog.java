@@ -17,6 +17,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import guiComponentes.GUI_total;
@@ -43,6 +44,11 @@ public class Operador_removerPromoDialog extends JDialog {
 	public Operador_removerPromoDialog(Operador_gerirClientes operador_gerirClientes, List<Promocao> promocoes, Cliente cliente) {
 		this.operador_gerirClientes = operador_gerirClientes;
 		this.cliente = cliente;
+		
+		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+		UIManager.put("OptionPane.noButtonText", "Não");
+		UIManager.put("OptionPane.okButtonText", "Okay");
+		UIManager.put("OptionPane.yesButtonText", "Sim");
 		
 		setBounds(500, 300, 450, 170);
 		getContentPane().setLayout(new BorderLayout());

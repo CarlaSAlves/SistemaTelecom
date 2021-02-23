@@ -76,7 +76,17 @@ public class Operador_gerirClientes extends JFrame {
 	 * que contém todos os métodos e elementos que compõem a página 
 	 */
 	public Operador_gerirClientes() {
+		inicialize();
 
+	}
+
+	private void inicialize() {
+		
+		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+		UIManager.put("OptionPane.noButtonText", "Não");
+		UIManager.put("OptionPane.okButtonText", "Okay");
+		UIManager.put("OptionPane.yesButtonText", "Sim");
+		
 		ativarNimbusLookAndFeel();
 		pane = new JPanel();
 		setContentPane(pane);

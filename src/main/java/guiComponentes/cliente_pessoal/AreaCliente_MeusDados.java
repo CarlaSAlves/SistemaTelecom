@@ -346,7 +346,6 @@ public class AreaCliente_MeusDados extends JFrame {
 							nifAlterado = false;
 						}else {
 							nifAlterado = true;
-							System.out.println("true? nif");
 							nif = Integer.parseInt( textFieldDadosNIF.getText().trim());
 						}
 
@@ -360,7 +359,6 @@ public class AreaCliente_MeusDados extends JFrame {
 						moradaAlterado = false;
 					}else {
 						moradaAlterado = true;
-						System.out.println("true?why ?");
 						morada = textFieldDadosMorada.getText();
 					}
 

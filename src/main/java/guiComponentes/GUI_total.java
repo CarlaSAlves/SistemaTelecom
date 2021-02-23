@@ -36,10 +36,12 @@ import standard_value_object.Funcionario;
 public class GUI_total extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel pane;
+	private JPanel pane, loginPanel, homepagePanel, gestor_clientePanel, gestor_operadorPanel, gestor_pacotesPanel, gestor_promocaoPanel, 
+	operador_homepagePanel, operador_gerirClientesPanel, operador_visualizarPromoPanel, areaClientePanel, operador_visualizarPacotePanel;
 	private static String username;
 	private Instant inicio;
 	private GUI_gestor_cliente gestor_cliente;
+	private GUI_login login;
 	private Admin_GUI_homepage homepage;
 	private	GUI_gestor_operador gestor_operador;
 	private GUI_gestor_pacotes gestor_pacotes;
@@ -52,13 +54,7 @@ public class GUI_total extends JFrame {
 	private Duration temporizador;
 	private String dataEHoraDeLog;
 	private SimpleDateFormat dateFormat ;
-	private GUI_login login;
-
-	private JPanel loginPanel, homepagePanel, gestor_clientePanel, gestor_operadorPanel, gestor_pacotesPanel, gestor_promocaoPanel, operador_homepagePanel, operador_gerirClientesPanel, operador_visualizarPromoPanel, areaClientePanel;
-	private JPanel operador_visualizarPacotePanel;
-
-
-
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -81,6 +77,10 @@ public class GUI_total extends JFrame {
 
 	public GUI_total() {
 
+		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+		UIManager.put("OptionPane.noButtonText", "Não");
+		UIManager.put("OptionPane.okButtonText", "Okay");
+		UIManager.put("OptionPane.yesButtonText", "Sim");
 
 		ativarNimbusLookAndFeel();
 
@@ -140,8 +140,6 @@ public class GUI_total extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				homepagePanel.setVisible(true);
 				gestor_clientePanel.setVisible(false);
-
-
 			}
 		});
 
@@ -157,7 +155,6 @@ public class GUI_total extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				homepagePanel.setVisible(true);
 				gestor_operadorPanel.setVisible(false);
-
 			}
 		});
 
@@ -256,8 +253,9 @@ public class GUI_total extends JFrame {
 
 	}
 
-
-
+	/**
+	 * Configurar interface, look and feel Nimbus 
+	 */
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 			if ("Nimbus".equals(info.getName())) {
@@ -277,6 +275,21 @@ public class GUI_total extends JFrame {
 		}
 	}
 
+	/**
+	 * Método que transporta o username pelos paineis da aplicação
+	 * @param login
+	 * @param homepage
+	 * @param gestor_cliente
+	 * @param gestor_operador
+	 * @param gestor_pacotes
+	 * @param gestor_promocao
+	 * @param operador_homepage
+	 * @param operador_visualizarPacotes
+	 * @param operador_visualizarPromocoes
+	 * @param areaCliente
+	 * @param operador_gerirClientes
+	 * @throws Exception
+	 */
 	private void labelUsernameNavegaPaginas(GUI_login login, Admin_GUI_homepage homepage,
 			GUI_gestor_cliente gestor_cliente, GUI_gestor_operador gestor_operador,
 			GUI_gestor_pacotes gestor_pacotes, GUI_gestor_promocao gestor_promocao, Operador_homepage operador_homepage, 
@@ -307,7 +320,9 @@ public class GUI_total extends JFrame {
 	}
 
 	
-
+	/**
+	 * Configura o temporizador e insere-o nos paineis
+	 */
 	private void comecarTemporizador(){
 
 		long data1 = System.currentTimeMillis();
@@ -368,6 +383,13 @@ public class GUI_total extends JFrame {
 		t.start();
 	}
 
+	/**
+	 * Método que grava no ficheiro sessaolog o registo das sessões, username, tempo de sessão, data e hora
+	 * @param username
+	 * @param temporizador
+	 * @param dataEHora
+	 * @param ficheiro
+	 */
 	private void gravarFicheiro(String username, Duration temporizador, String dataEHora, String ficheiro) {
 
 		try {
@@ -384,10 +406,20 @@ public class GUI_total extends JFrame {
 		}	
 	}
 
+	/**
+	 * 
+	 * @return username
+	 */
 	public static String getUsername() {
 		return username;
 	}
 
+	/**
+	 * Este método comunica com o login, configura os paineis que se escondem e aparecem conforme 
+	 * o username que fez login
+	 * @param role
+	 * @throws Exception
+	 */
 	public void loginEfetuado(int role) throws Exception {
 		inicio = Instant.now();
 		labelUsernameNavegaPaginas(login, homepage, gestor_cliente, gestor_operador, gestor_pacotes,
@@ -401,19 +433,20 @@ public class GUI_total extends JFrame {
 			areaClientePanel.setVisible(true);
 		}
 		comecarTemporizador();
-
-
-
 	}
 
-
+	/**
+	 * Faz reset às tabelas quando o botão voltar é premido 
+	 */
 	public void voltarBtAdminHomePage() {
 		gravarFicheiro(username, temporizador, dataEHoraDeLog, "sessaolog.txt");
+		
 		loginPanel.setVisible(true);
 		homepagePanel.setVisible(false);
 
 		gestor_cliente.getTable().setModel(new DefaultTableModel());	
 		gestor_cliente.getLblResultados().setText("Resultados: ");
+		
 		gestor_operador.getTable().setModel(new DefaultTableModel());
 		gestor_operador.getLblResultados().setText("Resultados: ");
 
@@ -424,31 +457,48 @@ public class GUI_total extends JFrame {
 		gestor_promocao.getTable().setModel(new DefaultTableModel());
 		gestor_promocao.getLblResultados().setText("Resultados: ");
 		gestor_promocao.getTextAreaDescricao().setText(" ");	
-		
-
 	}
 
-
+	/**
+	 * Configura quando o gerir clientes, na homepage Administrador é clicado. 
+	 * A homepage é escondida e o gestor cliente é mostrado.
+	 */
 	public void gerirAdminClientes() {
 		homepagePanel.setVisible(false);
 		gestor_clientePanel.setVisible(true);
 	}
 
+	/**
+	 * Configura quando o gerir operadores, na homepage Administrador é clicado. 
+	 * A homepage é escondida e o gestor operadores é mostrado.
+	 */
 	public void gerirAdminOperadores() {
 		homepagePanel.setVisible(false);
 		gestor_operadorPanel.setVisible(true);
 	}
 
+	/**
+	 * Configura quando o gerir promoções, na homepage Administrador é clicado. 
+	 * A homepage é escondida e o gestor de promoções é mostrado. 
+	 */
 	public void gerirAdminPromocoes() {
 		homepagePanel.setVisible(false);				
 		gestor_promocaoPanel.setVisible(true);
 	}
 
+	/**
+	 * Configura quando o gerir pacotes comerciais, na homepage Administrador é clicado. 
+	 * A homepage é escondida e o gestor de pacotes comerciais é mostrado. 
+	 */
 	public void gerirAdminPacotes() {
 		homepagePanel.setVisible(false);
 		gestor_pacotesPanel.setVisible(true);
 	}
 
+	/**
+	 * Configura quando o botão voltar, na homepage Administrador é clicado. 
+	 * A homepage é escondida e a janela de login é mostrada. 
+	 */
 	public void voltarBtOperadorHomePage() {
 		gravarFicheiro(username, temporizador, dataEHoraDeLog, "sessaolog.txt");
 		loginPanel.setVisible(true);
@@ -466,37 +516,49 @@ public class GUI_total extends JFrame {
 		operador_gerirClientes.getLblResultados().setText("Resultados: ");
 	}
 
+	/**
+	 * Configura quando o gerir clientes, na homepage Operador é clicado. 
+	 * A homepage é escondida e o gestor de clientes é mostrado. 
+	 */
 	public void gerirOperHomepage() {
 		operador_homepagePanel.setVisible(false);
 		operador_gerirClientesPanel.setVisible(true);
 	}
 
+	/**
+	 * Configura quando o gerir pacotes comerciais, na homepage Operador é clicado. 
+	 * A homepage é escondida e o gestor de pacotes comerciais é mostrado.  
+	 */
 	public void operador_visualizarPacote() {
 		operador_homepagePanel.setVisible(false);
 		operador_visualizarPacotePanel.setVisible(true);
 	}
 
+	/**
+	 * Configura quando o gerir promoções, na homepage Operador é clicado. 
+	 * A homepage é escondida e o gestor de promoções é mostrado. 
+	 */
 	public void operador_visualizarPromo() {
 		operador_homepagePanel.setVisible(false);
 		operador_visualizarPromoPanel.setVisible(true);
 	}
 
+	/**
+	 * @return username
+	 */
 	public String mandarUsername() {
 		return username;
 	}
 
 
 	/**
-	 * Botão Voltar para pagina do login do cliente
+	 * Botão terminar sessão de cliente
 	 */
 	public void btTerminarSessaoCliente() {
 		gravarFicheiro(username, temporizador, dataEHoraDeLog, "sessaolog.txt");
 		loginPanel.setVisible(true);
 		areaClientePanel.setVisible(false);
-	
 	}	
-	
-
 }
 
 
