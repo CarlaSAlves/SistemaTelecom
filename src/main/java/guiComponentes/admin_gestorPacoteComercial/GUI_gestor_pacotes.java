@@ -55,19 +55,40 @@ public class GUI_gestor_pacotes extends JFrame {
 	private JTextArea textAreaDescricao;
 
 	/**
-	 * 
+	 * Construtor que inicia com o método que configura o painel base e o método inicialize, 
+	 * que contém todos os métodos e elementos que compõem a página 
 	 */
 	public GUI_gestor_pacotes() {
+		
 		ativarNimbusLookAndFeel();
 		
-		contentPaneSetup();
+		setTitle("Pesquisa de Pacotes Comerciais");
+		setBounds(100, 30, 1400, 800);
+		contentPane = new JPanel();
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setFont(font);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		contentPane.setBackground(Color.WHITE);
+		
 		inicialize();
 	}
+	
+	/**
+	 * Contém o corpo da página
+	 */
 	protected void inicialize() {
 
-		
-
-		// Botões
+		/*
+		 *  Botões da página:
+		 *  
+		 *  Criar Pacote Comercial 
+		 *  Editar Pacote Comercial
+		 *  Desativar Pacote Comercial
+		 *  Visualizar Historico
+		 *  Voltar 
+		 *  TextArea Descrição
+		 */
 
 		JButton botaoCriarPacotes = botaoCriarPacotesSetup();
 		getContentPane().add(botaoCriarPacotes);
@@ -77,6 +98,9 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		botaoDesativarPacoteComercialSetup();
 		getContentPane().add(botaoDesativarPacoteComercial);
+		
+		botaoVisualizarHistoricoSetup();
+		contentPane.add(botaoVisualizarHistorico);
 
 		btVoltarGestorPacotesSetup();
 		getContentPane().add(btVoltarGestorPacotes);
@@ -88,9 +112,37 @@ public class GUI_gestor_pacotes extends JFrame {
 		textAreaDescricao.setEditable(false);
 		contentPane.add(textAreaDescricao);
 
-		// Tabela
+		/**
+		 *  Campos de Pesquisa:
+		 *  
+		 *  ID
+		 *  Nome
+		 *  Ativo
+		 *  Botão Pesquisar
+		 */ 
+		
+		JLabel lblCamposPesquisas = new JLabel("Campo de Pesquisa");
+		lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
+		lblCamposPesquisas.setBounds(98, 50, 294, 26);
+		contentPane.add(lblCamposPesquisas);
+		
+		painelPesquisa = new JPanel();
+		painelPesquisa.setLayout(null);
+		painelPesquisa.setBackground(Color.WHITE);
+		painelPesquisa.setBounds(98, 104, 453, 175);
+		contentPane.add(painelPesquisa);
 
-		JPanel panel = panelSetup();
+		painelPesquisa();
+
+		/**
+		 * Tabela de Resultados:
+		 * 
+		 * Tabela
+		 * ScrollPane
+		 * Label Resultados
+		 */
+
+		JPanel panel = paneldaTabelaSetup();
 		getContentPane().add(panel);
 
 		JScrollPane scrollPane = scrollPaneSetup();
@@ -99,48 +151,31 @@ public class GUI_gestor_pacotes extends JFrame {
 		tableSetup();
 		scrollPane.setViewportView(table);
 
-		lblResultadosSetup();
+		lblResultados = new JLabel("Resultados: ");
+		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 16));
+		lblResultados.setBounds(33, 6, 136, 25);
 		panel.add(lblResultados);
+	
+		/**
+		 * Footer: 
+		 * 
+		 * Imagem de rodapé
+		 * Temporizador
+		 * 
+		 */
 
-		botaoVisualizarHistoricoSetup();
-		contentPane.add(botaoVisualizarHistorico);
-
-
-		// Campo de pesquisa 
-
-				JLabel lblCamposPesquisas = new JLabel("Campo de Pesquisa");
-				lblCamposPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-				lblCamposPesquisas.setBounds(98, 50, 294, 26);
-				contentPane.add(lblCamposPesquisas);
-
-				painelPesquisa();
-
-
-		// Footer
-
-		JLabel lbFooter = lbFooterSetup();
+		JLabel lbFooter = new JLabel("");
+		lbFooter.setIcon(new ImageIcon(GUI_gestor_pacotes.class.getResource("/guiComponentes/img/Altran1.1.png")));
+		lbFooter.setBounds(599, 690, 213, 65);
 		contentPane.add(lbFooter);
 
-		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setBounds(1215, 698, 159, 18);
-		contentPane.add(lblUsernameLogged);
-
-		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 10));
-		lblTempoSessao = new JLabel();
-		lblTempoSessao.setBounds(1215, 717, 159, 18);
-		contentPane.add(lblTempoSessao);
-
-		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 10));
-		lblHoraSistema = new JLabel();
-		lblHoraSistema.setBounds(1215, 737, 159, 18);
-		contentPane.add(lblHoraSistema);
-
-		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
+		timerSetup();
 
 	}
+
+	/**
+	 * Configurar interface, look and feel Nimbus 
+	 */
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 			if ("Nimbus".equals(info.getName())) {
@@ -159,144 +194,78 @@ public class GUI_gestor_pacotes extends JFrame {
 			}
 		}
 	}
+	
 	/**
+	 * Configuração do botão criar Pacote Comercial.
+	 * Quando premido, abre a janela Dialog "CriarPacotesDialog", 
+	 * para preencher os dados do novo Pacote Comercial.
 	 * 
+	 * @return botaoCriarPacotes
+	 * @botaoCriarPacotes - abre janela CriarPacotesDialog
 	 */
-	protected void painelPesquisa() {
-		
-		{
-			painelPesquisa = new JPanel();
-			painelPesquisa.setLayout(null);
-			painelPesquisa.setBackground(Color.WHITE);
-			painelPesquisa.setBounds(98, 104, 453, 175);
-			contentPane.add(painelPesquisa);
-			{
-				labelID = new JLabel("ID");
-				labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-				labelID.setBounds(6, 15, 39, 18);
-				painelPesquisa.add(labelID);
+	private JButton botaoCriarPacotesSetup() {
+		JButton botaoCriarPacotes = new JButton("Criar Pacote Comercial");
+		botaoCriarPacotes.setBounds(609, 179, 218, 43);
+		botaoCriarPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		botaoCriarPacotes.setBackground(SystemColor.activeCaption);
+		botaoCriarPacotes.setFocusPainted(false);
+		botaoCriarPacotes.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+				CriarPacotesDialog dialog = new CriarPacotesDialog(GUI_gestor_pacotes.this);
+				dialog.setVisible(true);
+				dialog.setResizable(false);
 			}
-			{
-				textPesquisaID = new JTextField();
-				textPesquisaID.setColumns(10);
-				textPesquisaID.setBounds(72, 6, 371, 27);
-				painelPesquisa.add(textPesquisaID);
-			}
-			{
-				labelNome = new JLabel("Nome");
-				labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-				labelNome.setBounds(6, 44, 56, 27);
-				painelPesquisa.add(labelNome);
-			}
-			{
-				textFieldNome = new JTextField();
-				textFieldNome.setColumns(10);
-				textFieldNome.setBounds(72, 44, 371, 27);
-				painelPesquisa.add(textFieldNome);
-			}
-			{
-				checkBoxAtivo = new JCheckBox("Ativo");
-				checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-				checkBoxAtivo.setBackground(Color.WHITE);
-				checkBoxAtivo.setBounds(232, 78, 69, 24);
-				painelPesquisa.add(checkBoxAtivo);
-			}
-			{
-				btPesquisar = new JButton("Pesquisar");
-				btPesquisar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						try {
-							int id = 0;
-							String nome = null;
-							int ativo = checkBoxAtivo.isSelected() ? 1 : 0;
-
-							if (!textPesquisaID.getText().isBlank()) {
-								id = Integer.parseInt(textPesquisaID.getText().trim());
-							}
-
-							if (!textFieldNome.getText().isBlank()) {
-								nome = textFieldNome.getText().trim();
-							}
-
-							List<PacoteComercial> pacotesComerciais = null;
-
-							if ((id != 0) || (nome != null) || (ativo != 0)) {
-								pacotesComerciais = GestorDeDAO.getGestorDeDAO().pesquisaPacoteComercial(id,
-										nome, ativo);
-							} else {
-								pacotesComerciais = GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
-							}
-
-							PacoteComercialPesquisaModelTable model =
-									new PacoteComercialPesquisaModelTable(pacotesComerciais);
-							table.setModel(model);
-
-							numberRows = table.getRowCount();
-							lblResultados.setText("Resultados: " + numberRows);
-
-						} catch (Exception e1) {
-
-						}
-					}
-				});
-				btPesquisar.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-				btPesquisar.setBackground(SystemColor.activeCaption);
-				btPesquisar.setBounds(72, 121, 371, 27);
-				painelPesquisa.add(btPesquisar);
-			}
-		}
+		});
+		return botaoCriarPacotes;
 	}
-	private JLabel lbFooterSetup() {
-		JLabel lbFooter = new JLabel("");
-		lbFooter.setIcon(new ImageIcon(GUI_gestor_pacotes.class.getResource("/guiComponentes/img/Altran1.1.png")));
-		lbFooter.setBounds(599, 690, 213, 65);
-		return lbFooter;
-	}
+	
+	/**
+	 * Configuração do botão editar Pacote Comercial.
+	 * Quando premido, abre a janela Dialog "CriarPacotesDialog", 
+	 * com os campos pré-preenchidos com a informação anterior mas editáveis.
+	 * Se não está nenhum pacote selecionado, o botão não está selecionável, no entanto, 
+	 * existe a validação para dar uma mensagem de erro caso não haja um pacote selecionado.
+	 * @botaoEditarPacoteComercial - abre a CriarPacotesDialog editável
+	 */
+	private void botaoEditarPacoteComercialSetup() {
+		botaoEditarPacoteComercial = new JButton("Editar Pacote Comercial");
+		botaoEditarPacoteComercial.setBounds(609, 125, 218, 43);
+		botaoEditarPacoteComercial.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		botaoEditarPacoteComercial.setBackground(SystemColor.activeCaption);
+		botaoEditarPacoteComercial.setFocusPainted(false);
+		botaoEditarPacoteComercial.setEnabled(false);
+		botaoEditarPacoteComercial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 
-	private void botaoVisualizarHistoricoSetup() {
-		botaoVisualizarHistorico = new JButton("Visualizar Historico");
-		botaoVisualizarHistorico.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
-
 
 				if (row < 0) {
 					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
-							"Por favor selecione um Pacote Comercial", "Error", JOptionPane.ERROR_MESSAGE);
+							"Por favor selecione um Pacote Comercial", "Error",
+							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 
-				PacoteComercial pacoteComercial = (PacoteComercial) table.getValueAt(row, PacoteComercialPesquisaModelTable.OBJECT_COL);
-				List<HistoricoPacoteComercial> list;
+				PacoteComercial pacoteComercialTemp = (PacoteComercial) table.getValueAt(row,
+						PacoteComercialPesquisaModelTable.OBJECT_COL);
 
-				try {
-
-					list = GestorDeDAO.getGestorDeDAO().getHistoricoPacoteComercial(pacoteComercial.getId());
-					HistoricoPacoteComercialDialog dialogHistorico = new HistoricoPacoteComercialDialog();
-					dialogHistorico.preencherTable(pacoteComercial, list);
-					dialogHistorico.setVisible(true);
-					dialogHistorico.setResizable(false);
-
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-
+				CriarPacotesDialog dialog =	new CriarPacotesDialog(GUI_gestor_pacotes.this, pacoteComercialTemp, true);
+				dialog.setResizable(false);
+				dialog.setVisible(true);
 			}
 		});
-		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
-		botaoVisualizarHistorico.setBounds(609, 236, 218, 43);
-		botaoVisualizarHistorico.setEnabled(false);
 	}
-
-	private void btVoltarGestorPacotesSetup() {
-		btVoltarGestorPacotes = new JButton("Voltar");
-		btVoltarGestorPacotes.setBounds(6, 709, 119, 38);
-		btVoltarGestorPacotes.setFont(font);
-		btVoltarGestorPacotes.setBackground(SystemColor.activeCaption);
-		btVoltarGestorPacotes.setFocusPainted(false);
-	}
-
+	
+	/**
+	 * Configuração do botão desativar Pacote Comercial.
+	 * Quando premido, faz a confirmação da ação. 
+	 * Se o Pacote Comercial estiver ativo o botão indica "desativar", se o Pacote Comercial está desativo
+	 * o botão indica "ativar".
+	 * Se não está nenhum Pacote Comercial selecionado, o botão não está selecionável, no entanto, 
+	 * existe a validação para dar uma mensagem de erro caso não haja um Pacote Comercial selecionado.
+	 * @botaoDesativarPacoteComercial - botão dinâmico (ativo/desativo)
+	 */
 	private void botaoDesativarPacoteComercialSetup() {
 		botaoDesativarPacoteComercial = new JButton("Desativar Pacote Comercial");
 		botaoDesativarPacoteComercial.setBounds(609, 71, 218, 43);
@@ -361,56 +330,177 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		});
 	}
-
-	private void botaoEditarPacoteComercialSetup() {
-		botaoEditarPacoteComercial = new JButton("Editar Pacote Comercial");
-		botaoEditarPacoteComercial.setBounds(609, 125, 218, 43);
-		botaoEditarPacoteComercial.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoEditarPacoteComercial.setBackground(SystemColor.activeCaption);
-		botaoEditarPacoteComercial.setFocusPainted(false);
-		botaoEditarPacoteComercial.setEnabled(false);
-		botaoEditarPacoteComercial.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
+	
+	/**
+	 * Criação do botão Visualizar Histórico. 
+	 * Quando premido, desde que um Pacote Comercial esteja selecionado, abre uma tabela com o 
+	 * histórico das alterações feitas no Pacote Comercial selecionado. 
+	 * Se não está nenhum Pacote Comercial selecionado, o botão não está selecionável, no entanto, 
+	 * existe a validação para dar uma mensagem de erro caso não haja um Pacote Comercial selecionado. 
+	 * @botaoVisualizarHistorico - abre janela com histórico de operações
+	 */
+	private void botaoVisualizarHistoricoSetup() {
+		botaoVisualizarHistorico = new JButton("Visualizar Historico");
+		botaoVisualizarHistorico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
+
 
 				if (row < 0) {
 					JOptionPane.showMessageDialog(GUI_gestor_pacotes.this,
-							"Por favor selecione um Pacote Comercial", "Error",
-							JOptionPane.ERROR_MESSAGE);
+							"Por favor selecione um Pacote Comercial", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 
-				PacoteComercial pacoteComercialTemp = (PacoteComercial) table.getValueAt(row,
-						PacoteComercialPesquisaModelTable.OBJECT_COL);
+				PacoteComercial pacoteComercial = (PacoteComercial) table.getValueAt(row, PacoteComercialPesquisaModelTable.OBJECT_COL);
+				List<HistoricoPacoteComercial> list;
 
-				CriarPacotesDialog dialog =	new CriarPacotesDialog(GUI_gestor_pacotes.this, pacoteComercialTemp, true);
-				dialog.setResizable(false);
-				dialog.setVisible(true);
+				try {
+
+					list = GestorDeDAO.getGestorDeDAO().getHistoricoPacoteComercial(pacoteComercial.getId());
+					HistoricoPacoteComercialDialog dialogHistorico = new HistoricoPacoteComercialDialog();
+					dialogHistorico.preencherTable(pacoteComercial, list);
+					dialogHistorico.setVisible(true);
+					dialogHistorico.setResizable(false);
+
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+
 			}
 		});
+		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
+		botaoVisualizarHistorico.setBounds(609, 236, 218, 43);
+		botaoVisualizarHistorico.setEnabled(false);
+	}
+	
+	/**
+	 * Configuração do botão voltar.
+	 * Quando premido volta à homepage do Administrador.
+	 * @btVoltarGestorPacotes - volta à homepage de Administrador
+	 */
+	private void btVoltarGestorPacotesSetup() {
+		btVoltarGestorPacotes = new JButton("Voltar");
+		btVoltarGestorPacotes.setBounds(6, 709, 119, 38);
+		btVoltarGestorPacotes.setFont(font);
+		btVoltarGestorPacotes.setBackground(SystemColor.activeCaption);
+		btVoltarGestorPacotes.setFocusPainted(false);
 	}
 
-	private void botaoAtivarDinamico() {
+	/**
+	 * /**
+	 * Configuração das labels de pesquisa e do botão de pesquisa dinâmico. 
+	 * @labelID
+	 * @labelNome
+	 * @textPesquisaID
+	 * @textFieldNome
+	 * @checkBoxAtivo
+	 * @btPesquisar
+	 */
+	protected void painelPesquisa() {
 
-		try {
-			int row = table.getSelectedRow();
-			PacoteComercial pacoteComercial = (PacoteComercial) table.getValueAt(row, PacoteComercialPesquisaModelTable.OBJECT_COL);
-			if (pacoteComercial.isAtivo())
-				botaoDesativarPacoteComercial.setText("Desativar Pacote Comercial");
-			else
-				botaoDesativarPacoteComercial.setText("Ativar Pacote Comercial");
-		} catch  (Exception e) {
-			e.printStackTrace();
-		}
+		labelID = new JLabel("ID");
+		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		labelID.setBounds(6, 15, 39, 18);
+		painelPesquisa.add(labelID);
+		
+		labelNome = new JLabel("Nome");
+		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		labelNome.setBounds(6, 44, 56, 27);
+		painelPesquisa.add(labelNome);
+
+		textPesquisaID = new JTextField();
+		textPesquisaID.setColumns(10);
+		textPesquisaID.setBounds(72, 6, 371, 27);
+		painelPesquisa.add(textPesquisaID);
+
+		textFieldNome = new JTextField();
+		textFieldNome.setColumns(10);
+		textFieldNome.setBounds(72, 44, 371, 27);
+		painelPesquisa.add(textFieldNome);
+
+		// CheckBox Ativo 
+		
+		checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		checkBoxAtivo.setBackground(Color.WHITE);
+		checkBoxAtivo.setBounds(232, 78, 69, 24);
+		painelPesquisa.add(checkBoxAtivo);
+
+		btPesquisar = new JButton("Pesquisar");
+		btPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int id = 0;
+					String nome = null;
+					int ativo = checkBoxAtivo.isSelected() ? 1 : 0;
+
+					if (!textPesquisaID.getText().isBlank()) {
+						id = Integer.parseInt(textPesquisaID.getText().trim());
+					}
+
+					if (!textFieldNome.getText().isBlank()) {
+						nome = textFieldNome.getText().trim();
+					}
+
+					List<PacoteComercial> pacotesComerciais = null;
+
+					if ((id != 0) || (nome != null) || (ativo != 0)) {
+						pacotesComerciais = GestorDeDAO.getGestorDeDAO().pesquisaPacoteComercial(id,
+								nome, ativo);
+					} else {
+						pacotesComerciais = GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
+					}
+
+					PacoteComercialPesquisaModelTable model =
+							new PacoteComercialPesquisaModelTable(pacotesComerciais);
+					table.setModel(model);
+
+					numberRows = table.getRowCount();
+					lblResultados.setText("Resultados: " + numberRows);
+
+				} catch (Exception e1) {
+
+				}
+			}
+		});
+		btPesquisar.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		btPesquisar.setBackground(SystemColor.activeCaption);
+		btPesquisar.setBounds(72, 121, 371, 27);
+		painelPesquisa.add(btPesquisar);
 	}
-
-	private void lblResultadosSetup() {
-		lblResultados = new JLabel("Resultados: ");
-		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 16));
-		lblResultados.setBounds(33, 6, 136, 25);
+	
+	/**
+	 * Configuração do painel que contém tabela de resultados
+	 * @return painel da Tabela
+	 */
+	private JPanel paneldaTabelaSetup() {
+		JPanel painelTabela = new JPanel();
+		painelTabela.setBackground(Color.WHITE);
+		painelTabela.setBounds(66, 309, 1279, 369);
+		painelTabela.setFont(font);
+		painelTabela.setLayout(null);
+		return painelTabela;
 	}
-
+	
+	/**
+	 * ScrollPane da tabela.
+	 * @return scrollPane
+	 */
+	private JScrollPane scrollPaneSetup() {
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(33, 33, 1224, 330);
+		return scrollPane;
+	}
+	
+	/**
+	 * Configuração da tabela de resultados.
+	 * Configuração de quais os botões selecionáveis consoante 
+	 * exista um pacote comercial selecionado ou não. 
+	 * Aqui está também referenciado o método do botão dinâmico (ativar/desativar).
+	 * @table
+	 */
 	private void tableSetup() {
 		table = new JTable();
 		table.setRowSelectionAllowed(true);
@@ -445,50 +535,56 @@ public class GUI_gestor_pacotes extends JFrame {
 			}
 		});
 	}
+	
+	/**
+	 * Botão ativo/desativo dinâmico. 
+	 * Quando o pacote comercial está ativo o botão apresenta "desativar".
+	 * Quando o pacote comercial está desativo o botão apresenta "ativar".
+	 * @botaoDesativarOperador - botao dinâmico
+	 */
+	private void botaoAtivarDinamico() {
 
-	private JScrollPane scrollPaneSetup() {
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(33, 33, 1224, 330);
-		return scrollPane;
+		try {
+			int row = table.getSelectedRow();
+			PacoteComercial pacoteComercial = (PacoteComercial) table.getValueAt(row, PacoteComercialPesquisaModelTable.OBJECT_COL);
+			if (pacoteComercial.isAtivo())
+				botaoDesativarPacoteComercial.setText("Desativar Pacote Comercial");
+			else
+				botaoDesativarPacoteComercial.setText("Ativar Pacote Comercial");
+		} catch  (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	private JPanel panelSetup() {
-		JPanel painelTabela = new JPanel();
-		painelTabela.setBackground(Color.WHITE);
-		painelTabela.setBounds(66, 309, 1279, 369);
-		painelTabela.setFont(font);
-		painelTabela.setLayout(null);
-		return painelTabela;
+	/**
+	 * Configuração das labels de username e temporização.
+	 * @lblUsernameLogged apresenta o username que está logado
+	 * @lblTempoSessao apresenta o tempo de sessão desde o momento que faz login
+	 * @lblHoraSistema apresenta a hora atual do sistema 
+	 */
+	protected void timerSetup() {
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setBounds(1215, 698, 159, 18);
+		lblUsernameLogged.setText("Username:");
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 10));
+		contentPane.add(lblUsernameLogged);
+		
+		lblTempoSessao = new JLabel();
+		lblTempoSessao.setBounds(1215, 717, 159, 18);
+		lblTempoSessao.setText("Sessão:");
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 10));
+		contentPane.add(lblTempoSessao);
+		
+		lblHoraSistema = new JLabel();
+		lblHoraSistema.setBounds(1215, 737, 159, 18);
+		lblHoraSistema.setText("Data:");
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
+		contentPane.add(lblHoraSistema);
 	}
-
-	private JButton botaoCriarPacotesSetup() {
-		JButton botaoCriarPacotes = new JButton("Criar Pacote Comercial");
-		botaoCriarPacotes.setBounds(609, 179, 218, 43);
-		botaoCriarPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoCriarPacotes.setBackground(SystemColor.activeCaption);
-		botaoCriarPacotes.setFocusPainted(false);
-		botaoCriarPacotes.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent arg0) {
-				CriarPacotesDialog dialog = new CriarPacotesDialog(GUI_gestor_pacotes.this);
-				dialog.setVisible(true);
-				dialog.setResizable(false);
-			}
-		});
-		return botaoCriarPacotes;
-	}
-
-	private void contentPaneSetup() {
-		contentPane = new JPanel();
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		setTitle("Pesquisa de Pacotes Comerciais");
-		setFont(font);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 30, 1400, 800);
-		contentPane.setBackground(Color.WHITE);
-	}
-
+	
+	/**
+	 * Ao fazer alterações no pacote comercial a tabela é atualizada. 
+	 */
 	public void refreshPacotesTable() {
 
 		try {
@@ -504,41 +600,73 @@ public class GUI_gestor_pacotes extends JFrame {
 		}
 
 	}
-
+	
+	/**
+	 * Retorna a tabela
+	 * @return table
+	 */
 	public JTable getTable() {
 		return table;
 	}
 
+	/**
+	 * @return botão Voltar Gestor Pacotes
+	 */
 	public JButton btVoltarGestorPacotes() {
 		return btVoltarGestorPacotes;
 	}
 
-
-	public void setBtVoltarGestorPacotes(JButton btnNewButtonVoltar2) {
-		this.btVoltarGestorPacotes = btnNewButtonVoltar2;
+	/**
+	 * @return botao Voltar
+	 * @param botaoVoltar2
+	 */
+	public void setBtVoltarGestorPacotes(JButton botaoVoltar2) {
+		this.btVoltarGestorPacotes = botaoVoltar2;
+	}
+	
+	/**
+	 * @return o painel
+	 */
+	public JPanel returnPanel() {
+		return (JPanel) getContentPane();
 	}
 
+	/**
+	 * Configura a label usernameLogged 
+	 * @param username
+	 */
 	public void setUsernameLoggedIn(String username) {
 		lblUsernameLogged.setText("Username: " + username);
-
 	}
-
+	
+	/**
+	 * Configura a label de temporizador. 
+	 * @param temporizador
+	 */
 	public void setLblTempoSessao(Duration temporizador) {
 		lblTempoSessao.setText(
 				"Sessao: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart());;
 	}
 
+	/**
+	 * Configura a label de hora de sistema
+	 * @param agora
+	 */
 	public void setLblHoraSistema(String agora) {
-		lblHoraSistema.setText("Data: " + agora);
-
+		lblHoraSistema.setText("Data: " + agora)
 	}
 
-	public JPanel returnPanel() {
-		return (JPanel) getContentPane();
-	}
+	/**
+	 * @return lblResultados
+	 */
 	public JLabel getLblResultados() {
 		return lblResultados;
 	}
+	
+	/**
+	 * 
+	 * @return textAreaDescricao
+	 */
 	public JTextArea getTextAreaDescricao() {
 		return textAreaDescricao;
 	}

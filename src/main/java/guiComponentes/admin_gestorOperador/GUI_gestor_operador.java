@@ -153,13 +153,7 @@ public class GUI_gestor_operador extends JFrame {
 		
 		timerSetup();
 
-	} // end inicialize 
-
-	/**
-	 * 
-	 */
-	
-	
+	} 
 
 	/**
 	 * Configurar interface, look and feel Nimbus 
@@ -366,8 +360,8 @@ public class GUI_gestor_operador extends JFrame {
 	
 	/**
 	 * Configuração do botão voltar.
-	 * Quando premido volta à homepage do Operador.
-	 * @btVoltarGestorOperador - volta à homepage de Operador
+	 * Quando premido volta à homepage do Administrador.
+	 * @btVoltarGestorOperador - volta à homepage de Administrador
 	 */
 	private void btVoltarGestorOperadorSetup() {
 		btVoltarGestorOperador = new JButton("Voltar");
@@ -631,7 +625,6 @@ public class GUI_gestor_operador extends JFrame {
 	}
 
 	/**
-	/**
 	 * @return botão voltar
 	 */
 	public JButton btVoltarGestorOperador() {
@@ -661,7 +654,7 @@ public class GUI_gestor_operador extends JFrame {
 		lblUsernameLogged.setText("Username: " + username);
 
 	}
-
+	
 	/**
 	 * Configura a label de temporizador. 
 	 * @param temporizador
