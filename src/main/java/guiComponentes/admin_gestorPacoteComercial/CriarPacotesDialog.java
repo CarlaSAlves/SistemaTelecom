@@ -169,7 +169,7 @@ public class CriarPacotesDialog extends JDialog {
 	/**
 	 * Configuração da janela se for acionada pelo botão editar - apresenta os campos editáveis.
 	 * @param pacoteComercialPesquisaApp
-	 * @param pacoteComercialAntigo - vai buscar os valores atuis do pacote
+	 * @param pacoteComercialAntigo - vai buscar os valores atuais do pacote
 	 * @param modoEditar - acionado pelo botão editar
 	 */
 	public CriarPacotesDialog(GUI_gestor_pacotes pacoteComercialPesquisaApp, PacoteComercial pacoteComercialAntigo, boolean modoEditar ) {

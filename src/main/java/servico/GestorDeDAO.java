@@ -19,6 +19,7 @@ import data_acess_object_dao.PromocaoDAO;
 import historicos.HistoricoCliente;
 import historicos.HistoricoOperador;
 import historicos.HistoricoPacoteComercial;
+import historicos.HistoricoPromocoes;
 import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 import standard_value_object.PacoteCliente;
@@ -124,6 +125,11 @@ public class GestorDeDAO {
 	public List<HistoricoPacoteComercial> getHistoricoPacoteComercial(int id_pacote) throws Exception {
 		return pacoteComercialDAO.getHistoricoPacoteComercial(id_pacote);
 	}
+	
+	public List<HistoricoPromocoes> getHistoricoPromocao(int id_promocao) throws Exception {
+		return promocaoDAO.getHistoricoPromocao(id_promocao);
+	}
+	
 	public void criarFuncionario(Funcionario funcionario, Funcionario admin) throws Exception {
 		funcionarioDAO.criarFuncionario(funcionario, admin);
 	}
