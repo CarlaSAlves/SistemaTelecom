@@ -4,6 +4,11 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import standard_value_object.Funcionario;
 
+/**
+ * Esta classe configura a tabela de pesquisa, onde se mostra os clientes.
+ * 
+ */
+
 public class OperadorPesquisaModelTable extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
@@ -18,6 +23,11 @@ public class OperadorPesquisaModelTable extends AbstractTableModel {
 	
 	private List<Funcionario> funcionarios;
 	
+	/**
+	 * Criação das linhas e colunas da tabela, consoante o tamanho 
+	 * da lista de operadores dando-lhe o nome da coluna correspondente.
+	 * @param operadores
+	 */
 	public OperadorPesquisaModelTable(List<Funcionario> operadores) {
 		funcionarios = operadores;
 	}
@@ -38,6 +48,9 @@ public class OperadorPesquisaModelTable extends AbstractTableModel {
 		return nomesColunas[col];
 	}
 
+	/**
+	 * Dependendo das constantes, vai buscar os valores correspondentes ao operador.
+	 */
 	@Override
 	public Object getValueAt(int row, int col) {
 

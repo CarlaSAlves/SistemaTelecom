@@ -98,7 +98,6 @@ public class HistoricoClienteDialog extends JDialog {
 	}
 
 	/**
-	 * 
 	 * Renderer da tabela
 	 */
 	private final class DateTimeCellRenderer extends DefaultTableCellRenderer {
