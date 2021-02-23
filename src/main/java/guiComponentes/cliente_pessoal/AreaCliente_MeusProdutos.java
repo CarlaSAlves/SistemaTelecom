@@ -126,7 +126,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		//Imagem fundo
 
 		JLabel imagemDados = new JLabel("");
-		imagemDados.setBounds(6, -45, 1408, 586);
+		imagemDados.setBounds(0, -37, 1408, 586);
 		panelMeusProdutos.add(imagemDados);
 		imagemDados.setBackground(new Color(240, 240,240 ));
 		imagemDados.setIcon(new ImageIcon(Admin_GUI_homepage.class.getResource("/guiComponentes/img/AltranClientes.png")));

@@ -79,6 +79,11 @@ public class GUI_gestor_pacotes extends JFrame {
 	 */
 	protected void inicialize() {
 
+		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+		UIManager.put("OptionPane.noButtonText", "Não");
+		UIManager.put("OptionPane.okButtonText", "Okay");
+		UIManager.put("OptionPane.yesButtonText", "Sim");
+		
 		/*
 		 *  Botões da página:
 		 *  

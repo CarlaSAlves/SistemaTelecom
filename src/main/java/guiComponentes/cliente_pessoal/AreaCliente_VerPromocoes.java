@@ -91,7 +91,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		JLabel labelPromoDescricao = new JLabel("Descrição");
 		labelPromoDescricao.setForeground(Color.WHITE);
 		labelPromoDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		labelPromoDescricao.setBounds(319, 222, 89, 23);
+		labelPromoDescricao.setBounds(319, 223, 87, 23);
 		panelVerTodasPromo.add(labelPromoDescricao);
 
 		textFieldNome = new JTextField();

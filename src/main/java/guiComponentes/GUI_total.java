@@ -81,6 +81,10 @@ public class GUI_total extends JFrame {
 
 	public GUI_total() {
 
+		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+		UIManager.put("OptionPane.noButtonText", "Não");
+		UIManager.put("OptionPane.okButtonText", "Okay");
+		UIManager.put("OptionPane.yesButtonText", "Sim");
 
 		ativarNimbusLookAndFeel();
 
