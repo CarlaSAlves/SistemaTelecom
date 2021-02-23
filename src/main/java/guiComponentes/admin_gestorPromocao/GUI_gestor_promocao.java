@@ -68,6 +68,28 @@ public class GUI_gestor_promocao extends JFrame {
 
 		inicialize();
 	}
+	
+	/**
+	 * Configurar interface, look and feel Nimbus 
+	 */
+	private void ativarNimbusLookAndFeel() {
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+			if ("Nimbus".equals(info.getName())) {
+				try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
+	}
 
 	/**
 	 * Contém o corpo da página
@@ -172,28 +194,6 @@ public class GUI_gestor_promocao extends JFrame {
 		timerSetup();
 
 	}	
-
-	/**
-	 * Configurar interface, look and feel Nimbus 
-	 */
-	private void ativarNimbusLookAndFeel() {
-		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-			if ("Nimbus".equals(info.getName())) {
-				try {
-					UIManager.setLookAndFeel(info.getClassName());
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e) {
-					e.printStackTrace();
-				}
-				break;
-			}
-		}
-	}
 
 	/**
 	 * Configuração do botão criar Promoção.
