@@ -167,11 +167,13 @@ public class GUI_gestor_promocao extends JFrame {
 		JPanel panel = paneldaTabelaSetup();
 		getContentPane().add(panel);
 
+		tableSetup(); 
+		
 		JScrollPane scrollPane = scrollPaneSetup();
 		panel.add(scrollPane);
 		scrollPane.setViewportView(table);
 
-		tableSetup(); 
+		
 
 		lblResultados = new JLabel("Resultados: ");
 		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 16));
@@ -371,7 +373,7 @@ public class GUI_gestor_promocao extends JFrame {
 		});
 		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
-		botaoVisualizarHistorico.setBounds(609, 236, 218, 43);
+		botaoVisualizarHistorico.setBounds(609, 236, 231, 43);
 		botaoVisualizarHistorico.setEnabled(false);
 	}
 

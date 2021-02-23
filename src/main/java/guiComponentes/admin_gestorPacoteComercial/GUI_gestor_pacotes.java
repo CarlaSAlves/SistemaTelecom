@@ -149,12 +149,12 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		JPanel panel = paneldaTabelaSetup();
 		getContentPane().add(panel);
-
+		tableSetup();
 		JScrollPane scrollPane = scrollPaneSetup();
 		panel.add(scrollPane);
 		scrollPane.setViewportView(table);
 		
-		tableSetup();
+		
 
 		lblResultados = new JLabel("Resultados: ");
 		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 16));

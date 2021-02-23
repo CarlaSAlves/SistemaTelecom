@@ -279,7 +279,7 @@ public class PromocaoDAO {
 
 			String sql = "SELECT HistoricoPromocao.id_funcionario, HistoricoPromocao.id_promocao, HistoricoPromocao.descricao, "
 					+ "HistoricoPromocao.data_registo, admin.nome "
-					+ "FROM funcionario_log_promocao HistoricoPromocao, funcionario admin WHERE HistoricoPromocao.id_funcionario=admin.id AND HistoricoPromocao.id_pacote_comercial=" + id_promocao;
+					+ "FROM funcionario_log_promocao HistoricoPromocao, funcionario admin WHERE HistoricoPromocao.id_funcionario=admin.id AND HistoricoPromocao.id_promocao=" + id_promocao;
 
 			myRs = myStmt.executeQuery(sql);
 
