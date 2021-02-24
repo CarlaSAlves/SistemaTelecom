@@ -69,16 +69,9 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		setContentPane(panelVerTodasPromo);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1384, 586);
-<<<<<<< Updated upstream
 
-=======
-<<<<<<< HEAD
 		setResizable(false);
-		
-=======
 
->>>>>>> 0e2b372a8e5cb6f970ad6cf052d12005ebbb2629
->>>>>>> Stashed changes
 		// Labels e textFieldNome da página 
 
 		JLabel labelVerPromo = new JLabel("Ver todas as Promoções");
