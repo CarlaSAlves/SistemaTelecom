@@ -1,30 +1,30 @@
 package guiComponentes.cliente_pessoal;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.SystemColor;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import guiComponentes.Admin_GUI_homepage;
 import servico.GestorDeDAO;
-import standard_value_object.Cliente;
 import standard_value_object.PacoteComercial;
 import javax.swing.JTextField;
+import javax.swing.ListCellRenderer;
 import javax.swing.JScrollBar;
 
+@SuppressWarnings("serial")
 public class AreaCliente_VerPacotes extends JFrame {
 
 	//private JPanel panel;
@@ -62,6 +62,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	private void initialize() throws Exception {
 		
 		/**
@@ -103,62 +104,50 @@ public class AreaCliente_VerPacotes extends JFrame {
 		textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textFieldNome.setEditable(false);
 		textFieldNome.setBounds(400, 169, 300, 31);
-		panelVerTodosPacotes.add(textFieldNome);
 		textFieldNome.setColumns(10);
+		panelVerTodosPacotes.add(textFieldNome);
+		
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
-		textArea.setFont(new Font("Dubai Light", Font.PLAIN, 14));
-		textArea.setBounds(400, 222, 300, 104);
+		textArea.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		textArea.setBounds(400, 222, 300, 114);
 		panelVerTodosPacotes.add(textArea);
 		
 		// Jlist e ScrollBar
 		
-		String[] pacotes = new String[GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais().size()];
-		int i = 0;
-		for (PacoteComercial pacote : GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais()) {
-			if (pacote.isAtivo()) {
-			pacotes[i] = pacote.getNome();
-			i++;
-			}
-		}
+		List<PacoteComercial> pacotes = GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
 		
+		DefaultListModel model = new DefaultListModel();	
+		model.addAll(pacotes);
+		JList listVerPacote = new JList(model);
+	
+		ListCellRenderer renderer = new RendererPacote();
+		listVerPacote.setCellRenderer(renderer);
+		listVerPacote.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		listVerPacote.setBounds(66, 120, 226, 362);
+		listVerPacote.setLayoutOrientation( JList.HORIZONTAL_WRAP );
+		listVerPacote.setVisibleRowCount( -1 ); // -1 sig q ele é variavel
+		listVerPacote.setFixedCellHeight( 24 );
+		listVerPacote.setFixedCellWidth( 226 );
+	
 		
-		JList<String> listVerPacotes = new JList<String>(pacotes);
-		listVerPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 14));
-		listVerPacotes.setBounds(66, 120, 226, 362);
-		listVerPacotes.setSelectedIndex(0);
-		listVerPacotes.setForeground(Color.BLACK);
-		listVerPacotes.setLayoutOrientation( JList.HORIZONTAL_WRAP );
-		listVerPacotes.setVisibleRowCount( -1 ); // -1 sig q ele é variavel
-
-		listVerPacotes.setFixedCellHeight( 24 );
-		listVerPacotes.setFixedCellWidth( 226 );
-		panelVerTodosPacotes.add(listVerPacotes);
-		
-		String texto = listVerPacotes.getSelectedValue();
-		textFieldNome.setText((texto));
-		textArea.setText(texto);
-		
-		listVerPacotes.addListSelectionListener(new ListSelectionListener() {
-		
+		listVerPacote.addListSelectionListener(new ListSelectionListener() {
+			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				if (!e.getValueIsAdjusting()) {
-					String texto = listVerPacotes.getSelectedValue();
-					try {
-						textFieldNome.setText((texto));
-						textArea.setText(texto);
-					} catch (Exception ex) {
-
-					}
-					return;
-				}
+				PacoteComercial pacote = (PacoteComercial) listVerPacote.getSelectedValue();
+				textFieldNome.setText(pacote.getNome());
+				textArea.setText(pacote.getDescricao());	
 				
 			}
 		});
 		
+
+		panelVerTodosPacotes.add(listVerPacote);
+
+
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(66, 120, 226, 362);
 		panelVerTodosPacotes.add(scrollBar);
@@ -200,6 +189,29 @@ public class AreaCliente_VerPacotes extends JFrame {
 			}
 		}
 	}
+	
+private class RendererPacote implements ListCellRenderer<PacoteComercial> {
+		
+		private JLabel texto;
+		
+		public RendererPacote() {
+			texto = new JLabel();
+			texto.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+			texto.setOpaque( true );
+			texto.setForeground(Color.black);
+	
+		}
+		
+		public Component getListCellRendererComponent(JList<? extends PacoteComercial> list, PacoteComercial value, int index,
+				boolean isSelected, boolean cellHasFocus) {
+			texto.setText( value.getNome());
+			texto.setBackground(isSelected ? new Color(253, 132, 67) : Color.white );
+			texto.setForeground(isSelected ? Color.white : Color.black);
+			
+			
+			return texto;
+		}
+}
 
 
 	public JPanel returnAreaClienteVerPacotes() {

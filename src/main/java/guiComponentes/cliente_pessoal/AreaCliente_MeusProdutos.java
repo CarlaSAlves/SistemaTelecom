@@ -7,6 +7,11 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -154,7 +159,10 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		public Component getListCellRendererComponent(JList<? extends Promocao> list, Promocao value, int index,
 				boolean isSelected, boolean cellHasFocus) {
 			display.setText("  " + value.getNome());
+			display.isFocusable();
+
 			return display;
+
 		}
 	}
 
@@ -198,12 +206,12 @@ public class AreaCliente_MeusProdutos extends JFrame {
 			if(cliente != null) {
 
 				if( cliente.getId_pacote_cliente()!= 0) {
-					
+
 					textAreaNomePacote.setVisible(true);
 					textAreaDescricaoPacote.setVisible(true);
 					lblSeuPacote.setText("Pacote Comercial");
 					btnPesquisarPacotes.setVisible(false);
-					
+
 					PacoteComercial pacoteCliente = GestorDeDAO.getGestorDeDAO().getPacoteClienteInfo(cliente.getId_pacote_cliente());
 					textAreaNomePacote.setText(pacoteCliente.getNome());
 					textAreaDescricaoPacote.setText(pacoteCliente.getDescricao());
@@ -211,12 +219,12 @@ public class AreaCliente_MeusProdutos extends JFrame {
 					List<Promocao> promocoesCliente = GestorDeDAO.getGestorDeDAO().getPacoteClientePromocaoInfo(cliente.getId_pacote_cliente());
 
 					if(promocoesCliente.size() > 0 ) {
-						
+
 						textAreaDescricaoPromocoes.setVisible(true);
 						comboBoxPromocoes.setVisible(true);
 						lblAsSuasPromoces.setText("Promoções");
 						btnPesquisarPromocoes.setVisible(false);
-						
+
 						comboBoxPromocoes.setRenderer(new PromocaoComboRenderer());
 						for(Promocao pro : promocoesCliente) {
 							comboBoxPromocoes.addItem(pro);
@@ -230,7 +238,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 								textAreaDescricaoPromocoes.setText(promocao.getDescricao());
 							}
 						});
-						
+
 					} else {
 						textAreaDescricaoPromocoes.setVisible(false);
 						comboBoxPromocoes.setVisible(false);
@@ -258,7 +266,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		}
 
 	}
-	
+
 	public JButton getBtnPesquisarPacotes() {
 		return btnPesquisarPacotes;
 	}
