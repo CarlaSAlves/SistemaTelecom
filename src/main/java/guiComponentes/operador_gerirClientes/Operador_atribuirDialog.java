@@ -67,33 +67,8 @@ public class Operador_atribuirDialog extends JDialog {
 	}
 
 	/**
-	 * 
-	 * @param operador_gerirClientes
-	 * @param promocoes
-	 * @param cliente
-	 * @param modoPromocao
-	 */
-	public Operador_atribuirDialog( Operador_gerirClientes operador_gerirClientes, List<Promocao> promocoes, Cliente cliente, boolean modoPromocao) {
-		this();
-		this.operador_gerirClientes = operador_gerirClientes;
-		this.cliente = cliente;
-		this.modoPromocao = modoPromocao;
-		setTitle("Atribuir Promoção");
-		if(modoPromocao) {
-			labelPacote.setText("Selecione a Promoção que deseja atribuir: ");
-			comboBoxPromo = new JComboBox<Promocao>();
-			comboBoxPromo.setRenderer(new PromocaoComboRenderer());
-			comboBoxPromo.setBounds(10, 47, 414, 25);
-			contentPanel.add(comboBoxPromo);
-			for(Promocao p : promocoes) {
-				if(p.isAtiva()) {
-					comboBoxPromo.addItem(p);
-				}
-			}
-		}
-	}
-
-	/**
+	 * Atribui um pacote comercial ou uma promoção ao cliente
+	 * Validações para o botão ok 
 	 * 
 	 */
 	public Operador_atribuirDialog() {
@@ -106,7 +81,7 @@ public class Operador_atribuirDialog extends JDialog {
 
 		labelPacote = new JLabel();
 		labelPacote.setForeground(Color.BLACK);
-		labelPacote.setFont(new Font("Dialog", Font.BOLD, 13));
+		labelPacote.setFont(new Font("Dubai Light", Font.BOLD, 13));
 		labelPacote.setBounds(10, 11, 414, 25);
 		setResizable(false);
 
@@ -187,14 +162,44 @@ public class Operador_atribuirDialog extends JDialog {
 			}
 		}
 	}
+	
+	/**
+	 * Configuração para o modo promoção 
+	 * @param operador_gerirClientes
+	 * @param promocoes
+	 * @param cliente
+	 * @param modoPromocao
+	 */
+	public Operador_atribuirDialog( Operador_gerirClientes operador_gerirClientes, List<Promocao> promocoes, Cliente cliente, boolean modoPromocao) {
+		this();
+		this.operador_gerirClientes = operador_gerirClientes;
+		this.cliente = cliente;
+		this.modoPromocao = modoPromocao;
+		setTitle("Atribuir Promoção");
+		if(modoPromocao) {
+			labelPacote.setText("Selecione a Promoção que deseja atribuir: ");
+			comboBoxPromo = new JComboBox<Promocao>();
+			comboBoxPromo.setRenderer(new PromocaoComboRenderer());
+			comboBoxPromo.setBounds(10, 47, 414, 25);
+			contentPanel.add(comboBoxPromo);
+			for(Promocao p : promocoes) {
+				if(p.isAtiva()) {
+					comboBoxPromo.addItem(p);
+				}
+			}
+		}
+	}
 
+	/**
+	 * Cria o renderer para a comboBox de pacotes comerciais
+	 */
 	private class PacoteComboRenderer implements ListCellRenderer<PacoteComercial> {
 
 		private JLabel display;
 
 		PacoteComboRenderer(){
 			display = new JLabel();
-			display.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			display.setFont(new Font("Dubai Light", Font.PLAIN, 11));
 			display.setOpaque( true );
 		}
 
@@ -206,17 +211,23 @@ public class Operador_atribuirDialog extends JDialog {
 		}
 	}
 
+	/**
+	 * @param username
+	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
+	/**
+	 * Cria o renderer para a comboBox de promoções
+	 */
 	private class PromocaoComboRenderer implements ListCellRenderer<Promocao> {
 
 		private JLabel display;
 
 		PromocaoComboRenderer(){
 			display = new JLabel();
-			display.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			display.setFont(new Font("Dubai Light", Font.PLAIN, 11));
 			display.setOpaque( true );
 		}
 

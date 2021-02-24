@@ -65,20 +65,20 @@ public class GUI_login extends JFrame {
 		JLabel labelLogin = new JLabel("Username");
 		labelLogin.setBounds(209, 383, 131, 27);
 		labelLogin.setForeground(Color.WHITE);
-		labelLogin.setFont(new Font("SansSerif", Font.BOLD, 20));
+		labelLogin.setFont(new Font("Dubai Light", Font.BOLD, 20));
 		getContentPane().add(labelLogin);
 		setResizable(false);
 		labelPass = new JLabel("Password");
 		labelPass.setBounds(209, 430, 138, 27);
 		labelPass.setForeground(Color.WHITE);
-		labelPass.setFont(new Font("SansSerif", Font.BOLD, 20));
+		labelPass.setFont(new Font("Dubai Light", Font.BOLD, 20));
 		getContentPane().add(labelPass);
 
 		// textField de username 
 
 		textFieldUser = new JTextField();
 		textFieldUser.setBounds(329, 383, 193, 27);
-		textFieldUser.setFont(new Font("Dialog", Font.PLAIN, 13));
+		textFieldUser.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		getContentPane().add(textFieldUser);
 		textFieldUser.setColumns(10);
 		textFieldUser.addFocusListener(new FocusListener() {
@@ -120,7 +120,7 @@ public class GUI_login extends JFrame {
 
 		passwordField = new JPasswordField();
 		passwordField.setBounds(329, 430, 193, 27);
-		passwordField.setFont(new Font("Dialog", Font.PLAIN, 13));
+		passwordField.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		getContentPane().add(passwordField);	
 		passwordField.addKeyListener(new KeyListener() {
 
@@ -152,7 +152,7 @@ public class GUI_login extends JFrame {
 		labelConfm.setBounds(359, 578, 251, 18);
 		labelConfm.setForeground(new Color(70,74,101));
 		labelConfm.setVisible(false);
-		labelConfm.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		labelConfm.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		getContentPane().add(labelConfm);
 
 		// icon de user 
@@ -170,7 +170,7 @@ public class GUI_login extends JFrame {
 		btLogin.setBackground(new Color(240, 240, 240));
 		btLogin.setToolTipText("Carregue para fazer login");
 		btLogin.setFocusPainted(false);
-		btLogin.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		btLogin.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		btLogin.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -203,7 +203,7 @@ public class GUI_login extends JFrame {
 		btnSair.setToolTipText("Carregue para fazer signout");
 		btnSair.setBounds(375, 520, 104, 33);
 		btnSair.setForeground(Color.BLACK);
-		btnSair.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		btnSair.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		btnSair.setFocusPainted(false);
 		btnSair.setBackground(SystemColor.menu);
 		panel.add(btnSair);

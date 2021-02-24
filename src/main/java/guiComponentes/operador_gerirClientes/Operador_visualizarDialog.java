@@ -46,7 +46,11 @@ public class Operador_visualizarDialog extends JDialog {
 		labelTitulo.setText("Pacote Comercial do Cliente: " + nome);
 	}
 
-
+	/**
+	 * @param promocoes
+	 * @param modoPromocao
+	 * @param nome
+	 */
 	@SuppressWarnings("unchecked")
 	public Operador_visualizarDialog(List<Promocao> promocoes, boolean modoPromocao, String nome) {
 		this();
@@ -80,54 +84,54 @@ public class Operador_visualizarDialog extends JDialog {
 		}
 	}
 
-
+	/**
+	 * 
+	 */
 	public Operador_visualizarDialog() {
+		
 		setBounds(500, 300, 549, 300);
 		setResizable(false);
+		setTitle("");
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setTitle("");
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-
-		textAreaDescricao = new JTextArea();
-		textAreaDescricao.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		textAreaDescricao.setBounds(86, 92, 437, 125);
-		textAreaDescricao.setEditable(false);
-		contentPanel.add(textAreaDescricao);
 
 		labelTitulo = new JLabel("");
 		labelTitulo.setForeground(Color.BLACK);
 		labelTitulo.setFont(new Font("Dubai Light", Font.BOLD, 13));
 		labelTitulo.setBounds(10, 11, 513, 32);
-
 		contentPanel.add(labelTitulo);
-
-		textFieldNome = new JTextField();
-		textFieldNome.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		textFieldNome.setBounds(86, 54, 437, 28);
-		textFieldNome.setEditable(false);
-		contentPanel.add(textFieldNome);
-		textFieldNome.setColumns(10);
-
+		
 		JLabel lblNome = new JLabel("Nome");
-		lblNome.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblNome.setBounds(10, 53, 85, 28);
 		contentPanel.add(lblNome);
 
 		JLabel lblDescricao = new JLabel("Descrição");
-		lblDescricao.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblDescricao.setBounds(10, 86, 87, 28);
 		contentPanel.add(lblDescricao);
 
-
-		{
+		textFieldNome = new JTextField();
+		textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 11));
+		textFieldNome.setBounds(86, 54, 437, 28);
+		textFieldNome.setEditable(false);
+		contentPanel.add(textFieldNome);
+		textFieldNome.setColumns(10);
+		
+		textAreaDescricao = new JTextArea();
+		textAreaDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 11));
+		textAreaDescricao.setBounds(86, 92, 437, 125);
+		textAreaDescricao.setEditable(false);
+		contentPanel.add(textAreaDescricao);
+		
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(Color.WHITE);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
+			
 				JButton cancelButton = new JButton("Sair");
 				cancelButton.setActionCommand("Cancelar");
 				cancelButton.addActionListener(new ActionListener() {
@@ -138,17 +142,16 @@ public class Operador_visualizarDialog extends JDialog {
 					}
 				});
 				buttonPane.add(cancelButton);
-			}
 		}
 	}
 
-	private class PromocaoComboRenderer implements ListCellRenderer<Promocao> {
+	class PromocaoComboRenderer implements ListCellRenderer<Promocao> {
 
 		private JLabel display;
 
 		PromocaoComboRenderer(){
 			display = new JLabel();
-			display.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			display.setFont(new Font("Dubai Light", Font.PLAIN, 11));
 			display.setOpaque( true );
 		}
 
@@ -159,7 +162,4 @@ public class Operador_visualizarDialog extends JDialog {
 			return display;
 		}
 	}
-
-}
-
 
