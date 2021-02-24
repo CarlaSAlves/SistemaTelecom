@@ -65,7 +65,7 @@ public class Operador_homepage extends JFrame {
 		JLabel lblPoesia = new JLabel("Portal do Operador");
 		lblPoesia.setBounds(161, 117, 415, 33);
 		lblPoesia.setForeground(new Color(255, 205, 30));
-		lblPoesia.setFont(new Font("Dubai", Font.BOLD, 40));
+		lblPoesia.setFont(new Font("Dubai Light", Font.BOLD, 40));
 		pane.add(lblPoesia);
 
 		labelBoasVindas = new JLabel("");
