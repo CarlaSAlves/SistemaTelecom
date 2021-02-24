@@ -86,7 +86,8 @@ public class Admin_GUI_homepage extends JFrame {
 		lblTitulo.setForeground(new Color(70,74,101));
 		lblTitulo.setFont(new Font("Dubai", Font.BOLD, 40));
 		getContentPane().add(lblTitulo);
-
+		setResizable(false);
+		
 		/*
 		 * Botões:
 		 * 

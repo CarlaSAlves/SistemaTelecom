@@ -7,6 +7,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -44,29 +46,29 @@ public class Operador_removerPromoDialog extends JDialog {
 	public Operador_removerPromoDialog(Operador_gerirClientes operador_gerirClientes, List<Promocao> promocoes, Cliente cliente) {
 		this.operador_gerirClientes = operador_gerirClientes;
 		this.cliente = cliente;
-		
+
 		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
 		UIManager.put("OptionPane.noButtonText", "Não");
 		UIManager.put("OptionPane.okButtonText", "Okay");
 		UIManager.put("OptionPane.yesButtonText", "Sim");
-		
+
 		setBounds(500, 300, 450, 170);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
+		setResizable(false);
 		setTitle("Remover Promoção");
-		
-			
+
+
 		labelPacote = new JLabel();
 		labelPacote.setForeground(Color.BLACK);
 		labelPacote.setFont(new Font("Dialog", Font.BOLD, 13));
 		labelPacote.setBounds(10, 11, 414, 25);
 		contentPanel.add(labelPacote);
 		labelPacote.setText("Selecione a Promoção que deseja remover: ");
-		
+
 		comboBoxPromo = new JComboBox<Promocao>();
 		comboBoxPromo.setRenderer(new PromocaoComboRenderer());
 		comboBoxPromo.setBounds(10, 47, 414, 25);
@@ -76,7 +78,7 @@ public class Operador_removerPromoDialog extends JDialog {
 				comboBoxPromo.addItem(p);
 			}
 		}
-		
+
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -90,29 +92,29 @@ public class Operador_removerPromoDialog extends JDialog {
 						Cliente clienteTemp = null;
 						Funcionario func = null;
 						PacoteCliente pacoteCliente = null;
-						
-						
+
+
 						try {
-							
+
 							clienteTemp = cliente;
 							func = GestorDeDAO.getGestorDeDAO().pesquisaFuncionarioLogin(username);
 							Promocao promocao = (Promocao) comboBoxPromo.getSelectedItem();
-							
+
 							GestorDeDAO.getGestorDeDAO().removerPromocao(clienteTemp.getId_pacote_cliente(), promocao.getId(), func, clienteTemp);
-						
+
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
-						
+
 						JOptionPane.showMessageDialog(Operador_removerPromoDialog.this,
 								"Promoção Removida com Sucesso!", "Promoção Removida", JOptionPane.INFORMATION_MESSAGE);
-						
+
 						setVisible(false);
 						dispose();
-						
+
 					}
 				});
-				
+
 				buttonPane.add(okButton);
 			}
 			{
@@ -124,7 +126,7 @@ public class Operador_removerPromoDialog extends JDialog {
 						dispose();
 					}
 				});
-				
+
 				buttonPane.add(cancelButton);
 			}
 		}
@@ -147,5 +149,5 @@ public class Operador_removerPromoDialog extends JDialog {
 			return display;
 		}
 	}
-	
+
 }

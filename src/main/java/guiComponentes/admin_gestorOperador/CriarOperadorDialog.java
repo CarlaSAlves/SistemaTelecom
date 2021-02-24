@@ -70,6 +70,7 @@ public class CriarOperadorDialog extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.text);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setResizable(false);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 
 		inicialize();

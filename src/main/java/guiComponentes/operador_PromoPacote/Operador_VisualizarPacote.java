@@ -43,22 +43,6 @@ public class Operador_VisualizarPacote extends JFrame {
 	private JCheckBox checkBoxAtivo;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Operador_VisualizarPacote frame = new Operador_VisualizarPacote();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public Operador_VisualizarPacote() {
@@ -79,7 +63,7 @@ public class Operador_VisualizarPacote extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
 		contentPane.setBackground(Color.WHITE);
-
+		setResizable(false);
 		// Botões
 
 		btVoltarOperadorHomepageSetup();

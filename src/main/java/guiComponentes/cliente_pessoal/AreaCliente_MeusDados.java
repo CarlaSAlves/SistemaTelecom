@@ -45,9 +45,14 @@ public class AreaCliente_MeusDados extends JFrame {
 	private boolean nomeAlterado = false, nifAlterado = false, 
 			moradaAlterado = false, todosDadosValidos = false, 
 			loginAlterado = false, passwordCorreta = false, passwordNovaIgual = false;
-	private String username;
+	private JLabel lblNovaPassword_1;
+	private JPasswordField passwordField_1;
+	private JLabel lblNovaPassword_2;
+	private JPasswordField passwordField_2;
+	private JLabel lblNovaPass_2;
+	private JLabel lblNovaPassConfirm;
 
-	/**
+		/**
 	 * Create the frame.
 	 * @throws Exception 
 	 */
@@ -73,6 +78,8 @@ public class AreaCliente_MeusDados extends JFrame {
 		setContentPane(panelMeusDados);
 		panelMeusDados.setLayout(null);
 
+		setResizable(false);
+		
 		panelDados = new JPanel();
 		panelDados.setBounds(10, 11, 390, 495);
 		panelDados.setBackground(new Color(0, 178, 188));
