@@ -71,23 +71,7 @@ public class AreaCliente_MeusDados extends JFrame {
 	private JLabel lblNovaPass_2;
 	private JLabel lblNovaPassConfirm;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AreaCliente_MeusProdutos frame = new AreaCliente_MeusProdutos();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
+		/**
 	 * Create the frame.
 	 * @throws Exception 
 	 */
@@ -110,6 +94,8 @@ public class AreaCliente_MeusDados extends JFrame {
 		setContentPane(panelMeusDados);
 		panelMeusDados.setLayout(null);
 
+		setResizable(false);
+		
 		panelDados = new JPanel();
 		panelDados.setBounds(10, 11, 390, 495);
 		panelDados.setBackground(new Color(0, 178, 188));

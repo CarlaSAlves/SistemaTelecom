@@ -54,23 +54,6 @@ public class Operador_gerirClientes extends JFrame {
 	private JCheckBox checkBoxAtivo;
 
 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Operador_gerirClientes frame = new Operador_gerirClientes();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Construtor que inicia com o método que configura o painel base e o método inicialize, 
 	 * que contém todos os métodos e elementos que compõem a página 
@@ -115,7 +98,7 @@ public class Operador_gerirClientes extends JFrame {
 		painelPesquisa.setBackground(Color.WHITE);
 		painelPesquisa.setBounds(96, 77, 453, 221);
 		pane.add(painelPesquisa);
-
+		setResizable(false);
 		labelsPesquisaSetup();
 		textFieldsPesquisaSetup();
 		lblCamposPesquisasSetup();

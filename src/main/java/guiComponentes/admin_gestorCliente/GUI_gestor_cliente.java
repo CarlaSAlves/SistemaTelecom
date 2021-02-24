@@ -60,7 +60,7 @@ public class GUI_gestor_cliente extends JFrame {
 		setFont(font);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane.setBackground(Color.WHITE);
-
+		setResizable(false);
 		inicialize();
 	}
 

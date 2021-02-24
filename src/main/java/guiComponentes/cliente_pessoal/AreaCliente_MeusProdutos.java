@@ -69,7 +69,8 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		panelMeusProdutos.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(panelMeusProdutos);
 		panelMeusProdutos.setLayout(null);
-
+		setResizable(false);
+		
 		// Área Pacote Comercial
 
 		lblSeuPacote = new JLabel("Pacote Comercial");

@@ -83,6 +83,7 @@ public class Operador_visualizarDialog extends JDialog {
 
 	public Operador_visualizarDialog() {
 		setBounds(500, 300, 549, 300);
+		setResizable(false);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

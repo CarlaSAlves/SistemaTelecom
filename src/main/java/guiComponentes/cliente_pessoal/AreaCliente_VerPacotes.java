@@ -32,22 +32,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 	private JPanel panelVerTodosPacotes;
 	private JTextField textFieldNome;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AreaCliente_VerPacotes frame = new AreaCliente_VerPacotes();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
 	 * @throws Exception 
@@ -79,7 +64,15 @@ public class AreaCliente_VerPacotes extends JFrame {
 		setContentPane(panelVerTodosPacotes);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1384, 586);
+<<<<<<< Updated upstream
 
+=======
+<<<<<<< HEAD
+		setResizable(false);
+=======
+
+>>>>>>> 0e2b372a8e5cb6f970ad6cf052d12005ebbb2629
+>>>>>>> Stashed changes
 
 		// Labels e textFieldNome da página 
 

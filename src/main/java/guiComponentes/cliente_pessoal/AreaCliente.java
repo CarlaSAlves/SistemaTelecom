@@ -39,21 +39,6 @@ public class AreaCliente extends JFrame {
 	private JTabbedPane tabbedPane;
 
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AreaCliente frame = new AreaCliente(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 
 	/**
@@ -120,6 +105,7 @@ public class AreaCliente extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
 		getContentPane().setLayout(null);
+		setResizable(false);
 
 		/* Cabeçalho */
 		//  Label portal cliente

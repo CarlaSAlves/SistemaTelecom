@@ -108,7 +108,7 @@ public class Operador_atribuirDialog extends JDialog {
 		labelPacote.setForeground(Color.BLACK);
 		labelPacote.setFont(new Font("Dialog", Font.BOLD, 13));
 		labelPacote.setBounds(10, 11, 414, 25);
-
+		setResizable(false);
 
 
 		contentPanel.add(labelPacote);

@@ -57,7 +57,7 @@ public class CriarPromocaoDialog extends JDialog {
 		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-
+		setResizable(false);
 		inicialize();
 
 	}

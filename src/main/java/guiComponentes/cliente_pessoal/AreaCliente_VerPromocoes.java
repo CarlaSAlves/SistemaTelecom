@@ -36,21 +36,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 	private JPanel panelVerTodasPromo;
 	private JTextField textFieldNome;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AreaCliente_VerPromocoes frame = new AreaCliente_VerPromocoes();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
@@ -83,7 +69,16 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		setContentPane(panelVerTodasPromo);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1384, 586);
+<<<<<<< Updated upstream
 
+=======
+<<<<<<< HEAD
+		setResizable(false);
+		
+=======
+
+>>>>>>> 0e2b372a8e5cb6f970ad6cf052d12005ebbb2629
+>>>>>>> Stashed changes
 		// Labels e textFieldNome da página 
 
 		JLabel labelVerPromo = new JLabel("Ver todas as Promoções");
