@@ -64,7 +64,7 @@ public class Operador_removerPromoDialog extends JDialog {
 
 		labelPacote = new JLabel();
 		labelPacote.setForeground(Color.BLACK);
-		labelPacote.setFont(new Font("Dialog", Font.BOLD, 13));
+		labelPacote.setFont(new Font("Dubai Light", Font.BOLD, 13));
 		labelPacote.setBounds(10, 11, 414, 25);
 		contentPanel.add(labelPacote);
 		labelPacote.setText("Selecione a Promoção que deseja remover: ");

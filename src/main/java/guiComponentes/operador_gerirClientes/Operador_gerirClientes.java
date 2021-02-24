@@ -201,22 +201,22 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	private void labelsPesquisaSetup() {
 		labelID = new JLabel("ID");
-		labelID.setFont(new Font("Dialog", Font.PLAIN, 13));
+		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		labelID.setBounds(6, 15, 39, 18);
 		painelPesquisa.add(labelID);
 
 		labelNIF = new JLabel("NIF");
-		labelNIF.setFont(new Font("Dialog", Font.PLAIN, 13));
+		labelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		labelNIF.setBounds(6, 49, 56, 18);
 		painelPesquisa.add(labelNIF);
 
 		labelNome = new JLabel("Nome");
-		labelNome.setFont(new Font("Dialog", Font.PLAIN, 13));
+		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		labelNome.setBounds(6, 87, 56, 18);
 		painelPesquisa.add(labelNome);
 
 		labelMorada = new JLabel("Morada");
-		labelMorada.setFont(new Font("Dialog", Font.PLAIN, 13));
+		labelMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		labelMorada.setBounds(6, 116, 56, 27);
 		painelPesquisa.add(labelMorada);
 
@@ -254,7 +254,7 @@ public class Operador_gerirClientes extends JFrame {
 		// Checkbox Ativo
 
 		checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
+		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		checkBoxAtivo.setBackground(Color.WHITE);
 		checkBoxAtivo.setBounds(234, 150, 69, 24);
 		painelPesquisa.add(checkBoxAtivo);
@@ -269,7 +269,7 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	private void botaoPesquisaSetup() {
 		botaoPesquisa = new JButton("Pesquisar");
-		botaoPesquisa.setFont(new Font("Dialog", Font.PLAIN, 13));
+		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		botaoPesquisa.setBounds(72, 181, 371, 27);
 		botaoPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -333,7 +333,7 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	public void botaoVisualizarPacote() {
 		btnVisualizarPacote = new JButton("Visualizar Pacote Comercial");
-		btnVisualizarPacote.setFont(new Font("Dialog", Font.PLAIN, 13));
+		btnVisualizarPacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btnVisualizarPacote.setBounds(1136, 255, 187, 40);
 		pane.add(btnVisualizarPacote);
 		btnVisualizarPacote.addActionListener(new ActionListener() {
@@ -377,7 +377,7 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	public void botaoVisualizarPromocao() {
 		btVisualizarPromocao = new JButton("Visualizar Promoções");
-		btVisualizarPromocao.setFont(new Font("Dialog", Font.PLAIN, 13));
+		btVisualizarPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btVisualizarPromocao.setBounds(1136, 204, 187, 40);
 		pane.add(btVisualizarPromocao);
 		btVisualizarPromocao.addActionListener(new ActionListener() {
@@ -419,7 +419,7 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	public void botaoRemoverPromocao() {
 		btnRemoverPromo = new JButton("Remover Promoção");
-		btnRemoverPromo.setFont(new Font("Dialog", Font.PLAIN, 13));
+		btnRemoverPromo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btnRemoverPromo.setEnabled(false);
 		btnRemoverPromo.setBounds(742, 204, 187, 40);
 		pane.add(btnRemoverPromo);
@@ -460,7 +460,7 @@ public class Operador_gerirClientes extends JFrame {
 
 	public void botaoAtribuirPromocao() {
 		btAtribuirPromocao = new JButton("Atribuir Promoção");
-		btAtribuirPromocao.setFont(new Font("Dialog", Font.PLAIN, 13));
+		btAtribuirPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btAtribuirPromocao.setBounds(939, 204, 187, 40);
 		pane.add(btAtribuirPromocao);
 		btAtribuirPromocao.addActionListener(new ActionListener() {
@@ -496,7 +496,7 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	private void botaoAtribuirPacote() {
 		btAtribuirPacote = new JButton("Atribuir Pacote Comercial");
-		btAtribuirPacote.setFont(new Font("Dialog", Font.PLAIN, 13));
+		btAtribuirPacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btAtribuirPacote.setBounds(939, 255, 187, 40);
 		pane.add(btAtribuirPacote);
 
@@ -566,7 +566,7 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	private void botaoVisualizarHistoricoSetup() {
 		btnVerHistorico = new JButton("Ver Historico");
-		btnVerHistorico.setFont(new Font("Dialog", Font.PLAIN, 13));
+		btnVerHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btnVerHistorico.setEnabled(false);
 		btnVerHistorico.setBounds(742, 255, 187, 40);
 		btnVerHistorico.addActionListener(new ActionListener() {
@@ -635,7 +635,7 @@ public class Operador_gerirClientes extends JFrame {
 	private void btVoltarOperadorGerirClientes() {
 		btVoltarOperador = new JButton("Voltar");
 		btVoltarOperador.setBounds(6, 709, 119, 38);
-		btVoltarOperador.setFont(new Font("Dialog", Font.PLAIN, 13));
+		btVoltarOperador.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btVoltarOperador.setBackground(Color.WHITE);
 		btVoltarOperador.setFocusPainted(false);
 		pane.add(btVoltarOperador);

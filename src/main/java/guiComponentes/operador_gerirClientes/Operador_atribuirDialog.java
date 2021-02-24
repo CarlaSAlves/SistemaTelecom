@@ -81,7 +81,7 @@ public class Operador_atribuirDialog extends JDialog {
 
 		labelPacote = new JLabel();
 		labelPacote.setForeground(Color.BLACK);
-		labelPacote.setFont(new Font("Dialog", Font.BOLD, 13));
+		labelPacote.setFont(new Font("Dubai Light", Font.BOLD, 13));
 		labelPacote.setBounds(10, 11, 414, 25);
 		setResizable(false);
 
@@ -199,7 +199,7 @@ public class Operador_atribuirDialog extends JDialog {
 
 		PacoteComboRenderer(){
 			display = new JLabel();
-			display.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			display.setFont(new Font("Dubai Light", Font.PLAIN, 11));
 			display.setOpaque( true );
 		}
 
@@ -227,7 +227,7 @@ public class Operador_atribuirDialog extends JDialog {
 
 		PromocaoComboRenderer(){
 			display = new JLabel();
-			display.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			display.setFont(new Font("Dubai Light", Font.PLAIN, 11));
 			display.setOpaque( true );
 		}
 
