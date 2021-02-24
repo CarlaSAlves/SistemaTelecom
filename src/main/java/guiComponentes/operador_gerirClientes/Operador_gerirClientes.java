@@ -76,7 +76,7 @@ public class Operador_gerirClientes extends JFrame {
 	 * que contém todos os métodos e elementos que compõem a página 
 	 */
 	public Operador_gerirClientes() {
-		
+
 		ativarNimbusLookAndFeel();
 		pane = new JPanel();
 		setContentPane(pane);
@@ -85,7 +85,7 @@ public class Operador_gerirClientes extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
 		pane.setBackground(SystemColor.text);
-		
+
 		inicialize();
 
 	}
@@ -95,13 +95,12 @@ public class Operador_gerirClientes extends JFrame {
 	 * Contém o corpo da página
 	 */
 	private void inicialize() { 
-		
-//		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
-//		UIManager.put("OptionPane.noButtonText", "Não");
-//		UIManager.put("OptionPane.okButtonText", "Okay");
-//		UIManager.put("OptionPane.yesButtonText", "Sim");
-		
-		
+
+		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+		UIManager.put("OptionPane.noButtonText", "Não");
+		UIManager.put("OptionPane.okButtonText", "Okay");
+		UIManager.put("OptionPane.yesButtonText", "Sim");
+
 		/**
 		 *  Campos de Pesquisa:
 		 *  
@@ -116,11 +115,11 @@ public class Operador_gerirClientes extends JFrame {
 		painelPesquisa.setBackground(Color.WHITE);
 		painelPesquisa.setBounds(96, 77, 453, 221);
 		pane.add(painelPesquisa);
-		
+
 		labelsPesquisaSetup();
 		textFieldsPesquisaSetup();
 		lblCamposPesquisasSetup();
-	
+
 
 		pane.add(lblCampoPesquisas);
 
@@ -137,11 +136,10 @@ public class Operador_gerirClientes extends JFrame {
 		 *  Ver Historico
 		 *  
 		 */
-		
+
 		botaoVisualizarHistoricoSetup();
 		btVoltarOperadorGerirClientes();
 		botaoPesquisaSetup();
-		botaoAtribuirPacote();
 		botaoAtribuirPacote();
 		botaoAtribuirPromocao();		
 		botaoRemoverPromocao();
@@ -149,14 +147,14 @@ public class Operador_gerirClientes extends JFrame {
 		botaoVisualizarPromocao();
 
 		botaoVisualizarPacote();
-		
+
 
 		btnVisualizarPacote.setEnabled(false);
 		btAtribuirPacote.setEnabled(false);
 		btAtribuirPromocao.setEnabled(false);
 		btVisualizarPromocao.setEnabled(false);
-		
-		
+
+
 
 		/**
 		 * Tabela de Resultados:
@@ -172,7 +170,7 @@ public class Operador_gerirClientes extends JFrame {
 		painelTabela.setFont(font);
 		painelTabela.setLayout(null);
 		pane.add(painelTabela);
-		tableSetup();
+		scrollPaneSetup();
 		JScrollPane scrollPane = scrollPaneSetup();
 		painelTabela.add(scrollPane);
 
@@ -193,12 +191,142 @@ public class Operador_gerirClientes extends JFrame {
 		lbFooter.setIcon(new ImageIcon(Operador_gerirClientes.class.getResource("/guiComponentes/img/AltranOperadorFooter.png")));
 		lbFooter.setBounds(599, 690, 213, 65);
 		pane.add(lbFooter);
-		
+
 		timerSetup();
-		
+
 	}// end initialize
 
-	
+	/**
+	 * /**
+	 * Configuração das labels de pesquisa
+	 * @labelID
+	 * @labelNIF
+	 * @labelNome
+	 */
+	private void labelsPesquisaSetup() {
+		labelID = new JLabel("ID");
+		labelID.setFont(new Font("Dialog", Font.PLAIN, 13));
+		labelID.setBounds(6, 15, 39, 18);
+		painelPesquisa.add(labelID);
+
+		labelNIF = new JLabel("NIF");
+		labelNIF.setFont(new Font("Dialog", Font.PLAIN, 13));
+		labelNIF.setBounds(6, 49, 56, 18);
+		painelPesquisa.add(labelNIF);
+
+		labelNome = new JLabel("Nome");
+		labelNome.setFont(new Font("Dialog", Font.PLAIN, 13));
+		labelNome.setBounds(6, 87, 56, 18);
+		painelPesquisa.add(labelNome);
+
+		labelMorada = new JLabel("Morada");
+		labelMorada.setFont(new Font("Dialog", Font.PLAIN, 13));
+		labelMorada.setBounds(6, 116, 56, 27);
+		painelPesquisa.add(labelMorada);
+
+	}
+
+	/**
+	 * Configuração das textFields de Pesquisa e checkbox Ativo
+	 * @textPesquisaID
+	 * @textFieldNome
+	 * @textPesquisaNIF
+	 * @checkboxAtivo
+	 */
+
+	private void textFieldsPesquisaSetup() {
+		textPesquisaID = new JTextField();
+		textPesquisaID.setColumns(10);
+		textPesquisaID.setBounds(72, 6, 371, 27);
+		painelPesquisa.add(textPesquisaID);
+
+		textPesquisaNIF = new JTextField();
+		textPesquisaNIF.setColumns(10);
+		textPesquisaNIF.setBounds(72, 40, 371, 27);
+		painelPesquisa.add(textPesquisaNIF);
+
+		textFieldNome = new JTextField();
+		textFieldNome.setColumns(10);
+		textFieldNome.setBounds(72, 78, 371, 27);
+		painelPesquisa.add(textFieldNome);
+
+		textFieldMorada = new JTextField();
+		textFieldMorada.setColumns(10);
+		textFieldMorada.setBounds(72, 116, 371, 27);
+		painelPesquisa.add(textFieldMorada);
+
+		// Checkbox Ativo
+
+		checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
+		checkBoxAtivo.setBackground(Color.WHITE);
+		checkBoxAtivo.setBounds(234, 150, 69, 24);
+		painelPesquisa.add(checkBoxAtivo);
+
+	}
+
+
+	/**
+	 * Configuração do botão de pesquisa dinâmico. 
+	 * É possível pesquisar por vários campos ao mesmo tempo.
+	 * @botaoPesquisa 
+	 */
+	private void botaoPesquisaSetup() {
+		botaoPesquisa = new JButton("Pesquisar");
+		botaoPesquisa.setFont(new Font("Dialog", Font.PLAIN, 13));
+		botaoPesquisa.setBounds(72, 181, 371, 27);
+		botaoPesquisa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					int id = 0;
+					String nif = null;
+					String nome = null;
+					String morada = null;
+					int ativo = checkBoxAtivo.isSelected()? 1:0;
+
+					if(!textPesquisaID.getText().isBlank()) {
+						id = Integer.parseInt(textPesquisaID.getText().trim());
+					}
+
+					if(!textPesquisaNIF.getText().isBlank()) {
+						nif = textPesquisaNIF.getText().trim();
+					}
+
+					if(!textFieldNome.getText().isBlank()) {
+						nome = textFieldNome.getText().trim();
+					}
+
+					if(!textFieldMorada.getText().isBlank()) {
+						morada = textFieldMorada.getText().trim();
+					}
+
+
+					List<Cliente> clientes = null;
+
+					if ((id != 0) || (nif != null) || (nome != null) || (morada != null) || (ativo!=0) ) {
+						clientes = GestorDeDAO.getGestorDeDAO().pesquisaCliente(id, nif, nome, morada, ativo);
+					} else {
+						clientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
+					}
+
+					ClientePesquisaModelTableOP model = new ClientePesquisaModelTableOP(clientes);
+					table.setModel(model);
+					numberRows = table.getRowCount();
+					lblResultados.setText("Resultados: " + numberRows);
+
+				} catch (Exception e1) {
+
+				}
+
+
+
+			}
+		});
+		painelPesquisa.add(botaoPesquisa);
+
+	}
+
+
 	/**
 	 * Criação do botão Visualizar Pacote. 
 	 * Quando premido, desde que um cliente esteja selecionado e tenha um pacote coemrcial atribuido
@@ -242,7 +370,7 @@ public class Operador_gerirClientes extends JFrame {
 			}
 		});
 	}
-	
+
 	/**
 	 * Criação do botão Visualizar Promoção. 
 	 * Quando premido, desde que um cliente esteja selecionado e tenha promoções
@@ -285,7 +413,6 @@ public class Operador_gerirClientes extends JFrame {
 		});
 	}
 
-	
 	/**
 	 * Configuração do botão remover promoção.
 	 * Caso o cliente tenha uma promoção abre uma janela que permite selecionar a promoção a remover.
@@ -362,14 +489,15 @@ public class Operador_gerirClientes extends JFrame {
 			}
 		});
 	}
-	
+
 	private void botaoAtribuirPacote() {
 		btAtribuirPacote = new JButton("Atribuir Pacote Comercial");
 		btAtribuirPacote.setFont(new Font("Dialog", Font.PLAIN, 13));
 		btAtribuirPacote.setBounds(939, 255, 187, 40);
 		pane.add(btAtribuirPacote);
+
 		btAtribuirPacote.addActionListener(new ActionListener() {
-//TODO Problema
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
@@ -414,179 +542,7 @@ public class Operador_gerirClientes extends JFrame {
 				}
 			}
 		});
-		
-	}
 
-	/**
-	 * Configuração do botão de pesquisa dinâmico. 
-	 * É possível pesquisar por vários campos ao mesmo tempo.
-	 * @botaoPesquisa 
-	 */
-	private void botaoPesquisaSetup() {
-		botaoPesquisa = new JButton("Pesquisar");
-		botaoPesquisa.setFont(new Font("Dialog", Font.PLAIN, 13));
-		botaoPesquisa.setBounds(72, 181, 371, 27);
-		botaoPesquisa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					int id = 0;
-					String nif = null;
-					String nome = null;
-					String morada = null;
-					int ativo = checkBoxAtivo.isSelected()? 1:0;
-
-					if(!textPesquisaID.getText().isBlank()) {
-						id = Integer.parseInt(textPesquisaID.getText().trim());
-					}
-
-					if(!textPesquisaNIF.getText().isBlank()) {
-						nif = textPesquisaNIF.getText().trim();
-					}
-
-					if(!textFieldNome.getText().isBlank()) {
-						nome = textFieldNome.getText().trim();
-					}
-
-					if(!textFieldMorada.getText().isBlank()) {
-						morada = textFieldMorada.getText().trim();
-					}
-
-
-					List<Cliente> clientes = null;
-
-					if ((id != 0) || (nif != null) || (nome != null) || (morada != null) || (ativo!=0) ) {
-						clientes = GestorDeDAO.getGestorDeDAO().pesquisaCliente(id, nif, nome, morada, ativo);
-					} else {
-						clientes = GestorDeDAO.getGestorDeDAO().getAllClientes();
-					}
-
-					ClientePesquisaModelTableOP model = new ClientePesquisaModelTableOP(clientes);
-					table.setModel(model);
-					numberRows = table.getRowCount();
-					lblResultados.setText("Resultados: " + numberRows);
-
-				} catch (Exception e1) {
-
-				}
-
-
-
-			}
-		});
-		painelPesquisa.add(botaoPesquisa);
-		
-	}
-
-	/**
-	 * Configuração das labels de username e temporização.
-	 * @lblUsernameLogged apresenta o username que está logado
-	 * @lblTempoSessao apresenta o tempo de sessão desde o momento que faz login
-	 * @lblHoraSistema apresenta a hora atual do sistema 
-	 */
-	private void timerSetup() {
-		lblTempoSessao = new JLabel();
-		lblTempoSessao.setBounds(1215, 717, 159, 18);
-		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 10));
-		pane.add(lblTempoSessao);
-
-		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setBounds(1215, 698, 159, 18);
-		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 10));
-		pane.add(lblUsernameLogged);
-
-		lblHoraSistema = new JLabel();
-		lblHoraSistema.setBounds(1215, 737, 159, 18);
-		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
-		pane.add(lblHoraSistema);
-		
-	}
-
-	/**
-	 * /**
-	 * Configuração das labels de pesquisa
-	 * @labelID
-	 * @labelNIF
-	 * @labelNome
-	 */
-	private void labelsPesquisaSetup() {
-		labelID = new JLabel("ID");
-		labelID.setFont(new Font("Dialog", Font.PLAIN, 13));
-		labelID.setBounds(6, 15, 39, 18);
-		painelPesquisa.add(labelID);
-		
-		labelNIF = new JLabel("NIF");
-		labelNIF.setFont(new Font("Dialog", Font.PLAIN, 13));
-		labelNIF.setBounds(6, 49, 56, 18);
-		painelPesquisa.add(labelNIF);
-
-		labelNome = new JLabel("Nome");
-		labelNome.setFont(new Font("Dialog", Font.PLAIN, 13));
-		labelNome.setBounds(6, 87, 56, 18);
-		painelPesquisa.add(labelNome);
-		
-		labelMorada = new JLabel("Morada");
-		labelMorada.setFont(new Font("Dialog", Font.PLAIN, 13));
-		labelMorada.setBounds(6, 116, 56, 27);
-		painelPesquisa.add(labelMorada);
-		
-	}
-	
-	/**
-	 * Configuração das textFields de Pesquisa e checkbox Ativo
-	 * @textPesquisaID
-	 * @textFieldNome
-	 * @textPesquisaNIF
-	 * @checkboxAtivo
-	 */
-
-	private void textFieldsPesquisaSetup() {
-		textPesquisaID = new JTextField();
-		textPesquisaID.setColumns(10);
-		textPesquisaID.setBounds(72, 6, 371, 27);
-		painelPesquisa.add(textPesquisaID);
-	
-		textPesquisaNIF = new JTextField();
-		textPesquisaNIF.setColumns(10);
-		textPesquisaNIF.setBounds(72, 40, 371, 27);
-		painelPesquisa.add(textPesquisaNIF);
-		
-		textFieldNome = new JTextField();
-		textFieldNome.setColumns(10);
-		textFieldNome.setBounds(72, 78, 371, 27);
-		painelPesquisa.add(textFieldNome);
-		
-		textFieldMorada = new JTextField();
-		textFieldMorada.setColumns(10);
-		textFieldMorada.setBounds(72, 116, 371, 27);
-		painelPesquisa.add(textFieldMorada);
-		
-		// Checkbox Ativo
-		
-		checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
-		checkBoxAtivo.setBackground(Color.WHITE);
-		checkBoxAtivo.setBounds(234, 150, 69, 24);
-		painelPesquisa.add(checkBoxAtivo);
-		
-	}
-
-
-	/**
-	 * Configuração do botão voltar.
-	 * Quando premido volta à homepage do Operador.
-	 * @btVoltarGerirClientes - volta à homepage do operador
-	 */
-	private void btVoltarOperadorGerirClientes() {
-		btVoltarOperador = new JButton("Voltar");
-		btVoltarOperador.setBounds(6, 709, 119, 38);
-		btVoltarOperador.setFont(new Font("Dialog", Font.PLAIN, 13));
-		btVoltarOperador.setBackground(Color.WHITE);
-		btVoltarOperador.setFocusPainted(false);
-		pane.add(btVoltarOperador);
-		
 	}
 
 	/**
@@ -633,6 +589,47 @@ public class Operador_gerirClientes extends JFrame {
 		pane.add(btnVerHistorico);
 	}
 
+	/**
+	 * Configuração das labels de username e temporização.
+	 * @lblUsernameLogged apresenta o username que está logado
+	 * @lblTempoSessao apresenta o tempo de sessão desde o momento que faz login
+	 * @lblHoraSistema apresenta a hora atual do sistema 
+	 */
+	private void timerSetup() {
+		lblTempoSessao = new JLabel();
+		lblTempoSessao.setBounds(1215, 717, 159, 18);
+		lblTempoSessao.setText("Sessão:");
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 10));
+		pane.add(lblTempoSessao);
+
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setBounds(1215, 698, 159, 18);
+		lblUsernameLogged.setText("Username:");
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 10));
+		pane.add(lblUsernameLogged);
+
+		lblHoraSistema = new JLabel();
+		lblHoraSistema.setBounds(1215, 737, 159, 18);
+		lblHoraSistema.setText("Data:");
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
+		pane.add(lblHoraSistema);
+
+	}
+
+	/**
+	 * Configuração do botão voltar.
+	 * Quando premido volta à homepage do Operador.
+	 * @btVoltarGerirClientes - volta à homepage do operador
+	 */
+	private void btVoltarOperadorGerirClientes() {
+		btVoltarOperador = new JButton("Voltar");
+		btVoltarOperador.setBounds(6, 709, 119, 38);
+		btVoltarOperador.setFont(new Font("Dialog", Font.PLAIN, 13));
+		btVoltarOperador.setBackground(Color.WHITE);
+		btVoltarOperador.setFocusPainted(false);
+		pane.add(btVoltarOperador);
+
+	}
 
 
 	/**
@@ -641,18 +638,9 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	private JScrollPane scrollPaneSetup() {
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(33, 33, 1224, 330);		
-		scrollPane.setViewportView(table);
-		return scrollPane;
-	}
-
-	/**
-	 * Configuração da tabela de resultados
-	 * 
-	 */
-
-	private void tableSetup(){
+		scrollPane.setBounds(33, 33, 1224, 330);
 		table = new JTable();
+		scrollPane.setViewportView(table);
 		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
 		table.setFillsViewportHeight(true);
@@ -704,7 +692,7 @@ public class Operador_gerirClientes extends JFrame {
 
 			}	
 		});
-
+		return scrollPane;
 	}
 
 
@@ -780,30 +768,57 @@ public class Operador_gerirClientes extends JFrame {
 	}
 
 
+	/**
+	 * Painel de Pesquisa
+	 */
 	protected void painelPesquisa() {
 	}
-
+	/**
+	 * Retorna a tabela
+	 * @return table
+	 */
 	public JTable getTable() {
 		return table;
 	}
 
+	/**
+	 * 
+	 * @return btVoltarOperador
+	 */
 	public JButton btVoltarOperador() {
 		return btVoltarOperador;
 	}
+	/**
+	 * 
+	 * @param botaoVoltar2
+	 * @return botaoVoltar2
+	 */
 
 	public void setBtVoltarOperador(JButton botaoVoltar2) {
 		this.btVoltarOperador = botaoVoltar2;
 	}
 
+	/**
+	 * Configura a label usernameLogged 
+	 * @param username
+	 */
 	public void setUsernameLoggedIn(String username) {
 		lblUsernameLogged.setText("Username: " + username);
 
 	}
 
+	/**
+	 * Configura a label de temporizador. 
+	 * @param temporizador
+	 */
 	public void setLblTempoSessao(Duration temporizador) {
 		lblTempoSessao.setText("Sessao: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
 	}
 
+	/**
+	 * Configura a label de hora de sistema
+	 * @param agora
+	 */
 	public void setLblHoraSistema(String agora) {
 		lblHoraSistema.setText("Data: " + agora);
 
@@ -813,13 +828,24 @@ public class Operador_gerirClientes extends JFrame {
 		return (JPanel) getContentPane();
 	}
 
+	/**
+	 * @return lblResultados
+	 */
 	public JLabel getLblResultados() {
 		return lblResultados;
 	}
+	
+	/***
+	 * 
+	 * @return username
+	 */
 	public String getUsername() {
 		return username;
 	}
-
+	/**
+	 * 
+	 * @param username
+	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
