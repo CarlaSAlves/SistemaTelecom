@@ -2,8 +2,14 @@ package guiComponentes.cliente_pessoal;
 
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,8 +22,11 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import servico.GestorDeDAO;
+import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
 import javax.swing.JTextField;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListModel;
 import javax.swing.JScrollBar;
 
 @SuppressWarnings("serial")
@@ -58,6 +67,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 
 	}
 
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	private void initialize() throws Exception {
 
 		/**
@@ -73,9 +83,9 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		setContentPane(panelVerTodasPromo);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1384, 586);
-		
+
 		// Labels e textFieldNome da página 
-		
+
 		JLabel labelVerPromo = new JLabel("Ver todas as Promoções");
 		labelVerPromo.setForeground(Color.WHITE);
 		labelVerPromo.setFont(new Font("Dubai Light", Font.BOLD, 22));
@@ -85,13 +95,13 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		JLabel labelPacoteNome = new JLabel("Nome");
 		labelPacoteNome.setForeground(Color.WHITE);
 		labelPacoteNome.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		labelPacoteNome.setBounds(319, 169, 71, 31);
+		labelPacoteNome.setBounds(315, 169, 71, 31);
 		panelVerTodasPromo.add(labelPacoteNome);
 
 		JLabel labelPromoDescricao = new JLabel("Descrição");
 		labelPromoDescricao.setForeground(Color.WHITE);
 		labelPromoDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		labelPromoDescricao.setBounds(319, 223, 87, 23);
+		labelPromoDescricao.setBounds(315, 223, 87, 23);
 		panelVerTodasPromo.add(labelPromoDescricao);
 
 		textFieldNome = new JTextField();
@@ -105,60 +115,53 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setFont(new Font("Dubai Light", Font.PLAIN, 14));
-		textArea.setBounds(400, 222, 300, 104);
+		textArea.setBounds(400, 222, 300, 114);
 		panelVerTodasPromo.add(textArea);
-
 
 		// Jlist e ScrollBar
 		
-		String[] promocoes = new String[GestorDeDAO.getGestorDeDAO().getAllPromocoes().size()];
-		
-		int i = 0;
-		for (Promocao promo : GestorDeDAO.getGestorDeDAO().getAllPromocoes()) {
-			if (promo.isAtiva()) {
-			promocoes[i] = promo.getNome();
-			i++;
+		List<Promocao> promocoes = new ArrayList<Promocao>();
+		for (Promocao p : GestorDeDAO.getGestorDeDAO().getAllPromocoes()) {
+			if (p.isAtiva()) {
+				promocoes.add(p);
 			}
 		}
-
-		JList<String> listVerPromo = new JList<String>(promocoes);
-
+				
+		DefaultListModel model = new DefaultListModel();	
+		model.addAll(promocoes);
+		JList listVerPromo = new JList(model);
+			
+		ListCellRenderer renderer = new RendererPromocao();
+		listVerPromo.setCellRenderer(renderer);
 		listVerPromo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		listVerPromo.setBounds(66, 120, 226, 362);
-		listVerPromo.setSelectedIndex(0);
-		listVerPromo.setForeground(Color.BLACK);
 		listVerPromo.setLayoutOrientation( JList.HORIZONTAL_WRAP );
 		listVerPromo.setVisibleRowCount( -1 ); // -1 sig q ele é variavel
-
 		listVerPromo.setFixedCellHeight( 24 );
 		listVerPromo.setFixedCellWidth( 226 );
-		panelVerTodasPromo.add(listVerPromo);
-		String texto = listVerPromo.getSelectedValue();
-		textFieldNome.setText((texto));
-		textArea.setText(texto);
+		listVerPromo.setSelectedIndex(0);
+		Promocao promocao = (Promocao) listVerPromo.getSelectedValue();
+		textFieldNome.setText(promocao.getNome());
+		textArea.setText(promocao.getDescricao());	
 		
 		listVerPromo.addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				if (!e.getValueIsAdjusting()) {
-					String texto = listVerPromo.getSelectedValue();
-					try {
-						textFieldNome.setText((texto));
-						textArea.setText(texto);
-					} catch (Exception ex) {
-
-					}
-					return;
-				}
+				Promocao promocao = (Promocao) listVerPromo.getSelectedValue();
+				textFieldNome.setText(promocao.getNome());
+				textArea.setText(promocao.getDescricao());	
 				
 			}
 		});
 		
+
+		panelVerTodasPromo.add(listVerPromo);
+
+
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(66, 120, 226, 362);
 		panelVerTodasPromo.add(scrollBar);
-
 
 
 		/*
@@ -171,7 +174,6 @@ public class AreaCliente_VerPromocoes extends JFrame {
 
 
 	}//end initialize
-
 
 
 	/**
@@ -197,8 +199,27 @@ public class AreaCliente_VerPromocoes extends JFrame {
 			}
 		}
 	}
-
-
+	
+private class RendererPromocao implements ListCellRenderer<Promocao> {
+		
+		private JLabel texto;
+		
+		public RendererPromocao() {
+			texto = new JLabel();
+			texto.setFont(new Font("Dubai Light", Font.PLAIN, 15));
+			texto.setOpaque( true );
+			texto.setForeground(Color.black);
+		}
+		
+		public Component getListCellRendererComponent(JList<? extends Promocao> list, Promocao value, int index,
+				boolean isSelected, boolean cellHasFocus) {
+			texto.setText( value.getNome());
+			texto.setBackground(isSelected ? new Color(253, 132, 67) : Color.white );
+			texto.setForeground(isSelected ? Color.white : Color.black);		
+			return texto;
+		}
+}
+	
 	public JPanel returnAreaClienteVerPromo() {
 		return (JPanel) getContentPane();
 	}
