@@ -505,6 +505,13 @@ public class Operador_gerirClientes extends JFrame {
 				int row = table.getSelectedRow();
 				Cliente clienteTemp = (Cliente) table.getValueAt(row, ClientePesquisaModelTableOP.OBJECT_COL);
 				Funcionario func = null;
+				
+				if(!clienteTemp.isAtivo()) {
+					JOptionPane.showMessageDialog(Operador_gerirClientes.this,
+							"Não possivel é atribuir Pacote Comercial pois o cliente não se encontra ativo!", "Cliente Inativo",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 
 				if(clienteTemp.getId_pacote_cliente()==0) {
 					try {
