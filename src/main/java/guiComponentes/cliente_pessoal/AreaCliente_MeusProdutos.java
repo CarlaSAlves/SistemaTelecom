@@ -66,19 +66,15 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		panelMeusProdutos.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(panelMeusProdutos);
 		panelMeusProdutos.setLayout(null);
-<<<<<<< HEAD
+
 		
 		JLabel lblOsSeusProdutos = new JLabel("Os Seus Produtos");
 		lblOsSeusProdutos.setForeground(Color.WHITE);
 		lblOsSeusProdutos.setFont(new Font("Dubai Light", Font.BOLD, 22));
 		lblOsSeusProdutos.setBounds(66, 55, 234, 28);
 		panelMeusProdutos.add(lblOsSeusProdutos);
-		
-
-=======
 		setResizable(false);
 		
->>>>>>> 5ea16f77a6ee87911c4ff683428aa8daf7cad6d6
 		// Área Pacote Comercial
 
 		lblSeuPacote = new JLabel("Pacote Comercial");

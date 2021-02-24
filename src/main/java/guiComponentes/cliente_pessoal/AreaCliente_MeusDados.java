@@ -5,16 +5,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import data_acess_object_dao.PasswordEncryption;
 import guiComponentes.Admin_GUI_homepage;
-import guiComponentes.admin_gestorCliente.CriarClienteDialog;
-import guiComponentes.admin_gestorCliente.GUI_gestor_cliente;
 import servico.GestorDeDAO;
 import standard_value_object.Cliente;
-import standard_value_object.PacoteComercial;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
-import java.awt.EventQueue;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -25,12 +21,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPasswordField;
-import javax.swing.JCheckBox;
 
 @SuppressWarnings("serial")
 
@@ -45,12 +37,7 @@ public class AreaCliente_MeusDados extends JFrame {
 	private boolean nomeAlterado = false, nifAlterado = false, 
 			moradaAlterado = false, todosDadosValidos = false, 
 			loginAlterado = false, passwordCorreta = false, passwordNovaIgual = false;
-	private JLabel lblNovaPassword_1;
-	private JPasswordField passwordField_1;
-	private JLabel lblNovaPassword_2;
-	private JPasswordField passwordField_2;
-	private JLabel lblNovaPass_2;
-	private JLabel lblNovaPassConfirm;
+	private String username;
 
 		/**
 	 * Create the frame.

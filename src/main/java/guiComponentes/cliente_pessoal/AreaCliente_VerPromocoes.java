@@ -32,10 +32,8 @@ import javax.swing.JScrollBar;
 @SuppressWarnings("serial")
 public class AreaCliente_VerPromocoes extends JFrame {
 
-	//private JPanel panel;
 	private JPanel panelVerTodasPromo;
 	private JTextField textFieldNome;
-
 
 
 	/**
@@ -47,29 +45,24 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		try {
 			initialize();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	private void initialize() throws Exception {
 
-		/**
-		 * 
-		 */
 		ativarNimbusLookAndFeel();
 
 		/**
 		 * Define as caracteristicas dos painel base. 
 		 */
+
 		panelVerTodasPromo = new JPanel();
 		panelVerTodasPromo.setLayout(null);
 		setContentPane(panelVerTodasPromo);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1384, 586);
-
 		setResizable(false);
 
 		// Labels e textFieldNome da página 
@@ -107,18 +100,18 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		panelVerTodasPromo.add(textArea);
 
 		// Jlist e ScrollBar
-		
+
 		List<Promocao> promocoes = new ArrayList<Promocao>();
 		for (Promocao p : GestorDeDAO.getGestorDeDAO().getAllPromocoes()) {
 			if (p.isAtiva()) {
 				promocoes.add(p);
 			}
 		}
-				
+
 		DefaultListModel model = new DefaultListModel();	
 		model.addAll(promocoes);
 		JList listVerPromo = new JList(model);
-			
+
 		ListCellRenderer renderer = new RendererPromocao();
 		listVerPromo.setCellRenderer(renderer);
 		listVerPromo.setFont(new Font("Dubai Light", Font.PLAIN, 14));
@@ -131,26 +124,22 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		Promocao promocao = (Promocao) listVerPromo.getSelectedValue();
 		textFieldNome.setText(promocao.getNome());
 		textArea.setText(promocao.getDescricao());	
-		
+
 		listVerPromo.addListSelectionListener(new ListSelectionListener() {
-			
+
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				Promocao promocao = (Promocao) listVerPromo.getSelectedValue();
 				textFieldNome.setText(promocao.getNome());
-				textArea.setText(promocao.getDescricao());	
-				
+				textArea.setText(promocao.getDescricao());		
 			}
 		});
-		
 
 		panelVerTodasPromo.add(listVerPromo);
-
 
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(66, 120, 226, 362);
 		panelVerTodasPromo.add(scrollBar);
-
 
 		/*
 		 * Define a imagem de fundo através de uma label
@@ -161,14 +150,12 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		panelVerTodasPromo.add(labelIconFundo);
 
 
-	}//end initialize
-
+	} //end initialize
 
 	/**
 	 * Activa o Nimbus Look and Feel
 	 * 
 	 */
-
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 			if ("Nimbus".equals(info.getName())) {
@@ -187,18 +174,20 @@ public class AreaCliente_VerPromocoes extends JFrame {
 			}
 		}
 	}
-	
-private class RendererPromocao implements ListCellRenderer<Promocao> {
-		
+	/**
+	 * Cria o renderer da JList
+	 */
+	private class RendererPromocao implements ListCellRenderer<Promocao> {
+
 		private JLabel texto;
-		
+
 		public RendererPromocao() {
 			texto = new JLabel();
 			texto.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 			texto.setOpaque( true );
 			texto.setForeground(Color.black);
 		}
-		
+
 		public Component getListCellRendererComponent(JList<? extends Promocao> list, Promocao value, int index,
 				boolean isSelected, boolean cellHasFocus) {
 			texto.setText( value.getNome());
@@ -206,9 +195,13 @@ private class RendererPromocao implements ListCellRenderer<Promocao> {
 			texto.setForeground(isSelected ? Color.white : Color.black);		
 			return texto;
 		}
-}
-	
+	}
+
+	/**
+	 * 
+	 * @return painel 
+	 */
 	public JPanel returnAreaClienteVerPromo() {
 		return (JPanel) getContentPane();
 	}
-}// end class
+} // end class

@@ -1,9 +1,7 @@
 package guiComponentes.cliente_pessoal;
 
-
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +26,10 @@ import javax.swing.JScrollBar;
 @SuppressWarnings("serial")
 public class AreaCliente_VerPacotes extends JFrame {
 
-	//private JPanel panel;
 	private JPanel panelVerTodosPacotes;
 	private JTextField textFieldNome;
 
-	
+
 	/**
 	 * Create the frame.
 	 * @throws Exception 
@@ -42,23 +39,19 @@ public class AreaCliente_VerPacotes extends JFrame {
 		try {
 			initialize();
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
-
 	}
 
 	@SuppressWarnings("unchecked")
 	private void initialize() throws Exception {
 
-		/**
-		 * 
-		 */
 		ativarNimbusLookAndFeel();
 
 		/**
 		 * Define as caracteristicas dos painel base. 
 		 */
+		
 		panelVerTodosPacotes = new JPanel();
 		panelVerTodosPacotes.setLayout(null);
 		setContentPane(panelVerTodosPacotes);
@@ -95,7 +88,6 @@ public class AreaCliente_VerPacotes extends JFrame {
 		textFieldNome.setColumns(10);
 		panelVerTodosPacotes.add(textFieldNome);
 
-
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
@@ -129,7 +121,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 		PacoteComercial pacote = (PacoteComercial) listVerPacote.getSelectedValue();
 		textFieldNome.setText(pacote.getNome());
 		textArea.setText(pacote.getDescricao());
-		
+
 		listVerPacote.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
@@ -142,14 +134,11 @@ public class AreaCliente_VerPacotes extends JFrame {
 			}
 		});
 
-
 		panelVerTodosPacotes.add(listVerPacote);
-
 
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(66, 120, 226, 362);
 		panelVerTodosPacotes.add(scrollBar);
-
 
 		/*
 		 * Define a imagem de fundo através de uma label
@@ -158,15 +147,10 @@ public class AreaCliente_VerPacotes extends JFrame {
 		labelIconFundo.setIcon(new ImageIcon(AreaCliente_VerPacotes.class.getResource("/guiComponentes/img/AltranClientes.png")));
 		labelIconFundo.setBounds(0, -37, 1408, 586);
 		getContentPane().add(labelIconFundo);
-
-
-	}//end initialize
-
-
+	}
 
 	/**
 	 * Activa o Nimbus Look and Feel
-	 * 
 	 */
 
 	private void ativarNimbusLookAndFeel() {
@@ -188,6 +172,9 @@ public class AreaCliente_VerPacotes extends JFrame {
 		}
 	}
 
+	/**
+	 * Cria o renderer da JList
+	 */
 	private class RendererPacote implements ListCellRenderer<PacoteComercial> {
 
 		private JLabel texto;
@@ -208,8 +195,12 @@ public class AreaCliente_VerPacotes extends JFrame {
 		}
 	}
 
-
+	/**
+	 * 
+	 * @return painel 
+	 */
 	public JPanel returnAreaClienteVerPacotes() {
 		return (JPanel) getContentPane();
 	}
+	
 }// end class
