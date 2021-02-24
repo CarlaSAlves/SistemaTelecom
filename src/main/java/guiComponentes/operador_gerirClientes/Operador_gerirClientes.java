@@ -76,16 +76,6 @@ public class Operador_gerirClientes extends JFrame {
 	 * que contém todos os métodos e elementos que compõem a página 
 	 */
 	public Operador_gerirClientes() {
-		inicialize();
-
-	}
-
-	private void inicialize() {
-		
-		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
-		UIManager.put("OptionPane.noButtonText", "Não");
-		UIManager.put("OptionPane.okButtonText", "Okay");
-		UIManager.put("OptionPane.yesButtonText", "Sim");
 		
 		ativarNimbusLookAndFeel();
 		pane = new JPanel();
@@ -95,15 +85,22 @@ public class Operador_gerirClientes extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
 		pane.setBackground(SystemColor.text);
-
+		
 		inicialize();
 
 	}
+
 
 	/**
 	 * Contém o corpo da página
 	 */
 	private void inicialize() { 
+		
+//		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+//		UIManager.put("OptionPane.noButtonText", "Não");
+//		UIManager.put("OptionPane.okButtonText", "Okay");
+//		UIManager.put("OptionPane.yesButtonText", "Sim");
+		
 		
 		/**
 		 *  Campos de Pesquisa:
@@ -372,7 +369,7 @@ public class Operador_gerirClientes extends JFrame {
 		btAtribuirPacote.setBounds(939, 255, 187, 40);
 		pane.add(btAtribuirPacote);
 		btAtribuirPacote.addActionListener(new ActionListener() {
-
+//TODO Problema
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
