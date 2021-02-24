@@ -38,19 +38,14 @@ import standard_value_object.Promocao;
 public class Operador_gerirClientes extends JFrame {
 
 	private int numberRows;
-	private JPanel pane;
-	private JLabel lblCampoPesquisas, lblTempoSessao, lblUsernameLogged, lblHoraSistema, lblResultados, labelID, labelNIF, labelNome, labelMorada;
+	private JPanel pane, painelPesquisa;
+	private JLabel lblCampoPesquisa, lblTempoSessao, lblUsernameLogged, lblHoraSistema, lblResultados, labelID, labelNIF, labelNome, labelMorada;
 	private JButton btAtribuirPacote, btAtribuirPromocao, btVisualizarPromocao, btVoltarOperador, btnVisualizarPacote, btnRemoverPromo ;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JTable table;
-	private JTextField textPesquisaID;
-	private JTextField textPesquisaNIF;
-	private JTextField textFieldNome;
-	private JTextField textFieldMorada;
-	private JButton btnVerHistorico;
-	private JButton botaoPesquisa;
+	private JTextField textPesquisaID, textPesquisaNIF, textFieldNome, textFieldMorada ;
+	private JButton btnVerHistorico, botaoPesquisa;
 	private String username;
-	private JPanel painelPesquisa;
 	private JCheckBox checkBoxAtivo;
 
 
@@ -61,6 +56,7 @@ public class Operador_gerirClientes extends JFrame {
 	public Operador_gerirClientes() {
 
 		ativarNimbusLookAndFeel();
+		
 		pane = new JPanel();
 		setContentPane(pane);
 		pane.setLayout(null);
@@ -68,11 +64,11 @@ public class Operador_gerirClientes extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
 		pane.setBackground(SystemColor.text);
-
+		setResizable(false);
+		
 		inicialize();
 
 	}
-
 
 	/**
 	 * Contém o corpo da página
@@ -90,6 +86,7 @@ public class Operador_gerirClientes extends JFrame {
 		 *  ID
 		 *  NIF
 		 *  Nome
+		 *  Morada
 		 *  Ativo
 		 *  Botão Pesquisar
 		 */ 
@@ -98,15 +95,17 @@ public class Operador_gerirClientes extends JFrame {
 		painelPesquisa.setBackground(Color.WHITE);
 		painelPesquisa.setBounds(96, 77, 453, 221);
 		pane.add(painelPesquisa);
-		setResizable(false);
+		
 		labelsPesquisaSetup();
 		textFieldsPesquisaSetup();
-		lblCamposPesquisasSetup();
-
-
-		pane.add(lblCampoPesquisas);
+		
+		lblCampoPesquisa = new JLabel("Campo de Pesquisa");
+		lblCampoPesquisa.setFont(new Font("Dubai Light", Font.BOLD, 20));
+		lblCampoPesquisa.setBounds(96, 39, 294, 26);
+		pane.add(lblCampoPesquisa);
 
 		painelPesquisa();
+		botaoPesquisaSetup();
 
 		/*
 		 *  Botões da página:
@@ -117,28 +116,18 @@ public class Operador_gerirClientes extends JFrame {
 		 *  Visualizar Promoção 
 		 *  Remover Promoção
 		 *  Ver Historico
+		 *  Voltar
 		 *  
 		 */
 
+		botaoAtribuirPacote();
+		botaoAtribuirPromocao();	
+		botaoVisualizarPacote();
+		botaoVisualizarPromocao();
+		botaoRemoverPromocao();
 		botaoVisualizarHistoricoSetup();
 		btVoltarOperadorGerirClientes();
-		botaoPesquisaSetup();
-		botaoAtribuirPacote();
-		botaoAtribuirPromocao();		
-		botaoRemoverPromocao();
-
-		botaoVisualizarPromocao();
-
-		botaoVisualizarPacote();
-
-
-		btnVisualizarPacote.setEnabled(false);
-		btAtribuirPacote.setEnabled(false);
-		btAtribuirPromocao.setEnabled(false);
-		btVisualizarPromocao.setEnabled(false);
-
-
-
+		
 		/**
 		 * Tabela de Resultados:
 		 * 
@@ -178,6 +167,30 @@ public class Operador_gerirClientes extends JFrame {
 		timerSetup();
 
 	}// end initialize
+	
+	/**
+	 * Configurar interface, look and feel Nimbus 
+	 */
+
+	private void ativarNimbusLookAndFeel() {
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+			if ("Nimbus".equals(info.getName())) {
+				try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
+
+	}
 
 	/**
 	 * /**
@@ -402,7 +415,7 @@ public class Operador_gerirClientes extends JFrame {
 	 * Envia mensagem "Cliente Removido com Sucesso"
 	 * Se não está nenhum cliente selecionado, o botão não está selecionável.
 	 * Existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado.
-	 * @botaoDesativarOperador - botão dinâmico (ativo/desativo)
+	 * @btnRemoverPromo - botão dinâmico (ativo/desativo)
 	 */
 	public void botaoRemoverPromocao() {
 		btnRemoverPromo = new JButton("Remover Promoção");
@@ -473,6 +486,14 @@ public class Operador_gerirClientes extends JFrame {
 		});
 	}
 
+	/**
+	 * Configuração do botão atribuir pacote.
+	 * Quando premido, abre a janela Dialog "Atribuir Pacote Comercial" e apresenta uma comboBox 
+	 * onde se podem selecionar os pacotes disponíveis
+	 * Se não está nenhum cliente selecionado, o botão não está selecionável.
+	 * Existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado.
+	 * @btAtribuirPacote - abre a Operador_atribuirDialog 
+	 */
 	private void botaoAtribuirPacote() {
 		btAtribuirPacote = new JButton("Atribuir Pacote Comercial");
 		btAtribuirPacote.setFont(new Font("Dialog", Font.PLAIN, 13));
@@ -629,6 +650,8 @@ public class Operador_gerirClientes extends JFrame {
 	private JScrollPane scrollPaneSetup() {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(33, 33, 1224, 330);
+		
+		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setRowSelectionAllowed(true);
@@ -683,41 +706,6 @@ public class Operador_gerirClientes extends JFrame {
 			}	
 		});
 		return scrollPane;
-	}
-
-
-	/**
-	 * Configurar interface, look and feel Nimbus 
-	 */
-
-	private void ativarNimbusLookAndFeel() {
-		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-			if ("Nimbus".equals(info.getName())) {
-				try {
-					UIManager.setLookAndFeel(info.getClassName());
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e) {
-					e.printStackTrace();
-				}
-				break;
-			}
-		}
-
-	}
-
-	/**
-	 * Label dos Campos de Pesquisa:r
-	 */ 
-	private void lblCamposPesquisasSetup() {
-		lblCampoPesquisas = new JLabel("Campo de Pesquisa");
-		lblCampoPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-		lblCampoPesquisas.setBounds(96, 39, 294, 26);
-
 	}
 
 	/**

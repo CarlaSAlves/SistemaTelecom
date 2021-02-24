@@ -69,6 +69,8 @@ public class Operador_removerPromoDialog extends JDialog {
 		contentPanel.add(labelPacote);
 		labelPacote.setText("Selecione a Promoção que deseja remover: ");
 
+		// ComboBox 
+		
 		comboBoxPromo = new JComboBox<Promocao>();
 		comboBoxPromo.setRenderer(new PromocaoComboRenderer());
 		comboBoxPromo.setBounds(10, 47, 414, 25);
@@ -77,9 +79,7 @@ public class Operador_removerPromoDialog extends JDialog {
 			if(p.isAtiva()) {
 				comboBoxPromo.addItem(p);
 			}
-		}
-
-		{
+			
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -92,7 +92,6 @@ public class Operador_removerPromoDialog extends JDialog {
 						Cliente clienteTemp = null;
 						Funcionario func = null;
 						PacoteCliente pacoteCliente = null;
-
 
 						try {
 
@@ -111,13 +110,11 @@ public class Operador_removerPromoDialog extends JDialog {
 
 						setVisible(false);
 						dispose();
-
 					}
 				});
 
 				buttonPane.add(okButton);
-			}
-			{
+
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.addActionListener(new ActionListener() {
 
@@ -132,6 +129,9 @@ public class Operador_removerPromoDialog extends JDialog {
 		}
 	}
 
+	/**
+	 * Cria o renderer da promoção
+	 */
 	private class PromocaoComboRenderer implements ListCellRenderer<Promocao> {
 
 		private JLabel display;
