@@ -67,7 +67,7 @@ public class GUI_login extends JFrame {
 		labelLogin.setForeground(Color.WHITE);
 		labelLogin.setFont(new Font("SansSerif", Font.BOLD, 20));
 		getContentPane().add(labelLogin);
-
+		setResizable(false);
 		labelPass = new JLabel("Password");
 		labelPass.setBounds(209, 430, 138, 27);
 		labelPass.setForeground(Color.WHITE);

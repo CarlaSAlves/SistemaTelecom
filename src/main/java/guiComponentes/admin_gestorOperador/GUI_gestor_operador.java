@@ -57,7 +57,7 @@ public class GUI_gestor_operador extends JFrame {
 		setFont(font);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane.setBackground(SystemColor.white);
-		
+		setResizable(false);
 		inicialize();
 	}
 	

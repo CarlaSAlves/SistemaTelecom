@@ -97,6 +97,8 @@ public class GUI_gestor_pacotes extends JFrame {
 
 		JButton botaoCriarPacotes = botaoCriarPacotesSetup();
 		getContentPane().add(botaoCriarPacotes);
+		setResizable(false);
+		
 
 		botaoEditarPacoteComercialSetup();
 		getContentPane().add(botaoEditarPacoteComercial);

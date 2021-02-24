@@ -108,6 +108,8 @@ public class GUI_gestor_promocao extends JFrame {
 
 		JButton botaoCriarPromocao = botaoCriarPromocaoSetup();
 		getContentPane().add(botaoCriarPromocao);
+		setResizable(false);
+		
 
 		botaoEditarPromocaoSetup();
 		getContentPane().add(botaoEditarPromocao);

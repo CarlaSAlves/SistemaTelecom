@@ -24,9 +24,7 @@ import javax.swing.JTabbedPane;
 
 public class AreaCliente extends JFrame {
 
-
 	private static final long serialVersionUID = 1L;
-
 	private JPanel panel;
 	private JLabel lblUsernameLogged,lblTempoSessao,lblHoraSistema;
 	private JLabel lblBemVindo;
@@ -37,24 +35,6 @@ public class AreaCliente extends JFrame {
 	private AreaCliente_VerPromocoes areaClienteVerPromo;
 	private String username;
 	private JTabbedPane tabbedPane;
-
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AreaCliente frame = new AreaCliente(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 
 	/**
 	 * Create the frame.
@@ -87,18 +67,36 @@ public class AreaCliente extends JFrame {
 		initialize(guit);
 		ativarNimbusLookAndFeel();
 	}
-
-	public void enviarUsernameAreaCliente(String username) {
-		this.username = username;
-		areaClienteDados.enviarUsernameMeusDados(this.username);
-		areaClienteProdutos.enviarUsernameMeusProdutos(this.username);
+	
+	/**
+	 * Activa o Nimbus Look and Feel
+	 * 
+	 */
+	private void ativarNimbusLookAndFeel() {
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+			if ("Nimbus".equals(info.getName())) {
+				try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
 	}
 
-	public JTabbedPane getTabbedPane() {
-		return tabbedPane;
-	}
-
-
+	/**
+	
+	 /* 
+	 * Contém o corpo da página
+	 * @param guit
+	 */
 	private void initialize(GUI_total guit) {
 		
 		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
@@ -111,6 +109,7 @@ public class AreaCliente extends JFrame {
 		/**
 		 * Define as caracteristicas dos painel base. 
 		 */
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		panel = new JPanel();
 		setContentPane(panel);
@@ -120,8 +119,10 @@ public class AreaCliente extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
 		getContentPane().setLayout(null);
+		setResizable(false);
 
 		/* Cabeçalho */
+	
 		//  Label portal cliente
 
 		JLabel lblPortalCliente = new JLabel("Portal do Cliente");
@@ -136,14 +137,12 @@ public class AreaCliente extends JFrame {
 		lblBemVindo.setBounds(16, 48, 200, 33);
 		panel.add(lblBemVindo);
 
-
 		// Construção JTabbedPane
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		tabbedPane.setBounds(0, 89, 1384, 586); //180, 50
 		panel.add(tabbedPane);
-
 
 		// Ligação a Classe AreaCliente_MeusDados -  Separador os meus dados
 
@@ -152,14 +151,12 @@ public class AreaCliente extends JFrame {
 		panelMeusDados.setLayout(null);
 		panelMeusDados.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
 
-
 		// Ligação a Classe AreaCliente_MeusProdutos-  Separador MeusProdutos
 
 		JPanel panelMeusProdutos = areaClienteProdutos.returnAreaClienteMeusProdutos();
 		tabbedPane.addTab("Meus Produtos",null,  panelMeusProdutos);
 		panelMeusProdutos.setLayout(null);
 		panelMeusProdutos.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
-
 
 		// Ligação a classe ver Pacotes
 
@@ -176,7 +173,8 @@ public class AreaCliente extends JFrame {
 		panelVerTodasPromo.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
 
 		/* RODAPÉ */
-		//Botão Termina sessão
+		
+		//Botão Terminar sessão
 
 		btTerminarSessao = new JButton("Terminar Sessão");
 		btTerminarSessao.setForeground(Color.DARK_GRAY);
@@ -184,7 +182,6 @@ public class AreaCliente extends JFrame {
 		btTerminarSessao.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		btTerminarSessao.setFocusPainted(false);
 		getContentPane().add(btTerminarSessao);
-
 
 		// Action listener botão terminar sessão
 
@@ -198,7 +195,7 @@ public class AreaCliente extends JFrame {
 		});
 
 
-		// Logotipo no rodapé
+		// Logotipo da empresa
 
 		JLabel lblFooter = new JLabel("");
 		lblFooter.setForeground(new Color(0, 0, 0));
@@ -209,12 +206,14 @@ public class AreaCliente extends JFrame {
 		setupTempoSessao();
 		tabbedPane.setSelectedIndex(0);
 
-	}//end initialize method
+	} //end initialize method
 
 
 	/**
-	 * Definição da lable do tempo de sessão
-	 * 
+	 * Configuração das labels de username e temporização.
+	 * @lblUsernameLogged apresenta o username que está logado
+	 * @lblTempoSessao apresenta o tempo de sessão desde o momento que faz login
+	 * @lblHoraSistema apresenta a hora atual do sistema 
 	 */
 	protected void setupTempoSessao() {
 		lblUsernameLogged = new JLabel();
@@ -241,48 +240,60 @@ public class AreaCliente extends JFrame {
 	}
 
 	/**
-	 * Cria uma Lable de Boas Vindas
+	 * Cria uma Label de Boas Vindas
 	 * @param name
 	 */
 	public void setLabelBoasVindas(String name) {
 		lblBemVindo.setText(name);
 
 	}
+	
 	/**
-	 * Activa o Nimbus Look and Feel
-	 * 
+	 * Envia o username para a area cliente
+	 * @param username
 	 */
-	private void ativarNimbusLookAndFeel() {
-		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-			if ("Nimbus".equals(info.getName())) {
-				try {
-					UIManager.setLookAndFeel(info.getClassName());
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e) {
-					e.printStackTrace();
-				}
-				break;
-			}
-		}
+	public void enviarUsernameAreaCliente(String username) {
+		this.username = username;
+		areaClienteDados.enviarUsernameMeusDados(this.username);
+		areaClienteProdutos.enviarUsernameMeusProdutos(this.username);
 	}
 
+	/**
+	 * 
+	 * @return tabbedPane
+	 */
+	public JTabbedPane getTabbedPane() {
+		return tabbedPane;
+	}
+
+	/**
+	 * 
+	 * @return painel
+	 */
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
 
+	/**
+	 * 
+	 * @param username
+	 */
 	public void setUsernameLoggedIn(String username) {
 		lblUsernameLogged.setText("Username: " + username);
 	}
 
+	/**
+	 * 
+	 * @param temporizador
+	 */
 	public void setLblTempoSessao(Duration temporizador) {
 		lblTempoSessao.setText("Sessao: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
 	}
 
+	/**
+	 * 
+	 * @param agora
+	 */
 	public void setLblHoraSistema(String agora) {
 		lblHoraSistema.setText("Data: " + agora);
 
