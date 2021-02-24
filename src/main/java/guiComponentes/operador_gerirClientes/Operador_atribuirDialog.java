@@ -66,6 +66,13 @@ public class Operador_atribuirDialog extends JDialog {
 
 	}
 
+	/**
+	 * 
+	 * @param operador_gerirClientes
+	 * @param promocoes
+	 * @param cliente
+	 * @param modoPromocao
+	 */
 	public Operador_atribuirDialog( Operador_gerirClientes operador_gerirClientes, List<Promocao> promocoes, Cliente cliente, boolean modoPromocao) {
 		this();
 		this.operador_gerirClientes = operador_gerirClientes;
@@ -86,6 +93,9 @@ public class Operador_atribuirDialog extends JDialog {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public Operador_atribuirDialog() {
 		setBounds(500, 300, 450, 170);
 		getContentPane().setLayout(new BorderLayout());

@@ -50,11 +50,25 @@ public class Operador_homepage extends JFrame {
 		inicialize(guit);
 
 	}
+	/**
+	 * Método inicialize, que contém todos os elementos que compõem a homepage. 
+	 * @param guit
+	 */
 
 	private void inicialize(GUI_total guit) {
-
 		ativarNimbusLookAndFeel();
-
+		
+		/*
+		 * Configuração do painel base
+		 * Label com nome da página e boas vindas
+		 * Botões da página:
+		 *  
+		 *  Gerir cliente
+		 *  Visualizar pacotes comerciais
+		 *  Visualizar promoçoes
+		 * 	Terminar sessão
+		 */
+		
 		pane = new JPanel();
 		setContentPane(pane);
 		pane.setLayout(null);
@@ -63,7 +77,6 @@ public class Operador_homepage extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
 		getContentPane().setLayout(null);
-
 
 		JLabel lblPoesia = new JLabel("Portal do Operador");
 		lblPoesia.setBounds(161, 117, 415, 33);
@@ -128,7 +141,7 @@ public class Operador_homepage extends JFrame {
 		});
 
 
-		// Footer 
+		// Botão terminar sessão 
 
 		btVoltar = new JButton("Terminar Sessão");
 		btVoltar.setForeground(Color.DARK_GRAY);
@@ -141,7 +154,7 @@ public class Operador_homepage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				guit.voltarBtOperadorHomePage();
-				//teste
+			
 			}
 		});
 
@@ -163,7 +176,10 @@ public class Operador_homepage extends JFrame {
 	}
 
 	/**
-	 * Define as caracteristicas das labels usernameLogged, tempoSessao e horaSistema
+	 * Configuração das labels de username e temporização.
+	 * @lblUsernameLogged apresenta o username que está logado
+	 * @lblTempoSessao apresenta o tempo de sessão desde o momento que faz login
+	 * @lblHoraSistema apresenta a hora atual do sistema 
 	 */
 	protected void setupTempoSessao() {
 		lblUsernameLogged = new JLabel();
@@ -188,6 +204,9 @@ public class Operador_homepage extends JFrame {
 		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
 	}
 
+	/**
+	 * Configurar interface, look and feel Nimbus 
+	 */
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 			if ("Nimbus".equals(info.getName())) {
@@ -209,24 +228,39 @@ public class Operador_homepage extends JFrame {
 	}
 
 	/**
-	 * @return the labelBoasVindas
+	 * Configuração the labelBoasVindas
 	 */
 	public void setLabelBoasVindas(String username) {
-		labelBoasVindas.setText( username );;
+		labelBoasVindas.setText( username );
 	}
 
+	/**
+	 * @return o painel
+	 */
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
 
+	/**
+	 * Configura a label usernameLogged 
+	 * @param username
+	 */
 	public void setUsernameLoggedIn(String username) {
 		lblUsernameLogged.setText("Username: " + username);
 	}
 
+	/**
+	 * Configura a label de temporizador. 
+	 * @param temporizador
+	 */
 	public void setLblTempoSessao(Duration temporizador) {
 		lblTempoSessao.setText("Sessao: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart()); ;
 	}
 
+	/**
+	 * Configura a label de hora de sistema
+	 * @param agora
+	 */
 	public void setLblHoraSistema(String agora) {
 		lblHoraSistema.setText("Data: " + agora);
 

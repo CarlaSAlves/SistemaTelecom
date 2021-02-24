@@ -36,6 +36,11 @@ public class CriarClienteDialog extends JDialog {
 	private String username;
 	private JLabel lblPassword, lblAuxiliar;
 
+	/**
+	 * Construtor Criar Cliente Dialog
+	 * @param clientePesquisaApp
+	 * @param username
+	 */
 
 	public CriarClienteDialog(GUI_gestor_cliente clientePesquisaApp, String username) {
 		this();

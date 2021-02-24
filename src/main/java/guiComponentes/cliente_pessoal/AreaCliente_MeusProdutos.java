@@ -75,15 +75,17 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		lblSeuPacote = new JLabel("Pacote Comercial");
 		lblSeuPacote.setForeground(Color.WHITE);
 		lblSeuPacote.setBounds(66, 122, 315, 36);
-		lblSeuPacote.setFont(new Font("Dubai Light", Font.PLAIN, 20));
+		lblSeuPacote.setFont(new Font("Dialog", Font.PLAIN, 15));
 		panelMeusProdutos.add(lblSeuPacote);
 
 		textAreaNomePacote = new JTextArea();
+		textAreaNomePacote.setEditable(false);
 		textAreaNomePacote.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textAreaNomePacote.setBounds(66, 169, 300, 31);
 		panelMeusProdutos.add(textAreaNomePacote);
 
 		textAreaDescricaoPacote = new JTextArea();
+		textAreaDescricaoPacote.setEditable(false);
 		textAreaDescricaoPacote.setLineWrap(true);
 		textAreaDescricaoPacote.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textAreaDescricaoPacote.setBounds(66, 222, 300, 104);
@@ -94,11 +96,12 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		// Promoções
 		lblAsSuasPromoces = new JLabel("Promoções");
 		lblAsSuasPromoces.setForeground(Color.WHITE);
-		lblAsSuasPromoces.setFont(new Font("Dubai Light", Font.PLAIN, 20));
+		lblAsSuasPromoces.setFont(new Font("Dialog", Font.PLAIN, 15));
 		lblAsSuasPromoces.setBounds(400, 122, 315, 36); 
 		panelMeusProdutos.add(lblAsSuasPromoces);
 
 		textAreaDescricaoPromocoes = new JTextArea();
+		textAreaDescricaoPromocoes.setEditable(false);
 		textAreaDescricaoPromocoes.setLineWrap(true);
 		textAreaDescricaoPromocoes.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textAreaDescricaoPromocoes.setBounds(400, 222, 300, 104);
@@ -111,7 +114,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 		btnPesquisarPromocoes = new JButton("Pesquisar Promoções");
 		btnPesquisarPromocoes.setFont(new Font("Dialog Light", Font.PLAIN, 12));
-		btnPesquisarPromocoes.setBounds(400, 168, 247, 32);
+		btnPesquisarPromocoes.setBounds(400, 169, 247, 32);
 		btnPesquisarPromocoes.setVisible(false);
 		panelMeusProdutos.add(btnPesquisarPromocoes);
 
