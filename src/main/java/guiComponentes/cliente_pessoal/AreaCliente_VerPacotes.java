@@ -84,19 +84,19 @@ public class AreaCliente_VerPacotes extends JFrame {
 		JLabel labelVerPacotes = new JLabel("Ver todos os Pacotes Comerciais");
 		labelVerPacotes.setForeground(Color.WHITE);
 		labelVerPacotes.setFont(new Font("Dubai Light", Font.BOLD, 22));
-		labelVerPacotes.setBounds(66, 54, 318, 28);
+		labelVerPacotes.setBounds(66, 54, 600, 28);
 		panelVerTodosPacotes.add(labelVerPacotes);
 		
 		JLabel labelPacoteNome = new JLabel("Nome");
 		labelPacoteNome.setForeground(Color.WHITE);
 		labelPacoteNome.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		labelPacoteNome.setBounds(319, 169, 62, 31);
+		labelPacoteNome.setBounds(315, 169, 62, 31);
 		panelVerTodosPacotes.add(labelPacoteNome);
 		
 		JLabel labelPacoteDescricao = new JLabel("Descrição");
 		labelPacoteDescricao.setForeground(Color.WHITE);
 		labelPacoteDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		labelPacoteDescricao.setBounds(319, 223, 87, 23);
+		labelPacoteDescricao.setBounds(315, 223, 87, 23);
 		panelVerTodosPacotes.add(labelPacoteDescricao);
 		
 		textFieldNome = new JTextField();

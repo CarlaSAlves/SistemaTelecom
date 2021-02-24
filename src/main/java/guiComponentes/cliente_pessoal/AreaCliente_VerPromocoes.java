@@ -85,13 +85,13 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		JLabel labelPacoteNome = new JLabel("Nome");
 		labelPacoteNome.setForeground(Color.WHITE);
 		labelPacoteNome.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		labelPacoteNome.setBounds(319, 169, 71, 31);
+		labelPacoteNome.setBounds(315, 169, 71, 31);
 		panelVerTodasPromo.add(labelPacoteNome);
 
 		JLabel labelPromoDescricao = new JLabel("Descrição");
 		labelPromoDescricao.setForeground(Color.WHITE);
 		labelPromoDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 18));
-		labelPromoDescricao.setBounds(319, 223, 87, 23);
+		labelPromoDescricao.setBounds(315, 223, 87, 23);
 		panelVerTodasPromo.add(labelPromoDescricao);
 
 		textFieldNome = new JTextField();
