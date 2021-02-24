@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -56,7 +57,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 		try {
 			initialize();
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -64,12 +65,12 @@ public class AreaCliente_VerPacotes extends JFrame {
 
 	@SuppressWarnings("unchecked")
 	private void initialize() throws Exception {
-		
+
 		/**
 		 * 
 		 */
 		ativarNimbusLookAndFeel();
-		
+
 		/**
 		 * Define as caracteristicas dos painel base. 
 		 */
@@ -78,51 +79,57 @@ public class AreaCliente_VerPacotes extends JFrame {
 		setContentPane(panelVerTodosPacotes);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1384, 586);
-		
+
 
 		// Labels e textFieldNome da página 
-		
+
 		JLabel labelVerPacotes = new JLabel("Ver todos os Pacotes Comerciais");
 		labelVerPacotes.setForeground(Color.WHITE);
 		labelVerPacotes.setFont(new Font("Dubai Light", Font.BOLD, 22));
 		labelVerPacotes.setBounds(66, 54, 600, 28);
 		panelVerTodosPacotes.add(labelVerPacotes);
-		
+
 		JLabel labelPacoteNome = new JLabel("Nome");
 		labelPacoteNome.setForeground(Color.WHITE);
 		labelPacoteNome.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		labelPacoteNome.setBounds(315, 169, 62, 31);
 		panelVerTodosPacotes.add(labelPacoteNome);
-		
+
 		JLabel labelPacoteDescricao = new JLabel("Descrição");
 		labelPacoteDescricao.setForeground(Color.WHITE);
 		labelPacoteDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		labelPacoteDescricao.setBounds(315, 223, 87, 23);
 		panelVerTodosPacotes.add(labelPacoteDescricao);
-		
+
 		textFieldNome = new JTextField();
 		textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textFieldNome.setEditable(false);
 		textFieldNome.setBounds(400, 169, 300, 31);
 		textFieldNome.setColumns(10);
 		panelVerTodosPacotes.add(textFieldNome);
-		
-		
+
+
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		textArea.setBounds(400, 222, 300, 114);
 		panelVerTodosPacotes.add(textArea);
-		
+
 		// Jlist e ScrollBar
-		
-		List<PacoteComercial> pacotes = GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais();
-		
+
+		List<PacoteComercial> pacotes = new ArrayList<PacoteComercial>();
+		for (PacoteComercial p : GestorDeDAO.getGestorDeDAO().getAllPacotesComerciais()) {
+			if (p.isAtivo()) {
+				pacotes.add(p);
+			}
+		}
+
+		@SuppressWarnings("rawtypes")
 		DefaultListModel model = new DefaultListModel();	
 		model.addAll(pacotes);
 		JList listVerPacote = new JList(model);
-	
+
 		ListCellRenderer renderer = new RendererPacote();
 		listVerPacote.setCellRenderer(renderer);
 		listVerPacote.setFont(new Font("Dubai Light", Font.PLAIN, 14));
@@ -131,19 +138,23 @@ public class AreaCliente_VerPacotes extends JFrame {
 		listVerPacote.setVisibleRowCount( -1 ); // -1 sig q ele é variavel
 		listVerPacote.setFixedCellHeight( 24 );
 		listVerPacote.setFixedCellWidth( 226 );
-	
+		listVerPacote.setSelectedIndex(0);
+		PacoteComercial pacote = (PacoteComercial) listVerPacote.getSelectedValue();
+		textFieldNome.setText(pacote.getNome());
+		textArea.setText(pacote.getDescricao());
 		
 		listVerPacote.addListSelectionListener(new ListSelectionListener() {
-			
+
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
+
 				PacoteComercial pacote = (PacoteComercial) listVerPacote.getSelectedValue();
 				textFieldNome.setText(pacote.getNome());
 				textArea.setText(pacote.getDescricao());	
-				
+
 			}
 		});
-		
+
 
 		panelVerTodosPacotes.add(listVerPacote);
 
@@ -151,8 +162,8 @@ public class AreaCliente_VerPacotes extends JFrame {
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(66, 120, 226, 362);
 		panelVerTodosPacotes.add(scrollBar);
-		
-			
+
+
 		/*
 		 * Define a imagem de fundo através de uma label
 		 */
@@ -189,29 +200,26 @@ public class AreaCliente_VerPacotes extends JFrame {
 			}
 		}
 	}
-	
-private class RendererPacote implements ListCellRenderer<PacoteComercial> {
-		
+
+	private class RendererPacote implements ListCellRenderer<PacoteComercial> {
+
 		private JLabel texto;
-		
+
 		public RendererPacote() {
 			texto = new JLabel();
 			texto.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 			texto.setOpaque( true );
 			texto.setForeground(Color.black);
-	
 		}
-		
+
 		public Component getListCellRendererComponent(JList<? extends PacoteComercial> list, PacoteComercial value, int index,
 				boolean isSelected, boolean cellHasFocus) {
 			texto.setText( value.getNome());
 			texto.setBackground(isSelected ? new Color(253, 132, 67) : Color.white );
 			texto.setForeground(isSelected ? Color.white : Color.black);
-			
-			
 			return texto;
 		}
-}
+	}
 
 
 	public JPanel returnAreaClienteVerPacotes() {

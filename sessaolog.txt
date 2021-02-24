@@ -1080,3 +1080,33 @@
 <duração da sessão:	0:9>
 </sessao>
 
+<sessao>
+<username:	admin>
+<data e hora do login:	24-02-2021 12:10:26>
+<duração da sessão:	0:4>
+</sessao>
+
+<sessao>
+<username:	ana>
+<data e hora do login:	24-02-2021 12:10:33>
+<duração da sessão:	0:7>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	24-02-2021 12:10:46>
+<duração da sessão:	0:11>
+</sessao>
+
+<sessao>
+<username:	andreCar>
+<data e hora do login:	24-02-2021 12:11:03>
+<duração da sessão:	0:48>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	24-02-2021 12:11:56>
+<duração da sessão:	0:8>
+</sessao>
+

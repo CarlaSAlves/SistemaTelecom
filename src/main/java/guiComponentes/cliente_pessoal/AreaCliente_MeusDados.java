@@ -210,7 +210,7 @@ public class AreaCliente_MeusDados extends JFrame {
 				btCancelar.setVisible(true);
 				btConfirmar.setVisible(true);
 
-
+				textFieldID.setEnabled(false);
 				textFieldDadosNome.setEditable(true);
 				textFieldDadosNIF.setEditable(true);
 				textFieldDadosMorada.setEditable(true);
@@ -391,6 +391,7 @@ public class AreaCliente_MeusDados extends JFrame {
 				btCancelar.setVisible(false);
 				btConfirmar.setVisible(false);
 
+				textFieldID.setEnabled(true);
 				textFieldDadosNome.setEditable(false);
 				textFieldDadosNIF.setEditable(false);
 				textFieldDadosMorada.setEditable(false);
@@ -405,6 +406,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 			}
 		});
+		
 		btConfirmar.setForeground(Color.DARK_GRAY);
 		btConfirmar.setVisible(false);
 		btConfirmar.setFont(new Font("Dubai Light", Font.PLAIN, 16));
@@ -426,7 +428,7 @@ public class AreaCliente_MeusDados extends JFrame {
 					textFieldID.setText("" +cliente.getId());
 				}
 
-
+				textFieldID.setEnabled(true);
 				textFieldDadosNome.setEditable(false);
 				textFieldDadosNIF.setEditable(false);
 				textFieldDadosMorada.setEditable(false);

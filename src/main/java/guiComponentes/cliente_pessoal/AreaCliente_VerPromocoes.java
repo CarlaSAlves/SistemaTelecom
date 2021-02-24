@@ -7,6 +7,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -21,6 +22,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import servico.GestorDeDAO;
+import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
@@ -118,8 +120,13 @@ public class AreaCliente_VerPromocoes extends JFrame {
 
 		// Jlist e ScrollBar
 		
-		List<Promocao> promocoes = GestorDeDAO.getGestorDeDAO().getAllPromocoes();
-		
+		List<Promocao> promocoes = new ArrayList<Promocao>();
+		for (Promocao p : GestorDeDAO.getGestorDeDAO().getAllPromocoes()) {
+			if (p.isAtiva()) {
+				promocoes.add(p);
+			}
+		}
+				
 		DefaultListModel model = new DefaultListModel();	
 		model.addAll(promocoes);
 		JList listVerPromo = new JList(model);
@@ -132,7 +139,10 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		listVerPromo.setVisibleRowCount( -1 ); // -1 sig q ele é variavel
 		listVerPromo.setFixedCellHeight( 24 );
 		listVerPromo.setFixedCellWidth( 226 );
-	
+		listVerPromo.setSelectedIndex(0);
+		Promocao promocao = (Promocao) listVerPromo.getSelectedValue();
+		textFieldNome.setText(promocao.getNome());
+		textArea.setText(promocao.getDescricao());	
 		
 		listVerPromo.addListSelectionListener(new ListSelectionListener() {
 			
@@ -199,16 +209,13 @@ private class RendererPromocao implements ListCellRenderer<Promocao> {
 			texto.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 			texto.setOpaque( true );
 			texto.setForeground(Color.black);
-	
 		}
 		
 		public Component getListCellRendererComponent(JList<? extends Promocao> list, Promocao value, int index,
 				boolean isSelected, boolean cellHasFocus) {
 			texto.setText( value.getNome());
 			texto.setBackground(isSelected ? new Color(253, 132, 67) : Color.white );
-			texto.setForeground(isSelected ? Color.white : Color.black);
-			
-			
+			texto.setForeground(isSelected ? Color.white : Color.black);		
 			return texto;
 		}
 }
