@@ -37,16 +37,12 @@ import javax.swing.JButton;
 public class AreaCliente_MeusProdutos extends JFrame {
 
 	private JPanel panelMeusProdutos;
-	private JTextArea textAreaNomePacote;
-	private JTextArea textAreaDescricaoPacote;
-	private JTextArea textAreaDescricaoPromocoes;
+	private JTextArea textAreaNomePacote, textAreaDescricaoPacote, textAreaDescricaoPromocoes;
 	private JComboBox<Promocao> comboBoxPromocoes;
 	private JLabel lblAsSuasPromoces, lblSeuPacote;
 	private String userName;
-	private JButton btnPesquisarPacotes;
-	private JButton btnPesquisarPromocoes;
-
-
+	private JButton btnPesquisarPacotes, btnPesquisarPromocoes;
+	
 
 	/**
 	 * Create the frame.
@@ -55,9 +51,10 @@ public class AreaCliente_MeusProdutos extends JFrame {
 	public AreaCliente_MeusProdutos(){	
 		initialize();	
 	}
-
-
-
+	
+	/**
+	 * Configurar interface, look and feel Nimbus 
+	 */
 	@SuppressWarnings("null")
 	private void initialize() {
 
@@ -69,6 +66,13 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		panelMeusProdutos.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(panelMeusProdutos);
 		panelMeusProdutos.setLayout(null);
+		
+		JLabel lblOsSeusProdutos = new JLabel("Os Seus Produtos");
+		lblOsSeusProdutos.setForeground(Color.WHITE);
+		lblOsSeusProdutos.setFont(new Font("Dubai Light", Font.BOLD, 22));
+		lblOsSeusProdutos.setBounds(66, 55, 234, 28);
+		panelMeusProdutos.add(lblOsSeusProdutos);
+		
 
 		// Área Pacote Comercial
 
@@ -91,9 +95,8 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		textAreaDescricaoPacote.setBounds(66, 222, 300, 104);
 		panelMeusProdutos.add(textAreaDescricaoPacote);
 
-
-
 		// Promoções
+		
 		lblAsSuasPromoces = new JLabel("Promoções");
 		lblAsSuasPromoces.setForeground(Color.WHITE);
 		lblAsSuasPromoces.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -125,12 +128,6 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		panelMeusProdutos.add(btnPesquisarPacotes);
 
 
-		JLabel lblOsSeusProdutos = new JLabel("Os Seus Produtos");
-		lblOsSeusProdutos.setForeground(Color.WHITE);
-		lblOsSeusProdutos.setFont(new Font("Dubai Light", Font.BOLD, 22));
-		lblOsSeusProdutos.setBounds(66, 55, 234, 28);
-		panelMeusProdutos.add(lblOsSeusProdutos);
-
 		//Imagem fundo
 
 		JLabel imagemDados = new JLabel("");
@@ -144,7 +141,6 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 	/**
 	 * Cria o renderer da ComboBox
-	 * 
 	 *
 	 */
 
@@ -194,10 +190,18 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		}
 	}
 
+	/**
+	 * 
+	 * @return painel 
+	 */
 	public JPanel returnAreaClienteMeusProdutos() {
 		return  (JPanel) getContentPane();
 	}
 
+	/**
+	 * Método que faz o username percorrer os vários paineis.
+	 * @param username
+	 */
 	public void enviarUsernameMeusProdutos(String username) {
 		this.userName = username;
 
@@ -270,10 +274,18 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 	}
 
+	/**
+	 * 
+	 * @return btnPesquisarPacotes
+	 */
 	public JButton getBtnPesquisarPacotes() {
 		return btnPesquisarPacotes;
 	}
 
+	/**
+	 * 
+	 * @return btnPesquisarPromocoes
+	 */
 	public JButton getBtnPesquisarPromocoes() {
 		return btnPesquisarPromocoes;
 	}
