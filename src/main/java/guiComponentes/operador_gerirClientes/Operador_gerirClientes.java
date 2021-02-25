@@ -334,7 +334,7 @@ public class Operador_gerirClientes extends JFrame {
 	public void botaoVisualizarPacote() {
 		btnVisualizarPacote = new JButton("Visualizar Pacote Comercial");
 		btnVisualizarPacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		btnVisualizarPacote.setBounds(1136, 255, 187, 40);
+		btnVisualizarPacote.setBounds(1113, 256, 209, 40);
 		pane.add(btnVisualizarPacote);
 		btnVisualizarPacote.addActionListener(new ActionListener() {
 
@@ -378,7 +378,7 @@ public class Operador_gerirClientes extends JFrame {
 	public void botaoVisualizarPromocao() {
 		btVisualizarPromocao = new JButton("Visualizar Promoções");
 		btVisualizarPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		btVisualizarPromocao.setBounds(1136, 204, 187, 40);
+		btVisualizarPromocao.setBounds(1113, 205, 209, 40);
 		pane.add(btVisualizarPromocao);
 		btVisualizarPromocao.addActionListener(new ActionListener() {
 
@@ -421,7 +421,7 @@ public class Operador_gerirClientes extends JFrame {
 		btnRemoverPromo = new JButton("Remover Promoção");
 		btnRemoverPromo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btnRemoverPromo.setEnabled(false);
-		btnRemoverPromo.setBounds(742, 204, 187, 40);
+		btnRemoverPromo.setBounds(719, 205, 187, 40);
 		pane.add(btnRemoverPromo);
 		btnRemoverPromo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -461,7 +461,7 @@ public class Operador_gerirClientes extends JFrame {
 	public void botaoAtribuirPromocao() {
 		btAtribuirPromocao = new JButton("Atribuir Promoção");
 		btAtribuirPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		btAtribuirPromocao.setBounds(939, 204, 187, 40);
+		btAtribuirPromocao.setBounds(916, 205, 187, 40);
 		pane.add(btAtribuirPromocao);
 		btAtribuirPromocao.addActionListener(new ActionListener() {
 
@@ -497,7 +497,7 @@ public class Operador_gerirClientes extends JFrame {
 	private void botaoAtribuirPacote() {
 		btAtribuirPacote = new JButton("Atribuir Pacote Comercial");
 		btAtribuirPacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		btAtribuirPacote.setBounds(939, 255, 187, 40);
+		btAtribuirPacote.setBounds(916, 256, 187, 40);
 		pane.add(btAtribuirPacote);
 
 		btAtribuirPacote.addActionListener(new ActionListener() {
@@ -568,7 +568,7 @@ public class Operador_gerirClientes extends JFrame {
 		btnVerHistorico = new JButton("Ver Historico");
 		btnVerHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btnVerHistorico.setEnabled(false);
-		btnVerHistorico.setBounds(742, 255, 187, 40);
+		btnVerHistorico.setBounds(719, 256, 187, 40);
 		btnVerHistorico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();

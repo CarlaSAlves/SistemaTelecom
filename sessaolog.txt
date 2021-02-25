@@ -1140,3 +1140,9 @@
 <duração da sessão:	0:10>
 </sessao>
 
+<sessao>
+<username:	ana>
+<data e hora do login:	25-02-2021 11:50:20>
+<duração da sessão:	0:5>
+</sessao>
+

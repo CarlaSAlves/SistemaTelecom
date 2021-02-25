@@ -134,7 +134,7 @@ public class AreaCliente extends JFrame {
 		lblBemVindo = new JLabel("");
 		lblBemVindo.setForeground(new Color(253,132,67));
 		lblBemVindo.setFont(new Font("Dubai Light", Font.BOLD, 17));
-		lblBemVindo.setBounds(16, 48, 200, 33);
+		lblBemVindo.setBounds(16, 48, 250, 33);
 		panel.add(lblBemVindo);
 
 		// Construção JTabbedPane

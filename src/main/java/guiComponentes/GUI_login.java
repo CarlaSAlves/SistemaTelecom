@@ -65,13 +65,13 @@ public class GUI_login extends JFrame {
 		JLabel labelLogin = new JLabel("Username");
 		labelLogin.setBounds(209, 383, 131, 27);
 		labelLogin.setForeground(Color.WHITE);
-		labelLogin.setFont(new Font("Dubai Light", Font.BOLD, 20));
+		labelLogin.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		getContentPane().add(labelLogin);
 		setResizable(false);
 		labelPass = new JLabel("Password");
 		labelPass.setBounds(209, 430, 138, 27);
 		labelPass.setForeground(Color.WHITE);
-		labelPass.setFont(new Font("Dubai Light", Font.BOLD, 20));
+		labelPass.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		getContentPane().add(labelPass);
 
 		// textField de username 
@@ -152,7 +152,7 @@ public class GUI_login extends JFrame {
 		labelConfm.setBounds(359, 578, 251, 18);
 		labelConfm.setForeground(new Color(70,74,101));
 		labelConfm.setVisible(false);
-		labelConfm.setFont(new Font("Dubai Light", Font.PLAIN, 12));
+		labelConfm.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		getContentPane().add(labelConfm);
 
 		// icon de user 
@@ -170,7 +170,7 @@ public class GUI_login extends JFrame {
 		btLogin.setBackground(new Color(240, 240, 240));
 		btLogin.setToolTipText("Carregue para fazer login");
 		btLogin.setFocusPainted(false);
-		btLogin.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		btLogin.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		btLogin.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -203,7 +203,7 @@ public class GUI_login extends JFrame {
 		btnSair.setToolTipText("Carregue para fazer signout");
 		btnSair.setBounds(375, 520, 104, 33);
 		btnSair.setForeground(Color.BLACK);
-		btnSair.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		btnSair.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		btnSair.setFocusPainted(false);
 		btnSair.setBackground(SystemColor.menu);
 		panel.add(btnSair);
@@ -211,6 +211,7 @@ public class GUI_login extends JFrame {
 		// imagem de fundo 
 
 		JLabel icon = new JLabel("");
+		icon.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		icon.setIcon(new ImageIcon(GUI_login.class.getResource("/guiComponentes/img/fundoAltran.png")));
 		icon.setBounds(0, 89, 1394, 586);
 		panel.add(icon);
