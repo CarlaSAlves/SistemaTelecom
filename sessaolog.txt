@@ -1062,3 +1062,39 @@
 <duração da sessão:	0:30>
 </sessao>
 
+<sessao>
+<username:	andreCar>
+<data e hora do login:	24-02-2021 15:38:45>
+<duração da sessão:	5:49>
+</sessao>
+
+<sessao>
+<username:	ana>
+<data e hora do login:	24-02-2021 17:37:06>
+<duração da sessão:	0:11>
+</sessao>
+
+<sessao>
+<username:	andreCar>
+<data e hora do login:	24-02-2021 17:37:25>
+<duração da sessão:	0:13>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	24-02-2021 17:37:46>
+<duração da sessão:	0:7>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	24-02-2021 17:37:57>
+<duração da sessão:	0:10>
+</sessao>
+
+<sessao>
+<username:	ana>
+<data e hora do login:	25-02-2021 11:50:20>
+<duração da sessão:	0:5>
+</sessao>
+

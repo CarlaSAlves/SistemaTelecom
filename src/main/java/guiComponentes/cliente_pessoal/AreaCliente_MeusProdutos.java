@@ -80,7 +80,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		lblSeuPacote = new JLabel("Pacote Comercial");
 		lblSeuPacote.setForeground(Color.WHITE);
 		lblSeuPacote.setBounds(66, 122, 315, 36);
-		lblSeuPacote.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblSeuPacote.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		panelMeusProdutos.add(lblSeuPacote);
 
 		textAreaNomePacote = new JTextArea();
@@ -100,7 +100,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		
 		lblAsSuasPromoces = new JLabel("Promoções");
 		lblAsSuasPromoces.setForeground(Color.WHITE);
-		lblAsSuasPromoces.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblAsSuasPromoces.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		lblAsSuasPromoces.setBounds(400, 122, 315, 36); 
 		panelMeusProdutos.add(lblAsSuasPromoces);
 
@@ -117,13 +117,13 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		panelMeusProdutos.add(comboBoxPromocoes);
 
 		btnPesquisarPromocoes = new JButton("Pesquisar Promoções");
-		btnPesquisarPromocoes.setFont(new Font("Dialog Light", Font.PLAIN, 12));
+		btnPesquisarPromocoes.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		btnPesquisarPromocoes.setBounds(400, 169, 247, 32);
 		btnPesquisarPromocoes.setVisible(false);
 		panelMeusProdutos.add(btnPesquisarPromocoes);
 
 		btnPesquisarPacotes = new JButton("Pesquisar Pacotes Comerciais");
-		btnPesquisarPacotes.setFont(new Font("Dialog Light", Font.PLAIN, 12));
+		btnPesquisarPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		btnPesquisarPacotes.setBounds(66, 168, 264, 32);
 		btnPesquisarPacotes.setVisible(false);
 		panelMeusProdutos.add(btnPesquisarPacotes);

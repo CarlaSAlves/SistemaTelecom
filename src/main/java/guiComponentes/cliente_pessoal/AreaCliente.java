@@ -114,7 +114,7 @@ public class AreaCliente extends JFrame {
 		panel = new JPanel();
 		setContentPane(panel);
 		panel.setLayout(null);
-		getContentPane().setFont(new Font("Dubai", Font.PLAIN, 12));
+		getContentPane().setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		getContentPane().setBackground(SystemColor.text);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
@@ -128,13 +128,13 @@ public class AreaCliente extends JFrame {
 		JLabel lblPortalCliente = new JLabel("Portal do Cliente");
 		lblPortalCliente.setBounds(16, 17, 508, 33);
 		lblPortalCliente.setForeground(new Color(253,132,67));
-		lblPortalCliente.setFont(new Font("Dubai", Font.BOLD, 40));
+		lblPortalCliente.setFont(new Font("Dubai Light", Font.BOLD, 40));
 		getContentPane().add(lblPortalCliente);
 
 		lblBemVindo = new JLabel("");
 		lblBemVindo.setForeground(new Color(253,132,67));
 		lblBemVindo.setFont(new Font("Dubai Light", Font.BOLD, 17));
-		lblBemVindo.setBounds(16, 48, 200, 33);
+		lblBemVindo.setBounds(16, 48, 250, 33);
 		panel.add(lblBemVindo);
 
 		// Construção JTabbedPane

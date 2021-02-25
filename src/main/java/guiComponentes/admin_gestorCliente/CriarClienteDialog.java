@@ -135,7 +135,7 @@ public class CriarClienteDialog extends JDialog {
 
 		lblPassword = new JLabel( "Password");
 		lblPassword.setBounds(9, 163, 82, 27);
-		lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		lblPassword.setFont(new Font("Arial Nova Light", Font.PLAIN, 13));
 		contentPanel.add(lblPassword);
 
 		lblAuxiliar = new JLabel();

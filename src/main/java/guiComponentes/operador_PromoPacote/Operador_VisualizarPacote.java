@@ -246,7 +246,7 @@ public class Operador_VisualizarPacote extends JFrame {
 	private void btVoltarOperadorHomepageSetup() {
 		btVoltarOperadorHomepage = new JButton("Voltar");
 		btVoltarOperadorHomepage.setBounds(6, 709, 119, 38);
-		btVoltarOperadorHomepage.setFont(new Font("Dialog", Font.PLAIN, 13));
+		btVoltarOperadorHomepage.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		
 		btVoltarOperadorHomepage.setFocusPainted(false);
 

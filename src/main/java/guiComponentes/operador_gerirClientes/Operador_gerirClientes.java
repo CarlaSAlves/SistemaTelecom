@@ -38,19 +38,14 @@ import standard_value_object.Promocao;
 public class Operador_gerirClientes extends JFrame {
 
 	private int numberRows;
-	private JPanel pane;
-	private JLabel lblCampoPesquisas, lblTempoSessao, lblUsernameLogged, lblHoraSistema, lblResultados, labelID, labelNIF, labelNome, labelMorada;
+	private JPanel pane, painelPesquisa;
+	private JLabel lblCampoPesquisa, lblTempoSessao, lblUsernameLogged, lblHoraSistema, lblResultados, labelID, labelNIF, labelNome, labelMorada;
 	private JButton btAtribuirPacote, btAtribuirPromocao, btVisualizarPromocao, btVoltarOperador, btnVisualizarPacote, btnRemoverPromo ;
 	private Font font = new Font("Dubai Light", Font.PLAIN, 15);
 	private JTable table;
-	private JTextField textPesquisaID;
-	private JTextField textPesquisaNIF;
-	private JTextField textFieldNome;
-	private JTextField textFieldMorada;
-	private JButton btnVerHistorico;
-	private JButton botaoPesquisa;
+	private JTextField textPesquisaID, textPesquisaNIF, textFieldNome, textFieldMorada ;
+	private JButton btnVerHistorico, botaoPesquisa;
 	private String username;
-	private JPanel painelPesquisa;
 	private JCheckBox checkBoxAtivo;
 
 
@@ -61,6 +56,7 @@ public class Operador_gerirClientes extends JFrame {
 	public Operador_gerirClientes() {
 
 		ativarNimbusLookAndFeel();
+		
 		pane = new JPanel();
 		setContentPane(pane);
 		pane.setLayout(null);
@@ -68,11 +64,11 @@ public class Operador_gerirClientes extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 30, 1400, 800);
 		pane.setBackground(SystemColor.text);
-
+		setResizable(false);
+		
 		inicialize();
 
 	}
-
 
 	/**
 	 * Contém o corpo da página
@@ -90,6 +86,7 @@ public class Operador_gerirClientes extends JFrame {
 		 *  ID
 		 *  NIF
 		 *  Nome
+		 *  Morada
 		 *  Ativo
 		 *  Botão Pesquisar
 		 */ 
@@ -98,15 +95,17 @@ public class Operador_gerirClientes extends JFrame {
 		painelPesquisa.setBackground(Color.WHITE);
 		painelPesquisa.setBounds(96, 77, 453, 221);
 		pane.add(painelPesquisa);
-		setResizable(false);
+		
 		labelsPesquisaSetup();
 		textFieldsPesquisaSetup();
-		lblCamposPesquisasSetup();
-
-
-		pane.add(lblCampoPesquisas);
+		
+		lblCampoPesquisa = new JLabel("Campo de Pesquisa");
+		lblCampoPesquisa.setFont(new Font("Dubai Light", Font.BOLD, 20));
+		lblCampoPesquisa.setBounds(96, 39, 294, 26);
+		pane.add(lblCampoPesquisa);
 
 		painelPesquisa();
+		botaoPesquisaSetup();
 
 		/*
 		 *  Botões da página:
@@ -117,28 +116,18 @@ public class Operador_gerirClientes extends JFrame {
 		 *  Visualizar Promoção 
 		 *  Remover Promoção
 		 *  Ver Historico
+		 *  Voltar
 		 *  
 		 */
 
+		botaoAtribuirPacote();
+		botaoAtribuirPromocao();	
+		botaoVisualizarPacote();
+		botaoVisualizarPromocao();
+		botaoRemoverPromocao();
 		botaoVisualizarHistoricoSetup();
 		btVoltarOperadorGerirClientes();
-		botaoPesquisaSetup();
-		botaoAtribuirPacote();
-		botaoAtribuirPromocao();		
-		botaoRemoverPromocao();
-
-		botaoVisualizarPromocao();
-
-		botaoVisualizarPacote();
-
-
-		btnVisualizarPacote.setEnabled(false);
-		btAtribuirPacote.setEnabled(false);
-		btAtribuirPromocao.setEnabled(false);
-		btVisualizarPromocao.setEnabled(false);
-
-
-
+		
 		/**
 		 * Tabela de Resultados:
 		 * 
@@ -178,6 +167,30 @@ public class Operador_gerirClientes extends JFrame {
 		timerSetup();
 
 	}// end initialize
+	
+	/**
+	 * Configurar interface, look and feel Nimbus 
+	 */
+
+	private void ativarNimbusLookAndFeel() {
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+			if ("Nimbus".equals(info.getName())) {
+				try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
+
+	}
 
 	/**
 	 * /**
@@ -188,22 +201,22 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	private void labelsPesquisaSetup() {
 		labelID = new JLabel("ID");
-		labelID.setFont(new Font("Dialog", Font.PLAIN, 13));
+		labelID.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		labelID.setBounds(6, 15, 39, 18);
 		painelPesquisa.add(labelID);
 
 		labelNIF = new JLabel("NIF");
-		labelNIF.setFont(new Font("Dialog", Font.PLAIN, 13));
+		labelNIF.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		labelNIF.setBounds(6, 49, 56, 18);
 		painelPesquisa.add(labelNIF);
 
 		labelNome = new JLabel("Nome");
-		labelNome.setFont(new Font("Dialog", Font.PLAIN, 13));
+		labelNome.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		labelNome.setBounds(6, 87, 56, 18);
 		painelPesquisa.add(labelNome);
 
 		labelMorada = new JLabel("Morada");
-		labelMorada.setFont(new Font("Dialog", Font.PLAIN, 13));
+		labelMorada.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		labelMorada.setBounds(6, 116, 56, 27);
 		painelPesquisa.add(labelMorada);
 
@@ -241,7 +254,7 @@ public class Operador_gerirClientes extends JFrame {
 		// Checkbox Ativo
 
 		checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setFont(new Font("Dialog", Font.PLAIN, 13));
+		checkBoxAtivo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		checkBoxAtivo.setBackground(Color.WHITE);
 		checkBoxAtivo.setBounds(234, 150, 69, 24);
 		painelPesquisa.add(checkBoxAtivo);
@@ -256,7 +269,7 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	private void botaoPesquisaSetup() {
 		botaoPesquisa = new JButton("Pesquisar");
-		botaoPesquisa.setFont(new Font("Dialog", Font.PLAIN, 13));
+		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		botaoPesquisa.setBounds(72, 181, 371, 27);
 		botaoPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -320,8 +333,8 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	public void botaoVisualizarPacote() {
 		btnVisualizarPacote = new JButton("Visualizar Pacote Comercial");
-		btnVisualizarPacote.setFont(new Font("Dialog", Font.PLAIN, 13));
-		btnVisualizarPacote.setBounds(1136, 255, 187, 40);
+		btnVisualizarPacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		btnVisualizarPacote.setBounds(1113, 256, 209, 40);
 		pane.add(btnVisualizarPacote);
 		btnVisualizarPacote.addActionListener(new ActionListener() {
 
@@ -364,8 +377,8 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	public void botaoVisualizarPromocao() {
 		btVisualizarPromocao = new JButton("Visualizar Promoções");
-		btVisualizarPromocao.setFont(new Font("Dialog", Font.PLAIN, 13));
-		btVisualizarPromocao.setBounds(1136, 204, 187, 40);
+		btVisualizarPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		btVisualizarPromocao.setBounds(1113, 205, 209, 40);
 		pane.add(btVisualizarPromocao);
 		btVisualizarPromocao.addActionListener(new ActionListener() {
 
@@ -402,13 +415,13 @@ public class Operador_gerirClientes extends JFrame {
 	 * Envia mensagem "Cliente Removido com Sucesso"
 	 * Se não está nenhum cliente selecionado, o botão não está selecionável.
 	 * Existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado.
-	 * @botaoDesativarOperador - botão dinâmico (ativo/desativo)
+	 * @btnRemoverPromo - botão dinâmico (ativo/desativo)
 	 */
 	public void botaoRemoverPromocao() {
 		btnRemoverPromo = new JButton("Remover Promoção");
-		btnRemoverPromo.setFont(new Font("Dialog", Font.PLAIN, 13));
+		btnRemoverPromo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btnRemoverPromo.setEnabled(false);
-		btnRemoverPromo.setBounds(742, 204, 187, 40);
+		btnRemoverPromo.setBounds(719, 205, 187, 40);
 		pane.add(btnRemoverPromo);
 		btnRemoverPromo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -447,8 +460,8 @@ public class Operador_gerirClientes extends JFrame {
 
 	public void botaoAtribuirPromocao() {
 		btAtribuirPromocao = new JButton("Atribuir Promoção");
-		btAtribuirPromocao.setFont(new Font("Dialog", Font.PLAIN, 13));
-		btAtribuirPromocao.setBounds(939, 204, 187, 40);
+		btAtribuirPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		btAtribuirPromocao.setBounds(916, 205, 187, 40);
 		pane.add(btAtribuirPromocao);
 		btAtribuirPromocao.addActionListener(new ActionListener() {
 
@@ -473,10 +486,18 @@ public class Operador_gerirClientes extends JFrame {
 		});
 	}
 
+	/**
+	 * Configuração do botão atribuir pacote.
+	 * Quando premido, abre a janela Dialog "Atribuir Pacote Comercial" e apresenta uma comboBox 
+	 * onde se podem selecionar os pacotes disponíveis
+	 * Se não está nenhum cliente selecionado, o botão não está selecionável.
+	 * Existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado.
+	 * @btAtribuirPacote - abre a Operador_atribuirDialog 
+	 */
 	private void botaoAtribuirPacote() {
 		btAtribuirPacote = new JButton("Atribuir Pacote Comercial");
-		btAtribuirPacote.setFont(new Font("Dialog", Font.PLAIN, 13));
-		btAtribuirPacote.setBounds(939, 255, 187, 40);
+		btAtribuirPacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
+		btAtribuirPacote.setBounds(916, 256, 187, 40);
 		pane.add(btAtribuirPacote);
 
 		btAtribuirPacote.addActionListener(new ActionListener() {
@@ -545,9 +566,9 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	private void botaoVisualizarHistoricoSetup() {
 		btnVerHistorico = new JButton("Ver Historico");
-		btnVerHistorico.setFont(new Font("Dialog", Font.PLAIN, 13));
+		btnVerHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btnVerHistorico.setEnabled(false);
-		btnVerHistorico.setBounds(742, 255, 187, 40);
+		btnVerHistorico.setBounds(719, 256, 187, 40);
 		btnVerHistorico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
@@ -614,7 +635,7 @@ public class Operador_gerirClientes extends JFrame {
 	private void btVoltarOperadorGerirClientes() {
 		btVoltarOperador = new JButton("Voltar");
 		btVoltarOperador.setBounds(6, 709, 119, 38);
-		btVoltarOperador.setFont(new Font("Dialog", Font.PLAIN, 13));
+		btVoltarOperador.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btVoltarOperador.setBackground(Color.WHITE);
 		btVoltarOperador.setFocusPainted(false);
 		pane.add(btVoltarOperador);
@@ -629,6 +650,8 @@ public class Operador_gerirClientes extends JFrame {
 	private JScrollPane scrollPaneSetup() {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(33, 33, 1224, 330);
+		
+		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setRowSelectionAllowed(true);
@@ -683,41 +706,6 @@ public class Operador_gerirClientes extends JFrame {
 			}	
 		});
 		return scrollPane;
-	}
-
-
-	/**
-	 * Configurar interface, look and feel Nimbus 
-	 */
-
-	private void ativarNimbusLookAndFeel() {
-		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-			if ("Nimbus".equals(info.getName())) {
-				try {
-					UIManager.setLookAndFeel(info.getClassName());
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e) {
-					e.printStackTrace();
-				}
-				break;
-			}
-		}
-
-	}
-
-	/**
-	 * Label dos Campos de Pesquisa:r
-	 */ 
-	private void lblCamposPesquisasSetup() {
-		lblCampoPesquisas = new JLabel("Campo de Pesquisa");
-		lblCampoPesquisas.setFont(new Font("Dubai Light", Font.BOLD, 20));
-		lblCampoPesquisas.setBounds(96, 39, 294, 26);
-
 	}
 
 	/**

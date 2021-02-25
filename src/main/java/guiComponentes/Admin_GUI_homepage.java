@@ -84,7 +84,7 @@ public class Admin_GUI_homepage extends JFrame {
 		JLabel lblTitulo = new JLabel("Portal do Administrador");
 		lblTitulo.setBounds(161, 117, 508, 33);
 		lblTitulo.setForeground(new Color(70,74,101));
-		lblTitulo.setFont(new Font("Dubai", Font.BOLD, 40));
+		lblTitulo.setFont(new Font("Dubai Light", Font.BOLD, 40));
 		getContentPane().add(lblTitulo);
 		setResizable(false);
 		
@@ -102,7 +102,7 @@ public class Admin_GUI_homepage extends JFrame {
 		btGerirClientes.setForeground(Color.DARK_GRAY);
 		btGerirClientes.setToolTipText("Gestão de Clientes");	
 		btGerirClientes.setFocusPainted(false);
-		btGerirClientes.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btGerirClientes.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		getContentPane().add(btGerirClientes);
 
 		btGerirOperadores = new JButton("Gerir Operadores");
@@ -110,14 +110,14 @@ public class Admin_GUI_homepage extends JFrame {
 		btGerirOperadores.setToolTipText("Gestão de Operadores");
 		btGerirOperadores.setForeground(Color.DARK_GRAY);
 		btGerirOperadores.setFocusPainted(false);
-		btGerirOperadores.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btGerirOperadores.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		getContentPane().add(btGerirOperadores);
 
 		btGerirPacotes = new JButton("Gerir Pacotes Comerciais");
 		btGerirPacotes.setBounds(239, 395, 286, 60);
 		btGerirPacotes.setToolTipText("Gestão de Pacotes de Clientes");
 		btGerirPacotes.setForeground(Color.DARK_GRAY);
-		btGerirPacotes.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btGerirPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		btGerirPacotes.setFocusPainted(false);
 		getContentPane().add(btGerirPacotes);
 
@@ -125,7 +125,7 @@ public class Admin_GUI_homepage extends JFrame {
 		btGerirPromocoes.setBounds(239, 483, 286, 60);
 		btGerirPromocoes.setToolTipText("Gerir Promoções");
 		btGerirPromocoes.setForeground(Color.DARK_GRAY);
-		btGerirPromocoes.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btGerirPromocoes.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		btGerirPromocoes.setFocusPainted(false);
 		getContentPane().add(btGerirPromocoes);
 
@@ -141,7 +141,7 @@ public class Admin_GUI_homepage extends JFrame {
 		btVoltar = new JButton("Terminar Sessão");
 		btVoltar.setForeground(Color.DARK_GRAY);
 		btVoltar.setBounds(16, 687, 180, 50);
-		btVoltar.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btVoltar.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		btVoltar.setFocusPainted(false);
 		getContentPane().add(btVoltar);
 

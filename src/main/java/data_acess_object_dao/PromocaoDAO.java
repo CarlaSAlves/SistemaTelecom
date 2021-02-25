@@ -227,7 +227,8 @@ public class PromocaoDAO {
 		PreparedStatement myStmt = null;
 
 		try {
-			myStmt = myConn.prepareStatement("INSERT INTO promocao(nome, descricao, ativa, data_inicio) VALUES(?,?,?,?)");
+			myStmt = myConn.prepareStatement("INSERT INTO promocao(nome, descricao, ativa, data_inicio) VALUES(?,?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
 
 			myStmt.setString(1, promocao.getNome());
 			myStmt.setString(2, promocao.getDescricao());
@@ -235,8 +236,18 @@ public class PromocaoDAO {
 			
 			//se ativo = true, mudar a data_inicio para agora. De outro modo, colocar nulo na data_inicio
 			myStmt.setTimestamp(4, promocao.isAtiva() ? new Timestamp(System.currentTimeMillis()) : null);
-
 			myStmt.executeUpdate();
+			
+			// se criação foi bem sucedida, vamos fazer parse à resposta enviada pela base de dados para extratir o id da entidade criada
+			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
+				if (generatedKeys.next()) {
+					//recuperamos o id do funcionario recém-criado e vamos atribui-lo ao objeto funcionario enviado como parametro nesta funçao, só para o reaproveitar
+					promocao.setId((int)generatedKeys.getLong(1));
+				}
+				else {
+					throw new SQLException("Criação de pacote falhou. Nenhum ID foi devolvido.");
+				}
+			}
 
 		}catch(Exception e) {
 			e.printStackTrace();

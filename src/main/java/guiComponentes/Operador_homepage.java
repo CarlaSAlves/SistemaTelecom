@@ -40,7 +40,7 @@ public class Operador_homepage extends JFrame {
 
 	private void inicialize(GUI_total guit) {
 		ativarNimbusLookAndFeel();
-		
+
 		/*
 		 * Configuração do painel base
 		 * Label com nome da página e boas vindas
@@ -51,7 +51,7 @@ public class Operador_homepage extends JFrame {
 		 *  Visualizar promoçoes
 		 * 	Terminar sessão
 		 */
-		
+
 		pane = new JPanel();
 		setContentPane(pane);
 		pane.setLayout(null);
@@ -65,11 +65,11 @@ public class Operador_homepage extends JFrame {
 		JLabel lblPoesia = new JLabel("Portal do Operador");
 		lblPoesia.setBounds(161, 117, 415, 33);
 		lblPoesia.setForeground(new Color(255, 205, 30));
-		lblPoesia.setFont(new Font("Dubai", Font.BOLD, 40));
+		lblPoesia.setFont(new Font("Dubai Light", Font.BOLD, 40));
 		pane.add(lblPoesia);
 
 		labelBoasVindas = new JLabel("");
-		labelBoasVindas.setFont(new Font("Dubai", Font.BOLD, 18));
+		labelBoasVindas.setFont(new Font("Dubai Light", Font.BOLD, 18));
 		labelBoasVindas.setForeground(new Color(255, 205, 30));
 		labelBoasVindas.setBounds(161, 162, 606, 33);
 		pane.add(labelBoasVindas);
@@ -81,14 +81,14 @@ public class Operador_homepage extends JFrame {
 		btClientes.setForeground(Color.DARK_GRAY);
 		btClientes.setToolTipText("Gestão de Clientes");	
 		btClientes.setFocusPainted(false);
-		btClientes.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btClientes.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		pane.add(btClientes);
 		btClientes.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				guit.gerirOperHomepage();
-				
+
 			}
 		});
 
@@ -97,30 +97,30 @@ public class Operador_homepage extends JFrame {
 		btPacotesPromo.setToolTipText("Gestão de Pacotes Comerciais e Promoções");
 		btPacotesPromo.setForeground(Color.DARK_GRAY);
 		btPacotesPromo.setFocusPainted(false);
-		btPacotesPromo.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btPacotesPromo.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		pane.add(btPacotesPromo);
 		btPacotesPromo.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					guit.operador_visualizarPacote();
-				
+				guit.operador_visualizarPacote();
+
 			}
 		});
 
 		JButton btnVisualizarPromocoes = new JButton("Visualizar Promoções");
 		btnVisualizarPromocoes.setToolTipText("Gestão de Pacotes Comerciais e Promoções");
 		btnVisualizarPromocoes.setForeground(Color.DARK_GRAY);
-		btnVisualizarPromocoes.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btnVisualizarPromocoes.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		btnVisualizarPromocoes.setFocusPainted(false);
 		btnVisualizarPromocoes.setBounds(161, 465, 286, 60);
 		pane.add(btnVisualizarPromocoes);
 		btnVisualizarPromocoes.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					guit.operador_visualizarPromo();
-				
+				guit.operador_visualizarPromo();
+
 			}
 		});
 
@@ -130,15 +130,15 @@ public class Operador_homepage extends JFrame {
 		btVoltar = new JButton("Terminar Sessão");
 		btVoltar.setForeground(Color.DARK_GRAY);
 		btVoltar.setBounds(16, 687, 180, 50);
-		btVoltar.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btVoltar.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		btVoltar.setFocusPainted(false);
 		getContentPane().add(btVoltar);
 		btVoltar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				guit.voltarBtOperadorHomePage();
-			
+
 			}
 		});
 
@@ -148,14 +148,14 @@ public class Operador_homepage extends JFrame {
 		lblFooter.setBounds(599, 690, 214, 65);
 		lblFooter.setIcon(new ImageIcon(Operador_homepage.class.getResource("/guiComponentes/img/AltranOperadorFooter.png")));
 		getContentPane().add(lblFooter);
-		
-				// Imagem de Fundo
-		
-				JLabel icon = new JLabel("");
-				icon.setBounds(0, 83, 1394, 586);
-				icon.setBackground(new Color(240, 240, 240));
-				icon.setIcon(new ImageIcon(Operador_homepage.class.getResource("/guiComponentes/img/AltranFundoOperador.png")));
-				getContentPane().add(icon);
+
+		// Imagem de Fundo
+
+		JLabel icon = new JLabel("");
+		icon.setBounds(0, 83, 1394, 586);
+		icon.setBackground(new Color(240, 240, 240));
+		icon.setIcon(new ImageIcon(Operador_homepage.class.getResource("/guiComponentes/img/AltranFundoOperador.png")));
+		getContentPane().add(icon);
 
 	}
 
