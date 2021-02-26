@@ -142,6 +142,7 @@ public class Operador_VisualizarPacote extends JFrame {
 		painelPesquisa.add(labelID);
 
 		textPesquisaID = new JTextField();
+		textPesquisaID.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		textPesquisaID.setColumns(10);
 		textPesquisaID.setBounds(72, 6, 371, 27);
 		painelPesquisa.add(textPesquisaID);
@@ -152,6 +153,7 @@ public class Operador_VisualizarPacote extends JFrame {
 		painelPesquisa.add(labelNome);
 
 		textFieldNome = new JTextField();
+		textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		textFieldNome.setColumns(10);
 		textFieldNome.setBounds(72, 44, 371, 27);
 		painelPesquisa.add(textFieldNome);

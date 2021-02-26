@@ -234,21 +234,25 @@ public class Operador_gerirClientes extends JFrame {
 
 	private void textFieldsPesquisaSetup() {
 		textPesquisaID = new JTextField();
+		textPesquisaID.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		textPesquisaID.setColumns(10);
 		textPesquisaID.setBounds(72, 6, 371, 27);
 		painelPesquisa.add(textPesquisaID);
 
 		textPesquisaNIF = new JTextField();
+		textPesquisaNIF.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		textPesquisaNIF.setColumns(10);
 		textPesquisaNIF.setBounds(72, 40, 371, 27);
 		painelPesquisa.add(textPesquisaNIF);
 
 		textFieldNome = new JTextField();
+		textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		textFieldNome.setColumns(10);
 		textFieldNome.setBounds(72, 78, 371, 27);
 		painelPesquisa.add(textFieldNome);
 
 		textFieldMorada = new JTextField();
+		textFieldMorada.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		textFieldMorada.setColumns(10);
 		textFieldMorada.setBounds(72, 116, 371, 27);
 		painelPesquisa.add(textFieldMorada);

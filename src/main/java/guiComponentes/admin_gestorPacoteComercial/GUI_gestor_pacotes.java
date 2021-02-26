@@ -1,13 +1,11 @@
 
 package guiComponentes.admin_gestorPacoteComercial;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import standard_value_object.Funcionario;
 import standard_value_object.PacoteComercial;
 import javax.swing.JTextField;
@@ -15,18 +13,12 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
-
 import javax.swing.ImageIcon;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-
 import servico.GestorDeDAO;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -34,12 +26,10 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.JTextArea;
-
 import guiComponentes.GUI_total;
 import historicos.HistoricoPacoteComercial;
 import javax.swing.JCheckBox;
 import java.awt.Color;
-import java.awt.Component;
 
 public class GUI_gestor_pacotes extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -418,11 +408,13 @@ public class GUI_gestor_pacotes extends JFrame {
 		painelPesquisa.add(labelNome);
 
 		textPesquisaID = new JTextField();
+		textPesquisaID.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		textPesquisaID.setColumns(10);
 		textPesquisaID.setBounds(72, 6, 371, 27);
 		painelPesquisa.add(textPesquisaID);
 
 		textFieldNome = new JTextField();
+		textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		textFieldNome.setColumns(10);
 		textFieldNome.setBounds(72, 44, 371, 27);
 		painelPesquisa.add(textFieldNome);
