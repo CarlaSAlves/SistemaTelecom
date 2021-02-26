@@ -232,7 +232,7 @@ public class CriarClienteDialog extends JDialog {
 						if(nomeEmArray[i]==32) {
 							continue;
 						}
-						if (nomeEmArray[i]<65 || nomeEmArray[i] > 122 ) {
+						if (nomeEmArray[i]>= 48 || nomeEmArray[i] <= 57 ) {
 							JOptionPane.showMessageDialog(CriarClienteDialog.this,
 									"O Nome não pode conter números!", "Erro", JOptionPane.ERROR_MESSAGE);
 							return;
@@ -273,7 +273,7 @@ public class CriarClienteDialog extends JDialog {
 						if(nomeEmArray[i]==32) {
 							continue;
 						}
-						if (nomeEmArray[i]<65 || nomeEmArray[i] > 122 ) {
+						if (nomeEmArray[i]>= 48 && nomeEmArray[i] <= 57 ) {
 							JOptionPane.showMessageDialog(CriarClienteDialog.this,
 									"O Nome não pode conter números!", "Erro", JOptionPane.ERROR_MESSAGE);
 							return;
@@ -286,7 +286,11 @@ public class CriarClienteDialog extends JDialog {
 						JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem de ser um inteiro!");
 						return;
 					}
-
+					
+					if(textFieldNIF.getText().length() != 9) {
+						JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF deve conter 9 digitos!");
+						return;
+					}
 					// verifica se já existe um cliente com o mesmo login
 					List<Cliente> listaClientes = null;
 					try {

@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import data_acess_object_dao.PasswordEncryption;
 import guiComponentes.Admin_GUI_homepage;
+import guiComponentes.admin_gestorCliente.CriarClienteDialog;
 import servico.GestorDeDAO;
 import standard_value_object.Cliente;
 import java.awt.Font;
@@ -468,7 +469,7 @@ public class AreaCliente_MeusDados extends JFrame {
 						if(nomeEmArray[i]==32) {
 							continue;
 						}
-						if (nomeEmArray[i]<65 || nomeEmArray[i] > 122 ) {
+						if (nomeEmArray[i]>= 48 && nomeEmArray[i] <= 57 ) {
 							JOptionPane.showMessageDialog(AreaCliente_MeusDados.this,
 									"O Nome não pode conter números!", "Erro", JOptionPane.ERROR_MESSAGE);
 							return;
@@ -504,6 +505,11 @@ public class AreaCliente_MeusDados extends JFrame {
 
 					}catch( Exception ex ){
 						JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "O NIF tem de ser um inteiro!", "Erro", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					
+					if(textFieldDadosNIF.getText().length() != 9) {
+						JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "O NIF deve conter 9 digitos!");
 						return;
 					}
 
