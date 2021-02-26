@@ -189,43 +189,43 @@ public class AreaCliente_MeusDados extends JFrame {
 		lblDadosMorada.setBounds(56, 272, 81, 28);
 		panelDados.add(lblDadosMorada);
 
-		lblNovoNome = new JLabel("Insira o Novo Nome");
+		lblNovoNome = new JLabel("Insira o novo Nome");
 		lblNovoNome.setForeground(Color.LIGHT_GRAY);
 		lblNovoNome.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblNovoNome.setBounds(66, 176, 224, 14);
 		panelDados.add(lblNovoNome);
 
-		lblNovaMorada = new JLabel("Insira a Nova Morada");
+		lblNovaMorada = new JLabel("Insira a nova Morada");
 		lblNovaMorada.setForeground(Color.LIGHT_GRAY);
 		lblNovaMorada.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblNovaMorada.setBounds(66, 304, 224, 14);
 		panelDados.add(lblNovaMorada);
 
-		lblNovoNIF = new JLabel("Insira o Novo NIF");
+		lblNovoNIF = new JLabel("Insira o novo NIF");
 		lblNovoNIF.setForeground(Color.LIGHT_GRAY);
 		lblNovoNIF.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblNovoNIF.setBounds(66, 239, 224, 14);
 		panelDados.add(lblNovoNIF);
 
-		lblTitulo = new JLabel("Os Seus Dados");
+		lblTitulo = new JLabel("Os seus Dados");
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Dubai Light", Font.BOLD, 22));
 		lblTitulo.setBounds(56, 43, 234, 28);
 		panelDados.add(lblTitulo);
 
-		lblNovoLogin = new JLabel("Insira o Novo Login");
+		lblNovoLogin = new JLabel("Insira o novo Username");
 		lblNovoLogin.setForeground(Color.LIGHT_GRAY);
 		lblNovoLogin.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblNovoLogin.setBounds(29, 111, 224, 14);
 		panelPasswords.add(lblNovoLogin);
 
-		lblNovaPass_2 = new JLabel("Insira a Nova Password");
+		lblNovaPass_2 = new JLabel("Insira a nova Password");
 		lblNovaPass_2.setForeground(Color.LIGHT_GRAY);
 		lblNovaPass_2.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblNovaPass_2.setBounds(29, 239, 224, 14);
 		panelPasswords.add(lblNovaPass_2);
 
-		lblNovaPassConfirm = new JLabel("Insira a Nova Password");
+		lblNovaPassConfirm = new JLabel("Insira a nova Password");
 		lblNovaPassConfirm.setForeground(Color.LIGHT_GRAY);
 		lblNovaPassConfirm.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblNovaPassConfirm.setBounds(29, 304, 224, 14);
@@ -237,7 +237,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		lblNovaPass.setBounds(29, 171, 224, 14);
 		panelPasswords.add(lblNovaPass);
 
-		lblDadosLogin = new JLabel("Login ");
+		lblDadosLogin = new JLabel("Username ");
 		lblDadosLogin.setForeground(Color.WHITE);
 		lblDadosLogin.setBounds(19, 79, 234, 28);
 		panelPasswords.add(lblDadosLogin);
@@ -249,7 +249,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		panelPasswords.add(lblPassword);
 		lblPassword.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 
-		lblTituloPass = new JLabel("O Seu Login & Password");
+		lblTituloPass = new JLabel("O seu Username & Password");
 		lblTituloPass.setForeground(Color.WHITE);
 		lblTituloPass.setFont(new Font("Dubai Light", Font.BOLD, 22));
 		lblTituloPass.setBounds(19, 43, 300, 28);
@@ -262,7 +262,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		lblNovaPassword_1.setBounds(19, 207, 234, 28);
 		panelPasswords.add(lblNovaPassword_1);
 
-		lblNovaPassword_2 = new JLabel("Confirmar Nova Password");
+		lblNovaPassword_2 = new JLabel("Confirmar nova Password");
 		lblNovaPassword_2.setForeground(Color.WHITE);
 		lblNovaPassword_2.setFont(new Font("Dubai Light", Font.PLAIN, 18));
 		lblNovaPassword_2.setVisible(false);
@@ -634,7 +634,7 @@ public class AreaCliente_MeusDados extends JFrame {
 				passwordField_2.setVisible(true);
 
 				lblPassword.setText("Password Atual");
-				lblDadosLogin.setText("Novo Login");
+				lblDadosLogin.setText("Novo Username");
 
 				lblNovaPass.setVisible(true);
 				lblNovaPass_2.setVisible(true);
@@ -748,7 +748,7 @@ public class AreaCliente_MeusDados extends JFrame {
 				lblNovaPass.setVisible(false);
 
 				lblPassword.setText("Password");
-				lblDadosLogin.setText("Login");
+				lblDadosLogin.setText("Username");
 
 				if(cliente != null) {
 					textFieldDadosLogin.setText(cliente.getLogin());
@@ -873,7 +873,7 @@ public class AreaCliente_MeusDados extends JFrame {
 				lblNovaPass.setVisible(false);
 
 				lblPassword.setText("Password");
-				lblDadosLogin.setText("Login");
+				lblDadosLogin.setText("Username");
 
 				passwordField.setText(PasswordEncryption.get_SHA_512_SecurePassword(cliente.getPassword()).substring(0, 8));
 
@@ -930,7 +930,7 @@ public class AreaCliente_MeusDados extends JFrame {
 			lblNovaPass.setVisible(false);
 
 			lblPassword.setText("Password");
-			lblDadosLogin.setText("Login");
+			lblDadosLogin.setText("Username");
 
 			textFieldDadosNome.setEditable(false);
 			textFieldDadosNIF.setEditable(false);

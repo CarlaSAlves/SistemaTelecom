@@ -216,6 +216,9 @@ public class Operador_VisualizarPromocoes extends JFrame {
 		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
 		table.setFillsViewportHeight(true);
+		table.setFocusable(false);
+		table.setSelectionBackground(new Color(250,235,70));
+		table.setSelectionForeground(Color.black);
 		table.setModel(new DefaultTableModel(
 				new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
 		table.setForeground(SystemColor.desktop);

@@ -1266,3 +1266,57 @@
 <duração da sessão:	2:54>
 </sessao>
 
+<sessao>
+<username:	andreCar>
+<data e hora do login:	26-02-2021 11:16:27>
+<duração da sessão:	0:9>
+</sessao>
+
+<sessao>
+<username:	andreCar>
+<data e hora do login:	26-02-2021 11:24:09>
+<duração da sessão:	2:4>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	26-02-2021 11:26:17>
+<duração da sessão:	0:6>
+</sessao>
+
+<sessao>
+<username:	andreCar>
+<data e hora do login:	26-02-2021 11:41:45>
+<duração da sessão:	2:3>
+</sessao>
+
+<sessao>
+<username:	ana>
+<data e hora do login:	26-02-2021 11:43:54>
+<duração da sessão:	8:39>
+</sessao>
+
+<sessao>
+<username:	andreCar>
+<data e hora do login:	26-02-2021 11:52:38>
+<duração da sessão:	0:16>
+</sessao>
+
+<sessao>
+<username:	ana>
+<data e hora do login:	26-02-2021 11:52:58>
+<duração da sessão:	0:46>
+</sessao>
+
+<sessao>
+<username:	andreCar>
+<data e hora do login:	26-02-2021 12:04:30>
+<duração da sessão:	0:19>
+</sessao>
+
+<sessao>
+<username:	ana>
+<data e hora do login:	26-02-2021 11:59:05>
+<duração da sessão:	19:39>
+</sessao>
+

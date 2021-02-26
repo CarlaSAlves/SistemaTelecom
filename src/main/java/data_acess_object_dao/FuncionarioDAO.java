@@ -192,11 +192,13 @@ public class FuncionarioDAO {
 			}
 			if(nif != null) {
 				nif += "%";
+				nif = "%" + nif;
 				sj.add("NIF LIKE ?");
 				values.add(nif);
 			}
 			if(nome != null) {
 				nome += "%";
+				nome = "%" + nome;
 				sj.add("NOME LIKE ?");
 				values.add(nome);
 			}

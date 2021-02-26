@@ -68,7 +68,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		panelMeusProdutos.setLayout(null);
 
 		
-		JLabel lblOsSeusProdutos = new JLabel("Os Seus Produtos");
+		JLabel lblOsSeusProdutos = new JLabel("Os seus Produtos");
 		lblOsSeusProdutos.setForeground(Color.WHITE);
 		lblOsSeusProdutos.setFont(new Font("Dubai Light", Font.BOLD, 22));
 		lblOsSeusProdutos.setBounds(66, 55, 234, 28);

@@ -84,6 +84,7 @@ public class PacoteComercialDAO {
 			}
 			if(nome != null) {
 				nome += "%";
+				nome = "%" + nome;
 				sj.add("NOME LIKE ?");
 				values.add(nome);
 			}

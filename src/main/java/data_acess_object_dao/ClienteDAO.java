@@ -85,16 +85,19 @@ public class ClienteDAO {
 			}
 			if(nif != null) {
 				nif += "%";
+				nif = "%" + nif;
 				sj.add("NIF LIKE ?");
 				values.add(nif);
 			}
 			if(nome != null) {
 				nome += "%";
+				nome = "%" + nome;
 				sj.add("NOME LIKE ?");
 				values.add(nome);
 			}
 			if(morada != null) {
 				morada += "%";
+				morada = "%" + morada;
 				sj.add("morada LIKE ?");
 				values.add(morada);
 			}

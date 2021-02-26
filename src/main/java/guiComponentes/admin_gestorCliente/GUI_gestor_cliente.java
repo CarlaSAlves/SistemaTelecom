@@ -14,6 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.time.Duration;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -27,6 +29,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import guiComponentes.GUI_login;
 import guiComponentes.GUI_total;
 import historicos.HistoricoCliente;
 import javax.swing.JCheckBox;
@@ -44,6 +47,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private JButton botaoDesativarCliente, botaoEditarCliente, botaoVisualizarHistorico, botaoPesquisa, btVoltarGestorCliente;
 	private JTextField textFieldID, textFieldNIF,textFieldNome,textFieldMorada;
 	private JCheckBox checkBoxAtivo;
+	private GUI_total guit;
 
 	/**
 	 * Construtor que inicia com o método que configura o painel base e o método inicialize, 
@@ -423,21 +427,25 @@ public class GUI_gestor_cliente extends JFrame {
 	 */
 	private void textFieldsPesquisaSetup() {
 		textFieldID = new JTextField();
+		textFieldID.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		textFieldID.setBounds(72, 6, 371, 27);
 		textFieldID.setColumns(10);
 		painelPesquisa.add(textFieldID);
 
 		textFieldNIF = new JTextField();
+		textFieldNIF.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		textFieldNIF.setBounds(72, 40, 371, 27);
 		textFieldNIF.setColumns(10);
 		painelPesquisa.add(textFieldNIF);
 
 		textFieldNome = new JTextField();
+		textFieldNome.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		textFieldNome.setBounds(72, 78, 371, 27);
 		textFieldNome.setColumns(10);
 		painelPesquisa.add(textFieldNome);
 
 		textFieldMorada = new JTextField();
+		textFieldMorada.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		textFieldMorada.setBounds(72, 116, 371, 27);
 		textFieldMorada.setColumns(10);
 		painelPesquisa.add(textFieldMorada);

@@ -659,15 +659,15 @@ public class Operador_gerirClientes extends JFrame {
 	private JScrollPane scrollPaneSetup() {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(33, 33, 1224, 330);
-		scrollPane.setBackground(Color.white);
+		
 		
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
-		table.setFocusable(false);
 		table.setFillsViewportHeight(true);
+		table.setFocusable(false);
 		table.setSelectionBackground(new Color(250,235,70));
 		table.setSelectionForeground(Color.black);
 		table.setModel(new DefaultTableModel(new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
