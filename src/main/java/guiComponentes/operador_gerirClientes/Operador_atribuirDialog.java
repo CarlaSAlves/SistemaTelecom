@@ -94,6 +94,7 @@ public class Operador_atribuirDialog extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.setBackground(Color.LIGHT_GRAY);
 				okButton.addActionListener(new ActionListener() {
 
 					@Override
@@ -150,6 +151,7 @@ public class Operador_atribuirDialog extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setBackground(Color.LIGHT_GRAY);
 				cancelButton.setActionCommand("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 
@@ -208,6 +210,7 @@ public class Operador_atribuirDialog extends JDialog {
 				int index, boolean isSelected, boolean cellHasFocus) {
 			display.setText("  " + value.getNome());
 			return display;
+			
 		}
 	}
 
@@ -235,6 +238,10 @@ public class Operador_atribuirDialog extends JDialog {
 		public Component getListCellRendererComponent(JList<? extends Promocao> list, Promocao value, int index,
 				boolean isSelected, boolean cellHasFocus) {
 			display.setText("  " + value.getNome());
+			if (isSelected) {
+				display.setBackground(new Color(250,235,70));
+			} else 
+				display.setBackground(null);
 			return display;
 		}
 	}

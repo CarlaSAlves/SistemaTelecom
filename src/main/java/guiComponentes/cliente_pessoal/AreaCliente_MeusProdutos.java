@@ -160,11 +160,6 @@ public class AreaCliente_MeusProdutos extends JFrame {
 				boolean isSelected, boolean cellHasFocus) {
 			display.setText("  " + value.getNome());
 			display.isFocusable();
-//			if (cellHasFocus) {
-//				display.setBackground(Color.orange);
-//			} else 
-//				display.setBackground(null);
-
 			if (isSelected) {
 				display.setBackground(new Color(253, 132, 67));
 			} else 

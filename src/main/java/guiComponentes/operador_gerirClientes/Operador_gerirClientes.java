@@ -2,6 +2,7 @@ package guiComponentes.operador_gerirClientes;
 
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -24,6 +25,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import guiComponentes.admin_gestorCliente.ClientePesquisaModelTable;
 import guiComponentes.admin_gestorCliente.HistoricoClienteDialog;
@@ -269,6 +271,7 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	private void botaoPesquisaSetup() {
 		botaoPesquisa = new JButton("Pesquisar");
+		botaoPesquisa.setBackground(Color.LIGHT_GRAY);
 		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		botaoPesquisa.setBounds(72, 181, 371, 27);
 		botaoPesquisa.addActionListener(new ActionListener() {
@@ -333,6 +336,7 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	public void botaoVisualizarPacote() {
 		btnVisualizarPacote = new JButton("Visualizar Pacote Comercial");
+		btnVisualizarPacote.setBackground(Color.LIGHT_GRAY);
 		btnVisualizarPacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btnVisualizarPacote.setBounds(1113, 256, 209, 40);
 		pane.add(btnVisualizarPacote);
@@ -377,6 +381,7 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	public void botaoVisualizarPromocao() {
 		btVisualizarPromocao = new JButton("Visualizar Promoções");
+		btVisualizarPromocao.setBackground(Color.LIGHT_GRAY);
 		btVisualizarPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btVisualizarPromocao.setBounds(1113, 205, 209, 40);
 		pane.add(btVisualizarPromocao);
@@ -419,6 +424,7 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	public void botaoRemoverPromocao() {
 		btnRemoverPromo = new JButton("Remover Promoção");
+		btnRemoverPromo.setBackground(Color.LIGHT_GRAY);
 		btnRemoverPromo.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btnRemoverPromo.setEnabled(false);
 		btnRemoverPromo.setBounds(719, 205, 187, 40);
@@ -460,6 +466,7 @@ public class Operador_gerirClientes extends JFrame {
 
 	public void botaoAtribuirPromocao() {
 		btAtribuirPromocao = new JButton("Atribuir Promoção");
+		btAtribuirPromocao.setBackground(Color.LIGHT_GRAY);
 		btAtribuirPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btAtribuirPromocao.setBounds(916, 205, 187, 40);
 		pane.add(btAtribuirPromocao);
@@ -496,6 +503,7 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	private void botaoAtribuirPacote() {
 		btAtribuirPacote = new JButton("Atribuir Pacote Comercial");
+		btAtribuirPacote.setBackground(Color.LIGHT_GRAY);
 		btAtribuirPacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btAtribuirPacote.setBounds(916, 256, 187, 40);
 		pane.add(btAtribuirPacote);
@@ -566,6 +574,7 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	private void botaoVisualizarHistoricoSetup() {
 		btnVerHistorico = new JButton("Ver Historico");
+		btnVerHistorico.setBackground(Color.LIGHT_GRAY);
 		btnVerHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btnVerHistorico.setEnabled(false);
 		btnVerHistorico.setBounds(719, 256, 187, 40);
@@ -636,7 +645,7 @@ public class Operador_gerirClientes extends JFrame {
 		btVoltarOperador = new JButton("Voltar");
 		btVoltarOperador.setBounds(6, 709, 119, 38);
 		btVoltarOperador.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		btVoltarOperador.setBackground(Color.WHITE);
+		btVoltarOperador.setBackground(Color.LIGHT_GRAY);
 		btVoltarOperador.setFocusPainted(false);
 		pane.add(btVoltarOperador);
 
@@ -650,13 +659,17 @@ public class Operador_gerirClientes extends JFrame {
 	private JScrollPane scrollPaneSetup() {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(33, 33, 1224, 330);
+		scrollPane.setBackground(Color.white);
 		
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
+		table.setFocusable(false);
 		table.setFillsViewportHeight(true);
+		table.setSelectionBackground(new Color(250,235,70));
+		table.setSelectionForeground(Color.black);
 		table.setModel(new DefaultTableModel(new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
 		table.setForeground(SystemColor.desktop);
 		table.setBackground(UIManager.getColor("CheckBox.light"));
@@ -744,7 +757,7 @@ public class Operador_gerirClientes extends JFrame {
 		} catch  (Exception e) {
 		}
 	}
-
+	
 
 	/**
 	 * Painel de Pesquisa

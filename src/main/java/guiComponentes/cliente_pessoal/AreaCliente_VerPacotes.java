@@ -23,6 +23,8 @@ import standard_value_object.PacoteComercial;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.JScrollBar;
+import javax.swing.border.LineBorder;
+import javax.swing.border.BevelBorder;
 
 @SuppressWarnings("serial")
 public class AreaCliente_VerPacotes extends JFrame {
@@ -118,7 +120,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 		listVerPacote.setVisibleRowCount( -1 ); // -1 sig q ele é variavel
 		listVerPacote.setFixedCellHeight( 24 );
 		listVerPacote.setFixedCellWidth( 226 );
-		listVerPacote.setBorder(BorderFactory.createLoweredBevelBorder());
+		listVerPacote.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(192, 192, 192), Color.LIGHT_GRAY, null, null));
 		
 		listVerPacote.setSelectedIndex(0);
 		PacoteComercial pacote = (PacoteComercial) listVerPacote.getSelectedValue();

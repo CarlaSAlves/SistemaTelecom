@@ -28,6 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 import javax.swing.JScrollBar;
+import javax.swing.border.BevelBorder;
 
 @SuppressWarnings("serial")
 public class AreaCliente_VerPromocoes extends JFrame {
@@ -111,6 +112,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		DefaultListModel model = new DefaultListModel();	
 		model.addAll(promocoes);
 		JList listVerPromo = new JList(model);
+		listVerPromo.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.LIGHT_GRAY, Color.LIGHT_GRAY, null, null));
 
 		ListCellRenderer renderer = new RendererPromocao();
 		listVerPromo.setCellRenderer(renderer);
