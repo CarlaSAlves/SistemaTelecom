@@ -94,6 +94,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
 		textArea.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		textArea.setBounds(400, 222, 300, 114);
 		panelVerTodosPacotes.add(textArea);

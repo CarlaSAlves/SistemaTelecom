@@ -96,6 +96,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
 		textArea.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textArea.setBounds(400, 222, 300, 114);
 		panelVerTodasPromo.add(textArea);

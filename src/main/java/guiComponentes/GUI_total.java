@@ -457,6 +457,8 @@ public class GUI_total extends JFrame {
 		gestor_promocao.getTable().setModel(new DefaultTableModel());
 		gestor_promocao.getLblResultados().setText("Resultados: ");
 		gestor_promocao.getTextAreaDescricao().setText(" ");	
+		
+		
 	}
 
 	/**

@@ -504,7 +504,7 @@ public class AreaCliente_MeusDados extends JFrame {
 
 
 					}catch( Exception ex ){
-						JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "O NIF tem de ser um inteiro!", "Erro", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog( AreaCliente_MeusDados.this, "O NIF só pode conter números!", "Erro", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 					
@@ -754,7 +754,8 @@ public class AreaCliente_MeusDados extends JFrame {
 					textFieldDadosLogin.setText(cliente.getLogin());
 					passwordField.setText(PasswordEncryption.get_SHA_512_SecurePassword(cliente.getPassword()).substring(0, 8));
 				}
-
+				textFieldDadosLogin.setEditable(false);
+				passwordField.setEditable(false);
 			}
 
 
@@ -877,6 +878,8 @@ public class AreaCliente_MeusDados extends JFrame {
 
 				passwordField.setText(PasswordEncryption.get_SHA_512_SecurePassword(cliente.getPassword()).substring(0, 8));
 
+				textFieldDadosLogin.setEditable(false);
+				passwordField.setEditable(false);
 			}
 
 		});

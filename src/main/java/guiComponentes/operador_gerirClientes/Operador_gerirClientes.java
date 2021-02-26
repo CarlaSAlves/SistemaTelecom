@@ -233,7 +233,7 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 
 	private void textFieldsPesquisaSetup() {
-		textPesquisaID = new JTextField();
+		textPesquisaID = new JTextField("");
 		textPesquisaID.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		textPesquisaID.setColumns(10);
 		textPesquisaID.setBounds(72, 6, 371, 27);
@@ -341,6 +341,7 @@ public class Operador_gerirClientes extends JFrame {
 	public void botaoVisualizarPacote() {
 		btnVisualizarPacote = new JButton("Visualizar Pacote Comercial");
 		btnVisualizarPacote.setBackground(Color.LIGHT_GRAY);
+		btnVisualizarPacote.setEnabled(false);
 		btnVisualizarPacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btnVisualizarPacote.setBounds(1113, 256, 209, 40);
 		pane.add(btnVisualizarPacote);
@@ -386,6 +387,7 @@ public class Operador_gerirClientes extends JFrame {
 	public void botaoVisualizarPromocao() {
 		btVisualizarPromocao = new JButton("Visualizar Promoções");
 		btVisualizarPromocao.setBackground(Color.LIGHT_GRAY);
+		btVisualizarPromocao.setEnabled(false);
 		btVisualizarPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btVisualizarPromocao.setBounds(1113, 205, 209, 40);
 		pane.add(btVisualizarPromocao);
@@ -471,6 +473,7 @@ public class Operador_gerirClientes extends JFrame {
 	public void botaoAtribuirPromocao() {
 		btAtribuirPromocao = new JButton("Atribuir Promoção");
 		btAtribuirPromocao.setBackground(Color.LIGHT_GRAY);
+		btAtribuirPromocao.setEnabled(false);
 		btAtribuirPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btAtribuirPromocao.setBounds(916, 205, 187, 40);
 		pane.add(btAtribuirPromocao);
@@ -508,6 +511,7 @@ public class Operador_gerirClientes extends JFrame {
 	private void botaoAtribuirPacote() {
 		btAtribuirPacote = new JButton("Atribuir Pacote Comercial");
 		btAtribuirPacote.setBackground(Color.LIGHT_GRAY);
+		btAtribuirPacote.setEnabled(false);
 		btAtribuirPacote.setFont(new Font("Dubai Light", Font.PLAIN, 13));
 		btAtribuirPacote.setBounds(916, 256, 187, 40);
 		pane.add(btAtribuirPacote);
@@ -613,32 +617,7 @@ public class Operador_gerirClientes extends JFrame {
 		pane.add(btnVerHistorico);
 	}
 
-	/**
-	 * Configuração das labels de username e temporização.
-	 * @lblUsernameLogged apresenta o username que está logado
-	 * @lblTempoSessao apresenta o tempo de sessão desde o momento que faz login
-	 * @lblHoraSistema apresenta a hora atual do sistema 
-	 */
-	private void timerSetup() {
-		lblTempoSessao = new JLabel();
-		lblTempoSessao.setBounds(1215, 717, 159, 18);
-		lblTempoSessao.setText("Sessão:");
-		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 10));
-		pane.add(lblTempoSessao);
-
-		lblUsernameLogged = new JLabel();
-		lblUsernameLogged.setBounds(1215, 698, 159, 18);
-		lblUsernameLogged.setText("Username:");
-		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 10));
-		pane.add(lblUsernameLogged);
-
-		lblHoraSistema = new JLabel();
-		lblHoraSistema.setBounds(1215, 737, 159, 18);
-		lblHoraSistema.setText("Data:");
-		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
-		pane.add(lblHoraSistema);
-
-	}
+	
 
 	/**
 	 * Configuração do botão voltar.
@@ -760,6 +739,33 @@ public class Operador_gerirClientes extends JFrame {
 				btAtribuirPacote.setText("Atribuir Pacote Comercial");
 		} catch  (Exception e) {
 		}
+	}
+	
+	/**
+	 * Configuração das labels de username e temporização.
+	 * @lblUsernameLogged apresenta o username que está logado
+	 * @lblTempoSessao apresenta o tempo de sessão desde o momento que faz login
+	 * @lblHoraSistema apresenta a hora atual do sistema 
+	 */
+	private void timerSetup() {
+		lblTempoSessao = new JLabel();
+		lblTempoSessao.setBounds(1215, 717, 159, 18);
+		lblTempoSessao.setText("Sessão:");
+		lblTempoSessao.setFont(new Font("Dubai Light", Font.PLAIN, 10));
+		pane.add(lblTempoSessao);
+
+		lblUsernameLogged = new JLabel();
+		lblUsernameLogged.setBounds(1215, 698, 159, 18);
+		lblUsernameLogged.setText("Username:");
+		lblUsernameLogged.setFont(new Font("Dubai Light", Font.PLAIN, 10));
+		pane.add(lblUsernameLogged);
+
+		lblHoraSistema = new JLabel();
+		lblHoraSistema.setBounds(1215, 737, 159, 18);
+		lblHoraSistema.setText("Data:");
+		lblHoraSistema.setFont(new Font("Dubai Light", Font.PLAIN, 10));
+		pane.add(lblHoraSistema);
+
 	}
 	
 

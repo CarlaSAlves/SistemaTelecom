@@ -92,6 +92,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		textAreaDescricaoPacote = new JTextArea();
 		textAreaDescricaoPacote.setEditable(false);
 		textAreaDescricaoPacote.setLineWrap(true);
+		textAreaDescricaoPacote.setWrapStyleWord(true);
 		textAreaDescricaoPacote.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textAreaDescricaoPacote.setBounds(66, 222, 300, 104);
 		panelMeusProdutos.add(textAreaDescricaoPacote);
@@ -107,6 +108,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 		textAreaDescricaoPromocoes = new JTextArea();
 		textAreaDescricaoPromocoes.setEditable(false);
 		textAreaDescricaoPromocoes.setLineWrap(true);
+		textAreaDescricaoPromocoes.setWrapStyleWord(true);
 		textAreaDescricaoPromocoes.setFont(new Font("Dubai Light", Font.PLAIN, 14));
 		textAreaDescricaoPromocoes.setBounds(400, 222, 300, 104);
 		panelMeusProdutos.add(textAreaDescricaoPromocoes);
