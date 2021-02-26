@@ -436,7 +436,7 @@ public class GUI_total extends JFrame {
 	}
 
 	/**
-	 * Faz reset às tabelas quando o botão voltar é premido 
+	 * Faz reset às tabelas e ao campo de pesquisa do administrador quando o botão voltar é premido 
 	 */
 	public void voltarBtAdminHomePage() {
 		gravarFicheiro(username, temporizador, dataEHoraDeLog, "sessaolog.txt");
@@ -446,17 +446,30 @@ public class GUI_total extends JFrame {
 
 		gestor_cliente.getTable().setModel(new DefaultTableModel());	
 		gestor_cliente.getLblResultados().setText("Resultados: ");
+		gestor_cliente.getTextFieldID().setText("");
+		gestor_cliente.getTextFieldNome().setText("");
+		gestor_cliente.getTextFieldNIF().setText("");
+		gestor_cliente.getTextFieldMorada().setText("");
 		
 		gestor_operador.getTable().setModel(new DefaultTableModel());
 		gestor_operador.getLblResultados().setText("Resultados: ");
+		gestor_operador.getTextPesquisaID().setText("");
+		gestor_operador.getTextFieldNome().setText("");
+		gestor_operador.getTextPesquisaNIF().setText("");
 
 		gestor_pacotes.getTable().setModel(new DefaultTableModel());
 		gestor_pacotes.getLblResultados().setText("Resultados: ");
 		gestor_pacotes.getTextAreaDescricao().setText(" ");	
+		gestor_pacotes.getTextPesquisaID().setText("");
+		gestor_pacotes.getTextFieldNome().setText("");
+		gestor_pacotes.getTextAreaDescricao().setText("");
 
 		gestor_promocao.getTable().setModel(new DefaultTableModel());
 		gestor_promocao.getLblResultados().setText("Resultados: ");
-		gestor_promocao.getTextAreaDescricao().setText(" ");	
+		gestor_promocao.getTextAreaDescricao().setText("");	
+		gestor_promocao.getTextPesquisaID().setText("");
+		gestor_promocao.getTextFieldNome().setText("");
+		gestor_promocao.getTextAreaDescricao().setText("");
 		
 		
 	}
@@ -498,7 +511,7 @@ public class GUI_total extends JFrame {
 	}
 
 	/**
-	 * Configura quando o botão voltar, na homepage Administrador é clicado. 
+	 * Faz reset às tabelas e ao campo de pesquisa do operador quando o botão voltar é premido 
 	 * A homepage é escondida e a janela de login é mostrada. 
 	 */
 	public void voltarBtOperadorHomePage() {
@@ -509,13 +522,21 @@ public class GUI_total extends JFrame {
 		operador_visualizarPacote.getTable().setModel(new DefaultTableModel());
 		operador_visualizarPacote.getLblResultados().setText("Resultados: ");
 		operador_visualizarPacote.getTextAreaDescricao().setText(" ");
+		operador_visualizarPacote.getTextFieldNome().setText("");
+		operador_visualizarPacote.getTextPesquisaID().setText("");
 
 		operador_visualizarPromo.getTable().setModel(new DefaultTableModel());
 		operador_visualizarPromo.getLblResultados().setText("Resultados: ");
 		operador_visualizarPromo.getTextAreaDescricao().setText(" ");
+		operador_visualizarPromo.getTextFieldNome().setText("");
+		operador_visualizarPromo.getTextPesquisaID().setText("");
 		
 		operador_gerirClientes.getTable().setModel(new DefaultTableModel());
 		operador_gerirClientes.getLblResultados().setText("Resultados: ");
+		operador_gerirClientes.getTextFieldMorada().setText(" ");
+		operador_gerirClientes.getTextFieldNome().setText("");
+		operador_gerirClientes.getTextPesquisaNIF().setText("");
+		operador_gerirClientes.getTextPesquisaID().setText("");
 	}
 
 	/**

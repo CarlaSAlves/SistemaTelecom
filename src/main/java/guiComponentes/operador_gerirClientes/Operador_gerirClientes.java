@@ -169,11 +169,10 @@ public class Operador_gerirClientes extends JFrame {
 		timerSetup();
 
 	}// end initialize
-	
+
 	/**
 	 * Configurar interface, look and feel Nimbus 
 	 */
-
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 			if ("Nimbus".equals(info.getName())) {
@@ -850,5 +849,34 @@ public class Operador_gerirClientes extends JFrame {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	/**
+	 * @return the textPesquisaID
+	 */
+	public JTextField getTextPesquisaID() {
+		return textPesquisaID;
+	}
+
+	/**
+	 * @return the textPesquisaNIF
+	 */
+	public JTextField getTextPesquisaNIF() {
+		return textPesquisaNIF;
+	}
+
+	/**
+	 * @return the textFieldNome
+	 */
+	public JTextField getTextFieldNome() {
+		return textFieldNome;
+	}
+
+	/**
+	 * @return the textFieldMorada
+	 */
+	public JTextField getTextFieldMorada() {
+		return textFieldMorada;
+	}
+
 
 }

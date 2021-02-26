@@ -316,4 +316,18 @@ public class Operador_VisualizarPromocoes extends JFrame {
 		return textAreaDescricao;
 	}
 
+	/**
+	 * @return the textPesquisaID
+	 */
+	public JTextField getTextPesquisaID() {
+		return textPesquisaID;
+	}
+
+	/**
+	 * @return the textFieldNome
+	 */
+	public JTextField getTextFieldNome() {
+		return textFieldNome;
+	}
+
 }

@@ -714,4 +714,32 @@ public class GUI_gestor_cliente extends JFrame {
 		return lblResultados;
 	}
 
+	/**
+	 * @return the textFieldID
+	 */
+	public JTextField getTextFieldID() {
+		return textFieldID;
+	}
+
+	/**
+	 * @return the textFieldNIF
+	 */
+	public JTextField getTextFieldNIF() {
+		return textFieldNIF;
+	}
+
+	/**
+	 * @return the textFieldNome
+	 */
+	public JTextField getTextFieldNome() {
+		return textFieldNome;
+	}
+
+	/**
+	 * @return the textFieldMorada
+	 */
+	public JTextField getTextFieldMorada() {
+		return textFieldMorada;
+	}
+
 }

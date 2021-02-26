@@ -685,6 +685,27 @@ public class GUI_gestor_operador extends JFrame {
 	public JLabel getLblResultados() {
 		return lblResultados;
 	}
+
+	/**
+	 * @return the textPesquisaID
+	 */
+	public JTextField getTextPesquisaID() {
+		return textPesquisaID;
+	}
+
+	/**
+	 * @return the textPesquisaNIF
+	 */
+	public JTextField getTextPesquisaNIF() {
+		return textPesquisaNIF;
+	}
+
+	/**
+	 * @return the textFieldNome
+	 */
+	public JTextField getTextFieldNome() {
+		return textFieldNome;
+	}
 	
 	
 }
