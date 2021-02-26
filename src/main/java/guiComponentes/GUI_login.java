@@ -65,13 +65,13 @@ public class GUI_login extends JFrame {
 		JLabel labelLogin = new JLabel("Username");
 		labelLogin.setBounds(209, 383, 131, 27);
 		labelLogin.setForeground(Color.WHITE);
-		labelLogin.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		labelLogin.setFont(new Font("Dubai Light", Font.BOLD, 17));
 		getContentPane().add(labelLogin);
 		setResizable(false);
 		labelPass = new JLabel("Password");
 		labelPass.setBounds(209, 430, 138, 27);
 		labelPass.setForeground(Color.WHITE);
-		labelPass.setFont(new Font("Dubai Light", Font.PLAIN, 17));
+		labelPass.setFont(new Font("Dubai Light", Font.BOLD, 17));
 		getContentPane().add(labelPass);
 
 		// textField de username 
@@ -149,10 +149,10 @@ public class GUI_login extends JFrame {
 		// label de confirmação de dados 
 
 		labelConfm = new JLabel("User ou Password incorreta");
-		labelConfm.setBounds(359, 578, 251, 18);
+		labelConfm.setBounds(342, 578, 251, 18);
 		labelConfm.setForeground(new Color(70,74,101));
 		labelConfm.setVisible(false);
-		labelConfm.setFont(new Font("Dubai Light", Font.PLAIN, 14));
+		labelConfm.setFont(new Font("Dubai Light", Font.BOLD, 16));
 		getContentPane().add(labelConfm);
 
 		// icon de user 
@@ -167,7 +167,7 @@ public class GUI_login extends JFrame {
 		btLogin = new JButton("Login");
 		btLogin.setBounds(375, 476, 104, 33);
 		btLogin.setForeground(SystemColor.desktop);
-		btLogin.setBackground(new Color(240, 240, 240));
+		btLogin.setBackground(Color.LIGHT_GRAY);
 		btLogin.setToolTipText("Carregue para fazer login");
 		btLogin.setFocusPainted(false);
 		btLogin.setFont(new Font("Dubai Light", Font.PLAIN, 15));
@@ -205,7 +205,7 @@ public class GUI_login extends JFrame {
 		btnSair.setForeground(Color.BLACK);
 		btnSair.setFont(new Font("Dubai Light", Font.PLAIN, 15));
 		btnSair.setFocusPainted(false);
-		btnSair.setBackground(SystemColor.menu);
+		btnSair.setBackground(Color.LIGHT_GRAY);
 		panel.add(btnSair);
 
 		// imagem de fundo 
