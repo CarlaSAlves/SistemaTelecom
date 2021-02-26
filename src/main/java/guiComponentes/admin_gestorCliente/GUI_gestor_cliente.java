@@ -205,7 +205,7 @@ public class GUI_gestor_cliente extends JFrame {
 		JButton botaoCriarCliente = new JButton("Criar Cliente");
 		botaoCriarCliente.setBounds(1168, 264, 152, 32);
 		botaoCriarCliente.setFont(font);
-		botaoCriarCliente.setBackground(SystemColor.activeCaption);
+		botaoCriarCliente.setBackground(Color.LIGHT_GRAY);
 		botaoCriarCliente.setFocusPainted(false);
 		botaoCriarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -232,7 +232,7 @@ public class GUI_gestor_cliente extends JFrame {
 		botaoEditarCliente.setBounds(826, 264, 161, 33);
 		botaoEditarCliente.setFont(font);
 		botaoEditarCliente.setEnabled(false);
-		botaoEditarCliente.setBackground(SystemColor.activeCaption);
+		botaoEditarCliente.setBackground(Color.LIGHT_GRAY);
 		botaoEditarCliente.setFocusPainted(false);
 		botaoEditarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -267,7 +267,7 @@ public class GUI_gestor_cliente extends JFrame {
 		botaoDesativarCliente.setBounds(997, 264, 161, 33);
 		botaoDesativarCliente.setFont(font);
 		botaoDesativarCliente.setEnabled(false);
-		botaoDesativarCliente.setBackground(SystemColor.activeCaption);
+		botaoDesativarCliente.setBackground(Color.LIGHT_GRAY);
 		botaoDesativarCliente.setFocusPainted(false);
 		botaoDesativarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -342,7 +342,7 @@ public class GUI_gestor_cliente extends JFrame {
 	private void botaoVisualizarHistoricoSetup() {
 		botaoVisualizarHistorico = new JButton("Ver Historico");
 		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
+		botaoVisualizarHistorico.setBackground(Color.LIGHT_GRAY);
 		botaoVisualizarHistorico.setBounds(655, 263, 161, 33);
 		botaoVisualizarHistorico.setEnabled(false);
 		botaoVisualizarHistorico.addActionListener(new ActionListener() {
@@ -383,7 +383,7 @@ public class GUI_gestor_cliente extends JFrame {
 		btVoltarGestorCliente = new JButton("Voltar");
 		btVoltarGestorCliente.setBounds(6, 709, 119, 38);
 		btVoltarGestorCliente.setFont(font);
-		btVoltarGestorCliente.setBackground(SystemColor.activeCaption);
+		btVoltarGestorCliente.setBackground(Color.LIGHT_GRAY);
 		btVoltarGestorCliente.setFocusPainted(false);
 	}
 
@@ -468,7 +468,7 @@ public class GUI_gestor_cliente extends JFrame {
 		botaoPesquisa = new JButton("Pesquisar");
 		botaoPesquisa.setBounds(72, 181, 371, 27);
 		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		botaoPesquisa.setBackground(SystemColor.activeCaption);
+		botaoPesquisa.setBackground(Color.LIGHT_GRAY);
 		botaoPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -552,6 +552,7 @@ public class GUI_gestor_cliente extends JFrame {
 		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
 		table.setFillsViewportHeight(true);
+		table.setFocusable(false);
 		table.setModel(new DefaultTableModel(new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
 		table.setForeground(SystemColor.desktop);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

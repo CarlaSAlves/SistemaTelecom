@@ -506,6 +506,7 @@ public class GUI_gestor_promocao extends JFrame {
 		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
 		table.setFillsViewportHeight(true);
+		table.setFocusable(false);
 		table.setModel(new DefaultTableModel(new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
 		table.setForeground(SystemColor.desktop);
 		table.setBackground(UIManager.getColor("CheckBox.light"));

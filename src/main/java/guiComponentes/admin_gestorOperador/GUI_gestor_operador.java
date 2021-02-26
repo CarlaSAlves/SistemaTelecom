@@ -139,7 +139,6 @@ public class GUI_gestor_operador extends JFrame {
 		panelDaTable.add(scrollPane);
 		
 		
-
 		lblResultados = new JLabel("Resultados: ");
 		lblResultados.setFont(new Font("Dubai Light", Font.PLAIN, 16));
 		lblResultados.setBounds(33, 6, 136, 25);
@@ -531,6 +530,7 @@ public class GUI_gestor_operador extends JFrame {
 		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
 		table.setFillsViewportHeight(true);
+		table.setFocusable(false);
 		table.setModel(new DefaultTableModel(new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
 		table.setForeground(SystemColor.desktop);
 		table.setBackground(UIManager.getColor("CheckBox.light"));
