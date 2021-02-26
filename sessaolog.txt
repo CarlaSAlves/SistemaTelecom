@@ -1098,3 +1098,87 @@
 <duração da sessão:	0:5>
 </sessao>
 
+<sessao>
+<username:	asd>
+<data e hora do login:	25-02-2021 11:54:49>
+<duração da sessão:	0:26>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	25-02-2021 11:55:23>
+<duração da sessão:	0:34>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	25-02-2021 12:02:47>
+<duração da sessão:	1:0>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	25-02-2021 12:03:53>
+<duração da sessão:	0:6>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	25-02-2021 12:04:04>
+<duração da sessão:	0:4>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	25-02-2021 14:55:22>
+<duração da sessão:	0:29>
+</sessao>
+
+<sessao>
+<username:	asd>
+<data e hora do login:	25-02-2021 14:55:57>
+<duração da sessão:	0:15>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	25-02-2021 16:13:59>
+<duração da sessão:	0:57>
+</sessao>
+
+<sessao>
+<username:	Anas>
+<data e hora do login:	25-02-2021 16:34:35>
+<duração da sessão:	8:50>
+</sessao>
+
+<sessao>
+<username:	Cliente>
+<data e hora do login:	25-02-2021 16:43:37>
+<duração da sessão:	0:7>
+</sessao>
+
+<sessao>
+<username:	Anas>
+<data e hora do login:	25-02-2021 16:44:18>
+<duração da sessão:	0:6>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	25-02-2021 16:44:35>
+<duração da sessão:	1:23>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	25-02-2021 16:47:28>
+<duração da sessão:	0:26>
+</sessao>
+
+<sessao>
+<username:	qwe>
+<data e hora do login:	26-02-2021 10:04:35>
+<duração da sessão:	0:11>
+</sessao>
+

@@ -513,6 +513,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
 		table.setFillsViewportHeight(true);
+		table.setFocusable(false);
 		table.setModel(new DefaultTableModel(
 				new Object[][] {{}, {}, {}, {}, {}, {}, {}, {}, {}, {},}, new String[] {}));
 		table.setForeground(SystemColor.desktop);
