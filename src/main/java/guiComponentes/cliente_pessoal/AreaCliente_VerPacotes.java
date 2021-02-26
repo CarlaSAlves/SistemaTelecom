@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -117,6 +118,8 @@ public class AreaCliente_VerPacotes extends JFrame {
 		listVerPacote.setVisibleRowCount( -1 ); // -1 sig q ele é variavel
 		listVerPacote.setFixedCellHeight( 24 );
 		listVerPacote.setFixedCellWidth( 226 );
+		listVerPacote.setBorder(BorderFactory.createLoweredBevelBorder());
+		
 		listVerPacote.setSelectedIndex(0);
 		PacoteComercial pacote = (PacoteComercial) listVerPacote.getSelectedValue();
 		textFieldNome.setText(pacote.getNome());
