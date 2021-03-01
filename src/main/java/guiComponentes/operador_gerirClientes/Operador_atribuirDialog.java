@@ -209,6 +209,10 @@ public class Operador_atribuirDialog extends JDialog {
 		public Component getListCellRendererComponent(JList<? extends PacoteComercial> list, PacoteComercial value,
 				int index, boolean isSelected, boolean cellHasFocus) {
 			display.setText("  " + value.getNome());
+			if (isSelected) {
+				display.setBackground(new Color(250,235,70));
+			} else 
+				display.setBackground(null);
 			return display;
 			
 		}
