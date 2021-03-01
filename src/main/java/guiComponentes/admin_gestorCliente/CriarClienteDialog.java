@@ -232,7 +232,7 @@ public class CriarClienteDialog extends JDialog {
 						if(nomeEmArray[i]==32) {
 							continue;
 						}
-						if (nomeEmArray[i]>= 48 || nomeEmArray[i] <= 57 ) {
+						if (nomeEmArray[i]>= 48 && nomeEmArray[i] <= 57 ) {
 							JOptionPane.showMessageDialog(CriarClienteDialog.this,
 									"O Nome não pode conter números!", "Erro", JOptionPane.ERROR_MESSAGE);
 							return;
