@@ -204,7 +204,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		JButton botaoCriarPacotes = new JButton("Criar Pacote Comercial");
 		botaoCriarPacotes.setBounds(609, 179, 218, 43);
 		botaoCriarPacotes.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoCriarPacotes.setBackground(SystemColor.activeCaption);
+		botaoCriarPacotes.setBackground(Color.LIGHT_GRAY);
 		botaoCriarPacotes.setFocusPainted(false);
 		botaoCriarPacotes.addActionListener(new ActionListener() {
 
@@ -229,7 +229,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		botaoEditarPacoteComercial = new JButton("Editar Pacote Comercial");
 		botaoEditarPacoteComercial.setBounds(609, 125, 218, 43);
 		botaoEditarPacoteComercial.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoEditarPacoteComercial.setBackground(SystemColor.activeCaption);
+		botaoEditarPacoteComercial.setBackground(Color.LIGHT_GRAY);
 		botaoEditarPacoteComercial.setFocusPainted(false);
 		botaoEditarPacoteComercial.setEnabled(false);
 		botaoEditarPacoteComercial.addActionListener(new ActionListener() {
@@ -267,7 +267,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		botaoDesativarPacoteComercial = new JButton("Desativar Pacote Comercial");
 		botaoDesativarPacoteComercial.setBounds(609, 71, 218, 43);
 		botaoDesativarPacoteComercial.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoDesativarPacoteComercial.setBackground(SystemColor.activeCaption);
+		botaoDesativarPacoteComercial.setBackground(Color.LIGHT_GRAY);
 		botaoDesativarPacoteComercial.setFocusPainted(false);
 		botaoDesativarPacoteComercial.setEnabled(false);
 		botaoDesativarPacoteComercial.addActionListener(new ActionListener() {
@@ -367,7 +367,7 @@ public class GUI_gestor_pacotes extends JFrame {
 			}
 		});
 		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
+		botaoVisualizarHistorico.setBackground(Color.LIGHT_GRAY);
 		botaoVisualizarHistorico.setBounds(609, 236, 218, 43);
 		botaoVisualizarHistorico.setEnabled(false);
 	}
@@ -381,7 +381,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		btVoltarGestorPacotes = new JButton("Voltar");
 		btVoltarGestorPacotes.setBounds(6, 709, 119, 38);
 		btVoltarGestorPacotes.setFont(font);
-		btVoltarGestorPacotes.setBackground(SystemColor.activeCaption);
+		btVoltarGestorPacotes.setBackground(Color.LIGHT_GRAY);
 		btVoltarGestorPacotes.setFocusPainted(false);
 	}
 
@@ -465,7 +465,7 @@ public class GUI_gestor_pacotes extends JFrame {
 			}
 		});
 		btPesquisar.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		btPesquisar.setBackground(SystemColor.activeCaption);
+		btPesquisar.setBackground(Color.LIGHT_GRAY);
 		btPesquisar.setBounds(72, 121, 371, 27);
 		painelPesquisa.add(btPesquisar);
 	}
