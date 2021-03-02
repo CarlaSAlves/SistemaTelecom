@@ -52,7 +52,7 @@ public class Operador_VisualizarPromocoes extends JFrame {
 	}
 
 	/**
-	 * 
+	 * Settings of the page 
 	 */
 	protected void inicialize() {
 
@@ -67,7 +67,7 @@ public class Operador_VisualizarPromocoes extends JFrame {
 		contentPane.setBackground(Color.WHITE);
 		setResizable(false);
 
-		// Botões
+		// Buttons
 
 		btVoltarOperadorHomepageSetup();
 		getContentPane().add(btVoltarOperadorHomepage);
@@ -80,7 +80,7 @@ public class Operador_VisualizarPromocoes extends JFrame {
 		textAreaDescricao.setEditable(false);
 		contentPane.add(textAreaDescricao);
 
-		// Tabela 
+		// Table 
 
 		JPanel panel = panelSetup();
 		getContentPane().add(panel);
@@ -132,6 +132,9 @@ public class Operador_VisualizarPromocoes extends JFrame {
 		contentPane.add(lblHoraSistema);
 	}
 
+	/**
+	 * Painel Pesquisa settings
+	 */
 	private void painelPesquisa() {
 		painelPesquisa = new JPanel();
 		painelPesquisa.setLayout(null);
@@ -213,6 +216,9 @@ public class Operador_VisualizarPromocoes extends JFrame {
 		painelPesquisa.add(btPesquisar);
 	}
 
+	/**
+	 * Table setup
+	 */
 	private void tableSetup() {
 		table = new JTable();
 		table.setRowSelectionAllowed(true);
@@ -241,6 +247,10 @@ public class Operador_VisualizarPromocoes extends JFrame {
 
 	}
 
+	/**
+	 * Table panel setup
+	 * @return painelTabela
+	 */
 	private JPanel panelSetup() {
 		JPanel painelTabela = new JPanel();
 		painelTabela.setBackground(Color.WHITE);
@@ -250,6 +260,9 @@ public class Operador_VisualizarPromocoes extends JFrame {
 		return painelTabela;
 	}
 
+	/**
+	 * Voltar Button settings, to go back to the previous page 
+	 */
 	private void btVoltarOperadorHomepageSetup() {
 		btVoltarOperadorHomepage = new JButton("Voltar");
 		btVoltarOperadorHomepage.setFont(new Font("Dubai Light", Font.PLAIN, 13));
@@ -258,6 +271,9 @@ public class Operador_VisualizarPromocoes extends JFrame {
 
 	}
 
+	/**
+	 * Look and feel - Nimbus 
+	 */
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 			if ("Nimbus".equals(info.getName())) {
@@ -277,41 +293,74 @@ public class Operador_VisualizarPromocoes extends JFrame {
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @return table
+	 */
 	public JTable getTable() {
 		return table;
 	}
 
+	/**
+	 * 
+	 * @return btVoltarOperadorHomepage
+	 */
 	public JButton btVoltarOperadorHomepage() {
 		return btVoltarOperadorHomepage;
 	}
 
-
+	/**
+	 * 
+	 * @param btVoltar
+	 */
 	public void setBtVoltarOperadorHomepage(JButton btVoltar) {
 		this.btVoltarOperadorHomepage = btVoltar;
 	}
 
+	/**
+	 * @param username
+	 */
+	
 	public void setUsernameLoggedIn(String username) {
 		lblUsernameLogged.setText("Username: " + username);
-
 	}
 
+	/**
+	 * @param temporizador
+	 */
 	public void setLblTempoSessao(Duration temporizador) {
 		lblTempoSessao.setText(
 				"Sessao: " + temporizador.toMinutesPart() + ":" + temporizador.toSecondsPart());;
 	}
 
+	/**
+	 * 
+	 * @param agora
+	 */
 	public void setLblHoraSistema(String agora) {
 		lblHoraSistema.setText("Data: " + agora);
-
 	}
 
+	/**
+	 * 
+	 * @return panel
+	 */
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
+	
+	/**
+	 * 
+	 * @return lblResultados
+	 */
 	public JLabel getLblResultados() {
 		return lblResultados;
 	}
+	
+	/**
+	 * 
+	 * @return textAreaDescricao
+	 */
 	public JTextArea getTextAreaDescricao() {
 		return textAreaDescricao;
 	}
