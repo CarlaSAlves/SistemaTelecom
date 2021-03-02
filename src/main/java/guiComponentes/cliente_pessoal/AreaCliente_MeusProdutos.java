@@ -53,7 +53,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 	}
 	
 	/**
-	 * Configurar interface, look and feel Nimbus 
+	 * Configure UI, look and feel Nimbus 
 	 */
 	@SuppressWarnings("null")
 	private void initialize() {
@@ -143,7 +143,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 
 	/**
-	 * Cria o renderer da ComboBox
+	 * Creates the ComboBox renderer
 	 *
 	 */
 
@@ -173,7 +173,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 
 
 	/**
-	 * Activa o Nimbus Look and Feel
+	 * Activates the Nimbus Look and Feel
 	 * 
 	 */
 
@@ -205,7 +205,7 @@ public class AreaCliente_MeusProdutos extends JFrame {
 	}
 
 	/**
-	 * Método que faz o username percorrer os vários paineis.
+	 * Method that sends the username across the various panels.
 	 * @param username
 	 */
 	public void enviarUsernameMeusProdutos(String username) {
