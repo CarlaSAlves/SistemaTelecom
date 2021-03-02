@@ -195,7 +195,7 @@ public class GUI_gestor_operador extends JFrame {
 		JButton botaoCriarOperador = new JButton("Criar Operador");
 		botaoCriarOperador.setBounds(1168, 264, 152, 32);
 		botaoCriarOperador.setFont(font);
-		botaoCriarOperador.setBackground(SystemColor.activeCaption);
+		botaoCriarOperador.setBackground(Color.LIGHT_GRAY);
 		botaoCriarOperador.setFocusPainted(false);
 		botaoCriarOperador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -219,7 +219,7 @@ public class GUI_gestor_operador extends JFrame {
 		botaoEditarOperador = new JButton("Editar Operador");
 		botaoEditarOperador.setBounds(826, 264, 161, 33);
 		botaoEditarOperador.setFont(font);
-		botaoEditarOperador.setBackground(SystemColor.activeCaption);
+		botaoEditarOperador.setBackground(Color.LIGHT_GRAY);
 		botaoEditarOperador.setFocusPainted(false);
 		botaoEditarOperador.setEnabled(false);
 		botaoEditarOperador.addActionListener(new ActionListener() {
@@ -256,7 +256,7 @@ public class GUI_gestor_operador extends JFrame {
 		botaoDesativarOperador = new JButton("Desativar Operador");
 		botaoDesativarOperador.setBounds(997, 264, 161, 33);
 		botaoDesativarOperador.setFont(font);
-		botaoDesativarOperador.setBackground(SystemColor.activeCaption);
+		botaoDesativarOperador.setBackground(Color.LIGHT_GRAY);
 		botaoDesativarOperador.setFocusPainted(false);
 		botaoDesativarOperador.setEnabled(false);
 		botaoDesativarOperador.addActionListener(new ActionListener() {
@@ -359,7 +359,7 @@ public class GUI_gestor_operador extends JFrame {
 		});
 
 		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
+		botaoVisualizarHistorico.setBackground(Color.LIGHT_GRAY);
 		botaoVisualizarHistorico.setBounds(651, 264, 161, 33);
 		botaoVisualizarHistorico.setEnabled(false);
 	}
@@ -373,7 +373,7 @@ public class GUI_gestor_operador extends JFrame {
 		btVoltarGestorOperador = new JButton("Voltar");
 		btVoltarGestorOperador.setBounds(6, 709, 119, 38);
 		btVoltarGestorOperador.setFont(font);
-		btVoltarGestorOperador.setBackground(SystemColor.activeCaption);
+		btVoltarGestorOperador.setBackground(Color.LIGHT_GRAY);
 		btVoltarGestorOperador.setFocusPainted(false);
 	}
 
@@ -449,7 +449,7 @@ public class GUI_gestor_operador extends JFrame {
 	private void botaoPesquisaSetup() {
 		botaoPesquisa = new JButton("Pesquisar");
 		botaoPesquisa.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		botaoPesquisa.setBackground(SystemColor.activeCaption);
+		botaoPesquisa.setBackground(Color.LIGHT_GRAY);
 		botaoPesquisa.setBounds(72, 143, 371, 27);
 		botaoPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

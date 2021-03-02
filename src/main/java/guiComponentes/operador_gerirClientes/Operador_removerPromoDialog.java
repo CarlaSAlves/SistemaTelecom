@@ -130,7 +130,7 @@ public class Operador_removerPromoDialog extends JDialog {
 	}
 
 	/**
-	 * Cria o renderer da promoção
+	 * Creates the renderer of promoção
 	 */
 	private class PromocaoComboRenderer implements ListCellRenderer<Promocao> {
 
@@ -146,6 +146,10 @@ public class Operador_removerPromoDialog extends JDialog {
 		public Component getListCellRendererComponent(JList<? extends Promocao> list, Promocao value, int index,
 				boolean isSelected, boolean cellHasFocus) {
 			display.setText("  " + value.getNome());
+			if (isSelected) {
+				display.setBackground(new Color(250,235,70));
+			} else 
+				display.setBackground(null);
 			return display;
 		}
 	}

@@ -67,8 +67,8 @@ public class Operador_atribuirDialog extends JDialog {
 	}
 
 	/**
-	 * Atribui um pacote comercial ou uma promoção ao cliente
-	 * Validações para o botão ok 
+	 * Assigns a pacote comercial or a promoção to the cliente
+	 * Validations for the ok button 
 	 * 
 	 */
 	public Operador_atribuirDialog() {
@@ -166,7 +166,7 @@ public class Operador_atribuirDialog extends JDialog {
 	}
 	
 	/**
-	 * Configuração para o modo promoção 
+	 * Settings for the promoção mode 
 	 * @param operador_gerirClientes
 	 * @param promocoes
 	 * @param cliente
@@ -193,7 +193,7 @@ public class Operador_atribuirDialog extends JDialog {
 	}
 
 	/**
-	 * Cria o renderer para a comboBox de pacotes comerciais
+	 * Creates the renderer for the comboBox of pacotes comerciais
 	 */
 	private class PacoteComboRenderer implements ListCellRenderer<PacoteComercial> {
 
@@ -209,6 +209,10 @@ public class Operador_atribuirDialog extends JDialog {
 		public Component getListCellRendererComponent(JList<? extends PacoteComercial> list, PacoteComercial value,
 				int index, boolean isSelected, boolean cellHasFocus) {
 			display.setText("  " + value.getNome());
+			if (isSelected) {
+				display.setBackground(new Color(250,235,70));
+			} else 
+				display.setBackground(null);
 			return display;
 			
 		}
@@ -222,7 +226,7 @@ public class Operador_atribuirDialog extends JDialog {
 	}
 
 	/**
-	 * Cria o renderer para a comboBox de promoções
+	 * Creates the renderer for the comboBox of promoções
 	 */
 	private class PromocaoComboRenderer implements ListCellRenderer<Promocao> {
 

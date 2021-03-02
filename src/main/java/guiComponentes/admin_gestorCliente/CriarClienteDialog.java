@@ -232,7 +232,7 @@ public class CriarClienteDialog extends JDialog {
 						if(nomeEmArray[i]==32) {
 							continue;
 						}
-						if (nomeEmArray[i]>= 48 || nomeEmArray[i] <= 57 ) {
+						if (nomeEmArray[i]>= 48 && nomeEmArray[i] <= 57 ) {
 							JOptionPane.showMessageDialog(CriarClienteDialog.this,
 									"O Nome não pode conter números!", "Erro", JOptionPane.ERROR_MESSAGE);
 							return;
@@ -242,7 +242,7 @@ public class CriarClienteDialog extends JDialog {
 						Integer.parseInt( textFieldNIF.getText() );
 					}
 					catch( Exception ex ){
-						JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem de ser um inteiro!");
+						JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF só pode conter números!");
 						return;
 					}
 
@@ -283,7 +283,7 @@ public class CriarClienteDialog extends JDialog {
 						Integer.parseInt( textFieldNIF.getText() );
 					}
 					catch( Exception ex ){
-						JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF tem de ser um inteiro!");
+						JOptionPane.showMessageDialog( CriarClienteDialog.this, "O NIF só pode conter números!");
 						return;
 					}
 					
@@ -300,7 +300,7 @@ public class CriarClienteDialog extends JDialog {
 					}
 					for( Cliente c : listaClientes) {
 						if(c.getLogin().equalsIgnoreCase(textFieldLogin.getText())) {
-							JOptionPane.showMessageDialog( CriarClienteDialog.this, "Login Invalido, ja em uso!");
+							JOptionPane.showMessageDialog( CriarClienteDialog.this, "Login Invalido, já em uso!");
 							return;
 						}
 					}							

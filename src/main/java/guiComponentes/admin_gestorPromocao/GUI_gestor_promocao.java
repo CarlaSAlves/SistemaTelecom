@@ -205,7 +205,7 @@ public class GUI_gestor_promocao extends JFrame {
 		JButton botaoCriarPromocao = new JButton("Criar Promoção");
 		botaoCriarPromocao.setBounds(609, 179, 231, 43);
 		botaoCriarPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoCriarPromocao.setBackground(SystemColor.activeCaption);
+		botaoCriarPromocao.setBackground(Color.LIGHT_GRAY);
 		botaoCriarPromocao.setFocusPainted(false);
 		botaoCriarPromocao.addActionListener(new ActionListener() {
 
@@ -231,7 +231,7 @@ public class GUI_gestor_promocao extends JFrame {
 		botaoEditarPromocao = new JButton("Editar Promoção");
 		botaoEditarPromocao.setBounds(609, 125, 231, 43);
 		botaoEditarPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoEditarPromocao.setBackground(SystemColor.activeCaption);
+		botaoEditarPromocao.setBackground(Color.LIGHT_GRAY);
 		botaoEditarPromocao.setFocusPainted(false);
 		botaoEditarPromocao.setEnabled(false);
 		botaoEditarPromocao.addActionListener(new ActionListener() {
@@ -267,7 +267,7 @@ public class GUI_gestor_promocao extends JFrame {
 		botaoDesativarPromocao = new JButton("Desativar Promoção");
 		botaoDesativarPromocao.setBounds(609, 71, 231, 43);
 		botaoDesativarPromocao.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoDesativarPromocao.setBackground(SystemColor.activeCaption);
+		botaoDesativarPromocao.setBackground(Color.LIGHT_GRAY);
 		botaoDesativarPromocao.setFocusPainted(false);
 		botaoDesativarPromocao.setEnabled(false);
 		botaoDesativarPromocao.addActionListener(new ActionListener() {
@@ -368,7 +368,7 @@ public class GUI_gestor_promocao extends JFrame {
 			}
 		});
 		botaoVisualizarHistorico.setFont(new Font("Dubai Light", Font.PLAIN, 15));
-		botaoVisualizarHistorico.setBackground(SystemColor.activeCaption);
+		botaoVisualizarHistorico.setBackground(Color.LIGHT_GRAY);
 		botaoVisualizarHistorico.setBounds(609, 236, 231, 43);
 		botaoVisualizarHistorico.setEnabled(false);
 	}
@@ -382,7 +382,7 @@ public class GUI_gestor_promocao extends JFrame {
 		btVoltarGestorPromocao = new JButton("Voltar");
 		btVoltarGestorPromocao.setBounds(6, 709, 119, 38);
 		btVoltarGestorPromocao.setFont(font);
-		btVoltarGestorPromocao.setBackground(SystemColor.activeCaption);
+		btVoltarGestorPromocao.setBackground(Color.LIGHT_GRAY);
 		btVoltarGestorPromocao.setFocusPainted(false);
 	}
 
@@ -465,7 +465,7 @@ public class GUI_gestor_promocao extends JFrame {
 		});
 		
 		btPesquisar.setFont(new Font("Dubai Light", Font.PLAIN, 13));
-		btPesquisar.setBackground(SystemColor.activeCaption);
+		btPesquisar.setBackground(Color.LIGHT_GRAY);
 		btPesquisar.setBounds(72, 121, 371, 27);
 		painelPesquisa.add(btPesquisar);
 	}

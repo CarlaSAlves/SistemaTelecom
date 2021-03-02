@@ -38,14 +38,6 @@ public class Operador_visualizarDialog extends JDialog {
 	private boolean modoPromocao = false;
 
 
-	public Operador_visualizarDialog(PacoteComercial pacoteComercial, String nome) {
-		this();
-		textFieldNome.setText(pacoteComercial.getNome());
-		textAreaDescricao.setText(pacoteComercial.getDescricao());
-		setTitle("Visualizar Pacote Comercial");
-		labelTitulo.setText("Pacote Comercial do Cliente: " + nome);
-	}
-
 	/**
 	 * @param promocoes
 	 * @param modoPromocao
@@ -56,7 +48,7 @@ public class Operador_visualizarDialog extends JDialog {
 		this();
 		this.modoPromocao = modoPromocao;
 		if(this.modoPromocao) {
-			
+
 			textFieldNome.setVisible(false);
 			@SuppressWarnings("rawtypes")
 			JComboBox comboBox = new JComboBox();
@@ -68,27 +60,27 @@ public class Operador_visualizarDialog extends JDialog {
 			contentPanel.add(comboBox);
 			Promocao promocao = (Promocao) comboBox.getSelectedItem();
 			textAreaDescricao.setText(promocao.getDescricao());	
-			
+
 			comboBox.addItemListener(new ItemListener() {
-				
+
 				@Override
 				public void itemStateChanged(ItemEvent e) {
 					Promocao promocao = (Promocao) comboBox.getSelectedItem();
 					textAreaDescricao.setText(promocao.getDescricao());	
 				}
 			});
-			
+
 			setTitle("Visualizar Promoções");
 			labelTitulo.setText("Promoções do Cliente: " + nome);
-			
+
 		}
 	}
 
 	/**
-	 * 
+	 * Settings for visualization mode
 	 */
 	public Operador_visualizarDialog() {
-		
+
 		setBounds(500, 300, 549, 300);
 		setResizable(false);
 		setTitle("");
@@ -103,7 +95,7 @@ public class Operador_visualizarDialog extends JDialog {
 		labelTitulo.setFont(new Font("Dubai Light", Font.BOLD, 13));
 		labelTitulo.setBounds(10, 11, 513, 32);
 		contentPanel.add(labelTitulo);
-		
+
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Dubai Light", Font.PLAIN, 12));
 		lblNome.setBounds(10, 53, 85, 28);
@@ -120,31 +112,47 @@ public class Operador_visualizarDialog extends JDialog {
 		textFieldNome.setEditable(false);
 		contentPanel.add(textFieldNome);
 		textFieldNome.setColumns(10);
-		
+
 		textAreaDescricao = new JTextArea();
 		textAreaDescricao.setFont(new Font("Dubai Light", Font.PLAIN, 11));
 		textAreaDescricao.setBounds(86, 92, 437, 125);
 		textAreaDescricao.setEditable(false);
 		contentPanel.add(textAreaDescricao);
-		
-			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(Color.WHITE);
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			
-				JButton cancelButton = new JButton("Sair");
-				cancelButton.setActionCommand("Cancelar");
-				cancelButton.addActionListener(new ActionListener() {
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						dispose();						
-					}
-				});
-				buttonPane.add(cancelButton);
-		}
+		JPanel buttonPane = new JPanel();
+		buttonPane.setBackground(Color.WHITE);
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
+
+		JButton cancelButton = new JButton("Sair");
+		cancelButton.setActionCommand("Cancelar");
+		cancelButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();						
+			}
+		});
+		buttonPane.add(cancelButton);
 	}
 
+	/**
+	 * Settings for the pacote comercial visualization mode 
+	 * @param pacoteComercial
+	 * @param nome
+	 */
+	public Operador_visualizarDialog(PacoteComercial pacoteComercial, String nome) {
+		this();
+		textFieldNome.setText(pacoteComercial.getNome());
+		textAreaDescricao.setText(pacoteComercial.getDescricao());
+		setTitle("Visualizar Pacote Comercial");
+		labelTitulo.setText("Pacote Comercial do Cliente: " + nome);
+	}
+
+	/**
+	 * Creates the renderer for the list of promoção
+	 *
+	 */
 	class PromocaoComboRenderer implements ListCellRenderer<Promocao> {
 
 		private JLabel display;
@@ -159,7 +167,12 @@ public class Operador_visualizarDialog extends JDialog {
 		public Component getListCellRendererComponent(JList<? extends Promocao> list, Promocao value, int index,
 				boolean isSelected, boolean cellHasFocus) {
 			display.setText("  " + value.getNome());
+			if (isSelected) {
+				display.setBackground(new Color(250,235,70));
+			} else 
+				display.setBackground(null);
 			return display;
 		}
 	}
+}
 
