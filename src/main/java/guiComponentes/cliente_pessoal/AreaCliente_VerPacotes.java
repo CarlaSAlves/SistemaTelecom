@@ -52,7 +52,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 		ativarNimbusLookAndFeel();
 
 		/**
-		 * Define as caracteristicas dos painel base. 
+		 * Defines the characteristics of the base panel. 
 		 */
 		
 		panelVerTodosPacotes = new JPanel();
@@ -147,7 +147,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 		panelVerTodosPacotes.add(scrollBar);
 
 		/*
-		 * Define a imagem de fundo através de uma label
+		 * Sets the background image via a label
 		 */
 		JLabel labelIconFundo = new JLabel("");
 		labelIconFundo.setIcon(new ImageIcon(AreaCliente_VerPacotes.class.getResource("/guiComponentes/img/AltranClientes.png")));
@@ -156,7 +156,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 	}
 
 	/**
-	 * Activa o Nimbus Look and Feel
+	 * Activates the Nimbus Look and Feel
 	 */
 
 	private void ativarNimbusLookAndFeel() {
@@ -179,7 +179,7 @@ public class AreaCliente_VerPacotes extends JFrame {
 	}
 
 	/**
-	 * Cria o renderer da JList
+	 * Creates the JList renderer
 	 */
 	private class RendererPacote implements ListCellRenderer<PacoteComercial> {
 

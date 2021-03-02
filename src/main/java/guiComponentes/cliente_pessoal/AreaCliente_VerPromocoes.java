@@ -56,7 +56,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		ativarNimbusLookAndFeel();
 
 		/**
-		 * Define as caracteristicas dos painel base. 
+		 * Defines the characteristics of the base panel. 
 		 */
 
 		panelVerTodasPromo = new JPanel();
@@ -66,7 +66,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		setBounds(100, 100, 1384, 586);
 		setResizable(false);
 
-		// Labels e textFieldNome da página 
+		// Labels and textFieldNome of the page
 
 		JLabel labelVerPromo = new JLabel("Ver todas as Promoções");
 		labelVerPromo.setForeground(Color.WHITE);
@@ -101,7 +101,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		textArea.setBounds(400, 222, 300, 114);
 		panelVerTodasPromo.add(textArea);
 
-		// Jlist e ScrollBar
+		// Jlist and ScrollBar
 
 		List<Promocao> promocoes = new ArrayList<Promocao>();
 		for (Promocao p : GestorDeDAO.getGestorDeDAO().getAllPromocoes()) {
@@ -145,7 +145,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		panelVerTodasPromo.add(scrollBar);
 
 		/*
-		 * Define a imagem de fundo através de uma label
+		 * Sets the background image via a label
 		 */
 		JLabel labelIconFundo = new JLabel("");
 		labelIconFundo.setIcon(new ImageIcon(AreaCliente_VerPromocoes.class.getResource("/guiComponentes/img/AltranClientes.png")));
@@ -156,7 +156,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 	} //end initialize
 
 	/**
-	 * Activa o Nimbus Look and Feel
+	 * Activates the Nimbus Look and Feel
 	 * 
 	 */
 	private void ativarNimbusLookAndFeel() {
@@ -178,7 +178,7 @@ public class AreaCliente_VerPromocoes extends JFrame {
 		}
 	}
 	/**
-	 * Cria o renderer da JList
+	 * Creates the JList renderer
 	 */
 	private class RendererPromocao implements ListCellRenderer<Promocao> {
 

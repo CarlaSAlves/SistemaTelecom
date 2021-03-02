@@ -69,7 +69,7 @@ public class AreaCliente extends JFrame {
 	}
 	
 	/**
-	 * Activa o Nimbus Look and Feel
+	 * Activates the Nimbus Look and Feel
 	 * 
 	 */
 	private void ativarNimbusLookAndFeel() {
@@ -94,7 +94,7 @@ public class AreaCliente extends JFrame {
 	/**
 	
 	 /* 
-	 * Contém o corpo da página
+	 * Contains the body of the page
 	 * @param guit
 	 */
 	private void initialize(GUI_total guit) {
@@ -107,7 +107,7 @@ public class AreaCliente extends JFrame {
 		ativarNimbusLookAndFeel(); 
 		
 		/**
-		 * Define as caracteristicas dos painel base. 
+		 * Defines the characteristics of the base panel. 
 		 */
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
@@ -121,9 +121,9 @@ public class AreaCliente extends JFrame {
 		getContentPane().setLayout(null);
 		setResizable(false);
 
-		/* Cabeçalho */
-	
-		//  Label portal cliente
+		/* Header */
+		
+		// Label customer portal
 
 		JLabel lblPortalCliente = new JLabel("Portal do Cliente");
 		lblPortalCliente.setBounds(16, 17, 508, 33);
@@ -137,44 +137,45 @@ public class AreaCliente extends JFrame {
 		lblBemVindo.setBounds(16, 48, 250, 33);
 		panel.add(lblBemVindo);
 
-		// Construção JTabbedPane
+		// Construction JTabbedPane
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setFont(new Font("Dubai Light", Font.PLAIN, 17));
 		tabbedPane.setBounds(0, 89, 1384, 586); //180, 50
 		panel.add(tabbedPane);
 
-		// Ligação a Classe AreaCliente_MeusDados -  Separador os meus dados
-
+		
+		// Link to AreaCliente_MeusDados - My Data tab
+		
 		JPanel panelMeusDados = areaClienteDados.returnAreaClienteMeusDados();	
 		tabbedPane.addTab("Meus Dados",null,  panelMeusDados);
 		panelMeusDados.setLayout(null);
 		panelMeusDados.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
 
-		// Ligação a Classe AreaCliente_MeusProdutos-  Separador MeusProdutos
-
+		// Link to Class AreaCliente_MeusProdutos- MyProducts tab
+		
 		JPanel panelMeusProdutos = areaClienteProdutos.returnAreaClienteMeusProdutos();
 		tabbedPane.addTab("Meus Produtos",null,  panelMeusProdutos);
 		panelMeusProdutos.setLayout(null);
 		panelMeusProdutos.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
 
-		// Ligação a classe ver Pacotes
+		// Link to class - ver Pacotes
 
 		JPanel panelVerTodosPacotes = areaClienteVerPacotes.returnAreaClienteVerPacotes();
 		tabbedPane.addTab("Ver todos os Pacotes Comerciais",null,  panelVerTodosPacotes);
 		panelVerTodosPacotes.setLayout(null);
 		panelMeusProdutos.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
 
-		// Ligação a classe ver Promoções
+		// Link to class - ver Promoções
 
 		JPanel panelVerTodasPromo = areaClienteVerPromo.returnAreaClienteVerPromo();
 		tabbedPane.addTab("Ver todas as Promoções", null,  panelVerTodasPromo);
 		panelVerTodasPromo.setLayout(null);
 		panelVerTodasPromo.setFont(new Font("Dubai Light", Font.PLAIN, 12 ));
 
-		/* RODAPÉ */
+		/* BACKBOARD */
 		
-		//Botão Terminar sessão
+		//Sign out button
 
 		btTerminarSessao = new JButton("Terminar Sessão");
 		btTerminarSessao.setForeground(Color.DARK_GRAY);
@@ -183,7 +184,7 @@ public class AreaCliente extends JFrame {
 		btTerminarSessao.setFocusPainted(false);
 		getContentPane().add(btTerminarSessao);
 
-		// Action listener botão terminar sessão
+		// Action listener logout button
 
 		btTerminarSessao.addActionListener(new ActionListener() {
 
@@ -195,7 +196,7 @@ public class AreaCliente extends JFrame {
 		});
 
 
-		// Logotipo da empresa
+		// Company logo
 
 		JLabel lblFooter = new JLabel("");
 		lblFooter.setForeground(new Color(0, 0, 0));
@@ -207,13 +208,12 @@ public class AreaCliente extends JFrame {
 		tabbedPane.setSelectedIndex(0);
 
 	} //end initialize method
-
-
+	
 	/**
-	 * Configuração das labels de username e temporização.
-	 * @lblUsernameLogged apresenta o username que está logado
-	 * @lblTempoSessao apresenta o tempo de sessão desde o momento que faz login
-	 * @lblHoraSistema apresenta a hora atual do sistema 
+	 * Configuring username labels and timer.
+	 * @lblUsernameLogged displays the username that is logged in
+	 * @lblTempoSessao displays the session time from the moment you log in
+	 * @lblHoraSistema displays the current system time 
 	 */
 	protected void setupTempoSessao() {
 		lblUsernameLogged = new JLabel();
@@ -240,7 +240,7 @@ public class AreaCliente extends JFrame {
 	}
 
 	/**
-	 * Cria uma Label de Boas Vindas
+	 * Create a Welcome Label
 	 * @param name
 	 */
 	public void setLabelBoasVindas(String name) {
@@ -249,7 +249,7 @@ public class AreaCliente extends JFrame {
 	}
 	
 	/**
-	 * Envia o username para a area cliente
+	 * Send the username to the client area
 	 * @param username
 	 */
 	public void enviarUsernameAreaCliente(String username) {

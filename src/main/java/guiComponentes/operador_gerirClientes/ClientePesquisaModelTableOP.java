@@ -8,7 +8,7 @@ import standard_value_object.Cliente;
 public class ClientePesquisaModelTableOP extends AbstractTableModel {
 	
 	/**
-	 * Esta classe configura a tabela de pesquisa, onde se mostra os clientes.
+	 * This class sets up the tabela de Pesquisa, where the clientes are shown.
 	 * 
 	 */
 
@@ -29,8 +29,8 @@ public class ClientePesquisaModelTableOP extends AbstractTableModel {
 	private List<Cliente> clientes;
 	
 	/**
-	 * Criação das linhas e colunas da tabela, consoante o tamanho 
-	 * da lista de clientes dando-lhe o nome da coluna correspondente.
+	 * Creating the rows and columns of the table, depending on the size 
+	 * of the Clientes List, by naming the corresponding column.
 	 * @param osClientes
 	 */
 
@@ -53,7 +53,7 @@ public class ClientePesquisaModelTableOP extends AbstractTableModel {
 		return nomesColunas[col];
 	}
 	/**
-	 * Dependendo das constantes, vai buscar os valores correspondentes ao cliente.
+	 * Depending on the constants, it fetches the corresponding values from the cliente.
 	 */
 
 	@Override

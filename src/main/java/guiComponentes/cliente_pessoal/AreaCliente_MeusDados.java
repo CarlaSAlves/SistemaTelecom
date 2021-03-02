@@ -49,14 +49,14 @@ public class AreaCliente_MeusDados extends JFrame {
 	}
 
 	/**
-	 * Configurar interface, look and feel Nimbus 
+	 * Interface, look and feel Nimbus setup
 	 */
 	private void initialize()   {
 
 		ativarNimbusLookAndFeel();
 
 		/**
-		 * Define as caracteristicas dos paineis base. 
+		 * Defines the characteristics of the base panels. 
 		 */
 
 		panelMeusDados = new JPanel();
@@ -111,10 +111,10 @@ public class AreaCliente_MeusDados extends JFrame {
 		textFieldsSetup();
 
 		/**
-		 * Botões
+		 * Buttons
 		 * 
 		 * Atualiza dados
-		 * Confima dados
+		 * Confirma dados
 		 * Cancelar
 		 * Atualiza dados Password
 		 * Confirma Password
@@ -139,7 +139,7 @@ public class AreaCliente_MeusDados extends JFrame {
 	}
 
 	/**
-	 * Activa o Nimbus Look and Feel
+	 * Activates Nimbus Look and Feel UI
 	 */
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -161,7 +161,7 @@ public class AreaCliente_MeusDados extends JFrame {
 	}
 
 	/**
-	 * labels para visualização e inserção de dados 
+	 * labels for viewing and entering data 
 	 */
 	private void labelsSetup() {
 
@@ -272,7 +272,7 @@ public class AreaCliente_MeusDados extends JFrame {
 	}
 
 	/**
-	 * textFields para visualização e inserção de dados 
+	 * textFields for viewing and entering data 
 	 */
 	private void textFieldsSetup() {
 
@@ -340,9 +340,9 @@ public class AreaCliente_MeusDados extends JFrame {
 	}
 
 	/**
-	 * Configura a interface para quando o botão "Atualizar dados" é clicado. 
-	 * Os campos de dados ficam editáveis, os botões confirmar e cancelar ficam visiveis
-	 * o botão atualiza é escondido 
+	 * Configures the interface for when the "Atualizar Dados" button is clicked. 
+	 * The data fields are editable, the confirm and cancel buttons are visible
+	 * the refresh button is hidden 
 	 * @btAtualizarDados 
 	 */
 	protected void botaoAtualizaDados() {
@@ -430,9 +430,9 @@ public class AreaCliente_MeusDados extends JFrame {
 	}
 
 	/**
-	 * Configura para quando é confirmada a alteração. Os campos de dados voltam a ficar não editáveis. 
-	 * Os botões confirmar e cancelar são escondidos e volta a aparecer o botão Atualiza dados.
-	 * Validações para os campos de dados. 
+	 * Sets to when the change is confirmed. The data fields become non-editable again. 
+	 * The confirm and cancel buttons are hidden and the Update Data button appears again.
+	 * Validations for the data fields. 
 	 */
 	protected void botaoConfirmarDados() {
 		btConfirmar = new JButton("Confirmar");
@@ -572,9 +572,9 @@ public class AreaCliente_MeusDados extends JFrame {
 	}
 
 	/**
-	 * Configuração para o botão cancelar. 
-	 * Os botões confirmar e cancelar são escondidos e volta a aparecer o botão Atualiza dados.
-	 * Não faz alteração.
+	 * Configuration for the cancel button. 
+	 * The confirm and cancel buttons are hidden and the Update Data button reappears.
+	 * Does not make any changes.
 	 */
 	protected void botaoCancelar() {
 		btCancelar = new JButton("Cancelar");
@@ -611,7 +611,7 @@ public class AreaCliente_MeusDados extends JFrame {
 	}
 
 	/**
-	 * Atualiza a password. Quando clicado, ficam visiveis 4 labels para inserção de dados e dois botões, confirmar e cancelar. 
+	 * Updates the password. When clicked, 4 labels are visible for data entry and two buttons, confirm and cancel. 
 	 */
 	protected void botaoAtualizaDadosPassword() {
 		btAtualizarDadosPass = new JButton("Atualizar Login");
@@ -720,9 +720,9 @@ public class AreaCliente_MeusDados extends JFrame {
 	}
 
 	/**
-	 * Cancela a alteração da password.
-	 * As labels de inserção de novos dados e os botões Confirmar e Cancelar são escondidos. 
-	 * As labels com o username e password ficam visiveis, bem como o botão Atualizar Login
+	 * Cancels the password change.
+	 * The labels for entering new data and the Confirm and Cancel buttons are hidden. 
+	 * The labels with the username and password are visible, as well as the Update Login button
 	 */
 	protected void botaoCancelarPassword() {
 		btCancelarPass = new JButton("Cancelar");
@@ -764,10 +764,10 @@ public class AreaCliente_MeusDados extends JFrame {
 	}
 
 	/**
-	 * Confirma a alteração da password. 
-	 * Valida os dados inseridos.
-	 * As labels de inserção de novos dados e os botões Confirmar e Cancelar são escondidos. 
-	 * As labels com o username e password ficam visiveis, bem como o botão Atualizar Login
+	 * Confirms the password change. 
+	 * Validates the entered data.
+	 * The labels for entering new data and the Confirm and Cancel buttons are hidden. 
+	 * The labels with the username and password are visible, as well as the Update Login button
 	 * 
 	 */
 	protected void botaoConfirmarPassword() {
@@ -888,14 +888,14 @@ public class AreaCliente_MeusDados extends JFrame {
 
 	/**
 	 * 
-	 * @return painel
+	 * @return main panel
 	 */
 	public JPanel returnAreaClienteMeusDados() {
 		return (JPanel) getContentPane();
 	}
 
 	/**
-	 * Método que faz o username percorrer os vários paineis.
+	 * Method that sends the username across the various panels.
 	 * @param username
 	 */
 	public void enviarUsernameMeusDados(String username) {
@@ -951,7 +951,7 @@ public class AreaCliente_MeusDados extends JFrame {
 	}
 
 	/**
-	 * Preenche os campos com os dados anteriores do cliente
+	 * Fills in the fields with the customer's previous data
 	 * @param clienteAntigo
 	 */
 	private void popularTextFields(Cliente clienteAntigo) {

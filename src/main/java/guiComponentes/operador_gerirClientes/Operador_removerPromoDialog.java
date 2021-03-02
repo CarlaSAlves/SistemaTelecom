@@ -130,7 +130,7 @@ public class Operador_removerPromoDialog extends JDialog {
 	}
 
 	/**
-	 * Cria o renderer da promoção
+	 * Creates the renderer of promoção
 	 */
 	private class PromocaoComboRenderer implements ListCellRenderer<Promocao> {
 

@@ -52,8 +52,8 @@ public class Operador_gerirClientes extends JFrame {
 
 
 	/**
-	 * Construtor que inicia com o método que configura o painel base e o método inicialize, 
-	 * que contém todos os métodos e elementos que compõem a página 
+	 * Constructor that starts with the method that sets up the base panel and the initialize method,
+	 * which contains all the methods and elements that make up the page 
 	 */
 	public Operador_gerirClientes() {
 
@@ -73,7 +73,7 @@ public class Operador_gerirClientes extends JFrame {
 	}
 
 	/**
-	 * Contém o corpo da página
+	 * Body of the page 
 	 */
 	private void inicialize() { 
 
@@ -83,7 +83,7 @@ public class Operador_gerirClientes extends JFrame {
 		UIManager.put("OptionPane.yesButtonText", "Sim");
 
 		/**
-		 *  Campos de Pesquisa:
+		 *  Research Fields:
 		 *  
 		 *  ID
 		 *  NIF
@@ -110,7 +110,7 @@ public class Operador_gerirClientes extends JFrame {
 		botaoPesquisaSetup();
 
 		/*
-		 *  Botões da página:
+		 *  Buttons of the página:
 		 *  
 		 *  Atribuir Pacote
 		 *  Atribuir Promoção
@@ -131,7 +131,7 @@ public class Operador_gerirClientes extends JFrame {
 		btVoltarOperadorGerirClientes();
 		
 		/**
-		 * Tabela de Resultados:
+		 * Results table:
 		 * 
 		 * Tabela
 		 * ScrollPane
@@ -171,7 +171,7 @@ public class Operador_gerirClientes extends JFrame {
 	}// end initialize
 
 	/**
-	 * Configurar interface, look and feel Nimbus 
+	 * Interface setup, look and feel Nimbus 
 	 */
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -195,7 +195,7 @@ public class Operador_gerirClientes extends JFrame {
 
 	/**
 	 * /**
-	 * Configuração das labels de pesquisa
+	 * Configuration of search labels
 	 * @labelID
 	 * @labelNIF
 	 * @labelNome
@@ -224,7 +224,7 @@ public class Operador_gerirClientes extends JFrame {
 	}
 
 	/**
-	 * Configuração das textFields de Pesquisa e checkbox Ativo
+	 * Configuration of the textFields search and "Activo" checkbox
 	 * @textPesquisaID
 	 * @textFieldNome
 	 * @textPesquisaNIF
@@ -268,8 +268,8 @@ public class Operador_gerirClientes extends JFrame {
 
 
 	/**
-	 * Configuração do botão de pesquisa dinâmico. 
-	 * É possível pesquisar por vários campos ao mesmo tempo.
+	 * Dynamic search button configuration. 
+	 * It's possible to search for multiple fields at the same time.
 	 * @botaoPesquisa 
 	 */
 	private void botaoPesquisaSetup() {
@@ -330,12 +330,11 @@ public class Operador_gerirClientes extends JFrame {
 
 
 	/**
-	 * Criação do botão Visualizar Pacote. 
-	 * Quando premido, desde que um cliente esteja selecionado e tenha um pacote coemrcial atribuido
-	 * abre uma janela com o nome e descrição da pacote.
-	 * Se não está nenhum cliente selecionado, o botão não está selecionável.
-	 * Existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado.
-	 * @botaoVisualizarPacote - abre janela Visualizar Pacotes
+	 * Creation of the Visualizar Pacote Button. 
+	 * When pressed, provided that a cliente is selected and has a pacote comercial assigned,
+	 * opens a window with the name and description of the pacote. 
+	 * If no cliente is selected, the button is not selectable either and it gives an error message. 
+	 * @botaoVisualizarPacote - opens Visualizar Pacotes window
 	 */
 	public void botaoVisualizarPacote() {
 		btnVisualizarPacote = new JButton("Visualizar Pacote Comercial");
@@ -376,12 +375,11 @@ public class Operador_gerirClientes extends JFrame {
 	}
 
 	/**
-	 * Criação do botão Visualizar Promoção. 
-	 * Quando premido, desde que um cliente esteja selecionado e tenha promoções
-	 * abre uma janela com o nome e descrição da promoção.
-	 * Se não está nenhum cliente selecionado, o botão não está selecionável.
-	 * Existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado.
-	 * @botaoVisualizarPromocao - abre janela Visualizar Promoções
+	 * Creation of the button Visualizar Promoção
+	 * When pressed, provided that a customer is selected and has promoções, opens
+	 * a window with the name and description of the promoção.
+	 * If no cliente is selected, the button is not selectable either and it gives an error message. 
+	 * @botaoVisualizarPromocao - opens Visualizar Promoções window
 	 */
 	public void botaoVisualizarPromocao() {
 		btVisualizarPromocao = new JButton("Visualizar Promoções");
@@ -420,12 +418,11 @@ public class Operador_gerirClientes extends JFrame {
 	}
 
 	/**
-	 * Configuração do botão remover promoção.
-	 * Caso o cliente tenha uma promoção abre uma janela que permite selecionar a promoção a remover.
-	 * Envia mensagem "Cliente Removido com Sucesso"
-	 * Se não está nenhum cliente selecionado, o botão não está selecionável.
-	 * Existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado.
-	 * @btnRemoverPromo - botão dinâmico (ativo/desativo)
+	 * RemoverPromocao button setup. 
+	 * If the cliente has a promoção, a window opens that allows the selection of the promoção to remove. 
+	 * Sends message "Cliente removido com sucesso". 
+	 * If no cliente is selected, the button is not selectable either and it gives an error message. 
+	 * @btnRemoverPromo - Dynamic button (Ativo/Desativo)
 	 */
 	public void botaoRemoverPromocao() {
 		btnRemoverPromo = new JButton("Remover Promoção");
@@ -461,12 +458,11 @@ public class Operador_gerirClientes extends JFrame {
 	}
 
 	/**
-	 * Configuração do botão atribuir promocao.
-	 * Quando premido, abre a janela Dialog "Atribuir Promoção" e apresenta uma comboBox 
-	 * onde se podem selecionar as promoções disponíveis
-	 * Se não está nenhum cliente selecionado, o botão não está selecionável.
-	 * Existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado.
-	 * @botaoAtribuirPromocao - abre a Operador_atribuirDialog 
+	 * Atribuir Promoção button setup. 
+	 * When pressed, opens the "Atribuir Promoção" dialog window, and displays a comboBox
+	 * where the available promoções can be selected. 
+	 * If no cliente is selected, the button is not selectable either and it gives an error message. 
+	 * @botaoAtribuirPromocao - opens the Operador_atribuir Dialog window 
 	 */
 
 	public void botaoAtribuirPromocao() {
@@ -500,12 +496,10 @@ public class Operador_gerirClientes extends JFrame {
 	}
 
 	/**
-	 * Configuração do botão atribuir pacote.
-	 * Quando premido, abre a janela Dialog "Atribuir Pacote Comercial" e apresenta uma comboBox 
-	 * onde se podem selecionar os pacotes disponíveis
-	 * Se não está nenhum cliente selecionado, o botão não está selecionável.
-	 * Existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado.
-	 * @btAtribuirPacote - abre a Operador_atribuirDialog 
+	 * Atribuir pacote button setup. 
+	 * When pressed, opens the "Atribuir Pacote Comercial" dialog window, that displays a comboBox where the available pacotes comerciais can be selected. 
+	 * If no cliente is selected, the button is not selectable either and it gives an error message. 
+	 * @btAtribuirPacote - opens the Operador_atribuir dialog window 
 	 */
 	private void botaoAtribuirPacote() {
 		btAtribuirPacote = new JButton("Atribuir Pacote Comercial");
@@ -572,12 +566,12 @@ public class Operador_gerirClientes extends JFrame {
 	}
 
 	/**
-	 * Criação do botão Visualizar Histórico. 
-	 * Quando premido, desde que um cliente esteja selecionado, abre uma tabela com o 
-	 * histórico das alterações feitas no cliente. 
-	 * Se não está nenhum cliente selecionado, o botão não está selecionável, no entanto, 
-	 * existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado. 
-	 * @botaoVisualizarHistorico - abre janela com histórico do cliente
+	 * Visualizar Historico button setup. 
+	 * When pressed, provided that a cliente is selected, it opens a table with the 
+	 * history of all the changes made to the cliente.
+	 * If no cliente is selected, the button is not selectable either and it gives an error message. 
+	 * 
+	 * @botaoVisualizarHistorico - opens histórico do cliente window
 	 */
 	private void botaoVisualizarHistoricoSetup() {
 		btnVerHistorico = new JButton("Ver Historico");
@@ -619,9 +613,9 @@ public class Operador_gerirClientes extends JFrame {
 	
 
 	/**
-	 * Configuração do botão voltar.
-	 * Quando premido volta à homepage do Operador.
-	 * @btVoltarGerirClientes - volta à homepage do operador
+	 * Voltar button setup.
+	 * When pressed it returns to the Operador homepage.
+	 * @btVoltarGerirClientes - returns to the Operador homepage.
 	 */
 	private void btVoltarOperadorGerirClientes() {
 		btVoltarOperador = new JButton("Voltar");
@@ -635,7 +629,7 @@ public class Operador_gerirClientes extends JFrame {
 
 
 	/**
-	 * ScrollPane da tabela
+	 * ScrollPane of the table
 	 * @return scrollPane
 	 */
 	private JScrollPane scrollPaneSetup() {
@@ -704,7 +698,7 @@ public class Operador_gerirClientes extends JFrame {
 	}
 
 	/**
-	 * Ao fazer alterações no cliente a tabela é atualizada. 
+	 * When changes are made in the cliente the table is updated. 
 	 */
 	public void refreshClienteTable() {
 
@@ -722,10 +716,10 @@ public class Operador_gerirClientes extends JFrame {
 	}
 
 	/**
-	 * Botão dinamico de remover/atribuir pacote. 
-	 * Quando o cliente está ativo o botão apresenta "Remover Pacote Comercial"
-	 * Quando o cliente está desativo o botão apresenta "Atribuir Pacote Comercial".
-	 * @botaoAtribuirDinamico - botao dinâmico
+	 * Dynamic button remover/atribuir pacote.
+	 * When the cliente is ativo, the button shows "Remover Pacote Comercial", 
+	 * when the cliente is desativo, the button shows "Atribuir Pacote Comercial"
+	 * @botaoAtribuirDinamico - Dynamic button
 	 */
 	private void botaoAtribuirDinamico() {
 
@@ -741,10 +735,10 @@ public class Operador_gerirClientes extends JFrame {
 	}
 	
 	/**
-	 * Configuração das labels de username e temporização.
-	 * @lblUsernameLogged apresenta o username que está logado
-	 * @lblTempoSessao apresenta o tempo de sessão desde o momento que faz login
-	 * @lblHoraSistema apresenta a hora atual do sistema 
+	 * Labels username and tempo de sessão setup.
+	 * @lblUsernameLogged displays the username that is logged in 
+	 * @lblTempoSessao displays the session time since the moment that the user logged
+	 * @lblHoraSistema displays the actual hour of the system 
 	 */
 	private void timerSetup() {
 		lblTempoSessao = new JLabel();
@@ -773,8 +767,8 @@ public class Operador_gerirClientes extends JFrame {
 	 */
 	protected void painelPesquisa() {
 	}
+	
 	/**
-	 * Retorna a tabela
 	 * @return table
 	 */
 	public JTable getTable() {
@@ -788,18 +782,17 @@ public class Operador_gerirClientes extends JFrame {
 	public JButton btVoltarOperador() {
 		return btVoltarOperador;
 	}
+	
 	/**
 	 * 
 	 * @param botaoVoltar2
 	 * @return botaoVoltar2
 	 */
-
 	public void setBtVoltarOperador(JButton botaoVoltar2) {
 		this.btVoltarOperador = botaoVoltar2;
 	}
 
 	/**
-	 * Configura a label usernameLogged 
 	 * @param username
 	 */
 	public void setUsernameLoggedIn(String username) {
@@ -808,7 +801,6 @@ public class Operador_gerirClientes extends JFrame {
 	}
 
 	/**
-	 * Configura a label de temporizador. 
 	 * @param temporizador
 	 */
 	public void setLblTempoSessao(Duration temporizador) {
@@ -816,7 +808,6 @@ public class Operador_gerirClientes extends JFrame {
 	}
 
 	/**
-	 * Configura a label de hora de sistema
 	 * @param agora
 	 */
 	public void setLblHoraSistema(String agora) {
@@ -824,6 +815,10 @@ public class Operador_gerirClientes extends JFrame {
 
 	}
 
+	/**
+	 * 
+	 * @return panel
+	 */
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}

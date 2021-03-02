@@ -1482,3 +1482,69 @@
 <duração da sessão:	5:46>
 </sessao>
 
+<sessao>
+<username:	admin>
+<data e hora do login:	01-03-2021 15:03:26>
+<duração da sessão:	0:43>
+</sessao>
+
+<sessao>
+<username:	oper>
+<data e hora do login:	01-03-2021 15:04:14>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	cliente>
+<data e hora do login:	01-03-2021 15:04:22>
+<duração da sessão:	0:1>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	01-03-2021 15:15:21>
+<duração da sessão:	0:11>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	01-03-2021 15:18:25>
+<duração da sessão:	0:25>
+</sessao>
+
+<sessao>
+<username:	admin>
+<data e hora do login:	01-03-2021 15:19:10>
+<duração da sessão:	0:8>
+</sessao>
+
+<sessao>
+<username:	operador>
+<data e hora do login:	01-03-2021 15:19:22>
+<duração da sessão:	1:54>
+</sessao>
+
+<sessao>
+<username:	test1>
+<data e hora do login:	01-03-2021 15:21:24>
+<duração da sessão:	2:47>
+</sessao>
+
+<sessao>
+<username:	operador>
+<data e hora do login:	01-03-2021 15:24:23>
+<duração da sessão:	0:13>
+</sessao>
+
+<sessao>
+<username:	test1>
+<data e hora do login:	01-03-2021 15:24:40>
+<duração da sessão:	0:18>
+</sessao>
+
+<sessao>
+<username:	operador>
+<data e hora do login:	01-03-2021 15:32:53>
+<duração da sessão:	3:9>
+</sessao>
+
