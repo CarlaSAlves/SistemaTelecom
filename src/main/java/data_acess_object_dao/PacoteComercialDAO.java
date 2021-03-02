@@ -17,22 +17,22 @@ import standard_value_object.Funcionario;
 import standard_value_object.PacoteComercial;
 
 /*
- * Classe que vai estabelecer a ligaçao com a base de dados e interagir principalmente com a tabela "pacote_comercial"
+ * Class used to establish connection with the database and interact with the "pacote_comercial" table.
  */
 public class PacoteComercialDAO {
 
 	private Connection myConn;
 
 	/*
-	 * Construtor que recebe um objeto do tipo java.sql.Connection, a ser fornecido pela classe servico.GestorDeDAO
+	 * Constructor which takes a java.sql.Connection object, to be supplied by the class servico.GestorDeDAO.
 	 */
 	public PacoteComercialDAO(Connection connection) throws FileNotFoundException, IOException, SQLException {
 		this.myConn = connection;
 	}
 
 	/*
-	 * Método que devolve uma lista com todos os pacotes existentes na tabela "pacote_comercial". 
-	 * Caso não existam pacotes, é devolvida uma lista vazia.
+	 * Returns a list containing every commercial package in the database.
+	 * Returns an empty list if no packages exist.
 	 */
 	public List<PacoteComercial> getAllPacotesComerciais() throws Exception {
 		List<PacoteComercial> listaPacotes = new ArrayList<>();
@@ -44,7 +44,7 @@ public class PacoteComercialDAO {
 			myStmt = myConn.createStatement();
 			myRs = myStmt.executeQuery("select * from pacote_comercial");
 
-			//faz parse ao resultado enviado pela base de dados e converte cada entrada num objeto funcionario
+			//parse the result returned by the database and converts each entry into a "PacoteComercial" object
 			while (myRs.next()) {
 				PacoteComercial pacote = converteRowParaPacoteComercial(myRs);
 				listaPacotes.add(pacote);
@@ -59,11 +59,11 @@ public class PacoteComercialDAO {
 	}
 
 	/*
-	 * Método que devolve uma lista de todos os pacotes comercials que respeitem os seguintes critérios:
-	 * - possuam o id passado como parametro e/ou
-	 * - possuam um nome que contenha o substring nome enviado no parametro da funçao e/ou
-	 * - possuam o campo ativo igual ao parametro ativo enviado para a função.
-	 * Caso não existam pacotes que satisfaçam os critérios inseridos nos parâmetros da função, devolve uma lista vazia.
+	 * Returns a list of packages which obey the following filtering criteria:
+	 * - have the "id" passed as argument and/or;
+	 * - have a name that contains the substring "nome" passed as an argument and/or;
+	 * - have an active field matching the argument "ativo" passed as argument.
+	 * If no packages match the criteria, returns an empty list.
 	 */
 	public List<PacoteComercial> pesquisaPacoteComercial(int id, String nome, int ativo) throws Exception {
 		List<PacoteComercial> list = new ArrayList<>();
@@ -73,7 +73,7 @@ public class PacoteComercialDAO {
 		StringJoiner sj = new StringJoiner (" AND ");
 		String query = "SELECT * FROM PACOTE_COMERCIAL WHERE ";
 
-		// analisar os parametros enviados para a funçao e construir uma query com base na sua existencia (ou nao)
+		//analyze the arguments passed to the function and build a query based on their value
 		try {
 			@SuppressWarnings("rawtypes")
 			List<Comparable> values = new ArrayList<Comparable>();
@@ -104,7 +104,7 @@ public class PacoteComercialDAO {
 
 			myRs = myStmt.executeQuery();
 
-			//converter o resultado devolvido pela base de dados em objetos java
+			//convert the result returned by the database into java objects
 			while (myRs.next()) {
 				PacoteComercial pacote = converteRowParaPacoteComercial(myRs);
 				list.add(pacote);
@@ -119,8 +119,8 @@ public class PacoteComercialDAO {
 	}
 
 	/*
-	 * Pesquisa e devolve o pacote comercial com o id enviado como parametro.
-	 * Devolve um objeto nulo se nenhum for encontrado.
+	 * Returns the package with the id passed as argument.
+	 * Returns a null object if no such package exists.
 	 */
 	public PacoteComercial pesquisaPacoteComercialById(int id) throws Exception {
 		PacoteComercial pacoteComercial = null;
@@ -132,7 +132,7 @@ public class PacoteComercialDAO {
 			myStmt.setInt(1, id);
 			myRs = myStmt.executeQuery();
 
-			//converter o resultado devolvido pela base de dados num objeto java
+			//convert the result returned by the database into java objects
 			if (myRs.next()) {
 				pacoteComercial = new PacoteComercial();
 				pacoteComercial.setId(myRs.getInt(1));
@@ -158,34 +158,41 @@ public class PacoteComercialDAO {
 		return pacoteComercial;
 	}
 
+//	/*
+//	 * Cria um novo pacote comercial na tabela "pacote_comercial" com base no primeiro objeto PacoteComercial enviado como parâmetro. 
+//	 * O id dessa nova entidade é automaticamente gerado pela base de dados
+//	 * e é de seguida devolvido pelo driver JDBC para poder ser colocado no mesmo objeto PacoteComercial passado como parâmetro. De seguida, faz log à operação efetuada usando os dados
+//	 * do funcionário enviado como segundo parâmetro à função.
+//	 * Devolve um pacote comercial  com o id gerado automaticamente pela base de dados. Caso a criação falhe irá ser propagada uma exceção pelo JDBC.
+//	 */
+	
 	/*
-	 * Cria um novo pacote comercial na tabela "pacote_comercial" com base no primeiro objeto PacoteComercial enviado como parâmetro. 
-	 * O id dessa nova entidade é automaticamente gerado pela base de dados
-	 * e é de seguida devolvido pelo driver JDBC para poder ser colocado no mesmo objeto PacoteComercial passado como parâmetro. De seguida, faz log à operação efetuada usando os dados
-	 * do funcionário enviado como segundo parâmetro à função.
-	 * Devolve um pacote comercial  com o id gerado automaticamente pela base de dados. Caso a criação falhe irá ser propagada uma exceção pelo JDBC.
+	 * Creates a new package entity in the "pacote_comercial" table based on the "pacote" passed as argument. If the creation is successful, the JDBC driver will return the id of the new entity,
+	 * which will then be added to the "pacote" object passed as an argument to the method. The method returns that "pacote" object.
+	 * Afterwards, the method will log the operation using the "funcionario" object passed as argument.
+	 * If the creation of the "pacote_comercial" entity fails, an exception will be thrown by the JDBC driver.
 	 */
 	@SuppressWarnings("resource")
 	public PacoteComercial criarPacoteComercial (PacoteComercial pacote , Funcionario funcionario) throws Exception {
 		PreparedStatement myStmt = null;
 
-		//se se pode criar um pacoteComercial com ativo = false, entao nao faz sentido ter data_inicio definida de forma automatica
-		//pelo mysql. � preciso que seja definida manualmente
+		//Statement.RETURN_GENERATED_KEYS allows the jdbc driver to return the id of the newly created entity
 		try {
 			myStmt = myConn.prepareStatement("INSERT INTO pacote_comercial(nome, descricao, ativo, data_inicio, data_fim) VALUES(?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			myStmt.setString(1, pacote.getNome());
 			myStmt.setString(2, pacote.getDescricao());
 			myStmt.setBoolean(3, pacote.isAtivo());
-			//se ativo = true, mudar a data_inicio para agora. De outro modo, colocar nulo na data_inicio
+			
+			//if active = true, update the data_inicio field to now. Otherwise, set it to null.
 			myStmt.setTimestamp(4, pacote.isAtivo() ? new Timestamp(System.currentTimeMillis()) : null);
 			myStmt.setTimestamp(5, pacote.isAtivo() ? null : new Timestamp(System.currentTimeMillis()));
 			myStmt.executeUpdate();
 
-			// se criação foi bem sucedida, vamos fazer parse à resposta enviada pela base de dados para extratir o id da entidade criada
+			//if the entity was created, parse the response from the database to extract the id of the created entity
 			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
 				if (generatedKeys.next()) {
-					//recuperamos o id do pacote comercial  recém-criado e vamos atribui-lo ao objeto pacote comercial enviado como parametro nesta funçao
+					//assign the id of the created entity to the already existing "PacoteComercial" object
 					pacote.setId((int)generatedKeys.getLong(1));
 				}
 				else {
@@ -193,7 +200,7 @@ public class PacoteComercialDAO {
 				}
 			}
 			
-			//registo da operação
+			//log the operation
 			myStmt = logUpdate(funcionario, pacote, "Criar Pacote Comercial");	
 			myStmt.executeUpdate();	
 
@@ -205,7 +212,16 @@ public class PacoteComercialDAO {
 		return pacote;
 	}
 
-	// Este metodo serve apenas para editar nome e descri�ao. Para Ativar/Desativar, usar os metodos correspondentes
+	/*
+	 * Edits the package in the database with the id matching the id of the "pacote" passed as argument.
+	 * The fields in the database entity will be updated with the values present in the Java object passed as argument.
+	 * 
+	 * This method should only be used to update the name and description of a package.
+	 * 
+	 * Afterwards, proceeds to log the operation using the "funcionario" passed as argument.
+	 * 
+	 * Returns the "PacoteComercial" object passed as argument with updated fields.
+	 */
 	@SuppressWarnings("resource")
 	public PacoteComercial editarPacoteComercial(PacoteComercial pacote, Funcionario funcionario) throws Exception {
 		PreparedStatement myState = null; 
@@ -219,7 +235,7 @@ public class PacoteComercialDAO {
 
 			myState.executeUpdate();
 
-			//o nosso objeto cliente já contém o id, por isso podemos usa-lo diretamente na funçao seguinte
+			//log the operation
 			myState = logUpdate(funcionario, pacote, "Editar Pacote Comercial");	
 			myState.executeUpdate();	
 		} catch (Exception e) {
@@ -231,8 +247,8 @@ public class PacoteComercialDAO {
 	}
 
 	/*
-	 * Devolve o histórico de operaçoes para o pacote comercial com o id passado como parametro.
-	 * Caso não existam operaçoes, devolve uma lista vazia.
+	 * Returns a list containing the log history for the commercial package with the id passed as argument.
+	 * If no logs exist, returns an empty list.
 	 */
 	public List<HistoricoPacoteComercial> getHistoricoPacoteComercial(int id_pacote) throws Exception {
 		List<HistoricoPacoteComercial> list = new ArrayList<HistoricoPacoteComercial>();
@@ -249,6 +265,7 @@ public class PacoteComercialDAO {
 
 			myRs = myStmt.executeQuery(sql);
 
+			//convert the result returned by the database into java objects
 			while (myRs.next()) {
 
 				int id_funcionario = myRs.getInt("HistoricoPacote_comercial.id_funcionario");
@@ -271,7 +288,10 @@ public class PacoteComercialDAO {
 	}
 
 	/*
-	 * Regista a operação efetuada envolvendo o funcionário e o pacote enviados como parâmetros na tabela funcionario_log_pacote_comercial.
+	 * Method used to log the details of any given operation. Takes in the following arguments:
+	 * @param funcionario the object "Funcionario" responsible for the operation
+	 * @param pacote the object "PacoteComercial" involved in the operation
+	 * @param descricao string describing the operation type
 	 */
 	private PreparedStatement logUpdate(Funcionario funcionario, PacoteComercial pacote, String descricao) throws SQLException {
 		PreparedStatement myStmt;
@@ -283,10 +303,10 @@ public class PacoteComercialDAO {
 		myStmt.setString(4, descricao);
 		return myStmt;
 	}
-
+	
 	/*
-	 * Desativa o pacote comercial com o id enviado como parâmetro. Caso a operação seja bem sucedida, coloca a data atual no campo "data_fim"
-	 * do pacote desativado na base de dados. De seguida, regista a operação usando os dados do funcionario passado como segundo parâmetro.
+	 * Disables the package with id matching the "id" argument passed.
+	 * Afterwards, proceeds to log the operation using the "funcionario" object passed.
 	 */
 	@SuppressWarnings("resource")
 	public void desativarPacoteComercial (int id, Funcionario funcionario) throws Exception {
@@ -300,7 +320,7 @@ public class PacoteComercialDAO {
 			myState.setInt(1, id);
 			myState.executeUpdate();
 
-			//regista a operaçao
+			//log the operation
 			myState = logUpdate(funcionario, pacote, "Desativar Pacote Comercial");	
 			myState.executeUpdate();	
 
@@ -311,17 +331,22 @@ public class PacoteComercialDAO {
 		}
 	}
 
+//	/*
+//	 * Ativa o pacote comercial com o id enviado como parâmetro. Caso a operação seja bem sucedida, coloca a data atual no campo "data_inicio" e null
+//	 * no campo "data_fim" do pacote desativado na base de dados. 
+//	 * De seguida, regista a operação usando os dados do funcionario passado como segundo parâmetro.
+//	 */
+	
 	/*
-	 * Ativa o pacote comercial com o id enviado como parâmetro. Caso a operação seja bem sucedida, coloca a data atual no campo "data_inicio" e null
-	 * no campo "data_fim" do pacote desativado na base de dados. 
-	 * De seguida, regista a operação usando os dados do funcionario passado como segundo parâmetro.
+	 * Enables the commercial package with id matching the "id" value passed as argument.
+	 * Afterwards, proceeds to log the operation using the "funcionario" object passed.
 	 */
 	@SuppressWarnings("resource")
 	public void ativarPacoteComercial (int id, Funcionario funcionario) throws Exception {
 		PreparedStatement myState = null; 
 		PacoteComercial pacote = pesquisaPacoteComercialAuxiliarID(id);
 		try {
-			//verificar se o pacote comercial esta de facto desativado
+			//check if package is enabled
 			myState = myConn.prepareStatement("Select ativo From pacote_comercial Where id =" + id + ";");
 			ResultSet rs = myState.executeQuery();
 
@@ -330,7 +355,7 @@ public class PacoteComercialDAO {
 				estaAtivo = rs.getBoolean(1);
 			}
 
-			//se esta desativado, vamos ativar e colocar as datas corretas
+			//if it's disabled, enable it and update the date fields
 			if(!estaAtivo) {
 				myState = myConn.prepareStatement("UPDATE pacote_comercial SET ativo = 1,"
 						+ "data_inicio = current_timestamp(), data_fim = NULL WHERE id=?");
@@ -338,7 +363,7 @@ public class PacoteComercialDAO {
 				myState.executeUpdate();
 			}
 
-			//regista a operaçao
+			//log the operation
 			myState = logUpdate(funcionario, pacote, "Ativar Pacote Comercial");	
 
 			myState.executeUpdate();	
@@ -348,9 +373,10 @@ public class PacoteComercialDAO {
 			myState.close();
 		}
 	}
-
+	
 	/*
-	 * Obtem uma lista com todas as operaçoes envolvendo o pacote comercial com o id enviado como parametro.
+	 * Returns a list containing every operation involving the package with the id passed as argument.
+	 * Returns an empty list if no logs exist.
 	 */
 	public List<HistoricoPacoteComercial> getHistoricoOperador(int id_pacoteComercial) throws Exception {
 		List<HistoricoPacoteComercial> list = new ArrayList<HistoricoPacoteComercial>();
@@ -389,7 +415,8 @@ public class PacoteComercialDAO {
 	}
 	
 	/*
-	 * Pesquisa e devolve o PacoteComercial com o id enviado como parametro. Caso nao exista, devolve um objeto nulo.
+	 * Returns the commercial package with the id passed as argument.
+	 * Returns a null object if no such package exists,
 	 */
 	public PacoteComercial pesquisaPacoteComercialAuxiliarID(int id) throws Exception {
 		PacoteComercial pacoteComercial = null;
@@ -401,6 +428,7 @@ public class PacoteComercialDAO {
 			myStmt.setInt(1, id);
 			myRs = myStmt.executeQuery();
 
+			//convert the entries in the result set into java objects
 			while (myRs.next()) {
 				pacoteComercial = converteRowParaPacoteComercial(myRs);
 			}
@@ -414,7 +442,7 @@ public class PacoteComercialDAO {
 	}
 	
 	/*
-	 * Converte cada entrade de um ResultSet num objeto PacoteComercial
+	 * Method that converts each entry of a ResultSet into a "PacoteComercial" Java object
 	 */
 	public PacoteComercial converteRowParaPacoteComercial(ResultSet myRs) throws SQLException {
 		java.sql.Date data_fim;
@@ -425,12 +453,15 @@ public class PacoteComercialDAO {
 		String descricao = myRs.getString("descricao");
 		boolean ativo = myRs.getBoolean("ativo");
 
+		//set the data_inicio field
 		Timestamp timestamp_inicio = myRs.getTimestamp("data_inicio");
 		if(timestamp_inicio != null ) {
 			data_inicio = new java.sql.Date(timestamp_inicio.getTime());
 		}else {
 			data_inicio = null;
 		}
+		
+		//set the data_fim field
 		Timestamp timestamp_fim = myRs.getTimestamp("data_fim");
 		if(timestamp_fim != null ) {
 			data_fim = new java.sql.Date(timestamp_fim.getTime());

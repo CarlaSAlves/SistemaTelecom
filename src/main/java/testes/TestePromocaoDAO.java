@@ -16,7 +16,10 @@ import data_acess_object_dao.PromocaoDAO;
 import standard_value_object.PacoteCliente;
 import standard_value_object.Promocao;
 
-//correr o script para criar a base de dados antes de correr estes testes
+/*
+ * Class containing tests for the methods in the PromocaoDAO class.
+ * It's advisable to run the database creating script before running any tests.
+ */
 public class TestePromocaoDAO {
 	
 	private PromocaoDAO promocaoDAO;
@@ -72,7 +75,10 @@ public class TestePromocaoDAO {
 		assertNotEquals(0, promocaoDAO.getHistoricoPromocao(3));
 	}
 	
-	//estabelece a ligaçao com a base de dados definida no documento sistema_tele.properties
+	/*
+	* Method which will establish a connection with the database by instancing a java.sql.Connection object and assigning it to the this.connection attribute.
+	* The database url and credentials are stored in the "sistema_tele.propeties" file in the root folder of the project.
+	*/
 	private Connection startConnection() throws FileNotFoundException, IOException, SQLException {
 		Properties props = new Properties();
 		props.load(new FileInputStream("sistema_tele.properties"));

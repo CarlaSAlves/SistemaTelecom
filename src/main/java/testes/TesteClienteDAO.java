@@ -22,7 +22,10 @@ import standard_value_object.Cliente;
 import standard_value_object.Funcionario;
 import standard_value_object.PacoteCliente;
 
-//correr o script para criar a base de dados antes de correr estes testes
+/*
+ * Class containing tests for the methods in the ClienteDAO class.
+ * It's advisable to run the database creating script before running any tests.
+ */
 public class TesteClienteDAO {
 	
 	private ClienteDAO clienteDAO;
@@ -126,7 +129,10 @@ public class TesteClienteDAO {
 		assertNotEquals(0, clienteDAO.getHistoricoCliente(1).size());
 	}
 	
-	//estabelece a ligaçao com a base de dados definida no documento sistema_tele.properties
+	/*
+	 * Method which will establish a connection with the database by instancing a java.sql.Connection object and assigning it to the this.connection attribute.
+	 * The database url and credentials are stored in the "sistema_tele.propeties" file in the root folder of the project.
+	 */
 	private Connection startConnection() throws FileNotFoundException, IOException, SQLException {
 		Properties props = new Properties();
 		props.load(new FileInputStream("sistema_tele.properties"));

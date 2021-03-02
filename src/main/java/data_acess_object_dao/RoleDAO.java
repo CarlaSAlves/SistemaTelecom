@@ -12,22 +12,22 @@ import java.util.List;
 import standard_value_object.Role;
 
 /*
- * Classe que vai estabelecer a ligaçao com a base de dados e interagir principalmente com a tabela "role"
+ * Class used to establish connection with the database and interact with the "role" table.
  */
 public class RoleDAO {
 
 	private Connection myConn;
 	
 	/*
-	 * Construtor que recebe um objeto do tipo java.sql.Connection, a ser fornecido pela classe servico.GestorDeDAO
+	 * Constructor which takes a java.sql.Connection object, to be supplied by the class servico.GestorDeDAO.
 	 */
 	public RoleDAO(Connection connection) throws FileNotFoundException, IOException, SQLException {
 		this.myConn = connection;
 	}
 	
 	/*
-	 * Pesquisa e devolve a funçao com o id enviado como parametro.
-	 * Devolve um objeto nulo se nenhum for encontrado.
+	 * Returns a Java object corresponding to the role with the id passed as argument.
+	 * If no role is found in the database, returns a null object.
 	 */
 	public Role getRoleById(int id) throws Exception {
 		PreparedStatement myStmt = null;
@@ -39,7 +39,7 @@ public class RoleDAO {
 			myStmt.setInt(1, id);
 			myRs = myStmt.executeQuery();
 			
-			//converter o resultado devolvido pela base de dados num objeto java
+			//parse the result returned by the database and converts each entry into a "Role" object
 			if (myRs.next()) {
 				role = new Role();
 				role.setId(myRs.getInt(1));
@@ -56,8 +56,8 @@ public class RoleDAO {
 	}
 
 	/*
-	 * Método que devolve uma lista com todos as funçoes existentes na tabela "funcao". 
-	 * Caso não existam funçoes, é devolvida uma lista vazia.
+	 * Returns a list containing every role in the database, as Java objects.
+	 * If no roles exist in the database, returns an empty list.
 	 */
 	public List<Role> getAllRole() throws Exception {
 		List<Role> listaRoles = new ArrayList<>();
@@ -68,7 +68,7 @@ public class RoleDAO {
 			myStmt = myConn.createStatement();
 			myRs = myStmt.executeQuery("select * from role");
 			
-			//faz parse ao resultado enviado pela base de dados e converte cada entrada num objeto funcionario
+			//parse the result returned by the database and converts each entry into a "Role" object
 			while (myRs.next()) {
 				Role role = converteRowParaRoles(myRs);
 				listaRoles.add(role);
@@ -84,7 +84,7 @@ public class RoleDAO {
 	}
 	
 	/*
-	 * Converte cada entrade de um ResultSet num objeto Role
+	 * Method that converts each entry of a ResultSet into a "Role" Java object
 	 */
 	private Role converteRowParaRoles(ResultSet myRs) throws SQLException {
 		int id = myRs.getInt("id");

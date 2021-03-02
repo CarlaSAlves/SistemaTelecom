@@ -15,7 +15,10 @@ import org.junit.Test;
 
 import data_acess_object_dao.RoleDAO;
 
-//correr o script para criar a base de dados antes de correr estes testes
+/*
+ * Class containing tests for the methods in the RoleDAO class.
+ * It's advisable to run the database creating script before running any tests.
+ */
 public class TesteRoleDAO {
 
 	private RoleDAO roleDAO;
@@ -34,17 +37,20 @@ public class TesteRoleDAO {
 		assertEquals(2, roleDAO.getAllRole().size());
 	}
 	
-	//estabelece a ligaçao com a base de dados definida no documento sistema_tele.properties
-		private Connection startConnection() throws FileNotFoundException, IOException, SQLException {
-			Properties props = new Properties();
-			props.load(new FileInputStream("sistema_tele.properties"));
-			String user = props.getProperty("user");
-			String password = props.getProperty("password");
-			String dburl = props.getProperty("dburl");
-			
-			Connection connection = DriverManager.getConnection(dburl, user, password);
-			connection.setAutoCommit(false);
-			return connection;
-		}
+	/*
+	 * Method which will establish a connection with the database by instancing a java.sql.Connection object and assigning it to the this.connection attribute.
+	 * The database url and credentials are stored in the "sistema_tele.propeties" file in the root folder of the project.
+	 */
+	private Connection startConnection() throws FileNotFoundException, IOException, SQLException {
+		Properties props = new Properties();
+		props.load(new FileInputStream("sistema_tele.properties"));
+		String user = props.getProperty("user");
+		String password = props.getProperty("password");
+		String dburl = props.getProperty("dburl");
+		
+		Connection connection = DriverManager.getConnection(dburl, user, password);
+		connection.setAutoCommit(false);
+		return connection;
+	}
 
 }

@@ -4,17 +4,20 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-//classe para encriptar passwords usando o algoritmo SHA512
+//Class used to produced encrypted passwords using the SHA512 algorithm
 public class PasswordEncryption {
 	
 	/*
-	 * Recebe um string como parametro e encripta-o usando o algoritmo SHA512.
-	 * Devolve um string com 128 carateres.
+	 * Method that receives a string as argument and encrypts it using the SHA512 algorithm.
+	 * Returns a 128 character string resulting from encrypting the passed string.
 	 */
 	public static String get_SHA_512_SecurePassword(String passwordToHash){
 	   
 		String passwordGerada = null;
+		
+		//algorithm requires a salt
 		String salt = "Grupo2";
+		
 	    try {
 	        MessageDigest md = MessageDigest.getInstance("SHA-512");
 	        md.update(salt.getBytes(StandardCharsets.UTF_8));

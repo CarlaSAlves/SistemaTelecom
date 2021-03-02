@@ -27,9 +27,13 @@ import standard_value_object.PacoteClientePromocao;
 import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
 
+
 /*
- * Classe responsável por inicializar e agrupar todos os DAO. 
- * Serve como intermediária entre os componentes que necessitam de interagir com a base de dados e os DAO.
+ * Class responsible for grouping and initializing every Data Access Object used to interact with the database.
+ * This class will receive calls for the methods inside each DAO and delegate them accordingly (DAO methods are never called directly).
+ * 
+ * The database url and credential values are stored in the "sistema_tele.properties" text file in the root folder of the project.
+ * This class is a singleton, meaning only one instance can exist at any given time.
  */
 public class GestorDeDAO {
 
@@ -42,6 +46,9 @@ public class GestorDeDAO {
 	private static GestorDeDAO GestorDeDAOInstance = null;
 	private Connection connection;
 
+	/*
+	 * Constructor which will provide a java.sql.Connection object to every DAO. 
+	 */
 	private GestorDeDAO() throws Exception {
 		this.startConnection();
 		clienteDAO = new ClienteDAO(this.connection);
@@ -52,6 +59,10 @@ public class GestorDeDAO {
 		pacoteClientePromocaoDAO = new PacoteClientePromocaoDAO(connection);
 	}
 
+	/*
+	 * Method to access the instance of GestorDeDAO if it's already created, or to instance one if it isn't. 
+	 * Since the constructor is private, this is the only way to access an instance of GestorDeDAO.
+	 */
 	public static synchronized GestorDeDAO getGestorDeDAO() throws Exception {
 		if( GestorDeDAOInstance == null ) {
 			GestorDeDAOInstance = new GestorDeDAO();
@@ -60,15 +71,19 @@ public class GestorDeDAO {
 	}
 
 	/*
-	 * Método responsável por inicializar a ligação com a base de dados, usando os parametros armazenados no documento "sistema_tele.properties".
+	 * Method which will establish a connection with the database by instancing a java.sql.Connection object and assigning it to the this.connection attribute.
+	 * The database url and credentials are stored in the "sistema_tele.propeties" file in the root folder of the project.
 	 */
 	private void startConnection() throws FileNotFoundException, IOException, SQLException {
 		Properties props = new Properties();
 		props.load(new FileInputStream("sistema_tele.properties"));
-
 		String user = props.getProperty("user");
 		String password = props.getProperty("password");
 		String dburl = props.getProperty("dburl");
+		
+//		String user = "root";
+//		String password = "";
+//		String dburl = "jdbc:mysql://localhost:3306/sistema_tele";
 
 		this.connection = DriverManager.getConnection(dburl, user, password);
 	}

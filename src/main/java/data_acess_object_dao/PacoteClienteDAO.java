@@ -18,22 +18,22 @@ import standard_value_object.PacoteComercial;
 import standard_value_object.Promocao;
 
 /*
- * Classe que vai estabelecer a ligaçao com a base de dados e interagir principalmente com a tabela "pacote_cliente"
+ * Class used to establish connection with the database and interact with the "pacote_cliente" table.
  */
 public class PacoteClienteDAO {
 
 	private Connection myConn;
 
 	/*
-	 * Construtor que recebe um objeto do tipo java.sql.Connection, a ser fornecido pela classe servico.GestorDeDAO
+	 * Constructor which takes a java.sql.Connection object, to be supplied by the class servico.GestorDeDAO.
 	 */
 	public PacoteClienteDAO(Connection connection) throws FileNotFoundException, IOException, SQLException {
 		this.myConn = connection;
 	}
 
 	/*
-	 * Método que devolve uma lista com todos os pacotes existentes na tabela "pacote_cliente". 
-	 * Caso não existam pacotes, é devolvida uma lista vazia.
+	 * Returns a list containing every customer package existing in the table "pacote_cliente".
+	 * Returns an empty list if no package exists.
 	 */
 	public List<PacoteCliente> pesquisarTodosPacotesCliente() throws Exception {
 		List<PacoteCliente> listaClientes = new ArrayList<>();
@@ -45,6 +45,7 @@ public class PacoteClienteDAO {
 			myStmt = myConn.createStatement();
 			myRs = myStmt.executeQuery("select * from pacote_cliente");
 
+			//parse the result returned by the database and converts each entry into a "pacote_cliente" object
 			while (myRs.next()) {
 				PacoteCliente dacoteCliente = convertRowToPacoteCliente(myRs);
 				listaClientes.add(dacoteCliente);
@@ -59,6 +60,10 @@ public class PacoteClienteDAO {
 	}
 
 
+	/*
+	 * Returns the the information about the package with the id passed as an argument to this method.
+	 * If no package exists, returns a null object.
+	 */
 	public PacoteComercial getPacoteClienteInfo(int id) throws Exception {
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
@@ -70,7 +75,7 @@ public class PacoteClienteDAO {
 			myStmt.setInt(1, id);
 			myRs = myStmt.executeQuery();
 
-			//converter o resultado devolvido pela base de dados num objeto java
+			//parse the result returned by the database and converts each entry into a "pacote_cliente" object
 			if (myRs.next()) {
 				pacoteComercial = new PacoteComercial(myRs.getString(1), myRs.getString(2), myRs.getBoolean(4));
 			}
@@ -86,9 +91,9 @@ public class PacoteClienteDAO {
 
 
 	/**
-	 * Pesquisa e devolve o pacote com o id enviado como parametro.
-	 * Devolve pacote nulo se nenhum for encontrado.
-	 * @param id do cliente
+	 * Returns the package with the id passed as argument.
+	 * Returns null if no package is found.
+	 * @param id id of the package to return
 	 */
 	public PacoteCliente pesquisarPacoteClienteId(int id) throws Exception {
 		PreparedStatement myStmt = null;
@@ -100,7 +105,7 @@ public class PacoteClienteDAO {
 			myStmt.setInt(1, id);
 			myRs = myStmt.executeQuery();
 
-			//converter o resultado devolvido pela base de dados num objeto java
+			//parse the result returned by the database and converts each entry into a "pacote_cliente" object
 			if (myRs.next()) {
 				pacoteCliente = new PacoteCliente();
 				pacoteCliente.setId(myRs.getInt(1));
@@ -124,12 +129,20 @@ public class PacoteClienteDAO {
 	 * Cria um novo pacote_cliente na base de dados com base do PacoteCliente enviado como parametro.
 	 * Caso a criaçao falhe, ira propagar uma exceçao.
 	 */
+	
+	/*
+	 * Creates a new package entity based on the "pacoteCliente" argument passed.
+	 * Afterwards, proceeds to log the operation.
+	 * @param pacoteCliente is a Java object representing the package that will be persisted in the database
+	 * @param cliente the customer who will receive the package
+	 * @param funcionario the employee who performs the operation
+	 */
 	@SuppressWarnings("resource")
 	public PacoteCliente criarPacoteCliente(PacoteCliente pacoteCliente, Cliente cliente, Funcionario funcionario) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
 
-			//Statement.RETURN_GENERATED_KEYS permite ao driver jdbc devolver o id da entidade criada, caso a criaçao seja bem sucedida
+			//Statement.RETURN_GENERATED_KEYS allows the jdbc driver to return the id of the newly created entity
 			myStmt = myConn.prepareStatement("insert into pacote_cliente(id_pacote_comercial, data_inicio, id_criado_por) "
 					+ "VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
@@ -138,10 +151,10 @@ public class PacoteClienteDAO {
 			myStmt.setInt(3, pacoteCliente.getId_criado_por());
 			myStmt.executeUpdate();
 
-			// se criação foi bem sucedida, vamos fazer parse à resposta enviada pela base de dados para extratir o id da entidade criada
+			//if the entity was created, parse the response from the database to extract the id of the created entity
 			try (ResultSet generatedKeys = myStmt.getGeneratedKeys()) {
 				if (generatedKeys.next()) {
-					//recuperamos o id do funcionario recém-criado e vamos atribui-lo ao objeto funcionario enviado como parametro nesta funçao, só para o reaproveitar
+					//assign the id of the created entity to the already existing "pacote_cliente" object
 					pacoteCliente.setId((int)generatedKeys.getLong(1));
 				}
 				else {
@@ -149,6 +162,7 @@ public class PacoteClienteDAO {
 				}
 			}
 
+			//update the customer to set the id_pacote_cliente field to the id of the newly created package
 			myStmt =  myConn.prepareStatement("UPDATE `cliente` SET `id_pacote_cliente`=? WHERE  `id`=?");
 
 			myStmt.setInt(1, pacoteCliente.getId());
@@ -156,6 +170,7 @@ public class PacoteClienteDAO {
 
 			myStmt.executeUpdate();	
 
+			//log the operation
 			myStmt = logUpdate(funcionario, cliente, "Atribuir Pacote Comercial");	
 
 			myStmt.executeUpdate();	
@@ -170,7 +185,10 @@ public class PacoteClienteDAO {
 	}
 
 	/*
-	 * Adiciona ao PacoteCliente enviado como parametro a promoçao enviada como segundo parametro.
+	 * Add a promotion passed as argument to the package passed as 1st argument.
+	 * @param pacoteCliente package which will receive the sale/promotion
+	 * @param promocao promotion to be assigned to the package
+	 * Returns the value 1 if successful.
 	 */
 	public int adicionarPromocao(PacoteCliente pacoteCliente, Promocao promocao) throws SQLException{
 		PreparedStatement myStmt = null;
@@ -189,19 +207,25 @@ public class PacoteClienteDAO {
 	}
 
 	/*
-	 * Remove a promoçao enviada como parametro do PacoteCliente enviado como primeiro parametro.
+	 * Removes the promotion with id "id_promocao" from the customer package with id "id_pacote_cliente".
+	 * Aftewards, logs the operation using the employee and customer passed as arguments.
+	 * @param id_pacote_cliente id of the package we wish to remove the promotion from
+	 * @param id_promocao id of the promotion we wish to remove
+	 * @param funcionario employee who performs the operation
+	 * @param cliente customer who owns the package being modified.
+	 * Returns the value 1 if successful.
 	 */
 	@SuppressWarnings("resource")
 	public int removerPromocao(int id_pacote_cliente, int id_promocao, Funcionario funcionario, Cliente cliente) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
 			myStmt = myConn.prepareStatement("DELETE FROM `sistema_tele`.`pacote_cliente_promocao` WHERE (`id_pacote_cliente` = ?) and (`id_promocao` = ?);");
-
 			myStmt.setInt(1, id_pacote_cliente);
 			myStmt.setInt(2, id_promocao);
 
 			myStmt.executeUpdate();
 
+			//log the operation
 			myStmt = logUpdate(funcionario, cliente, "Remover Promoção");	
 
 			myStmt.executeUpdate();	
@@ -216,6 +240,11 @@ public class PacoteClienteDAO {
 	}
 
 	//Recebe como parametro um PacoteCliente e altera o pacote comercial associado a esse pacote cliente.
+	/*
+	 * Method that receives a "PacoteCliente" object and updates the values of 
+	 * the corresponding entity in the database.
+	 * Returns the value 1 if successful.
+	 */
 	public int editarPacoteCliente(PacoteCliente pacoteCliente) throws SQLException{
 		PreparedStatement myStmt = null;
 		try {
@@ -232,13 +261,22 @@ public class PacoteClienteDAO {
 		return 1;
 	}
 
+//	/*
+//	 * Elimina o pacote cliente com o id enviado como parametro da base de dados, bem como todas as promoçoes a ele associadas.
+//	 * Coloca o campo id_pacote_cliente do cliente que possui esse pacote a nulo.
+//	 * Caso a operaçao seja bem sucedida, devolve o valor 1. De outro modo, devolve 0.
+//	 */
+//	//para apagar um pacote_cliente, vai ser necessario remover todas as promo�oes associadas a esse pacote.
+//	// Vai ser tambem necessario remover o pacote do cliente que o det�m. S� depois � possivel apagar o pacote cliente.
+	
 	/*
-	 * Elimina o pacote cliente com o id enviado como parametro da base de dados, bem como todas as promoçoes a ele associadas.
-	 * Coloca o campo id_pacote_cliente do cliente que possui esse pacote a nulo.
-	 * Caso a operaçao seja bem sucedida, devolve o valor 1. De outro modo, devolve 0.
+	 * Deletes the package with id passed as argument. Afterwards. logs the operation using the employee
+	 * and customer passed as arguments.
+	 * @param id id of the package to delete
+	 * @param funcionario employee who performs the operation
+	 * @param cliente customer who owns the package being deleted
+	 * Returns the value 1 if successful.
 	 */
-	//para apagar um pacote_cliente, vai ser necessario remover todas as promo�oes associadas a esse pacote.
-	// Vai ser tambem necessario remover o pacote do cliente que o det�m. S� depois � possivel apagar o pacote cliente.
 	@SuppressWarnings("resource")
 	public int eliminarPacoteById(int id, Funcionario funcionario, Cliente cliente) throws SQLException{
 		PreparedStatement myStmt = null;
@@ -248,13 +286,13 @@ public class PacoteClienteDAO {
 		}
 
 		try {
-			//remove o pacote cliente do cliente que o possui
+			//removes the package from the customer who owns it
 			String query1 = "Update `cliente` Set `id_pacote_cliente` = NULL Where (`id_pacote_cliente` =" + id + ");";
 
-			//elimina o pacote cliente da base de dados
+			//deletes the package from the database
 			String query2 = "DELETE from `pacote_cliente` where (`id`=" + id + ");";
 
-			//elimina promocoes associadas da base de dados
+			//delete any promotion assigned to the package in question
 			String query3 = "DELETE from `pacote_cliente_promocao` where (`id_pacote_cliente` =" + id + ");";
 
 			myStmt = myConn.prepareStatement(query1);
@@ -266,6 +304,7 @@ public class PacoteClienteDAO {
 			myStmt = myConn.prepareStatement(query3);
 			myStmt.executeUpdate();
 
+			//log the operation
 			myStmt = logUpdate(funcionario, cliente, "Remover Pacote Comercial");
 			myStmt.executeUpdate();
 
@@ -279,7 +318,7 @@ public class PacoteClienteDAO {
 	}
 
 	/*
-	 * Convert cada entrada de um ResultSet num objeto do tipo PacoteCliente.
+	 * Method that converts each entry of a ResultSet into a "PacoteCliente" Java object
 	 */
 	private PacoteCliente convertRowToPacoteCliente(ResultSet myRs) throws SQLException {
 
@@ -293,6 +332,12 @@ public class PacoteClienteDAO {
 		return pacoteCliente;
 	}
 
+	/*
+	 * Method used to log the details of any given operation. Takes in the following arguments:
+	 * @param funcionario the object "Funcionario" responsible for the operation
+	 * @param cliente the object "Cliente" who owns the package
+	 * @param descricao string describing the operation type
+	 */
 	private PreparedStatement logUpdate(Funcionario funcionario, Cliente cliente, String descricao) throws SQLException {
 		PreparedStatement myStmt;
 		myStmt = myConn.prepareStatement("insert into funcionario_log_cliente(id_funcionario, id_cliente, data_registo, descricao) VALUES (?, ?, ?, ?)");

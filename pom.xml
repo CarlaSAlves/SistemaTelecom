@@ -6,7 +6,11 @@
 	<artifactId>SistemaTelelecom</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SistemaTelelecom</name>
-
+	
+	<properties>
+		<java.version>13</java.version>
+	</properties>
+	
 	<dependencies>
 	
 		<dependency>
@@ -21,8 +25,70 @@
 			<version>8.0.22</version>
 		</dependency>
 		
-
 	</dependencies>
 
+	<build>
+	
+	  <plugins>
+	  
+<!-- 	  <plugin> -->
+<!--         <artifactId>maven-assembly-plugin</artifactId> -->
+<!--         <executions> -->
+<!--           <execution> -->
+<!--             <phase>package</phase> -->
+<!--             <goals> -->
+<!--               <goal>single</goal> -->
+<!--             </goals> -->
+<!--           </execution> -->
+<!--         </executions> -->
+<!--         <configuration> -->
+<!--           <descriptorRefs> -->
+<!--             <descriptorRef>jar-with-dependencies</descriptorRef> -->
+<!--           </descriptorRefs> -->
+<!--         </configuration> -->
+<!--       </plugin> -->
+      
+ 	<plugin>
+	  <groupId>org.apache.maven.plugins</groupId>
+	  <artifactId>maven-assembly-plugin</artifactId>
+	  <configuration>
+	    <archive>
+	      <manifest>
+	         <addClasspath>true</addClasspath>
+	         <classpathPrefix>lib/</classpathPrefix>
+	         <mainClass>guiComponentes.GUI_total</mainClass>
+	      </manifest>
+	    </archive>
+	  </configuration>
+	</plugin>
+      
+	  
+	  <plugin>
+	      <groupId>org.apache.maven.plugins</groupId>
+	      <artifactId>maven-compiler-plugin</artifactId>
+	      <version>3.6.1</version>
+	      <configuration>
+          	<release>13</release>
+	      </configuration>
+      </plugin>
+	  
+<!-- 	    <plugin> -->
+<!-- 	      <groupId>org.apache.maven.plugins</groupId> -->
+<!-- 	      <artifactId>maven-jar-plugin</artifactId> -->
+<!-- 	      <version>3.2.0</version> -->
+<!-- 	      <configuration> -->
+<!-- 	        <archive> -->
+<!-- 	          <manifest> -->
+<!-- 	            <addClasspath>true</addClasspath> -->
+<!-- 	            <classpathPrefix>lib/</classpathPrefix> -->
+<!-- 	            <mainClass>guiComponentes.GUI_total</mainClass> -->
+<!-- 	          </manifest> -->
+<!-- 	        </archive> -->
+<!-- 	      </configuration> -->
+<!-- 	    </plugin> -->
+	    
+	  </plugins>
+	</build>
+	
 
 </project>
