@@ -10,6 +10,8 @@ public class ClientePesquisaModelTable extends AbstractTableModel {
 	/**
 	 * Esta classe configura a tabela de pesquisa, onde se mostra os clientes.
 	 * 
+	 * This class sets up the search table where the clients are shown
+	 * 
 	 */
 
 	private static final long serialVersionUID = 1L;
@@ -27,6 +29,9 @@ public class ClientePesquisaModelTable extends AbstractTableModel {
 	/**
 	 * Criação das linhas e colunas da tabela, consoante o tamanho 
 	 * da lista de clientes dando-lhe o nome da coluna correspondente.
+	 * 
+	 * Creation of the rows and collumns of the table depending on its size
+	 * from the list of clients giving them the name of the correspondent collumn
 	 * @param osClientes
 	 */
 	public ClientePesquisaModelTable(List<Cliente> osClientes) {
@@ -50,6 +55,7 @@ public class ClientePesquisaModelTable extends AbstractTableModel {
 
 	/**
 	 * Dependendo das constantes, vai buscar os valores correspondentes ao cliente.
+	 * Depending on the constant, it will get the values for each client
 	 */
 	@Override
 	public Object getValueAt(int row, int col) {

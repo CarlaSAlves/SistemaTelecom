@@ -42,6 +42,7 @@ public class HistoricoClienteDialog extends JDialog {
 		contentPanel.setLayout(new BorderLayout(0, 0));
 
 		// Painel de histórico 
+		// history panel
 		JPanel panel = new JPanel();
 		contentPanel.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
@@ -53,6 +54,7 @@ public class HistoricoClienteDialog extends JDialog {
 		panel.add(clienteRegistosLabel);
 
 		// Tabela e Scrollpane de histórico 
+		//table and scrollpanel for the history
 		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPanel.add(scrollPane, BorderLayout.CENTER);
@@ -61,6 +63,7 @@ public class HistoricoClienteDialog extends JDialog {
 		scrollPane.setViewportView(table);
 
 		// Painel de rodapé - botão sair 
+		// baseboard , leave button
 		
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -82,6 +85,7 @@ public class HistoricoClienteDialog extends JDialog {
 
 	/**
 	 * Método que preenche a tabela com o registos
+	 * method that fills the table with data
 	 * @param cliente
 	 * @param historicoCliente
 	 */
@@ -99,6 +103,7 @@ public class HistoricoClienteDialog extends JDialog {
 
 	/**
 	 * Renderer da tabela
+	 * table renderer
 	 */
 	private final class DateTimeCellRenderer extends DefaultTableCellRenderer {
 

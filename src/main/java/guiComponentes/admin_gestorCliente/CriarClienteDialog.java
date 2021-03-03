@@ -38,6 +38,7 @@ public class CriarClienteDialog extends JDialog {
 
 	/**
 	 * Construtor Criar Cliente Dialog
+	 * Contructor create client dialog
 	 * @param clientePesquisaApp
 	 * @param username
 	 */
@@ -50,6 +51,7 @@ public class CriarClienteDialog extends JDialog {
 
 	/**
 	 * Preenche as textFields com os valores anteriores do cliente, antes de editar.
+	 * fills the textfields with previous values from client before editing
 	 * @param clienteAntigo2
 	 */
 	private void popularTextFields(Cliente clienteAntigo2) {
@@ -62,6 +64,8 @@ public class CriarClienteDialog extends JDialog {
 	/**
 	 * Construtor que inicia com o método que configura a janela e o método inicialize, 
 	 * que contém todos os métodos e elementos que compõem a página 
+	 * constructor that initializes with a method that sets up the window and the initilize method
+	 * which contains all the methods and elements that compose the page
 	 */
 	public CriarClienteDialog() {
 
@@ -79,11 +83,12 @@ public class CriarClienteDialog extends JDialog {
 
 	/**
 	 * Contém o corpo da página
+	 * contains the body of the page
 	 */
 	private void inicialize() {
 
 		/**
-		 *  Labels e textField da página:
+		 *  Labels e textField of the page:
 		 *  Nome
 		 *  NIF
 		 *  Morada
@@ -98,6 +103,9 @@ public class CriarClienteDialog extends JDialog {
 		 * Painel de Confirmação 
 		 * Botão Confirmar
 		 * Botão Cancelar
+		 * confirmation panel
+		 * confirmation button
+		 * cancellation button
 		 */
 		painelConfirmacaoSetup();
 
@@ -105,12 +113,14 @@ public class CriarClienteDialog extends JDialog {
 
 	/**
 	 * Configuração das labels da janela 
+	 * configs the window labels
 	 * @lblNome
 	 * @lblNIF
 	 * @lblMorada
 	 * @lblLogin
 	 * @lblPassword
-	 * @lblAuxiliar - label inserida no textField da password
+	 * @lblAuxiliar - label inserida no textField da password // label inserted in the password textfield
+	 * 
 	 */
 	private void labelsSetup() {
 		JLabel lblNome = new JLabel("Nome");
@@ -149,6 +159,7 @@ public class CriarClienteDialog extends JDialog {
 
 	/**
 	 * Configuração das textFields 
+	 * textfield configs
 	 * @textFieldNome
 	 * @textFieldNIF
 	 * @textFieldMorada
@@ -191,11 +202,14 @@ public class CriarClienteDialog extends JDialog {
 
 	/**
 	 * Configura os botões do rodapé da página 
+	 * configs the buttons at the bottom of the page
 	 * 
-	 * @buttonPane - painel de confirmação
+	 * @buttonPane - painel de confirmação //confirmation panel
+	 * 
 	 * @okButton - botão de confirmação, aciona as validações de campos e 
 	 * o método que grava os dados do cliente na base de dados.
-	 * @cancelButton - botão cancelar, cancela a ação e fecha a janela.
+	 * confirmation button that starts the validations of the fields and saves the client in the DB
+	 * @cancelButton - botão cancelar, cancela a ação e fecha a janela. // cancellation button, cancel the action and closes the window
 	 * 
 	 */
 	protected void painelConfirmacaoSetup() {
@@ -336,9 +350,10 @@ public class CriarClienteDialog extends JDialog {
 
 	/**
 	 * Configuração da janela se for acionada pelo botão editar - apresenta os campos editáveis.
+	 * configs the window if actioned by the edit button - presents the editable fields
 	 * @param clientePesquisaApp
-	 * @param clienteAntigo - vai buscar os valores atuais do cliente
-	 * @param modoEditar - acionado pelo botão editar
+	 * @param clienteAntigo - vai buscar os valores atuais do cliente // retrieves the updated values from the client
+	 * @param modoEditar - acionado pelo botão editar // actions by the edit button
 	 * @param username
 	 */
 	public CriarClienteDialog(GUI_gestor_cliente clientePesquisaApp, Cliente clienteAntigo, boolean modoEditar, String username) {
@@ -379,6 +394,7 @@ public class CriarClienteDialog extends JDialog {
 
 	/**
 	 * Método que conecta ao gestor DAO e grava os dados do cliente na base de dados
+	 * Method that connects gestorDAO and saves the data of the client in the DB
 	 */
 	@SuppressWarnings("deprecation")
 	private void gravarCliente() {
