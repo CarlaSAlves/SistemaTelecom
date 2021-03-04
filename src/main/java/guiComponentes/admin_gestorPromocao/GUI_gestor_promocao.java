@@ -44,8 +44,8 @@ public class GUI_gestor_promocao extends JFrame {
 	private JTextArea textAreaDescricao;
 
 	/**
-	 * Construtor que inicia com o método que configura o painel base e o método inicialize, 
-	 * que contém todos os métodos e elementos que compõem a página 
+	 * Contructor that initializes with the method that configs the base panel and the method initialize
+	 * which contains all the methods and elements that compose the page
 	 */
 	public  GUI_gestor_promocao() {
 
@@ -64,7 +64,7 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 	
 	/**
-	 * Configurar interface, look and feel Nimbus 
+	 * contains the body of the page
 	 */
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -96,7 +96,7 @@ public class GUI_gestor_promocao extends JFrame {
 		UIManager.put("OptionPane.yesButtonText", "Sim");
 		
 		/*
-		 *  Botões da página:
+		 *  Page buttons:
 		 *  
 		 *  Criar Promoção 
 		 *  Editar Promoção
@@ -131,7 +131,7 @@ public class GUI_gestor_promocao extends JFrame {
 		contentPane.add(textAreaDescricao);
 
 		/**
-		 *  Campos de Pesquisa:
+		 *  Search fields:
 		 *  
 		 *  ID
 		 *  Nome
@@ -153,7 +153,7 @@ public class GUI_gestor_promocao extends JFrame {
 		painelPesquisa();
 
 		/**
-		 * Tabela de Resultados:
+		 * Result table:
 		 * 
 		 * Tabela
 		 * ScrollPane
@@ -177,11 +177,9 @@ public class GUI_gestor_promocao extends JFrame {
 		panel.add(lblResultados);
 
 		/**
-		 * Footer: 
-		 * 
-		 * Imagem de rodapé
-		 * Temporizador
-		 * 
+		 * Footer:
+		 * footer image
+		 * timer		 * 
 		 */
 
 		JLabel lbFooter = new JLabel("");
@@ -193,13 +191,15 @@ public class GUI_gestor_promocao extends JFrame {
 
 	}	
 
-	/**
-	 * Configuração do botão criar Promoção.
-	 * Quando premido, abre a janela Dialog "CriarPromocaoDialog", 
-	 * para preencher os dados da nova Promoção.
+	/** * 
+	 * Configs the create client button
+	 * When pressed, opens a window Dialog "CriarPromocaoDialog"
+	 * to input the data of the new package
 	 * 
-	 * @return botaoCriarPromocao
-	 * @botaoCriarPacotes - abre janela CriarPromocaoDialog
+	 * @return botaoCriarCliente 
+	 * @botaoCriarCliente - opens a window Dialog "CriarPromocaoDialog"
+
+	
 	 */
 	private JButton botaoCriarPromocaoSetup() {
 		JButton botaoCriarPromocao = new JButton("Criar Promoção");
@@ -220,13 +220,16 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	/**
-	 * Configuração do botão editar Promoção.
-	 * Quando premido, abre a janela Dialog "CriarPromocaoDialog", 
-	 * com os campos pré-preenchidos com a informação anterior mas editáveis.
-	 * Se não está nenhuma Promoção selecionada, o botão não está selecionável, no entanto, 
-	 * existe a validação para dar uma mensagem de erro caso não haja uma promoção selecionada.
-	 * @botaoEditarPromocao - abre a CriarPromocaoDialog editável
+	 * 
+	 * Configs the edit "pacote" button
+	 * When pressed it opens the "CriarPromocaoDialog" Dialog
+	 * with the pre-existing data about the pacote but editable, which can be changed.
+	 * If no client is selected this button is not enabled, however
+	 * there is a validation to give an error in such a case
+	* @botaoEditarPromocao- abre a CriarPromocaoDialog editável // opens the CriarClienteDialog editable.
 	 */
+
+	
 	private void botaoEditarPromocaoSetup() {
 		botaoEditarPromocao = new JButton("Editar Promoção");
 		botaoEditarPromocao.setBounds(609, 125, 231, 43);
@@ -255,13 +258,12 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	/**
-	 * Configuração do botão desativar Promoção.
-	 * Quando premido, faz a confirmação da ação. 
-	 * Se a Promoção estiver ativa o botão indica "desativar", se a Promoção está desativa
-	 * o botão indica "ativar".
-	 * Se não está nenhuma Promoção selecionada, o botão não está selecionável, no entanto, 
-	 * existe a validação para dar uma mensagem de erro caso não haja uma Promoção selecionada.
-	 * @botaoDesativarPromocao - botão dinâmico (ativo/desativo)
+	 *  * Configs the deactivate Promoção button.
+	 * When pressed asks to confirm the action.
+	 * If the Promoção is active the button reads "deactivate" and if the client is inactive it reads "activate"
+	 * If there is no selected Promoção, this button is disabled, however there is a validation which gives an error if that were to happen.
+	 * @botaoDesativarCliente - dynamic button "activate/deactivate"
+	 * 
 	 */
 	private void botaoDesativarPromocaoSetup() {
 		botaoDesativarPromocao = new JButton("Desativar Promoção");
@@ -330,12 +332,10 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	/**
-	 * Criação do botão Visualizar Histórico. 
-	 * Quando premido, desde que uma Promoção esteja selecionada, abre uma tabela com o 
-	 * histórico das alterações feitas na Promoção selecionada. 
-	 * Se não está nenhuma Promoção selecionada, o botão não está selecionável, no entanto, 
-	 * existe a validação para dar uma mensagem de erro caso não haja uma Promoção selecionado. 
-	 * @botaoVisualizarHistorico - abre janela com histórico de operações
+	 * Creates the visualise history button
+	 * When pressed, as long as there is a selected cliente, opens a window with the history of all actions taken on this client.
+	 * When no cliente has been selected this button is disabled, however there is a validation in case it would be able to press it so it shows an error.
+	 * @botaoVisualizarHistorico - opens the window with the history of actions taken by user on a specific client
 	 */
 	private void botaoVisualizarHistoricoSetup() {
 		botaoVisualizarHistorico = new JButton("Visualizar Historico");
@@ -374,9 +374,9 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	/**
-	 * Configuração do botão voltar.
-	 * Quando premido volta à homepage do Administrador.
-	 * @btVoltarGestorPromocao - volta à homepage de Administrador
+	 * configs the return button
+	 * when pressed it returns to the admin homepage 
+	 * @btVoltarGestorPromocao - returns to the admin homepage
 	 */
 	private void btVoltarGestorPromocaoSetup() {
 		btVoltarGestorPromocao = new JButton("Voltar");
@@ -388,7 +388,7 @@ public class GUI_gestor_promocao extends JFrame {
 
 	/**
 	 * /**
-	 * Configuração das labels de pesquisa e do botão de pesquisa dinâmico. 
+	 * configs the search labels 
 	 * @labelID
 	 * @labelNome
 	 * @textPesquisaID
@@ -471,7 +471,7 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	/**
-	 * Configuração do painel que contém tabela de resultados
+	 * Configs the panel that contains the result table.
 	 * @return painel da Tabela
 	 */
 	private JPanel paneldaTabelaSetup() {
@@ -485,7 +485,7 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	/**
-	 * ScrollPane da tabela.
+	  * ScrollPane da tabela.
 	 * @return scrollPane
 	 */
 	private JScrollPane scrollPaneSetup() {
@@ -495,10 +495,9 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	/**
-	 * Configuração da tabela de resultados.
-	 * Configuração de quais os botões selecionáveis consoante 
-	 * exista uma promoção selecionado ou não. 
-	 * Aqui está também referenciado o método do botão dinâmico (ativar/desativar).
+	 * Configs the result table from a search
+	 * Configs which button are enabled depending if the is a promocao selected or not
+	 * Here is also referenced the dynamic "activate/deactivate" button
 	 * @table
 	 */
 	private void tableSetup() {
@@ -537,10 +536,10 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	/**
-	 * Botão ativo/desativo dinâmico. 
-	 * Quando a promoção está ativa o botão apresenta "desativar".
-	 * Quando a promoção está desativo o botão apresenta "ativar".
-	 * @botaoDesativarPromocao - botao dinâmico
+	* "activate/deactivate" dynamic button
+	 * When the client is active the button shows "deactivate"
+	 * When the client is inactive the button shows "activate"
+	 * @botaoDesativarPromocao - dynamic button
 	 */
 	private void botaoAtivarDinamico() {
 
@@ -557,10 +556,10 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	/**
-	 * Configuração das labels de username e temporização.
-	 * @lblUsernameLogged apresenta o username que está logado
-	 * @lblTempoSessao apresenta o tempo de sessão desde o momento que faz login
-	 * @lblHoraSistema apresenta a hora atual do sistema 
+	 * Configs the labels username and timer
+	 * @lblUsernameLogged shows the current logged username
+	 * @lblTempoSessao shows the total time since the moment of the login
+	 * @lblHoraSistema shows the system time
 	 */
 	private void timerSetup() {
 		lblTempoSessao = new JLabel();
@@ -584,7 +583,7 @@ public class GUI_gestor_promocao extends JFrame {
 	}
  
 	/**
-	 * Ao fazer alterações na promoção a tabela é atualizada. 
+	 * When changes on the client are made, this refreshes the result table.
 	 */
 	public void refreshPromocaoTable() {
 		try {
@@ -599,7 +598,7 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	/**
-	 * Retorna a tabela
+	
 	 * @return table
 	 */
 	public JTable getTable() {
@@ -630,7 +629,7 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	/**
-	 * Configura a label de temporizador. 
+	 *  configs the timer
 	 * @param temporizador
 	 */
 	public void setLblTempoSessao(Duration temporizador) {
@@ -638,7 +637,7 @@ public class GUI_gestor_promocao extends JFrame {
 	}
 
 	/**
-	 * Configura a label de hora de sistema
+	 * configs the label which shows the system time
 	 * @param agora
 	 */
 	public void setLblHoraSistema(String agora) {

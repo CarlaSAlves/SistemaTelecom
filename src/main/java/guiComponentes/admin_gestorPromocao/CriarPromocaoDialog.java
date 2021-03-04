@@ -35,7 +35,7 @@ public class CriarPromocaoDialog extends JDialog {
 	}
 
 	/**
-	 * Preenche as textFields com os valores anteriores da promoção, antes de editar.
+	 * Fills the textFields with values from the selected operator before it edits
 	 * @param promocaoAntigo2
 	 */
 	private void popularTextFields(Promocao promocaoAntigo2) {
@@ -45,8 +45,8 @@ public class CriarPromocaoDialog extends JDialog {
 	}
 
 	/**
-	 * Construtor que inicia com o método que configura a janela e o método inicialize, 
-	 * que contém todos os métodos e elementos que compõem a página 
+	 * Contructor that starts with the method that configs the window and the method initialize
+	 * which contains all method and elements that compose the page
 	 */
 	public CriarPromocaoDialog() {
 
@@ -63,12 +63,12 @@ public class CriarPromocaoDialog extends JDialog {
 	}
 
 	/**
-	 * Contém o corpo da página
+	 * Contains the body of the page
 	 */
 	private void inicialize() {
 		
 		/**
-		 *  Labels e textField da página:
+		 *  Labels e textField of the page:
 		 *  Nome
 		 *  Descrição
 		 */
@@ -98,21 +98,21 @@ public class CriarPromocaoDialog extends JDialog {
 		contentPanel.add(textFieldDescricao);
 
 		/**
-		 * Painel de Confirmação 
-		 * Botão Confirmar
-		 * Botão Cancelar
+		 * Confirmation panel
+		 * Confirmation button
+		 * Cancellation button
 		 */
 
 		painelConfirmacaoSetup();
 	}
 	
 	/**
-	 * Configura os botões do rodapé da página 
+	 * configs the labels for the window
 	 * 
-	 * @buttonPane - painel de confirmação
-	 * @okButton - botão de confirmação, aciona as validações de campos e 
-	 * o método que grava os dados da promoção na base de dados.
-	 * @cancelButton - botão cancelar, cancela a ação e fecha a janela.
+	 * @buttonPane - confirmation panel
+	 * @okButton - confirmation button with action 
+	 * event to validate entries with the method gravaDados
+	 * @cancelButton - cancellation button, cancels the action and closes the window
 	 * 
 	 */
 	protected void painelConfirmacaoSetup() {
@@ -159,10 +159,10 @@ public class CriarPromocaoDialog extends JDialog {
 	}
 	
 	/**
-	 * Configuração da janela se for acionada pelo botão editar - apresenta os campos editáveis.
-	 * @param promocaoPesquisaApp
-	 * @param promocaoTemp - vaio buscar os valores atuais da promoção
-	 * @param modoEditar - accionado pelo botão editar
+	 *Configs the window that starts with edit button, shows editable fields
+	 * @param operadorPesquisaApp
+	 * @param funcionarioTemp - retrieves the updated values of the selected package
+	 * @param modoEditar - actioned by edit button
 	 */
 	public CriarPromocaoDialog(GUI_gestor_promocao promocaoPesquisaApp, Promocao promocaoTemp, boolean modoEditar ) {
 		this();
@@ -170,7 +170,7 @@ public class CriarPromocaoDialog extends JDialog {
 		this.promocaoAntiga = promocaoTemp;
 		this.modoEditar = modoEditar;
 
-		// modo editar, accionado pelo clique no botão "editar"
+		// edit mode, actioned by the edit button
 		
 		if(modoEditar) {
 			setTitle("Editar Promoção");
@@ -179,7 +179,7 @@ public class CriarPromocaoDialog extends JDialog {
 	}
 
 	/**
-	 * Método que conecta ao gestor DAO e grava os dados da promoção na base de dados
+	 * method that connects gestorDAO and saves the data of the operator onto the DB
 	 */
 	private void gravarPromocao() {
 		String nome = textFieldNome.getText();

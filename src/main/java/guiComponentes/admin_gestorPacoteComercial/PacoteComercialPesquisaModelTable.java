@@ -26,8 +26,8 @@ public class PacoteComercialPesquisaModelTable extends AbstractTableModel {
 	private List<PacoteComercial> pacotesComerciais;
 
 	/**
-	  * Creation of the rows and collumns of the table depending on its size
-	 * from the list of clients giving them the name of the correspondent collumn
+	  * Creation of the rows and columns of the table depending on its size
+	 * from the list of clients giving them the name of the correspondent column
 	 * @param pacotesComerciais
 	 */
 	public PacoteComercialPesquisaModelTable(List<PacoteComercial> pacotesComerciais) {

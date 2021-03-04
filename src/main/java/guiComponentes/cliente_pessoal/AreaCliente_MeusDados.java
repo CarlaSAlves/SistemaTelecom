@@ -128,7 +128,7 @@ public class AreaCliente_MeusDados extends JFrame {
 		botaoConfirmarPassword();
 		botaoCancelarPassword();
 
-		//Imagem fundo
+		//Background immage
 
 		JLabel imagemDados = new JLabel("");
 		imagemDados.setBounds(0, -37, 1408, 586);

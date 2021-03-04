@@ -88,7 +88,6 @@ public class CriarOperadorDialog extends JDialog {
 
 		/**
 		 *  Labels e textField of the page:
-		 * 
 		 *  Nome
 		 *  NIF
 		 *  Login

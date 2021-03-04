@@ -44,7 +44,7 @@ public class HistoricoPromocaoDialog extends JDialog {
 		setResizable(false);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		
-		// Painel de histórico 
+		// history panel
 
 
 		JPanel panel = new JPanel();
@@ -57,7 +57,7 @@ public class HistoricoPromocaoDialog extends JDialog {
 		promocaoRegistoLabel = new JLabel("");
 		panel.add(promocaoRegistoLabel);
 
-		// Tabela e Scrollpane de histórico
+		// history scrollpane and table
 		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPanel.add(scrollPane, BorderLayout.CENTER);
@@ -65,7 +65,7 @@ public class HistoricoPromocaoDialog extends JDialog {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		// Painel de rodapé - botão sair 
+		// footer panel and return button
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -84,7 +84,7 @@ public class HistoricoPromocaoDialog extends JDialog {
 	}
 
 	/**
-	 * Método que preenche a tabela com o registos
+	  * method that fills the tale with results
 	 * @param promo
 	 * @param historicoPromo
 	 */
@@ -101,7 +101,7 @@ public class HistoricoPromocaoDialog extends JDialog {
 	}
 
 	/**
-	 * Renderer da tabela
+	 * table Renderer 
 	 */
 	private final class DateTimeCellRenderer extends DefaultTableCellRenderer {
 

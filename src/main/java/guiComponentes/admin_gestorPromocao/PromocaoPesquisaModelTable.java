@@ -25,8 +25,8 @@ public class PromocaoPesquisaModelTable extends AbstractTableModel {
 	private List<Promocao> promocoes;
 
 	/**
-	 * Criação das linhas e colunas da tabela, consoante o tamanho 
-	 * da lista de promoções dando-lhe o nome da coluna correspondente.
+	* Creation of the rows and columns of the table depending on its size
+	 * from the list of clients giving them the name of the correspondent column
 	 * @param pacotesComerciais
 	 */
 	public PromocaoPesquisaModelTable(List<Promocao> promocoes) {
@@ -50,7 +50,7 @@ public class PromocaoPesquisaModelTable extends AbstractTableModel {
 	}
 
 	/**
-	 * Dependendo das constantes, vai buscar os valores correspondentes ao pacote comercial.
+		  * Depending on the constant, it will get the values for each client
 	 */
 	@Override
 	public Object getValueAt(int row, int col) {

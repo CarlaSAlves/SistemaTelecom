@@ -665,7 +665,7 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * @return botão voltar
+	 * @return "return" button
 	 * returns the "return" button
 	 */
 	public JButton btVoltarGestorCliente() {
