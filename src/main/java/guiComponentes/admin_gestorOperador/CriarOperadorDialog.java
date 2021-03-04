@@ -49,7 +49,8 @@ public class CriarOperadorDialog extends JDialog {
 		this.operadorPesquisaApp = operadorPesquisaApp;
 	}
 	/**
-	 * Preenche as textFields com os valores anteriores do operador, antes de editar.
+	
+	 * Fills the textFields with values from the selected operator before it edits
 	 * @param funcionarioTemp
 	 */
 	private void popularTextFields(Funcionario funcionarioTemp) {
@@ -59,8 +60,9 @@ public class CriarOperadorDialog extends JDialog {
 	}
 
 	/**
-	 * Construtor que inicia com o método que configura a janela e o método inicialize, 
-	 * que contém todos os métodos e elementos que compõem a página 
+	 
+	 * Contructor that starts with the method that configs the window and the method initialize
+	 * which contains all method and elements that compose the page
 	 */
 	public CriarOperadorDialog() {
 
@@ -79,12 +81,13 @@ public class CriarOperadorDialog extends JDialog {
 
 
 	/**
-	 * Contém o corpo da página
+	 *
+	 * Contains the body of the page
 	 */
 	private void inicialize() {
 
 		/**
-		 *  Labels e textField da página:
+		 *  Labels e textField of the page:
 		 * 
 		 *  Nome
 		 *  NIF
@@ -95,9 +98,9 @@ public class CriarOperadorDialog extends JDialog {
 		textFieldSetup();
 
 		/**
-		 * Painel de Confirmação 
-		 * Botão Confirmar
-		 * Botão Cancelar
+		 * Confirmation panel
+		 * Confirmation button
+		 * Cancellation button
 		 */
 
 		painelConfirmacaoSetup();
@@ -105,12 +108,12 @@ public class CriarOperadorDialog extends JDialog {
 	}
 
 	/**
-	 * Configuração das labels da janela 
+	 * configs the labels for the window
 	 * @lblNome
 	 * @lblNIF
 	 * @lblLogin
 	 * @lblPassword
-	 * @lblAuxiliar - label inserida no textField da password
+	 * @lblAuxiliar - label inserted beneath password textField  
 	 */
 	private void labelsSetup() {
 		JLabel lblNome = new JLabel("Nome");
@@ -143,7 +146,7 @@ public class CriarOperadorDialog extends JDialog {
 	}
 	
 	/**
-	 * Configuração das textFields 
+	 * Configs textFields 
 	 * @textFieldNome
 	 * @textFieldNIF
 	 * @textFieldLogin
@@ -177,12 +180,11 @@ public class CriarOperadorDialog extends JDialog {
 
 	}
 	/**
-	 * Configura os botões do rodapé da página 
+	 * configs the footer of the page
 	 * 
-	 * @buttonPane - painel de confirmação
-	 * @okButton - botão de confirmação, aciona as validações de campos e 
-	 * o método que grava os dados do operador na base de dados.
-	 * @cancelButton - botão cancelar, cancela a ação e fecha a janela.
+	 * @buttonPane -confirmation panel
+	 * @okButton - confirmation button with action event to validate entries with the method gravaDados
+	 * @cancelButton - cancellation button, cancels the action and closes the window
 	 */
 	private void painelConfirmacaoSetup() {
 		
@@ -200,7 +202,7 @@ public class CriarOperadorDialog extends JDialog {
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				// Validações dos campos de texto no modo editar
+				// validation of the fields if edit mode is on
 				if(modoEditar) {
 					if (textFieldNome.getText().isBlank() || textFieldLogin.getText().isBlank()) {
 						JOptionPane.showMessageDialog( CriarOperadorDialog.this, "Todos os dados têm de ser preenchidos!");
@@ -235,7 +237,7 @@ public class CriarOperadorDialog extends JDialog {
 					gravarOperador();
 				}
 				
-				// Validações dos campos de texto no modo criar
+				// validation of the fields when a new operator is being created
 				else {
 					if (textFieldNome.getText().isBlank() || textFieldLogin.getText().isBlank() || textFieldPassword.getText().isBlank()) {
 						JOptionPane.showMessageDialog( CriarOperadorDialog.this, "Todos os dados têm de ser preenchidos!");
@@ -309,10 +311,10 @@ public class CriarOperadorDialog extends JDialog {
 	}
 
 	/**
-	 * Configuração da janela se for acionada pelo botão editar - apresenta os campos editáveis.
+	 *Configs the window that starts with edit button, shows editable fields
 	 * @param operadorPesquisaApp
-	 * @param funcionarioTemp - vai buscar os valores atuais do operador
-	 * @param modoEditar - acionado pelo botão editar
+	 * @param funcionarioTemp - retrieves the updated values of the selected operator
+	 * @param modoEditar - actioned by edit button
 	 */
 	public CriarOperadorDialog(GUI_gestor_operador operadorPesquisaApp, Funcionario funcionarioTemp, boolean modoEditar ) {
 		this();
@@ -320,7 +322,7 @@ public class CriarOperadorDialog extends JDialog {
 		this.funcionarioAntigo = funcionarioTemp;
 		this.modoEditar = modoEditar;
 
-		// modo editar, accionado pelo clique no botão "editar"
+		// edit mode, actioned by the edit button
 		if(modoEditar) {
 			setTitle("Editar Operador");
 			popularTextFields(funcionarioTemp);
@@ -350,7 +352,8 @@ public class CriarOperadorDialog extends JDialog {
 	}
 
 	/**
-	 * Método que conecta ao gestor DAO e grava os dados do operador na base de dados
+	
+	 * method that connects gestorDAO and saves the data of the operator onto the DB
 	 */
 	@SuppressWarnings("deprecation")
 	private void gravarOperador() {

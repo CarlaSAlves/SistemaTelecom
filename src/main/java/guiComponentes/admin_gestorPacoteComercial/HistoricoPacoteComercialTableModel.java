@@ -21,8 +21,8 @@ public class HistoricoPacoteComercialTableModel extends AbstractTableModel {
 	private List<HistoricoPacoteComercial> historicoLista;
 
 	/**
-	 * Criação das linhas e colunas da tabela, consoante o tamanho 
-	 * da lista de registos dando-lhe o nome da coluna correspondente.
+	 * Creates the rows and columns depending on the size of the result set
+	 * and names each column accordingly
 	 * @param historicoLista
 	 */
 	public HistoricoPacoteComercialTableModel(List<HistoricoPacoteComercial> historicoLista) {
@@ -45,7 +45,7 @@ public class HistoricoPacoteComercialTableModel extends AbstractTableModel {
 	}
 
 	/**
-	 * Dependendo das constantes, vai buscar os valores correspondentes aos registos.
+	* depends on the constants,  retrieves the data corresponding the the registries
 	 */
 	@Override
 	public Object getValueAt(int row, int col) {

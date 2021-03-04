@@ -21,8 +21,8 @@ public class HistoricoOperadorTableModel extends AbstractTableModel {
 	private List<HistoricoOperador> historicoLista;
 
 	/**
-	 * Criação das linhas e colunas da tabela, consoante o tamanho 
-	 * da lista de registos dando-lhe o nome da coluna correspondente.
+	 * creates rows and columns depending on result set size
+	 * name each column according to results from DB
 	 * @param historicoLista
 	 */
 	public HistoricoOperadorTableModel(List<HistoricoOperador> historicoLista) {
@@ -45,7 +45,8 @@ public class HistoricoOperadorTableModel extends AbstractTableModel {
 	}
 
 	/**
-	 * Dependendo das constantes, vai buscar os valores correspondentes aos registos.
+	 * 
+	 * Depending on the constants, retrieves the values that correspond the registries
 	 */
 	@Override
 	public Object getValueAt(int row, int col) {

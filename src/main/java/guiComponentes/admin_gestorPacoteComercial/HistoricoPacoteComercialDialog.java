@@ -43,7 +43,7 @@ public class HistoricoPacoteComercialDialog extends JDialog {
 		setResizable(false);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 
-		// Painel de histórico 
+		// history panel
 		
 		JPanel panel = new JPanel();
 		contentPanel.add(panel, BorderLayout.NORTH);
@@ -55,7 +55,7 @@ public class HistoricoPacoteComercialDialog extends JDialog {
 		pacoteComercialRegistosTable = new JLabel("");
 		panel.add(pacoteComercialRegistosTable);
 
-		// Tabela e Scrollpane de histórico
+		// history scrollpane and table
 
 		JScrollPane scrollPane = new JScrollPane();
 		contentPanel.add(scrollPane, BorderLayout.CENTER);
@@ -63,7 +63,7 @@ public class HistoricoPacoteComercialDialog extends JDialog {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 
-		// Painel de rodapé - botão sair 
+		// footer panel and return button
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -83,7 +83,7 @@ public class HistoricoPacoteComercialDialog extends JDialog {
 	}
 
 	/**
-	 * Método que preenche a tabela com o registos
+	 * method that fills the tale with results
 	 * @param pacote
 	 * @param historicoPacoteComercial
 	 */
@@ -101,7 +101,7 @@ public class HistoricoPacoteComercialDialog extends JDialog {
 
 	
 	/**
-	 * Renderer da tabela
+	 * table Renderer 
 	 */
 	private final class DateTimeCellRenderer extends DefaultTableCellRenderer {
 

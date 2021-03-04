@@ -45,8 +45,8 @@ public class GUI_gestor_pacotes extends JFrame {
 	private JTextArea textAreaDescricao;
 
 	/**
-	 * Construtor que inicia com o método que configura o painel base e o método inicialize, 
-	 * que contém todos os métodos e elementos que compõem a página 
+	 * Contructor that initializes with the method that configs the base panel and the method initialize
+	 * which contains all the methods and elements that compose the page
 	 */
 	public GUI_gestor_pacotes() {
 		
@@ -65,7 +65,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 	
 	/**
-	 * Contém o corpo da página
+	 * contains the body of the page
 	 */
 	protected void inicialize() {
 
@@ -75,14 +75,14 @@ public class GUI_gestor_pacotes extends JFrame {
 		UIManager.put("OptionPane.yesButtonText", "Sim");
 		
 		/*
-		 *  Botões da página:
+		 *  Page buttons:
 		 *  
-		 *  Criar Pacote Comercial 
-		 *  Editar Pacote Comercial
-		 *  Desativar Pacote Comercial
-		 *  Visualizar Historico
-		 *  Voltar 
-		 *  TextArea Descrição
+		 *  Creates "Pacote Comercial"
+		 *  Edits " Pacote Comercial"
+		 *  Deactivates  "Pacote Comercial"
+		 *  View history
+		 *  return 
+		 *  TextArea Description
 		 */
 
 		JButton botaoCriarPacotes = botaoCriarPacotesSetup();
@@ -110,7 +110,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		contentPane.add(textAreaDescricao);
 
 		/**
-		 *  Campos de Pesquisa:
+		 *  Search fields:
 		 *  
 		 *  ID
 		 *  Nome
@@ -132,7 +132,7 @@ public class GUI_gestor_pacotes extends JFrame {
 		painelPesquisa();
 
 		/**
-		 * Tabela de Resultados:
+		 * Result table:
 		 * 
 		 * Tabela
 		 * ScrollPane
@@ -155,9 +155,8 @@ public class GUI_gestor_pacotes extends JFrame {
 	
 		/**
 		 * Footer: 
-		 * 
-		 * Imagem de rodapé
-		 * Temporizador
+		 * footer image
+		 * timer
 		 * 
 		 */
 
@@ -171,7 +170,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 
 	/**
-	 * Configurar interface, look and feel Nimbus 
+	 * configs interface, look and feel Nimbus
 	 */
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -193,12 +192,13 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 	
 	/**
-	 * Configuração do botão criar Pacote Comercial.
-	 * Quando premido, abre a janela Dialog "CriarPacotesDialog", 
-	 * para preencher os dados do novo Pacote Comercial.
+
+	 * Configs the create client button
+	 * When pressed, opens a window Dialog "CriarPacotesDialog"
+	 * to input the data of the new "Pacote Comercial"
 	 * 
 	 * @return botaoCriarPacotes
-	 * @botaoCriarPacotes - abre janela CriarPacotesDialog
+	 * @botaoCriarPacotes - opens a window Dialog "CriarPacotesDialog"
 	 */
 	private JButton botaoCriarPacotesSetup() {
 		JButton botaoCriarPacotes = new JButton("Criar Pacote Comercial");
@@ -218,12 +218,12 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 	
 	/**
-	 * Configuração do botão editar Pacote Comercial.
-	 * Quando premido, abre a janela Dialog "CriarPacotesDialog", 
-	 * com os campos pré-preenchidos com a informação anterior mas editáveis.
-	 * Se não está nenhum pacote selecionado, o botão não está selecionável, no entanto, 
-	 * existe a validação para dar uma mensagem de erro caso não haja um pacote selecionado.
-	 * @botaoEditarPacoteComercial - abre a CriarPacotesDialog editável
+	* Configs the edit "Pacote Comercial" button
+	 * When pressed it opens the "CriarPacotesDialog" Dialog
+	 * with the pre-existing data about the "Pacote Comercial" but editable, which can be changed.
+	 * If no client is selected this button is not enabled, however
+	 * there is a validation to give an error in such a case
+	 * @botaoEditarPacoteComercial -  opens the CriarPacotesDialog editable.
 	 */
 	private void botaoEditarPacoteComercialSetup() {
 		botaoEditarPacoteComercial = new JButton("Editar Pacote Comercial");
@@ -255,13 +255,11 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 	
 	/**
-	 * Configuração do botão desativar Pacote Comercial.
-	 * Quando premido, faz a confirmação da ação. 
-	 * Se o Pacote Comercial estiver ativo o botão indica "desativar", se o Pacote Comercial está desativo
-	 * o botão indica "ativar".
-	 * Se não está nenhum Pacote Comercial selecionado, o botão não está selecionável, no entanto, 
-	 * existe a validação para dar uma mensagem de erro caso não haja um Pacote Comercial selecionado.
-	 * @botaoDesativarPacoteComercial - botão dinâmico (ativo/desativo)
+	 * Configs the deactivate "Pacote Comercial" button.
+	 * When pressed asks to confirm the action.
+	 * If the client is active the button reads "deactivate" and if the "Pacote Comercial" is inactive it reads "activate"
+	 * If there is no selected client, this button is disabled, however there is a validation which gives an error if that were to happen.
+		 * @botaoDesativarPacoteComercial -dynamic button "activate/deactivate"
 	 */
 	private void botaoDesativarPacoteComercialSetup() {
 		botaoDesativarPacoteComercial = new JButton("Desativar Pacote Comercial");
@@ -329,12 +327,10 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 	
 	/**
-	 * Criação do botão Visualizar Histórico. 
-	 * Quando premido, desde que um Pacote Comercial esteja selecionado, abre uma tabela com o 
-	 * histórico das alterações feitas no Pacote Comercial selecionado. 
-	 * Se não está nenhum Pacote Comercial selecionado, o botão não está selecionável, no entanto, 
-	 * existe a validação para dar uma mensagem de erro caso não haja um Pacote Comercial selecionado. 
-	 * @botaoVisualizarHistorico - abre janela com histórico de operações
+	 * Creates the visualise history button
+	 * When pressed, as long as there is a selected "Pacote Comercial", opens a window with the history of all actions taken on this client.
+	 * When no "Pacote Comercial" has been selected this button is disabled, however there is a validation in case it would be able to press it so it shows an error.
+	 * @botaoVisualizarHistorico - opens the window with the history of actions taken by user 
 	 */
 	private void botaoVisualizarHistoricoSetup() {
 		botaoVisualizarHistorico = new JButton("Visualizar Historico");
@@ -373,9 +369,9 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 	
 	/**
-	 * Configuração do botão voltar.
-	 * Quando premido volta à homepage do Administrador.
-	 * @btVoltarGestorPacotes - volta à homepage de Administrador
+	 * configs the return button
+	 * when pressed it returns to the admin homepage 
+	 * @btVoltarGestorPacotes -  returns to the admin homepage
 	 */
 	private void btVoltarGestorPacotesSetup() {
 		btVoltarGestorPacotes = new JButton("Voltar");
@@ -387,7 +383,7 @@ public class GUI_gestor_pacotes extends JFrame {
 
 	/**
 	 * /**
-	 * Configuração das labels de pesquisa e do botão de pesquisa dinâmico. 
+	 * configs the search labels
 	 * @labelID
 	 * @labelNome
 	 * @textPesquisaID
@@ -471,7 +467,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 	
 	/**
-	 * Configuração do painel que contém tabela de resultados
+	 * Configs the panel that contains the result table.
 	 * @return painel da Tabela
 	 */
 	private JPanel paneldaTabelaSetup() {
@@ -484,7 +480,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 	
 	/**
-	 * ScrollPane da tabela.
+	 *table  ScrollPane 
 	 * @return scrollPane
 	 */
 	private JScrollPane scrollPaneSetup() {
@@ -494,10 +490,9 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 	
 	/**
-	 * Configuração da tabela de resultados.
-	 * Configuração de quais os botões selecionáveis consoante 
-	 * exista um pacote comercial selecionado ou não. 
-	 * Aqui está também referenciado o método do botão dinâmico (ativar/desativar).
+	 * Configs the result table from a search
+	 * Configs which button are enabled depending if the is a "Pacote Comercial" selected or not
+	 * Here is also referenced the dynamic "activate/deactivate" button
 	 * @table
 	 */
 	private void tableSetup() {
@@ -537,10 +532,10 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 	
 	/**
-	 * Botão ativo/desativo dinâmico. 
-	 * Quando o pacote comercial está ativo o botão apresenta "desativar".
-	 * Quando o pacote comercial está desativo o botão apresenta "ativar".
-	 * @botaoDesativarPacoteComercial - botao dinâmico
+	 * * "activate/deactivate" dynamic button
+	 * When the pacote comercial is active the button shows "deactivate"
+	 * When the pacote comercial is inactive the button shows "activate"
+	 * @botaoDesativarPacoteComercial - dynamic button
 	 */
 	private void botaoAtivarDinamico() {
 
@@ -557,10 +552,10 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 
 	/**
-	 * Configuração das labels de username e temporização.
-	 * @lblUsernameLogged apresenta o username que está logado
-	 * @lblTempoSessao apresenta o tempo de sessão desde o momento que faz login
-	 * @lblHoraSistema apresenta a hora atual do sistema 
+	 * Configs the labels username and timer
+	 * @lblUsernameLogged shows the current logged username
+	 * @lblTempoSessao shows the total time since the moment of the login
+	 * @lblHoraSistema shows the system time
 	 */
 	protected void timerSetup() {
 		lblUsernameLogged = new JLabel();
@@ -583,7 +578,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 	
 	/**
-	 * Ao fazer alterações no pacote comercial a tabela é atualizada. 
+	 * When changes on the pacote comercial are made, this refreshes the result table.
 	 */
 	public void refreshPacotesTable() {
 
@@ -602,7 +597,6 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 	
 	/**
-	 * Retorna a tabela
 	 * @return table
 	 */
 	public JTable getTable() {
@@ -632,7 +626,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 
 	/**
-	 * Configura a label usernameLogged 
+	 * configs usernameLogged label
 	 * @param username
 	 */
 	public void setUsernameLoggedIn(String username) {
@@ -640,7 +634,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 	
 	/**
-	 * Configura a label de temporizador. 
+	 * Configs timer label
 	 * @param temporizador
 	 */
 	public void setLblTempoSessao(Duration temporizador) {
@@ -649,7 +643,7 @@ public class GUI_gestor_pacotes extends JFrame {
 	}
 
 	/**
-	 * Configura a label de hora de sistema
+	 * configs system time label
 	 * @param agora
 	 */
 	public void setLblHoraSistema(String agora) {

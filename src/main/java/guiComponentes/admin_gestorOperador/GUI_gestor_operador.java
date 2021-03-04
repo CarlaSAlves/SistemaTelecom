@@ -43,8 +43,8 @@ public class GUI_gestor_operador extends JFrame {
 
 	
 	/**
-	 * Construtor que inicia com o método que configura o painel base e o método inicialize, 
-	 * que contém todos os métodos e elementos que compõem a página 
+
+	 * Contructor that initializes with the method that configs the panel base and the initialize method which contains all elements that compose the page.
 	 */
 	public GUI_gestor_operador() {
 		
@@ -62,7 +62,7 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	/**
-	 * Contém o corpo da página
+	 *Contains the body of the page
 	 */
 	protected void inicialize() {
 		
@@ -72,13 +72,13 @@ public class GUI_gestor_operador extends JFrame {
 		UIManager.put("OptionPane.yesButtonText", "Sim");
 
 		/*
-		 *  Botões da página:
+		 *  page buttons:
 		 *  
-		 *  Criar Operador 
-		 *  Editar Operador
-		 *  Desativar Operador
-		 *  Visualizar Historico
-		 *  Voltar 
+		 *  Criar Operador//Create operator 
+		 *  Editar Operador//Edit operator
+		 *  Desativar Operador//deactivate operator
+		 *  Visualizar Historico// see history
+		 *  Voltar //return
 		 */
 
 		JButton botaoCriarOperador = botaoCriarOperadorSetup();
@@ -97,13 +97,13 @@ public class GUI_gestor_operador extends JFrame {
 		getContentPane().add(btVoltarGestorOperador);
 
 		/**
-		 *  Campos de Pesquisa:
+		 *  search fields:
 		 *  
 		 *  ID
 		 *  NIF
 		 *  Nome
 		 *  Ativo
-		 *  Botão Pesquisar
+		 *  search button
 		 */ 
 
 		lblCamposPesquisas = new JLabel("Campo de Pesquisa");
@@ -123,11 +123,11 @@ public class GUI_gestor_operador extends JFrame {
 		botaoPesquisaSetup();
 
 		/**
-		 * Tabela de Resultados:
+		 * result table:
 		 * 
-		 * Tabela
+		 * table
 		 * ScrollPane
-		 * Label Resultados
+		 *  Result label
 		 */
 		
 		JPanel panelDaTable = panelDaTableSetup();
@@ -147,8 +147,8 @@ public class GUI_gestor_operador extends JFrame {
 		/**
 		 * Footer: 
 		 * 
-		 * Imagem de rodapé
-		 * Temporizador
+		 * footer image
+		 * timer
 		 * 
 		 */
 
@@ -162,7 +162,7 @@ public class GUI_gestor_operador extends JFrame {
 	} 
 
 	/**
-	 * Configurar interface, look and feel Nimbus 
+	 * Configs interface, look and feel Nimbus 
 	 */
 	private void ativarNimbusLookAndFeel() {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -184,12 +184,12 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	/**
-	 * Configuração do botão criar operador.
-	 * Quando premido, abre a janela Dialog "CriarOperadorDialog", 
-	 * para preencher os dados do novo operador.
+	 * Configs the button create oprator
+	 * When pressed opens "CriarOperadorDialog" dialog, 
+	 * to fill the details of the new operator
 	 * 
 	 * @return botaoCriarOperador
-	 * @botaoCriarOperador - abre janela criarOperadorDialog
+	 * @botaoCriarOperador - opens "CriarOperadorDialog" dialog, 
 	 */
 	private JButton botaoCriarOperadorSetup() {
 		JButton botaoCriarOperador = new JButton("Criar Operador");
@@ -208,12 +208,14 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	/**
-	 * Configuração do botão editar operador.
-	 * Quando premido, abre a janela Dialog "CriarOperadorDialog", 
-	 * com os campos pré-preenchidos com a informação anterior mas editáveis.
-	 * Se não está nenhum operador selecionado, o botão não está selecionável, no entanto, 
-	 * existe a validação para dar uma mensagem de erro caso não haja um operador selecionado.
-	 * @botaoEditarOperador - abre a CriarOperadorDialog editável
+	 *
+	 * Configs the edit operator button
+	 * When pressed opens "CriarOperadorDialog" dialog.
+	 * with the fields filled with the information of the selected operator.
+	 * If no operator has been selected this button is disabled.
+	 * However there is a validation if it were to be pressed with no operator selected.
+
+	 * @botaoEditarOperador - opens a CriarOperadorDialog 
 	 */
 	private void botaoEditarOperadorSetup() {
 		botaoEditarOperador = new JButton("Editar Operador");
@@ -244,13 +246,12 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	/**
-	 * Configuração do botão desativar operador.
-	 * Quando premido, faz a confirmação da ação. 
-	 * Se o operador estiver ativo o botão indica "desativar", se o operador está desativo
-	 * o botão indica "ativar".
-	 * Se não está nenhum operador selecionado, o botão não está selecionável, no entanto, 
-	 * existe a validação para dar uma mensagem de erro caso não haja um operador selecionado.
-	 * @botaoDesativarOperador - botão dinâmico (ativo/desativo)
+	  *
+	 * Configs the edit operator button
+	 * When pressed opens "CriarOperadorDialog" dialog.
+	 * If the selected operator is active button reads "disable operator" otherwise shows "activate operator"
+	 * If no operator has been selected this button is disabled.
+	 * However there is a validation if it were to be pressed with no operator selected.
 	 */
 	private void botaoDesativarOperadorSetup() {
 		botaoDesativarOperador = new JButton("Desativar Operador");
@@ -321,12 +322,11 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	/**
-	 * Criação do botão Visualizar Histórico. 
-	 * Quando premido, desde que um operador esteja selecionado, abre uma tabela com o 
-	 * histórico das alterações feitas no operador selecionado. 
-	 * Se não está nenhum operador selecionado, o botão não está selecionável, no entanto, 
-	 * existe a validação para dar uma mensagem de erro caso não haja um operador selecionado. 
-	 * @botaoVisualizarHistorico - abre janela com histórico de operações
+	 * Sets up the view history button 
+	 * When pressed as long as an operator was selected opens a dialog with the history of the operator.
+	 * If no operator has been selected this button is disabled.
+	 * However there is a validation if it were to be pressed with no operator selected.
+	 * @botaoVisualizarHistorico - opens a window with the history of selected operator
 	 */
 	private void botaoVisualizarHistoricoSetup() {
 		botaoVisualizarHistorico = new JButton("Ver Historico");
@@ -365,9 +365,9 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	/**
-	 * Configuração do botão voltar.
-	 * Quando premido volta à homepage do Administrador.
-	 * @btVoltarGestorOperador - volta à homepage de Administrador
+	 * configs the return button
+	 * when pressed returns to the admin homepage
+	 * @btVoltarGestorOperador -returns to the admin homepage
 	 */
 	private void btVoltarGestorOperadorSetup() {
 		btVoltarGestorOperador = new JButton("Voltar");
@@ -379,7 +379,7 @@ public class GUI_gestor_operador extends JFrame {
 
 	/**
 	 * /**
-	 * Configuração das labels de pesquisa
+	 * Configs the search labels
 	 * @labelID
 	 * @labelNIF
 	 * @labelNome
@@ -404,7 +404,7 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	/**
-	 * Configuração das textFields de Pesquisa e checkbox Ativo
+	 * Configuração the search textFields and the "ativo" checkbox
 	 * @textPesquisaID
 	 * @textFieldNome
 	 * @textPesquisaNIF
@@ -441,8 +441,8 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	/**
-	 * Configuração do botão de pesquisa dinâmico. 
-	 * É possível pesquisar por vários campos ao mesmo tempo.
+	 * Configs the dynamic search button
+	 * It is possible to search using several fields at the same time
 	 * @botaoPesquisa 
 	 */
 	 
@@ -495,8 +495,8 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	/**
-	 * Configuração do painel que contém tabela de resultados
-	 * @return painel da Tabela
+	 * configs the panel that contains the result table
+	 * @return table panel
 	 */
 	private JPanel panelDaTableSetup() {
 		JPanel painelTabela = new JPanel();
@@ -508,7 +508,7 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	/**
-	 * ScrollPane da tabela.
+	 * table ScrollPane 
 	 * @return scrollPane
 	 */
 	private JScrollPane scrollPaneSetup() {
@@ -519,10 +519,10 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	/**
-	 * Configuração da tabela de resultados.
-	 * Configuração de quais os botões selecionáveis consoante 
-	 * exista operador selecionado ou não. 
-	 * Aqui está também referenciado o método do botão dinâmico (ativar/desativar).
+	 * configs the result table
+	 * configs which button are active depending on selection
+	 * 
+	 * Here is also referenced the dynamic activate/deactivate button
 	 * @table
 	 */
 	private void tableSetup() {
@@ -562,10 +562,10 @@ public class GUI_gestor_operador extends JFrame {
 	}
 
 	/**
-	 * Botão ativo/desativo dinâmico. 
-	 * Quando o operador está ativo o botão apresenta "desativar".
-	 * Quando o operador está desativo o botão apresenta "ativar".
-	 * @botaoDesativarOperador - botao dinâmico
+	 * dynamic activate/deactivate button
+	 * When the operator is active shows deactivate
+	 * When the operator is disabled shows activate
+	 * @botaoDesativarOperador - dynamic button
 	 */
 	private void botaoAtivarDinamico() {
 
@@ -581,10 +581,10 @@ public class GUI_gestor_operador extends JFrame {
 	}
 
 	/**
-	 * Configuração das labels de username e temporização.
-	 * @lblUsernameLogged apresenta o username que está logado
-	 * @lblTempoSessao apresenta o tempo de sessão desde o momento que faz login
-	 * @lblHoraSistema apresenta a hora atual do sistema 
+	 * configs username and timer labels
+	 * @lblUsernameLogged shows the current logged user
+	 * @lblTempoSessao shows the total time since login
+	 * @lblHoraSistema shows system time
 	 */
 	protected void timerSetup() {
 		lblTempoSessao = new JLabel();
@@ -607,7 +607,7 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	/**
-	 * Ao fazer alterações no operador a tabela é atualizada. 
+	 * when an operator is updated also updates table
 	 */
 	public void refreshOperadorTable() {
 
@@ -624,7 +624,6 @@ public class GUI_gestor_operador extends JFrame {
 	}
 
 	/**
-	 * Retorna a tabela
 	 * @return table
 	 */
 	public JTable getTable() {
@@ -632,14 +631,14 @@ public class GUI_gestor_operador extends JFrame {
 	}
 
 	/**
-	 * @return botão voltar
+	 * @return return button
 	 */
 	public JButton btVoltarGestorOperador() {
 		return btVoltarGestorOperador;
 	}
 
 	/**
-	 * @return botao Voltar
+	 * @return return button2
 	 * @param botaoVoltar2
 	 */
 	public void setBtVoltarGestorOperador(JButton botaoVoltar2) {
@@ -647,14 +646,14 @@ public class GUI_gestor_operador extends JFrame {
 	}
 
 	/**
-	 * @return o painel
+	 * @returns panel
 	 */
 	public JPanel returnPanel() {
 		return (JPanel) getContentPane();
 	}
 	
 	/**
-	 * Configura a label usernameLogged 
+	 * Configura the loggedUser label
 	 * @param username
 	 */
 	public void setUsernameLoggedIn(String username) {
@@ -663,7 +662,7 @@ public class GUI_gestor_operador extends JFrame {
 	}
 	
 	/**
-	 * Configura a label de temporizador. 
+	 * returns the timer label
 	 * @param temporizador
 	 */
 	public void setLblTempoSessao(Duration temporizador) {
@@ -671,7 +670,7 @@ public class GUI_gestor_operador extends JFrame {
 	}
 
 	/**
-	 * Configura a label de hora de sistema
+	 * Configura the system time label
 	 * @param agora
 	 */
 	public void setLblHoraSistema(String agora) {
@@ -687,21 +686,21 @@ public class GUI_gestor_operador extends JFrame {
 	}
 
 	/**
-	 * @return the textPesquisaID
+	 * @return  textPesquisaID
 	 */
 	public JTextField getTextPesquisaID() {
 		return textPesquisaID;
 	}
 
 	/**
-	 * @return the textPesquisaNIF
+	 * @return  textPesquisaNIF
 	 */
 	public JTextField getTextPesquisaNIF() {
 		return textPesquisaNIF;
 	}
 
 	/**
-	 * @return the textFieldNome
+	 * @return textFieldNome
 	 */
 	public JTextField getTextFieldNome() {
 		return textFieldNome;

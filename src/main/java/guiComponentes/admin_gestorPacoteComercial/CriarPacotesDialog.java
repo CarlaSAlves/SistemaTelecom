@@ -40,7 +40,8 @@ public class CriarPacotesDialog extends JDialog {
 	}
 
 	/**
-	 * Preenche as textFields com os valores anteriores do pacote, antes de editar.
+	 * 
+	 * Fills the textfields with values of the selected package before edition
 	 * @param pacoteComercialAntigo2
 	 */
 	private void popularTextFields(PacoteComercial pacoteComercialAntigo2) {
@@ -50,8 +51,8 @@ public class CriarPacotesDialog extends JDialog {
 	}
 
 	/**
-	 * Construtor que inicia com o método que configura a janela e o método inicialize, 
-	 * que contém todos os métodos e elementos que compõem a página 
+	 * constructor that initializes with a method that sets up the window and the initilize method
+	 * which contains all the methods and elements that compose the page
 	 */
 	public CriarPacotesDialog() {
 
@@ -68,12 +69,12 @@ public class CriarPacotesDialog extends JDialog {
 	}
 
 	/**
-	 * Contém o corpo da página
+	 *  * contains the body of the page
 	 */
 	private void inicialize() {
 
 		/**
-		 *  Labels e textField da página:
+		 *  Labels e textField of the page:
 		 *  Nome
 		 *  Descrição
 		 */
@@ -102,9 +103,9 @@ public class CriarPacotesDialog extends JDialog {
 
 
 		/**
-		 * Painel de Confirmação 
-		 * Botão Confirmar
-		 * Botão Cancelar
+		 *confirmation panel
+		 * confirmation button
+		 * cancellation button
 		 */
 
 		painelConfirmacaoSetup();
@@ -112,12 +113,12 @@ public class CriarPacotesDialog extends JDialog {
 	}
 
 	/**
-	 * Configura os botões do rodapé da página 
+	 * configs the footer buttons of the page
 	 * 
-	 * @buttonPane - painel de confirmação
-	 * @okButton - botão de confirmação, aciona as validações de campos e 
-	 * o método que grava os dados do pacote na base de dados.
-	 * @cancelButton - botão cancelar, cancela a ação e fecha a janela.
+	 * @buttonPane - confirmation panel
+	 * @okButton -  confirmation button that starts the validations of the fields
+	 *  and saves the client in the DB
+	 * @cancelButton - cancellation button, cancel the action and closes the window
 	 * 
 	 */
 	protected void painelConfirmacaoSetup() {
@@ -167,10 +168,9 @@ public class CriarPacotesDialog extends JDialog {
 	}
 
 	/**
-	 * Configuração da janela se for acionada pelo botão editar - apresenta os campos editáveis.
-	 * @param pacoteComercialPesquisaApp
-	 * @param pacoteComercialAntigo - vai buscar os valores atuais do pacote
-	 * @param modoEditar - acionado pelo botão editar
+	 * configs the window if actioned by the edit button - presents the editable fields * @param pacoteComercialPesquisaApp
+	 * @param pacoteComercialAntigo - retrieves the current info of the package
+	 * @param modoEditar - actioned by the edit button
 	 */
 	public CriarPacotesDialog(GUI_gestor_pacotes pacoteComercialPesquisaApp, PacoteComercial pacoteComercialAntigo, boolean modoEditar ) {
 		this();
@@ -178,7 +178,7 @@ public class CriarPacotesDialog extends JDialog {
 		this.pacoteComercialAntigo = pacoteComercialAntigo;
 		this.modoEditar = modoEditar;
 
-		// modo editar, accionado pelo clique no botão "editar"
+		//edit mode, actioned by the edit button
 		
 		if(modoEditar) {
 			setTitle("Editar Pacote Comercial");
@@ -187,7 +187,7 @@ public class CriarPacotesDialog extends JDialog {
 	}
 
 	/**
-	 * Método que conecta ao gestor DAO e grava os dados do pacote na base de dados
+	 * Method that connects gestorDAO and saves the data of the client in the DB
 	 */
 	private void gravarPacoteComercial() {
 		String nome = textFieldNome.getText();

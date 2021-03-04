@@ -24,8 +24,8 @@ public class OperadorPesquisaModelTable extends AbstractTableModel {
 	private List<Funcionario> funcionarios;
 	
 	/**
-	 * Criação das linhas e colunas da tabela, consoante o tamanho 
-	 * da lista de operadores dando-lhe o nome da coluna correspondente.
+	 *  creates rows and columns depending on result set size
+	 * name each column according to results from DB
 	 * @param operadores
 	 */
 	public OperadorPesquisaModelTable(List<Funcionario> operadores) {
@@ -49,7 +49,7 @@ public class OperadorPesquisaModelTable extends AbstractTableModel {
 	}
 
 	/**
-	 * Dependendo das constantes, vai buscar os valores correspondentes ao operador.
+	 *  Depending on the constants, retrieves the values that correspond the registries
 	 */
 	@Override
 	public Object getValueAt(int row, int col) {

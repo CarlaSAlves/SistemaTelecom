@@ -42,7 +42,7 @@ public class HistoricoOperadorDialog extends JDialog {
 		setResizable(false);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 
-		// Painel de histórico
+		// history panel
 		JPanel panel = new JPanel();
 		contentPanel.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
@@ -53,7 +53,7 @@ public class HistoricoOperadorDialog extends JDialog {
 		operadorRegistoLabel = new JLabel("");
 		panel.add(operadorRegistoLabel);
 
-		// Tabela e Scrollpane de histórico 
+		// history scrollpane and table
 		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPanel.add(scrollPane, BorderLayout.CENTER);
@@ -61,7 +61,7 @@ public class HistoricoOperadorDialog extends JDialog {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 
-		// Painel de rodapé - botão sair 
+		// footer panel and return button
 		
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -83,7 +83,7 @@ public class HistoricoOperadorDialog extends JDialog {
 	}
 
 	/**
-	 * Método que preenche a tabela com o registos
+	 * method that fills the tale with results
 	 * @param funcionario
 	 * @param historicoFuncionario
 	 */
@@ -100,7 +100,7 @@ public class HistoricoOperadorDialog extends JDialog {
 	}
 
 	/**
-	 * Renderer da tabela
+	 * table Renderer 
 	 */
 	private final class DateTimeCellRenderer extends DefaultTableCellRenderer {
 

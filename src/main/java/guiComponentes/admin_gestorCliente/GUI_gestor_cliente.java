@@ -50,8 +50,6 @@ public class GUI_gestor_cliente extends JFrame {
 	private GUI_total guit;
 
 	/**
-	 * Construtor que inicia com o método que configura o painel base e o método inicialize, 
-	 * que contém todos os métodos e elementos que compõem a página 
 	 * Contructor that initializes with the method that configs the base panel and the method initialize
 	 * which contains all the methods and elements that compose the page
 	 */
@@ -71,7 +69,6 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * Contém o corpo da página
 	 * contains the body of the page
 	 */
 	private void inicialize() {
@@ -82,22 +79,11 @@ public class GUI_gestor_cliente extends JFrame {
 		UIManager.put("OptionPane.yesButtonText", "Sim");
 
 		/*
-		 *  Botões da página:
-		 *  Page buttons
-		 *  
-		 *  Criar Cliente
+		 *  Page buttons:
 		 *  Creates client
-		 *   
-		 *  Editar Cliente
 		 *  Edits client
-		 *  
-		 *  Desativar Cliente
 		 *  Deactivates client
-		 *  
-		 *  Visualizar Historico
-		 *  Visualizes
-		 *   
-		 *  Voltar 
+		 *  Visualizes history
 		 *  returns
 		 */
 
@@ -117,8 +103,7 @@ public class GUI_gestor_cliente extends JFrame {
 		getContentPane().add(btVoltarGestorCliente);
 
 		/**
-		 *  Campos de Pesquisa:
-		 *  Search fields
+		 *  Search fields:
 		 *  
 		 *  ID
 		 *  NIF
@@ -148,8 +133,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 
 		/**
-		 * Tabela de Resultados:
-		 * Result table
+		 * Result table:
 		 * 
 		 * Tabela
 		 * ScrollPane
@@ -172,11 +156,7 @@ public class GUI_gestor_cliente extends JFrame {
 
 		/**
 		 * Footer:
-		 * 
-		 * Imagem de rodapé
-		 * baseboard image
-		 * 
-		 * Temporizador
+		 * footer image
 		 * timer
 		 */
 
@@ -189,7 +169,6 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * Configurar interface, look and feel Nimbus 
 	 * configs interface, look and feel Nimbus
 	 */
 	private void ativarNimbusLookAndFeel() {
@@ -213,16 +192,13 @@ public class GUI_gestor_cliente extends JFrame {
 
 	/**
 	 *
-	 * Configuração do botão criar cliente.
-	 * Quando premido, abre a janela Dialog "CriarClienteDialog", 
-	 * para preencher os dados do novo cliente.
 	 * 
 	 * Configs the create client button
 	 * When pressed, opens a window Dialog "CriarClienteDialog"
 	 * to input the data of the new client
 	 * 
 	 * @return botaoCriarCliente 
-	 * @botaoCriarCliente - abre janela CriarClienteDialog //opens a window Dialog "CriarClienteDialog"
+	 * @botaoCriarCliente - opens a window Dialog "CriarClienteDialog"
 	 * 
 	 */
 	private JButton botaoCriarClienteSetup() {
@@ -244,12 +220,6 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * Configuração do botão editar cliente.
-	 * Quando premido, abre a janela Dialog "CriarClienteDialog", 
-	 * com os campos pré-preenchidos com a informação anterior mas editáveis, para se poder alterar.
-	 * Se não está nenhum cliente selecionado, o botão não está selecionável, no entanto, 
-	 * existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado.
-	 * 
 	 * Configs the edit client button
 	 * When pressed it opens the "CriarClienteDialog" Dialog
 	 * with the pre-existing data about the client but editable, which can be changed.
@@ -284,18 +254,13 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * Configuração do botão desativar cliente.
-	 * Quando premido, faz a confirmação da ação. 
-	 * Se o cliente estiver ativo o botão indica "desativar", se o cliente está desativo
-	 * o botão indica "ativar".
-	 * Se não está nenhum cliente selecionado, o botão não está selecionável, no entanto, 
-	 * existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado.
+
 	 * 
 	 * Configs the deactivate client button.
 	 * When pressed asks to confirm the action.
 	 * If the client is active the button reads "deactivate" and if the client is inactive it reads "activate"
 	 * If there is no selected client, this button is disabled, however there is a validation which gives an error if that were to happen.
-	 * @botaoDesativarCliente - botão dinâmico (ativo/desativo) /dynamic button "activate/deactivate"
+	 * @botaoDesativarCliente - dynamic button "activate/deactivate"
 	 */
 	private void botaoDesativarClienteSetup() {
 		botaoDesativarCliente = new JButton("Desativar Cliente");
@@ -367,16 +332,11 @@ public class GUI_gestor_cliente extends JFrame {
 
 
 	/**
-	 * Criação do botão Visualizar Histórico. 
-	 * Quando premido, desde que um cliente esteja selecionado, abre uma tabela com o 
-	 * histórico das alterações feitas no cliente selecionado. 
-	 * Se não está nenhum cliente selecionado, o botão não está selecionável, no entanto, 
-	 * existe a validação para dar uma mensagem de erro caso não haja um cliente selecionado. 
-	 * 
-	 * Creates the vizualize history button
+
+	 * Creates the visualise history button
 	 * When pressed, as long as there is a selected cliente, opens a window with the history of all actions taken on this client.
 	 * When no cliente has been selected this button is disabled, however there is a validation in case it would be able to press it so it shows an error.
-	 * @botaoVisualizarHistorico - abre janela com histórico de operações // opens the window with the history of actions taken by user on a specific client
+	 * @botaoVisualizarHistorico - opens the window with the history of actions taken by user on a specific client
 	 */
 	private void botaoVisualizarHistoricoSetup() {
 		botaoVisualizarHistorico = new JButton("Ver Historico");
@@ -414,12 +374,11 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * Configuração do botão voltar.
-	 * Quando premido volta à homepage de administrador.
+	
 	 * configs the return button
 	 * when pressed it returns to the admin homepage 
 	 * 
-	 * @btVoltarGestorCliente - volta à homepage de administrador//returns to the admin homepage
+	 * @btVoltarGestorCliente - returns to the admin homepage
 	 */
 	private void btVoltarGestorClienteSetup() {
 		btVoltarGestorCliente = new JButton("Voltar");
@@ -431,7 +390,6 @@ public class GUI_gestor_cliente extends JFrame {
 
 
 	/**
-	 * Configuração das labels de pesquisa
 	 * configs the search labels
 	 * @labelID
 	 * @labelNome
@@ -461,7 +419,6 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * Configuração das textFields de Pesquisa e checkbox Ativo
 	 * Configs the search textfields and the "ativo" checkbox
 	 * @textFieldID
 	 * @textFieldNome
@@ -504,9 +461,6 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * Configuração do botão de pesquisa dinâmico. 
-	 * É possível pesquisar por vários campos ao mesmo tempo.
-	 * 
 	 * Configs the dynamic search button
 	 * It is possible to search for several fields at the same time
 	 * 
@@ -564,7 +518,7 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * Configuração do painel que contém tabela de resultados
+
 	 * Configs the panel that contains the result table.
 	 * @return painel da Tabela
 	 */
@@ -590,10 +544,6 @@ public class GUI_gestor_cliente extends JFrame {
 
 
 	/**
-	 * Configuração da tabela de resultados.
-	 * Configuração de quais os botões selecionáveis consoante 
-	 * exista cliente selecionado ou não. 
-	 * Aqui está também referenciado o método do botão dinâmico (ativar/desativar).
 	 * Configs the result table from a search
 	 * Configs which button are enabled depending if the is a client selected or not
 	 * Here is also referenced the dynamic "activate/deactivate" button
@@ -636,14 +586,11 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * Botão ativo/desativo dinâmico. 
-	 * Quando o cliente está ativo o botão apresenta "desativar".
-	 * Quando o cliente está desativo o botão apresenta "ativar".
-	 * 
+
 	 * "activate/deactivate" dynamic button
 	 * When the client is active the button shows "deactivate"
 	 * When the client is inactive the button shows "activate"
-	 * @botaoDesativarCliente - botao dinâmico
+	 * @botaoDesativarCliente - dynamic button
 	 */
 	private void botaoAtivarDinamico() {
 
@@ -659,12 +606,10 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * Configuração das labels de username e temporização.
-	 * 
 	 * Configs the labels username and timer
-	 * @lblUsernameLogged apresenta o username que está logado// shows the current logged username
-	 * @lblTempoSessao apresenta o tempo de sessão desde o momento que faz login//shows the total time since the moment of the login
-	 * @lblHoraSistema apresenta a hora atual do sistema // shows the system time
+	 * @lblUsernameLogged shows the current logged username
+	 * @lblTempoSessao shows the total time since the moment of the login
+	 * @lblHoraSistema shows the system time
 	 */
 	protected void timerSetup() {
 
@@ -692,7 +637,7 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * Ao fazer alterações no cliente a tabela é atualizada. 
+
 	 * When changes on the client are made, this refreshes the result table.
 	 */
 	public void refreshClienteTable() {
@@ -712,7 +657,6 @@ public class GUI_gestor_cliente extends JFrame {
 
 
 	/**
-	 * Retorna a tabela
 	 * returns the table
 	 * @return table
 	 */
@@ -737,7 +681,6 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * @return o painel
 	 * returns the pane as a JPanel
 	 */
 	public JPanel returnPanel() {
@@ -745,7 +688,6 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * Configura a label usernameLogged 
 	 * configs the label usernameLogged
 	 * @param username
 	 */
@@ -755,7 +697,6 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * Configura a label de temporizador. 
 	 * configs the timer
 	 * @param temporizador
 	 */
@@ -764,7 +705,6 @@ public class GUI_gestor_cliente extends JFrame {
 	}
 
 	/**
-	 * Configura a label de hora de sistema
 	 * configs the label which shows the system time
 	 * @param agora
 	 */
